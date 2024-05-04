@@ -39,7 +39,7 @@ current_standings = {
     'Hyderabad': {'Matches': 10, 'Wins': 6, 'Points': 12},
     'Chennai': {'Matches': 10, 'Wins': 5, 'Points': 10},
     'Delhi': {'Matches': 11, 'Wins': 5, 'Points': 10},
-    'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8}
+    'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Punjab': {'Matches': 10, 'Wins': 4, 'Points': 8},
     'Gujarat': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Mumbai': {'Matches': 11, 'Wins': 3, 'Points': 6}
