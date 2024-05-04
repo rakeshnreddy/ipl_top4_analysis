@@ -39,14 +39,15 @@ current_standings = {
     'Hyderabad': {'Matches': 10, 'Wins': 6, 'Points': 12},
     'Chennai': {'Matches': 10, 'Wins': 5, 'Points': 10},
     'Delhi': {'Matches': 11, 'Wins': 5, 'Points': 10},
+    'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8}
     'Punjab': {'Matches': 10, 'Wins': 4, 'Points': 8},
-    'Gujarat': {'Matches': 10, 'Wins': 4, 'Points': 8},
-    'Mumbai': {'Matches': 11, 'Wins': 3, 'Points': 6},
-    'Bangalore': {'Matches': 10, 'Wins': 3, 'Points': 6}
+    'Gujarat': {'Matches': 11, 'Wins': 4, 'Points': 8},
+    'Mumbai': {'Matches': 11, 'Wins': 3, 'Points': 6}
+    
 }
 
 remaining_fixtures = [
-    ('Bangalore', 'Gujarat'), ('Punjab', 'Chennai'), 
+    ('Punjab', 'Chennai'), 
     ('Lucknow', 'Kolkata'), ('Mumbai', 'Hyderabad'), ('Delhi', 'Rajasthan'), 
     ('Hyderabad', 'Lucknow'), ('Punjab', 'Bangalore'), ('Gujarat', 'Chennai'), 
     ('Kolkata', 'Mumbai'), ('Chennai', 'Rajasthan'), ('Bangalore', 'Delhi'), 
