@@ -4,6 +4,33 @@ from itertools import product
 from pandas import DataFrame
 import numpy as np
 
+# Team colors and full names for IPL teams
+team_colors = {
+    'Rajasthan': '#4B0082',
+    'Kolkata': '#800080',
+    'Lucknow': '#808000',
+    'Hyderabad': '#FF4500',
+    'Chennai': '#FFFF00',
+    'Delhi': '#00008B',
+    'Punjab': '#DC143C',
+    'Gujarat': '#00BFFF',
+    'Mumbai': '#0000CD',
+    'Bangalore': '#B22222'
+}
+
+team_full_names = {
+    'Rajasthan': 'Rajasthan Royals',
+    'Kolkata': 'Kolkata Knight Riders',
+    'Lucknow': 'Lucknow Super Giants',
+    'Hyderabad': 'Sunrisers Hyderabad',
+    'Chennai': 'Chennai Super Kings',
+    'Delhi': 'Delhi Capitals',
+    'Punjab': 'Punjab Kings',
+    'Gujarat': 'Gujarat Titans',
+    'Mumbai': 'Mumbai Indians',
+    'Bangalore': 'Royal Challengers Bangalore'
+}
+
 # Define the current standings and remaining fixtures
 current_standings = {
     'Rajasthan': {'Matches': 10, 'Wins': 8, 'Points': 16},
@@ -34,14 +61,20 @@ def plot_standings(standings):
     df['Wins'] = df['Wins'].astype(int)
     df['Points'] = df['Points'].astype(int)
     df.sort_values(by='Points', ascending=False, inplace=True)
-    plt.figure(figsize=(10, 5))
-    plt.bar(df.index, df['Points'], color=plt.cm.Paired(np.arange(len(df))))
-    plt.xlabel('Teams')
-    plt.ylabel('Points')
-    plt.title('Current IPL Standings')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    st.pyplot(plt)
+    df['Team Name'] = df.index.map(team_full_names)  # Map abbreviated names to full names
+    colors = df.index.map(team_colors)  # Map teams to their colors
+
+    #plt.figure(figsize=(12, 6))
+    #plt.bar(df['Team Name'], df['Points'], color=colors)
+    #plt.xlabel('Teams')
+    #plt.ylabel('Points')
+    #plt.title('Current IPL Standings')
+    #plt.xticks(rotation=45)
+    #plt.tight_layout()
+    #st.pyplot(plt)
+
+    return df  # Return DataFrame for additional use
+
 
 def analyze_team(team_name, scenarios_to_show=3):
     total_matches_per_team = {team: stats['Matches'] for team, stats in current_standings.items()}
@@ -116,37 +149,26 @@ def simulate_season():
 def main():
     st.title("Current IPL Standings with Top 4 Probability")
     simulate_season()  # Calculate and update probabilities
+    df_standings = plot_standings(current_standings)  # Use the modified plotting function
     
-    # Convert standings to DataFrame
-    df_standings = DataFrame(current_standings).T
-    
-    # Ensure data types for Matches, Wins, and Points are integers
-    df_standings['Matches'] = df_standings['Matches'].astype(int)
-    df_standings['Wins'] = df_standings['Wins'].astype(int)
-    df_standings['Points'] = df_standings['Points'].astype(int)
-    
-    # Format probability column with percentages and two decimal places
+    # Display the DataFrame with full team names and probabilities formatted
     df_standings['Top 4 Probability'] = df_standings['Top 4 Probability'].astype(float).map('{:.2f}%'.format)
-    
-    # Sort standings by Points
-    df_standings.sort_values(by='Points', ascending=False, inplace=True)
-    
-    # Display the DataFrame as a table in Streamlit
-    st.table(df_standings)
-    plot_standings(current_standings)
+    st.table(df_standings[['Team Name', 'Matches', 'Wins', 'Points', 'Top 4 Probability']])
 
-    team_name = st.selectbox("Select a team to analyze:", list(current_standings.keys()))
+    team_name = st.selectbox("Select a team to analyze:", list(team_full_names.values()))
     if st.button("Analyze Team"):
-        valid_scenarios, total_scenarios, percentage_chance, examples = analyze_team(team_name)
+        # Adjust the analyze_team call to handle full names
+        team_key = [key for key, value in team_full_names.items() if value == team_name][0]
+        valid_scenarios, total_scenarios, percentage_chance, examples = analyze_team(team_key)
         st.write(f"{team_name} has a {percentage_chance:.2f}% chance to finish in the top 4, based on {valid_scenarios} out of {total_scenarios} valid scenarios.")
         for i, example in enumerate(examples, 1):
             st.subheader(f"Example Scenario {i} where {team_name} finishes in the top 4:")
             for result in example[0]:
                 st.write(result)
             st.write("Standings in this scenario:")
-            df = DataFrame({team: {'Matches': stats['Matches'], 'Wins': stats['Wins'], 'Points': stats['Points']} for team, stats in example[1]}).T
-            df.sort_values(by='Points', ascending=False, inplace=True)
-            st.table(df)
+            df_example = DataFrame({team: {'Matches': stats['Matches'], 'Wins': stats['Wins'], 'Points': stats['Points']} for team, stats in example[1]}).T
+            df_example.sort_values(by='Points', ascending=False, inplace=True)
+            st.table(df_example)
 
 if __name__ == "__main__":
     main()
