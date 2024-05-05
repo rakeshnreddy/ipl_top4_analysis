@@ -33,22 +33,21 @@ team_full_names = {
 
 # Define the current standings and remaining fixtures
 current_standings = {
+    'Kolkata': {'Matches': 11, 'Wins': 8, 'Points': 16},
     'Rajasthan': {'Matches': 10, 'Wins': 8, 'Points': 16},
-    'Kolkata': {'Matches': 10, 'Wins': 7, 'Points': 14},
-    'Lucknow': {'Matches': 10, 'Wins': 6, 'Points': 12},
+    'Chennai': {'Matches': 11, 'Wins': 6, 'Points': 12},
     'Hyderabad': {'Matches': 10, 'Wins': 6, 'Points': 12},
-    'Chennai': {'Matches': 10, 'Wins': 5, 'Points': 10},
+    'Lucknow': {'Matches': 11, 'Wins': 6, 'Points': 12},
     'Delhi': {'Matches': 11, 'Wins': 5, 'Points': 10},
     'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8},
-    'Punjab': {'Matches': 10, 'Wins': 4, 'Points': 8},
+    'Punjab': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Gujarat': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Mumbai': {'Matches': 11, 'Wins': 3, 'Points': 6}
     
 }
 
 remaining_fixtures = [
-    ('Punjab', 'Chennai'), 
-    ('Lucknow', 'Kolkata'), ('Mumbai', 'Hyderabad'), ('Delhi', 'Rajasthan'), 
+    ('Mumbai', 'Hyderabad'), ('Delhi', 'Rajasthan'), 
     ('Hyderabad', 'Lucknow'), ('Punjab', 'Bangalore'), ('Gujarat', 'Chennai'), 
     ('Kolkata', 'Mumbai'), ('Chennai', 'Rajasthan'), ('Bangalore', 'Delhi'), 
     ('Gujarat', 'Kolkata'), ('Delhi', 'Lucknow'), ('Rajasthan', 'Punjab'), 
