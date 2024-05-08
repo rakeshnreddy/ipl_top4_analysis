@@ -23,7 +23,7 @@ current_standings = {
     'Rajasthan': {'Matches': 11, 'Wins': 8, 'Points': 16},
     'Chennai': {'Matches': 11, 'Wins': 6, 'Points': 12},
     'Hyderabad': {'Matches': 11, 'Wins': 6, 'Points': 12},
-    'Delhi': {'Matches': 12, 'Wins': 6, 'Points': 12},
+    'Delhi': {'Matches': 12, 'Wins': 5, 'Points': 12},
     'Lucknow': {'Matches': 11, 'Wins': 6, 'Points': 12},
     'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Punjab': {'Matches': 11, 'Wins': 4, 'Points': 8},
@@ -31,7 +31,7 @@ current_standings = {
     'Gujarat': {'Matches': 11, 'Wins': 4, 'Points': 8}
 }
 
-remaining_fixtures = [ 
+remaining_fixtures = [
     ('Hyderabad', 'Lucknow'), ('Punjab', 'Bangalore'), ('Gujarat', 'Chennai'), 
     ('Kolkata', 'Mumbai'), ('Chennai', 'Rajasthan'), ('Bangalore', 'Delhi'), 
     ('Gujarat', 'Kolkata'), ('Delhi', 'Lucknow'), ('Rajasthan', 'Punjab'), 
@@ -110,10 +110,23 @@ def analyze_team(team_name, top_n):
     for match, results in match_wins_count.items():
         total_wins = results['team_a_wins'] + results['team_b_wins']
         if total_wins > 0:
-            match_wins_count[match]['Most Likely Winner'] = f"{match[0]} {100 * results['team_a_wins'] / total_wins:.2f}% | {match[1]} {100 * results['team_b_wins'] / total_wins:.2f}%"
+            team_a_win_percentage = 100 * results['team_a_wins'] / total_wins
+            team_b_win_percentage = 100 * results['team_b_wins'] / total_wins
+            if team_a_win_percentage == team_b_win_percentage:
+                result_text = "Result doesn't matter"
+            elif team_a_win_percentage == 100:
+                result_text = f"{match[0]} must win"
+            elif team_b_win_percentage == 100:
+                result_text = f"{match[1]} must win"
+            else:
+                higher_win_team = match[0] if team_a_win_percentage > team_b_win_percentage else match[1]
+                higher_win_percentage = max(team_a_win_percentage, team_b_win_percentage)
+                result_text = f"{higher_win_team} should win in {higher_win_percentage:.2f}% of the cases"
+            match_wins_count[match]['Most Likely Winner'] = f"{match[0]} {team_a_win_percentage:.2f}% | {match[1]} {team_b_win_percentage:.2f}%"
+            match_wins_count[match]['Outcome'] = result_text
 
     if valid_scenarios > 0:
-        results_df = DataFrame.from_dict(match_wins_count, orient='index', columns=['Most Likely Winner'])
+        results_df = DataFrame.from_dict(match_wins_count, orient='index', columns=['Most Likely Winner', 'Outcome'])
         results_df.index = [f"{match[0]} vs {match[1]}" for match in results_df.index]
         return 100 * valid_scenarios / (2 ** len(remaining_fixtures)), results_df
     else:
@@ -123,6 +136,7 @@ def analyze_team(team_name, top_n):
 def simulate_matches(results_df):
     try:
         final_results = {team: {'Matches': stats['Matches'], 'Wins': stats['Wins'], 'Points': stats['Points']} for team, stats in current_standings.items()}
+        match_results = []  # List to store the results of each simulated match
 
         for match, row in results_df.iterrows():
             team_a, team_b = match.split(' vs ')
@@ -144,11 +158,16 @@ def simulate_matches(results_df):
             final_results[winner]['Points'] += 2
             final_results[loser]['Matches'] += 1
 
+            match_result_str = f"{winner} defeats {loser}"  # Record the result of the match
+            match_results.append(match_result_str)  # Append the result to the list
+
         final_results_df = DataFrame.from_dict(final_results, orient='index')
         final_results_df.sort_values(by=['Points', 'Wins'], ascending=[False, False], inplace=True)
-        return final_results_df
+        
+        # Display match results and the final standings
+        return match_results, final_results_df  # Return both match results and the final standings DataFrame
     except Exception as e:
-        return f"An error occurred during simulation: {str(e)}"
+        return f"An error occurred during simulation: {str(e)}", None
 
 def main():
     st.title("IPL Standings and Probability Analysis")
@@ -163,7 +182,7 @@ def main():
     team_name = st.selectbox("Select a team to analyze:", list(team_full_names.values()))
     if st.button("Analyze Team"):
         team_key = next(key for key, value in team_full_names.items() if value == team_name)
-        percentage, team_results = analyze_team(team_key, top_n)
+        percentage, team_results = analyze_team(team_key, top_n)  # Here top_n is passed
         if team_results is None:
             st.write(f"No data available. {team_name} cannot finish in the top {top_n} based on current standings and remaining fixtures.")
         else:
@@ -171,17 +190,26 @@ def main():
             st.write(f"Match outcome frequencies where the team finishes in the top {top_n}:")
             st.table(team_results)
 
+
         # Store results in session state for persistence
         st.session_state['results_df'] = team_results
 
     if st.button("Simulate Matches"):
         if 'results_df' in st.session_state and st.session_state['results_df'] is not None:
-            final_results_df = simulate_matches(st.session_state['results_df'].copy())
-            if isinstance(final_results_df, str):  # Check if the returned object is an error message
-                st.error(final_results_df)
+            match_results, final_results_df = simulate_matches(st.session_state['results_df'].copy())
+            if isinstance(match_results, str):  # Check if an error message was returned
+                st.error(match_results)
             else:
-                st.write("Final Results after Simulating Matches:")
-                st.table(final_results_df)
+                col1, col2 = st.columns(2)  # Create two columns
+                
+                with col1:
+                    st.write("Match Results:")
+                    for result in match_results:
+                        st.write(result)
+                
+                with col2:
+                    st.write("Final Points Table after Simulating Matches:")
+                    st.table(final_results_df)
         else:
             st.write("Please analyze a team first or ensure there is valid data before simulating matches.")
 
