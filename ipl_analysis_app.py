@@ -188,7 +188,12 @@ def main():
         else:
             st.write(f"{team_name} finishes in the top {top_n} in {percentage:.2f}% of scenarios.")
             st.write(f"Match outcome frequencies where the team finishes in the top {top_n}:")
-            st.table(team_results)
+            # Display only the 'Outcome' column to the user
+            st.table(team_results[['Outcome']])
+    
+        # Store results in session state for persistence
+        st.session_state['results_df'] = team_results
+
 
 
         # Store results in session state for persistence
