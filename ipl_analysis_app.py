@@ -21,10 +21,10 @@ team_full_names = {
 current_standings = {
     'Kolkata': {'Matches': 11, 'Wins': 8, 'Points': 16},
     'Rajasthan': {'Matches': 11, 'Wins': 8, 'Points': 16},
+    'Hyderabad': {'Matches': 12, 'Wins': 6, 'Points': 14},
     'Chennai': {'Matches': 11, 'Wins': 6, 'Points': 12},
-    'Hyderabad': {'Matches': 11, 'Wins': 6, 'Points': 12},
     'Delhi': {'Matches': 12, 'Wins': 5, 'Points': 12},
-    'Lucknow': {'Matches': 11, 'Wins': 6, 'Points': 12},
+    'Lucknow': {'Matches': 12, 'Wins': 6, 'Points': 12},
     'Bangalore': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Punjab': {'Matches': 11, 'Wins': 4, 'Points': 8},
     'Mumbai': {'Matches': 12, 'Wins': 3, 'Points': 8},
@@ -32,7 +32,7 @@ current_standings = {
 }
 
 remaining_fixtures = [
-    ('Hyderabad', 'Lucknow'), ('Punjab', 'Bangalore'), ('Gujarat', 'Chennai'), 
+    ('Punjab', 'Bangalore'), ('Gujarat', 'Chennai'), 
     ('Kolkata', 'Mumbai'), ('Chennai', 'Rajasthan'), ('Bangalore', 'Delhi'), 
     ('Gujarat', 'Kolkata'), ('Delhi', 'Lucknow'), ('Rajasthan', 'Punjab'), 
     ('Hyderabad', 'Gujarat'), ('Mumbai', 'Lucknow'), ('Bangalore', 'Chennai'), 
@@ -201,12 +201,12 @@ def main():
                 st.error(match_results)
             else:
                 col1, col2 = st.columns(2)  # Create two columns
-                
+
                 with col1:
                     st.write("Match Results:")
                     for result in match_results:
                         st.write(result)
-                
+
                 with col2:
                     st.write("Final Points Table after Simulating Matches:")
                     st.table(final_results_df)
