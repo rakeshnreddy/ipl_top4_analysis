@@ -29,7 +29,6 @@ current_standings = {
     'Gujarat': {'Matches': 12, 'Wins': 5, 'Points': 10},
     'Mumbai': {'Matches': 12, 'Wins': 4, 'Points': 8},
     'Punjab': {'Matches': 12, 'Wins': 4, 'Points': 8}
-    
 }
 
 remaining_fixtures = [
@@ -55,50 +54,72 @@ def plot_standings(standings):
 
 def simulate_season():
     total_matches_per_team = calculate_total_matches_per_team()
-    all_positions = {team: [0] * 10 for team in current_standings}
-    scenarios = product([0, 1], repeat=len(remaining_fixtures))
-    total_scenarios = 0
+    scenarios = list(product([0, 1], repeat=len(remaining_fixtures)))
 
-    for outcome in scenarios:
-        standings = {team: dict(stats) for team, stats in current_standings.items()}
-        for match_result, match in zip(outcome, remaining_fixtures):
-            winner = match[0] if match_result == 1 else match[1]
-            loser = match[1] if winner == match[0] else match[0]
-            standings[winner]['Wins'] += 1
-            standings[winner]['Points'] += 2
-            standings[winner]['Matches'] += 1
-            standings[loser]['Matches'] += 1
+    # Initialize probabilities
+    for team in current_standings:
+        current_standings[team]['Top 4 Probability'] = 0
+        current_standings[team]['Top 2 Probability'] = 0
 
-        if all(standings[team]['Matches'] == total_matches_per_team[team] for team in standings):
-            total_scenarios += 1
-            sorted_teams = sorted(standings.items(), key=lambda x: (-x[1]['Points'], -x[1]['Wins']))
-            for pos, (team, _) in enumerate(sorted_teams):
-                all_positions[team][pos] += 1
+    for team_priority in current_standings:
+        top_4_counts = 0
+        top_2_counts = 0
+        total_scenarios = 0
 
-    for team, positions in all_positions.items():
-        current_standings[team]['Top 4 Probability'] = sum(positions[:4]) / total_scenarios * 100
-        current_standings[team]['Top 2 Probability'] = sum(positions[:2]) / total_scenarios * 100
+        for outcome in scenarios:
+            standings = {t: dict(stats) for t, stats in current_standings.items()}
+            for match_result, match in zip(outcome, remaining_fixtures):
+                winner = match[0] if match_result == 1 else match[1]
+                loser = match[1] if winner == match[0] else match[0]
+                standings[winner]['Wins'] += 1
+                standings[winner]['Points'] += 2
+                standings[winner]['Matches'] += 1
+                standings[loser]['Matches'] += 1
+
+            # Ensure all matches are counted correctly
+            if all(standings[t]['Matches'] == total_matches_per_team[t] for t in standings):
+                total_scenarios += 1
+                sorted_teams = sorted(standings.items(), key=lambda x: (-x[1]['Points'], x[0] != team_priority, -x[1]['Wins']))
+                top_4_teams = sorted_teams[:4]
+                top_2_teams = sorted_teams[:2]
+
+                if team_priority in [t[0] for t in top_4_teams]:
+                    top_4_counts += 1
+                if team_priority in [t[0] for t in top_2_teams]:
+                    top_2_counts += 1
+
+        # Update probabilities for the team being analyzed
+        if total_scenarios > 0:
+            current_standings[team_priority]['Top 4 Probability'] = (top_4_counts / total_scenarios) * 100
+            current_standings[team_priority]['Top 2 Probability'] = (top_2_counts / total_scenarios) * 100
+
+    return plot_standings(current_standings)
+
+
 
 def analyze_team(team_name, top_n):
     total_matches_per_team = calculate_total_matches_per_team()
     valid_scenarios = 0
     match_wins_count = {match: {'team_a_wins': 0, 'team_b_wins': 0} for match in remaining_fixtures}
 
+    # Generate all possible outcomes of remaining matches
     for outcome in product([0, 1], repeat=len(remaining_fixtures)):
         updated_standings = {team: dict(stats) for team, stats in current_standings.items()}
         outcome_dict = dict(zip(remaining_fixtures, outcome))
 
+        # Apply the results of each match outcome
         for match, result in outcome_dict.items():
             team_a, team_b = match
             winner = team_a if result == 1 else team_b
             loser = team_b if winner == team_a else team_a
             updated_standings[winner]['Wins'] += 1
             updated_standings[winner]['Points'] += 2
-            updated_standings[winner]['Matches'] += 1
             updated_standings[loser]['Matches'] += 1
+            updated_standings[winner]['Matches'] += 1
 
+        # Check if standings are complete
         if all(updated_standings[team]['Matches'] == total_matches_per_team[team] for team in updated_standings):
-            sorted_teams = sorted(updated_standings.items(), key=lambda x: (-x[1]['Points'], -x[1]['Wins']))
+            sorted_teams = sorted(updated_standings.items(), key=lambda x: (-x[1]['Points'], x[0] != team_name, -x[1]['Wins']))
             if team_name in [team for team, _ in sorted_teams[:top_n]]:
                 valid_scenarios += 1
                 for match, result in outcome_dict.items():
@@ -107,71 +128,81 @@ def analyze_team(team_name, top_n):
                     else:
                         match_wins_count[match]['team_b_wins'] += 1
 
-    for match, results in match_wins_count.items():
-        total_wins = results['team_a_wins'] + results['team_b_wins']
-        if total_wins > 0:
-            team_a_win_percentage = 100 * results['team_a_wins'] / total_wins
-            team_b_win_percentage = 100 * results['team_b_wins'] / total_wins
-            if team_a_win_percentage == team_b_win_percentage:
-                result_text = "Result doesn't matter"
-            elif team_a_win_percentage == 100:
-                result_text = f"{match[0]} must win"
-            elif team_b_win_percentage == 100:
-                result_text = f"{match[1]} must win"
-            else:
-                higher_win_team = match[0] if team_a_win_percentage > team_b_win_percentage else match[1]
-                higher_win_percentage = max(team_a_win_percentage, team_b_win_percentage)
-                result_text = f"{higher_win_team} should win in {higher_win_percentage:.2f}% of the cases"
-            match_wins_count[match]['Most Likely Winner'] = f"{match[0]} {team_a_win_percentage:.2f}% | {match[1]} {team_b_win_percentage:.2f}%"
-            match_wins_count[match]['Outcome'] = result_text
-
     if valid_scenarios > 0:
+        for match, results in match_wins_count.items():
+            total_wins = results['team_a_wins'] + results['team_b_wins']
+            if total_wins > 0:
+                results['Outcome'] = f"{match[0]} wins" if results['team_a_wins'] > results['team_b_wins'] else f"{match[1]} wins"
+                if results['team_a_wins'] == results['team_b_wins']:
+                    results['Outcome'] = "Result doesn't matter"
+            else:
+                results['Outcome'] = "Result doesn't matter"
+
         results_df = DataFrame.from_dict(match_wins_count, orient='index', columns=['Most Likely Winner', 'Outcome'])
         results_df.index = [f"{match[0]} vs {match[1]}" for match in results_df.index]
         return 100 * valid_scenarios / (2 ** len(remaining_fixtures)), results_df
     else:
-        return 0, None  # No valid scenarios
+        return 0, DataFrame(columns=['Most Likely Winner', 'Outcome'])
 
 
-def simulate_matches(results_df):
+
+def simulate_matches(results_df, team_name):
     try:
-        final_results = {team: {'Matches': stats['Matches'], 'Wins': stats['Wins'], 'Points': stats['Points']} for team, stats in current_standings.items()}
+        # Initialize the final results from current standings
+        final_results = {team: {
+            'Matches': current_standings[team]['Matches'],
+            'Wins': current_standings[team]['Wins'],
+            'Points': current_standings[team]['Points'],
+            'priority': 1  # Default priority for all other teams
+        } for team in current_standings}
+
+        # Set a higher priority for the analyzed team
+        final_results[team_name]['priority'] = 0
+
         match_results = []  # List to store the results of each simulated match
 
         for match, row in results_df.iterrows():
             team_a, team_b = match.split(' vs ')
-            percentages = row['Most Likely Winner'].split('|')
-            team_a_percentage = float(percentages[0].split()[1].strip('%'))
-            team_b_percentage = float(percentages[1].split()[1].strip('%'))
+            outcome = row['Outcome']
 
-            if team_a_percentage > team_b_percentage:
-                winner = team_a
-                loser = team_b
-            elif team_a_percentage < team_b_percentage:
-                winner = team_b
-                loser = team_a
-            else:
+            if "wins" in outcome:
+                winner = team_a if team_a in outcome else team_b
+                loser = team_b if winner == team_a else team_a
+            elif "Result doesn't matter" in outcome:
+                # Randomly decide the winner if the result doesn't matter
                 winner, loser = random.choice([(team_a, team_b), (team_b, team_a)])
+            else:
+                continue  # Skip if the outcome format is unexpected
 
             final_results[winner]['Wins'] += 1
             final_results[winner]['Matches'] += 1
             final_results[winner]['Points'] += 2
             final_results[loser]['Matches'] += 1
 
-            match_result_str = f"{winner} defeats {loser}"  # Record the result of the match
-            match_results.append(match_result_str)  # Append the result to the list
+            match_result_str = f"{winner} defeats {loser}"
+            match_results.append(match_result_str)
 
+        # Create a DataFrame from the final results dictionary
         final_results_df = DataFrame.from_dict(final_results, orient='index')
-        final_results_df.sort_values(by=['Points', 'Wins'], ascending=[False, False], inplace=True)
         
-        # Display match results and the final standings
-        return match_results, final_results_df  # Return both match results and the final standings DataFrame
+        # Sorting by points first, then by priority in case of ties, and then by wins
+        final_results_df.sort_values(by=['Points', 'priority', 'Wins'], ascending=[False, True, False], inplace=True)
+
+        return match_results, final_results_df
     except Exception as e:
         return f"An error occurred during simulation: {str(e)}", None
+
 
 def main():
     st.title("IPL Standings and Probability Analysis")
 
+    # Get full team name from user selection
+    full_team_name = st.selectbox("Select a team to analyze:", list(team_full_names.values()))
+
+    # Convert full team name to the key used in standings
+    team_key = next(key for key, value in team_full_names.items() if value == full_team_name)
+
+    # Call simulate_season to populate probabilities
     simulate_season()
     df_standings = plot_standings(current_standings)
     st.table(df_standings[['Team Name', 'Matches', 'Wins', 'Points', 'Top 4 Probability', 'Top 2 Probability']])
@@ -179,39 +210,26 @@ def main():
     top_n_choice = st.radio("Select analysis depth:", ["Top 4", "Top 2"])
     top_n = 2 if top_n_choice == "Top 2" else 4
 
-    team_name = st.selectbox("Select a team to analyze:", list(team_full_names.values()))
     if st.button("Analyze Team"):
-        team_key = next(key for key, value in team_full_names.items() if value == team_name)
-        percentage, team_results = analyze_team(team_key, top_n)  # Here top_n is passed
+        percentage, team_results = analyze_team(team_key, top_n)
         if team_results is None:
-            st.write(f"No data available. {team_name} cannot finish in the top {top_n} based on current standings and remaining fixtures.")
+            st.write(f"No data available. {full_team_name} cannot finish in the top {top_n} based on current standings and remaining fixtures.")
         else:
-            st.write(f"{team_name} finishes in the top {top_n} in {percentage:.2f}% of scenarios.")
-            st.write(f"Match outcome frequencies where the team finishes in the top {top_n}:")
-            # Display only the 'Outcome' column to the user
+            st.write(f"{full_team_name} finishes in the top {top_n} in {percentage:.2f}% of scenarios.")
             st.table(team_results[['Outcome']])
-    
-        # Store results in session state for persistence
-        st.session_state['results_df'] = team_results
-
-
-
-        # Store results in session state for persistence
         st.session_state['results_df'] = team_results
 
     if st.button("Simulate Matches"):
         if 'results_df' in st.session_state and st.session_state['results_df'] is not None:
-            match_results, final_results_df = simulate_matches(st.session_state['results_df'].copy())
-            if isinstance(match_results, str):  # Check if an error message was returned
+            match_results, final_results_df = simulate_matches(st.session_state['results_df'].copy(), team_key)
+            if isinstance(match_results, str):
                 st.error(match_results)
             else:
-                col1, col2 = st.columns(2)  # Create two columns
-
+                col1, col2 = st.columns(2)
                 with col1:
                     st.write("Match Results:")
                     for result in match_results:
                         st.write(result)
-
                 with col2:
                     st.write("Final Points Table after Simulating Matches:")
                     st.table(final_results_df)
