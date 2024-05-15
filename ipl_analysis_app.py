@@ -3,6 +3,7 @@ from itertools import product
 from pandas import DataFrame
 import random
 
+
 # Team colors and full names for IPL teams
 team_full_names = {
     'Rajasthan': 'Rajasthan Royals',
