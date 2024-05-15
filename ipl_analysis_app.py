@@ -20,19 +20,19 @@ team_full_names = {
 # Define the current standings and remaining fixtures
 current_standings = {
     'Kolkata': {'Matches': 13, 'Wins': 9, 'Points': 20},
-    'Rajasthan': {'Matches': 12, 'Wins': 8, 'Points': 16},
+    'Rajasthan': {'Matches': 13, 'Wins': 8, 'Points': 16},
     'Chennai': {'Matches': 13, 'Wins': 7, 'Points': 14},
     'Hyderabad': {'Matches': 12, 'Wins': 7, 'Points': 14},
     'Delhi': {'Matches': 14, 'Wins': 7, 'Points': 14},
     'Bangalore': {'Matches': 13, 'Wins': 6, 'Points': 12},
     'Lucknow': {'Matches': 13, 'Wins': 6, 'Points': 12},
     'Gujarat': {'Matches': 13, 'Wins': 5, 'Points': 10},
-    'Mumbai': {'Matches': 13, 'Wins': 4, 'Points': 8},
-    'Punjab': {'Matches': 12, 'Wins': 4, 'Points': 8}
+    'Punjab': {'Matches': 13, 'Wins': 4, 'Points': 10},
+    'Mumbai': {'Matches': 13, 'Wins': 4, 'Points': 8}
+    
 }
 
 remaining_fixtures = [ 
-    ('Rajasthan', 'Punjab'), 
     ('Hyderabad', 'Gujarat'), ('Mumbai', 'Lucknow'), ('Bangalore', 'Chennai'), 
     ('Hyderabad', 'Punjab'), ('Rajasthan', 'Kolkata')
 ]
