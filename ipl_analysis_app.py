@@ -20,17 +20,16 @@ team_full_names = {
 
 # Define the current standings and remaining fixtures
 current_standings = {
-    'Kolkata': {'Matches': 13, 'Wins': 9, 'Points': 20},
-    'Rajasthan': {'Matches': 13, 'Wins': 8, 'Points': 16},
-    'Chennai': {'Matches': 13, 'Wins': 7, 'Points': 14},
-    'Hyderabad': {'Matches': 12, 'Wins': 7, 'Points': 14},
-    'Delhi': {'Matches': 14, 'Wins': 7, 'Points': 14},
-    'Bangalore': {'Matches': 13, 'Wins': 6, 'Points': 12},
-    'Lucknow': {'Matches': 13, 'Wins': 6, 'Points': 12},
-    'Gujarat': {'Matches': 13, 'Wins': 5, 'Points': 10},
-    'Punjab': {'Matches': 13, 'Wins': 4, 'Points': 10},
-    'Mumbai': {'Matches': 13, 'Wins': 4, 'Points': 8}
-    
+    'Hyderabad': {'Matches': 1, 'Wins': 1, 'Points': 2},   # Sunrisers Hyderabad
+    'Bangalore': {'Matches': 1, 'Wins': 1, 'Points': 2},     # Royal Challengers Bengaluru
+    'Punjab': {'Matches': 1, 'Wins': 1, 'Points': 2},        # Punjab Kings
+    'Chennai': {'Matches': 1, 'Wins': 1, 'Points': 2},       # Chennai Super Kings
+    'Delhi': {'Matches': 1, 'Wins': 1, 'Points': 2},         # Delhi Capitals
+    'Kolkata': {'Matches': 2, 'Wins': 1, 'Points': 2},       # Kolkata Knight Riders
+    'Lucknow': {'Matches': 1, 'Wins': 0, 'Points': 0},       # Lucknow Super Giants
+    'Mumbai': {'Matches': 1, 'Wins': 0, 'Points': 0},        # Mumbai Indians
+    'Gujarat': {'Matches': 1, 'Wins': 0, 'Points': 0},       # Gujarat Titans
+    'Rajasthan': {'Matches': 2, 'Wins': 0, 'Points': 0}      # Rajasthan Royals
 }
 
 
