@@ -34,12 +34,6 @@ current_standings = {
 
 
 remaining_fixtures = [
-    ('Kolkata', 'Bangalore'),    # Match 1: 22 Mar – Kolkata Knight Riders (H) vs Royal Challengers Bangalore
-    ('Hyderabad', 'Rajasthan'),   # Match 2: 23 Mar 15:30 – Sunrisers Hyderabad (H) vs Rajasthan Royals
-    ('Chennai', 'Mumbai'),         # Match 3: 23 Mar 19:30 – Chennai Super Kings (H) vs Mumbai Indians
-    ('Delhi', 'Lucknow'),          # Match 4: 24 Mar 19:30 – Delhi Capitals (H) vs Lucknow Super Giants
-    ('Gujarat', 'Punjab'),         # Match 5: 25 Mar 19:30 – Gujarat Titans (H) vs Punjab Kings
-    ('Rajasthan', 'Kolkata'),      # Match 6: 26 Mar 19:30 – Rajasthan Royals (H) vs Kolkata Knight Riders
     ('Hyderabad', 'Lucknow'),      # Match 7: 27 Mar 19:30 – Sunrisers Hyderabad (H) vs Lucknow Super Giants
     ('Chennai', 'Bangalore'),      # Match 8: 28 Mar 19:30 – Chennai Super Kings (H) vs Royal Challengers Bangalore
     ('Gujarat', 'Mumbai'),         # Match 9: 29 Mar 19:30 – Gujarat Titans (H) vs Mumbai Indians
