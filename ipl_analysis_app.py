@@ -20,54 +20,20 @@ team_full_names = {
 
 # Define the current standings and remaining fixtures
 current_standings = {
-    'Hyderabad': {'Matches': 1, 'Wins': 1, 'Points': 2},   # Sunrisers Hyderabad
-    'Bangalore': {'Matches': 1, 'Wins': 1, 'Points': 2},     # Royal Challengers Bengaluru
-    'Punjab': {'Matches': 1, 'Wins': 1, 'Points': 2},        # Punjab Kings
-    'Chennai': {'Matches': 1, 'Wins': 1, 'Points': 2},       # Chennai Super Kings
-    'Delhi': {'Matches': 1, 'Wins': 1, 'Points': 2},         # Delhi Capitals
-    'Kolkata': {'Matches': 2, 'Wins': 1, 'Points': 2},       # Kolkata Knight Riders
-    'Lucknow': {'Matches': 1, 'Wins': 0, 'Points': 0},       # Lucknow Super Giants
-    'Mumbai': {'Matches': 1, 'Wins': 0, 'Points': 0},        # Mumbai Indians
-    'Gujarat': {'Matches': 1, 'Wins': 0, 'Points': 0},       # Gujarat Titans
-    'Rajasthan': {'Matches': 2, 'Wins': 0, 'Points': 0}      # Rajasthan Royals
+    'Gujarat':   {'Matches': 8, 'Wins': 6, 'Points': 12},   # Gujarat Titans
+    'Delhi':     {'Matches': 8, 'Wins': 6, 'Points': 12},   # Delhi Capitals
+    'Bangalore': {'Matches': 8, 'Wins': 5, 'Points': 10},   # Royal Challengers Bengaluru
+    'Punjab':    {'Matches': 8, 'Wins': 5, 'Points': 10},   # Punjab Kings
+    'Lucknow':   {'Matches': 9, 'Wins': 5, 'Points': 10},   # Lucknow Super Giants
+    'Mumbai':    {'Matches': 8, 'Wins': 4, 'Points': 8},    # Mumbai Indians
+    'Kolkata':   {'Matches': 8, 'Wins': 3, 'Points': 6},    # Kolkata Knight Riders
+    'Rajasthan': {'Matches': 8, 'Wins': 2, 'Points': 4},    # Rajasthan Royals
+    'Hyderabad': {'Matches': 7, 'Wins': 2, 'Points': 4},    # Sunrisers Hyderabad
+    'Chennai':   {'Matches': 8, 'Wins': 2, 'Points': 4}     # Chennai Super Kings
 }
 
 
 remaining_fixtures = [
-    ('Hyderabad', 'Lucknow'),      # Match 7: 27 Mar 19:30 – Sunrisers Hyderabad (H) vs Lucknow Super Giants
-    ('Chennai', 'Bangalore'),      # Match 8: 28 Mar 19:30 – Chennai Super Kings (H) vs Royal Challengers Bangalore
-    ('Gujarat', 'Mumbai'),         # Match 9: 29 Mar 19:30 – Gujarat Titans (H) vs Mumbai Indians
-    ('Delhi', 'Hyderabad'),        # Match 10: 30 Mar 15:30 – Delhi Capitals (H) vs Sunrisers Hyderabad
-    ('Rajasthan', 'Chennai'),      # Match 11: 30 Mar 19:30 – Rajasthan Royals (H) vs Chennai Super Kings
-    ('Mumbai', 'Kolkata'),         # Match 12: 31 Mar 19:30 – Mumbai Indians (H) vs Kolkata Knight Riders
-    ('Lucknow', 'Punjab'),         # Match 13: 1 Apr 19:30 – Lucknow Super Giants (H) vs Punjab Kings
-    ('Bangalore', 'Gujarat'),      # Match 14: 2 Apr 19:30 – Royal Challengers Bangalore (H) vs Gujarat Titans
-    ('Kolkata', 'Hyderabad'),      # Match 15: 3 Apr 19:30 – Kolkata Knight Riders (H) vs Sunrisers Hyderabad
-    ('Lucknow', 'Mumbai'),         # Match 16: 4 Apr 19:30 – Lucknow Super Giants (H) vs Mumbai Indians
-    ('Chennai', 'Delhi'),          # Match 17: 5 Apr 15:30 – Chennai Super Kings (H) vs Delhi Capitals
-    ('Punjab', 'Rajasthan'),       # Match 18: 5 Apr 19:30 – Punjab Kings (H) vs Rajasthan Royals
-    ('Kolkata', 'Lucknow'),        # Match 19: 6 Apr 15:30 – Kolkata Knight Riders (H) vs Lucknow Super Giants
-    ('Hyderabad', 'Gujarat'),      # Match 20: 6 Apr 19:30 – Sunrisers Hyderabad (H) vs Gujarat Titans
-    ('Mumbai', 'Bangalore'),       # Match 21: 7 Apr 19:30 – Mumbai Indians (H) vs Royal Challengers Bangalore
-    ('Punjab', 'Chennai'),         # Match 22: 8 Apr 19:30 – Punjab Kings (H) vs Chennai Super Kings
-    ('Gujarat', 'Rajasthan'),      # Match 23: 9 Apr 19:30 – Gujarat Titans (H) vs Rajasthan Royals
-    ('Bangalore', 'Delhi'),        # Match 24: 10 Apr 19:30 – Royal Challengers Bangalore (H) vs Delhi Capitals
-    ('Chennai', 'Kolkata'),        # Match 25: 11 Apr 19:30 – Chennai Super Kings (H) vs Kolkata Knight Riders
-    ('Lucknow', 'Gujarat'),        # Match 26: 12 Apr 15:30 – Lucknow Super Giants (H) vs Gujarat Titans
-    ('Hyderabad', 'Punjab'),       # Match 27: 12 Apr 19:30 – Sunrisers Hyderabad (H) vs Punjab Kings
-    ('Rajasthan', 'Bangalore'),    # Match 28: 13 Apr 15:30 – Rajasthan Royals (H) vs Royal Challengers Bangalore
-    ('Delhi', 'Mumbai'),           # Match 29: 13 Apr 19:30 – Delhi Capitals (H) vs Mumbai Indians
-    ('Lucknow', 'Chennai'),        # Match 30: 14 Apr 19:30 – Lucknow Super Giants (H) vs Chennai Super Kings
-    ('Punjab', 'Kolkata'),         # Match 31: 15 Apr 19:30 – Punjab Kings (H) vs Kolkata Knight Riders
-    ('Delhi', 'Rajasthan'),        # Match 32: 16 Apr 19:30 – Delhi Capitals (H) vs Rajasthan Royals
-    ('Mumbai', 'Hyderabad'),       # Match 33: 17 Apr 19:30 – Mumbai Indians (H) vs Sunrisers Hyderabad
-    ('Bangalore', 'Punjab'),       # Match 34: 18 Apr 19:30 – Royal Challengers Bangalore (H) vs Punjab Kings
-    ('Gujarat', 'Delhi'),          # Match 35: 19 Apr 15:30 – Gujarat Titans (H) vs Delhi Capitals
-    ('Rajasthan', 'Lucknow'),      # Match 36: 19 Apr 19:30 – Rajasthan Royals (H) vs Lucknow Super Giants
-    ('Punjab', 'Bangalore'),       # Match 37: 20 Apr 15:30 – Punjab Kings (H) vs Royal Challengers Bangalore
-    ('Mumbai', 'Chennai'),         # Match 38: 20 Apr 19:30 – Mumbai Indians (H) vs Chennai Super Kings
-    ('Kolkata', 'Gujarat'),        # Match 39: 21 Apr 19:30 – Kolkata Knight Riders (H) vs Gujarat Titans
-    ('Lucknow', 'Delhi'),          # Match 40: 22 Apr 19:30 – Lucknow Super Giants (H) vs Delhi Capitals
     ('Hyderabad', 'Mumbai'),       # Match 41: 23 Apr 19:30 – Sunrisers Hyderabad (H) vs Mumbai Indians
     ('Bangalore', 'Rajasthan'),    # Match 42: 24 Apr 19:30 – Royal Challengers Bangalore (H) vs Rajasthan Royals
     ('Chennai', 'Hyderabad'),      # Match 43: 25 Apr 19:30 – Chennai Super Kings (H) vs Sunrisers Hyderabad
