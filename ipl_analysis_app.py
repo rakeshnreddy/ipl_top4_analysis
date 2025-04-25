@@ -22,21 +22,18 @@ team_full_names = {
 current_standings = {
     'Gujarat':   {'Matches': 8, 'Wins': 6, 'Points': 12},   # Gujarat Titans
     'Delhi':     {'Matches': 8, 'Wins': 6, 'Points': 12},   # Delhi Capitals
-    'Bangalore': {'Matches': 8, 'Wins': 5, 'Points': 10},   # Royal Challengers Bengaluru
+    'Bangalore': {'Matches': 9, 'Wins': 6, 'Points': 12},   # Royal Challengers Bengaluru
+    'Mumbai':    {'Matches': 9, 'Wins': 5, 'Points': 10},    # Mumbai Indians
     'Punjab':    {'Matches': 8, 'Wins': 5, 'Points': 10},   # Punjab Kings
     'Lucknow':   {'Matches': 9, 'Wins': 5, 'Points': 10},   # Lucknow Super Giants
-    'Mumbai':    {'Matches': 8, 'Wins': 4, 'Points': 8},    # Mumbai Indians
     'Kolkata':   {'Matches': 8, 'Wins': 3, 'Points': 6},    # Kolkata Knight Riders
-    'Rajasthan': {'Matches': 8, 'Wins': 2, 'Points': 4},    # Rajasthan Royals
-    'Hyderabad': {'Matches': 7, 'Wins': 2, 'Points': 4},    # Sunrisers Hyderabad
-    'Chennai':   {'Matches': 8, 'Wins': 2, 'Points': 4}     # Chennai Super Kings
+    'Hyderabad': {'Matches': 9, 'Wins': 3, 'Points': 6},    # Sunrisers Hyderabad
+    'Rajasthan': {'Matches': 9, 'Wins': 2, 'Points': 4},    # Rajasthan Royals
+    'Chennai':   {'Matches': 9, 'Wins': 2, 'Points': 4}     # Chennai Super Kings
 }
 
 
 remaining_fixtures = [
-    ('Hyderabad', 'Mumbai'),       # Match 41: 23 Apr 19:30 – Sunrisers Hyderabad (H) vs Mumbai Indians
-    ('Bangalore', 'Rajasthan'),    # Match 42: 24 Apr 19:30 – Royal Challengers Bangalore (H) vs Rajasthan Royals
-    ('Chennai', 'Hyderabad'),      # Match 43: 25 Apr 19:30 – Chennai Super Kings (H) vs Sunrisers Hyderabad
     ('Kolkata', 'Punjab'),         # Match 44: 26 Apr 19:30 – Kolkata Knight Riders (H) vs Punjab Kings
     ('Mumbai', 'Lucknow'),         # Match 45: 27 Apr 15:30 – Mumbai Indians (H) vs Lucknow Super Giants
     ('Delhi', 'Bangalore'),        # Match 46: 27 Apr 19:30 – Delhi Capitals (H) vs Royal Challengers Bangalore
