@@ -56,26 +56,6 @@ team_styles = {
 full_name_key_mapping = {v: k for k, v in team_full_names.items()}
 # --- End Team Names and Styles ---
 
-
-
-# --- <<< ADD TEAM COLORS >>> ---
-team_colors = {
-    'Rajasthan': '#FFC0CB',  # Pink
-    'Kolkata': '#3A225D',    # Purple
-    'Lucknow': '#0078AD',    # Light Blue / Teal
-    'Hyderabad': '#FF822A',  # Orange
-    'Chennai': '#FFFF00',    # Yellow
-    'Delhi': '#004C93',      # Dark Blue
-    'Punjab': '#DD1F2D',      # Red
-    'Gujarat': '#1C2C5B',    # Dark Blue / Navy
-    'Mumbai': '#006CB7',      # Blue
-    'Bangalore': '#D11F2D'     # Red/Black - Using Red
-}
-# --- <<< END TEAM COLORS >>> ---
-
-# --- <<< ADD REVERSE MAPPING HERE >>> ---
-team_key_mapping = {v: k for k, v in team_full_names.items()}
-# --- <<< END REVERSE MAPPING >>> ---
 # --- <<< MODIFY STYLING FUNCTION (Place outside main) >>> ---
 def style_team_row(row):
     """Applies background color to the entire row based on team full name,
@@ -695,142 +675,128 @@ def simulate_matches(results_df, team_name, initial_standings_arg):
 def main():
     st.set_page_config(layout="wide", page_title="IPL Probability Analyzer")
 
-    # --- <<< MODIFICATION: Refined Theme-Aware CSS >>> ---
+    # --- <<< REPLACE CSS BLOCK HERE >>> ---
     st.markdown("""
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-            /* Base font */
+            /* --- Base & Theme Variables --- */
+            :root {
+                --font-family-sans-serif: 'Inter', sans-serif;
+                --border-radius-lg: 16px;
+                --border-radius-md: 10px;
+                --border-radius-sm: 8px;
+                --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --box-shadow-medium: 0 6px 20px rgba(0, 0, 0, 0.1);
+                --transition-fast: all 0.2s ease-in-out;
+                --transition-medium: all 0.3s ease-in-out;
+            }
+
+            /* --- Base Font --- */
+            /* Let Streamlit handle base body/app background and text color */
             body, .stApp {
-                font-family: 'Inter', sans-serif !important;
+                font-family: var(--font-family-sans-serif) !important;
             }
 
-            /* Ensure default text uses theme color */
-            body, .stApp, p, li, .stMarkdown, .stText, .stAlert, [data-testid="stSidebar"] *, .stDataFrame th, .stDataFrame td, .stRadio label span, .stSelectbox label span {
-                color: var(--text-color);
-            }
-
-            /* App Background */
-            .stApp {
-                 background-color: var(--background-color);
-            }
-
-            /* Main content area */
+            /* --- Main Layout --- */
+            .stApp > header { display: block; } /* Ensure header is visible */
             .main .block-container {
-                padding: 2rem 3rem 5rem 3rem;
-                background-color: color-mix(in srgb, var(--secondary-background-color) 90%, transparent);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                border-radius: 16px;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+                padding: 2rem 3rem 4rem 3rem;
+                background-color: var(--secondary-background-color); /* Use secondary for contrast */
+                border-radius: var(--border-radius-lg);
+                box-shadow: var(--box-shadow-medium);
                 border: 1px solid var(--separator-color);
-                margin: 2.5rem auto;
+                margin: 2rem auto;
                 max-width: 1400px;
             }
 
-            /* Dataframes */
-            .stDataFrame {
-                border-radius: 10px;
-                overflow: hidden;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-                border: 1px solid var(--separator-color);
-            }
-            .stDataFrame [data-testid="stTable"] thead th {
-                background-color: var(--secondary-background-color);
-                font-weight: 600;
-                color: var(--text-color); /* Theme text for header */
-                border-bottom: 2px solid var(--primary-color);
-                text-align: center;
-                padding: 0.8rem 0.5rem;
-            }
-            .stDataFrame [data-testid="stTable"] tbody td {
-                 border: none;
-                 text-align: center;
-                 padding: 0.7rem 0.5rem;
-                 border-bottom: 1px solid var(--separator-color);
-                 /* Text color handled by Streamlit + row style */
-            }
-             .stDataFrame [data-testid="stTable"] tbody tr:last-child td { border-bottom: none; }
-             .stDataFrame [data-testid="stTable"] tbody tr:hover td {
-                 background-color: color-mix(in srgb, var(--primary-color) 10%, transparent) !important;
-            }
-
-            /* Buttons - Explicit colors */
-            .stButton>button {
-                border-radius: 8px; padding: 0.7rem 1.3rem; font-weight: 600; border: none;
-                background-color: #007bff; color: white; /* Explicit Blue/White */
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); transition: all 0.25s ease;
-                transform: scale(1); cursor: pointer;
-            }
-            .stButton>button:hover {
-                 box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); transform: scale(1.03);
-                 background-color: #0056b3; filter: none;
-            }
-             .stButton>button:active {
-                 transform: scale(0.98); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                 background-color: #004085; filter: none;
-             }
-             .stButton>button:disabled {
-                 background-color: #6c757d; color: #ced4da; cursor: not-allowed;
-                 box-shadow: none; transform: scale(1);
-             }
-
-            /* Sidebar */
+            /* --- Sidebar --- */
             [data-testid="stSidebar"] {
                  background-color: var(--secondary-background-color);
-                 backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
                  border-right: 1px solid var(--separator-color);
                  box-shadow: 2px 0px 10px rgba(0,0,0,0.05);
+                 padding-top: 1rem;
             }
-             /* Sidebar Widgets */
-             .stRadio, .stSelectbox {
+            /* Ensure sidebar text uses theme color */
+            [data-testid="stSidebar"] * {
+                 color: var(--text-color) !important; /* Keep important here for specificity */
+            }
+            [data-testid="stSidebar"] .stRadio,
+            [data-testid="stSidebar"] .stSelectbox {
                  background-color: var(--background-color); padding: 0.8rem;
-                 border-radius: 8px; margin-bottom: 1rem; border: 1px solid var(--separator-color);
-             }
-
-
-            /* --- <<< MODIFICATION: Explicit Theme Text Color for Headers/Caption >>> --- */
-            /* Section Headers */
-            h1, h2, h3, .stHeadingContainer h1, .stHeadingContainer h2, .stHeadingContainer h3 {
-                color: var(--text-color) !important; /* Force theme text color */
-                font-weight: 700 !important;
-            }
-            h1, .stHeadingContainer h1 {
-                 border-bottom: 3px solid var(--primary-color);
-                 padding-bottom: 0.7rem;
-                 margin-bottom: 1.5rem;
-            }
-            h2, .stHeadingContainer h2 { margin-top: 2.5rem; margin-bottom: 1.2rem; }
-            h3, .stHeadingContainer h3 { margin-top: 1.8rem; margin-bottom: 1rem; }
-
-            /* Caption text */
-            .stCaption {
-                color: var(--text-color) !important; /* Force theme text color */
-                opacity: 0.75;
-                font-size: 0.9em;
-            }
-            /* --- <<< END MODIFICATION >>> --- */
-
-
-            /* Altair Chart Container */
-            .stAltairChart {
-                 background-color: var(--secondary-background-color); border-radius: 10px;
-                 padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                 border-radius: var(--border-radius-sm); margin-bottom: 1rem;
                  border: 1px solid var(--separator-color);
             }
-            /* Altair Chart Text */
-            .stAltairChart text {
-                 fill: var(--text-color) !important;
-                 font-family: 'Inter', sans-serif !important;
+
+
+            /* --- Headers & Text (Targeting for Theme Color) --- */
+            /* Keep !important on headers/captions as they seem needed */
+            h1, h2, h3,
+            [data-testid="stHeading"] h1, [data-testid="stHeading"] h2, [data-testid="stHeading"] h3,
+            .stHeadingContainer h1, .stHeadingContainer h2, .stHeadingContainer h3,
+            div[data-testid="stMarkdownContainer"] h1, div[data-testid="stMarkdownContainer"] h2, div[data-testid="stMarkdownContainer"] h3
+            {
+                color: var(--text-color) !important;
+                font-weight: 700 !important;
+            }
+            h1, [data-testid="stHeading"] h1, .stHeadingContainer h1, div[data-testid="stMarkdownContainer"] h1 {
+                 border-bottom: 3px solid var(--primary-color); padding-bottom: 0.8rem;
+                 margin-bottom: 2rem; font-size: 2.2em;
+            }
+            h2, [data-testid="stHeading"] h2, .stHeadingContainer h2, div[data-testid="stMarkdownContainer"] h2 {
+                 margin-top: 3rem; margin-bottom: 1.5rem; font-size: 1.6em;
+                 border-bottom: 1px solid var(--separator-color); padding-bottom: 0.5rem;
+            }
+            h3, [data-testid="stHeading"] h3, .stHeadingContainer h3, div[data-testid="stMarkdownContainer"] h3 {
+                 margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3em;
+                 font-weight: 600 !important;
+            }
+            .stCaption, [data-testid="stCaptionContainer"] {
+                color: var(--text-color) !important;
+                opacity: 0.7; font-size: 0.9em;
+                margin-top: -0.8rem; margin-bottom: 1rem;
+            }
+            /* Default paragraph text - Should inherit from body/stApp now */
+            p, .stMarkdown p, .stText {
+                 line-height: 1.6;
+                 /* color: var(--text-color); REMOVED - Let it inherit */
             }
 
-            /* Success/Info/Warning boxes */
-            .stAlert {
-                border-radius: 8px; border-left-width: 5px;
-                background-color: var(--secondary-background-color);
-                color: var(--text-color); /* Theme text color */
-            }
-            .stAlert a { color: var(--primary-color); }
+            /* --- Buttons (Keep Explicit Colors) --- */
+            /* ... (Keep the explicit blue/white button CSS) ... */
+            .stButton>button { border-radius: var(--border-radius-sm); padding: 0.75rem 1.5rem; font-weight: 600; border: none; background-image: linear-gradient(to right, #0061ff, #007bff, #0095ff); background-size: 200% auto; color: white; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); transition: var(--transition-medium); transform: scale(1); cursor: pointer; }
+            .stButton>button:hover { background-position: right center; box-shadow: 0 7px 18px rgba(0, 123, 255, 0.3); transform: scale(1.03); }
+            .stButton>button:active { transform: scale(0.98); box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2); }
+            .stButton>button:disabled { background-image: none; background-color: #adb5bd; color: #dee2e6; cursor: not-allowed; box-shadow: none; transform: scale(1); opacity: 0.7; }
+
+
+            /* --- Dataframes --- */
+            /* ... (Keep DataFrame CSS as is) ... */
+            .stDataFrame { border-radius: var(--border-radius-md); overflow: hidden; box-shadow: var(--box-shadow-light); border: 1px solid var(--separator-color); }
+            .stDataFrame [data-testid="stTable"] thead th { background-color: var(--secondary-background-color); font-weight: 600; color: var(--text-color); border-bottom: 2px solid var(--primary-color); text-align: center; padding: 0.8rem 0.5rem; }
+            .stDataFrame [data-testid="stTable"] tbody td { border: none; text-align: center; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--separator-color); font-weight: 500; }
+            .stDataFrame [data-testid="stTable"] tbody tr:last-child td { border-bottom: none; }
+            .stDataFrame [data-testid="stTable"] tbody tr:hover td { background-color: color-mix(in srgb, var(--primary-color) 10%, transparent) !important; }
+            .stDataFrame [data-testid="stTable"] tbody td:first-child { font-weight: 700; color: var(--primary-color); }
+
+
+            /* --- Altair Chart --- */
+            /* ... (Keep Altair Chart CSS as is) ... */
+            .stAltairChart { background-color: var(--secondary-background-color); border-radius: var(--border-radius-md); padding: 1.2rem; box-shadow: var(--box-shadow-light); border: 1px solid var(--separator-color); }
+            .stAltairChart text { fill: var(--text-color) !important; font-family: var(--font-family-sans-serif) !important; font-size: 11px; }
+            .stAltairChart .title text { fill: var(--text-color) !important; font-weight: 600 !important; font-size: 14px !important; }
+            .stAltairChart .axis text { fill: var(--text-color) !important; opacity: 0.8; }
+
+
+            /* --- Alerts --- */
+            /* ... (Keep Alert CSS as is) ... */
+            .stAlert { border-radius: var(--border-radius-sm); border-left-width: 4px; background-color: var(--secondary-background-color); color: var(--text-color); padding: 1rem; box-shadow: var(--box-shadow-light); }
+            .stAlert a { color: var(--primary-color); font-weight: 600; }
+
+
+            /* --- Text Area (for match results) --- */
+            /* ... (Keep Text Area CSS as is) ... */
+            .stTextArea textarea { background-color: var(--secondary-background-color); border-radius: var(--border-radius-sm); border: 1px solid var(--separator-color); color: var(--text-color); opacity: 0.8; font-family: monospace; font-size: 0.9em; }
 
         </style>
     """, unsafe_allow_html=True)
