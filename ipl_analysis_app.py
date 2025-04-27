@@ -66,7 +66,7 @@ def style_team_row(row):
 
     if style_dict and 'bg' in style_dict:
         # Only set background-color
-        style_string = f"background-color: {style_dict['bg']};"
+        style_string = f"background-color: {style_dict['bg']}; color: white;"
         return [style_string] * len(row)
     else:
         # Default style if team not found
