@@ -3,15 +3,15 @@ import requests
 import json
 from datetime import datetime, timezone
 
-# ── Configuration ────────────────────────────────────────────────────────────────
-API_URL     = (
-    "https://api.cricapi.com/v1/series_points"
-    "?apikey=63d25b78-f287-4cf5-a2f5-4c97396766d5"
-    "&id=d5a498c8-7596-4b93-8ab0-e0efc3345312"
-)
-OUTPUT_FILE = "current_standings.json"
+# ── Configuration ────
+API_KEY           = "63d25b78-f287-4cf5-a2f5-4c97396766d5"
+SERIES_ID         = "d5a498c8-7596-4b93-8ab0-e0efc3345312"
+STANDINGS_URL     = f"https://api.cricapi.com/v1/series_points?apikey={API_KEY}&id={SERIES_ID}"
+FIXTURES_URL      = f"https://api.cricapi.com/v1/series_info?apikey={API_KEY}&id={SERIES_ID}"
+OUTPUT_STANDINGS  = "current_standings2.json"
+OUTPUT_FIXTURES   = "remaining_fixtures2.json"
 
-# Map full team names → your short keys
+# Full → short team mapping
 TEAM_NAME_MAP = {
     "Royal Challengers Bengaluru": "Bangalore",
     "Mumbai Indians":               "Mumbai",
@@ -25,31 +25,24 @@ TEAM_NAME_MAP = {
     "Chennai Super Kings":          "Chennai",
 }
 
-def main():
-    resp = requests.get(API_URL)
+def fetch_standings():
+    resp = requests.get(STANDINGS_URL)
     resp.raise_for_status()
     payload = resp.json()
-
     if payload.get("status") != "success":
-        raise RuntimeError("API returned error status")
+        raise RuntimeError("Standings API error")
 
     records = []
     for item in payload.get("data", []):
-        # Extract raw fields
         team_raw = item.get("teamname")
         matches  = item.get("matches", 0)
         wins     = item.get("wins", 0)
         ties     = item.get("ties", 0)
         nr       = item.get("nr", 0)
-        # Compute IPL points: Win=2, Tie=1, NR=1
         points   = wins * 2 + ties + nr
-
         if not team_raw:
             continue
-
-        # Map to your short key
         team = TEAM_NAME_MAP.get(team_raw, team_raw)
-
         records.append({
             "Team":    team,
             "Matches": matches,
@@ -57,29 +50,71 @@ def main():
             "Points":  points
         })
 
-    # Sort by Points descending
     records.sort(key=lambda r: r["Points"], reverse=True)
-
     standings = {
         rec["Team"]: {
             "Matches": rec["Matches"],
             "Wins":    rec["Wins"],
-            "Points":  rec["Points"]
+            "Points":  rec["Points"],
         }
         for rec in records
     }
 
-    output = {
+    return {
         "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source":       API_URL,
+        "source":       "Series Points API",
         "standings":    standings
     }
 
-    # Print and write to file
-    print(json.dumps(output, indent=4))
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=4)
-    print(f"\n✔ Saved {len(records)} teams to {OUTPUT_FILE}")
+def fetch_fixtures():
+    resp = requests.get(FIXTURES_URL)
+    resp.raise_for_status()
+    payload = resp.json()
+    match_list = payload.get("data", {}).get("matchList", [])
+
+    now = datetime.now(timezone.utc)
+    upcoming = []
+
+    for match in match_list:
+        if match.get("status") != "Match not started" or not match.get("hasSquad", False):
+            continue
+
+        dt_str = match.get("dateTimeGMT")
+        try:
+            dt = datetime.fromisoformat(dt_str).replace(tzinfo=timezone.utc)
+        except Exception:
+            continue
+
+        if dt < now:
+            continue
+
+        teams = match.get("teams", [])
+        if len(teams) != 2:
+            continue
+
+        t1 = TEAM_NAME_MAP.get(teams[0], teams[0])
+        t2 = TEAM_NAME_MAP.get(teams[1], teams[1])
+        upcoming.append((dt, [t1, t2]))
+
+    upcoming.sort(key=lambda x: x[0])
+    fixtures = [pair for _, pair in upcoming]
+
+    return {
+        "last_updated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source":       "Series Info API",
+        "fixtures":     fixtures
+    }
+
+def main():
+    standings_json = fetch_standings()
+    with open(OUTPUT_STANDINGS, "w", encoding="utf-8") as f:
+        json.dump(standings_json, f, indent=4)
+    print(f"✔ Saved standings to {OUTPUT_STANDINGS}")
+
+    fixtures_json = fetch_fixtures()
+    with open(OUTPUT_FIXTURES, "w", encoding="utf-8") as f:
+        json.dump(fixtures_json, f, indent=4)
+    print(f"✔ Saved fixtures to {OUTPUT_FIXTURES}")
 
 if __name__ == "__main__":
     main()
