@@ -12,7 +12,7 @@ import traceback # Added for detailed error printing
 
 # --- Configuration ---
 EXHAUSTIVE_LIMIT = 20  # Max fixtures for exhaustive simulation
-NUM_SIMULATIONS_MC = 500000 # Number of simulations for Monte Carlo
+NUM_SIMULATIONS_MC = 4000000 # Number of simulations for Monte Carlo
 MC_TOLERANCE = 0.02 # Tolerance for 'Result doesn't matter' in MC (e.g., 2% difference) # <<< ADD THIS
 # --- End Configuration ---
 
@@ -840,7 +840,20 @@ def main():
         st.sidebar.info("No remaining fixtures."); selected_method = 'None'; selected_method_display = "None"
     st.sidebar.markdown("---")
     # --- End Sidebar Method Selection ---
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("Analyze Specific Team")
+    # Use FULL names for selection dropdown
+    available_teams_full = sorted([name for key, name in team_full_names.items() if key in initial_standings_data])
+    if not available_teams_full: st.sidebar.error("No teams available."); st.stop()
 
+    full_team_name = st.sidebar.selectbox("Select Team:", available_teams_full, key="team_select")
+    # Map selected full name back to key
+    team_key = next((key for key, value in team_full_names.items() if value == full_team_name), None)
+
+    if not team_key: st.sidebar.error("Selected team key not found."); st.stop()
+
+    top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select") # Simplified label
+    top_n = 2 if top_n_choice == "Top 2" else 4
 
     # --- Display Initial Standings ---
     st.subheader("Current Standings")
@@ -863,6 +876,9 @@ def main():
     st.caption(f"Method: {selected_method_display}") # Show method used here
     standings_with_probs = None
     cache_key = f'standings_with_probs_{selected_method}'
+    # Determine which probability column to display based on sidebar choice
+    prob_column_to_display = 'Top 2 Probability' if top_n_choice == "Top 2" else 'Top 4 Probability'
+
 
 
     # (create_probability_chart function definition should be here - keep as modified before)
@@ -929,7 +945,7 @@ def main():
     if cache_key in st.session_state:
          standings_with_probs = st.session_state[cache_key]
          st.caption("(Using cached results)")
-         chart = create_probability_chart(standings_with_probs, 'Top 4 Probability')
+         chart = create_probability_chart(standings_with_probs, prob_column_to_display)
          if chart: st.altair_chart(chart, use_container_width=True)
          else: st.warning("Could not generate probability chart from cached data.")
 
@@ -948,7 +964,7 @@ def main():
                     if team in standings_with_probs: standings_with_probs[team].update(probs)
                 st.session_state[cache_key] = standings_with_probs
                 st.caption("(Newly Calculated)")
-                chart = create_probability_chart(standings_with_probs, 'Top 4 Probability')
+                chart = create_probability_chart(standings_with_probs, prob_column_to_display)
                 if chart: st.altair_chart(chart, use_container_width=True)
                 else: st.warning("Could not generate probability chart from calculated data.")
             else:
@@ -960,20 +976,7 @@ def main():
 
 
     # --- Team Specific Analysis ---
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("Analyze Specific Team")
-    # Use FULL names for selection dropdown
-    available_teams_full = sorted([name for key, name in team_full_names.items() if key in initial_standings_data])
-    if not available_teams_full: st.sidebar.error("No teams available."); st.stop()
-
-    full_team_name = st.sidebar.selectbox("Select Team:", available_teams_full, key="team_select")
-    # Map selected full name back to key
-    team_key = next((key for key, value in team_full_names.items() if value == full_team_name), None)
-
-    if not team_key: st.sidebar.error("Selected team key not found."); st.stop()
-
-    top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select") # Simplified label
-    top_n = 2 if top_n_choice == "Top 2" else 4
+    
 
     st.subheader(f"Analysis for {full_team_name}")
     st.caption(f"Method: {selected_method_display}")
