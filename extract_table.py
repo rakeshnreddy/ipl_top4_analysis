@@ -1,53 +1,85 @@
+#!/usr/bin/env python3
 import requests
-from bs4 import BeautifulSoup
+import json
+from datetime import datetime, timezone
 
-def extract_ipl_points_table(url):
-    try:
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}  # Adding User-Agent
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Raise an exception for bad status codes
-        soup = BeautifulSoup(response.content, "html.parser")
+# ── Configuration ────────────────────────────────────────────────────────────────
+API_URL     = (
+    "https://api.cricapi.com/v1/series_points"
+    "?apikey=63d25b78-f287-4cf5-a2f5-4c97396766d5"
+    "&id=d5a498c8-7596-4b93-8ab0-e0efc3345312"
+)
+OUTPUT_FILE = "current_standings.json"
 
-        # Find the table - you might need to adjust the selector
-        table = soup.find("table")  #  or e.g., soup.find("table", class_="your-table-class")
+# Map full team names → your short keys
+TEAM_NAME_MAP = {
+    "Royal Challengers Bengaluru": "Bangalore",
+    "Mumbai Indians":               "Mumbai",
+    "Gujarat Titans":               "Gujarat",
+    "Delhi Capitals":               "Delhi",
+    "Punjab Kings":                 "Punjab",
+    "Lucknow Super Giants":         "Lucknow",
+    "Kolkata Knight Riders":        "Kolkata",
+    "Rajasthan Royals":             "Rajasthan",
+    "Sunrisers Hyderabad":          "Hyderabad",
+    "Chennai Super Kings":          "Chennai",
+}
 
-        if not table:
-            return {"error": "Could not find the table element on the page."}
+def main():
+    resp = requests.get(API_URL)
+    resp.raise_for_status()
+    payload = resp.json()
 
-        rows = table.find_all("tr")
-        if not rows:
-             return {"error": "Could not find table rows."}
+    if payload.get("status") != "success":
+        raise RuntimeError("API returned error status")
 
+    records = []
+    for item in payload.get("data", []):
+        # Extract raw fields
+        team_raw = item.get("teamname")
+        matches  = item.get("matches", 0)
+        wins     = item.get("wins", 0)
+        ties     = item.get("ties", 0)
+        nr       = item.get("nr", 0)
+        # Compute IPL points: Win=2, Tie=1, NR=1
+        points   = wins * 2 + ties + nr
 
-        headers = [th.text.strip() for th in rows[0].find_all("th")]
-        table_data = {}
+        if not team_raw:
+            continue
 
-        for row in rows[1:]:
-            cells = row.find_all("td")
-            if len(cells) == len(headers):
-                team_name = cells[0].text.strip()
-                table_data[team_name] = {}
-                for i in range(1, len(headers)):
-                    header = headers[i]
-                    if header == "M":
-                        header = "Matches"
-                    elif header == "W":
-                        header = "Wins"
-                    elif header == "PT":
-                        header = "Points"
-                    table_data[team_name][header] = cells[i].text.strip()
+        # Map to your short key
+        team = TEAM_NAME_MAP.get(team_raw, team_raw)
 
-        return {"tableData": table_data}
+        records.append({
+            "Team":    team,
+            "Matches": matches,
+            "Wins":    wins,
+            "Points":  points
+        })
 
-    except requests.exceptions.RequestException as e:
-        return {"error": f"Error fetching URL: {e}"}
-    except Exception as e:
-        return {"error": f"An error occurred: {e}"}
+    # Sort by Points descending
+    records.sort(key=lambda r: r["Points"], reverse=True)
 
-url = "https://www.espncricinfo.com/series/ipl-2025-1449924/points-table-standings"  # Replace with the actual URL if different
-result = extract_ipl_points_table(url)
+    standings = {
+        rec["Team"]: {
+            "Matches": rec["Matches"],
+            "Wins":    rec["Wins"],
+            "Points":  rec["Points"]
+        }
+        for rec in records
+    }
 
-if "error" in result:
-    print(result["error"])
-else:
-    print(result["tableData"])  # Prints the extracted data in the desired format
+    output = {
+        "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source":       API_URL,
+        "standings":    standings
+    }
+
+    # Print and write to file
+    print(json.dumps(output, indent=4))
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=4)
+    print(f"\n✔ Saved {len(records)} teams to {OUTPUT_FILE}")
+
+if __name__ == "__main__":
+    main()
