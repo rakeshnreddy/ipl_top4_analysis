@@ -12,7 +12,7 @@ import traceback # Added for detailed error printing
 
 # --- Configuration ---
 EXHAUSTIVE_LIMIT = 20  # Max fixtures for exhaustive simulation
-NUM_SIMULATIONS_MC = 4000000 # Number of simulations for Monte Carlo
+NUM_SIMULATIONS_MC = 1000000 # Number of simulations for Monte Carlo
 MC_TOLERANCE = 0.02 # Tolerance for 'Result doesn't matter' in MC (e.g., 2% difference) # <<< ADD THIS
 # --- End Configuration ---
 
