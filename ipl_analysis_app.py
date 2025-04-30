@@ -31,59 +31,234 @@ team_full_names = {
     'Bangalore': 'Royal Challengers Bangalore'
 }
 
-
-# Define the current standings and remaining fixtures
-current_standings = {
-    'Gujarat':   {'Matches': 8, 'Wins': 6, 'Points': 12},   # Gujarat Titans
-    'Delhi':     {'Matches': 8, 'Wins': 6, 'Points': 12},   # Delhi Capitals
-    'Mumbai':    {'Matches': 9, 'Wins': 5, 'Points': 1},    # Mumbai Indians
-    'Bangalore': {'Matches': 8, 'Wins': 5, 'Points': 10},   # Royal Challengers Bengaluru
-    'Punjab':    {'Matches': 8, 'Wins': 5, 'Points': 10},   # Punjab Kings
-    'Lucknow':   {'Matches': 9, 'Wins': 5, 'Points': 10},   # Lucknow Super Giants
-    'Kolkata':   {'Matches': 8, 'Wins': 3, 'Points': 6},    # Kolkata Knight Riders
-    'Rajasthan': {'Matches': 8, 'Wins': 2, 'Points': 4},    # Rajasthan Royals
-    'Hyderabad': {'Matches': 8, 'Wins': 2, 'Points': 4},    # Sunrisers Hyderabad
-    'Chennai':   {'Matches': 8, 'Wins': 2, 'Points': 4}     # Chennai Super Kings
+team_short_names = { # Still needed for chart
+    'Rajasthan': 'RR', 'Kolkata': 'KKR', 'Lucknow': 'LSG', 'Hyderabad': 'SRH',
+    'Chennai': 'CSK', 'Delhi': 'DC', 'Punjab': 'PBKS', 'Gujarat': 'GT',
+    'Mumbai': 'MI', 'Bangalore': 'RCB'
 }
 
+# Revised styles for better contrast and uniqueness
+team_styles = {
+    # Team Key: {'bg': 'background_hex', 'text': 'text_hex'}
+    'Rajasthan': {'bg': '#FFC0CB', 'text': '#000000'},  # Pink bg, Black text
+    'Kolkata':   {'bg': '#3A225D', 'text': '#FFFFFF'},  # Purple bg, White text
+    'Lucknow':   {'bg': '#00AEEF', 'text': '#000000'},  # Light Blue bg, Black text
+    'Hyderabad': {'bg': '#FF822A', 'text': '#000000'},  # Orange bg, Black text
+    'Chennai':   {'bg': '#FDB913', 'text': '#000000'},  # Yellow bg, Black text
+    'Delhi':     {'bg': '#004C93', 'text': '#FFFFFF'},  # Dark Blue bg, White text
+    'Punjab':    {'bg': '#AF0000', 'text': '#FFFFFF'},  # Darker Red bg, White text (Unique from RCB)
+    'Gujarat':   {'bg': '#1C2C5B', 'text': '#FFFFFF'},  # Navy bg, White text
+    'Mumbai':    {'bg': '#006CB7', 'text': '#FFFFFF'},  # Blue bg, White text
+    'Bangalore': {'bg': '#D11F2D', 'text': '#FFD700'}   # Red bg, Gold text (Unique)
+}
 
-remaining_fixtures = [
-    ('Bangalore', 'Rajasthan'),    # Match 42: 24 Apr 19:30 – Royal Challengers Bangalore (H) vs Rajasthan Royals
-    ('Chennai', 'Hyderabad'),      # Match 43: 25 Apr 19:30 – Chennai Super Kings (H) vs Sunrisers Hyderabad
-    ('Kolkata', 'Punjab'),         # Match 44: 26 Apr 19:30 – Kolkata Knight Riders (H) vs Punjab Kings
-    ('Mumbai', 'Lucknow'),         # Match 45: 27 Apr 15:30 – Mumbai Indians (H) vs Lucknow Super Giants
-    ('Delhi', 'Bangalore'),        # Match 46: 27 Apr 19:30 – Delhi Capitals (H) vs Royal Challengers Bangalore
-    ('Rajasthan', 'Gujarat'),      # Match 47: 28 Apr 19:30 – Rajasthan Royals (H) vs Gujarat Titans
-    ('Delhi', 'Kolkata'),          # Match 48: 29 Apr 19:30 – Delhi Capitals (H) vs Kolkata Knight Riders
-    ('Chennai', 'Punjab'),         # Match 49: 30 Apr 19:30 – Chennai Super Kings (H) vs Punjab Kings
-    ('Rajasthan', 'Mumbai'),       # Match 50: 1 May 19:30 – Rajasthan Royals (H) vs Mumbai Indians
-    ('Gujarat', 'Hyderabad'),      # Match 51: 2 May 19:30 – Gujarat Titans (H) vs Sunrisers Hyderabad
-    ('Bangalore', 'Chennai'),      # Match 52: 3 May 19:30 – Royal Challengers Bangalore (H) vs Chennai Super Kings
-    ('Kolkata', 'Rajasthan'),      # Match 53: 4 May 15:30 – Kolkata Knight Riders (H) vs Rajasthan Royals
-    ('Punjab', 'Lucknow'),         # Match 54: 4 May 19:30 – Punjab Kings (H) vs Lucknow Super Giants
-    ('Hyderabad', 'Delhi'),        # Match 55: 5 May 19:30 – Sunrisers Hyderabad (H) vs Delhi Capitals
-    ('Mumbai', 'Gujarat'),         # Match 56: 6 May 19:30 – Mumbai Indians (H) vs Gujarat Titans
-    ('Kolkata', 'Chennai'),        # Match 57: 7 May 19:30 – Kolkata Knight Riders (H) vs Chennai Super Kings
-    ('Punjab', 'Delhi'),           # Match 58: 8 May 19:30 – Punjab Kings (H) vs Delhi Capitals
-    ('Lucknow', 'Bangalore'),      # Match 59: 9 May 19:30 – Lucknow Super Giants (H) vs Royal Challengers Bangalore
-    ('Hyderabad', 'Kolkata'),      # Match 60: 10 May 19:30 – Sunrisers Hyderabad (H) vs Kolkata Knight Riders
-    ('Punjab', 'Mumbai'),          # Match 61: 11 May 15:30 – Punjab Kings (H) vs Mumbai Indians
-    ('Delhi', 'Gujarat'),          # Match 62: 11 May 19:30 – Delhi Capitals (H) vs Gujarat Titans
-    ('Chennai', 'Rajasthan'),      # Match 63: 12 May 19:30 – Chennai Super Kings (H) vs Rajasthan Royals
-    ('Bangalore', 'Hyderabad'),    # Match 64: 13 May 19:30 – Royal Challengers Bangalore (H) vs Sunrisers Hyderabad
-    ('Gujarat', 'Lucknow'),        # Match 65: 14 May 19:30 – Gujarat Titans (H) vs Lucknow Super Giants
-    ('Mumbai', 'Delhi'),           # Match 66: 15 May 19:30 – Mumbai Indians (H) vs Delhi Capitals
-    ('Rajasthan', 'Punjab'),       # Match 67: 16 May 19:30 – Rajasthan Royals (H) vs Punjab Kings
-    ('Bangalore', 'Kolkata'),      # Match 68: 17 May 19:30 – Royal Challengers Bangalore (H) vs Kolkata Knight Riders
-    ('Gujarat', 'Chennai'),        # Match 69: 18 May 15:30 – Gujarat Titans (H) vs Chennai Super Kings
-    ('Lucknow', 'Hyderabad')       # Match 70: 18 May 19:30 – Lucknow Super Giants (H) vs Sunrisers Hyderabad
+# Reverse mapping from FULL name to key (used in row styling)
+full_name_key_mapping = {v: k for k, v in team_full_names.items()}
+# --- End Team Names and Styles ---
+
+# --- <<< MODIFY STYLING FUNCTION (Place outside main) >>> ---
+def style_team_row(row):
+    """Applies background color to the entire row based on team full name,
+       allowing Streamlit to handle text color for theme compatibility."""
+    team_name = row['Team Name'] # Use the 'Team Name' column (full name)
+    team_key = full_name_key_mapping.get(team_name) # Use full name mapping
+    style_dict = team_styles.get(team_key) # Get dict containing 'bg'
+
+    if style_dict and 'bg' in style_dict:
+        # Only set background-color
+        style_string = f"background-color: {style_dict['bg']}; color: white;"
+        return [style_string] * len(row)
+    else:
+        # Default style if team not found
+        return [''] * len(row)
+# --- <<< END MODIFICATION >>> ---
+
+# --- Fallback Data (Keep as is) ---
+FALLBACK_STANDINGS = {
+    'Gujarat':   {'Matches': 8, 'Wins': 6, 'Points': 12}, 'Delhi':     {'Matches': 8, 'Wins': 6, 'Points': 12},
+    'Bangalore': {'Matches': 9, 'Wins': 6, 'Points': 12},  'Punjab':    {'Matches': 9, 'Wins': 5, 'Points': 11},
+    'Mumbai':    {'Matches': 9, 'Wins': 5, 'Points': 10},  'Lucknow':   {'Matches': 9, 'Wins': 5, 'Points': 10},
+    'Kolkata':   {'Matches': 9, 'Wins': 3, 'Points': 7}, 'Hyderabad': {'Matches': 9, 'Wins': 3, 'Points': 6},
+    'Rajasthan': {'Matches': 9, 'Wins': 2, 'Points': 4}, 'Chennai':   {'Matches': 9, 'Wins': 2, 'Points': 4}
+}
+FALLBACK_FIXTURES = [
+    ('Mumbai', 'Lucknow'), ('Delhi', 'Bangalore'), ('Rajasthan', 'Gujarat'), ('Delhi', 'Kolkata'),
+    ('Chennai', 'Punjab'), ('Rajasthan', 'Mumbai'), ('Gujarat', 'Hyderabad'), ('Bangalore', 'Chennai'), ('Kolkata', 'Rajasthan'),
+    ('Punjab', 'Lucknow'), ('Hyderabad', 'Delhi'), ('Mumbai', 'Gujarat'), ('Kolkata', 'Chennai'), ('Punjab', 'Delhi'),
+    ('Lucknow', 'Bangalore'), ('Hyderabad', 'Kolkata'), ('Punjab', 'Mumbai'), ('Delhi', 'Gujarat'), ('Chennai', 'Rajasthan'),
+    ('Bangalore', 'Hyderabad'), ('Gujarat', 'Lucknow'), ('Mumbai', 'Delhi'), ('Rajasthan', 'Punjab'), ('Bangalore', 'Kolkata'),
+    ('Gujarat', 'Chennai'), ('Lucknow', 'Hyderabad')
 ]
+# --- End Fallback Data ---
 
-def calculate_total_matches_per_team():
-    total_matches = {team: stats['Matches'] for team, stats in current_standings.items()}
-    for team1, team2 in remaining_fixtures:
-        total_matches[team1] += 1
-        total_matches[team2] += 1
+# --- Data Loading Function (Modified with Stricter Validation) ---
+@st.cache_data(ttl=3600)
+def load_data():
+    """Loads standings and fixtures from JSON files, using fallbacks if necessary,
+       and performs strict validation on standings data."""
+    loaded_standings = None
+    loaded_fixtures = None
+    standings_meta = {"source": "Unknown", "last_updated": "N/A"}
+    fixtures_meta = {"source": "Unknown", "last_updated": "N/A"}
+    load_errors = []
+
+    # Load Standings
+    try:
+        if os.path.exists(STANDINGS_FILE):
+            with open(STANDINGS_FILE, 'r') as f:
+                data = json.load(f)
+                loaded_standings = data.get("standings")
+                standings_meta["source"] = data.get("source", "JSON File")
+                standings_meta["last_updated"] = data.get("last_updated", "N/A")
+                # Basic check if standings exist in the file
+                if loaded_standings is None:
+                     load_errors.append(f"Warning: 'standings' key missing in {STANDINGS_FILE}.")
+                elif not isinstance(loaded_standings, dict):
+                    load_errors.append(f"Warning: Standings data in {STANDINGS_FILE} is not a dictionary.")
+                    loaded_standings = None # Treat as invalid
+                elif not loaded_standings:
+                     load_errors.append(f"Info: Standings data in {STANDINGS_FILE} is empty.")
+                     # Keep empty dict for now, validation will handle it
+        else:
+            load_errors.append(f"Info: Standings file not found: {STANDINGS_FILE}. Using fallback.")
+    except (json.JSONDecodeError, IOError) as e:
+        load_errors.append(f"Error loading {STANDINGS_FILE}: {e}. Using fallback.")
+        loaded_standings = None
+    except Exception as e:
+        load_errors.append(f"Unexpected error loading standings: {e}. Using fallback.")
+        loaded_standings = None
+
+    # Load Fixtures (Keep existing logic)
+    try:
+        if os.path.exists(FIXTURES_FILE):
+            with open(FIXTURES_FILE, 'r') as f:
+                data = json.load(f)
+                raw_fixtures = data.get("fixtures")
+                if isinstance(raw_fixtures, list):
+                     loaded_fixtures = [tuple(match) for match in raw_fixtures if isinstance(match, (list, tuple)) and len(match) == 2]
+                     if len(loaded_fixtures) != len(raw_fixtures):
+                          load_errors.append(f"Warning: Some fixture entries in {FIXTURES_FILE} were invalid or filtered.")
+                else:
+                     loaded_fixtures = None # Invalid format
+                fixtures_meta["source"] = data.get("source", "JSON File")
+                fixtures_meta["last_updated"] = data.get("last_updated", "N/A")
+                if loaded_fixtures is None and isinstance(raw_fixtures, list): # Check if it was a list but empty/invalid items
+                     load_errors.append(f"Warning: Fixtures data in {FIXTURES_FILE} is empty or contained only invalid entries.")
+                elif loaded_fixtures is None: # Not a list at all
+                     load_errors.append(f"Warning: Fixtures data in {FIXTURES_FILE} is not a list or missing 'fixtures' key.")
+
+        else:
+            load_errors.append(f"Info: Fixtures file not found: {FIXTURES_FILE}. Using fallback.")
+    except (json.JSONDecodeError, IOError) as e:
+        load_errors.append(f"Error loading {FIXTURES_FILE}: {e}. Using fallback.")
+        loaded_fixtures = None
+    except Exception as e:
+        load_errors.append(f"Unexpected error loading fixtures: {e}. Using fallback.")
+        loaded_fixtures = None
+
+    # Apply Fallbacks
+    final_standings_raw = loaded_standings if loaded_standings is not None else FALLBACK_STANDINGS
+    final_fixtures_raw = loaded_fixtures if loaded_fixtures is not None else FALLBACK_FIXTURES
+
+    # --- <<< START: Stricter Standings Validation >>> ---
+    validated_standings = {}
+    required_keys = {'Matches', 'Wins', 'Points'}
+
+    if isinstance(final_standings_raw, dict):
+        for team, stats in final_standings_raw.items():
+            if not isinstance(stats, dict):
+                load_errors.append(f"ERROR: Data for team '{team}' in standings is not a dictionary. Skipping team.")
+                continue # Skip this team
+
+            if not required_keys.issubset(stats.keys()):
+                missing = required_keys - stats.keys()
+                load_errors.append(f"ERROR: Team '{team}' in standings is missing required keys: {missing}. Skipping team.")
+                continue # Skip this team
+
+            # Try converting required values to integers
+            try:
+                validated_stats = {
+                    'Matches': int(stats['Matches']),
+                    'Wins': int(stats['Wins']),
+                    'Points': int(stats['Points'])
+                }
+                # Copy over any other existing keys (like probabilities if they were somehow loaded)
+                for k, v in stats.items():
+                    if k not in validated_stats:
+                        validated_stats[k] = v
+
+                validated_standings[team] = validated_stats # Add validated data
+
+            except (ValueError, TypeError) as e:
+                load_errors.append(f"ERROR: Non-integer or invalid value found for required keys in team '{team}'. Error: {e}. Skipping team.")
+                # Example: stats might be {'Matches': 10, 'Wins': 5, 'Points': 'None'} -> TypeError
+                # Example: stats might be {'Matches': 10, 'Wins': 5, 'Points': 'abc'} -> ValueError
+                continue # Skip this team
+    else:
+        load_errors.append("CRITICAL ERROR: Standings data (loaded or fallback) is not a dictionary. Using empty standings.")
+        validated_standings = {} # Ensure it's an empty dict if the source was totally invalid
+
+    final_standings = validated_standings # Use the validated data from now on
+    # --- <<< END: Stricter Standings Validation >>> ---
+
+
+    # Determine overall source and timestamp (using original load status)
+    if loaded_standings is not None and loaded_fixtures is not None:
+        data_source = f"JSON ({standings_meta['source']})"
+        last_updated = max(standings_meta['last_updated'], fixtures_meta['last_updated']) if standings_meta['last_updated'] != "N/A" and fixtures_meta['last_updated'] != "N/A" else (standings_meta['last_updated'] if standings_meta['last_updated'] != "N/A" else fixtures_meta['last_updated'])
+    elif loaded_standings is not None:
+        data_source = f"JSON Standings ({standings_meta['source']}) / Fallback Fixtures"
+        last_updated = standings_meta['last_updated']
+    elif loaded_fixtures is not None:
+        data_source = f"Fallback Standings / JSON Fixtures ({fixtures_meta['source']})"
+        last_updated = fixtures_meta['last_updated']
+    else:
+        data_source = "Fallback Data"
+        last_updated = "N/A"
+
+
+    # --- Fixture Validation (Depends on validated standings) ---
+    missing_teams_in_fixtures = set()
+    valid_fixtures = []
+    # Use the raw fixtures list before validation for this check
+    if isinstance(final_fixtures_raw, list):
+        for team1, team2 in final_fixtures_raw:
+             # Check against the KEYS of the *validated* standings
+            valid_match = True
+            if team1 not in final_standings: # Check against validated keys
+                missing_teams_in_fixtures.add(team1)
+                valid_match = False
+            if team2 not in final_standings: # Check against validated keys
+                missing_teams_in_fixtures.add(team2)
+                valid_match = False
+
+            if valid_match:
+                valid_fixtures.append((team1, team2)) # Only add fixtures where both teams are valid
+    else:
+         load_errors.append("ERROR: Fixtures data (loaded or fallback) is not a list. Using empty fixtures.")
+         valid_fixtures = [] # Ensure it's an empty list if source was invalid
+
+    if missing_teams_in_fixtures:
+        load_errors.append(f"ERROR: Teams found in fixtures but MISSING from validated standings: {missing_teams_in_fixtures}. Associated fixtures ignored.")
+
+    final_fixtures = valid_fixtures # Use only the fixtures with valid teams
+    # --- End Fixture Validation ---
+
+    # Final check if standings became empty after validation
+    if not final_standings and isinstance(final_standings_raw, dict) and final_standings_raw:
+         load_errors.append("CRITICAL ERROR: All teams failed validation. Standings are empty.")
+
+    return final_standings, final_fixtures, last_updated, data_source, load_errors
+
+
+# --- Helper Functions (Keep calculate_total_matches_per_team, plot_standings as is) ---
+def calculate_total_matches_per_team(standings_data, fixtures_data):
+    """Calculates total matches based on provided standings and fixtures."""
+    if not standings_data: return {}
+    total_matches = {team: stats.get('Matches', 0) for team, stats in standings_data.items()}
+    for team1, team2 in fixtures_data:
+        if team1 in total_matches: total_matches[team1] += 1
+        if team2 in total_matches: total_matches[team2] += 1
     return total_matches
 
 def plot_standings(standings_data):
