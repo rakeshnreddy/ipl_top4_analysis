@@ -8,10 +8,12 @@ from datetime import datetime
 import time # Added for progress bar
 import altair as alt # <<< ADD THIS IMPORT >>>
 import traceback # Added for detailed error printing
+from collections import defaultdict # Add this import
+
 
 
 # --- Configuration ---
-EXHAUSTIVE_LIMIT = 20  # Max fixtures for exhaustive simulation
+EXHAUSTIVE_LIMIT = 23  # Max fixtures for exhaustive simulation
 NUM_SIMULATIONS_MC = 1000000 # Number of simulations for Monte Carlo
 MC_TOLERANCE = 0.02 # Tolerance for 'Result doesn't matter' in MC (e.g., 2% difference) # <<< ADD THIS
 # --- End Configuration ---
@@ -669,7 +671,413 @@ def simulate_matches(results_df, team_name, initial_standings_arg):
         return f"An error occurred during simulation: {str(e)}", None
 # --- End Simulate Matches Function ---
 
-# --- Main Streamlit App (Modified) ---
+def analyze_qualification_path(team_name, top_n, initial_standings_arg, fixtures_arg):
+    """
+    Analyzes the minimum wins needed for a team to qualify, considering
+    guaranteed and possible scenarios using exhaustive simulation.
+
+    Returns:
+        dict: {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed}
+              Values can be integers (0 to num_matches) or None if impossible.
+    """
+    num_total_fixtures = len(fixtures_arg)
+
+    # --- Performance Check ---
+    if num_total_fixtures > EXHAUSTIVE_LIMIT:
+        st.error(f"Qualification Path analysis requested for {num_total_fixtures} fixtures, exceeding the limit of {EXHAUSTIVE_LIMIT}. Aborting.")
+        return {'possible': 'N/A (Limit Exceeded)', 'guaranteed': 'N/A (Limit Exceeded)', 'target_matches': 'N/A'} # Added target_matches here too
+    elif num_total_fixtures > 15:
+        st.warning(f"Running Qualification Path analysis for {num_total_fixtures} fixtures. This may take some time...")
+    # --- End Performance Check ---
+
+    total_matches_per_team = calculate_total_matches_per_team(initial_standings_arg, fixtures_arg)
+    if not total_matches_per_team:
+        return {'possible': 'Error', 'guaranteed': 'Error', 'target_matches': 'Error'} # Added target_matches
+
+    target_team_matches = [match for match in fixtures_arg if team_name in match]
+    num_target_matches = len(target_team_matches)
+    total_scenarios = 2 ** num_total_fixtures
+
+    # Data structures to store results per win count (k) for the target team
+    scenarios_per_win_count = defaultdict(int)
+    qualifying_scenarios_per_win_count = defaultdict(int)
+    possible_qualification_wins = set() # Store k values where qualification happened
+
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    start_time = time.time()
+    processed_scenarios = 0
+    
+    # --- <<< ADD DEBUG COUNTERS >>> ---
+    debug_k3_total_count = 0
+    debug_k3_qualified_count = 0
+    # --- <<< END DEBUG COUNTERS >>> ---
+
+    # Iterate through ALL possible outcomes of ALL remaining fixtures
+    for i, outcome_tuple in enumerate(product([0, 1], repeat=num_total_fixtures)):
+        standings_scenario = {t: dict(s) for t, s in initial_standings_arg.items()}
+        target_wins_in_scenario = 0
+
+        # Apply results for this specific scenario
+        for match_idx, result in enumerate(outcome_tuple):
+            match = fixtures_arg[match_idx]
+            team_a, team_b = match
+            winner = team_a if result == 1 else team_b
+            loser = team_b if winner == team_a else team_a
+            if winner in standings_scenario and loser in standings_scenario:
+                standings_scenario[winner]['Wins'] += 1; standings_scenario[winner]['Points'] += 2
+                standings_scenario[winner]['Matches'] += 1; standings_scenario[loser]['Matches'] += 1
+                if winner == team_name: target_wins_in_scenario += 1
+
+        # Check if the scenario is valid (all matches played)
+        if all(standings_scenario[team]['Matches'] == total_matches_per_team.get(team, -1) for team in standings_scenario): # Use .get for safety
+            # Sort standings with priority for the target team
+            # Ensure all teams have 'Points' and 'Wins' before sorting
+            valid_sort = True
+            for t_key in standings_scenario:
+                if 'Points' not in standings_scenario[t_key] or 'Wins' not in standings_scenario[t_key]:
+                    st.warning(f"Scenario {i} missing Points/Wins for {t_key}. Skipping scenario.")
+                    valid_sort = False
+                    break
+            if not valid_sort: continue
+
+            sorted_teams = sorted(standings_scenario.items(), key=lambda x: (-x[1]['Points'], x[0] != team_name, -x[1]['Wins']))
+            top_n_teams_keys = {t[0] for t in sorted_teams[:top_n]}
+
+            # Record scenario counts for this win number (k)
+            k = target_wins_in_scenario
+            scenarios_per_win_count[k] += 1
+            qualified_in_scenario = team_name in top_n_teams_keys
+
+            # Check if the target team qualified in this scenario
+            if qualified_in_scenario:
+                qualifying_scenarios_per_win_count[k] += 1
+                possible_qualification_wins.add(k) # Mark k as a possible win count
+
+            # --- <<< ADD DEBUGGING BLOCK >>> ---
+            if k == 3 and team_name == 'Bangalore' and top_n == 4:
+                debug_k3_total_count += 1 # Increment manual counter
+                if qualified_in_scenario:
+                    debug_k3_qualified_count += 1 # Increment manual counter
+                else:
+                    # This part should still not be reached based on previous results, but keep it just in case
+                    st.write("--- DEBUG: Non-Qualifying Scenario Found for k=3 ---")
+                    st.write(f"Scenario Index (approx): {i}")
+                    st.write("Final Standings (Scenario):")
+                    st.json(standings_scenario)
+                    st.write("Sorted Teams (Scenario):")
+                    formatted_sorted = [f"{idx+1}. {t[0]} (P:{t[1]['Points']}, W:{t[1]['Wins']}, Prio:{t[0]!=team_name})" for idx, t in enumerate(sorted_teams)]
+                    st.write(formatted_sorted)
+                    st.write("----------------------------------------------------")
+            # --- <<< END MODIFY DEBUG BLOCK >>> ---
+
+        # Update progress
+        processed_scenarios += 1
+        if (i + 1) % (max(1, total_scenarios // 100)) == 0:
+             progress = (i + 1) / total_scenarios
+             try: # Add try-except for progress bar update
+                 progress_bar.progress(progress)
+                 status_text.text(f"Analyzing qualification paths for {team_full_names.get(team_name, team_name)}... {processed_scenarios:,}/{total_scenarios:,} ({progress:.1%})")
+             except Exception as pb_e:
+                 st.warning(f"Progress bar update error: {pb_e}") # Non-critical
+
+    # # --- <<< ADD DEBUG PRINTS (AFTER LOOP) >>> ---
+    # st.write("--- DEBUG: Post-Loop Counts ---")
+    # st.write(f"Manual Count: k=3 Total Scenarios = {debug_k3_total_count}")
+    # st.write(f"Manual Count: k=3 Qualified Scenarios = {debug_k3_qualified_count}")
+    # st.write(f"DefaultDict Count: scenarios_per_win_count[3] = {scenarios_per_win_count.get(3, 0)}")
+    # st.write(f"DefaultDict Count: qualifying_scenarios_per_win_count[3] = {qualifying_scenarios_per_win_count.get(3, 0)}")
+    # st.write("---------------------------------")
+    # # --- <<< END DEBUG PRINTS >>> ---
+
+
+    # --- Determine Minimum Wins ---
+    min_wins_possible = None
+    if possible_qualification_wins:
+        min_wins_possible = min(possible_qualification_wins)
+
+    min_wins_guaranteed = None
+    # Iterate from max possible wins down to 0
+    for k in range(num_target_matches + 1): # e.g., range(5) -> 0, 1, 2, 3, 4
+        total_scenarios_for_k = scenarios_per_win_count.get(k, 0)
+        qualifying_scenarios_for_k = qualifying_scenarios_per_win_count.get(k, 0)
+
+        # # --- <<< ADD DEBUG PRINT (INSIDE FINAL LOOP) >>> ---
+        # if team_name == 'Bangalore' and top_n == 4: # Only print for the case we are debugging
+        #      st.write(f"Checking Guarantee for k={k}: Total={total_scenarios_for_k}, Qualified={qualifying_scenarios_for_k}")
+        # # --- <<< END DEBUG PRINT >>> ---
+
+        # If there were scenarios with k wins AND all of them resulted in qualification
+        if total_scenarios_for_k > 0 and qualifying_scenarios_for_k == total_scenarios_for_k:
+            min_wins_guaranteed = k
+            # # --- <<< ADD DEBUG PRINT (WHEN GUARANTEE FOUND) >>> ---
+            # if team_name == 'Bangalore' and top_n == 4:
+            #      st.write(f"----> Guarantee found at k={k}. Breaking loop.")
+            # # --- <<< END DEBUG PRINT >>> ---
+            break # Found the highest k that guarantees, so it's the minimum needed
+
+    end_time = time.time()
+    try: # Add try-except for final status update
+        status_text.text(f"Qualification Path analysis for {team_full_names.get(team_name, team_name)} completed in {end_time - start_time:.2f} seconds.")
+        progress_bar.empty()
+    except Exception as pb_e:
+         st.warning(f"Final progress bar update error: {pb_e}") # Non-critical
+
+    return {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed, 'target_matches': num_target_matches}
+# --- <<< END OF FUNCTION DEFINITION >>> ---
+
+# --- create_probability_chart Function (Add this back) ---
+def create_probability_chart(data_dict, prob_column='Top 4 Probability'):
+    if not data_dict:
+        return None
+
+    # Prepare data for Altair
+    chart_data = []
+    for team_key, stats in data_dict.items():
+        prob = stats.get(prob_column, 0.0)
+        if prob is not None and not isinstance(prob, (int, float)):
+             try: prob = float(prob)
+             except (ValueError, TypeError): prob = 0.0
+
+        chart_data.append({
+            'Team': team_short_names.get(team_key, team_key),
+            'Probability': prob / 100.0 if prob is not None else 0.0,
+            'Color': team_styles.get(team_key, {'bg': '#808080'})['bg']
+        })
+
+    if not chart_data:
+         return None
+
+    df_chart = DataFrame(chart_data)
+    chart_height = max(300, len(chart_data) * 35)
+
+    base = alt.Chart(df_chart).encode(
+        x=alt.X('Probability:Q', axis=alt.Axis(format='%', title='Probability', grid=False), scale=alt.Scale(domain=[0, 1])),
+        y=alt.Y('Team:N', sort='-x', title=None, axis=alt.Axis(ticks=False, domain=False)),
+        color=alt.Color('Color:N', scale=None),
+        tooltip=[
+            alt.Tooltip('Team:N'),
+            alt.Tooltip('Probability:Q', format='.4%', title='Probability')
+        ]
+    ).properties(
+        title=f'{prob_column} Chances', # Dynamic title
+        height=chart_height
+    )
+
+    bars = base.mark_bar(cornerRadius=3)
+    text = base.mark_text(
+        align='left', baseline='middle', dx=3
+    ).encode(
+        text=alt.Text('Probability:Q', format='.4%'),
+        color=alt.value('#333333')
+    )
+
+    chart = (bars + text).configure_view(strokeWidth=0)
+    return chart
+# --- End create_probability_chart Function ---
+
+
+# Place this function definition before main()
+# Make sure defaultdict, product, DataFrame, time, st etc. are imported
+
+def run_exhaustive_analysis_once(initial_standings_arg, fixtures_arg):
+    """
+    Performs a single exhaustive simulation pass to calculate all metrics.
+    Returns a comprehensive dictionary with results for all teams and analyses.
+    """
+    num_fixtures = len(fixtures_arg)
+    team_keys = list(initial_standings_arg.keys())
+
+    # --- Performance Check ---
+    if num_fixtures > EXHAUSTIVE_LIMIT:
+        st.error(f"Exhaustive analysis requested for {num_fixtures} fixtures, exceeding the limit of {EXHAUSTIVE_LIMIT}. Aborting.")
+        return None
+    elif num_fixtures > 15:
+        st.warning(f"Running full exhaustive analysis for {num_fixtures} fixtures. This may take some time...")
+    # --- End Performance Check ---
+
+    total_matches_per_team = calculate_total_matches_per_team(initial_standings_arg, fixtures_arg)
+    if not total_matches_per_team: return None
+
+    total_possible_scenarios = 2 ** num_fixtures
+
+    # --- Data Structures for Aggregation ---
+    # Overall qualification counts
+    overall_counts = {team: {'top4': 0, 'top2': 0} for team in team_keys}
+    # Path analysis counts: path_counts[team][k_wins] = {'total': N, 'qualified_top4': N, 'qualified_top2': N}
+    path_counts = defaultdict(lambda: defaultdict(lambda: {'total': 0, 'qualified_top4': 0, 'qualified_top2': 0}))
+    # Required outcome counts: req_outcome_counts[team][target_n][match_tuple] = {'team_a_wins': N, 'team_b_wins': N}
+    req_outcome_counts = defaultdict(lambda: {
+        4: defaultdict(lambda: {'team_a_wins': 0, 'team_b_wins': 0}),
+        2: defaultdict(lambda: {'team_a_wins': 0, 'team_b_wins': 0})
+    })
+    total_valid_scenarios = 0
+    # --- End Data Structures ---
+
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    start_time = time.time()
+    processed_scenarios = 0
+
+    # --- Single Pass Simulation Loop ---
+    for i, outcome_tuple in enumerate(product([0, 1], repeat=num_fixtures)):
+        standings_scenario = {t: dict(s) for t, s in initial_standings_arg.items()}
+        team_wins_in_scenario = {team: 0 for team in team_keys}
+        match_outcomes_this_scenario = {} # Store match results for this scenario
+
+        # Apply results for this specific scenario
+        for match_idx, result in enumerate(outcome_tuple):
+            match = fixtures_arg[match_idx]
+            match_key = tuple(match)
+            match_outcomes_this_scenario[match_key] = result # Store 0 or 1
+            team_a, team_b = match
+            winner = team_a if result == 1 else team_b
+            loser = team_b if winner == team_a else team_a
+            if winner in standings_scenario and loser in standings_scenario:
+                standings_scenario[winner]['Wins'] += 1; standings_scenario[winner]['Points'] += 2
+                standings_scenario[winner]['Matches'] += 1; standings_scenario[loser]['Matches'] += 1
+                if winner in team_wins_in_scenario: team_wins_in_scenario[winner] += 1
+
+        # Check if the scenario is valid
+        if all(standings_scenario[team]['Matches'] == total_matches_per_team.get(team, -1) for team in standings_scenario):
+            total_valid_scenarios += 1
+
+            # Analyze results for EACH team within this single scenario
+            for current_team_key in team_keys:
+                k_wins = team_wins_in_scenario[current_team_key]
+                path_counts[current_team_key][k_wins]['total'] += 1
+
+                # Sort with priority for the current_team_key
+                sorted_teams_prio = sorted(standings_scenario.items(), key=lambda x: (-x[1]['Points'], x[0] != current_team_key, -x[1]['Wins']))
+
+                # Check Top 4 Qualification
+                top_4_teams_keys = {t[0] for t in sorted_teams_prio[:4]}
+                qualified_top4 = current_team_key in top_4_teams_keys
+                if qualified_top4:
+                    overall_counts[current_team_key]['top4'] += 1
+                    path_counts[current_team_key][k_wins]['qualified_top4'] += 1
+                    # Increment required outcome counts for Top 4
+                    for match_key, result in match_outcomes_this_scenario.items():
+                        if result == 1: # Team A won
+                            req_outcome_counts[current_team_key][4][match_key]['team_a_wins'] += 1
+                        else: # Team B won
+                            req_outcome_counts[current_team_key][4][match_key]['team_b_wins'] += 1
+
+                # Check Top 2 Qualification
+                top_2_teams_keys = {t[0] for t in sorted_teams_prio[:2]}
+                qualified_top2 = current_team_key in top_2_teams_keys
+                if qualified_top2:
+                    overall_counts[current_team_key]['top2'] += 1
+                    path_counts[current_team_key][k_wins]['qualified_top2'] += 1
+                     # Increment required outcome counts for Top 2
+                    for match_key, result in match_outcomes_this_scenario.items():
+                        if result == 1: # Team A won
+                            req_outcome_counts[current_team_key][2][match_key]['team_a_wins'] += 1
+                        else: # Team B won
+                            req_outcome_counts[current_team_key][2][match_key]['team_b_wins'] += 1
+
+        # Update progress
+        processed_scenarios += 1
+        if (i + 1) % (max(1, total_possible_scenarios // 100)) == 0:
+             progress = (i + 1) / total_possible_scenarios
+             try:
+                 progress_bar.progress(progress)
+                 status_text.text(f"Running full exhaustive analysis... {processed_scenarios:,}/{total_possible_scenarios:,} ({progress:.1%})")
+             except Exception as pb_e:
+                 st.warning(f"Progress bar update error: {pb_e}")
+    # --- End Single Pass Loop ---
+
+    # --- Post-Processing ---
+    final_results = {
+        'overall_probabilities': {},
+        'team_analysis': {4: {}, 2: {}}, # Store required outcomes DFs
+        'qualification_path': {4: {}, 2: {}} # Store possible/guaranteed wins
+    }
+
+    if total_valid_scenarios == 0:
+        st.error("No valid scenarios found during exhaustive analysis. Cannot calculate results.")
+        return None # Or return empty structure
+
+    # 1. Calculate Overall Probabilities
+    for team in team_keys:
+        final_results['overall_probabilities'][team] = {
+            'Top 4 Probability': (overall_counts[team]['top4'] / total_valid_scenarios) * 100 if total_valid_scenarios > 0 else 0,
+            'Top 2 Probability': (overall_counts[team]['top2'] / total_valid_scenarios) * 100 if total_valid_scenarios > 0 else 0
+        }
+
+    # 2. Calculate Required Outcomes (Team Analysis)
+    for team in team_keys:
+        for target_n in [4, 2]:
+            team_qualified_count = overall_counts[team]['top4'] if target_n == 4 else overall_counts[team]['top2']
+            outcome_details = {}
+            if team_qualified_count > 0:
+                for match_key in fixtures_arg: # Iterate through all fixtures
+                    match_key_tuple = tuple(match_key)
+                    counts_dict = req_outcome_counts[team][target_n][match_key_tuple]
+                    team_a_wins = counts_dict['team_a_wins']
+                    team_b_wins = counts_dict['team_b_wins']
+                    total_wins_in_success = team_a_wins + team_b_wins
+                    outcome_str = "Result doesn't matter" # Default
+
+                    if total_wins_in_success > 0: # Only consider if match occurred in successful scenarios
+                        # Using simple majority for exhaustive 'required'
+                        if team_a_wins == team_qualified_count: outcome_str = f"{match_key[0]} wins"
+                        elif team_b_wins == team_qualified_count: outcome_str = f"{match_key[1]} wins"
+                        elif team_a_wins > team_b_wins: outcome_str = f"{match_key[0]} wins" # Frequent
+                        elif team_b_wins > team_a_wins: outcome_str = f"{match_key[1]} wins" # Frequent
+                        # else: remains "Result doesn't matter"
+
+                    outcome_details[f"{match_key[0]} vs {match_key[1]}"] = outcome_str
+
+                results_df = DataFrame({'Outcome': outcome_details})
+                percentage = (team_qualified_count / total_valid_scenarios) * 100 if total_valid_scenarios > 0 else 0
+            else:
+                results_df = DataFrame(columns=['Outcome'])
+                percentage = 0
+
+            final_results['team_analysis'][target_n][team] = {'percentage': percentage, 'results_df': results_df}
+
+    # 3. Calculate Qualification Path
+    num_target_matches_map = {team: sum(1 for m in fixtures_arg if team in m) for team in team_keys}
+    for team in team_keys:
+        for target_n in [4, 2]:
+            possible_wins_set = set()
+            min_wins_guaranteed = None
+            num_team_matches = num_target_matches_map[team]
+
+            # Find possible wins
+            for k in range(num_team_matches + 1):
+                qual_count = path_counts[team][k][f'qualified_top{target_n}']
+                if qual_count > 0:
+                    possible_wins_set.add(k)
+
+            min_wins_possible = min(possible_wins_set) if possible_wins_set else None
+
+            # Find guaranteed wins (iterating UPWARDS now)
+            for k in range(num_team_matches + 1):
+                total_for_k = path_counts[team][k]['total']
+                qual_for_k = path_counts[team][k][f'qualified_top{target_n}']
+                if total_for_k > 0 and qual_for_k == total_for_k:
+                    min_wins_guaranteed = k
+                    break # Found the minimum guarantee
+
+            final_results['qualification_path'][target_n][team] = {
+                'possible': min_wins_possible,
+                'guaranteed': min_wins_guaranteed,
+                'target_matches': num_team_matches
+            }
+    # --- End Post-Processing ---
+
+    end_time = time.time()
+    try:
+        status_text.text(f"Full exhaustive analysis completed in {end_time - start_time:.2f} seconds.")
+        progress_bar.empty()
+    except Exception as pb_e:
+        st.warning(f"Final progress bar update error: {pb_e}")
+
+    return final_results
+
+
 
 # --- Main Streamlit App (Modified) ---
 def main():
@@ -869,231 +1277,265 @@ def main():
     else:
         st.warning("Initial standings data is empty or could not be processed.")
     # --- End Display Initial Standings ---
+    # --- <<< MODIFIED: Combined Analysis Section >>> ---
+    st.subheader("Analysis Results")
 
+    # --- Single Button for Exhaustive Analysis ---
+    exhaustive_cache_key = 'exhaustive_full_results'
+    run_exhaustive_button_clicked = False
+    if selected_method == 'Exhaustive' and num_fixtures <= EXHAUSTIVE_LIMIT:
+        if st.button("Run Full Exhaustive Analysis"):
+            run_exhaustive_button_clicked = True
+            if exhaustive_cache_key in st.session_state:
+                del st.session_state[exhaustive_cache_key] # Clear cache if re-running
 
-    # --- Calculate and Display Overall Probabilities ---
-    st.subheader(f"Overall Qualification Probabilities") # Simplified Header
-    st.caption(f"Method: {selected_method_display}") # Show method used here
-    standings_with_probs = None
-    cache_key = f'standings_with_probs_{selected_method}'
-    # Determine which probability column to display based on sidebar choice
+            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
+            fixtures_copy = list(fixtures_data)
+            try:
+                full_results = run_exhaustive_analysis_once(standings_copy, fixtures_copy)
+                if full_results:
+                    st.session_state[exhaustive_cache_key] = full_results
+                else:
+                    # Error handled within the function, maybe add another message here
+                    st.error("Exhaustive analysis failed or was aborted.")
+            except Exception as e:
+                 st.error(f"An error occurred during the full exhaustive analysis: {e}"); traceback.print_exc()
+                 if exhaustive_cache_key in st.session_state: del st.session_state[exhaustive_cache_key]
+
+    elif selected_method == 'Exhaustive' and num_fixtures > EXHAUSTIVE_LIMIT:
+        st.warning(f"Exhaustive analysis selected, but fixture count ({num_fixtures}) exceeds limit ({EXHAUSTIVE_LIMIT}). Cannot run full analysis.")
+    # --- End Exhaustive Button ---
+
+    # --- Display Overall Probabilities (Reads from Cache or runs MC) ---
+    st.subheader(f"Overall Qualification Probabilities")
+    st.caption(f"Method: {selected_method_display}")
     prob_column_to_display = 'Top 2 Probability' if top_n_choice == "Top 2" else 'Top 4 Probability'
+    overall_probs_data = None
 
+    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
+        st.caption("(Using cached exhaustive results)")
+        overall_probs_data = st.session_state[exhaustive_cache_key]['overall_probabilities']
+        # Need to merge these probs into a structure create_probability_chart understands
+        display_data_for_chart = {t: dict(initial_standings_data[t]) for t in initial_standings_data}
+        for team, probs in overall_probs_data.items():
+            if team in display_data_for_chart:
+                display_data_for_chart[team].update(probs)
+        chart = create_probability_chart(display_data_for_chart, prob_column_to_display)
+        if chart: st.altair_chart(chart, use_container_width=True)
+        else: st.warning("Could not generate probability chart from cached exhaustive data.")
 
+    elif selected_method == 'Monte Carlo':
+        mc_overall_cache_key = f'standings_with_probs_{selected_method}' # Use old MC key
+        if mc_overall_cache_key in st.session_state:
+             standings_with_probs = st.session_state[mc_overall_cache_key]
+             st.caption("(Using cached MC results)")
+             chart = create_probability_chart(standings_with_probs, prob_column_to_display)
+             if chart: st.altair_chart(chart, use_container_width=True)
+             else: st.warning("Could not generate probability chart from cached MC data.")
 
-    # (create_probability_chart function definition should be here - keep as modified before)
-    # ... create_probability_chart definition ...
-    def create_probability_chart(data_dict, prob_column='Top 4 Probability'):
-        if not data_dict:
-            return None
-
-        # Prepare data for Altair
-        chart_data = []
-        for team_key, stats in data_dict.items(): # This loop must be INSIDE the function
-            prob = stats.get(prob_column, 0.0) # Default to 0 if missing
-            if prob is not None and not isinstance(prob, (int, float)): # Handle potential non-numeric data
-                 try: prob = float(prob)
-                 except (ValueError, TypeError): prob = 0.0
-
-            # Divide probability by 100
-            chart_data.append({
-                'Team': team_short_names.get(team_key, team_key),
-                'Probability': prob / 100.0 if prob is not None else 0.0,
-                # --- <<< MODIFICATION: Use team_styles['bg'] >>> ---
-                'Color': team_styles.get(team_key, {'bg': '#808080'})['bg'] # Use bg color from styles
-                # --- <<< END MODIFICATION >>> ---
-            })
-
-        if not chart_data:
-             return None
-
-        df_chart = DataFrame(chart_data)
-
-        # Calculate Height
-        chart_height = max(300, len(chart_data) * 35) # Adjust 35px per team as needed
-
-        base = alt.Chart(df_chart).encode(
-            x=alt.X('Probability:Q', axis=alt.Axis(format='%', title='Probability', grid=False), scale=alt.Scale(domain=[0, 1])), # Hide grid lines
-            y=alt.Y('Team:N', sort='-x', title=None, axis=alt.Axis(ticks=False, domain=False)), # Hide Y-axis ticks/domain
-            color=alt.Color('Color:N', scale=None),
-            tooltip=[
-                alt.Tooltip('Team:N'),
-                alt.Tooltip('Probability:Q', format='.4%', title='Probability')
-            ]
-        ).properties(
-            title=f'{prob_column} Chances',
-            height=chart_height
-        )
-
-        bars = base.mark_bar(cornerRadius=3) # Add slight corner radius
-
-        text = base.mark_text(
-            align='left',
-            baseline='middle',
-            dx=3 # Small nudge right from the bar end
-        ).encode(
-            text=alt.Text('Probability:Q', format='.4%'),
-            color=alt.value('#333333') # Dark grey text for labels
-        )
-
-        chart = (bars + text).configure_view(
-            strokeWidth=0 # Remove chart border
-        )
-        return chart
-
-    # Display Cached or Recalculated Probabilities (using chart)
-    if cache_key in st.session_state:
-         standings_with_probs = st.session_state[cache_key]
-         st.caption("(Using cached results)")
-         chart = create_probability_chart(standings_with_probs, prob_column_to_display)
-         if chart: st.altair_chart(chart, use_container_width=True)
-         else: st.warning("Could not generate probability chart from cached data.")
-
-    if selected_method != 'None':
-        if st.button(f"Calculate Overall Probabilities"): # Simplified button text
-            # ... (Calculation logic remains the same) ...
+        if st.button(f"Calculate Overall Probabilities (Monte Carlo)"):
+            # ... (MC calculation logic - simulate_season_mc) ...
             probabilities = None
             standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
             fixtures_copy = list(fixtures_data)
-            if selected_method == 'Exhaustive': probabilities = simulate_season_exhaustive(standings_copy, fixtures_copy)
-            elif selected_method == 'Monte Carlo': probabilities = simulate_season_mc(standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
-
+            probabilities = simulate_season_mc(standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
             if probabilities:
                 standings_with_probs = {t: dict(s) for t, s in initial_standings_data.items()}
                 for team, probs in probabilities.items():
                     if team in standings_with_probs: standings_with_probs[team].update(probs)
-                st.session_state[cache_key] = standings_with_probs
-                st.caption("(Newly Calculated)")
+                st.session_state[mc_overall_cache_key] = standings_with_probs
+                st.caption("(Newly Calculated MC)")
                 chart = create_probability_chart(standings_with_probs, prob_column_to_display)
                 if chart: st.altair_chart(chart, use_container_width=True)
-                else: st.warning("Could not generate probability chart from calculated data.")
+                else: st.warning("Could not generate probability chart from calculated MC data.")
             else:
                 st.warning(f"Could not calculate overall probabilities using {selected_method}.")
-                if cache_key in st.session_state: del st.session_state[cache_key]
-    elif 'standings_with_probs_None' not in st.session_state:
-         st.session_state['standings_with_probs_None'] = initial_standings_data
-    # --- End Overall Probabilities ---
+                if mc_overall_cache_key in st.session_state: del st.session_state[mc_overall_cache_key]
+
+    elif selected_method == 'None': # Season complete
+         st.info("Season complete. Probabilities based on final standings.")
+         # Optionally display final standings chart here if needed
+    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
+         st.info("Run the 'Full Exhaustive Analysis' first to see overall probabilities.")
+    # --- End Overall Probabilities Display ---
 
 
-    # --- Team Specific Analysis ---
-    
-
+    # --- Display Team Specific Analysis (Reads from Cache or runs MC) ---
     st.subheader(f"Analysis for {full_team_name}")
-    st.caption(f"Method: {selected_method_display}")
+    st.caption(f"Target: {top_n_choice} | Method: {selected_method_display}")
+    team_analysis_data = None
 
-    analysis_button_clicked = False
-    if selected_method != 'None':
-        if st.button(f"Analyze {full_team_name}"): # Simplified button text
-            # ... (Analysis logic remains the same) ...
-            analysis_button_clicked = True
-            if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
-            if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
+    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
+        st.caption("(Using cached exhaustive results)")
+        try:
+            team_analysis_data = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]
+            percentage = team_analysis_data['percentage']
+            team_results_df = team_analysis_data['results_df']
+
+            if team_results_df.empty and percentage == 0:
+                st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on exhaustive analysis.")
+            else:
+                st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (exhaustive).")
+                st.write("Required / Frequent Outcomes:")
+                df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
+                st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
+        except KeyError:
+            st.error(f"Could not retrieve cached exhaustive analysis data for {full_team_name} (Top {top_n}). Please re-run the full analysis.")
+        except Exception as e:
+            st.error(f"Error displaying cached exhaustive team analysis: {e}")
+
+    elif selected_method == 'Monte Carlo':
+        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}' # New cache key for MC team analysis
+        run_mc_team_analysis = False
+        if st.button(f"Analyze {full_team_name} (Monte Carlo)"):
+            run_mc_team_analysis = True
+            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key] # Clear cache if re-running
+
+        if run_mc_team_analysis:
+            # ... (MC team analysis logic - analyze_team_mc) ...
             percentage = 0; team_results_df = DataFrame(columns=['Outcome'])
             standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
             fixtures_copy = list(fixtures_data)
             try:
-                if selected_method == 'Exhaustive': percentage, team_results_df = analyze_team_exhaustive(team_key, top_n, standings_copy, fixtures_copy)
-                elif selected_method == 'Monte Carlo': percentage, team_results_df = analyze_team_mc(team_key, top_n, standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
-                st.session_state['results_df'] = team_results_df; st.session_state['analyzed_team_key'] = team_key
-                st.session_state['analyzed_percentage'] = percentage; st.session_state['analyzed_method'] = selected_method
-
+                percentage, team_results_df = analyze_team_mc(team_key, top_n, standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
+                st.session_state[mc_team_cache_key] = {'percentage': percentage, 'results_df': team_results_df} # Cache MC results
+                st.caption("(Newly Calculated MC)")
+                # Display immediately after calculation
                 if team_results_df.empty and percentage == 0:
-                    st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on this analysis.")
+                    st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on MC analysis.")
                 else:
-                    st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios.")
+                    st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC).")
                     st.write("Required / Frequent Outcomes:")
-                    # --- <<< MODIFICATION: Display Fixture and Outcome >>> ---
-                    df_display = team_results_df.reset_index() # Turn index (fixture) into column
-                    df_display.rename(columns={'index': 'Fixture'}, inplace=True) # Rename column
-                    st.dataframe(
-                        df_display[['Fixture', 'Outcome']], # Select both columns
-                        use_container_width=True,
-                        hide_index=True
-                    )
-                    # --- <<< END MODIFICATION >>> ---
+                    df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
+                    st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
             except Exception as e:
-                 st.error(f"An error occurred during team analysis: {e}"); traceback.print_exc()
-                 if 'results_df' in st.session_state: del st.session_state['results_df']
-                 if 'analyzed_team_key' in st.session_state: del st.session_state['analyzed_team_key']
+                 st.error(f"An error occurred during MC team analysis: {e}"); traceback.print_exc()
+                 if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
 
-    # Display cached team analysis results (logic remains the same, check formatting below)
-    cached_analysis_matches = ( not analysis_button_clicked and 'results_df' in st.session_state and
-        st.session_state.get('analyzed_team_key') == team_key and st.session_state.get('analyzed_method') == selected_method )
+        elif mc_team_cache_key in st.session_state: # Display cached MC team results
+             st.caption("(Using cached MC analysis results)")
+             cached_data = st.session_state[mc_team_cache_key]
+             percentage = cached_data['percentage']
+             team_results_df = cached_data['results_df']
+             if team_results_df.empty and percentage == 0:
+                 st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on cached MC analysis.")
+             else:
+                 st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC cached).")
+                 st.write("Required / Frequent Outcomes:")
+                 df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
+                 st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
 
-    if cached_analysis_matches:
-         st.caption("(Using cached analysis results)")
-         percentage = st.session_state.get('analyzed_percentage', 0)
-         team_results_df = st.session_state['results_df'] # Get original df with index
-         if team_results_df.empty and percentage == 0:
-             st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on cached analysis.")
-         else:
-             st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (cached).")
-             st.write("Required / Frequent Outcomes:")
-             # --- <<< MODIFICATION: Display Fixture and Outcome (Cached) >>> ---
-             df_display = team_results_df.reset_index() # Turn index (fixture) into column
-             df_display.rename(columns={'index': 'Fixture'}, inplace=True) # Rename column
-             st.dataframe(
-                 df_display[['Fixture', 'Outcome']], # Select both columns
-                 use_container_width=True,
-                 hide_index=True
-             ) # --- <<< END MODIFICATION >>> ---
-
-    elif selected_method == 'None': # Season complete logic
+    elif selected_method == 'None': # Season complete
          # ... (Season complete logic remains the same) ...
-         st.write("Season complete. Analysis based on final standings.")
-         final_standings_sorted = sorted(initial_standings_data.items(), key=lambda x: (-x[1]['Points'], -x[1]['Wins']))
-         final_pos = -1
-         for i, (t_key, _) in enumerate(final_standings_sorted):
-              if t_key == team_key: final_pos = i + 1; break
-         if final_pos != -1:
-              st.write(f"{full_team_name} finished in position **{final_pos}**.")
-              if final_pos <= top_n: st.write(f"Achieved {top_n_choice} finish.")
-              else: st.write(f"Did not achieve {top_n_choice} finish.")
-         else: st.write(f"Could not determine final position for {full_team_name}.")
-    # --- End Team Specific Analysis ---
+         st.info("Season complete. Analysis based on final standings.")
+    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
+         st.info("Run the 'Full Exhaustive Analysis' first to see team-specific results.")
+    # --- End Team Specific Analysis Display ---
 
 
-    # --- Simulate Specific Scenario ---
+    # --- Display Qualification Path (Reads from Cache) ---
+    st.subheader(f"Qualification Path for {full_team_name} (Top {top_n})")
+    st.caption("Analyzes minimum wins needed using Exhaustive method (subject to fixture limit).")
+    path_data = None
+
+    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
+        st.caption("(Using cached exhaustive results)")
+        try:
+            path_data = st.session_state[exhaustive_cache_key]['qualification_path'][top_n][team_key]
+            possible_wins = path_data.get('possible')
+            guaranteed_wins = path_data.get('guaranteed')
+            target_matches = path_data.get('target_matches', 'N/A')
+
+            st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
+            # Possible Qualification
+            if isinstance(possible_wins, int): st.success(f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results).")
+            elif possible_wins is None: st.error(f"**Possible Qualification:** Cannot qualify.")
+            else: st.warning(f"**Possible Qualification:** Analysis result: {possible_wins}")
+            # Guaranteed Qualification
+            if isinstance(guaranteed_wins, int): st.success(f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results).")
+            elif guaranteed_wins is None and possible_wins is not None: st.info(f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins.")
+            elif guaranteed_wins is None and possible_wins is None: pass
+            else: st.warning(f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}")
+        except KeyError:
+            st.error(f"Could not retrieve cached exhaustive path data for {full_team_name} (Top {top_n}). Please re-run the full analysis.")
+        except Exception as e:
+            st.error(f"Error displaying cached exhaustive path analysis: {e}")
+
+    elif selected_method == 'Monte Carlo':
+        st.info("Qualification Path analysis requires the Exhaustive method.")
+    elif selected_method == 'None':
+        st.info("Season complete. Path analysis not applicable.")
+    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
+        st.info("Run the 'Full Exhaustive Analysis' first to see qualification path results.")
+
+    st.markdown("---")
+    # --- End Qualification Path Display ---
+
+
+    # --- Simulate Specific Scenario (Modified to use cached exhaustive results if available) ---
     st.subheader("Simulate One Scenario")
-    if selected_method != 'None':
-        if st.button("Simulate Scenario"): # Simplified button text
-            # ... (Simulation logic remains the same, including checks) ...
-            current_team_key = team_key
-            if 'results_df' in st.session_state and 'analyzed_team_key' in st.session_state:
-                results_df_for_sim = st.session_state['results_df']; analyzed_team_key_from_state = st.session_state['analyzed_team_key']
-                analyzed_percentage = st.session_state.get('analyzed_percentage', 0)
-                analyzed_team_full_name = team_full_names.get(analyzed_team_key_from_state, analyzed_team_key_from_state)
-                current_team_full_name = team_full_names.get(current_team_key, current_team_key)
+    # Decide which results_df to use for simulation
+    results_df_for_sim = None
+    source_method_for_sim = "None"
 
-                if analyzed_team_key_from_state != current_team_key:
-                    st.warning(f"Last analysis was for {analyzed_team_full_name}. Please re-run analysis for {current_team_full_name} before simulating.")
-                    if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
-                    if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
-                elif results_df_for_sim.empty:
-                     st.warning(f"Cannot simulate: Analysis found 0% probability ({analyzed_percentage:.4f}%) for {current_team_full_name} to qualify.")
-                     if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
-                     if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
-                else:
-                    sim_status = st.empty(); sim_status.info(f"Simulating scenario for {current_team_full_name}...")
-                    try:
-                        match_results_log, final_results_df = simulate_matches(results_df_for_sim.copy(), current_team_key, {t: dict(s) for t, s in initial_standings_data.items()})
-                        if isinstance(match_results_log, str): st.error(match_results_log)
-                        elif final_results_df is not None:
-                            st.session_state['simulation_match_outcomes'] = match_results_log; st.session_state['simulation_results'] = final_results_df
-                        else: st.error("Simulation failed.")
-                        if isinstance(match_results_log, str) or final_results_df is None: # Clear state on error/failure
-                             if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
-                             if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
-                    except Exception as e:
-                         st.error(f"Simulation error: {e}"); traceback.print_exc()
+    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
+        try:
+            # Use the cached exhaustive results for the currently selected team/target
+            cached_team_analysis = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]
+            results_df_for_sim = cached_team_analysis['results_df']
+            source_method_for_sim = "Exhaustive (Cached)"
+        except KeyError:
+            st.warning("Could not find cached exhaustive results for simulation. Run full analysis.")
+    elif selected_method == 'Monte Carlo':
+        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}'
+        if mc_team_cache_key in st.session_state:
+            # Use the cached MC results if available
+            results_df_for_sim = st.session_state[mc_team_cache_key]['results_df']
+            source_method_for_sim = "Monte Carlo (Cached)"
+        else:
+            st.warning("Run Monte Carlo team analysis first to enable simulation.")
+    elif selected_method == 'None':
+        st.info("Cannot simulate scenario as the season is complete.")
+    else: # Exhaustive selected but not run yet
+        st.info("Run the analysis first to enable simulation.")
+
+
+    if results_df_for_sim is not None:
+        st.caption(f"(Using results from: {source_method_for_sim})")
+        if st.button("Simulate Scenario"):
+            # Check if results_df is empty (0% chance)
+            percentage_for_sim = 0
+            if source_method_for_sim == "Exhaustive (Cached)":
+                 percentage_for_sim = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]['percentage']
+            elif source_method_for_sim == "Monte Carlo (Cached)":
+                 percentage_for_sim = st.session_state[mc_team_cache_key]['percentage']
+
+            if results_df_for_sim.empty:
+                 st.warning(f"Cannot simulate: Analysis found 0% probability ({percentage_for_sim:.4f}%) for {full_team_name} to qualify using {source_method_for_sim} results.")
+                 # Clear previous simulation state if any
+                 if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
+                 if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
+            else:
+                sim_status = st.empty(); sim_status.info(f"Simulating scenario for {full_team_name}...")
+                try:
+                    match_results_log, final_results_df = simulate_matches(results_df_for_sim.copy(), team_key, {t: dict(s) for t, s in initial_standings_data.items()})
+                    if isinstance(match_results_log, str): st.error(match_results_log)
+                    elif final_results_df is not None:
+                        st.session_state['simulation_match_outcomes'] = match_results_log; st.session_state['simulation_results'] = final_results_df
+                    else: st.error("Simulation failed.")
+                    # Clear state on error/failure
+                    if isinstance(match_results_log, str) or final_results_df is None:
                          if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
                          if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
-                    finally: sim_status.empty()
-            else: st.warning("Please run analysis first.")
-    else: st.write("Cannot simulate scenario as the season is complete.")
+                except Exception as e:
+                     st.error(f"Simulation error: {e}"); traceback.print_exc()
+                     if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
+                     if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
+                finally: sim_status.empty()
 
-    # --- Display Simulation Results ---
+    # --- Display Simulation Results (remains the same) ---
     if 'simulation_results' in st.session_state and 'simulation_match_outcomes' in st.session_state:
+        # ... (Display logic is unchanged) ...
         st.markdown("---"); st.subheader("Simulated Scenario Outcome")
         sim_col1, sim_col2 = st.columns([1, 2])
         with sim_col1:
@@ -1103,13 +1545,11 @@ def main():
         with sim_col2:
             st.write("**Final Standings:**")
             final_table_df = st.session_state['simulation_results']
-            # --- <<< MODIFICATION: Use new styling function >>> ---
             st.dataframe(
-                final_table_df.style.apply(style_team_row, axis=1), # Use style_team_row
+                final_table_df.style.apply(style_team_row, axis=1),
                 use_container_width=True,
                 hide_index=True
             )
-            # --- <<< END MODIFICATION >>> ---
         st.markdown("---")
     # --- End Simulation Display ---
 
