@@ -8,8 +8,8 @@ API_KEY           = "63d25b78-f287-4cf5-a2f5-4c97396766d5"
 SERIES_ID         = "d5a498c8-7596-4b93-8ab0-e0efc3345312"
 STANDINGS_URL     = f"https://api.cricapi.com/v1/series_points?apikey={API_KEY}&id={SERIES_ID}"
 FIXTURES_URL      = f"https://api.cricapi.com/v1/series_info?apikey={API_KEY}&id={SERIES_ID}"
-OUTPUT_STANDINGS  = "current_standings2.json"
-OUTPUT_FIXTURES   = "remaining_fixtures2.json"
+OUTPUT_STANDINGS  = "current_standings.json"
+OUTPUT_FIXTURES   = "remaining_fixtures.json"
 
 # Full → short team mapping
 TEAM_NAME_MAP = {
