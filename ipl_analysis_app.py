@@ -865,11 +865,23 @@ def create_probability_chart(data_dict, prob_column='Top 4 Probability'):
     )
 
     bars = base.mark_bar(cornerRadius=3)
+    
+    # Get the current theme setting from Streamlit
+    try:
+        current_theme = st.get_option("theme.base")
+    except Exception: # Handle cases where get_option might not be available (e.g., older Streamlit)
+        current_theme = "light" # Default to light theme
+
+    # Set text color based on theme
+    text_label_color = '#FFFFFF' if current_theme == "dark" else '#333333'
+    
+    # Dynamic Text Color
+    
     text = base.mark_text(
         align='left', baseline='middle', dx=3
     ).encode(
         text=alt.Text('Probability:Q', format='.4%'),
-        color=alt.value('#333333')
+        color=alt.value(text_label_color)
     )
 
     chart = (bars + text).configure_view(strokeWidth=0)
