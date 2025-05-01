@@ -671,221 +671,223 @@ def simulate_matches(results_df, team_name, initial_standings_arg):
         return f"An error occurred during simulation: {str(e)}", None
 # --- End Simulate Matches Function ---
 
-def analyze_qualification_path(team_name, top_n, initial_standings_arg, fixtures_arg):
-    """
-    Analyzes the minimum wins needed for a team to qualify, considering
-    guaranteed and possible scenarios using exhaustive simulation.
+# def analyze_qualification_path(team_name, top_n, initial_standings_arg, fixtures_arg):
+#     """
+#     Analyzes the minimum wins needed for a team to qualify, considering
+#     guaranteed and possible scenarios using exhaustive simulation.
 
-    Returns:
-        dict: {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed}
-              Values can be integers (0 to num_matches) or None if impossible.
-    """
-    num_total_fixtures = len(fixtures_arg)
+#     Returns:
+#         dict: {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed}
+#               Values can be integers (0 to num_matches) or None if impossible.
+#     """
+#     num_total_fixtures = len(fixtures_arg)
 
-    # --- Performance Check ---
-    if num_total_fixtures > EXHAUSTIVE_LIMIT:
-        st.error(f"Qualification Path analysis requested for {num_total_fixtures} fixtures, exceeding the limit of {EXHAUSTIVE_LIMIT}. Aborting.")
-        return {'possible': 'N/A (Limit Exceeded)', 'guaranteed': 'N/A (Limit Exceeded)', 'target_matches': 'N/A'} # Added target_matches here too
-    elif num_total_fixtures > 15:
-        st.warning(f"Running Qualification Path analysis for {num_total_fixtures} fixtures. This may take some time...")
-    # --- End Performance Check ---
+#     # --- Performance Check ---
+#     if num_total_fixtures > EXHAUSTIVE_LIMIT:
+#         st.error(f"Qualification Path analysis requested for {num_total_fixtures} fixtures, exceeding the limit of {EXHAUSTIVE_LIMIT}. Aborting.")
+#         return {'possible': 'N/A (Limit Exceeded)', 'guaranteed': 'N/A (Limit Exceeded)', 'target_matches': 'N/A'} # Added target_matches here too
+#     elif num_total_fixtures > 15:
+#         st.warning(f"Running Qualification Path analysis for {num_total_fixtures} fixtures. This may take some time...")
+#     # --- End Performance Check ---
 
-    total_matches_per_team = calculate_total_matches_per_team(initial_standings_arg, fixtures_arg)
-    if not total_matches_per_team:
-        return {'possible': 'Error', 'guaranteed': 'Error', 'target_matches': 'Error'} # Added target_matches
+#     total_matches_per_team = calculate_total_matches_per_team(initial_standings_arg, fixtures_arg)
+#     if not total_matches_per_team:
+#         return {'possible': 'Error', 'guaranteed': 'Error', 'target_matches': 'Error'} # Added target_matches
 
-    target_team_matches = [match for match in fixtures_arg if team_name in match]
-    num_target_matches = len(target_team_matches)
-    total_scenarios = 2 ** num_total_fixtures
+#     target_team_matches = [match for match in fixtures_arg if team_name in match]
+#     num_target_matches = len(target_team_matches)
+#     total_scenarios = 2 ** num_total_fixtures
 
-    # Data structures to store results per win count (k) for the target team
-    scenarios_per_win_count = defaultdict(int)
-    qualifying_scenarios_per_win_count = defaultdict(int)
-    possible_qualification_wins = set() # Store k values where qualification happened
+#     # Data structures to store results per win count (k) for the target team
+#     scenarios_per_win_count = defaultdict(int)
+#     qualifying_scenarios_per_win_count = defaultdict(int)
+#     possible_qualification_wins = set() # Store k values where qualification happened
 
-    progress_bar = st.progress(0)
-    status_text = st.empty()
-    start_time = time.time()
-    processed_scenarios = 0
+#     progress_bar = st.progress(0)
+#     status_text = st.empty()
+#     start_time = time.time()
+#     processed_scenarios = 0
     
-    # --- <<< ADD DEBUG COUNTERS >>> ---
-    debug_k3_total_count = 0
-    debug_k3_qualified_count = 0
-    # --- <<< END DEBUG COUNTERS >>> ---
+#     # --- <<< ADD DEBUG COUNTERS >>> ---
+#     debug_k3_total_count = 0
+#     debug_k3_qualified_count = 0
+#     # --- <<< END DEBUG COUNTERS >>> ---
 
-    # Iterate through ALL possible outcomes of ALL remaining fixtures
-    for i, outcome_tuple in enumerate(product([0, 1], repeat=num_total_fixtures)):
-        standings_scenario = {t: dict(s) for t, s in initial_standings_arg.items()}
-        target_wins_in_scenario = 0
+#     # Iterate through ALL possible outcomes of ALL remaining fixtures
+#     for i, outcome_tuple in enumerate(product([0, 1], repeat=num_total_fixtures)):
+#         standings_scenario = {t: dict(s) for t, s in initial_standings_arg.items()}
+#         target_wins_in_scenario = 0
 
-        # Apply results for this specific scenario
-        for match_idx, result in enumerate(outcome_tuple):
-            match = fixtures_arg[match_idx]
-            team_a, team_b = match
-            winner = team_a if result == 1 else team_b
-            loser = team_b if winner == team_a else team_a
-            if winner in standings_scenario and loser in standings_scenario:
-                standings_scenario[winner]['Wins'] += 1; standings_scenario[winner]['Points'] += 2
-                standings_scenario[winner]['Matches'] += 1; standings_scenario[loser]['Matches'] += 1
-                if winner == team_name: target_wins_in_scenario += 1
+#         # Apply results for this specific scenario
+#         for match_idx, result in enumerate(outcome_tuple):
+#             match = fixtures_arg[match_idx]
+#             team_a, team_b = match
+#             winner = team_a if result == 1 else team_b
+#             loser = team_b if winner == team_a else team_a
+#             if winner in standings_scenario and loser in standings_scenario:
+#                 standings_scenario[winner]['Wins'] += 1; standings_scenario[winner]['Points'] += 2
+#                 standings_scenario[winner]['Matches'] += 1; standings_scenario[loser]['Matches'] += 1
+#                 if winner == team_name: target_wins_in_scenario += 1
 
-        # Check if the scenario is valid (all matches played)
-        if all(standings_scenario[team]['Matches'] == total_matches_per_team.get(team, -1) for team in standings_scenario): # Use .get for safety
-            # Sort standings with priority for the target team
-            # Ensure all teams have 'Points' and 'Wins' before sorting
-            valid_sort = True
-            for t_key in standings_scenario:
-                if 'Points' not in standings_scenario[t_key] or 'Wins' not in standings_scenario[t_key]:
-                    st.warning(f"Scenario {i} missing Points/Wins for {t_key}. Skipping scenario.")
-                    valid_sort = False
-                    break
-            if not valid_sort: continue
+#         # Check if the scenario is valid (all matches played)
+#         if all(standings_scenario[team]['Matches'] == total_matches_per_team.get(team, -1) for team in standings_scenario): # Use .get for safety
+#             # Sort standings with priority for the target team
+#             # Ensure all teams have 'Points' and 'Wins' before sorting
+#             valid_sort = True
+#             for t_key in standings_scenario:
+#                 if 'Points' not in standings_scenario[t_key] or 'Wins' not in standings_scenario[t_key]:
+#                     st.warning(f"Scenario {i} missing Points/Wins for {t_key}. Skipping scenario.")
+#                     valid_sort = False
+#                     break
+#             if not valid_sort: continue
 
-            sorted_teams = sorted(standings_scenario.items(), key=lambda x: (-x[1]['Points'], x[0] != team_name, -x[1]['Wins']))
-            top_n_teams_keys = {t[0] for t in sorted_teams[:top_n]}
+#             sorted_teams = sorted(standings_scenario.items(), key=lambda x: (-x[1]['Points'], x[0] != team_name, -x[1]['Wins']))
+#             top_n_teams_keys = {t[0] for t in sorted_teams[:top_n]}
 
-            # Record scenario counts for this win number (k)
-            k = target_wins_in_scenario
-            scenarios_per_win_count[k] += 1
-            qualified_in_scenario = team_name in top_n_teams_keys
+#             # Record scenario counts for this win number (k)
+#             k = target_wins_in_scenario
+#             scenarios_per_win_count[k] += 1
+#             qualified_in_scenario = team_name in top_n_teams_keys
 
-            # Check if the target team qualified in this scenario
-            if qualified_in_scenario:
-                qualifying_scenarios_per_win_count[k] += 1
-                possible_qualification_wins.add(k) # Mark k as a possible win count
+#             # Check if the target team qualified in this scenario
+#             if qualified_in_scenario:
+#                 qualifying_scenarios_per_win_count[k] += 1
+#                 possible_qualification_wins.add(k) # Mark k as a possible win count
 
-            # --- <<< ADD DEBUGGING BLOCK >>> ---
-            if k == 3 and team_name == 'Bangalore' and top_n == 4:
-                debug_k3_total_count += 1 # Increment manual counter
-                if qualified_in_scenario:
-                    debug_k3_qualified_count += 1 # Increment manual counter
-                else:
-                    # This part should still not be reached based on previous results, but keep it just in case
-                    st.write("--- DEBUG: Non-Qualifying Scenario Found for k=3 ---")
-                    st.write(f"Scenario Index (approx): {i}")
-                    st.write("Final Standings (Scenario):")
-                    st.json(standings_scenario)
-                    st.write("Sorted Teams (Scenario):")
-                    formatted_sorted = [f"{idx+1}. {t[0]} (P:{t[1]['Points']}, W:{t[1]['Wins']}, Prio:{t[0]!=team_name})" for idx, t in enumerate(sorted_teams)]
-                    st.write(formatted_sorted)
-                    st.write("----------------------------------------------------")
-            # --- <<< END MODIFY DEBUG BLOCK >>> ---
+#             # --- <<< ADD DEBUGGING BLOCK >>> ---
+#             if k == 3 and team_name == 'Bangalore' and top_n == 4:
+#                 debug_k3_total_count += 1 # Increment manual counter
+#                 if qualified_in_scenario:
+#                     debug_k3_qualified_count += 1 # Increment manual counter
+#                 else:
+#                     # This part should still not be reached based on previous results, but keep it just in case
+#                     st.write("--- DEBUG: Non-Qualifying Scenario Found for k=3 ---")
+#                     st.write(f"Scenario Index (approx): {i}")
+#                     st.write("Final Standings (Scenario):")
+#                     st.json(standings_scenario)
+#                     st.write("Sorted Teams (Scenario):")
+#                     formatted_sorted = [f"{idx+1}. {t[0]} (P:{t[1]['Points']}, W:{t[1]['Wins']}, Prio:{t[0]!=team_name})" for idx, t in enumerate(sorted_teams)]
+#                     st.write(formatted_sorted)
+#                     st.write("----------------------------------------------------")
+#             # --- <<< END MODIFY DEBUG BLOCK >>> ---
 
-        # Update progress
-        processed_scenarios += 1
-        if (i + 1) % (max(1, total_scenarios // 100)) == 0:
-             progress = (i + 1) / total_scenarios
-             try: # Add try-except for progress bar update
-                 progress_bar.progress(progress)
-                 status_text.text(f"Analyzing qualification paths for {team_full_names.get(team_name, team_name)}... {processed_scenarios:,}/{total_scenarios:,} ({progress:.1%})")
-             except Exception as pb_e:
-                 st.warning(f"Progress bar update error: {pb_e}") # Non-critical
+#         # Update progress
+#         processed_scenarios += 1
+#         if (i + 1) % (max(1, total_scenarios // 100)) == 0:
+#              progress = (i + 1) / total_scenarios
+#              try: # Add try-except for progress bar update
+#                  progress_bar.progress(progress)
+#                  status_text.text(f"Analyzing qualification paths for {team_full_names.get(team_name, team_name)}... {processed_scenarios:,}/{total_scenarios:,} ({progress:.1%})")
+#              except Exception as pb_e:
+#                  st.warning(f"Progress bar update error: {pb_e}") # Non-critical
 
-    # # --- <<< ADD DEBUG PRINTS (AFTER LOOP) >>> ---
-    # st.write("--- DEBUG: Post-Loop Counts ---")
-    # st.write(f"Manual Count: k=3 Total Scenarios = {debug_k3_total_count}")
-    # st.write(f"Manual Count: k=3 Qualified Scenarios = {debug_k3_qualified_count}")
-    # st.write(f"DefaultDict Count: scenarios_per_win_count[3] = {scenarios_per_win_count.get(3, 0)}")
-    # st.write(f"DefaultDict Count: qualifying_scenarios_per_win_count[3] = {qualifying_scenarios_per_win_count.get(3, 0)}")
-    # st.write("---------------------------------")
-    # # --- <<< END DEBUG PRINTS >>> ---
+#     # # --- <<< ADD DEBUG PRINTS (AFTER LOOP) >>> ---
+#     # st.write("--- DEBUG: Post-Loop Counts ---")
+#     # st.write(f"Manual Count: k=3 Total Scenarios = {debug_k3_total_count}")
+#     # st.write(f"Manual Count: k=3 Qualified Scenarios = {debug_k3_qualified_count}")
+#     # st.write(f"DefaultDict Count: scenarios_per_win_count[3] = {scenarios_per_win_count.get(3, 0)}")
+#     # st.write(f"DefaultDict Count: qualifying_scenarios_per_win_count[3] = {qualifying_scenarios_per_win_count.get(3, 0)}")
+#     # st.write("---------------------------------")
+#     # # --- <<< END DEBUG PRINTS >>> ---
 
 
-    # --- Determine Minimum Wins ---
-    min_wins_possible = None
-    if possible_qualification_wins:
-        min_wins_possible = min(possible_qualification_wins)
+#     # --- Determine Minimum Wins ---
+#     min_wins_possible = None
+#     if possible_qualification_wins:
+#         min_wins_possible = min(possible_qualification_wins)
 
-    min_wins_guaranteed = None
-    # Iterate from max possible wins down to 0
-    for k in range(num_target_matches + 1): # e.g., range(5) -> 0, 1, 2, 3, 4
-        total_scenarios_for_k = scenarios_per_win_count.get(k, 0)
-        qualifying_scenarios_for_k = qualifying_scenarios_per_win_count.get(k, 0)
+#     min_wins_guaranteed = None
+#     # Iterate from max possible wins down to 0
+#     for k in range(num_target_matches + 1): # e.g., range(5) -> 0, 1, 2, 3, 4
+#         total_scenarios_for_k = scenarios_per_win_count.get(k, 0)
+#         qualifying_scenarios_for_k = qualifying_scenarios_per_win_count.get(k, 0)
 
-        # # --- <<< ADD DEBUG PRINT (INSIDE FINAL LOOP) >>> ---
-        # if team_name == 'Bangalore' and top_n == 4: # Only print for the case we are debugging
-        #      st.write(f"Checking Guarantee for k={k}: Total={total_scenarios_for_k}, Qualified={qualifying_scenarios_for_k}")
-        # # --- <<< END DEBUG PRINT >>> ---
+#         # # --- <<< ADD DEBUG PRINT (INSIDE FINAL LOOP) >>> ---
+#         # if team_name == 'Bangalore' and top_n == 4: # Only print for the case we are debugging
+#         #      st.write(f"Checking Guarantee for k={k}: Total={total_scenarios_for_k}, Qualified={qualifying_scenarios_for_k}")
+#         # # --- <<< END DEBUG PRINT >>> ---
 
-        # If there were scenarios with k wins AND all of them resulted in qualification
-        if total_scenarios_for_k > 0 and qualifying_scenarios_for_k == total_scenarios_for_k:
-            min_wins_guaranteed = k
-            # # --- <<< ADD DEBUG PRINT (WHEN GUARANTEE FOUND) >>> ---
-            # if team_name == 'Bangalore' and top_n == 4:
-            #      st.write(f"----> Guarantee found at k={k}. Breaking loop.")
-            # # --- <<< END DEBUG PRINT >>> ---
-            break # Found the highest k that guarantees, so it's the minimum needed
+#         # If there were scenarios with k wins AND all of them resulted in qualification
+#         if total_scenarios_for_k > 0 and qualifying_scenarios_for_k == total_scenarios_for_k:
+#             min_wins_guaranteed = k
+#             # # --- <<< ADD DEBUG PRINT (WHEN GUARANTEE FOUND) >>> ---
+#             # if team_name == 'Bangalore' and top_n == 4:
+#             #      st.write(f"----> Guarantee found at k={k}. Breaking loop.")
+#             # # --- <<< END DEBUG PRINT >>> ---
+#             break # Found the highest k that guarantees, so it's the minimum needed
 
-    end_time = time.time()
-    try: # Add try-except for final status update
-        status_text.text(f"Qualification Path analysis for {team_full_names.get(team_name, team_name)} completed in {end_time - start_time:.2f} seconds.")
-        progress_bar.empty()
-    except Exception as pb_e:
-         st.warning(f"Final progress bar update error: {pb_e}") # Non-critical
+#     end_time = time.time()
+#     try: # Add try-except for final status update
+#         status_text.text(f"Qualification Path analysis for {team_full_names.get(team_name, team_name)} completed in {end_time - start_time:.2f} seconds.")
+#         progress_bar.empty()
+#     except Exception as pb_e:
+#          st.warning(f"Final progress bar update error: {pb_e}") # Non-critical
 
-    return {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed, 'target_matches': num_target_matches}
-# --- <<< END OF FUNCTION DEFINITION >>> ---
+#     return {'possible': min_wins_possible, 'guaranteed': min_wins_guaranteed, 'target_matches': num_target_matches}
+# # --- <<< END OF FUNCTION DEFINITION >>> ---
 
 # --- create_probability_chart Function (Add this back) ---
 def create_probability_chart(data_dict, prob_column='Top 4 Probability'):
     if not data_dict:
         return None
 
-    # Prepare data for Altair
+    # Build DataFrame
     chart_data = []
     for team_key, stats in data_dict.items():
-        prob = stats.get(prob_column, 0.0)
-        if prob is not None and not isinstance(prob, (int, float)):
-             try: prob = float(prob)
-             except (ValueError, TypeError): prob = 0.0
+        raw = stats.get(prob_column, 0.0)
+        try:
+            prob = float(raw)
+        except:
+            prob = 0.0
 
         chart_data.append({
             'Team': team_short_names.get(team_key, team_key),
-            'Probability': prob / 100.0 if prob is not None else 0.0,
-            'Color': team_styles.get(team_key, {'bg': '#808080'})['bg']
+            'Probability': prob / 100.0,
+            'BarColor': team_styles.get(team_key, {'bg':'#808080'})['bg']
         })
 
     if not chart_data:
-         return None
+        return None
 
-    df_chart = DataFrame(chart_data)
-    chart_height = max(300, len(chart_data) * 35)
+    df = DataFrame(chart_data)
+    height = max(300, len(df) * 35)
 
-    base = alt.Chart(df_chart).encode(
-        x=alt.X('Probability:Q', axis=alt.Axis(format='%', title='Probability', grid=False), scale=alt.Scale(domain=[0, 1])),
-        y=alt.Y('Team:N', sort='-x', title=None, axis=alt.Axis(ticks=False, domain=False)),
-        color=alt.Color('Color:N', scale=None),
+    # Shared base with x/y encoding
+    base = (
+        alt.Chart(df)
+           .encode(
+               x=alt.X('Probability:Q',
+                       axis=alt.Axis(format='%', title='Probability', grid=False),
+                       scale=alt.Scale(domain=[0,1])),
+               y=alt.Y('Team:N',
+                       sort='-x',
+                       title=None,
+                       axis=alt.Axis(ticks=False, domain=False))
+           )
+           .properties(title=f'{prob_column} Chances', height=height)
+    )
+
+    # Bars in team colors
+    bars = base.mark_bar(cornerRadius=3).encode(
+        color=alt.Color('BarColor:N', scale=None),
         tooltip=[
-            alt.Tooltip('Team:N'),
-            alt.Tooltip('Probability:Q', format='.4%', title='Probability')
+            alt.Tooltip('Team:N', title='Team'),
+            alt.Tooltip('Probability:Q', format='.4%', title='Chance')
         ]
-    ).properties(
-        title=f'{prob_column} Chances', # Dynamic title
-        height=chart_height
     )
 
-    bars = base.mark_bar(cornerRadius=3)
-    
-    # Get the current theme setting from Streamlit
-    try:
-        current_theme = st.get_option("theme.base")
-    except Exception: # Handle cases where get_option might not be available (e.g., older Streamlit)
-        current_theme = "light" # Default to light theme
-
-    # Set text color based on theme
-    text_label_color = '#FFFFFF' if current_theme == "dark" else '#333333'
-    
-    # Dynamic Text Color
-    
-    text = base.mark_text(
-        align='left', baseline='middle', dx=3
+    # Text labels—no color or fill here!
+    labels = base.mark_text(
+        align='left',
+        baseline='middle',
+        dx=3
     ).encode(
-        text=alt.Text('Probability:Q', format='.4%'),
-        color=alt.value(text_label_color)
+        text=alt.Text('Probability:Q', format='.4%')
     )
 
-    chart = (bars + text).configure_view(strokeWidth=0)
-    return chart
+
+    return (bars + labels).configure_view(strokeWidth=0)
+
 # --- End create_probability_chart Function ---
 
 
@@ -1203,10 +1205,15 @@ def main():
             /* --- Altair Chart --- */
             /* ... (Keep Altair Chart CSS as is) ... */
             .stAltairChart { background-color: var(--secondary-background-color); border-radius: var(--border-radius-md); padding: 1.2rem; box-shadow: var(--box-shadow-light); border: 1px solid var(--separator-color); }
-            .stAltairChart text { fill: var(--text-color) !important; font-family: var(--font-family-sans-serif) !important; font-size: 11px; }
+            /*.stAltairChart text { fill: var(--text-color); font-family: var(--font-family-sans-serif) !important; font-size: 11px; }*/
+            .stAltairChart g.mark-text text { /* Use a more specific selector */
+                 fill: var(--text-color);      /* Use theme's text color */
+                 font-size: 11px;             /* Set font size (matches axis labels in previous CSS) */
+                 /* Optional: Adjust font-weight if needed */
+                 /* font-weight: 500; */
+            }
             .stAltairChart .title text { fill: var(--text-color) !important; font-weight: 600 !important; font-size: 14px !important; }
             .stAltairChart .axis text { fill: var(--text-color) !important; opacity: 0.8; }
-
 
             /* --- Alerts --- */
             /* ... (Keep Alert CSS as is) ... */
@@ -1317,6 +1324,21 @@ def main():
     elif selected_method == 'Exhaustive' and num_fixtures > EXHAUSTIVE_LIMIT:
         st.warning(f"Exhaustive analysis selected, but fixture count ({num_fixtures}) exceeds limit ({EXHAUSTIVE_LIMIT}). Cannot run full analysis.")
     # --- End Exhaustive Button ---
+
+    st.markdown(
+        """
+        <style>
+          /* catch all text inside Altair/Vega embeds and force them to current theme color */
+          .stAltairChart text,
+          .st-altair-chart text,
+          div.vega-embed text {
+            fill: var(--text-color) !important;
+         }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
     # --- Display Overall Probabilities (Reads from Cache or runs MC) ---
     st.subheader(f"Overall Qualification Probabilities")
