@@ -1,40 +1,59 @@
 # .github/workflows/update-ipl.yml
- name: Update IPL Standings
+name: Update IPL Data & Precompute Analysis
 
- on:
-   schedule:
-     - cron: '0 19 * * *'    # 19:00 UTC → 00:30 IST next day
-   workflow_dispatch:
+on:
+  schedule:
+    - cron: '0 19 * * *'    # daily at 19:00 UTC
+  workflow_dispatch:      # manual trigger support
 
- jobs:
-   update:
-     runs-on: ubuntu-latest
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-     steps:
-       - uses: actions/checkout@v3
+    steps:
+      # 1) Checkout full repo history so we can rebase & push
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-       - name: Set up Python
-         uses: actions/setup-python@v4
-         with:
-           python-version: "3.x"
+      # 2) Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-       - name: Install dependencies
-         run: |
-           pip install requests pandas
+      # 3) Install your dependencies
+      - name: Install dependencies
+        run: |
+          pip install requests pandas
 
+      # 4) Scrape the latest standings & fixtures
+      - name: Run scraper
+        run: python extract_table.py
 
-       - name: Run scraper
-         run: python extract_table.py  # now generates both current_standings.json and remaining_fixtures.json
+      # 5) Precompute full exhaustive analysis
+      - name: Precompute exhaustive analysis
+        run: python precompute_analysis.py
 
-       - name: Commit results
-         run: |
-           git config user.name  "github-actions[bot]"
-           git config user.email "github-actions[bot]@users.noreply.github.com"
+      # 6) Commit all three JSONs back to the repo
+      - name: Commit updated data & analysis
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-           git add current_standings.json remaining_fixtures.json
-           git commit -m "Automated update: $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          # sync with remote to avoid non-fast-forward
+          git pull --rebase origin ${GITHUB_REF##*/} || true
 
-       - name: Push changes
-         uses: ad-m/github-push-action@v0.6.0
-         with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
+          git add current_standings.json remaining_fixtures.json analysis_results.json
+          git commit -m "ci: update IPL data & analysis $(date +'%Y-%m-%d')" || echo "No changes to commit"
+
+      # 7) Push the commit
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # you can omit force if rebase succeeds consistently
+          force: true
