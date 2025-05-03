@@ -10,7 +10,14 @@ import altair as alt # <<< ADD THIS IMPORT >>>
 import traceback # Added for detailed error printing
 from collections import defaultdict # Add this import
 
-
+# --- File Paths ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# --- <<< CHANGE 1: Move ANALYSIS_FILE definition >>> ---
+ANALYSIS_FILE = os.path.join(BASE_DIR, 'analysis_results.json') # Path for precomputed analysis
+# --- <<< END CHANGE 1 >>> ---
+STANDINGS_FILE = os.path.join(BASE_DIR, 'current_standings.json')
+FIXTURES_FILE = os.path.join(BASE_DIR, 'remaining_fixtures.json')
+# ---
 
 # --- Configuration ---
 EXHAUSTIVE_LIMIT = 23  # Max fixtures for exhaustive simulation
@@ -18,11 +25,6 @@ NUM_SIMULATIONS_MC = 1000000 # Number of simulations for Monte Carlo
 MC_TOLERANCE = 0.02 # Tolerance for 'Result doesn't matter' in MC (e.g., 2% difference) # <<< ADD THIS
 # --- End Configuration ---
 
-# --- File Paths ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STANDINGS_FILE = os.path.join(BASE_DIR, 'current_standings.json')
-FIXTURES_FILE = os.path.join(BASE_DIR, 'remaining_fixtures.json')
-# ---
 
 # Team colors and full names (Keep as is)
 # --- Team Names and Styles ---
@@ -1049,8 +1051,11 @@ def run_exhaustive_analysis_once(initial_standings_arg, fixtures_arg):
                 results_df = DataFrame(columns=['Outcome'])
                 percentage = 0
 
-            final_results['team_analysis'][target_n][team] = {'percentage': percentage, 'results_df': results_df}
-
+            # Convert DataFrame to dictionary before storing
+            final_results['team_analysis'][target_n][team] = {
+                'percentage': percentage,
+                'results_df': results_df.to_dict(orient='index') # Convert to dict
+            }
     # 3. Calculate Qualification Path
     num_target_matches_map = {team: sum(1 for m in fixtures_arg if team in m) for team in team_keys}
     for team in team_keys:
@@ -1227,10 +1232,48 @@ def main():
 
         </style>
     """, unsafe_allow_html=True)
-    # --- <<< END MODIFICATION >>> ---
+    # --- End CSS Styling ---
 
+    # --- <<< CHANGE 2: Load or Compute Analysis Once >>> ---
+    analysis = None # Initialize analysis variable
+    try:
+        with open(ANALYSIS_FILE, 'r') as f:
+            analysis = json.load(f)
+        st.caption(f"🔍 Loaded cached analysis from {ANALYSIS_FILE}")
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        st.warning(f"Could not load cached analysis file ({e}). Running analysis now...")
+        # Need to load data first to run analysis
+        standings_data_init, fixtures_data_init, _, _, load_errors_init = load_data()
+        if not load_errors_init or not any("CRITICAL" in err for err in load_errors_init):
+            if fixtures_data_init is not None and len(fixtures_data_init) <= EXHAUSTIVE_LIMIT:
+                analysis = run_exhaustive_analysis_once(standings_data_init, fixtures_data_init)
+                if analysis:
+                    try:
+                        with open(ANALYSIS_FILE, 'w') as f:
+                            json.dump(analysis, f, indent=4)
+                        st.caption("⚙️ Computed and cached new analysis results.")
+                    except IOError as write_e:
+                        st.error(f"Failed to write cache file {ANALYSIS_FILE}: {write_e}")
+                else:
+                    st.error("Exhaustive analysis failed during initial computation.")
+            elif fixtures_data_init is not None: # Exceeds limit
+                 st.warning(f"Number of fixtures ({len(fixtures_data_init)}) exceeds exhaustive limit ({EXHAUSTIVE_LIMIT}). Cannot precompute. Exhaustive mode will be unavailable.")
+            else: # Fixtures failed to load
+                 st.error("Could not load fixtures data. Cannot precompute exhaustive analysis.")
+        else:
+            st.error("Critical error loading initial data. Cannot precompute exhaustive analysis.")
+    except Exception as e:
+         st.error(f"An unexpected error occurred loading or computing analysis: {e}")
+         traceback.print_exc() # Print full traceback for unexpected errors
 
-    st.title("IPL Qualification Probability Analyzer") # Simplified Title
+    # If analysis is still None after trying to load/compute, stop or handle error
+    if analysis is None:
+        st.error("Failed to load or compute exhaustive analysis data. Exhaustive method unavailable.")
+        # Optionally, force method to Monte Carlo if possible, or stop
+        # For now, we'll let it continue but Exhaustive sections will show errors/info
+    # --- <<< END CHANGE 2 >>> ---
+
+    st.title("IPL Qualification Probability Analyzer")
 
     # --- Load Data ---
     initial_standings_data, fixtures_data, last_updated, data_source, load_errors = load_data()
@@ -1253,18 +1296,34 @@ def main():
     if num_fixtures == 0:
         recommended_method = 'None'; recommendation_text = "(Season Complete)"
 
-    method_options = [f'Exhaustive (Exact, Slow >{15} fixtures)', f'Monte Carlo ({NUM_SIMULATIONS_MC:,} sims)'] # Shorter labels
-    default_index = 1 if recommended_method == 'Monte Carlo' else 0
+    method_options = []
+    if analysis is not None or num_fixtures <= EXHAUSTIVE_LIMIT: # Only offer Exhaustive if precomputed or computable
+         method_options.append(f'Exhaustive (Precomputed/Exact)')
+    method_options.append(f'Monte Carlo ({NUM_SIMULATIONS_MC:,} sims)')
+
+    recommended_method = 'Monte Carlo' if num_fixtures > EXHAUSTIVE_LIMIT or analysis is None else 'Exhaustive'
+    recommendation_text = f"(Recommended: {recommended_method})" if recommended_method != 'None' else "(Season Complete)"
+    if num_fixtures == 0: recommended_method = 'None'
+
+    default_index = 0 # Default to first option
+    if recommended_method == 'Monte Carlo' and len(method_options) > 1:
+        default_index = 1 # Index of Monte Carlo if Exhaustive is also an option
+    elif recommended_method == 'Monte Carlo':
+        default_index = 0 # Index of Monte Carlo if it's the only option
 
     if recommended_method != 'None':
+        if not method_options:
+             st.sidebar.error("No analysis methods available.")
+             st.stop()
         selected_method_choice = st.sidebar.radio(
             f"Simulation Method {recommendation_text}:",
             method_options, index=default_index, key='sim_method_choice'
         )
         selected_method = 'Exhaustive' if 'Exhaustive' in selected_method_choice else 'Monte Carlo'
-        selected_method_display = selected_method # Use simple name for display in headers
+        selected_method_display = selected_method
     else:
         st.sidebar.info("No remaining fixtures."); selected_method = 'None'; selected_method_display = "None"
+    
     st.sidebar.markdown("---")
     # --- End Sidebar Method Selection ---
     st.sidebar.markdown("---")
@@ -1272,15 +1331,13 @@ def main():
     # Use FULL names for selection dropdown
     available_teams_full = sorted([name for key, name in team_full_names.items() if key in initial_standings_data])
     if not available_teams_full: st.sidebar.error("No teams available."); st.stop()
-
     full_team_name = st.sidebar.selectbox("Select Team:", available_teams_full, key="team_select")
-    # Map selected full name back to key
     team_key = next((key for key, value in team_full_names.items() if value == full_team_name), None)
-
     if not team_key: st.sidebar.error("Selected team key not found."); st.stop()
-
-    top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select") # Simplified label
+    top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select")
     top_n = 2 if top_n_choice == "Top 2" else 4
+        # --- End Sidebar Team/Target Selection ---
+
 
     # --- Display Initial Standings ---
     st.subheader("Current Standings")
@@ -1299,45 +1356,45 @@ def main():
     # --- <<< MODIFIED: Combined Analysis Section >>> ---
     st.subheader("Analysis Results")
 
-    # --- Single Button for Exhaustive Analysis ---
-    exhaustive_cache_key = 'exhaustive_full_results'
-    run_exhaustive_button_clicked = False
-    if selected_method == 'Exhaustive' and num_fixtures <= EXHAUSTIVE_LIMIT:
-        if st.button("Run Full Exhaustive Analysis"):
-            run_exhaustive_button_clicked = True
-            if exhaustive_cache_key in st.session_state:
-                del st.session_state[exhaustive_cache_key] # Clear cache if re-running
-
-            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
-            fixtures_copy = list(fixtures_data)
-            try:
-                full_results = run_exhaustive_analysis_once(standings_copy, fixtures_copy)
-                if full_results:
-                    st.session_state[exhaustive_cache_key] = full_results
-                else:
-                    # Error handled within the function, maybe add another message here
-                    st.error("Exhaustive analysis failed or was aborted.")
-            except Exception as e:
-                 st.error(f"An error occurred during the full exhaustive analysis: {e}"); traceback.print_exc()
-                 if exhaustive_cache_key in st.session_state: del st.session_state[exhaustive_cache_key]
-
-    elif selected_method == 'Exhaustive' and num_fixtures > EXHAUSTIVE_LIMIT:
-        st.warning(f"Exhaustive analysis selected, but fixture count ({num_fixtures}) exceeds limit ({EXHAUSTIVE_LIMIT}). Cannot run full analysis.")
-    # --- End Exhaustive Button ---
-
-    st.markdown(
-        """
-        <style>
-          /* catch all text inside Altair/Vega embeds and force them to current theme color */
-          .stAltairChart text,
-          .st-altair-chart text,
-          div.vega-embed text {
-            fill: var(--text-color) !important;
-         }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    ## --- Single Button for Exhaustive Analysis ---
+    #exhaustive_cache_key = 'exhaustive_full_results'
+    #run_exhaustive_button_clicked = False
+    #if selected_method == 'Exhaustive' and num_fixtures <= EXHAUSTIVE_LIMIT:
+    #    if st.button("Run Full Exhaustive Analysis"):
+    #        run_exhaustive_button_clicked = True
+    #        if exhaustive_cache_key in st.session_state:
+    #            del st.session_state[exhaustive_cache_key] # Clear cache if re-running
+#
+    #        standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
+    #        fixtures_copy = list(fixtures_data)
+    #        try:
+    #            full_results = run_exhaustive_analysis_once(standings_copy, fixtures_copy)
+    #            if full_results:
+    #                st.session_state[exhaustive_cache_key] = full_results
+    #            else:
+    #                # Error handled within the function, maybe add another message here
+    #                st.error("Exhaustive analysis failed or was aborted.")
+    #        except Exception as e:
+    #             st.error(f"An error occurred during the full exhaustive analysis: {e}"); traceback.print_exc()
+    #             if exhaustive_cache_key in st.session_state: del st.session_state[exhaustive_cache_key]
+#
+    #elif selected_method == 'Exhaustive' and num_fixtures > EXHAUSTIVE_LIMIT:
+    #    st.warning(f"Exhaustive analysis selected, but fixture count ({num_fixtures}) exceeds limit ({EXHAUSTIVE_LIMIT}). Cannot run full analysis.")
+    ## --- End Exhaustive Button ---
+#
+    #st.markdown(
+    #    """
+    #    <style>
+    #      /* catch all text inside Altair/Vega embeds and force them to current theme color */
+    #      .stAltairChart text,
+    #      .st-altair-chart text,
+    #      div.vega-embed text {
+    #        fill: var(--text-color) !important;
+    #     }
+    #    </style>
+    #    """,
+    #    unsafe_allow_html=True,
+    #)
 
 
     # --- Display Overall Probabilities (Reads from Cache or runs MC) ---
@@ -1346,32 +1403,33 @@ def main():
     prob_column_to_display = 'Top 2 Probability' if top_n_choice == "Top 2" else 'Top 4 Probability'
     overall_probs_data = None
 
-    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
-        st.caption("(Using cached exhaustive results)")
-        overall_probs_data = st.session_state[exhaustive_cache_key]['overall_probabilities']
-        # Need to merge these probs into a structure create_probability_chart understands
-        display_data_for_chart = {t: dict(initial_standings_data[t]) for t in initial_standings_data}
-        for team, probs in overall_probs_data.items():
-            if team in display_data_for_chart:
-                display_data_for_chart[team].update(probs)
-        chart = create_probability_chart(display_data_for_chart, prob_column_to_display)
-        if chart: st.altair_chart(chart, use_container_width=True)
-        else: st.warning("Could not generate probability chart from cached exhaustive data.")
+    # --- <<< CHANGE 4a: Use precomputed 'analysis' for Exhaustive >>> ---
+    if selected_method == 'Exhaustive':
+        if analysis: # Check if analysis was loaded/computed successfully
+            st.caption("(Using precomputed exhaustive analysis)")
+            overall_probs_data = analysis['overall_probabilities']
+            # Merge probs into display structure
+            display_data_for_chart = {t: dict(initial_standings_data.get(t, {})) for t in overall_probs_data} # Use .get for safety
+            for team, probs in overall_probs_data.items():
+                if team in display_data_for_chart:
+                    display_data_for_chart[team].update(probs)
+            chart = create_probability_chart(display_data_for_chart, prob_column_to_display)
+            if chart: st.altair_chart(chart, use_container_width=True)
+            else: st.warning("Could not generate probability chart from precomputed data.")
+        else:
+            st.error("Precomputed exhaustive analysis data is unavailable.") # Show error if analysis is None
 
     elif selected_method == 'Monte Carlo':
-        mc_overall_cache_key = f'standings_with_probs_{selected_method}' # Use old MC key
+        # --- (Monte Carlo logic remains the same) ---
+        mc_overall_cache_key = f'standings_with_probs_{selected_method}'
         if mc_overall_cache_key in st.session_state:
              standings_with_probs = st.session_state[mc_overall_cache_key]
              st.caption("(Using cached MC results)")
              chart = create_probability_chart(standings_with_probs, prob_column_to_display)
              if chart: st.altair_chart(chart, use_container_width=True)
              else: st.warning("Could not generate probability chart from cached MC data.")
-
         if st.button(f"Calculate Overall Probabilities (Monte Carlo)"):
-            # ... (MC calculation logic - simulate_season_mc) ...
-            probabilities = None
-            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
-            fixtures_copy = list(fixtures_data)
+            probabilities = None; standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}; fixtures_copy = list(fixtures_data)
             probabilities = simulate_season_mc(standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
             if probabilities:
                 standings_with_probs = {t: dict(s) for t, s in initial_standings_data.items()}
@@ -1386,125 +1444,123 @@ def main():
                 st.warning(f"Could not calculate overall probabilities using {selected_method}.")
                 if mc_overall_cache_key in st.session_state: del st.session_state[mc_overall_cache_key]
 
-    elif selected_method == 'None': # Season complete
+    elif selected_method == 'None':
          st.info("Season complete. Probabilities based on final standings.")
-         # Optionally display final standings chart here if needed
-    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
-         st.info("Run the 'Full Exhaustive Analysis' first to see overall probabilities.")
+    # --- <<< END CHANGE 4a >>> ---
     # --- End Overall Probabilities Display ---
-
 
     # --- Display Team Specific Analysis (Reads from Cache or runs MC) ---
     st.subheader(f"Analysis for {full_team_name}")
     st.caption(f"Target: {top_n_choice} | Method: {selected_method_display}")
     team_analysis_data = None
 
-    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
-        st.caption("(Using cached exhaustive results)")
-        try:
-            team_analysis_data = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]
-            percentage = team_analysis_data['percentage']
-            team_results_df = team_analysis_data['results_df']
+    # --- <<< CHANGE 4b: Use precomputed 'analysis' for Exhaustive >>> ---
+    if selected_method == 'Exhaustive':
+        if analysis: # Check if analysis was loaded/computed successfully
+            st.caption("(Using precomputed exhaustive analysis)")
+            try:
+                # Access precomputed data directly
+                team_data = analysis['team_analysis'][str(top_n)][team_key]
+                percentage = team_data['percentage']
+                # Recreate DataFrame from dict if needed (assuming it's stored as dict)
+                # If results_df is stored directly, use that. Adjust based on run_exhaustive_analysis_once output.
+                # Assuming results_df is stored directly:
+                # Recreate DataFrame from dictionary
+                team_results_df = DataFrame.from_dict(team_data['results_df'], orient='index')
 
-            if team_results_df.empty and percentage == 0:
-                st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on exhaustive analysis.")
-            else:
-                st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (exhaustive).")
-                st.write("Required / Frequent Outcomes:")
-                df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
-                st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
-        except KeyError:
-            st.error(f"Could not retrieve cached exhaustive analysis data for {full_team_name} (Top {top_n}). Please re-run the full analysis.")
-        except Exception as e:
-            st.error(f"Error displaying cached exhaustive team analysis: {e}")
+                if team_results_df.empty and percentage == 0:
+                    st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on exhaustive analysis.")
+                else:
+                    st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (exhaustive).")
+                    st.write("Required / Frequent Outcomes:")
+                    df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
+                    st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
+            except KeyError:
+                st.error(f"KeyError accessing precomputed data for {team_key} / Top {top_n}. Check analysis file structure.")
+            except Exception as e:
+                st.error(f"Error displaying precomputed exhaustive team analysis: {e}")
+        else:
+            st.error("Precomputed exhaustive analysis data is unavailable.")
 
     elif selected_method == 'Monte Carlo':
-        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}' # New cache key for MC team analysis
+        # --- (Monte Carlo logic remains the same) ---
+        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}'
         run_mc_team_analysis = False
         if st.button(f"Analyze {full_team_name} (Monte Carlo)"):
             run_mc_team_analysis = True
-            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key] # Clear cache if re-running
-
+            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
         if run_mc_team_analysis:
-            # ... (MC team analysis logic - analyze_team_mc) ...
             percentage = 0; team_results_df = DataFrame(columns=['Outcome'])
-            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}
-            fixtures_copy = list(fixtures_data)
+            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}; fixtures_copy = list(fixtures_data)
             try:
                 percentage, team_results_df = analyze_team_mc(team_key, top_n, standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
-                st.session_state[mc_team_cache_key] = {'percentage': percentage, 'results_df': team_results_df} # Cache MC results
+                st.session_state[mc_team_cache_key] = {
+                    'percentage': percentage,
+                    'results_df': team_results_df.to_dict(orient='index') # Store as dict
+                }
                 st.caption("(Newly Calculated MC)")
-                # Display immediately after calculation
-                if team_results_df.empty and percentage == 0:
-                    st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on MC analysis.")
+                if team_results_df.empty and percentage == 0: st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on MC analysis.")
                 else:
                     st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC).")
                     st.write("Required / Frequent Outcomes:")
                     df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
                     st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
-            except Exception as e:
-                 st.error(f"An error occurred during MC team analysis: {e}"); traceback.print_exc()
-                 if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
-
-        elif mc_team_cache_key in st.session_state: # Display cached MC team results
+            except Exception as e: st.error(f"An error occurred during MC team analysis: {e}"); traceback.print_exc();
+            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
+        elif mc_team_cache_key in st.session_state:
              st.caption("(Using cached MC analysis results)")
              cached_data = st.session_state[mc_team_cache_key]
              percentage = cached_data['percentage']
-             team_results_df = cached_data['results_df']
-             if team_results_df.empty and percentage == 0:
-                 st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on cached MC analysis.")
+             team_results_df = DataFrame(cached_data['results_df']) # Recreate DF
+             if team_results_df.empty and percentage == 0: st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on cached MC analysis.")
              else:
                  st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC cached).")
                  st.write("Required / Frequent Outcomes:")
                  df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
                  st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
 
-    elif selected_method == 'None': # Season complete
-         # ... (Season complete logic remains the same) ...
+    elif selected_method == 'None':
          st.info("Season complete. Analysis based on final standings.")
-    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
-         st.info("Run the 'Full Exhaustive Analysis' first to see team-specific results.")
+    # --- <<< END CHANGE 4b >>> ---
     # --- End Team Specific Analysis Display ---
-
 
     # --- Display Qualification Path (Reads from Cache) ---
     st.subheader(f"Qualification Path for {full_team_name} (Top {top_n})")
     st.caption("Analyzes minimum wins needed using Exhaustive method (subject to fixture limit).")
     path_data = None
 
-    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
-        st.caption("(Using cached exhaustive results)")
-        try:
-            path_data = st.session_state[exhaustive_cache_key]['qualification_path'][top_n][team_key]
-            possible_wins = path_data.get('possible')
-            guaranteed_wins = path_data.get('guaranteed')
-            target_matches = path_data.get('target_matches', 'N/A')
+    if selected_method == 'Exhaustive':
+        if analysis: # Check if analysis was loaded/computed successfully
+            st.caption("(Using precomputed exhaustive analysis)")
+            try:
+                # Access precomputed data directly
+                path_data = analysis['qualification_path'][str(top_n)][team_key]
+                possible_wins = path_data.get('possible')
+                guaranteed_wins = path_data.get('guaranteed')
+                target_matches = path_data.get('target_matches', 'N/A')
 
-            st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
-            # Possible Qualification
-            if isinstance(possible_wins, int): st.success(f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results).")
-            elif possible_wins is None: st.error(f"**Possible Qualification:** Cannot qualify.")
-            else: st.warning(f"**Possible Qualification:** Analysis result: {possible_wins}")
-            # Guaranteed Qualification
-            if isinstance(guaranteed_wins, int): st.success(f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results).")
-            elif guaranteed_wins is None and possible_wins is not None: st.info(f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins.")
-            elif guaranteed_wins is None and possible_wins is None: pass
-            else: st.warning(f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}")
-        except KeyError:
-            st.error(f"Could not retrieve cached exhaustive path data for {full_team_name} (Top {top_n}). Please re-run the full analysis.")
-        except Exception as e:
-            st.error(f"Error displaying cached exhaustive path analysis: {e}")
+                st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
+                if isinstance(possible_wins, int): st.success(f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results).")
+                elif possible_wins is None: st.error(f"**Possible Qualification:** Cannot qualify.")
+                else: st.warning(f"**Possible Qualification:** Analysis result: {possible_wins}")
+                if isinstance(guaranteed_wins, int): st.success(f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results).")
+                elif guaranteed_wins is None and possible_wins is not None: st.info(f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins.")
+                elif guaranteed_wins is None and possible_wins is None: pass
+                else: st.warning(f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}")
+            except KeyError:
+                st.error(f"KeyError accessing precomputed path data for {team_key} / Top {top_n}. Check analysis file structure.")
+            except Exception as e:
+                st.error(f"Error displaying precomputed exhaustive path analysis: {e}")
+        else:
+            st.error("Precomputed exhaustive analysis data is unavailable.")
 
     elif selected_method == 'Monte Carlo':
         st.info("Qualification Path analysis requires the Exhaustive method.")
     elif selected_method == 'None':
         st.info("Season complete. Path analysis not applicable.")
-    elif selected_method == 'Exhaustive' and exhaustive_cache_key not in st.session_state:
-        st.info("Run the 'Full Exhaustive Analysis' first to see qualification path results.")
-
+    # --- <<< END CHANGE 4c >>> ---
     st.markdown("---")
     # --- End Qualification Path Display ---
-
 
     # --- Simulate Specific Scenario (Modified to use cached exhaustive results if available) ---
     st.subheader("Simulate One Scenario")
@@ -1512,24 +1568,31 @@ def main():
     results_df_for_sim = None
     source_method_for_sim = "None"
 
-    if selected_method == 'Exhaustive' and exhaustive_cache_key in st.session_state:
-        try:
-            # Use the cached exhaustive results for the currently selected team/target
-            cached_team_analysis = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]
-            results_df_for_sim = cached_team_analysis['results_df']
-            source_method_for_sim = "Exhaustive (Cached)"
-        except KeyError:
-            st.warning("Could not find cached exhaustive results for simulation. Run full analysis.")
+    if selected_method == 'Exhaustive':
+        if analysis: # Check if analysis was loaded/computed successfully
+            try:
+                # Access precomputed data directly
+                cached_team_analysis = analysis['team_analysis'][str(top_n)][team_key] # Use str(top_n)
+                # Recreate DataFrame from dictionary
+                results_df_for_sim = DataFrame.from_dict(cached_team_analysis['results_df'], orient='index')
+                source_method_for_sim = "Exhaustive (Precomputed)"
+            except KeyError:
+                st.warning("Could not find precomputed exhaustive results for simulation.")
+        else:
+            st.warning("Precomputed exhaustive analysis data is unavailable for simulation.")
+
     elif selected_method == 'Monte Carlo':
+        # --- (Monte Carlo logic remains the same) ---
         mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}'
         if mc_team_cache_key in st.session_state:
-            # Use the cached MC results if available
-            results_df_for_sim = st.session_state[mc_team_cache_key]['results_df']
+            results_df_for_sim = DataFrame.from_dict(st.session_state[mc_team_cache_key]['results_df'], orient='index') # Recreate DF
             source_method_for_sim = "Monte Carlo (Cached)"
         else:
             st.warning("Run Monte Carlo team analysis first to enable simulation.")
+
     elif selected_method == 'None':
         st.info("Cannot simulate scenario as the season is complete.")
+    # --- <<< END CHANGE 4d >>> ---
     else: # Exhaustive selected but not run yet
         st.info("Run the analysis first to enable simulation.")
 
@@ -1539,6 +1602,12 @@ def main():
         if st.button("Simulate Scenario"):
             # Check if results_df is empty (0% chance)
             percentage_for_sim = 0
+            if source_method_for_sim == "Exhaustive (Precomputed)" and analysis:
+                 try:
+                      # --- <<< START MODIFICATION >>> ---
+                      percentage_for_sim = analysis['team_analysis'][str(top_n)][team_key]['percentage'] # Use str(top_n)
+                      # --- <<< END MODIFICATION >>> ---
+                 except KeyError: pass
             if source_method_for_sim == "Exhaustive (Cached)":
                  percentage_for_sim = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]['percentage']
             elif source_method_for_sim == "Monte Carlo (Cached)":
