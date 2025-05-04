@@ -29,6 +29,8 @@ jobs:
       # 3) Install your dependencies
       - name: Install dependencies
         run: |
+          pip install Cython          # satisfy the Pyjnius build
+          pip install requests pandas streamlit
           pip install -r requirements.txt
 
       # 4) Scrape the latest standings & fixtures
