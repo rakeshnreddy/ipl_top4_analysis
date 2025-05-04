@@ -24,15 +24,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.x'
 
       # 3) Install your dependencies
       - name: Install dependencies
         run: |
-          pip install Cython          # satisfy the Pyjnius build
-          pip install requests pandas streamlit
-          pip install -r requirements.txt
-
+          pip install --upgrade pip
+          pip install requests pandas streamlit altair
       # 4) Scrape the latest standings & fixtures
       - name: Run scraper
         run: python extract_table.py
