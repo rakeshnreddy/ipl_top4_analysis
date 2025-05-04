@@ -45,8 +45,8 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # sync with remote to avoid non-fast-forward
-          git pull --rebase origin ${GITHUB_REF##*/} || true
+          # auto‑stash our generated JSONs, pull & rebase, then pop stash
+          git pull --rebase --autostash origin ${GITHUB_REF##*/} || true
 
           git add current_standings.json remaining_fixtures.json analysis_results.json
           git commit -m "ci: update IPL data & analysis $(date +'%Y-%m-%d')" || echo "No changes to commit"
