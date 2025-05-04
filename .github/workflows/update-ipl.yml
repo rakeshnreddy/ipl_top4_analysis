@@ -39,7 +39,7 @@ jobs:
       - name: Precompute exhaustive analysis
         run: python precompute_analysis.py
 
-      - name: Debug: show files & git status
+      - name: Debug show files & git status
         run: |
           echo "=== Listing working directory ==="
           ls -la
