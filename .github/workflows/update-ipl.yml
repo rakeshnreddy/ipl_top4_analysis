@@ -65,5 +65,5 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # you can omit force if rebase succeeds consistently
+          branch: main        # ← explicitly push back to main
           force: true
