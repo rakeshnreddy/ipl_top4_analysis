@@ -650,69 +650,64 @@ def simulate_matches(results_df, team_name, initial_standings_arg):
         return f"An error occurred during simulation: {str(e)}", None
 # --- End Simulate Matches Function ---
 
-# --- create_probability_chart Function (Add this back) ---
 def create_probability_chart(data_dict, prob_column='Top 4 Probability'):
-    if not data_dict:
-        return None
-
-    # Build DataFrame
+    if not data_dict: return None
     chart_data = []
     for team_key, stats in data_dict.items():
         raw = stats.get(prob_column, 0.0)
-        try:
-            prob = float(raw)
-        except:
-            prob = 0.0
-
+        try: prob = float(raw)
+        except: prob = 0.0
         chart_data.append({
             'Team': team_short_names.get(team_key, team_key),
             'Probability': prob / 100.0,
-            'BarColor': team_styles.get(team_key, {'bg':'#808080'})['bg']
+            'BarColor': team_styles.get(team_key, {'bg':'#808080'})['bg'],
+            'ProbText': f"{prob:.4f}%" # Pre-format text string for the text column
         })
-
-    if not chart_data:
-        return None
-
+    if not chart_data: return None
     df = DataFrame(chart_data)
     height = max(300, len(df) * 35)
 
-    # Shared base with x/y encoding
-    base = (
-        alt.Chart(df)
-           .encode(
-               x=alt.X('Probability:Q',
-                       axis=alt.Axis(format='%', title='Probability', grid=False),
-                       scale=alt.Scale(domain=[0,1])),
-               y=alt.Y('Team:N',
-                       sort='-x',
-                       title=None,
-                       axis=alt.Axis(ticks=False, domain=False))
-           )
-           .properties(title=f'{prob_column} Chances', height=height)
-    )
+    # --- <<< START MODIFICATION: Separate Y Encodings >>> ---
+    # Y encoding for Bars (with labels)
+    y_encoding_bars = alt.Y('Team:N',
+                            sort=alt.SortField(field="Probability", order="descending"),
+                            title=None,
+                            axis=alt.Axis(ticks=False, domain=False, labels=True)) # Show labels
 
-    # Bars in team colors
-    bars = base.mark_bar(cornerRadius=3).encode(
+    # Y encoding for Text Column (NO labels/axis)
+    y_encoding_text = alt.Y('Team:N',
+                            sort=alt.SortField(field="Probability", order="descending"),
+                            title=None,
+                            axis=None) # Hide axis and labels
+    # --- <<< END MODIFICATION >>> ---
+
+    # Chart 1: Bars ONLY
+    bars = alt.Chart(df).mark_bar(cornerRadius=3).encode(
+        x=alt.X('Probability:Q', axis=alt.Axis(format='%', title='Probability', grid=False), scale=alt.Scale(domain=[0,1])),
+        y=y_encoding_bars, # Use shared Y encoding
         color=alt.Color('BarColor:N', scale=None),
-        tooltip=[
-            alt.Tooltip('Team:N', title='Team'),
-            alt.Tooltip('Probability:Q', format='.4%', title='Chance')
-        ]
+        tooltip=[alt.Tooltip('Team:N', title='Team'), alt.Tooltip('Probability:Q', format='.4%', title='Chance')]
+    ).properties(height=height) # Set height on one component
+
+    # Chart 2: Text Column ONLY
+    text = alt.Chart(df).mark_text(align='left', baseline='middle').encode(
+        y=y_encoding_text,
+        text=alt.Text('ProbText:N')
+    ).properties(height=height)
+
+    # Concatenate horizontally
+    # Add spacing between the bars and the text column
+    chart = alt.hconcat(bars, text, spacing=10).resolve_scale(
+        y='shared' # IMPORTANT: Ensure Y axes are shared and aligned
+    ).properties(
+         title=f'{prob_column} Chances', # Overall title for the combined chart
+         autosize=alt.AutoSizeParams(type='fit', contains='padding')
+    ).configure_view(
+        strokeWidth=0 # Remove outer border
     )
-
-    # Text labels—no color or fill here!
-    labels = base.mark_text(
-        align='left',
-        baseline='middle',
-        dx=3
-    ).encode(
-        text=alt.Text('Probability:Q', format='.4%')
-    )
-
-
-    return (bars + labels).configure_view(strokeWidth=0)
-
+    return chart
 # --- End create_probability_chart Function ---
+
 
 def run_exhaustive_analysis_once(initial_standings_arg, fixtures_arg):
     """
@@ -1024,28 +1019,11 @@ def main():
 
 
             /* --- Altair Chart --- */
-            /* ... (Keep Altair Chart CSS as is) ... */
-            .stAltairChart { background-color: var(--secondary-background-color); border-radius: var(--border-radius-md); padding: 1.2rem; box-shadow: var(--box-shadow-light); border: 1px solid var(--separator-color); }
-            /*.stAltairChart text { fill: var(--text-color); font-family: var(--font-family-sans-serif) !important; font-size: 11px; }*/
-            .stAltairChart g.mark-text text { /* Use a more specific selector */
-                 fill: var(--text-color);      /* Use theme's text color */
-                 font-size: 11px;             /* Set font size (matches axis labels in previous CSS) */
-                 /* Optional: Adjust font-weight if needed */
-                 /* font-weight: 500; */
-            }
+            .stAltairChart { /* Container styles */ }
+            .stAltairChart text { font-family: var(--font-family-sans-serif) !important; }
+            .stAltairChart .hconcat_0 .axis text { fill: var(--text-color) !important; opacity: 0.8; font-size: 11px; }
             .stAltairChart .title text { fill: var(--text-color) !important; font-weight: 600 !important; font-size: 14px !important; }
-            .stAltairChart .axis text { fill: var(--text-color) !important; opacity: 0.8; }
-
-            /* --- Alerts --- */
-            /* ... (Keep Alert CSS as is) ... */
-            .stAlert { border-radius: var(--border-radius-sm); border-left-width: 4px; background-color: var(--secondary-background-color); color: var(--text-color); padding: 1rem; box-shadow: var(--box-shadow-light); }
-            .stAlert a { color: var(--primary-color); font-weight: 600; }
-
-
-            /* --- Text Area (for match results) --- */
-            /* ... (Keep Text Area CSS as is) ... */
-            .stTextArea textarea { background-color: var(--secondary-background-color); border-radius: var(--border-radius-sm); border: 1px solid var(--separator-color); color: var(--text-color); opacity: 0.8; font-family: monospace; font-size: 0.9em; }
-
+            .stAltairChart .hconcat_1 g.mark-text text { fill: var(--text-color) !important; font-size: 11px; }
         </style>
     """, unsafe_allow_html=True)
 
@@ -1114,49 +1092,55 @@ def main():
          st.error("Critical Error: Could not load standings or fixtures data. Cannot proceed.")
          st.stop()
     # --- End Load Data ---
-
-    # --- Sidebar Method Selection ---
-    st.sidebar.title("Settings") # Simplified Sidebar Title
-    recommended_method = 'Monte Carlo' if num_fixtures > EXHAUSTIVE_LIMIT else 'Exhaustive'
-    recommendation_text = f"(Recommended: {recommended_method})"
-    if num_fixtures == 0:
-        recommended_method = 'None'; recommendation_text = "(Season Complete)"
-
-    method_options = []
-    if analysis is not None or num_fixtures <= EXHAUSTIVE_LIMIT: # Only offer Exhaustive if precomputed or computable
-         method_options.append(f'Exhaustive (Precomputed/Exact)')
-    method_options.append(f'Monte Carlo ({NUM_SIMULATIONS_MC:,} sims)')
-
-    recommended_method = 'Monte Carlo' if num_fixtures > EXHAUSTIVE_LIMIT or analysis is None else 'Exhaustive'
-    recommendation_text = f"(Recommended: {recommended_method})" if recommended_method != 'None' else "(Season Complete)"
-    if num_fixtures == 0: recommended_method = 'None'
-
-    default_index = 0 # Default to first option
-    if recommended_method == 'Monte Carlo' and len(method_options) > 1:
-        default_index = 1 # Index of Monte Carlo if Exhaustive is also an option
-    elif recommended_method == 'Monte Carlo':
-        default_index = 0 # Index of Monte Carlo if it's the only option
-
-    if recommended_method != 'None':
-        if not method_options:
-             st.sidebar.error("No analysis methods available.")
-             st.stop()
-        selected_method_choice = st.sidebar.radio(
-            f"Simulation Method {recommendation_text}:",
-            method_options, index=default_index, key='sim_method_choice'
-        )
-        selected_method = 'Exhaustive' if 'Exhaustive' in selected_method_choice else 'Monte Carlo'
-        selected_method_display = selected_method
-    else:
-        st.sidebar.info("No remaining fixtures."); selected_method = 'None'; selected_method_display = "None"
     
-    st.sidebar.markdown("---") # Separator
-    st.sidebar.subheader("Analysis Target") # New subheader
-    # --- End Sidebar Method Selection ---
-    top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select")
-    top_n = 2 if top_n_choice == "Top 2" else 4
-    st.sidebar.markdown("---")
-    # --- End Sidebar Team/Target Selection ---
+    # --- Sidebar (Simplified) ---
+    # st.sidebar.title("IPL Analyzer") # Simplified title
+    # st.sidebar.markdown("---")
+    # st.sidebar.write("Analysis uses precomputed data.")
+    # st.sidebar.write("Data is updated periodically via automation.")
+    # --- Sidebar Method Selection ---
+    
+    # st.sidebar.title("Settings") # Simplified Sidebar Title
+    # recommended_method = 'Monte Carlo' if num_fixtures > EXHAUSTIVE_LIMIT else 'Exhaustive'
+    # recommendation_text = f"(Recommended: {recommended_method})"
+    # if num_fixtures == 0:
+    #     recommended_method = 'None'; recommendation_text = "(Season Complete)"
+
+    # method_options = []
+    # if analysis is not None or num_fixtures <= EXHAUSTIVE_LIMIT: # Only offer Exhaustive if precomputed or computable
+    #      method_options.append(f'Exhaustive (Precomputed/Exact)')
+    # method_options.append(f'Monte Carlo ({NUM_SIMULATIONS_MC:,} sims)')
+
+    # recommended_method = 'Monte Carlo' if num_fixtures > EXHAUSTIVE_LIMIT or analysis is None else 'Exhaustive'
+    # recommendation_text = f"(Recommended: {recommended_method})" if recommended_method != 'None' else "(Season Complete)"
+    # if num_fixtures == 0: recommended_method = 'None'
+
+    # default_index = 0 # Default to first option
+    # if recommended_method == 'Monte Carlo' and len(method_options) > 1:
+    #     default_index = 1 # Index of Monte Carlo if Exhaustive is also an option
+    # elif recommended_method == 'Monte Carlo':
+    #     default_index = 0 # Index of Monte Carlo if it's the only option
+
+    # if recommended_method != 'None':
+    #     if not method_options:
+    #          st.sidebar.error("No analysis methods available.")
+    #          st.stop()
+    #     selected_method_choice = st.sidebar.radio(
+    #         f"Simulation Method {recommendation_text}:",
+    #         method_options, index=default_index, key='sim_method_choice'
+    #     )
+    #     selected_method = 'Exhaustive' if 'Exhaustive' in selected_method_choice else 'Monte Carlo'
+    #     selected_method_display = selected_method
+    # else:
+    #     st.sidebar.info("No remaining fixtures."); selected_method = 'None'; selected_method_display = "None"
+    
+    # st.sidebar.markdown("---") # Separator
+    # st.sidebar.subheader("Analysis Target") # New subheader
+    # # --- End Sidebar Method Selection ---
+    # top_n_choice = st.sidebar.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select")
+    # top_n = 2 if top_n_choice == "Top 2" else 4
+    # st.sidebar.markdown("---")
+    # # --- End Sidebar Team/Target Selection ---
     # --- Display Initial Standings ---
     st.subheader("Current Standings")
     df_initial = plot_standings(initial_standings_data)
@@ -1169,258 +1153,194 @@ def main():
     else:
         st.warning("Initial standings data is empty or could not be processed.")
     # --- End Display Initial Standings ---
-    st.subheader("Analysis Results")
+    # --- Determine Method to Display (Prioritize Exhaustive) ---
+    analysis_method_used = "N/A"
+    analysis_data = None # Will hold the actual results dict
 
-    # --- Display Overall Probabilities (Reads from Cache or runs MC) ---
+    if analysis and "metadata" in analysis and "analysis_data" in analysis:
+        analysis_method_used = analysis["metadata"].get("method_used", "Unknown")
+        analysis_data = analysis["analysis_data"] # Get the main results dict
+        if not analysis_data: # Check if analysis_data itself is null/empty
+             st.error("Precomputed analysis data is empty or invalid.")
+             analysis_method_used = "Error" # Mark as error state
+    elif analysis:
+        st.error("Precomputed analysis file has incorrect structure (missing metadata or analysis_data).")
+        analysis_method_used = "Error"
+    else:
+        # analysis is None (loading/computation failed earlier)
+        st.error("Precomputed analysis data is unavailable.")
+        analysis_method_used = "Unavailable"
+
+    # --- Display Overall Probabilities (Side-by-Side) ---
     st.subheader(f"Overall Qualification Probabilities")
-    st.caption(f"Method: {selected_method_display}")
-    prob_column_to_display = 'Top 2 Probability' if top_n_choice == "Top 2" else 'Top 4 Probability'
-    overall_probs_data = None
+    st.caption(f"Method Used: {analysis_method_used}") # Display the method from metadata
 
-    if selected_method == 'Exhaustive':
-        if analysis: # Check if analysis was loaded/computed successfully
-            #st.caption("(Using precomputed exhaustive analysis)")
-            overall_probs_data = analysis['overall_probabilities']
-            # Merge probs into display structure
-            display_data_for_chart = {t: dict(initial_standings_data.get(t, {})) for t in overall_probs_data} # Use .get for safety
-            for team, probs in overall_probs_data.items():
-                if team in display_data_for_chart:
-                    display_data_for_chart[team].update(probs)
-            chart = create_probability_chart(display_data_for_chart, prob_column_to_display)
-            if chart: st.altair_chart(chart, use_container_width=True)
-            else: st.warning("Could not generate probability chart from precomputed data.")
-        else:
-            st.error("Precomputed exhaustive analysis data is unavailable.") # Show error if analysis is None
+    # Check if analysis_data and the specific key exist
+    if analysis_data and "overall_probabilities" in analysis_data:
+        overall_probs_source = analysis_data["overall_probabilities"]
+        col1, col2 = st.columns(2)
+        # Prepare data structure for charts
+        display_data_for_chart = {t: dict(initial_standings_data.get(t, {})) for t in overall_probs_source}
+        for team, probs in overall_probs_source.items():
+            if team in display_data_for_chart:
+                display_data_for_chart[team].update(probs)
+        
+        ## # --- ADD DEBUG PRINT ---
+        ## st.write("DEBUG: Data for Charts:")
+        ## st.json(display_data_for_chart)
+        ## # --- END DEBUG PRINT ---
+        with col1:
+            st.markdown("##### Top 4 Chances")
+            chart_top4 = create_probability_chart(display_data_for_chart, 'Top 4 Probability')
+            if chart_top4: st.altair_chart(chart_top4, use_container_width=True)
+            else: st.warning("Could not generate Top 4 chart.")
+        with col2:
+            st.markdown("##### Top 2 Chances")
+            chart_top2 = create_probability_chart(display_data_for_chart, 'Top 2 Probability')
+            if chart_top2: st.altair_chart(chart_top2, use_container_width=True)
+            else: st.warning("Could not generate Top 2 chart.")
+    else:
+        st.warning(f"Overall probability data not available (Method: {analysis_method_used}).")
+    # --- End Overall Probabilities ---
+    
+    # --- Team Selection and Target (Main Area) ---
+    st.divider()
+    st.subheader("Detailed Team Analysis")
 
-    elif selected_method == 'Monte Carlo':
-        # --- (Monte Carlo logic remains the same) ---
-        mc_overall_cache_key = f'standings_with_probs_{selected_method}'
-        if mc_overall_cache_key in st.session_state:
-             standings_with_probs = st.session_state[mc_overall_cache_key]
-             st.caption("(Using cached MC results)")
-             chart = create_probability_chart(standings_with_probs, prob_column_to_display)
-             if chart: st.altair_chart(chart, use_container_width=True)
-             else: st.warning("Could not generate probability chart from cached MC data.")
-        if st.button(f"Calculate Overall Probabilities (Monte Carlo)"):
-            probabilities = None; standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}; fixtures_copy = list(fixtures_data)
-            probabilities = simulate_season_mc(standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
-            if probabilities:
-                standings_with_probs = {t: dict(s) for t, s in initial_standings_data.items()}
-                for team, probs in probabilities.items():
-                    if team in standings_with_probs: standings_with_probs[team].update(probs)
-                st.session_state[mc_overall_cache_key] = standings_with_probs
-                st.caption("(Newly Calculated MC)")
-                chart = create_probability_chart(standings_with_probs, prob_column_to_display)
-                if chart: st.altair_chart(chart, use_container_width=True)
-                else: st.warning("Could not generate probability chart from calculated MC data.")
+    col_team, col_target = st.columns([3, 1]) # Adjust ratios as needed
+
+    with col_team:
+        available_teams_full = sorted([name for key, name in team_full_names.items() if key in initial_standings_data])
+        if not available_teams_full: st.error("No teams available."); st.stop()
+        full_team_name = st.selectbox("Select Team:", available_teams_full, key="team_select_main", label_visibility="collapsed") # Hide label
+        team_key = next((key for key, value in team_full_names.items() if value == full_team_name), None)
+        if not team_key: st.error("Selected team key not found."); st.stop()
+
+    with col_target:
+        top_n_choice = st.radio("Analyze for:", ["Top 4", "Top 2"], key="top_n_select_main", horizontal=True, label_visibility="collapsed") # Horizontal layout
+        top_n = 2 if top_n_choice == "Top 2" else 4
+    # --- End Team Selection ---
+
+    # --- Display Team Specific Analysis ---
+    # Header is now part of the selection area
+    st.caption(f"Displaying {analysis_method_used} results for {full_team_name} ({top_n_choice})")
+
+    # Check if analysis_data and the specific key exist
+    if analysis_data and "team_analysis" in analysis_data:
+        try:
+            # Access data via analysis_data
+            team_data = analysis_data["team_analysis"][str(top_n)][team_key]
+            percentage = team_data['percentage']
+            team_results_df = DataFrame.from_dict(team_data['results_df'], orient='index')
+
+            if team_results_df.empty and percentage == 0:
+                st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on {analysis_method_used} analysis.")
             else:
-                st.warning(f"Could not calculate overall probabilities using {selected_method}.")
-                if mc_overall_cache_key in st.session_state: del st.session_state[mc_overall_cache_key]
+                st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios ({analysis_method_used}).")
+                st.write("Required / Frequent Outcomes:")
+                df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
+                st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
+        except KeyError:
+            st.error(f"Could not retrieve {analysis_method_used} analysis data for {full_team_name} (Top {top_n}).")
+        except Exception as e:
+            st.error(f"Error displaying {analysis_method_used} team analysis: {e}")
+    else:
+        st.warning("Team-specific analysis data not available.")
+    # --- End Team Specific Analysis ---
 
-    elif selected_method == 'None':
-         st.info("Season complete. Probabilities based on final standings.")
-    # --- End Overall Probabilities Display ---
-    st.divider() # Add a visual separator
-    st.subheader("Select Team for Detailed Analysis") # New subheader
-    available_teams_full = sorted([name for key, name in team_full_names.items() if key in initial_standings_data])
-
-    if not available_teams_full:
-        st.error("No teams available for analysis.")
-        st.stop()
-
-    # Use st.selectbox instead of st.sidebar.selectbox
-    full_team_name = st.selectbox(
-        "Select Team:",
-        available_teams_full,
-        key="team_select_main" # Use a different key if 'team_select' was used in sidebar before
-    )
-    team_key = next((key for key, value in team_full_names.items() if value == full_team_name), None)
-
-    if not team_key:
-        st.error("Selected team key not found.")
-        st.stop()
-
-    # --- Display Team Specific Analysis (Reads from Cache or runs MC) ---
-    st.subheader(f"Analysis for {full_team_name}")
-    st.caption(f"Target: {top_n_choice} | Method: {selected_method_display}")
-    team_analysis_data = None
-
-    if selected_method == 'Exhaustive':
-        if analysis: # Check if analysis was loaded/computed successfully
-            #st.caption("(Using precomputed exhaustive analysis)")
-            try:
-                # Access precomputed data directly
-                team_data = analysis['team_analysis'][str(top_n)][team_key]
-                percentage = team_data['percentage']
-                # Recreate DataFrame from dict if needed (assuming it's stored as dict)
-                # If results_df is stored directly, use that. Adjust based on run_exhaustive_analysis_once output.
-                # Assuming results_df is stored directly:
-                # Recreate DataFrame from dictionary
-                team_results_df = DataFrame.from_dict(team_data['results_df'], orient='index')
-
-                if team_results_df.empty and percentage == 0:
-                    st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on exhaustive analysis.")
-                else:
-                    st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (exhaustive).")
-                    st.write("Required / Frequent Outcomes:")
-                    df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
-                    st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
-            except KeyError:
-                st.error(f"KeyError accessing precomputed data for {team_key} / Top {top_n}. Check analysis file structure.")
-            except Exception as e:
-                st.error(f"Error displaying precomputed exhaustive team analysis: {e}")
-        else:
-            st.error("Precomputed exhaustive analysis data is unavailable.")
-
-    elif selected_method == 'Monte Carlo':
-        # --- (Monte Carlo logic remains the same) ---
-        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}'
-        run_mc_team_analysis = False
-        if st.button(f"Analyze {full_team_name} (Monte Carlo)"):
-            run_mc_team_analysis = True
-            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
-        if run_mc_team_analysis:
-            percentage = 0; team_results_df = DataFrame(columns=['Outcome'])
-            standings_copy = {t: dict(s) for t, s in initial_standings_data.items()}; fixtures_copy = list(fixtures_data)
-            try:
-                percentage, team_results_df = analyze_team_mc(team_key, top_n, standings_copy, fixtures_copy, num_simulations=NUM_SIMULATIONS_MC)
-                st.session_state[mc_team_cache_key] = {
-                    'percentage': percentage,
-                    'results_df': team_results_df.to_dict(orient='index') # Store as dict
-                }
-                st.caption("(Newly Calculated MC)")
-                if team_results_df.empty and percentage == 0: st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on MC analysis.")
-                else:
-                    st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC).")
-                    st.write("Required / Frequent Outcomes:")
-                    df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
-                    st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
-            except Exception as e: st.error(f"An error occurred during MC team analysis: {e}"); traceback.print_exc();
-            if mc_team_cache_key in st.session_state: del st.session_state[mc_team_cache_key]
-        elif mc_team_cache_key in st.session_state:
-             st.caption("(Using cached MC analysis results)")
-             cached_data = st.session_state[mc_team_cache_key]
-             percentage = cached_data['percentage']
-             team_results_df = DataFrame(cached_data['results_df']) # Recreate DF
-             if team_results_df.empty and percentage == 0: st.info(f"{full_team_name} cannot finish in the {top_n_choice} based on cached MC analysis.")
-             else:
-                 st.success(f"{full_team_name} finishes in the {top_n_choice} in **{percentage:.4f}%** of scenarios (MC cached).")
-                 st.write("Required / Frequent Outcomes:")
-                 df_display = team_results_df.reset_index().rename(columns={'index': 'Fixture'})
-                 st.dataframe(df_display[['Fixture', 'Outcome']], use_container_width=True, hide_index=True)
-
-    elif selected_method == 'None':
-         st.info("Season complete. Analysis based on final standings.")
-    # --- End Team Specific Analysis Display ---
-
-    # --- Display Qualification Path (Reads from Cache) ---
+    
+    # --- Display Qualification Path ---
     st.subheader(f"Qualification Path for {full_team_name} (Top {top_n})")
     st.caption("Minimum wins analysis (Exhaustive method only).")
     path_data = None
 
-    if selected_method == 'Exhaustive':
-        if analysis: # Check if analysis was loaded/computed successfully
-            #st.caption("(Using precomputed exhaustive analysis)")
-            try:
-                # Access precomputed data directly
-                path_data = analysis['qualification_path'][str(top_n)][team_key]
-                possible_wins = path_data.get('possible')
-                guaranteed_wins = path_data.get('guaranteed')
-                target_matches = path_data.get('target_matches', 'N/A')
 
-                st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
-                if isinstance(possible_wins, int): st.success(f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results).")
-                elif possible_wins is None: st.error(f"**Possible Qualification:** Cannot qualify.")
-                else: st.warning(f"**Possible Qualification:** Analysis result: {possible_wins}")
-                if isinstance(guaranteed_wins, int): st.success(f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results).")
-                elif guaranteed_wins is None and possible_wins is not None: st.info(f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins.")
-                elif guaranteed_wins is None and possible_wins is None: pass
-                else: st.warning(f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}")
-            except KeyError:
-                st.error(f"KeyError accessing precomputed path data for {team_key} / Top {top_n}. Check analysis file structure.")
-            except Exception as e:
-                st.error(f"Error displaying precomputed exhaustive path analysis: {e}")
-        else:
-            st.error("Precomputed exhaustive analysis data is unavailable.")
+    # Explicitly check if method was Exhaustive AND data exists
+    if analysis and analysis_method_used == "Exhaustive" and analysis_data and "qualification_path" in analysis_data:
+        try:
+            path_data = analysis_data["qualification_path"][str(top_n)][team_key]
+            possible_wins = path_data.get('possible')
+            guaranteed_wins = path_data.get('guaranteed')
+            target_matches = path_data.get('target_matches', 'N/A')
 
-    elif selected_method == 'Monte Carlo':
-        st.info("Qualification Path analysis requires the Exhaustive method.")
-    elif selected_method == 'None':
-        st.info("Season complete. Path analysis not applicable.")
+            ##  # --- <<< ADD DEBUG PRINTS >>> ---
+            ##  st.write(f"DEBUG: possible_wins = {possible_wins} (type: {type(possible_wins)})")
+            ##  st.write(f"DEBUG: guaranteed_wins = {guaranteed_wins} (type: {type(guaranteed_wins)})")
+            ##  # --- <<< END DEBUG PRINTS >>> ---
+
+            st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
+
+            # Now check the conditions
+            if isinstance(possible_wins, int): 
+                st.success(f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results).")
+            elif possible_wins is None: st.error(f"**Possible Qualification:** Cannot qualify.")
+            else: st.warning(f"**Possible Qualification:** Analysis result: {possible_wins}")
+            if isinstance(guaranteed_wins, int):
+                st.success(f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results).")
+            elif guaranteed_wins is None and possible_wins is not None: # Check possible_wins to avoid repeating error
+                 st.info(f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins.")
+            elif guaranteed_wins is None and possible_wins is None:
+                 pass # Error already shown by possible_wins block
+            else: # Handle unexpected non-int, non-None types if necessary
+                st.warning(f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}")
+            # --- <<< END ADDED BLOCK >>> ---
+      
+        except KeyError:
+            st.error(f"Could not retrieve Exhaustive path data for {full_team_name} (Top {top_n}). Key missing.")
+        except Exception as e:
+            st.error(f"Error displaying Exhaustive path analysis: {e}")
+    else:
+        # Explain why it's not shown
+        if analysis_method_used == "Monte Carlo (Precomputed)":
+             st.info("Qualification Path analysis is only available when Exhaustive method is used.")
+        elif analysis_method_used == "Exhaustive (Precomputed)":
+             st.warning("Exhaustive qualification path data not found in precomputed results.")
+        else: # Unavailable or Error
+             st.info("Qualification Path analysis requires precomputed Exhaustive results.")
     st.markdown("---")
-    # --- End Qualification Path Display ---
+    # --- End Qualification Path ---
 
-    # --- Simulate Specific Scenario (Modified to use cached exhaustive results if available) ---
+    # --- Simulate Specific Scenario ---
     st.subheader("Simulate One Scenario")
-    # Decide which results_df to use for simulation
     results_df_for_sim = None
-    source_method_for_sim = "None"
+    source_method_for_sim = "N/A"
 
-    if selected_method == 'Exhaustive':
-        if analysis: # Check if analysis was loaded/computed successfully
-            try:
-                # Access precomputed data directly
-                cached_team_analysis = analysis['team_analysis'][str(top_n)][team_key] # Use str(top_n)
-                # Recreate DataFrame from dictionary
-                results_df_for_sim = DataFrame.from_dict(cached_team_analysis['results_df'], orient='index')
-                source_method_for_sim = "Exhaustive (Precomputed)"
-            except KeyError:
-                st.warning("Could not find precomputed exhaustive results for simulation.")
-        else:
-            st.warning("Precomputed exhaustive analysis data is unavailable for simulation.")
-
-    elif selected_method == 'Monte Carlo':
-        # --- (Monte Carlo logic remains the same) ---
-        mc_team_cache_key = f'mc_team_analysis_{team_key}_{top_n}'
-        if mc_team_cache_key in st.session_state:
-            results_df_for_sim = DataFrame.from_dict(st.session_state[mc_team_cache_key]['results_df'], orient='index') # Recreate DF
-            source_method_for_sim = "Monte Carlo (Cached)"
-        else:
-            st.warning("Run Monte Carlo team analysis first to enable simulation.")
-
-    elif selected_method == 'None':
-        st.info("Cannot simulate scenario as the season is complete.")
-    else: # Exhaustive selected but not run yet
-        st.info("Run the analysis first to enable simulation.")
-
+    # Check if analysis_data and the specific key exist
+    if analysis_data and "team_analysis" in analysis_data:
+         try:
+             # Access data via analysis_data
+             sim_data = analysis_data["team_analysis"][str(top_n)][team_key]
+             results_df_for_sim = DataFrame.from_dict(sim_data['results_df'], orient='index')
+             source_method_for_sim = analysis_method_used # Use the determined method
+         except KeyError:
+             st.warning("Could not find results for simulation.")
+    else:
+         st.warning(f"Analysis data unavailable for simulation (Method: {analysis_method_used}).")
 
     if results_df_for_sim is not None:
         st.caption(f"(Using results from: {source_method_for_sim})")
         if st.button("Simulate Scenario"):
-            # Check if results_df is empty (0% chance)
             percentage_for_sim = 0
-            if source_method_for_sim == "Exhaustive (Precomputed)" and analysis:
-                 try:
-                      # --- <<< START MODIFICATION >>> ---
-                      percentage_for_sim = analysis['team_analysis'][str(top_n)][team_key]['percentage'] # Use str(top_n)
-                      # --- <<< END MODIFICATION >>> ---
+            if analysis_data and "team_analysis" in analysis_data: # Check again
+                 try: percentage_for_sim = analysis_data["team_analysis"][str(top_n)][team_key]['percentage']
                  except KeyError: pass
-            if source_method_for_sim == "Exhaustive (Cached)":
-                 percentage_for_sim = st.session_state[exhaustive_cache_key]['team_analysis'][top_n][team_key]['percentage']
-            elif source_method_for_sim == "Monte Carlo (Cached)":
-                 percentage_for_sim = st.session_state[mc_team_cache_key]['percentage']
 
             if results_df_for_sim.empty:
                  st.warning(f"Cannot simulate: Analysis found 0% probability ({percentage_for_sim:.4f}%) for {full_team_name} to qualify using {source_method_for_sim} results.")
-                 # Clear previous simulation state if any
                  if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
                  if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
             else:
+                # ... (Simulation execution logic remains the same) ...
                 sim_status = st.empty(); sim_status.info(f"Simulating scenario for {full_team_name}...")
                 try:
                     match_results_log, final_results_df = simulate_matches(results_df_for_sim.copy(), team_key, {t: dict(s) for t, s in initial_standings_data.items()})
                     if isinstance(match_results_log, str): st.error(match_results_log)
-                    elif final_results_df is not None:
-                        st.session_state['simulation_match_outcomes'] = match_results_log; st.session_state['simulation_results'] = final_results_df
+                    elif final_results_df is not None: st.session_state['simulation_match_outcomes'] = match_results_log; st.session_state['simulation_results'] = final_results_df
                     else: st.error("Simulation failed.")
-                    # Clear state on error/failure
                     if isinstance(match_results_log, str) or final_results_df is None:
                          if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
                          if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
-                except Exception as e:
-                     st.error(f"Simulation error: {e}"); traceback.print_exc()
-                     if 'simulation_results' in st.session_state: del st.session_state['simulation_results']
-                     if 'simulation_match_outcomes' in st.session_state: del st.session_state['simulation_match_outcomes']
+                except Exception as e: st.error(f"Simulation error: {e}"); traceback.print_exc()
                 finally: sim_status.empty()
 
     # --- Display Simulation Results (remains the same) ---
