@@ -988,10 +988,8 @@ def create_probability_chart(data_dict, prob_column="Top 4 Probability"):
         .mark_text(
             align="left",
             baseline="middle",
-            # --- <<< START MODIFICATION: Apply Python-determined color and fontSize >>> ---
-            color=text_color_for_prob_column,  # Use the theme-dependent color
+            # fontSize is a direct mark property, color will be handled by encoding
             fontSize=12,  # Set desired font size
-            # --- <<< END MODIFICATION >>> ---
         )
         .encode(
             y=y_encoding_text,
