@@ -1070,7 +1070,7 @@ def run_exhaustive_analysis_once(initial_standings_arg, fixtures_arg):
         match_outcomes_this_scenario = {}  # Store match results for this scenario
 
         # Apply results for this specific scenario
-        for match_idx, result in outcome_tuple:
+        for match_idx, result in enumerate(outcome_tuple): # Use enumerate here
             match = fixtures_arg[match_idx]
             match_key = tuple(match)
             match_outcomes_this_scenario[match_key] = result  # Store 0 or 1
