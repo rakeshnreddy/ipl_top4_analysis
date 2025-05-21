@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "precomputed_at": "2025-05-20T19:00:58.414103Z",
+        "precomputed_at": "2025-05-21T16:11:04.227885Z",
         "num_fixtures": 8,
         "last_data_update": "2025-05-20T19:00:57Z",
         "data_source": "JSON (Series Points API)",
@@ -21,26 +21,26 @@
                 "Top 2 Probability": 68.75
             },
             "Mumbai": {
-                "Top 4 Probability": 87.5,
+                "Top 4 Probability": 62.5,
                 "Top 2 Probability": 6.25
             },
             "Delhi": {
                 "Top 4 Probability": 37.5,
-                "Top 2 Probability": 0.0
+                "Top 2 Probability": 3.125
             },
             "Kolkata": {
-                "Top 4 Probability": 6.25,
+                "Top 4 Probability": 0.0,
                 "Top 2 Probability": 0.0
             },
             "Lucknow": {
-                "Top 4 Probability": 3.125,
-                "Top 2 Probability": 0.0
-            },
-            "Rajasthan": {
                 "Top 4 Probability": 0.0,
                 "Top 2 Probability": 0.0
             },
             "Hyderabad": {
+                "Top 4 Probability": 0.0,
+                "Top 2 Probability": 0.0
+            },
+            "Rajasthan": {
                 "Top 4 Probability": 0.0,
                 "Top 2 Probability": 0.0
             },
@@ -139,7 +139,7 @@
                     }
                 },
                 "Mumbai": {
-                    "percentage": 87.5,
+                    "percentage": 62.5,
                     "results_df": {
                         "Mumbai vs Delhi": {
                             "Outcome": "Mumbai wins"
@@ -197,68 +197,18 @@
                     }
                 },
                 "Kolkata": {
-                    "percentage": 6.25,
-                    "results_df": {
-                        "Mumbai vs Delhi": {
-                            "Outcome": "Delhi wins"
-                        },
-                        "Gujarat vs Lucknow": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Bangalore vs Hyderabad": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Punjab vs Delhi": {
-                            "Outcome": "Punjab wins"
-                        },
-                        "Gujarat vs Chennai": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Hyderabad vs Kolkata": {
-                            "Outcome": "Kolkata wins"
-                        },
-                        "Punjab vs Mumbai": {
-                            "Outcome": "Punjab wins"
-                        },
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
+                    "percentage": 0,
+                    "results_df": {}
                 },
                 "Lucknow": {
-                    "percentage": 3.125,
-                    "results_df": {
-                        "Mumbai vs Delhi": {
-                            "Outcome": "Delhi wins"
-                        },
-                        "Gujarat vs Lucknow": {
-                            "Outcome": "Lucknow wins"
-                        },
-                        "Bangalore vs Hyderabad": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Punjab vs Delhi": {
-                            "Outcome": "Punjab wins"
-                        },
-                        "Gujarat vs Chennai": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Hyderabad vs Kolkata": {
-                            "Outcome": "Result doesn't matter"
-                        },
-                        "Punjab vs Mumbai": {
-                            "Outcome": "Punjab wins"
-                        },
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Lucknow wins"
-                        }
-                    }
-                },
-                "Rajasthan": {
                     "percentage": 0,
                     "results_df": {}
                 },
                 "Hyderabad": {
+                    "percentage": 0,
+                    "results_df": {}
+                },
+                "Rajasthan": {
                     "percentage": 0,
                     "results_df": {}
                 },
@@ -385,8 +335,33 @@
                     }
                 },
                 "Delhi": {
-                    "percentage": 0,
-                    "results_df": {}
+                    "percentage": 3.125,
+                    "results_df": {
+                        "Mumbai vs Delhi": {
+                            "Outcome": "Delhi wins"
+                        },
+                        "Gujarat vs Lucknow": {
+                            "Outcome": "Result doesn't matter"
+                        },
+                        "Bangalore vs Hyderabad": {
+                            "Outcome": "Hyderabad wins"
+                        },
+                        "Punjab vs Delhi": {
+                            "Outcome": "Delhi wins"
+                        },
+                        "Gujarat vs Chennai": {
+                            "Outcome": "Result doesn't matter"
+                        },
+                        "Hyderabad vs Kolkata": {
+                            "Outcome": "Result doesn't matter"
+                        },
+                        "Punjab vs Mumbai": {
+                            "Outcome": "Mumbai wins"
+                        },
+                        "Lucknow vs Bangalore": {
+                            "Outcome": "Lucknow wins"
+                        }
+                    }
                 },
                 "Kolkata": {
                     "percentage": 0,
@@ -396,11 +371,11 @@
                     "percentage": 0,
                     "results_df": {}
                 },
-                "Rajasthan": {
+                "Hyderabad": {
                     "percentage": 0,
                     "results_df": {}
                 },
-                "Hyderabad": {
+                "Rajasthan": {
                     "percentage": 0,
                     "results_df": {}
                 },
@@ -428,8 +403,8 @@
                     "target_matches": 2
                 },
                 "Mumbai": {
-                    "possible": 0,
-                    "guaranteed": 1,
+                    "possible": 1,
+                    "guaranteed": 2,
                     "target_matches": 2
                 },
                 "Delhi": {
@@ -438,12 +413,17 @@
                     "target_matches": 2
                 },
                 "Kolkata": {
-                    "possible": 1,
+                    "possible": null,
                     "guaranteed": null,
                     "target_matches": 1
                 },
                 "Lucknow": {
-                    "possible": 2,
+                    "possible": null,
+                    "guaranteed": null,
+                    "target_matches": 2
+                },
+                "Hyderabad": {
+                    "possible": null,
                     "guaranteed": null,
                     "target_matches": 2
                 },
@@ -451,11 +431,6 @@
                     "possible": null,
                     "guaranteed": null,
                     "target_matches": 0
-                },
-                "Hyderabad": {
-                    "possible": null,
-                    "guaranteed": null,
-                    "target_matches": 2
                 },
                 "Chennai": {
                     "possible": null,
@@ -485,7 +460,7 @@
                     "target_matches": 2
                 },
                 "Delhi": {
-                    "possible": null,
+                    "possible": 2,
                     "guaranteed": null,
                     "target_matches": 2
                 },
@@ -499,15 +474,15 @@
                     "guaranteed": null,
                     "target_matches": 2
                 },
-                "Rajasthan": {
-                    "possible": null,
-                    "guaranteed": null,
-                    "target_matches": 0
-                },
                 "Hyderabad": {
                     "possible": null,
                     "guaranteed": null,
                     "target_matches": 2
+                },
+                "Rajasthan": {
+                    "possible": null,
+                    "guaranteed": null,
+                    "target_matches": 0
                 },
                 "Chennai": {
                     "possible": null,
