@@ -5,7 +5,6 @@ import OverallProbabilities from './components/OverallProbabilities';
 import DetailedTeamAnalysis from './components/DetailedTeamAnalysis';
 import QualificationPath from './components/QualificationPath';
 import ScenarioSimulation from './components/ScenarioSimulation';
-import OverallProbabilities from './components/OverallProbabilities';
 
 const App: React.FC = () => {
   return (

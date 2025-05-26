@@ -173,34 +173,28 @@ const DetailedTeamAnalysis: React.FC = () => {
             </strong>
           </p>
           <h4>Required / Frequent Outcomes for Qualification:</h4>
-          {fixtureOutcomes.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Fixture</th>
-                  <th>Outcome</th>
-                </tr>
-              </thead>
-              <tbody>
-                {fixtureOutcomes.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.fixture}</td>
-                    <td>{item.outcome.Outcome}</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {fixtureOutcomes.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.fixture}</td>
-                      <td>{item.outcome}</td>
+            {fixtureOutcomes.length > 0 ? (
+              <div className="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Fixture</th>
+                      <th>Outcome</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p>No specific outcomes data available. This often means the chance is 0% or 100%, or the team's qualification does not hinge on specific remaining matches.</p>
-          )}
+                  </thead>
+                  <tbody>
+                    {fixtureOutcomes.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.fixture}</td>
+                        <td>{item.outcome.Outcome}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p>No specific outcomes data available. This often means the chance is 0% or 100%, or the team's qualification does not hinge on specific remaining matches.</p>
+            )}
         </div>
       )}
       {!teamResults && selectedTeamKey && !loading && (
