@@ -1,359 +1,76 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-}
-
-#app-container {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header {
-  background-color: #007bff;
-  color: white;
-  padding: 1rem 0;
-  text-align: center;
-  border-radius: 8px 8px 0 0;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-section {
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
-section h2 {
-  margin-top: 0;
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 10px;
-  font-size: 1.8rem;
-}
-
-/* Specific section styling for visual separation (optional, can be refined later) */
-#current-standings {
-  background-color: #e9f7ff;
-}
-
-#overall-probabilities {
-  background-color: #e6fffa;
-}
-
-#team-analysis {
-  background-color: #fff0f5;
-}
-
-#qualification-path {
-  background-color: #f0f8ff;
-}
-
-#scenario-simulation {
-  background-color: #f5f5dc;
-}
-
-/*
-  The OverallProbabilities.tsx component uses a flex container div
-  to manage the layout of the two charts side-by-side.
-  Specific styling for chart containers (like #top4-chart-container)
-  can be removed if the component's internal styling is sufficient.
-  The height for the chart container is set inline in OverallProbabilities.tsx.
-*/
-
-/* Standings Table Styling */
-#current-standings table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#current-standings th,
-#current-standings td {
-  border: 1px solid #ddd;
-  padding: 10px 12px;
-  text-align: left;
-}
-
-#current-standings th {
-  background-color: #f0f0f0;
-  font-weight: 600;
-  color: #333;
-}
-
-#current-standings tbody tr:nth-child(even) {
-  background-color: #f9f9f9; /* For non-styled rows if any or as a base */
-}
-
-#current-standings tbody tr:hover {
-  background-color: #f1f1f1; /* Light hover for better UX */
-}
-
-/* Ensure team styles override default even/odd styling if needed */
-#current-standings tbody tr[style] { /* Targets rows with inline styles from team_styles */
-  color: inherit; /* Let inline style dictate text color */
-}
-#current-standings tbody tr[style]:nth-child(even) {
-  background-color: inherit; /* Let inline style dictate background */
-}
-
-/* Detailed Team Analysis Styling */
-#team-analysis .analysis-controls {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-#team-analysis .control-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#team-analysis .control-group label {
-  font-weight: 500;
-}
-
-#team-analysis select {
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: white;
-  font-size: 1em;
-}
-
-#team-analysis input[type="radio"] {
-  margin-right: 4px;
-}
-#team-analysis .control-group label[for*="-radio"] { /* Target radio labels */
-  margin-right: 10px;
-  font-weight: normal;
-}
-
-
-#team-analysis .analysis-results h3 {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  font-size: 1.4em;
-  color: #333;
-}
-
-#team-analysis .analysis-results p {
-  margin-bottom: 10px;
-}
-
-#team-analysis .analysis-results table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-#team-analysis .analysis-results th,
-#team-analysis .analysis-results td {
-  border: 1px solid #e0e0e0;
-  padding: 10px 12px;
-  text-align: left;
-}
-
-#team-analysis .analysis-results th {
-  background-color: #f7f7f7;
-  font-weight: 600;
-}
-
-#team-analysis .analysis-results tbody tr:nth-child(even) {
-  background-color: #fcfcfc;
-}
-
-/* Qualification Path Styling */
-#qualification-path .qualification-path-controls {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#qualification-path .control-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#qualification-path .control-group label {
-  font-weight: 500;
-}
-
-#qualification-path select {
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: white;
-  font-size: 1em;
-}
-
-#qualification-path input[type="radio"] {
-  margin-right: 4px;
-}
-#qualification-path .control-group label[for*="-radio"] {
-  margin-right: 10px;
-  font-weight: normal;
-}
-
-#qualification-path .qualification-path-results h3 {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  font-size: 1.4em;
-  color: #333;
-}
-
-#qualification-path .qualification-path-results p {
-  margin-bottom: 8px;
-  font-size: 1.05em;
-}
-
-/* Scenario Simulation Styling */
-#scenario-simulation .simulation-controls {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#scenario-simulation .control-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-#scenario-simulation .control-group label {
-  font-weight: 500;
-}
-
-#scenario-simulation select {
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: white;
-  font-size: 1em;
-}
-
-#scenario-simulation input[type="radio"] {
-  margin-right: 4px;
-}
-#scenario-simulation .control-group label[for*="-radio"] {
-  margin-right: 10px;
-  font-weight: normal;
-}
-
-#scenario-simulation button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  background-color: #28a745; /* Green */
-  color: white;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-#scenario-simulation button:hover {
-  background-color: #218838;
-}
-
-#scenario-simulation button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-#scenario-simulation .simulation-message {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #fff3cd; /* Light yellow for messages */
-  border: 1px solid #ffeeba;
-  border-radius: 4px;
-  color: #856404;
-}
-
-
-#scenario-simulation .simulation-results-container {
-  display: flex;
-  gap: 30px; /* Increased gap */
-  margin-top: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-#scenario-simulation .match-log-container,
-#scenario-simulation .final-standings-container {
-  flex: 1; /* Allow them to grow and shrink */
-  min-width: 300px; /* Minimum width before wrapping */
-}
-
-#scenario-simulation h4 {
-  margin-bottom: 10px;
-  font-size: 1.2em;
-  color: #333;
-}
-
-#scenario-simulation textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-family: monospace;
-  font-size: 0.9em;
-  background-color: #f8f9fa;
-  min-height: 200px; /* Ensure textarea has a good default height */
-}
-
-#scenario-simulation .final-standings-container table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-#scenario-simulation .final-standings-container th,
-#scenario-simulation .final-standings-container td {
-  border: 1px solid #e0e0e0;
-  padding: 10px 12px;
-  text-align: left;
-}
-
-#scenario-simulation .final-standings-container th {
-  background-color: #f7f7f7;
-  font-weight: 600;
-}
-
 :root {
-  /* Color Palette */
-  --primary-color: #007bff; /* Blue */
-  --primary-hover-color: #0056b3;
-  --secondary-color: #6c757d; /* Gray */
-  --background-color: #f8f9fa; /* Light Gray */
+  /* Light Theme Color Palette (Default) */
+  --primary-color: #007bff; /* Vivid Blue */
+  --primary-hover-color: #0056b3; /* Darker Blue */
+  --secondary-color: #6c757d; /* Cool Gray */
+  --background-color: #f4f7f6; /* Very Light Gray/Off-white */
   --surface-color: #ffffff; /* White */
-  --text-color: #212529; /* Dark Gray */
-  --text-muted-color: #6c757d; /* Gray */
-  --border-color: #dee2e6; /* Light Gray Border */
+  --text-color: #212529; /* Almost Black */
+  --text-muted-color: #5a6268; /* Medium Gray */
+  --border-color: #ced4da; /* Light Gray Border */
   --accent-color-success: #28a745; /* Green */
   --accent-color-warning: #ffc107; /* Yellow */
+  --accent-color-warning-text: #212529; /* Dark text for light yellow */
   --accent-color-info: #17a2b8; /* Teal */
+  --table-header-bg: #e9ecef;
+  --table-row-even-bg: var(--background-color);
+  --table-row-hover-bg: #ddeeff;
+  --control-bg: #e9ecef; /* Background for control groups */
+  --input-bg: var(--surface-color);
+  --input-text-color: var(--text-color);
+  --input-border-color: var(--border-color);
+  --button-text-color: var(--surface-color);
+  --disabled-bg-color: var(--secondary-color);
+  --disabled-text-color: #e9ecef;
+  --footer-bg-color: #343a40;
+  --footer-text-color: #f8f9fa;
+  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
+  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-hover-color);
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--surface-color);
+  --loading-message-border: #117a8b;
+  --error-message-bg: #f8d7da;
+  --error-message-text: #721c24;
+  --error-message-border: #f5c6cb;
+
+
+  /* Dark Theme Color Palette (Defined here, applied in media query) */
+  --primary-color-dark: #007bff; /* Blue can often work for both */
+  --primary-hover-color-dark: #0056b3;
+  --background-color-dark: #121212; /* Very dark gray */
+  --surface-color-dark: #1e1e1e; /* Slightly lighter for cards */
+  --text-color-dark: #e0e0e0; /* Light gray for text */
+  --text-muted-color-dark: #a0a0a0; /* Dimmer light gray */
+  --border-color-dark: #444444; /* Darker border */
+  --accent-color-success-dark: #28a745; /* Green can work, or make it slightly brighter */
+  --accent-color-warning-dark: #b8860b; /* Darker yellow for dark mode */
+  --accent-color-warning-text-dark: var(--text-color-dark); /* Light text for dark yellow */
+  --accent-color-info-dark: #17a2b8; /* Teal can work, or make it slightly brighter */
+  --table-header-bg-dark: #2c2c2c;
+  --table-row-even-bg-dark: #252525;
+  --table-row-hover-bg-dark: #3a3a3a;
+  --control-bg-dark: #2c2c2c;
+  --input-bg-dark: #2a2a2a;
+  --input-text-color-dark: var(--text-color-dark);
+  --input-border-color-dark: var(--border-color-dark);
+  --button-text-color-dark: var(--text-color-dark); /* For buttons that might not have dark bg like primary */
+  --disabled-bg-color-dark: #495057;
+  --disabled-text-color-dark: #adb5bd;
+  --footer-bg-color-dark: #212529;
+  --footer-text-color-dark: #ced4da;
+  --box-shadow-light-dark: 0 2px 5px rgba(255, 255, 255, 0.05);
+  --box-shadow-medium-dark: 0 4px 10px rgba(255, 255, 255, 0.08);
+  --link-color-dark: #63a9ff; /* Lighter blue for dark mode links */
+  --link-hover-color-dark: #8dbdff;
+  --loading-message-bg-dark: var(--accent-color-info-dark);
+  --loading-message-text-dark: var(--text-color-dark);
+  --loading-message-border-dark: #106777;
+  --error-message-bg-dark: #58181F;
+  --error-message-text-dark: #F8D7DA;
+  --error-message-border-dark: #721c24;
+
 
   /* Fonts */
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -361,8 +78,8 @@ section h2 {
 
   /* Spacing & Sizing */
   --spacing-unit: 8px;
-  --border-radius: 0.25rem; /* 4px */
-  --max-content-width: 1200px;
+  --border-radius: 0.3rem; /* Slightly more rounded: 4.8px */
+  --max-content-width: 1280px; /* Increased max width */
 }
 
 /* Global Resets & Defaults */
@@ -372,17 +89,23 @@ section h2 {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-family-sans-serif);
   margin: 0;
   padding: 0;
   background-color: var(--background-color);
   color: var(--text-color);
-  line-height: 1.6;
-  font-size: 16px;
+  line-height: 1.65; /* Improved line height */
+  font-size: 16px; /* Base font size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#root { /* Assuming Vite mounts to #root */
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -391,134 +114,177 @@ body {
 /* App Container */
 #app-container {
   max-width: var(--max-content-width);
-  margin: 0 auto; /* Center content */
-  padding: calc(var(--spacing-unit) * 2); /* 16px */
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3); /* 16px 24px */
   width: 100%;
+  flex-grow: 1; /* Allows footer to stick to bottom */
 }
 
 /* Header */
 header {
-  background-color: var(--primary-color);
-  color: var(--surface-color);
-  padding: calc(var(--spacing-unit) * 2) 0; /* 16px */
+  background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+  color: var(--button-text-color); /* Use variable for text color */
+  padding: calc(var(--spacing-unit) * 2.5) 0; /* 20px */
   text-align: center;
   border-radius: var(--border-radius);
-  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  box-shadow: var(--box-shadow-medium); /* Use variable */
 }
 
 header h1 {
   margin: 0;
-  font-size: 2rem; /* 32px */
-  font-weight: 600;
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* Sections */
 section {
   background-color: var(--surface-color);
-  padding: calc(var(--spacing-unit) * 2.5); /* 20px */
-  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+  padding: calc(var(--spacing-unit) * 3); /* 24px */
+  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--box-shadow-light); /* Use variable */
+  transition: box-shadow 0.3s ease-in-out;
+}
+section:hover {
+  box-shadow: var(--box-shadow-medium); /* Use variable */
 }
 
 section h2 {
   margin-top: 0;
-  margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
-  color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: calc(var(--spacing-unit) * 1); /* 8px */
-  font-size: 1.75rem; /* 28px */
-  font-weight: 500;
+  margin-bottom: calc(var(--spacing-unit) * 2.5); /* 20px */
+  color: var(--primary-hover-color);
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+  font-size: 1.85rem; /* 29.6px */
+  font-weight: 600;
 }
 
 section h3 {
-    margin-top: calc(var(--spacing-unit) * 1.5);
-    margin-bottom: calc(var(--spacing-unit) * 1);
-    font-size: 1.4rem;
-    color: var(--text-color);
-    font-weight: 500;
+  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+  margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+  font-size: 1.5rem; /* 24px */
+  color: var(--text-color);
+  font-weight: 600;
 }
 
 section h4 {
-    margin-top: var(--spacing-unit);
-    margin-bottom: calc(var(--spacing-unit) * 0.5);
-    font-size: 1.15rem;
-    color: var(--text-muted-color);
-    font-weight: 500;
+  margin-top: var(--spacing-unit) * 1.5; /* 12px */
+  margin-bottom: var(--spacing-unit); /* 8px */
+  font-size: 1.2rem; /* 19.2px */
+  color: var(--text-muted-color);
+  font-weight: 600;
 }
 
-
 /* Generic Table Styling */
+.table-responsive {
+  overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+  width: 100%;
+  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  border-radius: var(--border-radius);
-  overflow: hidden; /* For border-radius on table */
+  border-collapse: collapse; /* More robust than border-radius on table for compatibility */
 }
 
 th, td {
   border: 1px solid var(--border-color);
-  padding: calc(var(--spacing-unit) * 1.25); /* 10px */
+  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
   text-align: left;
   vertical-align: middle;
+  border-bottom-width: 1px; /* Ensure bottom border is consistent */
 }
 
 th {
-  background-color: #e9ecef; /* Lighter gray for headers */
-  font-weight: 600;
+  background-color: var(--table-header-bg); /* Use variable */
+  font-weight: 700; /* Bolder headers */
   color: var(--text-color);
+  white-space: nowrap; /* Prevent headers from wrapping */
 }
 
 tbody tr:nth-child(even) {
-  /* background-color: #f8f9fa; */ /* Keeping this subtle or removing if team styles are primary */
+  background-color: var(--table-row-even-bg); /* Use variable */
 }
 
 tbody tr:hover {
-  background-color: #e9ecef; /* Light hover for better UX */
+  background-color: var(--table-row-hover-bg); /* Use variable */
 }
 
-/* Ensure team styles override default even/odd styling if needed */
-tbody tr[style] { /* Targets rows with inline styles from team_styles */
-  color: inherit; /* Let inline style dictate text color */
+tbody tr[style] {
+  color: inherit;
 }
 tbody tr[style]:nth-child(even) {
-  background-color: inherit; /* Let inline style dictate background */
+  background-color: inherit;
 }
 tbody tr[style] td {
-    /* Ensure text color from team_styles has precedence */
-    /* Usually handled by inline style, but good to be aware */
+  /* Inline styles from team_styles will handle bg and text color */
+}
+table caption {
+  caption-side: top;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-muted-color);
+  padding: var(--spacing-unit);
+  text-align: left;
 }
 
 
 /* Form Elements */
+.analysis-controls,
+.qualification-path-controls,
+.simulation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-unit) * 2.5); /* 20px */
+  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+  padding: calc(var(--spacing-unit) * 2); /* 16px */
+  background-color: var(--control-bg); /* Use variable */
+  border-radius: var(--border-radius);
+  align-items: center;
+}
+
 .control-group {
   display: flex;
   align-items: center;
   gap: var(--spacing-unit); /* 8px */
-  margin-bottom: var(--spacing-unit); /* For multiple groups */
 }
 
-.control-group label {
-  font-weight: 500;
+.control-group label, fieldset legend {
+  font-weight: 600; /* Bolder labels */
   color: var(--text-color);
-  margin-right: calc(var(--spacing-unit) * 0.5);
+  margin-right: calc(var(--spacing-unit) * 0.5); /* 4px */
+  font-size: 0.95em; /* Slightly smaller labels */
 }
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+fieldset.control-group { /* For radio groups */
+    gap: var(--spacing-unit) * 1.5; /* 12px */
+}
+fieldset legend {
+    padding: 0 0 calc(var(--spacing-unit) * 0.5) 0; /* Bottom padding for legend */
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
 
 select,
 input[type="text"],
 input[type="number"],
 textarea {
-  padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5); /* 8px 12px */
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); /* 10px 12px */
   border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  background-color: var(--surface-color);
+  border: 1px solid var(--input-border-color); /* Use variable */
+  background-color: var(--input-bg); /* Use variable */
   font-size: 1em;
-  color: var(--text-color);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: var(--input-text-color); /* Use variable */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  min-width: 180px; /* Minimum width for select/inputs */
 }
 
 select:focus,
@@ -527,237 +293,358 @@ input[type="number"]:focus,
 textarea:focus {
   border-color: var(--primary-color);
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus ring */
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  margin-right: calc(var(--spacing-unit) * 0.5);
+  margin-right: calc(var(--spacing-unit) * 0.75); /* 6px */
+  accent-color: var(--primary-color); /* Style radio/checkbox color */
+  transform: scale(1.1); /* Slightly larger radio/checkbox */
 }
 
 .control-group label[for*="-radio"],
 .control-group label[for*="-checkbox"] {
-  margin-right: var(--spacing-unit);
-  font-weight: normal;
+  margin-right: var(--spacing-unit); /* 8px */
+  font-weight: normal; /* Normal weight for radio/checkbox labels */
 }
 
-button, .button { /* Added .button class for non-button elements styled as buttons */
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2); /* 10px 16px */
+button, .button {
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); /* 10px 20px */
   border: 1px solid transparent;
   border-radius: var(--border-radius);
   background-color: var(--primary-color);
-  color: var(--surface-color);
+  color: var(--button-text-color); /* Use variable */
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600; /* Bolder buttons */
   cursor: pointer;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
   text-align: center;
   display: inline-block;
   text-decoration: none;
+  white-space: nowrap; /* Prevent button text wrapping */
 }
-
 button:hover, .button:hover {
   background-color: var(--primary-hover-color);
   color: var(--surface-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
-button:focus, .button:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.35);
+button:active, .button:active {
+    transform: translateY(1px);
+}
+button:focus-visible, .button:focus-visible { /* Modern focus state */
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35);
 }
 
 button:disabled, .button:disabled {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
-  color: #f8f9fa;
+  background-color: var(--disabled-bg-color); /* Use variable */
+  border-color: var(--disabled-bg-color); /* Use variable */
+  color: var(--disabled-text-color); /* Use variable */
   cursor: not-allowed;
-  opacity: 0.65;
+  opacity: 0.75; /* More visible disabled state */
+  box-shadow: none;
+  transform: none;
 }
 
-/* Specific button variants */
 button.success, .button.success {
-    background-color: var(--accent-color-success);
+  background-color: var(--accent-color-success);
 }
 button.success:hover, .button.success:hover {
-    background-color: #1e7e34; /* Darker green */
+  background-color: #1f7d39; /* Darker success green */
 }
 button.warning, .button.warning {
-    background-color: var(--accent-color-warning);
-    color: var(--text-color); /* Yellow needs dark text */
+  background-color: var(--accent-color-warning);
+    color: var(--accent-color-warning-text); /* Use variable */
 }
 button.warning:hover, .button.warning:hover {
-    background-color: #e0a800; /* Darker yellow */
+    background-color: #e0a800; /* Consider making this a variable too if used elsewhere */
 }
 
 
 /* Utilities */
-.text-center {
-  text-align: center;
-}
-.mb-1 { margin-bottom: var(--spacing-unit); }
-.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
-.mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); }
+.text-center { text-align: center; }
+.mb-1 { margin-bottom: var(--spacing-unit); } /* 8px */
+.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); } /* 16px */
+.mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); } /* 24px */
 .mt-1 { margin-top: var(--spacing-unit); }
 .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
 .mt-3 { margin-top: calc(var(--spacing-unit) * 3); }
+.text-warning { color: #856404; background-color: #fff3cd; padding: var(--spacing-unit); border-radius: var(--border-radius); border: 1px solid #ffeeba;}
 
-/*
-  The OverallProbabilities.tsx component uses a flex container div
-  to manage the layout of the two charts side-by-side.
-  The height for the chart container is set inline in OverallProbabilities.tsx.
-*/
 
-/* Current Standings Table Specifics (if any beyond generic table) */
+/* Current Standings Metadata */
 #current-standings .metadata p {
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
   font-size: 0.9em;
   color: var(--text-muted-color);
 }
 
-/* Detailed Team Analysis Styling */
-#team-analysis .analysis-controls,
-#qualification-path .qualification-path-controls,
-#scenario-simulation .simulation-controls {
-  display: flex;
-  gap: calc(var(--spacing-unit) * 2); /* 16px */
-  margin-bottom: calc(var(--spacing-unit) * 2.5); /* 20px */
-  align-items: center;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  padding: var(--spacing-unit);
-  background-color: #f8f9fa; /* Light background for control areas */
-  border-radius: var(--border-radius);
-}
-
-#team-analysis .analysis-results table,
-#scenario-simulation .final-standings-container table {
-  /* Using generic table styles now */
-}
-
+/* Scenario Simulation Specifics */
 #scenario-simulation .simulation-message {
   margin-top: var(--spacing-unit);
-  padding: var(--spacing-unit);
-  background-color: var(--accent-color-warning); /* Light yellow for messages */
-  border: 1px solid #ffeeba;
+  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
+  background-color: var(--accent-color-warning); /* Use variable, or specific message bg */
+  border: 1px solid #ffeeba; /* Fallback, or make variable */
   border-radius: var(--border-radius);
-  color: #856404; /* Darker text for yellow background */
+  color: var(--accent-color-warning-text); /* Use variable */
+  font-weight: 500;
 }
-
 
 #scenario-simulation .simulation-results-container {
   display: flex;
   gap: calc(var(--spacing-unit) * 3); /* 24px */
-  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  margin-top: calc(var(--spacing-unit) * 2.5); /* 20px */
+  flex-wrap: wrap;
 }
 
 #scenario-simulation .match-log-container,
 #scenario-simulation .final-standings-container {
-  flex: 1; /* Allow them to grow and shrink */
-  min-width: 300px; /* Minimum width before wrapping */
+  flex: 1;
+  min-width: 320px; /* Ensure readability on smaller flex layouts */
   background-color: var(--surface-color);
-  padding: var(--spacing-unit) * 1.5;
+  padding: calc(var(--spacing-unit) * 2); /* 16px */
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
 #scenario-simulation textarea {
   width: 100%;
-  padding: var(--spacing-unit);
+  padding: var(--spacing-unit); /* 8px */
   border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--input-border-color); /* Use variable */
   font-family: var(--font-family-monospace);
-  font-size: 0.9em;
-  background-color: #e9ecef; /* Slightly different background for readonly textarea */
-  min-height: 200px; /* Ensure textarea has a good default height */
+  font-size: 0.95em; /* Slightly larger for readability */
+  background-color: var(--input-bg); /* Use variable, or specific like #e9ecef */
+  color: var(--input-text-color); /* Use variable */
+  min-height: 250px; /* Increased height */
   resize: vertical;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
 }
 
 /* Qualification Path Specifics */
 #qualification-path .qualification-path-results p {
-  margin-bottom: var(--spacing-unit); /* 8px */
-  font-size: 1em; /* Adjusted from 1.05em for consistency */
+  margin-bottom: var(--spacing-unit);
+  font-size: 1.05em; /* Slightly larger for emphasis */
 }
 #qualification-path .qualification-path-results strong {
-    color: var(--primary-color);
+  color: var(--primary-hover-color);
+}
+#qualification-path .metadata .text-warning { /* For the "Exhaustive only" message */
+    font-size: 0.9em;
+    margin-top: var(--spacing-unit);
 }
 
-/* Chart styling is mostly handled by Chart.js options, but container can be styled */
-.chart-container { /* Generic class you might add around ProbabilityChart instances */
-    padding: var(--spacing-unit);
+
+/* Chart Container (OverallProbabilities) */
+/* The height is primarily controlled inline in OverallProbabilities.tsx */
+/* Styles for the div wrapping ProbabilityChart if needed */
+#overall-probabilities > div > div[style*="flex: 1"] { /* Targets the flex children */
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    margin-bottom: calc(var(--spacing-unit) * 2);
-    height: 400px; /* Default height, can be overridden */
+    padding: var(--spacing-unit);
+    background-color: var(--surface-color);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
-/* In OverallProbabilities, height is set inline, which is fine. */
+#overall-probabilities .metadata p {
+  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
+  font-size: 0.9em;
+  color: var(--text-muted-color);
+}
+
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: calc(var(--spacing-unit) * 3) 0; /* 24px */
+  margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+  background-color: var(--footer-bg-color); /* Use variable */
+  color: var(--footer-text-color); /* Use variable */
+  border-top: 3px solid var(--primary-color);
+}
+footer p {
+  margin: calc(var(--spacing-unit) * 0.5) 0; /* 4px */
+  font-size: 0.9em;
+}
+
+
+/* ARIA Live Regions - Basic Styling for Visibility (if needed, often they are visually hidden) */
+[aria-live="polite"], [aria-live="assertive"] {
+    /* These regions update screen readers. Visual styling might not be needed unless they show visible messages. */
+    /* Example: */
+    /* padding: var(--spacing-unit); */
+    /* margin-top: var(--spacing-unit); */
+    /* border: 1px dashed var(--secondary-color); */
+}
+p[role="status"], p[role="alert"] { /* For loading/error messages */
+    padding: calc(var(--spacing-unit) * 1.5);
+    margin-top: var(--spacing-unit);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+p[role="status"] { /* Loading messages */
+    background-color: var(--loading-message-bg); /* Use variable */
+    color: var(--loading-message-text); /* Use variable */
+    border: 1px solid var(--loading-message-border); /* Use variable */
+}
+p[role="alert"] { /* Error messages */
+    background-color: var(--error-message-bg); /* Use variable */
+    color: var(--error-message-text); /* Use variable */
+    border: 1px solid var(--error-message-border); /* Use variable */
+}
+
+
+/* Dark Mode using prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: var(--primary-color-dark, #007bff);
+    --primary-hover-color: var(--primary-hover-color-dark, #0056b3);
+    --background-color: var(--background-color-dark, #121212);
+    --surface-color: var(--surface-color-dark, #1e1e1e);
+    --text-color: var(--text-color-dark, #e0e0e0);
+    --text-muted-color: var(--text-muted-color-dark, #a0a0a0);
+    --border-color: var(--border-color-dark, #444444);
+    --accent-color-success: var(--accent-color-success-dark, #28a745);
+    --accent-color-warning: var(--accent-color-warning-dark, #b8860b);
+    --accent-color-warning-text: var(--accent-color-warning-text-dark, #e0e0e0);
+    --accent-color-info: var(--accent-color-info-dark, #17a2b8);
+    --table-header-bg: var(--table-header-bg-dark, #2c2c2c);
+    --table-row-even-bg: var(--table-row-even-bg-dark, #252525);
+    --table-row-hover-bg: var(--table-row-hover-bg-dark, #3a3a3a);
+    --control-bg: var(--control-bg-dark, #2c2c2c);
+    --input-bg: var(--input-bg-dark, #2a2a2a);
+    --input-text-color: var(--input-text-color-dark, #e0e0e0);
+    --input-border-color: var(--input-border-color-dark, #444444);
+    /* --button-text-color is often var(--surface-color) or var(--text-color-dark) depending on button bg */
+    /* For primary button using var(--primary-color), text might need to be light if primary isn't changing much */
+    --button-text-color: var(--text-color-dark, #e0e0e0); /* Defaulting to light text for buttons */
+    --disabled-bg-color: var(--disabled-bg-color-dark, #495057);
+    --disabled-text-color: var(--disabled-text-color-dark, #adb5bd);
+    --footer-bg-color: var(--footer-bg-color-dark, #212529);
+    --footer-text-color: var(--footer-text-color-dark, #ced4da);
+    --box-shadow-light: var(--box-shadow-light-dark, 0 2px 5px rgba(255, 255, 255, 0.05));
+    --box-shadow-medium: var(--box-shadow-medium-dark, 0 4px 10px rgba(255, 255, 255, 0.08));
+    --link-color: var(--link-color-dark, #63a9ff);
+    --link-hover-color: var(--link-hover-color-dark, #8dbdff);
+    --loading-message-bg: var(--loading-message-bg-dark, #17a2b8);
+    --loading-message-text: var(--loading-message-text-dark, #e0e0e0);
+    --loading-message-border: var(--loading-message-border-dark, #106777);
+    --error-message-bg: var(--error-message-bg-dark, #58181F);
+    --error-message-text: var(--error-message-text-dark, #F8D7DA);
+    --error-message-border: var(--error-message-border-dark, #721c24);
+  }
+
+  /* Specific overrides for dark mode elements if variables are not enough */
+  header {
+    /* If gradient needs adjustment for dark mode, or use solid color */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover-color) 100%);
+  }
+  button, .button { /* Ensure primary buttons have light text if their bg doesn't change much */
+    color: var(--surface-color-dark, #e0e0e0); /* Typically light text on dark primary button */
+  }
+  button.warning, .button.warning { /* Yellow buttons need dark text in light mode, light text in dark mode */
+      color: var(--text-color-dark); /* Ensure light text for dark yellow */
+  }
+  #scenario-simulation textarea {
+      background-color: var(--input-bg-dark, #252525); /* Darker textarea background */
+      color: var(--input-text-color-dark, #e0e0e0);
+      border-color: var(--input-border-color-dark, #444444);
+  }
+   select:focus,
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35); /* Blue focus ring might need adjustment if too bright */
+    }
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: var(--primary-color); /* Check if this is visible enough, or choose a lighter accent */
+    }
+}
 
 
 /* Responsive adjustments */
-@media (max-width: 992px) { /* Tablets and larger phones */
-    #app-container {
-        padding: var(--spacing-unit); /* 8px */
-    }
-    header h1 {
-        font-size: 1.75rem; /* 28px */
-    }
-    section h2 {
-        font-size: 1.5rem; /* 24px */
-    }
-    section h3 {
-        font-size: 1.25rem;
-    }
-    /* Make control groups stack vertically for better readability */
-    #team-analysis .analysis-controls,
-    #qualification-path .qualification-path-controls,
-    #scenario-simulation .simulation-controls {
-        flex-direction: column;
-        align-items: flex-start; /* Align items to the start */
-    }
-    .control-group {
-        width: 100%; /* Make each control group take full width */
-        margin-bottom: var(--spacing-unit);
-    }
-    .control-group label { /* Ensure labels are not too wide */
-        flex-basis: 120px; /* Give labels a base width */
-        flex-grow: 0;
-    }
-    .control-group select, .control-group input[type="radio"] + label {
-        flex-grow: 1; /* Allow select and radio groups to take remaining space */
-    }
+@media (max-width: 992px) { /* Tablets */
+  #app-container {
+    padding: var(--spacing-unit) * 1.5; /* 12px */
+  }
+  header h1 {
+    font-size: 2rem; /* 32px */
+  }
+  section h2 {
+    font-size: 1.65rem; /* 26.4px */
+  }
+  section h3 {
+    font-size: 1.35rem; /* 21.6px */
+  }
 
-    #scenario-simulation .simulation-results-container {
-        flex-direction: column; /* Stack log and table on smaller screens */
-    }
+  .analysis-controls,
+  .qualification-path-controls,
+  .simulation-controls {
+    flex-direction: column;
+    align-items: stretch; /* Make controls take full width */
+  }
+  .control-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .control-group label, .control-group fieldset legend {
+    margin-bottom: calc(var(--spacing-unit) * 0.5); /* 4px */
+  }
+  .control-group select, .control-group input[type="radio"] + label, .control-group input[type="checkbox"] + label {
+    width: 100%;
+  }
+  fieldset.control-group label { /* For radio buttons */
+    width: auto; /* Override full width for radio labels */
+    margin-bottom: 0;
+  }
+
+
+  #scenario-simulation .simulation-results-container {
+    flex-direction: column;
+  }
+  #overall-probabilities > div[style*="flex-direction: row"] { /* The flex container for charts */
+    flex-direction: column !important; /* Force charts to stack */
+  }
+  #overall-probabilities > div > div[style*="flex: 1"] {
+      margin-bottom: var(--spacing-unit) * 2; /* Add space between stacked charts */
+  }
+
 }
 
 @media (max-width: 576px) { /* Small phones */
   body {
-    font-size: 14px;
+    font-size: 15px; /* Slightly smaller base for small devices */
+  }
+  #app-container {
+    padding: var(--spacing-unit); /* 8px */
   }
   header h1 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.75rem; /* 28px */
   }
   section h2 {
+    font-size: 1.5rem; /* 24px */
+  }
+  section h3 {
     font-size: 1.25rem; /* 20px */
   }
-   section h3 {
-        font-size: 1.1rem;
-    }
   th, td {
     padding: var(--spacing-unit); /* 8px */
   }
   button, .button {
-    width: 100%; /* Make buttons full width */
-    margin-bottom: var(--spacing-unit);
+    width: 100%;
+    margin-bottom: var(--spacing-unit); /* Add some space if they stack */
   }
-  .control-group { /* Further adjustments if needed for very small screens */
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .control-group label {
-    margin-bottom: calc(var(--spacing-unit) * 0.5);
-  }
-  .control-group select {
+  .analysis-controls button,
+  .qualification-path-controls button,
+  .simulation-controls button { /* Ensure buttons in control groups also follow this */
       width: 100%;
+  }
+
+  select, input[type="text"], input[type="number"], textarea {
+      font-size: 0.95em; /* Slightly smaller inputs on very small screens */
   }
 }

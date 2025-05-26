@@ -30,6 +30,7 @@ const CurrentStandings: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch('/current_standings.json')
       .then((response) => {
         if (!response.ok) {
@@ -46,61 +47,78 @@ const CurrentStandings: React.FC = () => {
             teamKey: key,
             ...stats,
           }))
-          .sort((a, b) => b.Points - a.Points) // Sort by points descending
+          .sort((a, b) => {
+            if (b.Points !== a.Points) {
+              return b.Points - a.Points; // Primary sort: Points
+            }
+            // Add NRR sorting here if available, or wins as secondary
+            return b.Wins - a.Wins; // Secondary sort: Wins
+          })
           .map((team, index) => ({
             ...team,
             teamFullName: team_full_names[team.teamKey] || team.teamKey,
             pos: index + 1,
           }));
         setStandings(processedStandings);
-        setLoading(false);
+        setError(null); // Clear any previous errors
       })
       .catch((fetchError) => {
         console.error("Failed to load standings:", fetchError);
-        setError(`Failed to load standings data. ${fetchError.message}`);
+        setError(`Failed to load standings data. Please check network or file. (${fetchError.message})`);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
 
   if (loading) {
-    return <p>Loading standings...</p>;
+    return <p role="status" aria-live="polite">Loading current standings...</p>;
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
+  }
+
+  if (standings.length === 0) {
+    return <p>No standings data available at the moment.</p>;
   }
 
   return (
     <div>
-      <div style={{ marginBottom: '10px', fontSize: '0.9em', color: '#555' }}>
-        <p>Last Updated: {lastUpdated ? new Date(lastUpdated).toLocaleString() : 'N/A'}</p>
-        <p>Source: {dataSource || 'N/A'}</p>
+      <div className="metadata mb-2">
+        {lastUpdated && <p>Last Updated: {new Date(lastUpdated).toLocaleString()}</p>}
+        {dataSource && <p>Source: {dataSource}</p>}
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Matches</th>
-            <th>Wins</th>
-            <th>Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {standings.map((team) => {
-            const style = team_styles[team.teamKey] || {};
-            return (
-              <tr key={team.teamKey} style={{ backgroundColor: style.bg, color: style.text }}>
-                <td>{team.pos}</td>
-                <td>{team.teamFullName}</td>
-                <td>{team.Matches}</td>
-                <td>{team.Wins}</td>
-                <td>{team.Points}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="table-responsive">
+        <table>
+          <caption>Current IPL Team Standings</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pos</th>
+              <th scope="col">Team</th>
+              <th scope="col">Matches</th>
+              <th scope="col">Wins</th>
+              <th scope="col">Points</th>
+              {/* Add NRR header if data becomes available */}
+            </tr>
+          </thead>
+          <tbody>
+            {standings.map((team) => {
+              const style = team_styles[team.teamKey] as TeamStyle | undefined || {};
+              return (
+                <tr key={team.teamKey} style={{ backgroundColor: style.bg, color: style.text }}>
+                  <td>{team.pos}</td>
+                  <td>{team.teamFullName}</td>
+                  <td>{team.Matches}</td>
+                  <td>{team.Wins}</td>
+                  <td>{team.Points}</td>
+                  {/* Add NRR data cell if available */}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

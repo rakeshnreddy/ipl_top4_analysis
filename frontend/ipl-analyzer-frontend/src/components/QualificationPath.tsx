@@ -8,7 +8,7 @@ interface QualificationPathResult {
 }
 
 interface QualificationPathData {
-  [target: string]: { // "2" or "4"
+  [target: string]: {
     [teamKey: string]: QualificationPathResult;
   };
 }
@@ -22,7 +22,6 @@ interface FetchedAnalysisData {
   metadata: AnalysisMetadata;
   analysis_data: {
     qualification_path: QualificationPathData;
-    // Other analysis data might also be here
   };
 }
 
@@ -38,6 +37,7 @@ const QualificationPath: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch('/analysis_results.json')
       .then((response) => {
         if (!response.ok) {
@@ -46,8 +46,12 @@ const QualificationPath: React.FC = () => {
         return response.json();
       })
       .then((data: FetchedAnalysisData) => {
-        setMetadata(data.metadata);
-        if (data.analysis_data && data.analysis_data.qualification_path) {
+        if (!data.analysis_data || !data.analysis_data.qualification_path) {
+          // This is a valid scenario if the method isn't exhaustive, so don't throw an error
+          // but allow the component to render a message about it.
+          setMetadata(data.metadata); // Still set metadata
+        } else {
+          setMetadata(data.metadata);
           const qualPath = data.analysis_data.qualification_path;
           setPathData(qualPath);
 
@@ -60,27 +64,27 @@ const QualificationPath: React.FC = () => {
           });
           setAvailableTeams(validTeams);
 
-          if (teamsInPathAnalysis.length > 0) {
+          if (teamsInPathAnalysis.length > 0 && !selectedTeamKey) {
             setSelectedTeamKey(teamsInPathAnalysis[0]);
           }
-        } else {
-          setError("Qualification path data is missing in the analysis results.");
         }
-        setLoading(false);
+        setError(null);
       })
       .catch((fetchError) => {
         console.error("Failed to load analysis results for qualification path:", fetchError);
-        setError(`Failed to load analysis data. ${fetchError.message}`);
+        setError(`Failed to load analysis data. (${fetchError.message})`);
+      })
+      .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [selectedTeamKey]);
 
   useEffect(() => {
     if (pathData && selectedTeamKey && selectedTarget && metadata?.method_used.toLowerCase().includes('exhaustive')) {
       const result = pathData[selectedTarget]?.[selectedTeamKey];
       setTeamPathResult(result || null);
     } else {
-      setTeamPathResult(null); // Clear if not exhaustive or data missing
+      setTeamPathResult(null);
     }
   }, [pathData, selectedTeamKey, selectedTarget, metadata]);
 
@@ -93,11 +97,11 @@ const QualificationPath: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading qualification path analysis...</p>;
+    return <p role="status" aria-live="polite">Loading qualification path analysis...</p>;
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
   }
 
   const isExhaustive = metadata?.method_used.toLowerCase().includes('exhaustive');
@@ -105,59 +109,69 @@ const QualificationPath: React.FC = () => {
   return (
     <div>
       {metadata && (
-        <div style={{ marginBottom: '10px', fontSize: '0.9em', color: '#555' }}>
+        <div className="metadata mb-1">
           <p>Analysis Method: {metadata.method_used}</p>
-          {!isExhaustive && (
-            <p style={{ color: 'orange' }}>
-              Note: Qualification Path analysis is most meaningful with Exhaustive method.
+          {!isExhaustive && pathData && ( // Check if pathData is available even if not exhaustive
+             <p className="text-warning" role="status">
+              Note: Qualification Path analysis is most meaningful and typically only available with the Exhaustive method.
             </p>
           )}
         </div>
       )}
 
-      <div className="qualification-path-controls">
-        <div className="control-group">
-          <label htmlFor="team-select-path">Select Team: </label>
-          <select id="team-select-path" value={selectedTeamKey} onChange={handleTeamChange} disabled={!isExhaustive}>
-            {Object.entries(availableTeams).map(([key, name]) => (
-              <option key={key} value={key}>{name}</option>
-            ))}
-          </select>
-        </div>
+      {!pathData && !loading && !isExhaustive && (
+         <p role="status">Qualification Path data is not available for the current analysis method ({metadata?.method_used || 'Unknown'}). This feature requires Exhaustive analysis.</p>
+      )}
+      
+      {isExhaustive && !pathData && !loading && (
+         <p role="status">Qualification Path data is available with the Exhaustive method, but it seems to be missing from the results file.</p>
+      )}
 
-        <div className="control-group">
-          <label>Select Target: </label>
-          <label htmlFor="top4-radio-path">
-            <input
-              type="radio"
-              id="top4-radio-path"
-              name="target-path"
-              value="4"
-              checked={selectedTarget === '4'}
-              onChange={handleTargetChange}
-              disabled={!isExhaustive}
-            /> Top 4
-          </label>
-          <label htmlFor="top2-radio-path">
-            <input
-              type="radio"
-              id="top2-radio-path"
-              name="target-path"
-              value="2"
-              checked={selectedTarget === '2'}
-              onChange={handleTargetChange}
-              disabled={!isExhaustive}
-            /> Top 2
-          </label>
-        </div>
-      </div>
 
-      {!isExhaustive && (
-        <p>Qualification Path analysis is only available when Exhaustive method is used.</p>
+      {(pathData || isExhaustive) && ( // Show controls if pathData exists OR if method is exhaustive (even if data is missing for some reason)
+        <div className="qualification-path-controls">
+          <div className="control-group">
+            <label htmlFor="team-select-path">Select Team: </label>
+            <select id="team-select-path" value={selectedTeamKey} onChange={handleTeamChange} disabled={!isExhaustive || Object.keys(availableTeams).length === 0} aria-controls="qualification-path-results">
+              <option value="">--Select a Team--</option>
+              {Object.entries(availableTeams).map(([key, name]) => (
+                <option key={key} value={key}>{name}</option>
+              ))}
+            </select>
+          </div>
+
+          <fieldset className="control-group">
+            <legend>Select Target:</legend>
+            <label htmlFor="top4-radio-path">
+              <input
+                type="radio"
+                id="top4-radio-path"
+                name="target-path"
+                value="4"
+                checked={selectedTarget === '4'}
+                onChange={handleTargetChange}
+                disabled={!isExhaustive}
+                aria-controls="qualification-path-results"
+              /> Top 4
+            </label>
+            <label htmlFor="top2-radio-path">
+              <input
+                type="radio"
+                id="top2-radio-path"
+                name="target-path"
+                value="2"
+                checked={selectedTarget === '2'}
+                onChange={handleTargetChange}
+                disabled={!isExhaustive}
+                aria-controls="qualification-path-results"
+              /> Top 2
+            </label>
+          </fieldset>
+        </div>
       )}
 
       {isExhaustive && selectedTeamKey && teamPathResult && (
-        <div className="qualification-path-results">
+        <div id="qualification-path-results" className="qualification-path-results mt-2">
           <h3>
             {team_full_names[selectedTeamKey] || selectedTeamKey} - Top {selectedTarget} Path
           </h3>
@@ -184,7 +198,10 @@ const QualificationPath: React.FC = () => {
         </div>
       )}
       {isExhaustive && selectedTeamKey && !teamPathResult && !loading && (
-         <p>No qualification path data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}.</p>
+         <p className="mt-2">No qualification path data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}.</p>
+      )}
+      {isExhaustive && !selectedTeamKey && Object.keys(availableTeams).length > 0 && !loading && (
+        <p className="mt-2">Please select a team to view its qualification path.</p>
       )}
     </div>
   );
