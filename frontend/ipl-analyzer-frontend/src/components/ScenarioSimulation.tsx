@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles, TeamNames, TeamStyle } from '../teamStyles';
-import { runSimulation } from '../utils/simulationLogic';
-import type { StandingsData, SimulatedTeamStats } from '../utils/simulationLogic'; // Import types
+
+import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
+
 
 // Types specific to this component's data fetching needs, not directly used by runSimulation
 interface FetchedStandingsData {
@@ -30,6 +30,86 @@ interface FetchedAnalysisData {
     team_analysis: TeamAnalysisData;
   };
 }
+
+
+interface SimulatedTeamStats extends TeamStats {
+  teamKey: string;
+  teamFullName: string;
+  pos: number;
+  priority?: number; // For tie-breaking
+}
+
+// Helper function for simulation
+const runSimulation = (
+  initialStandings: StandingsData,
+  resultsDf: { [fixture: string]: string },
+  analyzedTeamKey: string
+): { matchLog: string[]; finalStandings: SimulatedTeamStats[] } => {
+  const currentStandings = JSON.parse(JSON.stringify(initialStandings)); // Deep copy
+  const matchLog: string[] = [];
+
+  for (const fixture in resultsDf) {
+    const outcome = resultsDf[fixture];
+    const teams = fixture.split(" vs ");
+    if (teams.length !== 2) {
+      matchLog.push(`Invalid fixture string: ${fixture}`);
+      continue;
+    }
+    const teamA = teams[0];
+    const teamB = teams[1];
+
+    let winner: string;
+    let loser: string;
+
+    const outcomeObject = resultsDf[fixture];
+    const outcomeString = outcomeObject.Outcome;
+    if (outcomeString.includes("wins")) {
+      winner = outcomeString.replace(" wins", "");
+      loser = winner === teamA ? teamB : teamA;
+    } else { // "Result doesn't matter" or other unexpected
+      // Defaulting to Team A for "Result doesn't matter"
+      winner = teamA;
+      loser = teamB;
+      matchLog.push(`${fixture}: Result didn't matter, defaulted to ${winner} winning.`);
+    }
+    
+    matchLog.push(`${winner} defeats ${loser}`);
+
+    if (currentStandings[winner]) {
+      currentStandings[winner].Wins += 1;
+      currentStandings[winner].Points += 2;
+      currentStandings[winner].Matches += 1;
+    }
+    if (currentStandings[loser]) {
+      currentStandings[loser].Matches += 1;
+    }
+  }
+
+  const finalStandingsArray = Object.entries(currentStandings).map(([teamKey, stats]) => ({
+    teamKey,
+    ...(stats as TeamStats),
+    priority: teamKey === analyzedTeamKey ? 0 : 1, // Lower number = higher priority
+  }));
+
+  // Sort: Points (desc), Priority (asc), Wins (desc)
+  finalStandingsArray.sort((a, b) => {
+    if (b.Points !== a.Points) {
+      return b.Points - a.Points;
+    }
+    if (a.priority !== b.priority) {
+      return a.priority - b.priority;
+    }
+    return b.Wins - a.Wins;
+  });
+
+  const finalProcessedStandings: SimulatedTeamStats[] = finalStandingsArray.map((team, index) => ({
+    ...team,
+    teamFullName: team_full_names[team.teamKey] || team.teamKey,
+    pos: index + 1,
+  }));
+
+  return { matchLog, finalStandings: finalProcessedStandings };
+};
 
 const ScenarioSimulation: React.FC = () => {
   const [initialStandings, setInitialStandings] = useState<StandingsData | null>(null); // Type from simulationLogic

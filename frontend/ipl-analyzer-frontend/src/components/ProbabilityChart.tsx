@@ -1,17 +1,18 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import {
+import { // Values from chart.js
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
   Tooltip,
-  Legend,
-  ChartOptions,
-  ChartData
+  Legend
 } from 'chart.js';
-import { team_short_names, team_styles, TeamStyle } from '../teamStyles';
+import type { ChartOptions, ChartData } from 'chart.js'; // Types from chart.js
+
+import { team_short_names, team_styles } from '../teamStyles'; // Values from teamStyles
+import type { TeamStyle } from '../teamStyles'; // Types from teamStyles
 
 ChartJS.register(
   CategoryScale,

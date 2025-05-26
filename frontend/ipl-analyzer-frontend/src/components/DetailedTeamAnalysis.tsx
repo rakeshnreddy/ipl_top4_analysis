@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, TeamNames } from '../teamStyles';
+import { team_full_names, team_short_names } from '../teamStyles'; import type { TeamNames } from '../teamStyles';
+
 
 interface TeamAnalysisResult {
   percentage: number;
@@ -173,13 +174,18 @@ const DetailedTeamAnalysis: React.FC = () => {
           </p>
           <h4>Required / Frequent Outcomes for Qualification:</h4>
           {fixtureOutcomes.length > 0 ? (
-            <div className="table-responsive">
-              <table>
-                <caption>Required or frequent match outcomes for {team_full_names[selectedTeamKey] || selectedTeamKey} to qualify for Top {selectedTarget}.</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Fixture</th>
-                    <th scope="col">Outcome</th>
+            <table>
+              <thead>
+                <tr>
+                  <th>Fixture</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                {fixtureOutcomes.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.fixture}</td>
+                    <td>{item.outcome.Outcome}</td>
                   </tr>
                 </thead>
                 <tbody>

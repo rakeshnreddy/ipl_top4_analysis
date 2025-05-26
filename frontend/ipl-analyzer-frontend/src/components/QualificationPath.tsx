@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, TeamNames } from '../teamStyles';
+import { team_full_names } from '../teamStyles'; import type { TeamNames } from '../teamStyles';
 
 interface QualificationPathResult {
   possible: number | null;
