@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_short_names, TeamNames } from '../teamStyles';
+import { team_full_names, TeamNames } from '../teamStyles';
 
 interface TeamAnalysisResult {
   percentage: number;
-  results_df: { [fixture: string]: string }; // fixture: "TeamA vs TeamB", outcome: "TeamA wins"
+  results_df: { [fixture: string]: string };
 }
 
 interface TeamAnalysisData {
-  [target: string]: { // "2" or "4"
+  [target: string]: {
     [teamKey: string]: TeamAnalysisResult;
   };
 }
@@ -21,7 +21,6 @@ interface FetchedAnalysisData {
   metadata: AnalysisMetadata;
   analysis_data: {
     team_analysis: TeamAnalysisData;
-    // overall_probabilities might also be here but not used by this component
   };
 }
 
@@ -35,7 +34,7 @@ const DetailedTeamAnalysis: React.FC = () => {
   const [metadata, setMetadata] = useState<AnalysisMetadata | null>(null);
   const [availableTeams, setAvailableTeams] = useState<TeamNames>({});
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>('');
-  const [selectedTarget, setSelectedTarget] = useState<'4' | '2'>('4'); // Default to Top 4
+  const [selectedTarget, setSelectedTarget] = useState<'4' | '2'>('4');
   const [teamResults, setTeamResults] = useState<TeamAnalysisResult | null>(null);
   const [fixtureOutcomes, setFixtureOutcomes] = useState<FixtureOutcome[]>([]);
 
@@ -43,6 +42,7 @@ const DetailedTeamAnalysis: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch('/analysis_results.json')
       .then((response) => {
         if (!response.ok) {
@@ -51,11 +51,13 @@ const DetailedTeamAnalysis: React.FC = () => {
         return response.json();
       })
       .then((data: FetchedAnalysisData) => {
+        if (!data.analysis_data || !data.analysis_data.team_analysis) {
+          throw new Error("Team analysis data is missing or malformed in the response.");
+        }
         setMetadata(data.metadata);
         const teamAnalysis = data.analysis_data.team_analysis;
         setAnalysisData(teamAnalysis);
 
-        // Determine available teams from the analysis data (for Top 4 initially)
         const teamsInAnalysis = teamAnalysis['4'] ? Object.keys(teamAnalysis['4']) : [];
         const validTeams: TeamNames = {};
         teamsInAnalysis.forEach(key => {
@@ -65,17 +67,19 @@ const DetailedTeamAnalysis: React.FC = () => {
         });
         setAvailableTeams(validTeams);
 
-        if (teamsInAnalysis.length > 0) {
-          setSelectedTeamKey(teamsInAnalysis[0]); // Select the first available team
+        if (teamsInAnalysis.length > 0 && !selectedTeamKey) {
+          setSelectedTeamKey(teamsInAnalysis[0]);
         }
-        setLoading(false);
+        setError(null);
       })
       .catch((fetchError) => {
         console.error("Failed to load analysis results:", fetchError);
-        setError(`Failed to load analysis data. ${fetchError.message}`);
+        setError(`Failed to load analysis data. (${fetchError.message})`);
+      })
+      .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [selectedTeamKey]); // Re-fetch or re-process if selectedTeamKey logic changes, though not typical for initial load
 
   useEffect(() => {
     if (analysisData && selectedTeamKey && selectedTarget) {
@@ -103,17 +107,17 @@ const DetailedTeamAnalysis: React.FC = () => {
   };
 
   if (loading) {
-    return <p>Loading detailed analysis...</p>;
+    return <p role="status" aria-live="polite">Loading detailed analysis...</p>;
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
   }
 
   return (
     <div>
       {metadata && (
-        <div style={{ marginBottom: '10px', fontSize: '0.9em', color: '#555' }}>
+        <div className="metadata mb-1">
           <p>Analysis Method: {metadata.method_used}</p>
           <p>Last Updated: {new Date(metadata.timestamp).toLocaleString()}</p>
         </div>
@@ -121,41 +125,44 @@ const DetailedTeamAnalysis: React.FC = () => {
 
       <div className="analysis-controls">
         <div className="control-group">
-          <label htmlFor="team-select">Select Team: </label>
-          <select id="team-select" value={selectedTeamKey} onChange={handleTeamChange}>
+          <label htmlFor="team-select-analysis">Select Team: </label>
+          <select id="team-select-analysis" value={selectedTeamKey} onChange={handleTeamChange} aria-controls="team-analysis-results">
+            <option value="">--Select a Team--</option>
             {Object.entries(availableTeams).map(([key, name]) => (
               <option key={key} value={key}>{name}</option>
             ))}
           </select>
         </div>
 
-        <div className="control-group">
-          <label>Select Target: </label>
-          <label htmlFor="top4-radio">
+        <fieldset className="control-group">
+          <legend>Select Target:</legend>
+          <label htmlFor="top4-radio-analysis">
             <input
               type="radio"
-              id="top4-radio"
-              name="target"
+              id="top4-radio-analysis"
+              name="target-analysis"
               value="4"
               checked={selectedTarget === '4'}
               onChange={handleTargetChange}
+              aria-controls="team-analysis-results"
             /> Top 4
           </label>
-          <label htmlFor="top2-radio">
+          <label htmlFor="top2-radio-analysis">
             <input
               type="radio"
-              id="top2-radio"
-              name="target"
+              id="top2-radio-analysis"
+              name="target-analysis"
               value="2"
               checked={selectedTarget === '2'}
               onChange={handleTargetChange}
+              aria-controls="team-analysis-results"
             /> Top 2
           </label>
-        </div>
+        </fieldset>
       </div>
 
       {selectedTeamKey && teamResults && (
-        <div className="analysis-results">
+        <div id="team-analysis-results" className="analysis-results mt-2">
           <h3>
             {team_full_names[selectedTeamKey] || selectedTeamKey} - Top {selectedTarget} Analysis
           </h3>
@@ -164,31 +171,37 @@ const DetailedTeamAnalysis: React.FC = () => {
               Chance to qualify for Top {selectedTarget}: {teamResults.percentage.toFixed(2)}%
             </strong>
           </p>
-          <h4>Required / Frequent Outcomes:</h4>
+          <h4>Required / Frequent Outcomes for Qualification:</h4>
           {fixtureOutcomes.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Fixture</th>
-                  <th>Outcome</th>
-                </tr>
-              </thead>
-              <tbody>
-                {fixtureOutcomes.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.fixture}</td>
-                    <td>{item.outcome}</td>
+            <div className="table-responsive">
+              <table>
+                <caption>Required or frequent match outcomes for {team_full_names[selectedTeamKey] || selectedTeamKey} to qualify for Top {selectedTarget}.</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Fixture</th>
+                    <th scope="col">Outcome</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {fixtureOutcomes.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.fixture}</td>
+                      <td>{item.outcome}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
-            <p>No specific outcomes data available for this selection. This might mean the chance is 0% or 100%, or data is missing.</p>
+            <p>No specific outcomes data available. This often means the chance is 0% or 100%, or the team's qualification does not hinge on specific remaining matches.</p>
           )}
         </div>
       )}
       {!teamResults && selectedTeamKey && !loading && (
-         <p>No analysis data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}.</p>
+         <p className="mt-2">No analysis data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}. This could be due to the team already being qualified/eliminated or data processing issues.</p>
+      )}
+      {!selectedTeamKey && !loading && (
+        <p className="mt-2">Please select a team to view detailed analysis.</p>
       )}
     </div>
   );

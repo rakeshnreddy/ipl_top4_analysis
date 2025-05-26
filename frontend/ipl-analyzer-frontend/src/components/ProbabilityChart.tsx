@@ -25,14 +25,15 @@ ChartJS.register(
 interface ProbabilityChartProps {
   chartData: { teamKey: string; probability: number }[];
   titleText: string;
+  ariaLabel: string;
 }
 
-const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleText }) => {
+const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleText, ariaLabel }) => {
   const data: ChartData<'bar'> = {
     labels: chartData.map(d => team_short_names[d.teamKey] || d.teamKey),
     datasets: [
       {
-        label: titleText,
+        label: 'Probability', // Keep label simple for screen readers
         data: chartData.map(d => d.probability),
         backgroundColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.bg || '#cccccc'),
         borderColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.text || '#333333'),
@@ -42,13 +43,13 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
   };
 
   const options: ChartOptions<'bar'> = {
-    indexAxis: 'y' as const, // Horizontal bar chart
+    indexAxis: 'y' as const,
     responsive: true,
     maintainAspectRatio: false,
     scales: {
       x: {
         beginAtZero: true,
-        max: 100, // Probabilities are 0-100
+        max: 100,
         title: {
           display: true,
           text: 'Probability (%)',
@@ -67,7 +68,7 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
     },
     plugins: {
       legend: {
-        display: false, // Legend can be hidden if title is clear
+        display: false,
       },
       title: {
         display: true,
@@ -91,9 +92,19 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
         },
       },
     },
+    // Accessibility
+    animation: false, // Disable animation for users sensitive to motion
+    // The canvas element will get an aria-label from the Bar component props
   };
+  
+  // Height can be dynamic based on number of teams, or fixed
+  const chartHeight = Math.max(300, chartData.length * 35); // Example dynamic height
 
-  return <Bar options={options} data={data} />;
+  return (
+    <div style={{ height: `${chartHeight}px`, position: 'relative' }}>
+      <Bar options={options} data={data} aria-label={ariaLabel} role="img" />
+    </div>
+  );
 };
 
 export default ProbabilityChart;
