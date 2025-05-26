@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
+import { team_full_names, team_styles, TeamStyle } from '../teamStyles';
+
 interface TeamStats {
   Matches: number;
   Wins: number;
