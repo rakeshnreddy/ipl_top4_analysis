@@ -1,4 +1,3 @@
-# .github/workflows/pages.yml
 name: Deploy frontend to GitHub Pages
 
 on:
@@ -6,26 +5,34 @@ on:
     branches: [ main ]
 
 permissions:
-  pages: write
-  id-token: write
+  pages: write        # grant write access to the Pages API
+  id-token: write     # required by configure-pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Copy site into 'public'
         run: |
           rm -rf public
           mkdir public
-          cp -r frontend/ipl-analyzer-frontend/* public/
+          # copy everything, including dotfiles
+          cp -r frontend/ipl-analyzer-frontend/. public/
 
-      - uses: actions/configure-pages@v3
+      - name: Disable Jekyll
+        run: touch public/.nojekyll
 
-      - name: Upload artifact
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: public
 
-      - uses: actions/deploy-pages@v1
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
