@@ -3,6 +3,7 @@ import CurrentStandings from './components/CurrentStandings';
 import DetailedTeamAnalysis from './components/DetailedTeamAnalysis';
 import QualificationPath from './components/QualificationPath';
 import ScenarioSimulation from './components/ScenarioSimulation';
+import OverallProbabilities from './components/OverallProbabilities';
 
 function App() {
   return (

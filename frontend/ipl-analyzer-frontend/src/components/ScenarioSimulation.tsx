@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles, TeamNames, TeamStyle } from '../teamStyles';
+import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
+
 
 // Types from previous components (can be moved to a common types.ts later)
 interface TeamStats {
@@ -69,8 +70,10 @@ const runSimulation = (
     let winner: string;
     let loser: string;
 
-    if (outcome.includes("wins")) {
-      winner = outcome.replace(" wins", "");
+    const outcomeObject = resultsDf[fixture];
+    const outcomeString = outcomeObject.Outcome;
+    if (outcomeString.includes("wins")) {
+      winner = outcomeString.replace(" wins", "");
       loser = winner === teamA ? teamB : teamA;
     } else { // "Result doesn't matter" or other unexpected
       // Defaulting to Team A for "Result doesn't matter"
