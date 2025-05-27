@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
+import { team_full_names, team_styles } from '../teamStyles'; import type { TeamStyle } from '../teamStyles';
 interface TeamStats {
   Matches: number;
   Wins: number;
@@ -104,9 +104,9 @@ const CurrentStandings: React.FC = () => {
           </thead>
           <tbody>
             {standings.map((team) => {
-              const style = team_styles[team.teamKey] as TeamStyle | undefined || {};
+              const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
               return (
-                <tr key={team.teamKey} style={{ backgroundColor: style.bg, color: style.text }}>
+                <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
                   <td>{team.pos}</td>
                   <td>{team.teamFullName}</td>
                   <td>{team.Matches}</td>

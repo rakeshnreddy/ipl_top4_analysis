@@ -1,4 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+/// <reference types="vitest/globals" />
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'; // Removed 'vi'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DetailedTeamAnalysis from './DetailedTeamAnalysis'; // Adjust path as needed
 // team_full_names is imported by the component, so we mock it at the module level
@@ -33,11 +34,12 @@ const mockAnalysisData = {
 };
 
 describe('DetailedTeamAnalysis Component', () => {
-  let fetchSpy: ReturnType<typeof vi.spyOn<typeof globalThis, 'fetch'>>;
+  let fetchSpy: vi.MockInstance<[RequestInfo | URL, RequestInit?], Promise<Response>>;
 
   beforeEach(() => {
     // Ensure fetch is mocked for each test
-    fetchSpy = vi.spyOn(window, 'fetch');
+    fetchSpy = vi.fn(); // Create a generic mock function
+    globalThis.fetch = fetchSpy as any; // Assign it to globalThis.fetch
   });
 
   afterEach(() => {
@@ -45,7 +47,7 @@ describe('DetailedTeamAnalysis Component', () => {
   });
 
   const setupFetchMock = (data: any, ok = true) => {
-    fetchSpy.mockImplementation((url) => {
+    fetchSpy.mockImplementation((url: RequestInfo | URL) => { // Add type to url
       if (typeof url === 'string' && url.endsWith('/analysis_results.json')) {
         return Promise.resolve({
           ok: ok,

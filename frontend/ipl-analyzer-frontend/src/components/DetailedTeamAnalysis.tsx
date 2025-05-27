@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_short_names } from '../teamStyles'; import type { TeamNames } from '../teamStyles';
+import { team_full_names } from '../teamStyles'; import type { TeamNames } from '../teamStyles';
 
 
 interface TeamAnalysisResult {
@@ -186,7 +186,7 @@ const DetailedTeamAnalysis: React.FC = () => {
                     {fixtureOutcomes.map((item, index) => (
                       <tr key={index}>
                         <td>{item.fixture}</td>
-                        <td>{item.outcome.Outcome}</td>
+                        <td>{item.outcome}</td>
                       </tr>
                     ))}
                   </tbody>
