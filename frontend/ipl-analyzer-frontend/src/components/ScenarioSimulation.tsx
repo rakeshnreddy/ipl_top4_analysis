@@ -2,10 +2,21 @@ import React, { useEffect, useState } from 'react';
 
 import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
 
+// Copied from CurrentStandings.tsx
+interface TeamStats {
+  Matches: number;
+  Wins: number;
+  Points: number;
+}
+
+// Copied from CurrentStandings.tsx
+interface StandingsData {
+  [key: string]: TeamStats;
+}
 
 // Types specific to this component's data fetching needs, not directly used by runSimulation
 interface FetchedStandingsData {
-  standings: StandingsData; // This type is now from simulationLogic
+  standings: StandingsData;
 }
 
 interface TeamAnalysisResult {
@@ -49,7 +60,6 @@ const runSimulation = (
   const matchLog: string[] = [];
 
   for (const fixture in resultsDf) {
-    const outcome = resultsDf[fixture];
     const teams = fixture.split(" vs ");
     if (teams.length !== 2) {
       matchLog.push(`Invalid fixture string: ${fixture}`);
@@ -61,8 +71,8 @@ const runSimulation = (
     let winner: string;
     let loser: string;
 
-    const outcomeObject = resultsDf[fixture];
-    const outcomeString = outcomeObject.Outcome;
+    const outcomeObject = resultsDf[fixture]; // This is the outcome string
+    const outcomeString = outcomeObject; // Corrected: outcomeObject is the string itself
     if (outcomeString.includes("wins")) {
       winner = outcomeString.replace(" wins", "");
       loser = winner === teamA ? teamB : teamA;
@@ -268,9 +278,9 @@ const ScenarioSimulation: React.FC = () => {
                   </thead>
                   <tbody>
                     {simulatedFinalStandings.map((team) => {
-                      const style = team_styles[team.teamKey] as TeamStyle | undefined || {};
+                      const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
                       return (
-                        <tr key={team.teamKey} style={{ backgroundColor: style.bg, color: style.text }}>
+                        <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
                           <td>{team.pos}</td>
                           <td>{team.teamFullName}</td>
                           <td>{team.Matches}</td>

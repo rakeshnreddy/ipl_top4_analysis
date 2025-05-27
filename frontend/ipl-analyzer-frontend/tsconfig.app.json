@@ -24,7 +24,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/setupTests.ts"] // Added setupTests.ts
+  "include": ["src", "src/setupTests.ts"], // Added setupTests.ts
+  "exclude": [
+    "node_modules",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/**/__tests__/*",
+    "src/**/__mocks__/*"
+  ]
 }
 // Note: vite.config.ts is typically handled by tsconfig.node.json or processed by Vite directly,
 // so it's usually not needed in tsconfig.app.json's include array.

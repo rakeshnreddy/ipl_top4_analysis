@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { runSimulation } from './simulationLogic';
-import type { StandingsData, SimulatedTeamStats } from './simulationLogic';
+import type { StandingsData } from './simulationLogic';
 
 // Mock team_full_names used by the runSimulation function for teamFullName property
 // This avoids depending on the actual teamStyles.ts file in these unit tests.
