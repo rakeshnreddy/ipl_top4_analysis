@@ -139,8 +139,8 @@ const ScenarioSimulation: React.FC = () => {
     console.log('ScenarioSimulation.tsx - BASE_URL for analysis_results:', import.meta.env.BASE_URL);
     setLoading(true);
     Promise.all([
-      fetch('current_standings.json').then(res => res.ok ? res.json() : Promise.reject(new Error(`Standings fetch error: ${res.status}`))),
-      fetch('analysis_results.json').then(res => res.ok ? res.json() : Promise.reject(new Error(`Analysis fetch error: ${res.status}`)))
+      fetch(`${import.meta.env.BASE_URL}current_standings.json`).then(res => res.ok ? res.json() : Promise.reject(new Error(`Standings fetch error: ${res.status}`))),
+      fetch(`${import.meta.env.BASE_URL}analysis_results.json`).then(res => res.ok ? res.json() : Promise.reject(new Error(`Analysis fetch error: ${res.status}`)))
     ])
     .then(([standingsResult, analysisResult]: [FetchedStandingsData, FetchedAnalysisData]) => {
       if (!standingsResult.standings) {
