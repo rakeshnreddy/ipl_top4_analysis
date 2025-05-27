@@ -140,7 +140,16 @@ const ScenarioSimulation: React.FC = () => {
     setLoading(true);
     Promise.all([
       fetch(`${import.meta.env.BASE_URL}current_standings.json`).then(res => res.ok ? res.json() : Promise.reject(new Error(`Standings fetch error: ${res.status}`))),
-      fetch('https://rakeshnreddy.github.io/ipl_top4_analysis/analysis_results.json').then(res => res.ok ? res.json() : Promise.reject(new Error(`Analysis fetch error: ${res.status}`)))
+      (() => {
+        const analysisFile = 'analysis_results.json';
+        console.log('ScenarioSimulation.tsx - Fetching filename:', analysisFile);
+        const constructedURL = `${import.meta.env.BASE_URL}${analysisFile}`;
+        console.log('ScenarioSimulation.tsx - Constructed URL for analysis_results:', constructedURL);
+        return fetch(constructedURL).then(res => {
+          if (!res.ok) throw new Error(`Analysis fetch error: ${res.status}`);
+          return res.json();
+        });
+      })()
     ])
     .then(([standingsResult, analysisResult]: [FetchedStandingsData, FetchedAnalysisData]) => {
       if (!standingsResult.standings) {

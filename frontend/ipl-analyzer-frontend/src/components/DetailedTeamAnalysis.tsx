@@ -44,7 +44,11 @@ const DetailedTeamAnalysis: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.BASE_URL}analysis_results.json`)
+    const analysisFile = 'analysis_results.json';
+    console.log('DetailedTeamAnalysis.tsx - Fetching filename:', analysisFile);
+    const constructedURL = `${import.meta.env.BASE_URL}${analysisFile}`;
+    console.log('DetailedTeamAnalysis.tsx - Constructed URL for analysis_results:', constructedURL);
+    fetch(constructedURL)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
