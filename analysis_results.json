@@ -1,8 +1,8 @@
 {
     "metadata": {
-        "precomputed_at": "2025-05-27T12:06:34.273871Z",
-        "num_fixtures": 1,
-        "last_data_update": "2025-05-27T12:06:33Z",
+        "precomputed_at": "2025-05-27T19:01:02.750698Z",
+        "num_fixtures": 0,
+        "last_data_update": "2025-05-27T19:01:01Z",
         "data_source": "JSON (Series Points API)",
         "method_used": "Exhaustive"
     },
@@ -12,13 +12,13 @@
                 "Top 4 Probability": 100.0,
                 "Top 2 Probability": 100.0
             },
-            "Gujarat": {
-                "Top 4 Probability": 100.0,
-                "Top 2 Probability": 50.0
-            },
             "Bangalore": {
                 "Top 4 Probability": 100.0,
-                "Top 2 Probability": 50.0
+                "Top 2 Probability": 100.0
+            },
+            "Gujarat": {
+                "Top 4 Probability": 100.0,
+                "Top 2 Probability": 0.0
             },
             "Mumbai": {
                 "Top 4 Probability": 100.0,
@@ -53,35 +53,19 @@
             "4": {
                 "Punjab": {
                     "percentage": 100.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
-                },
-                "Gujarat": {
-                    "percentage": 100.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
+                    "results_df": {}
                 },
                 "Bangalore": {
                     "percentage": 100.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
+                    "results_df": {}
+                },
+                "Gujarat": {
+                    "percentage": 100.0,
+                    "results_df": {}
                 },
                 "Mumbai": {
                     "percentage": 100.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
+                    "results_df": {}
                 },
                 "Delhi": {
                     "percentage": 0,
@@ -111,27 +95,15 @@
             "2": {
                 "Punjab": {
                     "percentage": 100.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Result doesn't matter"
-                        }
-                    }
-                },
-                "Gujarat": {
-                    "percentage": 50.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Lucknow wins"
-                        }
-                    }
+                    "results_df": {}
                 },
                 "Bangalore": {
-                    "percentage": 50.0,
-                    "results_df": {
-                        "Lucknow vs Bangalore": {
-                            "Outcome": "Bangalore wins"
-                        }
-                    }
+                    "percentage": 100.0,
+                    "results_df": {}
+                },
+                "Gujarat": {
+                    "percentage": 0,
+                    "results_df": {}
                 },
                 "Mumbai": {
                     "percentage": 0,
@@ -170,15 +142,15 @@
                     "guaranteed": 0,
                     "target_matches": 0
                 },
-                "Gujarat": {
+                "Bangalore": {
                     "possible": 0,
                     "guaranteed": 0,
                     "target_matches": 0
                 },
-                "Bangalore": {
+                "Gujarat": {
                     "possible": 0,
                     "guaranteed": 0,
-                    "target_matches": 1
+                    "target_matches": 0
                 },
                 "Mumbai": {
                     "possible": 0,
@@ -198,7 +170,7 @@
                 "Lucknow": {
                     "possible": null,
                     "guaranteed": null,
-                    "target_matches": 1
+                    "target_matches": 0
                 },
                 "Hyderabad": {
                     "possible": null,
@@ -222,15 +194,15 @@
                     "guaranteed": 0,
                     "target_matches": 0
                 },
-                "Gujarat": {
+                "Bangalore": {
                     "possible": 0,
-                    "guaranteed": null,
+                    "guaranteed": 0,
                     "target_matches": 0
                 },
-                "Bangalore": {
-                    "possible": 1,
-                    "guaranteed": 1,
-                    "target_matches": 1
+                "Gujarat": {
+                    "possible": null,
+                    "guaranteed": null,
+                    "target_matches": 0
                 },
                 "Mumbai": {
                     "possible": null,
@@ -250,7 +222,7 @@
                 "Lucknow": {
                     "possible": null,
                     "guaranteed": null,
-                    "target_matches": 1
+                    "target_matches": 0
                 },
                 "Hyderabad": {
                     "possible": null,
