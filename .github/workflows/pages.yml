@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 permissions:
-  pages: write        # grant write access to the Pages API
-  id-token: write     # required by configure-pages
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -15,26 +15,32 @@ jobs:
       name: github-pages
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Copy site into 'public'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install & build
+        working-directory: frontend/ipl-analyzer-frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Prepare Pages artifact
         run: |
           rm -rf public
           mkdir public
-          # copy everything, including dotfiles
-          cp -r frontend/ipl-analyzer-frontend/. public/
+          # Copy the build output
+          cp -r frontend/ipl-analyzer-frontend/build/. public/
+          # Disable Jekyll processing
+          touch public/.nojekyll
 
-      - name: Disable Jekyll
-        run: touch public/.nojekyll
+      - uses: actions/configure-pages@v5
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: public
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
