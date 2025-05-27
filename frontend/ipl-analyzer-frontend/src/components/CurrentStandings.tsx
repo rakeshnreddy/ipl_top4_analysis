@@ -31,7 +31,7 @@ const CurrentStandings: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/current_standings.json')
+    fetch(`${import.meta.env.BASE_URL}current_standings.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
