@@ -21,7 +21,7 @@ interface FetchedStandingsData {
 
 interface TeamAnalysisResult {
   percentage: number;
-  results_df: { [fixture: string]: string };
+  results_df: { [fixture: string]: { Outcome: string; [key: string]: any } }; // Updated type
 }
 
 interface TeamAnalysisData {
@@ -53,7 +53,7 @@ interface SimulatedTeamStats extends TeamStats {
 // Helper function for simulation
 const runSimulation = (
   initialStandings: StandingsData,
-  resultsDf: { [fixture: string]: string },
+  resultsDf: { [fixture: string]: { Outcome: string; [key: string]: any } }, // Updated parameter type
   analyzedTeamKey: string
 ): { matchLog: string[]; finalStandings: SimulatedTeamStats[] } => {
   const currentStandings = JSON.parse(JSON.stringify(initialStandings)); // Deep copy
@@ -71,8 +71,8 @@ const runSimulation = (
     let winner: string;
     let loser: string;
 
-    const outcomeObject = resultsDf[fixture]; // This is the outcome string
-    const outcomeString = outcomeObject; // Corrected: outcomeObject is the string itself
+    const outcomeObject = resultsDf[fixture]; // outcomeObject is now an object
+    const outcomeString = outcomeObject.Outcome; // Extract Outcome property
     if (outcomeString.includes("wins")) {
       winner = outcomeString.replace(" wins", "");
       loser = winner === teamA ? teamB : teamA;
