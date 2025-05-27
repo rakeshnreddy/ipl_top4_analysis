@@ -44,7 +44,7 @@ const DetailedTeamAnalysis: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(new URL('analysis_results.json', import.meta.env.BASE_URL).href)
+    fetch(`${import.meta.env.BASE_URL}analysis_results.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
