@@ -39,6 +39,12 @@ jobs:
       - name: Precompute exhaustive analysis
         run: python precompute_analysis.py
 
+      - name: Copy analysis files to frontend public directory
+        run: |
+          mkdir -p frontend/ipl-analyzer-frontend/public/
+          cp analysis_results.json frontend/ipl-analyzer-frontend/public/analysis_results.json
+          cp current_standings.json frontend/ipl-analyzer-frontend/public/current_standings.json
+
       - name: Debug show files & git status
         run: |
           echo "=== Listing working directory ==="
@@ -57,7 +63,7 @@ jobs:
           # auto‑stash our generated JSONs, pull & rebase, then pop stash
           git pull --rebase --autostash origin ${GITHUB_REF##*/} || true
 
-          git add current_standings.json remaining_fixtures.json analysis_results.json
+          git add current_standings.json remaining_fixtures.json analysis_results.json frontend/ipl-analyzer-frontend/public/analysis_results.json frontend/ipl-analyzer-frontend/public/current_standings.json
           git commit -m "ci: update IPL data & analysis $(date +'%Y-%m-%d')" || echo "No changes to commit"
 
       # 7) Push the commit
