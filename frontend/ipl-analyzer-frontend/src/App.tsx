@@ -7,6 +7,7 @@ import QualificationPath from './components/QualificationPath';
 import ScenarioSimulation from './components/ScenarioSimulation';
 
 const App: React.FC = () => {
+  console.log('App.tsx - BASE_URL:', import.meta.env.BASE_URL);
   return (
     <div id="app-container">
       <header>
