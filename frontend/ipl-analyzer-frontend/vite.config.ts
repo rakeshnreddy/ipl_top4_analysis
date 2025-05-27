@@ -4,6 +4,7 @@ import { configDefaults } from 'vitest/config'; // Import configDefaults
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/ipl-analyser/',
   plugins: [react()],
   test: {
     globals: true, // Optional: to use Vitest globals like describe, it, expect without importing
