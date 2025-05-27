@@ -27,20 +27,12 @@ jobs:
         run: |
           npm ci
           npm run build
-
-      - name: Prepare Pages artifact
-        run: |
-          rm -rf public
-          mkdir public
-          # Copy the build output
-          cp -r frontend/ipl-analyzer-frontend/build/. public/
-          # Disable Jekyll processing
-          touch public/.nojekyll
+          touch dist/.nojekyll # Add .nojekyll to the build output directory
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public
+          path: frontend/ipl-analyzer-frontend/dist # Point directly to Vite's output
 
       - uses: actions/deploy-pages@v4
