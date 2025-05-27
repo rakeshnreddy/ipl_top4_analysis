@@ -4,7 +4,7 @@ import { team_full_names } from '../teamStyles'; import type { TeamNames } from 
 
 interface TeamAnalysisResult {
   percentage: number;
-  results_df: { [fixture: string]: string };
+  results_df: { [fixture: string]: { Outcome: string; [key: string]: any } }; // Updated
 }
 
 interface TeamAnalysisData {
@@ -27,7 +27,7 @@ interface FetchedAnalysisData {
 
 interface FixtureOutcome {
   fixture: string;
-  outcome: string;
+  outcome: { Outcome: string; [key: string]: any }; // Updated
 }
 
 const DetailedTeamAnalysis: React.FC = () => {
@@ -186,7 +186,7 @@ const DetailedTeamAnalysis: React.FC = () => {
                     {fixtureOutcomes.map((item, index) => (
                       <tr key={index}>
                         <td>{item.fixture}</td>
-                        <td>{item.outcome}</td>
+                        <td>{item.outcome.Outcome}</td>
                       </tr>
                     ))}
                   </tbody>
