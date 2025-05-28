@@ -101,7 +101,7 @@ const QualificationPath: React.FC = () => {
   }
 
   if (error) {
-    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive">{error}</p>; // Style via global CSS
   }
 
   const isExhaustive = metadata?.method_used.toLowerCase().includes('exhaustive');
@@ -109,9 +109,9 @@ const QualificationPath: React.FC = () => {
   return (
     <div>
       {metadata && (
-        <div className="metadata mb-1">
+        <div className="metadata mb-1 glassy-panel"> {/* Added glassy-panel */}
           <p>Analysis Method: {metadata.method_used}</p>
-          {!isExhaustive && pathData && ( // Check if pathData is available even if not exhaustive
+          {!isExhaustive && pathData && (
              <p className="text-warning" role="status">
               Note: Qualification Path analysis is most meaningful and typically only available with the Exhaustive method.
             </p>
@@ -119,16 +119,16 @@ const QualificationPath: React.FC = () => {
         </div>
       )}
 
-      {!pathData && !loading && !isExhaustive && (
+      {!pathData && !loading && !isExhaustive && metadata && ( // Added metadata check
          <p role="status">Qualification Path data is not available for the current analysis method ({metadata?.method_used || 'Unknown'}). This feature requires Exhaustive analysis.</p>
       )}
       
-      {isExhaustive && !pathData && !loading && (
-         <p role="status">Qualification Path data is available with the Exhaustive method, but it seems to be missing from the results file.</p>
+      {isExhaustive && !pathData && !loading && metadata && ( // Added metadata check
+         <p role="status" className="glassy-panel">Qualification Path data is available with the Exhaustive method, but it seems to be missing from the results file.</p>
       )}
 
 
-      {(pathData || isExhaustive) && ( // Show controls if pathData exists OR if method is exhaustive (even if data is missing for some reason)
+      {(pathData || (isExhaustive && metadata)) && ( // Show controls if pathData exists OR if method is exhaustive and metadata is loaded
         <div className="qualification-path-controls">
           <div className="control-group">
             <label htmlFor="team-select-path">Select Team: </label>
@@ -171,7 +171,7 @@ const QualificationPath: React.FC = () => {
       )}
 
       {isExhaustive && selectedTeamKey && teamPathResult && (
-        <div id="qualification-path-results" className="qualification-path-results mt-2">
+        <div id="qualification-path-results" className="qualification-path-results mt-2 glassy-panel"> {/* Added glassy-panel */}
           <h3>
             {team_full_names[selectedTeamKey] || selectedTeamKey} - Top {selectedTarget} Path
           </h3>
@@ -198,10 +198,10 @@ const QualificationPath: React.FC = () => {
         </div>
       )}
       {isExhaustive && selectedTeamKey && !teamPathResult && !loading && (
-         <p className="mt-2">No qualification path data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}.</p>
+         <p className="mt-2 glassy-panel">No qualification path data available for {team_full_names[selectedTeamKey] || selectedTeamKey} for Top {selectedTarget}.</p>
       )}
       {isExhaustive && !selectedTeamKey && Object.keys(availableTeams).length > 0 && !loading && (
-        <p className="mt-2">Please select a team to view its qualification path.</p>
+        <p className="mt-2 glassy-panel">Please select a team to view its qualification path.</p>
       )}
     </div>
   );

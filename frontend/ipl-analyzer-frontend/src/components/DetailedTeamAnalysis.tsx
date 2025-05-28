@@ -116,7 +116,7 @@ const DetailedTeamAnalysis: React.FC = () => {
   }
 
   if (error) {
-    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive">{error}</p>; // Style via global CSS
   }
 
   return (
@@ -129,7 +129,7 @@ const DetailedTeamAnalysis: React.FC = () => {
       )}
 
       <div className="analysis-controls">
-        <div className="control-group">
+        <div className="control-group glassy-panel"> {/* Added glassy-panel for consistency if not applied globally */}
           <label htmlFor="team-select-analysis">Select Team: </label>
           <select id="team-select-analysis" value={selectedTeamKey} onChange={handleTeamChange} aria-controls="team-analysis-results">
             <option value="">--Select a Team--</option>
@@ -139,7 +139,7 @@ const DetailedTeamAnalysis: React.FC = () => {
           </select>
         </div>
 
-        <fieldset className="control-group">
+        <fieldset className="control-group glassy-panel"> {/* Added glassy-panel */}
           <legend>Select Target:</legend>
           <label htmlFor="top4-radio-analysis">
             <input
@@ -167,7 +167,7 @@ const DetailedTeamAnalysis: React.FC = () => {
       </div>
 
       {selectedTeamKey && teamResults && (
-        <div id="team-analysis-results" className="analysis-results mt-2">
+        <div id="team-analysis-results" className="analysis-results mt-2 glassy-panel"> {/* Added glassy-panel */}
           <h3>
             {team_full_names[selectedTeamKey] || selectedTeamKey} - Top {selectedTarget} Analysis
           </h3>
@@ -179,7 +179,7 @@ const DetailedTeamAnalysis: React.FC = () => {
           <h4>Required / Frequent Outcomes for Qualification:</h4>
             {fixtureOutcomes.length > 0 ? (
               <div className="table-responsive">
-                <table>
+                <table className="mt-1"> {/* Added margin for spacing */}
                   <thead>
                     <tr>
                       <th>Fixture</th>
