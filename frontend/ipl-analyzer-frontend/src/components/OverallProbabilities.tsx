@@ -38,7 +38,7 @@ const OverallProbabilities: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/analysis_results.json')
+    fetch(`${import.meta.env.BASE_URL}analysis_results.json`) // This line will be changed
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
