@@ -9,7 +9,7 @@ import { // Values from chart.js
   Tooltip,
   Legend
 } from 'chart.js'; // Values from chart.js
-import type { ChartOptions, ChartData } from 'chart.js'; // Types from chart.js
+import type { ChartOptions, ChartData, TooltipItem } from 'chart.js'; // Types from chart.js
 
 import { team_short_names, team_styles } from '../teamStyles'; // Values from teamStyles
 import type { TeamStyle } from '../teamStyles'; // Types from teamStyles
@@ -66,9 +66,8 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
         },
         grid: {
           color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
-          }
         }
-      },
+      }, // x scale object ends
       y: {
         ticks: {
           autoSkip: false,
@@ -76,9 +75,9 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
         },
         grid: {
           color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
-        },
-      },
-    },
+        } // No comma after grid object
+      } // No comma after y scale object
+    }, // scales object ends
     plugins: {
       legend: {
         display: false,
@@ -110,7 +109,7 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
     animation: false, // Disable animation for users sensitive to motion
     // The canvas element will get an aria-label from the Bar component props
   };
-  
+
   // Height can be dynamic based on number of teams, or fixed
   const chartHeight = Math.max(300, chartData.length * 35); // Example dynamic height
 

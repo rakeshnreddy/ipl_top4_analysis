@@ -1,9 +1,9 @@
 // Team Names and Styles
 
 export interface TeamStyle {
-  bg: string; // Main background color or primary color for the team row/element
-  text: string; // Text color for good contrast on 'bg'
-  accent?: string; // Optional accent color for borders or highlights
+  bg: string;
+  text: string;
+  accent?: string; // Add this line
 }
 
 
