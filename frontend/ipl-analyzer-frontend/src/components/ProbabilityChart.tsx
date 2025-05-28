@@ -8,7 +8,7 @@ import { // Values from chart.js
   Title,
   Tooltip,
   Legend
-} from 'chart.js';
+} from 'chart.js'; // Values from chart.js
 import type { ChartOptions, ChartData } from 'chart.js'; // Types from chart.js
 
 import { team_short_names, team_styles } from '../teamStyles'; // Values from teamStyles
@@ -36,8 +36,11 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
       {
         label: 'Probability', // Keep label simple for screen readers
         data: chartData.map(d => d.probability),
-        backgroundColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.bg || '#cccccc'),
-        borderColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.text || '#333333'),
+        backgroundColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.accent || 
+                                          (team_styles[d.teamKey] as TeamStyle)?.bg || 
+                                          'var(--accent-color-light, #BEA8A7)'), // Fallback to CSS var or warm gray
+        borderColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.text || 
+                                        'var(--text-color-light, #8A7978)'), // Fallback to CSS var or darker warm gray
         borderWidth: 1,
       },
     ],
@@ -58,12 +61,21 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
         ticks: {
           callback: function(value) {
             return value + '%';
+          },
+          color: 'var(--text-color-light)' // Use CSS variable for tick colors
+        },
+        grid: {
+          color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
           }
         }
       },
       y: {
         ticks: {
           autoSkip: false,
+          color: 'var(--text-color-light)' // Use CSS variable for tick colors
+        },
+        grid: {
+          color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
         },
       },
     },
@@ -75,12 +87,13 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
         display: true,
         text: titleText,
         font: {
+          family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", // Match body font
           size: 16,
         }
       },
       tooltip: {
         callbacks: {
-          label: function (context) {
+          label: (context: TooltipItem<'bar'>) => {
             let label = context.dataset.label || '';
             if (label) {
               label += ': ';
@@ -102,7 +115,7 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
   const chartHeight = Math.max(300, chartData.length * 35); // Example dynamic height
 
   return (
-    <div style={{ height: `${chartHeight}px`, position: 'relative' }}>
+    <div className="chart-container" style={{ height: `${chartHeight}px`, position: 'relative' }}>
       <Bar options={options} data={data} aria-label={ariaLabel} role="img" />
     </div>
   );

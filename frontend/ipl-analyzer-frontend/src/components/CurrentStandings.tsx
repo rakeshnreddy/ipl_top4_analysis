@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles } from '../teamStyles'; import type { TeamStyle } from '../teamStyles';
+import { team_full_names, team_styles, TeamStyle } from '../teamStyles'; // Ensure TeamStyle is exported and imported
 interface TeamStats {
   Matches: number;
   Wins: number;
@@ -28,6 +28,12 @@ const CurrentStandings: React.FC = () => {
   const [dataSource, setDataSource] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Theme-aware default colors
+  const defaultTeamStyle: TeamStyle = { 
+    bg: 'var(--panel-bg-light)', // Using CSS variable, assuming light mode default
+    text: 'var(--text-color-light)' // Using CSS variable
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -76,7 +82,7 @@ const CurrentStandings: React.FC = () => {
   }
 
   if (error) {
-    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
+    return <p role="alert" aria-live="assertive">{error}</p>; // Style via global CSS
   }
 
   if (standings.length === 0) {
@@ -85,11 +91,11 @@ const CurrentStandings: React.FC = () => {
 
   return (
     <div>
-      <div className="metadata mb-2">
+      <div className="metadata mb-2 glassy-panel"> {/* Added glassy-panel */}
         {lastUpdated && <p>Last Updated: {new Date(lastUpdated).toLocaleString()}</p>}
         {dataSource && <p>Source: {dataSource}</p>}
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive glassy-panel"> {/* Added glassy-panel */}
         <table>
           <caption>Current IPL Team Standings</caption>
           <thead>
@@ -105,8 +111,13 @@ const CurrentStandings: React.FC = () => {
           <tbody>
             {standings.map((team) => {
               const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
+              const rowStyle = {
+                backgroundColor: teamStyle?.bg || defaultTeamStyle.bg,
+                color: teamStyle?.text || defaultTeamStyle.text,
+                borderLeft: teamStyle?.accent ? `5px solid ${teamStyle.accent}` : 'none', // Example use of accent
+              };
               return (
-                <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
+                <tr key={team.teamKey} style={rowStyle}>
                   <td>{team.pos}</td>
                   <td>{team.teamFullName}</td>
                   <td>{team.Matches}</td>
