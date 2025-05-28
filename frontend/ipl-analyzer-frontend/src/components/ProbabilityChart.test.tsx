@@ -21,8 +21,14 @@ vi.mock('../teamStyles', async (importOriginal) => {
 });
 
 // Mock ChartJS and its components as they are complex and not the focus of this unit test
+interface MockBarProps {
+  data: unknown;
+  options: unknown;
+  'aria-label': string;
+  role: string;
+}
 vi.mock('react-chartjs-2', () => ({
-  Bar: (props: any) => (
+  Bar: (props: MockBarProps) => (
     <div data-testid="bar-chart-mock" aria-label={props['aria-label']} role={props['role']}>
       {/* You can add more details here if needed to check props passed to Bar */}
       <pre>{JSON.stringify(props.data, null, 2)}</pre>

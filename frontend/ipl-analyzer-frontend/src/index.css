@@ -1,309 +1,650 @@
-/* IPL Analyzer Frontend Global Styles */  
-/* Add to your global CSS file, e.g., index.css or App.css */
-/* Glassmorphic Theme Styles */
 :root {
-  /* Light Mode Base */
-  /* --bg-color-light: #FFF5E1; /* Replaced by gradient */
-  --bg-gradient-start-light: #FFFAF0; /* Floral White - very light warm */
-  --bg-gradient-middle-light: #FFF0E1; /* Old Lace - light warm peach */
-  --bg-gradient-end-light: #FFE4B5;   /* Moccasin - warm beige */
-  --text-color-light: #4E342E; /* Deep Brown - warm dark text */
-  --panel-bg-light: rgba(255, 245, 225, 0.6); /* Semi-transparent light panel */
-  --panel-border-light: rgba(211, 188, 141, 0.5); /* Subtle warm border */
-  --accent-color-light: #FF8A65; /* Muted Orange */
-  --accent-color-light-rgb: 255, 138, 101; /* For rgba() usage */
-  --error-color-light: #D32F2F; /* Softer Red */
-  --error-color-light-rgb: 211, 47, 47; /* For rgba() usage */
-  --button-bg-light: #FFB74D; /* Warm Orange */
-  --button-text-light: #4E342E;
-  --input-bg-light: rgba(255, 245, 225, 0.8);
-  --input-border-light: #D3BC8D;
-  --table-header-bg-light: rgba(255, 236, 210, 0.7); /* Light warm beige for table headers */
+  /* Light Theme Color Palette (Default) */
+  --primary-color: #007bff; /* Vivid Blue */
+  --primary-hover-color: #0056b3; /* Darker Blue */
+  --secondary-color: #6c757d; /* Cool Gray */
+  --background-color: #f4f7f6; /* Very Light Gray/Off-white */
+  --surface-color: #ffffff; /* White */
+  --text-color: #212529; /* Almost Black */
+  --text-muted-color: #5a6268; /* Medium Gray */
+  --border-color: #ced4da; /* Light Gray Border */
+  --accent-color-success: #28a745; /* Green */
+  --accent-color-warning: #ffc107; /* Yellow */
+  --accent-color-warning-text: #212529; /* Dark text for light yellow */
+  --accent-color-info: #17a2b8; /* Teal */
+  --table-header-bg: #e9ecef;
+  --table-row-even-bg: var(--background-color);
+  --table-row-hover-bg: #ddeeff;
+  --control-bg: #e9ecef; /* Background for control groups */
+  --input-bg: var(--surface-color);
+  --input-text-color: var(--text-color);
+  --input-border-color: var(--border-color);
+  --button-text-color: var(--surface-color);
+  --disabled-bg-color: var(--secondary-color);
+  --disabled-text-color: #e9ecef;
+  --footer-bg-color: #343a40;
+  --footer-text-color: #f8f9fa;
+  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
+  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-hover-color);
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--surface-color);
+  --loading-message-border: #117a8b;
+  --error-message-bg: #f8d7da;
+  --error-message-text: #721c24;
+  --error-message-border: #f5c6cb;
 
-  /* Dark Mode Base */
-  /* --bg-color-dark: #2C1B18; /* Replaced by gradient */
-  --bg-gradient-start-dark: #3A2B27; /* Darker warm brown */
-  --bg-gradient-middle-dark: #2C1B18; /* Very Dark Warm Brown */
-  --bg-gradient-end-dark: #1E100C;   /* Deepest warm brown */
-  --text-color-dark: #EAE0D6; /* Pale Warm Beige */
-  --panel-bg-dark: rgba(44, 27, 24, 0.6); /* Semi-transparent dark panel */
-  --panel-border-dark: rgba(100, 80, 70, 0.5); /* Subtle warm dark border */
-  --accent-color-dark: #FFB74D; /* Warm Orange (can be same or adjusted) */
-  --accent-color-dark-rgb: 255, 183, 77; /* For rgba() usage */
-  --error-color-dark: #E57373; /* Lighter, softer red for dark mode */
-  --error-color-dark-rgb: 229, 115, 115; /* For rgba() usage */
-  --button-bg-dark: #E65100; /* Deeper Orange */
-  --button-text-dark: #FFF5E1;
-  --input-bg-dark: rgba(62, 39, 35, 0.7);
-  --input-border-dark: #795548;
-  --table-header-bg-dark: rgba(62, 39, 35, 0.8); /* Dark warm brown for table headers */
 
-  --border-radius-main: 12px;
-  --border-radius-small: 8px;
-  /* Define primary font variables for consistency */
-  --font-family-sans-serif: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Dark Theme Color Palette (Defined here, applied in media query) */
+  --primary-color-dark: #007bff; /* Blue can often work for both */
+  --primary-hover-color-dark: #0056b3;
+  --background-color-dark: #121212; /* Very dark gray */
+  --surface-color-dark: #1e1e1e; /* Slightly lighter for cards */
+  --text-color-dark: #e0e0e0; /* Light gray for text */
+  --text-muted-color-dark: #a0a0a0; /* Dimmer light gray */
+  --border-color-dark: #444444; /* Darker border */
+  --accent-color-success-dark: #28a745; /* Green can work, or make it slightly brighter */
+  --accent-color-warning-dark: #b8860b; /* Darker yellow for dark mode */
+  --accent-color-warning-text-dark: var(--text-color-dark); /* Light text for dark yellow */
+  --accent-color-info-dark: #17a2b8; /* Teal can work, or make it slightly brighter */
+  --table-header-bg-dark: #2c2c2c;
+  --table-row-even-bg-dark: #252525;
+  --table-row-hover-bg-dark: #3a3a3a;
+  --control-bg-dark: #2c2c2c;
+  --input-bg-dark: #2a2a2a;
+  --input-text-color-dark: var(--text-color-dark);
+  --input-border-color-dark: var(--border-color-dark);
+  --button-text-color-dark: var(--text-color-dark); /* For buttons that might not have dark bg like primary */
+  --disabled-bg-color-dark: #495057;
+  --disabled-text-color-dark: #adb5bd;
+  --footer-bg-color-dark: #212529;
+  --footer-text-color-dark: #ced4da;
+  --box-shadow-light-dark: 0 2px 5px rgba(255, 255, 255, 0.05);
+  --box-shadow-medium-dark: 0 4px 10px rgba(255, 255, 255, 0.08);
+  --link-color-dark: #63a9ff; /* Lighter blue for dark mode links */
+  --link-hover-color-dark: #8dbdff;
+  --loading-message-bg-dark: var(--accent-color-info-dark);
+  --loading-message-text-dark: var(--text-color-dark);
+  --loading-message-border-dark: #106777;
+  --error-message-bg-dark: #58181F;
+  --error-message-text-dark: #F8D7DA;
+  --error-message-border-dark: #721c24;
+
+
+  /* Fonts */
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Spacing & Sizing */
+  --spacing-unit: 8px;
+  --border-radius: 0.3rem; /* Slightly more rounded: 4.8px */
+  --max-content-width: 1280px; /* Increased max width */
 }
 
-/* Basic Reset and Global Settings */
-*, *::before, *::after {
+/* Global Resets & Defaults */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
 }
-
 
 body {
-  background: linear-gradient(135deg, var(--bg-gradient-start-light), var(--bg-gradient-middle-light), var(--bg-gradient-end-light));
-  color: var(--text-color-light);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Example font */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-family-sans-serif);
   margin: 0;
-  padding: 20px; /* Add some padding around the body */
-  line-height: 1.6; /* Improved readability */
-  -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
-  -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox */
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.65; /* Improved line height */
+  font-size: 16px; /* Base font size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#root { /* Assuming your React app mounts to an element with id="root" */
-  min-height: 100vh; /* Ensure the app takes at least the full viewport height */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-
-/* Dark mode styles */
-@media (prefers-color-scheme: dark) {
-  body {
-    /* background-color: var(--bg-color-dark); */
-    background: linear-gradient(135deg, var(--bg-gradient-start-dark), var(--bg-gradient-middle-dark), var(--bg-gradient-end-dark));
-    color: var(--text-color-dark);
-  }
-  .glassy-panel, .control-group, .metadata, .table-responsive, .simulation-results-container, .analysis-results, .qualification-path-results {
-    background: var(--panel-bg-dark); /* Important might be needed if old styles have high specificity */
-    border: 1px solid var(--panel-border-dark);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2); /* Softer shadow for dark */
-  }
-  .button, button {
-    background-color: var(--button-bg-dark);
-    color: var(--button-text-dark);
-    border: 1px solid var(--accent-color-dark);
-  }
-  .button:hover, button:hover {
-    background-color: var(--accent-color-dark); /* Important might be needed */
-  }
-  input, select, textarea {
-    background-color: var(--input-bg-dark);
-    color: var(--text-color-dark);
-    border: 1px solid var(--input-border-dark);
-  }
-  input::placeholder, textarea::placeholder {
-    color: var(--text-color-dark-placeholder, #b0bec5);
-  }
-  table th {
-    background-color: var(--table-header-bg-dark);
-  }
-  table td, table th {
-    border-bottom: 1px solid var(--panel-border-dark);
-  }
-  .simulation-message {
-    background-color: rgba(var(--accent-color-dark-rgb), 0.15);
-    border-left-color: var(--accent-color-dark);
-  }
-  p[role="alert"] {
-    color: var(--error-color-dark) !important; /* Important to override inline style if needed */
-    background-color: rgba(var(--error-color-dark-rgb), 0.1);
-    border-left-color: var(--error-color-dark);
-  }
-}
-
-/* Glassmorphic Panel Style */
-/* This is the base style for glassy panels.
-   Apply this class to components in your TSX files as needed.
-*/
-.glassy-panel {
-  background: var(--panel-bg-light);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: var(--border-radius-main);
-  border: 1px solid var(--panel-border-light);
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 1px 2px rgba(255,255,255,0.75) inset, 0 -1px 1px rgba(0,0,0,0.1) inset; /* Enhanced shadow for 3D */
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Apply glassy-panel styles to specific layout containers if they aren't already getting the class directly */
-/* Example: if .control-group itself should always be glassy without adding the class in TSX */
-.control-group, .metadata, .table-responsive,
-.simulation-results-container, .analysis-results, .qualification-path-results,
-.simulation-controls, .analysis-controls, .qualification-path-controls,
-.chart-wrapper { /* For containers around charts */
-  /* If these elements should always be glassy panels, you can apply the properties here,
-     or ensure the .glassy-panel class is added to them in the TSX files. */
-}
-
-/* General Rounded Edges & Styling */
-button, input, select, textarea {
-  border-radius: var(--border-radius-small);
-  padding: 10px 15px;
-  border: 1px solid var(--input-border-light);
-  background-color: var(--input-bg-light);
-  color: var(--text-color-light);
-  font-size: 1rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-button:hover, .button:hover {
-  opacity: 0.9;
-  background-color: var(--accent-color-light); /* Important might be needed */
-}
-button:disabled, .button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.button.success, button.success { /* Assuming .button is a general class you use */
-  background-color: var(--button-bg-light);
-  color: var(--button-text-light);
-  border: 1px solid var(--accent-color-light);
-}
-
-select {
-  appearance: none; /* Remove default arrow */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 40px; /* Make space for custom arrow */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234E342E'%3E%3Cpath d='M8 11.207l-4.604-4.603.707-.707L8 9.793l3.896-3.896.707.707z'/%3E%3C/svg%3E"); /* Basic SVG arrow, color matches --text-color-light */
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05) inset, 0 1px 1px rgba(255,255,255,0.3); /* Subtle 3D for select */
-}
-
-@media (prefers-color-scheme: dark) {
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23EAE0D6'%3E%3Cpath d='M8 11.207l-4.604-4.603.707-.707L8 9.793l3.896-3.896.707.707z'/%3E%3C/svg%3E"); /* Arrow color matches --text-color-dark */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2) inset, 0 1px 1px rgba(255,255,255,0.1);
-  }
-}
-
-select:focus {
-  outline: 2px solid var(--accent-color-light);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(var(--accent-color-light-rgb), 0.3), /* Existing focus style */
-              0 2px 5px rgba(0,0,0,0.05) inset, 0 1px 1px rgba(255,255,255,0.3); /* Keep 3D effect on focus */
-}
-
-textarea {
+/* App Container */
+#app-container {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3); /* 16px 24px */
   width: 100%;
-  box-sizing: border-box;
+  flex-grow: 1; /* Allows footer to stick to bottom */
 }
 
-/* Tables */
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+  color: var(--button-text-color); /* Use variable for text color */
+  padding: calc(var(--spacing-unit) * 2.5) 0; /* 20px */
+  text-align: center;
+  border-radius: var(--border-radius);
+  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  box-shadow: var(--box-shadow-medium); /* Use variable */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Sections */
+section {
+  background-color: var(--surface-color);
+  padding: calc(var(--spacing-unit) * 3); /* 24px */
+  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light); /* Use variable */
+  transition: box-shadow 0.3s ease-in-out;
+}
+section:hover {
+  box-shadow: var(--box-shadow-medium); /* Use variable */
+}
+
+section h2 {
+  margin-top: 0;
+  margin-bottom: calc(var(--spacing-unit) * 2.5); /* 20px */
+  color: var(--primary-hover-color);
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+  font-size: 1.85rem; /* 29.6px */
+  font-weight: 600;
+}
+
+section h3 {
+  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+  margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+  font-size: 1.5rem; /* 24px */
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+section h4 {
+  margin-top: var(--spacing-unit) * 1.5; /* 12px */
+  margin-bottom: var(--spacing-unit); /* 8px */
+  font-size: 1.2rem; /* 19.2px */
+  color: var(--text-muted-color);
+  font-weight: 600;
+}
+
+/* Generic Table Styling */
 .table-responsive {
-  overflow-x: auto;
-  /* padding: 0; Panel padding is enough */ /* Keep padding for shadow visibility */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 3px 8px rgba(0,0,0,0.07); /* More pronounced shadow for table container */
+  overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+  width: 100%;
+  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
 }
 table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-spacing: 0; /* Crucial for border-radius to work well with overflow:hidden */
-  overflow: hidden; /* Clip cell backgrounds to table radius */
+  border-collapse: collapse; /* More robust than border-radius on table for compatibility */
 }
+
 th, td {
-  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
   text-align: left;
-  border-bottom: 1px solid var(--panel-border-light);
+  vertical-align: middle;
+  border-bottom-width: 1px; /* Ensure bottom border is consistent */
 }
+
 th {
-  background-color: var(--table-header-bg-light);
-  backdrop-filter: blur(4px); /* Subtle glass for header */
+  background-color: var(--table-header-bg); /* Use variable */
+  font-weight: 700; /* Bolder headers */
+  color: var(--text-color);
+  white-space: nowrap; /* Prevent headers from wrapping */
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--table-row-even-bg); /* Use variable */
+}
+
+tbody tr:hover {
+  background-color: var(--table-row-hover-bg); /* Use variable */
+}
+
+tbody tr[style] {
+  color: inherit;
+}
+tbody tr[style]:nth-child(even) {
+  background-color: inherit;
+}
+tbody tr[style] td {
+  /* Inline styles from team_styles will handle bg and text color */
+}
+table caption {
+  caption-side: top;
+  font-size: 1.1em;
   font-weight: 600;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.05) inset; /* Slight inset for 3D header */
-}
-tbody tr:last-child td {
-  border-bottom: none;
-}
-/* Style for team colors in tables will still come from inline styles via teamStyles.ts */
-/* but we can ensure text color has good contrast if teamStyle.text is not defined */
-tbody tr td {
-  /* color: var(--text-color-light); Fallback if teamStyle.text is missing */
-}
-@media (prefers-color-scheme: dark) {
-  tbody tr td {
-    /* color: var(--text-color-dark); Fallback if teamStyle.text is missing */
-  }
+  color: var(--text-muted-color);
+  padding: var(--spacing-unit);
+  text-align: left;
 }
 
 
-/* Specific Component Adjustments */
-/* These containers will get .glassy-panel class from TSX for the background/border */
-.simulation-controls, .analysis-controls, .qualification-path-controls { 
+/* Form Elements */
+.analysis-controls,
+.qualification-path-controls,
+.simulation-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: calc(var(--spacing-unit) * 2.5); /* 20px */
+  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+  padding: calc(var(--spacing-unit) * 2); /* 16px */
+  background-color: var(--control-bg); /* Use variable */
+  border-radius: var(--border-radius);
   align-items: center;
 }
+
 .control-group {
-  padding: 15px; /* Slightly less padding for inner groups */
-  margin-bottom: 0; /* Remove margin if already handled by flex gap or parent panel's padding */
-  flex: 1;
-  min-width: 250px; /* Ensure controls don't get too squished */
-}
-.control-group legend {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: inherit; /* Inherit text color from body/parent */
-}
-.control-group label {
-  margin-right: 10px;
-  display: inline-flex; /* Align radio/checkbox with text */
+  display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--spacing-unit); /* 8px */
 }
 
-.simulation-message {
-  padding: 15px;
-  margin-top: 20px;
-  border-left: 5px solid var(--accent-color-light);
-  background-color: rgba(var(--accent-color-light-rgb), 0.1); /* Light accent background */
-  border-radius: var(--border-radius-small);
+.control-group label, fieldset legend {
+  font-weight: 600; /* Bolder labels */
+  color: var(--text-color);
+  margin-right: calc(var(--spacing-unit) * 0.5); /* 4px */
+  font-size: 0.95em; /* Slightly smaller labels */
+}
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+fieldset.control-group { /* For radio groups */
+    gap: var(--spacing-unit) * 1.5; /* 12px */
+}
+fieldset legend {
+    padding: 0 0 calc(var(--spacing-unit) * 0.5) 0; /* Bottom padding for legend */
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
 }
 
-p[role="alert"] { /* Error messages */
-  padding: 15px;
-  margin-top: 20px;
-  border-left: 5px solid var(--error-color-light);
-  background-color: rgba(var(--error-color-light-rgb), 0.1);
-  border-radius: var(--border-radius-small);
-  color: var(--error-color-light) !important; /* Override inline red */
+
+select,
+input[type="text"],
+input[type="number"],
+textarea {
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); /* 10px 12px */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--input-border-color); /* Use variable */
+  background-color: var(--input-bg); /* Use variable */
+  font-size: 1em;
+  color: var(--input-text-color); /* Use variable */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  min-width: 180px; /* Minimum width for select/inputs */
 }
 
-.metadata p {
-  margin: 5px 0;
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus ring */
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: calc(var(--spacing-unit) * 0.75); /* 6px */
+  accent-color: var(--primary-color); /* Style radio/checkbox color */
+  transform: scale(1.1); /* Slightly larger radio/checkbox */
+}
+
+.control-group label[for*="-radio"],
+.control-group label[for*="-checkbox"] {
+  margin-right: var(--spacing-unit); /* 8px */
+  font-weight: normal; /* Normal weight for radio/checkbox labels */
+}
+
+button, .button {
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); /* 10px 20px */
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: var(--button-text-color); /* Use variable */
+  font-size: 1em;
+  font-weight: 600; /* Bolder buttons */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap; /* Prevent button text wrapping */
+}
+button:hover, .button:hover {
+  background-color: var(--primary-hover-color);
+  color: var(--surface-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+button:active, .button:active {
+    transform: translateY(1px);
+}
+button:focus-visible, .button:focus-visible { /* Modern focus state */
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35);
+}
+
+button:disabled, .button:disabled {
+  background-color: var(--disabled-bg-color); /* Use variable */
+  border-color: var(--disabled-bg-color); /* Use variable */
+  color: var(--disabled-text-color); /* Use variable */
+  cursor: not-allowed;
+  opacity: 0.75; /* More visible disabled state */
+  box-shadow: none;
+  transform: none;
+}
+
+button.success, .button.success {
+  background-color: var(--accent-color-success);
+}
+button.success:hover, .button.success:hover {
+  background-color: #1f7d39; /* Darker success green */
+}
+button.warning, .button.warning {
+  background-color: var(--accent-color-warning);
+    color: var(--accent-color-warning-text); /* Use variable */
+}
+button.warning:hover, .button.warning:hover {
+    background-color: #e0a800; /* Consider making this a variable too if used elsewhere */
+}
+
+
+/* Utilities */
+.text-center { text-align: center; }
+.mb-1 { margin-bottom: var(--spacing-unit); } /* 8px */
+.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); } /* 16px */
+.mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); } /* 24px */
+.mt-1 { margin-top: var(--spacing-unit); }
+.mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
+.mt-3 { margin-top: calc(var(--spacing-unit) * 3); }
+.text-warning { color: #856404; background-color: #fff3cd; padding: var(--spacing-unit); border-radius: var(--border-radius); border: 1px solid #ffeeba;}
+
+
+/* Current Standings Metadata */
+#current-standings .metadata p {
+  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
   font-size: 0.9em;
-  opacity: 0.8;
+  color: var(--text-muted-color);
 }
 
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mb-1 { margin-bottom: 0.5rem; }
-.mb-2 { margin-bottom: 1rem; }
-
-/* Chart container styling */
-.chart-container { /* This is the div you wrap <Bar> with in ProbabilityChart.tsx */
-  /* If the chart container itself should be a glassy panel, add .glassy-panel to it in TSX.
-     Alternatively, style it directly here if it always has this look.
-  background: var(--panel-bg-light);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: var(--border-radius-main);
-  border: 1px solid var(--panel-border-light);
-  padding: 15px; // Adjust padding as needed
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
+/* Scenario Simulation Specifics */
+#scenario-simulation .simulation-message {
+  margin-top: var(--spacing-unit);
+  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
+  background-color: var(--accent-color-warning); /* Use variable, or specific message bg */
+  border: 1px solid #ffeeba; /* Fallback, or make variable */
+  border-radius: var(--border-radius);
+  color: var(--accent-color-warning-text); /* Use variable */
+  font-weight: 500;
 }
-.chart-container > div { /* Targets the canvas wrapper div from react-chartjs-2 */
-   border-radius: var(--border-radius-main);
-   padding: 10px; /* Add some padding inside the chart's own container if needed */
- }
+
+#scenario-simulation .simulation-results-container {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 3); /* 24px */
+  margin-top: calc(var(--spacing-unit) * 2.5); /* 20px */
+  flex-wrap: wrap;
+}
+
+#scenario-simulation .match-log-container,
+#scenario-simulation .final-standings-container {
+  flex: 1;
+  min-width: 320px; /* Ensure readability on smaller flex layouts */
+  background-color: var(--surface-color);
+  padding: calc(var(--spacing-unit) * 2); /* 16px */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+#scenario-simulation textarea {
+  width: 100%;
+  padding: var(--spacing-unit); /* 8px */
+  border-radius: var(--border-radius);
+  border: 1px solid var(--input-border-color); /* Use variable */
+  font-family: var(--font-family-monospace);
+  font-size: 0.95em; /* Slightly larger for readability */
+  background-color: var(--input-bg); /* Use variable, or specific like #e9ecef */
+  color: var(--input-text-color); /* Use variable */
+  min-height: 250px; /* Increased height */
+  resize: vertical;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+}
+
+/* Qualification Path Specifics */
+#qualification-path .qualification-path-results p {
+  margin-bottom: var(--spacing-unit);
+  font-size: 1.05em; /* Slightly larger for emphasis */
+}
+#qualification-path .qualification-path-results strong {
+  color: var(--primary-hover-color);
+}
+#qualification-path .metadata .text-warning { /* For the "Exhaustive only" message */
+    font-size: 0.9em;
+    margin-top: var(--spacing-unit);
+}
+
+
+/* Chart Container (OverallProbabilities) */
+/* The height is primarily controlled inline in OverallProbabilities.tsx */
+/* Styles for the div wrapping ProbabilityChart if needed */
+#overall-probabilities > div > div[style*="flex: 1"] { /* Targets the flex children */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-unit);
+    background-color: var(--surface-color);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+#overall-probabilities .metadata p {
+  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
+  font-size: 0.9em;
+  color: var(--text-muted-color);
+}
+
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: calc(var(--spacing-unit) * 3) 0; /* 24px */
+  margin-top: calc(var(--spacing-unit) * 4); /* 32px */
+  background-color: var(--footer-bg-color); /* Use variable */
+  color: var(--footer-text-color); /* Use variable */
+  border-top: 3px solid var(--primary-color);
+}
+footer p {
+  margin: calc(var(--spacing-unit) * 0.5) 0; /* 4px */
+  font-size: 0.9em;
+}
+
+
+/* ARIA Live Regions - Basic Styling for Visibility (if needed, often they are visually hidden) */
+[aria-live="polite"], [aria-live="assertive"] {
+    /* These regions update screen readers. Visual styling might not be needed unless they show visible messages. */
+    /* Example: */
+    /* padding: var(--spacing-unit); */
+    /* margin-top: var(--spacing-unit); */
+    /* border: 1px dashed var(--secondary-color); */
+}
+p[role="status"], p[role="alert"] { /* For loading/error messages */
+    padding: calc(var(--spacing-unit) * 1.5);
+    margin-top: var(--spacing-unit);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+p[role="status"] { /* Loading messages */
+    background-color: var(--loading-message-bg); /* Use variable */
+    color: var(--loading-message-text); /* Use variable */
+    border: 1px solid var(--loading-message-border); /* Use variable */
+}
+p[role="alert"] { /* Error messages */
+    background-color: var(--error-message-bg); /* Use variable */
+    color: var(--error-message-text); /* Use variable */
+    border: 1px solid var(--error-message-border); /* Use variable */
+}
+
+
+/* Dark Mode using prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: var(--primary-color-dark, #007bff);
+    --primary-hover-color: var(--primary-hover-color-dark, #0056b3);
+    --background-color: var(--background-color-dark, #121212);
+    --surface-color: var(--surface-color-dark, #1e1e1e);
+    --text-color: var(--text-color-dark, #e0e0e0);
+    --text-muted-color: var(--text-muted-color-dark, #a0a0a0);
+    --border-color: var(--border-color-dark, #444444);
+    --accent-color-success: var(--accent-color-success-dark, #28a745);
+    --accent-color-warning: var(--accent-color-warning-dark, #b8860b);
+    --accent-color-warning-text: var(--accent-color-warning-text-dark, #e0e0e0);
+    --accent-color-info: var(--accent-color-info-dark, #17a2b8);
+    --table-header-bg: var(--table-header-bg-dark, #2c2c2c);
+    --table-row-even-bg: var(--table-row-even-bg-dark, #252525);
+    --table-row-hover-bg: var(--table-row-hover-bg-dark, #3a3a3a);
+    --control-bg: var(--control-bg-dark, #2c2c2c);
+    --input-bg: var(--input-bg-dark, #2a2a2a);
+    --input-text-color: var(--input-text-color-dark, #e0e0e0);
+    --input-border-color: var(--input-border-color-dark, #444444);
+    /* --button-text-color is often var(--surface-color) or var(--text-color-dark) depending on button bg */
+    /* For primary button using var(--primary-color), text might need to be light if primary isn't changing much */
+    --button-text-color: var(--text-color-dark, #e0e0e0); /* Defaulting to light text for buttons */
+    --disabled-bg-color: var(--disabled-bg-color-dark, #495057);
+    --disabled-text-color: var(--disabled-text-color-dark, #adb5bd);
+    --footer-bg-color: var(--footer-bg-color-dark, #212529);
+    --footer-text-color: var(--footer-text-color-dark, #ced4da);
+    --box-shadow-light: var(--box-shadow-light-dark, 0 2px 5px rgba(255, 255, 255, 0.05));
+    --box-shadow-medium: var(--box-shadow-medium-dark, 0 4px 10px rgba(255, 255, 255, 0.08));
+    --link-color: var(--link-color-dark, #63a9ff);
+    --link-hover-color: var(--link-hover-color-dark, #8dbdff);
+    --loading-message-bg: var(--loading-message-bg-dark, #17a2b8);
+    --loading-message-text: var(--loading-message-text-dark, #e0e0e0);
+    --loading-message-border: var(--loading-message-border-dark, #106777);
+    --error-message-bg: var(--error-message-bg-dark, #58181F);
+    --error-message-text: var(--error-message-text-dark, #F8D7DA);
+    --error-message-border: var(--error-message-border-dark, #721c24);
+  }
+
+  /* Specific overrides for dark mode elements if variables are not enough */
+  header {
+    /* If gradient needs adjustment for dark mode, or use solid color */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover-color) 100%);
+  }
+  button, .button { /* Ensure primary buttons have light text if their bg doesn't change much */
+    color: var(--surface-color-dark, #e0e0e0); /* Typically light text on dark primary button */
+  }
+  button.warning, .button.warning { /* Yellow buttons need dark text in light mode, light text in dark mode */
+      color: var(--text-color-dark); /* Ensure light text for dark yellow */
+  }
+  #scenario-simulation textarea {
+      background-color: var(--input-bg-dark, #252525); /* Darker textarea background */
+      color: var(--input-text-color-dark, #e0e0e0);
+      border-color: var(--input-border-color-dark, #444444);
+  }
+   select:focus,
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35); /* Blue focus ring might need adjustment if too bright */
+    }
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: var(--primary-color); /* Check if this is visible enough, or choose a lighter accent */
+    }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) { /* Tablets */
+  #app-container {
+    padding: var(--spacing-unit) * 1.5; /* 12px */
+  }
+  header h1 {
+    font-size: 2rem; /* 32px */
+  }
+  section h2 {
+    font-size: 1.65rem; /* 26.4px */
+  }
+  section h3 {
+    font-size: 1.35rem; /* 21.6px */
+  }
+
+  .analysis-controls,
+  .qualification-path-controls,
+  .simulation-controls {
+    flex-direction: column;
+    align-items: stretch; /* Make controls take full width */
+  }
+  .control-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .control-group label, .control-group fieldset legend {
+    margin-bottom: calc(var(--spacing-unit) * 0.5); /* 4px */
+  }
+  .control-group select, .control-group input[type="radio"] + label, .control-group input[type="checkbox"] + label {
+    width: 100%;
+  }
+  fieldset.control-group label { /* For radio buttons */
+    width: auto; /* Override full width for radio labels */
+    margin-bottom: 0;
+  }
+
+
+  #scenario-simulation .simulation-results-container {
+    flex-direction: column;
+  }
+  #overall-probabilities > div[style*="flex-direction: row"] { /* The flex container for charts */
+    flex-direction: column !important; /* Force charts to stack */
+  }
+  #overall-probabilities > div > div[style*="flex: 1"] {
+      margin-bottom: var(--spacing-unit) * 2; /* Add space between stacked charts */
+  }
+
+}
+
+@media (max-width: 576px) { /* Small phones */
+  body {
+    font-size: 15px; /* Slightly smaller base for small devices */
+  }
+  #app-container {
+    padding: var(--spacing-unit); /* 8px */
+  }
+  header h1 {
+    font-size: 1.75rem; /* 28px */
+  }
+  section h2 {
+    font-size: 1.5rem; /* 24px */
+  }
+  section h3 {
+    font-size: 1.25rem; /* 20px */
+  }
+  th, td {
+    padding: var(--spacing-unit); /* 8px */
+  }
+  button, .button {
+    width: 100%;
+    margin-bottom: var(--spacing-unit); /* Add some space if they stack */
+  }
+  .analysis-controls button,
+  .qualification-path-controls button,
+  .simulation-controls button { /* Ensure buttons in control groups also follow this */
+      width: 100%;
+  }
+
+  select, input[type="text"], input[type="number"], textarea {
+      font-size: 0.95em; /* Slightly smaller inputs on very small screens */
+  }
+}

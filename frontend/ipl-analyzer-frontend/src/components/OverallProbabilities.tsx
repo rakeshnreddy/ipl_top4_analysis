@@ -84,7 +84,7 @@ const OverallProbabilities: React.FC = () => {
   }
 
   if (error) {
-    return <p role="alert" aria-live="assertive">{error}</p>; // Style via global CSS
+    return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
   }
 
   if (top4Data.length === 0 && top2Data.length === 0) {
@@ -94,14 +94,14 @@ const OverallProbabilities: React.FC = () => {
   return (
     <div>
       {metadata && (
-        <div className="metadata mb-2 glassy-panel"> {/* Added glassy-panel */}
+        <div className="metadata mb-2">
           <p>Analysis Method: {metadata.method_used}</p>
           <p>Last Updated: {new Date(metadata.timestamp).toLocaleString()}</p>
         </div>
       )}
-      <div className="charts-container" style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>
         {top4Data.length > 0 ? (
-          <div className="chart-wrapper glassy-panel" style={{ flex: 1, minWidth: '300px', padding: '10px' }}> {/* Added glassy-panel */}
+          <div style={{ flex: 1, minWidth: '300px' /* Ensures charts don't get too small */ }}>
             <ProbabilityChart 
               chartData={top4Data} 
               titleText="Top 4 Qualification Probability" 
@@ -109,10 +109,10 @@ const OverallProbabilities: React.FC = () => {
             />
           </div>
         ) : (
-          <p className="glassy-panel" style={{ flex: 1, minWidth: '300px' }}>No Top 4 probability data available.</p>
+          <p style={{ flex: 1, minWidth: '300px' }}>No Top 4 probability data available.</p>
         )}
         {top2Data.length > 0 ? (
-          <div className="chart-wrapper glassy-panel" style={{ flex: 1, minWidth: '300px', padding: '10px' }}> {/* Added glassy-panel */}
+          <div style={{ flex: 1, minWidth: '300px' }}>
             <ProbabilityChart 
               chartData={top2Data} 
               titleText="Top 2 Qualification Probability"
@@ -120,7 +120,7 @@ const OverallProbabilities: React.FC = () => {
             />
           </div>
         ) : (
-          <p className="glassy-panel" style={{ flex: 1, minWidth: '300px' }}>No Top 2 probability data available.</p>
+          <p style={{ flex: 1, minWidth: '300px' }}>No Top 2 probability data available.</p>
         )}
       </div>
     </div>
