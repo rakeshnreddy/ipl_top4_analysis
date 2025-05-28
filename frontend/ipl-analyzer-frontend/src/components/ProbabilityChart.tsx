@@ -45,6 +45,17 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
     ],
   };
 
+  const tooltipLabelCallback = (context: TooltipItem<'bar'>): string => {
+    let label = context.dataset.label || '';
+    if (label) {
+      label += ': ';
+    }
+    if (context.parsed.x !== null) {
+      label += context.parsed.x.toFixed(2) + '%';
+    }
+    return label;
+  };
+
   const options: ChartOptions<'bar'> = {
     indexAxis: 'y' as const,
     responsive: true,
@@ -91,16 +102,7 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
       },
       tooltip: {
         callbacks: {
-          label: (context: TooltipItem<'bar'>) => {
-            let label = context.dataset.label || '';
-            if (label) {
-              label += ': ';
-            }
-            if (context.parsed.x !== null) {
-              label += context.parsed.x.toFixed(2) + '%';
-            }
-            return label;
-          },
+          label: tooltipLabelCallback, // Assign the named function here
         },
       },
     },
