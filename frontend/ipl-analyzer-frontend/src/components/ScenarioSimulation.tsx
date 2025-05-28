@@ -21,7 +21,7 @@ interface FetchedStandingsData {
 
 interface TeamAnalysisResult {
   percentage: number;
-  results_df: { [fixture: string]: { Outcome: string; [key: string]: any } }; // Updated type
+  results_df: { [fixture: string]: { Outcome: string } }; // Updated type
 }
 
 interface TeamAnalysisData {
@@ -53,7 +53,7 @@ interface SimulatedTeamStats extends TeamStats {
 // Helper function for simulation
 const runSimulation = (
   initialStandings: StandingsData,
-  resultsDf: { [fixture: string]: { Outcome: string; [key: string]: any } }, // Updated parameter type
+  resultsDf: { [fixture: string]: { Outcome: string } }, // Updated parameter type
   analyzedTeamKey: string
 ): { matchLog: string[]; finalStandings: SimulatedTeamStats[] } => {
   const currentStandings = JSON.parse(JSON.stringify(initialStandings)); // Deep copy

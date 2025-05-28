@@ -22,12 +22,12 @@ const mockAnalysisData = {
   analysis_data: {
     team_analysis: {
       "4": { // Top 4
-        TeamA: { percentage: 90.50, results_df: { "Fixture1 (TeamX vs TeamY)": "TeamX wins", "Fixture2 (TeamZ vs TeamW)": "TeamZ wins" } },
-        TeamB: { percentage: 80.00, results_df: { "Fixture3 (TeamP vs TeamQ)": "TeamP wins" } },
+        TeamA: { percentage: 90.50, results_df: { "Fixture1 (TeamX vs TeamY)": { Outcome: "TeamX wins" }, "Fixture2 (TeamZ vs TeamW)": { Outcome: "TeamZ wins" } } },
+        TeamB: { percentage: 80.00, results_df: { "Fixture3 (TeamP vs TeamQ)": { Outcome: "TeamP wins" } } },
       },
       "2": { // Top 2
-        TeamA: { percentage: 60.00, results_df: { "Fixture1 (TeamX vs TeamY)": "TeamY wins" } },
-        TeamB: { percentage: 45.50, results_df: { "Fixture3 (TeamP vs TeamQ)": "TeamQ wins" } },
+        TeamA: { percentage: 60.00, results_df: { "Fixture1 (TeamX vs TeamY)": { Outcome: "TeamY wins" } } },
+        TeamB: { percentage: 45.50, results_df: { "Fixture3 (TeamP vs TeamQ)": { Outcome: "TeamQ wins" } } },
       }
     }
   }
@@ -38,15 +38,15 @@ describe('DetailedTeamAnalysis Component', () => {
 
   beforeEach(() => {
     // Ensure fetch is mocked for each test
-    fetchSpy = vi.fn(); // Create a generic mock function
-    globalThis.fetch = fetchSpy as any; // Assign it to globalThis.fetch
+    fetchSpy = vi.fn() as vi.MockInstance<[RequestInfo | URL, RequestInit?], Promise<Response>>; // Create a generic mock function
+    globalThis.fetch = fetchSpy; // Assign it to globalThis.fetch
   });
 
   afterEach(() => {
     vi.restoreAllMocks(); // Restores all mocks, including fetch
   });
 
-  const setupFetchMock = (data: any, ok = true) => {
+  const setupFetchMock = (data: unknown, ok = true) => {
     fetchSpy.mockImplementation((url: RequestInfo | URL) => { // Add type to url
       if (typeof url === 'string' && url.endsWith('/analysis_results.json')) {
         return Promise.resolve({
