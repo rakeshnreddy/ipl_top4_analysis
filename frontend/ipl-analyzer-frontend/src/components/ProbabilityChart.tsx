@@ -11,8 +11,7 @@ import { // Values from chart.js
 } from 'chart.js'; // Values from chart.js
 import type { ChartOptions, ChartData, TooltipItem } from 'chart.js'; // Types from chart.js
 
-import { team_short_names, team_styles } from '../teamStyles'; // Values from teamStyles
-import type { TeamStyle } from '../teamStyles'; // Types from teamStyles
+import { team_short_names, team_styles, type TeamStyle } from '../teamStyles'; // Values from teamStyles
 
 ChartJS.register(
   CategoryScale,

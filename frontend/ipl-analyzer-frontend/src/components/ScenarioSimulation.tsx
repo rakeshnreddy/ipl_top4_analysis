@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { team_full_names, team_styles } from '../teamStyles'; import type { TeamNames, TeamStyle } from '../teamStyles';
+import { team_full_names, team_styles, type TeamNames, type TeamStyle } from '../teamStyles';
 
 // Copied from CurrentStandings.tsx
 interface TeamStats {
@@ -135,11 +135,6 @@ const ScenarioSimulation: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [simulationMessage, setSimulationMessage] = useState<string>('');
 
-  // Theme-aware default colors (could be moved to a central theme context/hook later)
-  const defaultTeamStyle: TeamStyle = { 
-    bg: 'var(--panel-bg-light)', // CSS variable for light mode default
-    text: 'var(--text-color-light)' // CSS variable for light mode default
-  };
   useEffect(() => {
     console.log('ScenarioSimulation.tsx - BASE_URL for analysis_results:', import.meta.env.BASE_URL);
     setLoading(true);
@@ -237,7 +232,7 @@ const ScenarioSimulation: React.FC = () => {
   };
 
   if (loading) return <p role="status" aria-live="polite">Loading simulation data...</p>;
-  if (error) return <p role="alert" aria-live="assertive">{error}</p>; // Style via global CSS
+  if (error) return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
 
   return (
     <div>
@@ -294,13 +289,8 @@ const ScenarioSimulation: React.FC = () => {
                   <tbody>
                     {simulatedFinalStandings.map((team) => {
                       const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
-                      const rowStyle = {
-                        backgroundColor: teamStyle?.bg || defaultTeamStyle.bg,
-                        color: teamStyle?.text || defaultTeamStyle.text,
-                        borderBottom: teamStyle?.accent ? `2px solid ${teamStyle.accent}` : 'none',
-                      };
                       return (
-                        <tr key={team.teamKey} style={rowStyle}>
+                        <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
                           <td>{team.pos}</td>
                           <td>{team.teamFullName}</td>
                           <td>{team.Matches}</td>
