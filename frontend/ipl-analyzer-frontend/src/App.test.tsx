@@ -20,9 +20,32 @@ vi.mock('./components/ScenarioSimulation', () => ({
   default: () => <div data-testid="scenario-simulation-mock">ScenarioSimulation Mock</div>,
 }));
 
+import { ThemeProvider } from './contexts/ThemeContext'; // Import ThemeProvider
+
+// Mock window.matchMedia for ThemeContext used within App through ThemeToggle
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false, // Default to light theme for system preference in tests
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+});
+
 describe('App Component', () => {
   it('Test 1: Renders correctly and matches snapshot', () => {
-    const { container } = render(<App />);
+    const { container } = render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
     
     // Check for main sections by aria-labelledby or heading text
     expect(screen.getByRole('heading', { name: /IPL Qualification Analyzer/i })).toBeInTheDocument();
@@ -42,7 +65,11 @@ describe('App Component', () => {
   });
 
   it('Test 2: Footer renders correctly', () => {
-    render(<App />);
+    render(
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    );
     const year = new Date().getFullYear();
     expect(screen.getByText(`© ${year} IPL Analyzer. All rights reserved.`)).toBeInTheDocument();
     expect(screen.getByText('Data is for informational purposes only.')).toBeInTheDocument();
