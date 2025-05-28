@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ThemeProvider, useTheme } from '../contexts/ThemeContext';
+import { ThemeProvider } from '../contexts/ThemeContext'; // Removed unused useTheme
 import ThemeToggle from './ThemeToggle';
 import styles from './ThemeToggle.module.css'; // Import CSS Modules
 

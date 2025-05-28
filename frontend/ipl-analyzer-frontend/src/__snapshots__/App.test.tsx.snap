@@ -8,80 +8,130 @@ exports[`App Component > Test 1: Renders correctly and matches snapshot 1`] = `
     <h1>
       IPL Qualification Analyzer
     </h1>
+    <div
+      aria-label="Theme selection"
+      class="_toggleContainer_f72571"
+      role="radiogroup"
+    >
+      <button
+        aria-checked="false"
+        aria-label="Select Light theme"
+        class="_toggleButton_f72571 "
+        role="radio"
+      >
+        Light
+      </button>
+      <button
+        aria-checked="false"
+        aria-label="Select Dark theme"
+        class="_toggleButton_f72571 "
+        role="radio"
+      >
+        Dark
+      </button>
+      <button
+        aria-checked="true"
+        aria-label="Select System theme"
+        class="_toggleButton_f72571 _active_f72571"
+        role="radio"
+      >
+        System
+      </button>
+    </div>
   </header>
   <section
     aria-labelledby="current-standings-heading"
     id="current-standings"
   >
-    <h2
-      id="current-standings-heading"
-    >
-      Current Standings
-    </h2>
     <div
-      data-testid="current-standings-mock"
+      class="_card_6217ab"
     >
-      CurrentStandings Mock
+      <h2
+        id="current-standings-heading"
+      >
+        Current Standings
+      </h2>
+      <div
+        data-testid="current-standings-mock"
+      >
+        CurrentStandings Mock
+      </div>
     </div>
   </section>
   <section
     aria-labelledby="overall-probabilities-heading"
     id="overall-probabilities"
   >
-    <h2
-      id="overall-probabilities-heading"
-    >
-      Overall Qualification Probabilities
-    </h2>
     <div
-      data-testid="overall-probabilities-mock"
+      class="_card_6217ab"
     >
-      OverallProbabilities Mock
+      <h2
+        id="overall-probabilities-heading"
+      >
+        Overall Qualification Probabilities
+      </h2>
+      <div
+        data-testid="overall-probabilities-mock"
+      >
+        OverallProbabilities Mock
+      </div>
     </div>
   </section>
   <section
     aria-labelledby="team-analysis-heading"
     id="team-analysis"
   >
-    <h2
-      id="team-analysis-heading"
-    >
-      Detailed Team Analysis
-    </h2>
     <div
-      data-testid="detailed-team-analysis-mock"
+      class="_card_6217ab"
     >
-      DetailedTeamAnalysis Mock
+      <h2
+        id="team-analysis-heading"
+      >
+        Detailed Team Analysis
+      </h2>
+      <div
+        data-testid="detailed-team-analysis-mock"
+      >
+        DetailedTeamAnalysis Mock
+      </div>
     </div>
   </section>
   <section
     aria-labelledby="qualification-path-heading"
     id="qualification-path"
   >
-    <h2
-      id="qualification-path-heading"
-    >
-      Qualification Path
-    </h2>
     <div
-      data-testid="qualification-path-mock"
+      class="_card_6217ab"
     >
-      QualificationPath Mock
+      <h2
+        id="qualification-path-heading"
+      >
+        Qualification Path
+      </h2>
+      <div
+        data-testid="qualification-path-mock"
+      >
+        QualificationPath Mock
+      </div>
     </div>
   </section>
   <section
     aria-labelledby="scenario-simulation-heading"
     id="scenario-simulation"
   >
-    <h2
-      id="scenario-simulation-heading"
-    >
-      Simulate One Scenario
-    </h2>
     <div
-      data-testid="scenario-simulation-mock"
+      class="_card_6217ab"
     >
-      ScenarioSimulation Mock
+      <h2
+        id="scenario-simulation-heading"
+      >
+        Simulate One Scenario
+      </h2>
+      <div
+        data-testid="scenario-simulation-mock"
+      >
+        ScenarioSimulation Mock
+      </div>
     </div>
   </section>
   <footer>

@@ -14,31 +14,42 @@ const App: React.FC = () => {
     <div id="app-container">
       <header>
         <h1>IPL Qualification Analyzer</h1>
+        <ThemeToggle />
       </header>
 
       <section id="current-standings" aria-labelledby="current-standings-heading">
-        <h2 id="current-standings-heading">Current Standings</h2>
-        <CurrentStandings />
+        <GlassCard>
+          <h2 id="current-standings-heading">Current Standings</h2>
+          <CurrentStandings />
+        </GlassCard>
       </section>
 
       <section id="overall-probabilities" aria-labelledby="overall-probabilities-heading">
-        <h2 id="overall-probabilities-heading">Overall Qualification Probabilities</h2>
-        <OverallProbabilities />
+        <GlassCard>
+          <h2 id="overall-probabilities-heading">Overall Qualification Probabilities</h2>
+          <OverallProbabilities />
+        </GlassCard>
       </section>
 
       <section id="team-analysis" aria-labelledby="team-analysis-heading">
-        <h2 id="team-analysis-heading">Detailed Team Analysis</h2>
-        <DetailedTeamAnalysis />
+        <GlassCard>
+          <h2 id="team-analysis-heading">Detailed Team Analysis</h2>
+          <DetailedTeamAnalysis />
+        </GlassCard>
       </section>
 
       <section id="qualification-path" aria-labelledby="qualification-path-heading">
-        <h2 id="qualification-path-heading">Qualification Path</h2>
-        <QualificationPath />
+        <GlassCard>
+          <h2 id="qualification-path-heading">Qualification Path</h2>
+          <QualificationPath />
+        </GlassCard>
       </section>
 
       <section id="scenario-simulation" aria-labelledby="scenario-simulation-heading">
-        <h2 id="scenario-simulation-heading">Simulate One Scenario</h2>
-        <ScenarioSimulation />
+        <GlassCard>
+          <h2 id="scenario-simulation-heading">Simulate One Scenario</h2>
+          <ScenarioSimulation />
+        </GlassCard>
       </section>
 
       <footer>
