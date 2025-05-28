@@ -1,0 +1,18 @@
+.card {
+  padding: 1.5rem; /* Example padding, can be adjusted */
+  background-color: var(--glass-bg-color);
+  border: 1px solid var(--glass-border-color);
+  border-radius: var(--glass-border-radius);
+  box-shadow: 
+    0 4px 6px var(--glass-shadow-color-soft), /* Softer, larger shadow */
+    0 1px 3px var(--glass-shadow-color-strong); /* Subtle lift shadow */
+  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
+  backdrop-filter: blur(var(--glass-blur-intensity));
+  color: var(--glass-text-color);
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Smooth transitions */
+}
+
+.card:hover {
+  /* Optional: slightly enhance shadow or background on hover for more interactivity */
+  /* box-shadow: 0 6px 10px var(--glass-shadow-color-soft), 0 2px 4px var(--glass-shadow-color-strong); */
+}

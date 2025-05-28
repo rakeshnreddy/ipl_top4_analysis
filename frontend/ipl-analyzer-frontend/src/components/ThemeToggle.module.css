@@ -1,0 +1,30 @@
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--glass-border-radius);
+  background-color: var(--button-glass-bg-color); /* Use a theme variable */
+  border: 1px solid var(--glass-border-color);
+}
+
+.toggleButton {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: calc(var(--glass-border-radius) - 4px); /* Slightly smaller radius */
+  cursor: pointer;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--button-glass-text-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.toggleButton.active {
+  background-color: var(--primary-color); /* Use themed primary color */
+  color: var(--on-primary-text-color); /* UPDATED: Text color for active button */
+  border-color: var(--primary-hover-color);
+}
+
+.toggleButton:not(.active):hover {
+  background-color: rgba(128, 128, 128, 0.1); /* Subtle hover for non-active */
+}
