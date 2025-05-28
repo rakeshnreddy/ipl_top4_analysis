@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import ThemeToggle from './components/ThemeToggle'; // Import ThemeToggle
+import GlassCard from './components/GlassCard'; // Import GlassCard
 import CurrentStandings from './components/CurrentStandings';
 import OverallProbabilities from './components/OverallProbabilities';
 import DetailedTeamAnalysis from './components/DetailedTeamAnalysis';

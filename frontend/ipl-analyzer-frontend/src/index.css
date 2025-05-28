@@ -1,13 +1,34 @@
 :root {
   /* Light Theme Color Palette (Default) */
-  --primary-color: #007bff; /* Vivid Blue */
-  --primary-hover-color: #0056b3; /* Darker Blue */
-  --secondary-color: #6c757d; /* Cool Gray */
-  --background-color: #f4f7f6; /* Very Light Gray/Off-white */
-  --surface-color: #ffffff; /* White */
-  --text-color: #212529; /* Almost Black */
-  --text-muted-color: #5a6268; /* Medium Gray */
-  --border-color: #ced4da; /* Light Gray Border */
+  /* New Glassmorphism & Warm Theme Variables - Light Mode */
+  --glass-bg-color: rgba(255, 235, 220, 0.6); /* Light Peach, semi-transparent */
+  --glass-border-color: rgba(255, 182, 193, 0.35); /* Light Pink, low opacity */
+  --glass-shadow-color-soft: rgba(188, 123, 123, 0.15);
+  --glass-shadow-color-strong: rgba(188, 123, 123, 0.25);
+  --glass-blur-intensity: 12px;
+  --glass-text-color: #5D4037; /* Dark Brown */
+  --glass-border-radius: 16px;
+
+  --gradient-start-color: #FFDAB9; /* Peach Puff */
+  --gradient-end-color: #FFC0CB; /* Soft Pink */
+  
+  --button-glass-bg-color: rgba(255, 235, 220, 0.5);
+  --button-glass-text-color: #5D4037;
+  --input-glass-bg-color: rgba(255, 240, 230, 0.5);
+  --input-glass-text-color: #5D4037;
+  --input-glass-border-color: rgba(255, 182, 193, 0.3);
+
+  /* Update existing variables if needed to align with the new theme, e.g.: */
+  --primary-color: #FF8A65; /* Deep Coral for light theme */
+  --primary-hover-color: #FF7043; /* Darker Coral */
+  --text-color: var(--glass-text-color); /* Align main text with glass text */
+  --background-color: transparent; /* Page background will be gradient */
+  --surface-color: transparent; /* Card/panel surfaces will be glass */
+  --border-color: var(--glass-border-color);
+  --on-primary-text-color: #FFFFFF; /* White text on Deep Coral */
+
+  --secondary-color: #6c757d; /* Cool Gray - Keeping for now */
+  --text-muted-color: #5a6268; /* Medium Gray - Keeping for now */
   --accent-color-success: #28a745; /* Green */
   --accent-color-warning: #ffc107; /* Yellow */
   --accent-color-warning-text: #212529; /* Dark text for light yellow */
@@ -37,13 +58,33 @@
 
 
   /* Dark Theme Color Palette (Defined here, applied in media query) */
-  --primary-color-dark: #007bff; /* Blue can often work for both */
-  --primary-hover-color-dark: #0056b3;
-  --background-color-dark: #121212; /* Very dark gray */
-  --surface-color-dark: #1e1e1e; /* Slightly lighter for cards */
-  --text-color-dark: #e0e0e0; /* Light gray for text */
-  --text-muted-color-dark: #a0a0a0; /* Dimmer light gray */
-  --border-color-dark: #444444; /* Darker border */
+  /* New Glassmorphism & Warm Theme Variables - Dark Mode */
+  --glass-bg-color-dark: rgba(60, 40, 30, 0.65); /* Dark Warm Brown, semi-transparent */
+  --glass-border-color-dark: rgba(255, 171, 64, 0.3); /* Amber, low opacity */
+  --glass-shadow-color-soft-dark: rgba(0, 0, 0, 0.2);
+  --glass-shadow-color-strong-dark: rgba(0, 0, 0, 0.3);
+  /* --glass-blur-intensity can remain the same or be themed */
+  --glass-text-color-dark: #FFF3E0; /* Pale Orange White */
+  /* --glass-border-radius can remain the same */
+
+  --gradient-start-color-dark: #4E342E; /* Dark Brown */
+  --gradient-end-color-dark: #BF360C; /* Deep Orange Red */
+
+  --button-glass-bg-color-dark: rgba(80, 60, 50, 0.5);
+  --button-glass-text-color-dark: #FFF3E0;
+  --input-glass-bg-color-dark: rgba(70, 50, 40, 0.5);
+  --input-glass-text-color-dark: #FFF3E0;
+  --input-glass-border-color-dark: rgba(255, 171, 64, 0.25);
+
+  /* Update existing dark variables if needed, e.g.: */
+  --primary-color-dark: #FFAB40; /* Orange Amber for dark theme */
+  --primary-hover-color-dark: #FFB74D; /* Lighter Amber */
+  --text-color-dark: var(--glass-text-color-dark);
+  --background-color-dark: transparent;
+  --surface-color-dark: transparent;
+  --border-color-dark: var(--glass-border-color-dark);
+  
+  --text-muted-color-dark: #a0a0a0; /* Dimmer light gray - Keeping for now */
   --accent-color-success-dark: #28a745; /* Green can work, or make it slightly brighter */
   --accent-color-warning-dark: #b8860b; /* Darker yellow for dark mode */
   --accent-color-warning-text-dark: var(--text-color-dark); /* Light text for dark yellow */
@@ -97,12 +138,24 @@ body {
   font-family: var(--font-family-sans-serif);
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: var(--background-color); /* Will be transparent due to variable update */
   color: var(--text-color);
   line-height: 1.65; /* Improved line height */
   font-size: 16px; /* Base font size */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Gradient background */
+  min-height: 100vh;
+  background-image: linear-gradient(135deg, var(--gradient-start-color), var(--gradient-end-color));
+  background-size: 200% 200%; /* For animation */
+  animation: warmGradientAnimation 20s ease infinite;
+}
+
+@keyframes warmGradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 #root {
@@ -140,16 +193,9 @@ header h1 {
 
 /* Sections */
 section {
-  background-color: var(--surface-color);
-  padding: calc(var(--spacing-unit) * 3); /* 24px */
   margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-light); /* Use variable */
-  transition: box-shadow 0.3s ease-in-out;
-}
-section:hover {
-  box-shadow: var(--box-shadow-medium); /* Use variable */
+  /* Card-like styles (background, padding, border, border-radius, box-shadow, transition, :hover) removed */
+  /* Transition and hover for box-shadow are removed as GlassCard handles shadows */
 }
 
 section h2 {
@@ -180,40 +226,58 @@ section h4 {
 
 /* Generic Table Styling */
 .table-responsive {
-  overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+  overflow-x: auto;
   width: 100%;
-  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+  margin-top: calc(var(--spacing-unit) * 2);
+  /* border: 1px solid var(--border-color); REMOVE for now or use --glass-border-color */
+  border-radius: calc(var(--glass-border-radius) - 8px); /* Inner radius */
+  overflow: hidden; /* To make sure table respects the radius */
+  background-color: color-mix(in srgb, var(--glass-bg-color) 30%, transparent); /* Very subtle internal background */
 }
 table {
   width: 100%;
-  border-collapse: collapse; /* More robust than border-radius on table for compatibility */
+  border-collapse: separate; /* Or keep collapse and style differently */
+  border-spacing: 0;
+  background-color: transparent;
 }
 
 th, td {
-  border: 1px solid var(--border-color);
-  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
+  padding: calc(var(--spacing-unit) * 1.5);
   text-align: left;
   vertical-align: middle;
-  border-bottom-width: 1px; /* Ensure bottom border is consistent */
+  border: none; /* Remove individual cell borders initially */
+  border-bottom: 1px solid var(--glass-border-color); /* Rows separated by bottom border */
+  color: var(--glass-text-color);
+}
+td:first-child, th:first-child {
+    padding-left: calc(var(--spacing-unit) * 2); /* More padding for first cell if table-responsive has its own bg */
+}
+td:last-child, th:last-child {
+    padding-right: calc(var(--spacing-unit) * 2);
 }
 
 th {
-  background-color: var(--table-header-bg); /* Use variable */
-  font-weight: 700; /* Bolder headers */
-  color: var(--text-color);
-  white-space: nowrap; /* Prevent headers from wrapping */
+  /* background-color: var(--table-header-bg); */ /* Old var */
+  background-color: color-mix(in srgb, var(--glass-bg-color) 85%, var(--glass-text-color) 3%);
+  font-weight: 700;
+  /* color: var(--text-color); */ /* Now handled by th, td */
+  white-space: nowrap;
+  border-bottom-width: 2px; /* Thicker border for header */
+  border-bottom-color: var(--primary-color);
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--table-row-even-bg); /* Use variable */
+  /* background-color: var(--table-row-even-bg); */ /* Old var */
+  background-color: color-mix(in srgb, var(--glass-bg-color) 10%, transparent); /* Very subtle striping */
 }
 
 tbody tr:hover {
-  background-color: var(--table-row-hover-bg); /* Use variable */
+  /* background-color: var(--table-row-hover-bg); */ /* Old var */
+  background-color: color-mix(in srgb, var(--primary-color) 20%, var(--glass-bg-color) 70%);
+  /* color: var(--glass-text-color); */ /* Ensure text is readable */
 }
 
+/*
 tbody tr[style] {
   color: inherit;
 }
@@ -222,7 +286,7 @@ tbody tr[style]:nth-child(even) {
 }
 tbody tr[style] td {
   /* Inline styles from team_styles will handle bg and text color */
-}
+/* } */ /* Commenting out for now to prioritize glass theme */
 table caption {
   caption-side: top;
   font-size: 1.1em;
@@ -278,13 +342,16 @@ input[type="text"],
 input[type="number"],
 textarea {
   padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); /* 10px 12px */
-  border-radius: var(--border-radius);
-  border: 1px solid var(--input-border-color); /* Use variable */
-  background-color: var(--input-bg); /* Use variable */
+  border-radius: calc(var(--glass-border-radius) / 2); /* Smaller radius for inputs */
+  border: 1px solid var(--input-glass-border-color);
+  background-color: var(--input-glass-bg-color);
   font-size: 1em;
-  color: var(--input-text-color); /* Use variable */
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  color: var(--input-glass-text-color);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease;
   min-width: 180px; /* Minimum width for select/inputs */
+  backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* Keep subtle inner shadow */
 }
 
 select:focus,
@@ -293,7 +360,8 @@ input[type="number"]:focus,
 textarea:focus {
   border-color: var(--primary-color);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Focus ring */
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent); /* Consistent focus ring */
+  background-color: color-mix(in srgb, var(--input-glass-bg-color) 80%, var(--surface-color) 20%); /* Slightly change bg on focus */
 }
 
 input[type="radio"],
@@ -311,10 +379,10 @@ input[type="checkbox"] {
 
 button, .button {
   padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); /* 10px 20px */
-  border: 1px solid transparent;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  color: var(--button-text-color); /* Use variable */
+  border: 1px solid var(--glass-border-color);
+  border-radius: var(--border-radius); /* Can use var(--glass-border-radius) if preferred */
+  background-color: var(--button-glass-bg-color);
+  color: var(--button-glass-text-color);
   font-size: 1em;
   font-weight: 600; /* Bolder buttons */
   cursor: pointer;
@@ -323,11 +391,15 @@ button, .button {
   display: inline-block;
   text-decoration: none;
   white-space: nowrap; /* Prevent button text wrapping */
+  backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 button:hover, .button:hover {
-  background-color: var(--primary-hover-color);
-  color: var(--surface-color);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: color-mix(in srgb, var(--button-glass-bg-color) 80%, var(--primary-color) 20%);
+  border-color: var(--primary-color);
+  /* color: var(--button-glass-text-color); /* Ensure text color remains consistent or adjust as needed */
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Keep or enhance shadow */
 }
 button:active, .button:active {
     transform: translateY(1px);
@@ -335,17 +407,18 @@ button:active, .button:active {
 button:focus-visible, .button:focus-visible { /* Modern focus state */
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
-  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
 button:disabled, .button:disabled {
-  background-color: var(--disabled-bg-color); /* Use variable */
-  border-color: var(--disabled-bg-color); /* Use variable */
+  background-color: color-mix(in srgb, var(--disabled-bg-color) 50%, transparent);
+  border-color: color-mix(in srgb, var(--disabled-bg-color) 70%, transparent);
   color: var(--disabled-text-color); /* Use variable */
   cursor: not-allowed;
   opacity: 0.75; /* More visible disabled state */
   box-shadow: none;
   transform: none;
+  backdrop-filter: none;
 }
 
 button.success, .button.success {
@@ -496,74 +569,165 @@ p[role="alert"] { /* Error messages */
 }
 
 
-/* Dark Mode using prefers-color-scheme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: var(--primary-color-dark, #007bff);
-    --primary-hover-color: var(--primary-hover-color-dark, #0056b3);
-    --background-color: var(--background-color-dark, #121212);
-    --surface-color: var(--surface-color-dark, #1e1e1e);
-    --text-color: var(--text-color-dark, #e0e0e0);
-    --text-muted-color: var(--text-muted-color-dark, #a0a0a0);
-    --border-color: var(--border-color-dark, #444444);
-    --accent-color-success: var(--accent-color-success-dark, #28a745);
-    --accent-color-warning: var(--accent-color-warning-dark, #b8860b);
-    --accent-color-warning-text: var(--accent-color-warning-text-dark, #e0e0e0);
-    --accent-color-info: var(--accent-color-info-dark, #17a2b8);
-    --table-header-bg: var(--table-header-bg-dark, #2c2c2c);
-    --table-row-even-bg: var(--table-row-even-bg-dark, #252525);
-    --table-row-hover-bg: var(--table-row-hover-bg-dark, #3a3a3a);
-    --control-bg: var(--control-bg-dark, #2c2c2c);
-    --input-bg: var(--input-bg-dark, #2a2a2a);
-    --input-text-color: var(--input-text-color-dark, #e0e0e0);
-    --input-border-color: var(--input-border-color-dark, #444444);
-    /* --button-text-color is often var(--surface-color) or var(--text-color-dark) depending on button bg */
-    /* For primary button using var(--primary-color), text might need to be light if primary isn't changing much */
-    --button-text-color: var(--text-color-dark, #e0e0e0); /* Defaulting to light text for buttons */
-    --disabled-bg-color: var(--disabled-bg-color-dark, #495057);
-    --disabled-text-color: var(--disabled-text-color-dark, #adb5bd);
-    --footer-bg-color: var(--footer-bg-color-dark, #212529);
-    --footer-text-color: var(--footer-text-color-dark, #ced4da);
-    --box-shadow-light: var(--box-shadow-light-dark, 0 2px 5px rgba(255, 255, 255, 0.05));
-    --box-shadow-medium: var(--box-shadow-medium-dark, 0 4px 10px rgba(255, 255, 255, 0.08));
-    --link-color: var(--link-color-dark, #63a9ff);
-    --link-hover-color: var(--link-hover-color-dark, #8dbdff);
-    --loading-message-bg: var(--loading-message-bg-dark, #17a2b8);
-    --loading-message-text: var(--loading-message-text-dark, #e0e0e0);
-    --loading-message-border: var(--loading-message-border-dark, #106777);
-    --error-message-bg: var(--error-message-bg-dark, #58181F);
-    --error-message-text: var(--error-message-text-dark, #F8D7DA);
-    --error-message-border: var(--error-message-border-dark, #721c24);
-  }
+html[data-theme="light"] {
+  /* Light Theme Color Palette (Default) */
+  /* New Glassmorphism & Warm Theme Variables - Light Mode */
+  --glass-bg-color: rgba(255, 235, 220, 0.6); /* Light Peach, semi-transparent */
+  --glass-border-color: rgba(255, 182, 193, 0.35); /* Light Pink, low opacity */
+  --glass-shadow-color-soft: rgba(188, 123, 123, 0.15);
+  --glass-shadow-color-strong: rgba(188, 123, 123, 0.25);
+  --glass-blur-intensity: 12px;
+  --glass-text-color: #5D4037; /* Dark Brown */
+  --glass-border-radius: 16px;
 
-  /* Specific overrides for dark mode elements if variables are not enough */
-  header {
-    /* If gradient needs adjustment for dark mode, or use solid color */
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover-color) 100%);
-  }
-  button, .button { /* Ensure primary buttons have light text if their bg doesn't change much */
-    color: var(--surface-color-dark, #e0e0e0); /* Typically light text on dark primary button */
-  }
-  button.warning, .button.warning { /* Yellow buttons need dark text in light mode, light text in dark mode */
-      color: var(--text-color-dark); /* Ensure light text for dark yellow */
-  }
-  #scenario-simulation textarea {
-      background-color: var(--input-bg-dark, #252525); /* Darker textarea background */
-      color: var(--input-text-color-dark, #e0e0e0);
-      border-color: var(--input-border-color-dark, #444444);
-  }
-   select:focus,
-    input[type="text"]:focus,
-    input[type="number"]:focus,
-    textarea:focus {
-      box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.35); /* Blue focus ring might need adjustment if too bright */
-    }
-    input[type="radio"],
-    input[type="checkbox"] {
-      accent-color: var(--primary-color); /* Check if this is visible enough, or choose a lighter accent */
-    }
+  --gradient-start-color: #FFDAB9; /* Peach Puff */
+  --gradient-end-color: #FFC0CB; /* Soft Pink */
+  
+  --button-glass-bg-color: rgba(255, 235, 220, 0.5);
+  --button-glass-text-color: #5D4037;
+  --input-glass-bg-color: rgba(255, 240, 230, 0.5);
+  --input-glass-text-color: #5D4037;
+  --input-glass-border-color: rgba(255, 182, 193, 0.3);
+
+  /* Update existing variables if needed to align with the new theme, e.g.: */
+  --primary-color: #FF8A65; /* Deep Coral for light theme */
+  --primary-hover-color: #FF7043; /* Darker Coral */
+  --text-color: var(--glass-text-color); /* Align main text with glass text */
+  --background-color: transparent; /* Page background will be gradient */
+  --surface-color: transparent; /* Card/panel surfaces will be glass */
+  --border-color: var(--glass-border-color);
+
+  --secondary-color: #6c757d; /* Cool Gray - Keeping for now */
+  --text-muted-color: #5a6268; /* Medium Gray - Keeping for now */
+  --accent-color-success: #28a745; /* Green */
+  --accent-color-warning: #ffc107; /* Yellow */
+  --accent-color-warning-text: #212529; /* Dark text for light yellow */
+  --accent-color-info: #17a2b8; /* Teal */
+  --table-header-bg: #e9ecef;
+  --table-row-even-bg: var(--background-color);
+  --table-row-hover-bg: #ddeeff;
+  --control-bg: #e9ecef; /* Background for control groups */
+  --input-bg: var(--surface-color);
+  --input-text-color: var(--text-color);
+  --input-border-color: var(--border-color);
+  --button-text-color: var(--surface-color);
+  --disabled-bg-color: var(--secondary-color);
+  --disabled-text-color: #e9ecef;
+  --footer-bg-color: #343a40;
+  --footer-text-color: #f8f9fa;
+  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
+  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --link-color: var(--primary-color);
+  --link-hover-color: var(--primary-hover-color);
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--surface-color);
+  --loading-message-border: #117a8b;
+  --error-message-bg: #f8d7da;
+  --error-message-text: #721c24;
+  --error-message-border: #f5c6cb;
+  
+  /* Fonts & other base vars copied from :root */
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --spacing-unit: 8px;
+  --border-radius: 0.3rem;
+  --max-content-width: 1280px;
+  --on-primary-text-color: #FFFFFF; /* Ensure it's here for light theme */
 }
 
+html[data-theme="dark"] {
+  /* Apply new Glassmorphism & Warm Theme Variables - Dark Mode */
+  --glass-bg-color: var(--glass-bg-color-dark);
+  --glass-border-color: var(--glass-border-color-dark);
+  --glass-shadow-color-soft: var(--glass-shadow-color-soft-dark);
+  --glass-shadow-color-strong: var(--glass-shadow-color-strong-dark);
+  --glass-text-color: var(--glass-text-color-dark);
+  /* --glass-blur-intensity and --glass-border-radius typically remain same but can be themed if needed */
+
+  --gradient-start-color: var(--gradient-start-color-dark);
+  --gradient-end-color: var(--gradient-end-color-dark);
+  
+  --button-glass-bg-color: var(--button-glass-bg-color-dark);
+  --button-glass-text-color: var(--button-glass-text-color-dark);
+  --input-glass-bg-color: var(--input-glass-bg-color-dark);
+  --input-glass-text-color: var(--input-glass-text-color-dark);
+  --input-glass-border-color: var(--input-glass-border-color-dark);
+
+  /* Update existing variables for dark mode */
+  --primary-color: var(--primary-color-dark);
+  --primary-hover-color: var(--primary-hover-color-dark);
+  --text-color: var(--text-color-dark);
+  --background-color: var(--background-color-dark);
+  --surface-color: var(--surface-color-dark);
+  --border-color: var(--border-color-dark);
+  --on-primary-text-color: #2C1E1A; /* Very Dark Brown text on Orange Amber */
+  
+  --text-muted-color: var(--text-muted-color-dark); /* Keep existing muted text color */
+  --accent-color-success: var(--accent-color-success-dark);
+  --accent-color-warning: var(--accent-color-warning-dark);
+  --accent-color-warning-text: var(--accent-color-warning-text-dark);
+  --accent-color-info: var(--accent-color-info-dark);
+  --table-header-bg: var(--table-header-bg-dark);
+  --table-row-even-bg: var(--table-row-even-bg-dark);
+  --table-row-hover-bg: var(--table-row-hover-bg-dark);
+  --control-bg: var(--control-bg-dark);
+  --input-bg: var(--input-bg-dark);
+  --input-text-color: var(--input-text-color-dark);
+  --input-border-color: var(--input-border-color-dark);
+  --button-text-color: var(--button-text-color-dark);
+  --disabled-bg-color: var(--disabled-bg-color-dark);
+  --disabled-text-color: var(--disabled-text-color-dark);
+  --footer-bg-color: var(--footer-bg-color-dark);
+  --footer-text-color: var(--footer-text-color-dark);
+  --box-shadow-light: var(--box-shadow-light-dark);
+  --box-shadow-medium: var(--box-shadow-medium-dark);
+  --link-color: var(--link-color-dark);
+  --link-hover-color: var(--link-hover-color-dark);
+  --loading-message-bg: var(--loading-message-bg-dark);
+  --loading-message-text: var(--loading-message-text-dark);
+  --loading-message-border: var(--loading-message-border-dark);
+  --error-message-bg: var(--error-message-bg-dark);
+  --error-message-text: var(--error-message-text-dark);
+  --error-message-border: var(--error-message-border-dark);
+  
+  /* Fonts & other base vars copied from :root */
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --spacing-unit: 8px;
+  --border-radius: 0.3rem;
+  --max-content-width: 1280px;
+
+  /* Specific overrides for dark mode elements if variables are not enough */
+  /* (These were previously outside the :root block in the media query, so they should remain outside the html[data-theme='dark'] block too if they target specific elements) */
+  /* However, the request was to replace the *entire* media query block, so we'll put element-specific overrides inside if they need to be theme-dependent */
+}
+
+html[data-theme="dark"] header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover-color) 100%);
+}
+html[data-theme="dark"] button,
+html[data-theme="dark"] .button {
+  color: var(--surface-color-dark); /* Example of specific dark theme override for button text */
+}
+html[data-theme="dark"] button.warning,
+html[data-theme="dark"] .button.warning {
+  color: var(--text-color-dark);
+}
+html[data-theme="dark"] #scenario-simulation textarea {
+  background-color: var(--input-bg-dark);
+  color: var(--input-text-color-dark);
+  border-color: var(--input-border-color-dark);
+}
+html[data-theme="dark"] select:focus,
+html[data-theme="dark"] input[type="text"]:focus,
+html[data-theme="dark"] input[type="number"]:focus,
+html[data-theme="dark"] textarea:focus {
+  box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-dark-rgb, 255, 171, 64), 0.35); /* Assuming --primary-color-dark-rgb or similar for focus ring */
+}
+html[data-theme="dark"] input[type="radio"],
+html[data-theme="dark"] input[type="checkbox"] {
+  accent-color: var(--primary-color);
+}
 
 /* Responsive adjustments */
 @media (max-width: 992px) { /* Tablets */
