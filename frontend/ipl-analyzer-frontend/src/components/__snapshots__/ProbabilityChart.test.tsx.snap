@@ -1,0 +1,90 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProbabilityChart Component > Test 1: Renders correctly with mock data and matches snapshot 1`] = `
+<div
+  class="chart-container"
+  style="height: 300px; position: relative;"
+>
+  <div
+    aria-label="Test Chart Aria Label"
+    data-testid="bar-chart-mock"
+    role="img"
+  >
+    <pre>
+      {
+  "labels": [
+    "TA",
+    "TB"
+  ],
+  "datasets": [
+    {
+      "label": "Probability",
+      "data": [
+        75.5,
+        50.25
+      ],
+      "backgroundColor": [
+        "#ff8800",
+        "#88ff00"
+      ],
+      "borderColor": [
+        "#ffffff",
+        "#000000"
+      ],
+      "borderWidth": 1
+    }
+  ]
+}
+    </pre>
+    <pre>
+      {
+  "indexAxis": "y",
+  "responsive": true,
+  "maintainAspectRatio": false,
+  "scales": {
+    "x": {
+      "beginAtZero": true,
+      "max": 100,
+      "title": {
+        "display": true,
+        "text": "Probability (%)"
+      },
+      "ticks": {
+        "color": "var(--text-color-light)"
+      },
+      "grid": {
+        "color": "var(--panel-border-light, #e0e0e0)"
+      }
+    },
+    "y": {
+      "ticks": {
+        "autoSkip": false,
+        "color": "var(--text-color-light)"
+      },
+      "grid": {
+        "color": "var(--panel-border-light, #e0e0e0)"
+      }
+    }
+  },
+  "plugins": {
+    "legend": {
+      "display": false
+    },
+    "title": {
+      "display": true,
+      "text": "Test Chart Title",
+      "font": {
+        "family": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        "size": 16
+      }
+    },
+    "tooltip": {
+      "callbacks": {}
+    }
+  },
+  "animation": false
+}
+    </pre>
+  </div>
+</div>
+`;

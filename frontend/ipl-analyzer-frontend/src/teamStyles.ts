@@ -3,6 +3,7 @@
 export interface TeamStyle {
   bg: string;
   text: string;
+  accent?: string; // Add this line
 }
 
 export interface TeamStyles {
