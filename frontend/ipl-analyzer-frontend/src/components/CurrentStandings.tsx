@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, team_styles, type TeamStyle } from '../teamStyles';
+import { team_full_names } from '../teamStyles'; // Removed unused team_styles and TeamStyle
 interface TeamStats {
   Matches: number;
   Wins: number;
@@ -104,9 +104,10 @@ const CurrentStandings: React.FC = () => {
           </thead>
           <tbody>
             {standings.map((team) => {
-              const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
+              // const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined; // Removed
               return (
-                <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
+                // Inline style removed from tr below
+                <tr key={team.teamKey}>
                   <td>{team.pos}</td>
                   <td>{team.teamFullName}</td>
                   <td>{team.Matches}</td>

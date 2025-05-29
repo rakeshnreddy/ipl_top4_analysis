@@ -11,7 +11,7 @@ import { // Values from chart.js
 } from 'chart.js'; // Values from chart.js
 import type { ChartOptions, ChartData, TooltipItem } from 'chart.js'; // Types from chart.js
 
-import { team_short_names, team_styles, type TeamStyle } from '../teamStyles'; // Values from teamStyles
+import { team_short_names } from '../teamStyles'; // Removed unused team_styles and TeamStyle
 
 ChartJS.register(
   CategoryScale,
@@ -33,14 +33,15 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
     labels: chartData.map(d => team_short_names[d.teamKey] || d.teamKey),
     datasets: [
       {
-        label: 'Probability', // Keep label simple for screen readers
+        label: 'Probability',
         data: chartData.map(d => d.probability),
-        backgroundColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.accent || 
-                                          (team_styles[d.teamKey] as TeamStyle)?.bg || 
-                                          'var(--accent-color-light, #BEA8A7)'), // Fallback to CSS var or warm gray
-        borderColor: chartData.map(d => (team_styles[d.teamKey] as TeamStyle)?.text || 
-                                        'var(--text-color-light, #8A7978)'), // Fallback to CSS var or darker warm gray
-        borderWidth: 1,
+        // For simplicity in this subtask, using fixed colors.
+        // Proper theming would require passing theme variables as props or using Chart.js scripting.
+        backgroundColor: 'rgba(255, 111, 0, 0.6)', // Representative of light theme --primary-color (Vibrant Orange) with alpha
+        borderColor: 'rgba(255, 111, 0, 1)',     // Opaque version for border
+        borderWidth: 2,
+        borderRadius: 6, // Rounded bars
+        borderSkipped: false, // Border on all sides
       },
     ],
   };
@@ -72,21 +73,21 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
           callback: function(value) {
             return value + '%';
           },
-          color: 'var(--text-color-light)' // Use CSS variable for tick colors
+          color: 'var(--text-color)' // Ensure this uses a theme-aware text color variable
         },
         grid: {
-          color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
+          display: false, // Remove X-axis grid lines
         }
-      }, // x scale object ends
+      },
       y: {
         ticks: {
           autoSkip: false,
-          color: 'var(--text-color-light)' // Use CSS variable for tick colors
+          color: 'var(--text-color)' // Ensure this uses a theme-aware text color variable
         },
         grid: {
-          color: 'var(--panel-border-light, #e0e0e0)' // Use CSS variable for grid lines
-        } // No comma after grid object
-      } // No comma after y scale object
+          display: false, // Remove Y-axis grid lines
+        },
+      },
     }, // scales object ends
     plugins: {
       legend: {

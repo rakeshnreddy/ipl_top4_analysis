@@ -1,117 +1,110 @@
 :root {
-  /* Light Theme Color Palette (Default) */
-  /* New Glassmorphism & Warm Theme Variables - Light Mode */
-  --glass-bg-color: rgba(255, 235, 220, 0.6); /* Light Peach, semi-transparent */
-  --glass-border-color: rgba(255, 182, 193, 0.35); /* Light Pink, low opacity */
-  --glass-shadow-color-soft: rgba(188, 123, 123, 0.15);
-  --glass-shadow-color-strong: rgba(188, 123, 123, 0.25);
-  --glass-blur-intensity: 12px;
-  --glass-text-color: #5D4037; /* Dark Brown */
-  --glass-border-radius: 16px;
+  /* New Page Gradient Variables - Light Mode */
+  --gradient-page-start-color: #FF8C00; /* Dark Orange */
+  --gradient-page-end-color: #4682B4;   /* Steel Blue */
+  --header-text-color-light: #FFFFFF;
+  --header-text-color: var(--header-text-color-light); /* General header text color */
 
-  --gradient-start-color: #FFDAB9; /* Peach Puff */
-  --gradient-end-color: #FFC0CB; /* Soft Pink */
+  /* Orange & Blue Glassmorphic - Light Mode */
+  --glass-bg-gradient-start-color: rgba(255, 165, 0, 0.5);  /* Light Orange, semi-transparent */
+  --glass-bg-gradient-end-color: rgba(135, 206, 235, 0.4); /* Sky Blue, semi-transparent */
+  --glass-border-color: rgba(70, 130, 180, 0.4); /* Steel Blue, low opacity for borders */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.1);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.15);
+  --glass-blur-intensity: 10px;
+  --glass-text-color: #1A2A3A;    /* Dark Blue-Gray */
+  --glass-heading-color: #005A9C; /* Stronger Blue for headings on glass */
+  --glass-border-radius: 14px;
+
+  --primary-color: #FF6F00; /* Vibrant Orange */
+  --primary-hover-color: #FF8F00; /* Lighter Vibrant Orange */
+  --on-primary-text-color: #FFFFFF;
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #5A6F80; /* Muted Blue-Gray */
+  --background-color: transparent; /* Page background is gradient */
+  --surface-color: transparent;    /* Surfaces are glass */
+  --border-color: var(--glass-border-color); /* General border for non-glass elements if any */
   
-  --button-glass-bg-color: rgba(255, 235, 220, 0.5);
-  --button-glass-text-color: #5D4037;
-  --input-glass-bg-color: rgba(255, 240, 230, 0.5);
-  --input-glass-text-color: #5D4037;
-  --input-glass-border-color: rgba(255, 182, 193, 0.3);
+  --button-glass-bg-start-color: rgba(255, 175, 20, 0.4);
+  --button-glass-bg-end-color: rgba(155, 216, 245, 0.3);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
 
-  /* Update existing variables if needed to align with the new theme, e.g.: */
-  --primary-color: #FF8A65; /* Deep Coral for light theme */
-  --primary-hover-color: #FF7043; /* Darker Coral */
-  --text-color: var(--glass-text-color); /* Align main text with glass text */
-  --background-color: transparent; /* Page background will be gradient */
-  --surface-color: transparent; /* Card/panel surfaces will be glass */
-  --border-color: var(--glass-border-color);
-  --on-primary-text-color: #FFFFFF; /* White text on Deep Coral */
+  --input-glass-bg-color: rgba(220, 235, 245, 0.4); /* Very light blue, semi-transparent */
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
 
-  --secondary-color: #6c757d; /* Cool Gray - Keeping for now */
-  --text-muted-color: #5a6268; /* Medium Gray - Keeping for now */
-  --accent-color-success: #28a745; /* Green */
-  --accent-color-warning: #ffc107; /* Yellow */
-  --accent-color-warning-text: #212529; /* Dark text for light yellow */
-  --accent-color-info: #17a2b8; /* Teal */
-  --table-header-bg: #e9ecef;
-  --table-row-even-bg: var(--background-color);
-  --table-row-hover-bg: #ddeeff;
-  --control-bg: #e9ecef; /* Background for control groups */
-  --input-bg: var(--surface-color);
-  --input-text-color: var(--text-color);
-  --input-border-color: var(--border-color);
-  --button-text-color: var(--surface-color);
+  /* Kept from previous theme for compatibility, can be reviewed */
+  --secondary-color: #6c757d; 
+  --accent-color-success: #28a745;
+  --accent-color-warning: #ffc107;
+  --accent-color-warning-text: #212529;
+  --accent-color-info: #17a2b8;
+  --table-header-bg: #e9ecef; /* Will be overridden by new table styles */
+  --table-row-even-bg: var(--background-color); /* Will be overridden */
+  --table-row-hover-bg: #ddeeff; /* Will be overridden */
+  --control-bg: #e9ecef; /* To be reviewed if control containers become glass */
+  --input-bg: var(--surface-color); /* Overridden by input-glass-bg-color */
+  --input-text-color: var(--text-color); /* Overridden by input-glass-text-color */
+  --input-border-color: var(--border-color); /* Overridden by input-glass-border-color */
+  --button-text-color: var(--on-primary-text-color); /* Default button text on primary bg */
   --disabled-bg-color: var(--secondary-color);
   --disabled-text-color: #e9ecef;
-  --footer-bg-color: #343a40;
+  --footer-bg-color: #343a40; /* Consider making footer glass or themed */
   --footer-text-color: #f8f9fa;
-  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
-  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07); /* Replaced by glass shadows for cards */
+  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1); /* Replaced by glass shadows for cards */
   --link-color: var(--primary-color);
   --link-hover-color: var(--primary-hover-color);
   --loading-message-bg: var(--accent-color-info);
-  --loading-message-text: var(--surface-color);
+  --loading-message-text: #FFFFFF;
   --loading-message-border: #117a8b;
   --error-message-bg: #f8d7da;
   --error-message-text: #721c24;
   --error-message-border: #f5c6cb;
 
-
-  /* Dark Theme Color Palette (Defined here, applied in media query) */
-  /* New Glassmorphism & Warm Theme Variables - Dark Mode */
-  --glass-bg-color-dark: rgba(60, 40, 30, 0.65); /* Dark Warm Brown, semi-transparent */
-  --glass-border-color-dark: rgba(255, 171, 64, 0.3); /* Amber, low opacity */
-  --glass-shadow-color-soft-dark: rgba(0, 0, 0, 0.2);
-  --glass-shadow-color-strong-dark: rgba(0, 0, 0, 0.3);
-  /* --glass-blur-intensity can remain the same or be themed */
-  --glass-text-color-dark: #FFF3E0; /* Pale Orange White */
-  /* --glass-border-radius can remain the same */
-
-  --gradient-start-color-dark: #4E342E; /* Dark Brown */
-  --gradient-end-color-dark: #BF360C; /* Deep Orange Red */
-
-  --button-glass-bg-color-dark: rgba(80, 60, 50, 0.5);
-  --button-glass-text-color-dark: #FFF3E0;
-  --input-glass-bg-color-dark: rgba(70, 50, 40, 0.5);
-  --input-glass-text-color-dark: #FFF3E0;
-  --input-glass-border-color-dark: rgba(255, 171, 64, 0.25);
-
-  /* Update existing dark variables if needed, e.g.: */
-  --primary-color-dark: #FFAB40; /* Orange Amber for dark theme */
-  --primary-hover-color-dark: #FFB74D; /* Lighter Amber */
-  --text-color-dark: var(--glass-text-color-dark);
-  --background-color-dark: transparent;
-  --surface-color-dark: transparent;
-  --border-color-dark: var(--glass-border-color-dark);
-  
-  --text-muted-color-dark: #a0a0a0; /* Dimmer light gray - Keeping for now */
-  --accent-color-success-dark: #28a745; /* Green can work, or make it slightly brighter */
-  --accent-color-warning-dark: #b8860b; /* Darker yellow for dark mode */
-  --accent-color-warning-text-dark: var(--text-color-dark); /* Light text for dark yellow */
-  --accent-color-info-dark: #17a2b8; /* Teal can work, or make it slightly brighter */
+  /* Dark Theme Variable Placeholders (values defined in html[data-theme="dark"]) */
+  --gradient-page-start-color-dark: #D2691E;
+  --gradient-page-end-color-dark: #2C3E50;
+  --header-text-color-dark: #E0E0E0;
+  --glass-bg-gradient-start-color-dark: rgba(40, 58, 71, 0.65);
+  --glass-bg-gradient-end-color-dark: rgba(200, 100, 0, 0.55);
+  --glass-border-color-dark: rgba(255, 140, 0, 0.3);
+  --glass-shadow-color-soft-dark: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong-dark: rgba(0, 0, 0, 0.35);
+  --glass-text-color-dark: #EAEAEA;
+  --glass-heading-color-dark: #FFA500;
+  --primary-color-dark: #FFA500;
+  --primary-hover-color-dark: #FFB733;
+  --on-primary-text-color-dark: #1A2A3A;
+  --text-muted-color-dark: #9EADBA;
+  --button-glass-bg-start-color-dark: rgba(50, 68, 81, 0.5);
+  --button-glass-bg-end-color-dark: rgba(210, 110, 10, 0.4);
+  --button-border-color-dark: var(--glass-border-color-dark);
+  --input-glass-bg-color-dark: rgba(26, 42, 58, 0.5);
+  --input-glass-border-color-dark: var(--glass-border-color-dark);
+  /* Keep other dark theme specific vars like accent colors, footer, etc. */
+  --accent-color-success-dark: #28a745; 
+  --accent-color-warning-dark: #b8860b; 
+  --accent-color-warning-text-dark: var(--glass-text-color-dark);
+  --accent-color-info-dark: #17a2b8; 
   --table-header-bg-dark: #2c2c2c;
   --table-row-even-bg-dark: #252525;
   --table-row-hover-bg-dark: #3a3a3a;
   --control-bg-dark: #2c2c2c;
-  --input-bg-dark: #2a2a2a;
-  --input-text-color-dark: var(--text-color-dark);
-  --input-border-color-dark: var(--border-color-dark);
-  --button-text-color-dark: var(--text-color-dark); /* For buttons that might not have dark bg like primary */
   --disabled-bg-color-dark: #495057;
   --disabled-text-color-dark: #adb5bd;
   --footer-bg-color-dark: #212529;
   --footer-text-color-dark: #ced4da;
-  --box-shadow-light-dark: 0 2px 5px rgba(255, 255, 255, 0.05);
-  --box-shadow-medium-dark: 0 4px 10px rgba(255, 255, 255, 0.08);
-  --link-color-dark: #63a9ff; /* Lighter blue for dark mode links */
-  --link-hover-color-dark: #8dbdff;
+  --link-color-dark: #FFB733; /* Updated link color for dark */
+  --link-hover-color-dark: #FFA500; /* Updated link hover for dark */
   --loading-message-bg-dark: var(--accent-color-info-dark);
-  --loading-message-text-dark: var(--text-color-dark);
+  --loading-message-text-dark: var(--glass-text-color-dark);
   --loading-message-border-dark: #106777;
   --error-message-bg-dark: #58181F;
   --error-message-text-dark: #F8D7DA;
   --error-message-border-dark: #721c24;
-
 
   /* Fonts */
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -119,8 +112,8 @@
 
   /* Spacing & Sizing */
   --spacing-unit: 8px;
-  --border-radius: 0.3rem; /* Slightly more rounded: 4.8px */
-  --max-content-width: 1280px; /* Increased max width */
+  --border-radius: var(--glass-border-radius); /* Global radius to use glass radius */
+  --max-content-width: 1280px;
 }
 
 /* Global Resets & Defaults */
@@ -138,21 +131,19 @@ body {
   font-family: var(--font-family-sans-serif);
   margin: 0;
   padding: 0;
-  background-color: var(--background-color); /* Will be transparent due to variable update */
+  background-color: var(--background-color); 
   color: var(--text-color);
-  line-height: 1.65; /* Improved line height */
-  font-size: 16px; /* Base font size */
+  line-height: 1.65; 
+  font-size: 16px; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Gradient background */
   min-height: 100vh;
-  background-image: linear-gradient(135deg, var(--gradient-start-color), var(--gradient-end-color));
-  background-size: 200% 200%; /* For animation */
-  animation: warmGradientAnimation 20s ease infinite;
+  background-image: linear-gradient(135deg, var(--gradient-page-start-color), var(--gradient-page-end-color));
+  background-size: 200% 200%; 
+  animation: pageGradientAnimation 20s ease infinite;
 }
 
-@keyframes warmGradientAnimation {
+@keyframes pageGradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -162,81 +153,83 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color:transparent; /* Ensure #root is transparent */
 }
 
 /* App Container */
 #app-container {
   max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3); /* 16px 24px */
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
   width: 100%;
-  flex-grow: 1; /* Allows footer to stick to bottom */
+  flex-grow: 1;
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
-  color: var(--button-text-color); /* Use variable for text color */
-  padding: calc(var(--spacing-unit) * 2.5) 0; /* 20px */
+  /* background: transparent; /* REMOVED - Header is part of page gradient */
+  /* color: var(--header-text-color-light); /* REMOVED - h1 handles its own color */
+  padding: calc(var(--spacing-unit) * 2.5) 0; 
   text-align: center;
-  border-radius: var(--border-radius);
-  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
-  box-shadow: var(--box-shadow-medium); /* Use variable */
+  border-radius: var(--glass-border-radius); /* UPDATED */
+  margin-bottom: calc(var(--spacing-unit) * 4); 
+  /* box-shadow: none; /* REMOVED */
+  border-bottom: 1px solid var(--glass-border-color); /* ADDED */
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.25rem; /* 36px */
+  font-size: 2.25rem; 
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: var(--header-text-color); /* ADDED/UPDATED */
 }
 
 /* Sections */
 section {
-  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
-  /* Card-like styles (background, padding, border, border-radius, box-shadow, transition, :hover) removed */
-  /* Transition and hover for box-shadow are removed as GlassCard handles shadows */
+  margin-bottom: calc(var(--spacing-unit) * 4); 
+  /* Styles removed as GlassCard is used */
 }
 
 section h2 {
   margin-top: 0;
-  margin-bottom: calc(var(--spacing-unit) * 2.5); /* 20px */
-  color: var(--primary-hover-color);
-  border-bottom: 3px solid var(--primary-color);
-  padding-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
-  font-size: 1.85rem; /* 29.6px */
+  margin-bottom: calc(var(--spacing-unit) * 2.5); 
+  color: var(--glass-heading-color); /* This was already changed as per previous plan */
+  border-bottom: 2px solid var(--primary-color); /* CHANGED from 3px to 2px */
+  padding-bottom: calc(var(--spacing-unit) * 1.5); 
+  font-size: 1.85rem; 
   font-weight: 600;
 }
 
 section h3 {
-  margin-top: calc(var(--spacing-unit) * 2); /* 16px */
-  margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
-  font-size: 1.5rem; /* 24px */
-  color: var(--text-color);
+  margin-top: calc(var(--spacing-unit) * 2); 
+  margin-bottom: calc(var(--spacing-unit) * 1.5); 
+  font-size: 1.5rem; 
+  color: var(--glass-text-color); /* Use glass text color */
   font-weight: 600;
 }
 
 section h4 {
-  margin-top: var(--spacing-unit) * 1.5; /* 12px */
-  margin-bottom: var(--spacing-unit); /* 8px */
-  font-size: 1.2rem; /* 19.2px */
-  color: var(--text-muted-color);
+  margin-top: var(--spacing-unit) * 1.5; 
+  margin-bottom: var(--spacing-unit); 
+  font-size: 1.2rem; 
+  color: var(--text-muted-color); /* Use general muted text */
   font-weight: 600;
 }
 
-/* Generic Table Styling */
+/* Generic Table Styling for Glassmorphism */
 .table-responsive {
   overflow-x: auto;
   width: 100%;
   margin-top: calc(var(--spacing-unit) * 2);
-  /* border: 1px solid var(--border-color); REMOVE for now or use --glass-border-color */
-  border-radius: calc(var(--glass-border-radius) - 8px); /* Inner radius */
-  overflow: hidden; /* To make sure table respects the radius */
-  background-color: color-mix(in srgb, var(--glass-bg-color) 30%, transparent); /* Very subtle internal background */
+  border-radius: calc(var(--glass-border-radius) - 8px); /* Keep this from previous glass refinement */
+  overflow: hidden; 
+  background-color: color-mix(in srgb, var(--glass-bg-gradient-start-color) 15%, transparent); /* UPDATED */
+  border: 1px solid var(--glass-border-color);
 }
 table {
   width: 100%;
-  border-collapse: separate; /* Or keep collapse and style differently */
+  border-collapse: separate; 
   border-spacing: 0;
   background-color: transparent;
 }
@@ -245,48 +238,37 @@ th, td {
   padding: calc(var(--spacing-unit) * 1.5);
   text-align: left;
   vertical-align: middle;
-  border: none; /* Remove individual cell borders initially */
-  border-bottom: 1px solid var(--glass-border-color); /* Rows separated by bottom border */
+  border: none; 
+  border-bottom: 1px solid var(--glass-border-color); 
   color: var(--glass-text-color);
+  text-shadow: 1px 1px 2px color-mix(in srgb, var(--glass-text-color) 30%, black); /* ADDED "3D" effect */
 }
 td:first-child, th:first-child {
-    padding-left: calc(var(--spacing-unit) * 2); /* More padding for first cell if table-responsive has its own bg */
+    padding-left: calc(var(--spacing-unit) * 2); 
 }
 td:last-child, th:last-child {
     padding-right: calc(var(--spacing-unit) * 2);
 }
 
 th {
-  /* background-color: var(--table-header-bg); */ /* Old var */
-  background-color: color-mix(in srgb, var(--glass-bg-color) 85%, var(--glass-text-color) 3%);
+  /* background: linear-gradient(135deg, var(--glass-bg-gradient-start-color), var(--glass-bg-gradient-end-color)); /* REMOVED old gradient */
+  background-color: color-mix(in srgb, var(--glass-bg-gradient-end-color) 20%, transparent); /* UPDATED */
   font-weight: 700;
-  /* color: var(--text-color); */ /* Now handled by th, td */
   white-space: nowrap;
-  border-bottom-width: 2px; /* Thicker border for header */
-  border-bottom-color: var(--primary-color);
+  border-bottom-width: 2px; 
+  border-bottom-color: var(--primary-color); /* Kept as per instruction */
 }
 
 tbody tr:nth-child(even) {
-  /* background-color: var(--table-row-even-bg); */ /* Old var */
-  background-color: color-mix(in srgb, var(--glass-bg-color) 10%, transparent); /* Very subtle striping */
+  /* background-color: color-mix(in srgb, var(--glass-bg-gradient-start-color) 10%, transparent); /* REMOVED old striping */
+  background-color: transparent; /* UPDATED - removing striping */
 }
 
 tbody tr:hover {
-  /* background-color: var(--table-row-hover-bg); */ /* Old var */
-  background-color: color-mix(in srgb, var(--primary-color) 20%, var(--glass-bg-color) 70%);
-  /* color: var(--glass-text-color); */ /* Ensure text is readable */
+  /* background-color: color-mix(in srgb, var(--primary-color) 20%, var(--glass-bg-gradient-end-color) 30%); /* REMOVED old hover */
+  background-color: color-mix(in srgb, var(--primary-color) 15%, transparent); /* UPDATED */
 }
 
-/*
-tbody tr[style] {
-  color: inherit;
-}
-tbody tr[style]:nth-child(even) {
-  background-color: inherit;
-}
-tbody tr[style] td {
-  /* Inline styles from team_styles will handle bg and text color */
-/* } */ /* Commenting out for now to prioritize glass theme */
 table caption {
   caption-side: top;
   font-size: 1.1em;
@@ -296,62 +278,65 @@ table caption {
   text-align: left;
 }
 
-
 /* Form Elements */
 .analysis-controls,
 .qualification-path-controls,
 .simulation-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(var(--spacing-unit) * 2.5); /* 20px */
-  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
-  padding: calc(var(--spacing-unit) * 2); /* 16px */
-  background-color: var(--control-bg); /* Use variable */
-  border-radius: var(--border-radius);
+  gap: calc(var(--spacing-unit) * 2.5); 
+  margin-bottom: calc(var(--spacing-unit) * 3); 
+  padding: calc(var(--spacing-unit) * 2); 
+  background: linear-gradient(135deg, var(--glass-bg-gradient-start-color), var(--glass-bg-gradient-end-color));
+  border-radius: var(--glass-border-radius);
+  border: 1px solid var(--glass-border-color);
+  backdrop-filter: blur(var(--glass-blur-intensity));
+  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
+  box-shadow: var(--glass-shadow-color-soft) 0 4px 6px;
   align-items: center;
 }
 
 .control-group {
   display: flex;
   align-items: center;
-  gap: var(--spacing-unit); /* 8px */
+  gap: var(--spacing-unit); 
 }
 
 .control-group label, fieldset legend {
-  font-weight: 600; /* Bolder labels */
-  color: var(--text-color);
-  margin-right: calc(var(--spacing-unit) * 0.5); /* 4px */
-  font-size: 0.95em; /* Slightly smaller labels */
+  font-weight: 600; 
+  color: var(--glass-text-color);
+  margin-right: calc(var(--spacing-unit) * 0.5); 
+  font-size: 0.95em; 
 }
 fieldset {
     border: none;
     padding: 0;
     margin: 0;
+    background: transparent; /* Ensure fieldset itself is transparent */
 }
-fieldset.control-group { /* For radio groups */
-    gap: var(--spacing-unit) * 1.5; /* 12px */
+fieldset.control-group { 
+    gap: var(--spacing-unit) * 1.5; 
 }
 fieldset legend {
-    padding: 0 0 calc(var(--spacing-unit) * 0.5) 0; /* Bottom padding for legend */
+    padding: 0 0 calc(var(--spacing-unit) * 0.5) 0; 
     margin-bottom: calc(var(--spacing-unit) * 0.5);
 }
-
 
 select,
 input[type="text"],
 input[type="number"],
 textarea {
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); /* 10px 12px */
-  border-radius: calc(var(--glass-border-radius) / 2); /* Smaller radius for inputs */
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); 
+  border-radius: calc(var(--glass-border-radius) / 2); 
   border: 1px solid var(--input-glass-border-color);
   background-color: var(--input-glass-bg-color);
   font-size: 1em;
   color: var(--input-glass-text-color);
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease;
-  min-width: 180px; /* Minimum width for select/inputs */
+  min-width: 180px; 
   backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
   -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); /* Keep subtle inner shadow */
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); 
 }
 
 select:focus,
@@ -360,96 +345,107 @@ input[type="number"]:focus,
 textarea:focus {
   border-color: var(--primary-color);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent); /* Consistent focus ring */
-  background-color: color-mix(in srgb, var(--input-glass-bg-color) 80%, var(--surface-color) 20%); /* Slightly change bg on focus */
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent); 
+  background-color: color-mix(in srgb, var(--input-glass-bg-color) 80%, var(--glass-bg-gradient-end-color) 20%); 
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  margin-right: calc(var(--spacing-unit) * 0.75); /* 6px */
-  accent-color: var(--primary-color); /* Style radio/checkbox color */
-  transform: scale(1.1); /* Slightly larger radio/checkbox */
+  margin-right: calc(var(--spacing-unit) * 0.75); 
+  accent-color: var(--primary-color); 
+  transform: scale(1.1); 
 }
 
 .control-group label[for*="-radio"],
 .control-group label[for*="-checkbox"] {
-  margin-right: var(--spacing-unit); /* 8px */
-  font-weight: normal; /* Normal weight for radio/checkbox labels */
+  margin-right: var(--spacing-unit); 
+  font-weight: normal; 
+  color: var(--glass-text-color); /* Ensure these labels also use glass text color */
 }
 
 button, .button {
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); /* 10px 20px */
-  border: 1px solid var(--glass-border-color);
-  border-radius: var(--border-radius); /* Can use var(--glass-border-radius) if preferred */
-  background-color: var(--button-glass-bg-color);
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); 
+  border: 1px solid var(--button-border-color);
+  border-radius: var(--border-radius); 
+  background: linear-gradient(135deg, var(--button-glass-bg-start-color), var(--button-glass-bg-end-color));
   color: var(--button-glass-text-color);
   font-size: 1em;
-  font-weight: 600; /* Bolder buttons */
+  font-weight: 600; 
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
   text-align: center;
   display: inline-block;
   text-decoration: none;
-  white-space: nowrap; /* Prevent button text wrapping */
+  white-space: nowrap; 
   backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
   -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px var(--glass-shadow-color-soft);
 }
 button:hover, .button:hover {
-  background-color: color-mix(in srgb, var(--button-glass-bg-color) 80%, var(--primary-color) 20%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 80%, var(--primary-color) 20%), color-mix(in srgb, var(--button-glass-bg-end-color) 80%, var(--primary-color) 20%));
   border-color: var(--primary-color);
-  /* color: var(--button-glass-text-color); /* Ensure text color remains consistent or adjust as needed */
-  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Keep or enhance shadow */
+  box-shadow: 0 3px 6px var(--glass-shadow-color-strong);
 }
 button:active, .button:active {
     transform: translateY(1px);
+    box-shadow: 0 1px 2px var(--glass-shadow-color-strong);
 }
-button:focus-visible, .button:focus-visible { /* Modern focus state */
+button:focus-visible, .button:focus-visible { 
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
   box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
 button:disabled, .button:disabled {
-  background-color: color-mix(in srgb, var(--disabled-bg-color) 50%, transparent);
-  border-color: color-mix(in srgb, var(--disabled-bg-color) 70%, transparent);
-  color: var(--disabled-text-color); /* Use variable */
+  background: color-mix(in srgb, var(--button-glass-bg-start-color) 40%, #888888 60%); /* More muted */
+  border-color: color-mix(in srgb, var(--glass-border-color) 50%, #888888 50%);
+  color: color-mix(in srgb, var(--button-glass-text-color) 50%, #777777 50%);
   cursor: not-allowed;
-  opacity: 0.75; /* More visible disabled state */
+  opacity: 0.6; 
   box-shadow: none;
   transform: none;
   backdrop-filter: none;
 }
 
 button.success, .button.success {
-  background-color: var(--accent-color-success);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 70%, var(--accent-color-success) 30%), color-mix(in srgb, var(--button-glass-bg-end-color) 70%, var(--accent-color-success) 30%));
+  border-color: var(--accent-color-success);
+  color: var(--on-primary-text-color); /* Assuming success buttons use primary-like text contrast */
 }
 button.success:hover, .button.success:hover {
-  background-color: #1f7d39; /* Darker success green */
+  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 50%, var(--accent-color-success) 50%), color-mix(in srgb, var(--button-glass-bg-end-color) 50%, var(--accent-color-success) 50%));
+  border-color: color-mix(in srgb, var(--accent-color-success) 80%, #000000 20%);
 }
 button.warning, .button.warning {
-  background-color: var(--accent-color-warning);
-    color: var(--accent-color-warning-text); /* Use variable */
+  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 70%, var(--accent-color-warning) 30%), color-mix(in srgb, var(--button-glass-bg-end-color) 70%, var(--accent-color-warning) 30%));
+  border-color: var(--accent-color-warning);
+  color: var(--accent-color-warning-text); 
 }
 button.warning:hover, .button.warning:hover {
-    background-color: #e0a800; /* Consider making this a variable too if used elsewhere */
+  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 50%, var(--accent-color-warning) 50%), color-mix(in srgb, var(--button-glass-bg-end-color) 50%, var(--accent-color-warning) 50%));
+  border-color: color-mix(in srgb, var(--accent-color-warning) 80%, #000000 20%);
 }
 
 
 /* Utilities */
 .text-center { text-align: center; }
-.mb-1 { margin-bottom: var(--spacing-unit); } /* 8px */
-.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); } /* 16px */
-.mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); } /* 24px */
+.mb-1 { margin-bottom: var(--spacing-unit); } 
+.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); } 
+.mb-3 { margin-bottom: calc(var(--spacing-unit) * 3); } 
 .mt-1 { margin-top: var(--spacing-unit); }
 .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
 .mt-3 { margin-top: calc(var(--spacing-unit) * 3); }
-.text-warning { color: #856404; background-color: #fff3cd; padding: var(--spacing-unit); border-radius: var(--border-radius); border: 1px solid #ffeeba;}
-
+.text-warning { 
+  color: var(--accent-color-warning-text); 
+  background-color: color-mix(in srgb, var(--accent-color-warning) 70%, transparent); 
+  padding: var(--spacing-unit); 
+  border-radius: var(--border-radius); 
+  border: 1px solid var(--accent-color-warning);
+}
 
 /* Current Standings Metadata */
 #current-standings .metadata p {
-  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
+  margin-bottom: calc(var(--spacing-unit) * 0.75); 
   font-size: 0.9em;
   color: var(--text-muted-color);
 }
@@ -457,72 +453,64 @@ button.warning:hover, .button.warning:hover {
 /* Scenario Simulation Specifics */
 #scenario-simulation .simulation-message {
   margin-top: var(--spacing-unit);
-  padding: calc(var(--spacing-unit) * 1.5); /* 12px */
-  background-color: var(--accent-color-warning); /* Use variable, or specific message bg */
-  border: 1px solid #ffeeba; /* Fallback, or make variable */
+  padding: calc(var(--spacing-unit) * 1.5); 
+  background-color: color-mix(in srgb, var(--accent-color-warning) 70%, transparent); 
+  border: 1px solid var(--accent-color-warning); 
   border-radius: var(--border-radius);
-  color: var(--accent-color-warning-text); /* Use variable */
+  color: var(--accent-color-warning-text); 
   font-weight: 500;
 }
 
 #scenario-simulation .simulation-results-container {
   display: flex;
-  gap: calc(var(--spacing-unit) * 3); /* 24px */
-  margin-top: calc(var(--spacing-unit) * 2.5); /* 20px */
+  gap: calc(var(--spacing-unit) * 3); 
+  margin-top: calc(var(--spacing-unit) * 2.5); 
   flex-wrap: wrap;
 }
 
 #scenario-simulation .match-log-container,
 #scenario-simulation .final-standings-container {
   flex: 1;
-  min-width: 320px; /* Ensure readability on smaller flex layouts */
-  background-color: var(--surface-color);
-  padding: calc(var(--spacing-unit) * 2); /* 16px */
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  min-width: 320px; 
+  /* Uses GlassCard, so no specific bg/border/shadow here */
 }
 
 #scenario-simulation textarea {
   width: 100%;
-  padding: var(--spacing-unit); /* 8px */
-  border-radius: var(--border-radius);
-  border: 1px solid var(--input-border-color); /* Use variable */
+  padding: var(--spacing-unit); 
+  border-radius: calc(var(--glass-border-radius) / 2);
+  border: 1px solid var(--input-glass-border-color); 
   font-family: var(--font-family-monospace);
-  font-size: 0.95em; /* Slightly larger for readability */
-  background-color: var(--input-bg); /* Use variable, or specific like #e9ecef */
-  color: var(--input-text-color); /* Use variable */
-  min-height: 250px; /* Increased height */
+  font-size: 0.95em; 
+  background-color: var(--input-glass-bg-color); 
+  color: var(--input-glass-text-color); 
+  min-height: 250px; 
   resize: vertical;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+  backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 3));
 }
 
 /* Qualification Path Specifics */
 #qualification-path .qualification-path-results p {
   margin-bottom: var(--spacing-unit);
-  font-size: 1.05em; /* Slightly larger for emphasis */
+  font-size: 1.05em; 
 }
 #qualification-path .qualification-path-results strong {
   color: var(--primary-hover-color);
 }
-#qualification-path .metadata .text-warning { /* For the "Exhaustive only" message */
+#qualification-path .metadata .text-warning { 
     font-size: 0.9em;
     margin-top: var(--spacing-unit);
 }
 
-
 /* Chart Container (OverallProbabilities) */
-/* The height is primarily controlled inline in OverallProbabilities.tsx */
-/* Styles for the div wrapping ProbabilityChart if needed */
-#overall-probabilities > div > div[style*="flex: 1"] { /* Targets the flex children */
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-unit);
-    background-color: var(--surface-color);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+#overall-probabilities > div > div[style*="flex: 1"] { /* Targets the flex children from OverallProbabilities */
+    /* Uses GlassCard, so no specific bg/border/shadow here */
+    padding: var(--spacing-unit); /* Keep padding if needed around chart canvas */
 }
 #overall-probabilities .metadata p {
-  margin-bottom: calc(var(--spacing-unit) * 0.75); /* 6px */
+  margin-bottom: calc(var(--spacing-unit) * 0.75); 
   font-size: 0.9em;
   color: var(--text-muted-color);
 }
@@ -531,96 +519,88 @@ button.warning:hover, .button.warning:hover {
 /* Footer */
 footer {
   text-align: center;
-  padding: calc(var(--spacing-unit) * 3) 0; /* 24px */
-  margin-top: calc(var(--spacing-unit) * 4); /* 32px */
-  background-color: var(--footer-bg-color); /* Use variable */
-  color: var(--footer-text-color); /* Use variable */
+  padding: calc(var(--spacing-unit) * 3) 0; 
+  margin-top: calc(var(--spacing-unit) * 4); 
+  background-color: color-mix(in srgb, var(--glass-text-color) 85%, transparent); /* Darker, themed footer */
+  color: var(--gradient-page-start-color); /* Contrasting text */
   border-top: 3px solid var(--primary-color);
 }
 footer p {
-  margin: calc(var(--spacing-unit) * 0.5) 0; /* 4px */
+  margin: calc(var(--spacing-unit) * 0.5) 0; 
   font-size: 0.9em;
 }
 
-
-/* ARIA Live Regions - Basic Styling for Visibility (if needed, often they are visually hidden) */
-[aria-live="polite"], [aria-live="assertive"] {
-    /* These regions update screen readers. Visual styling might not be needed unless they show visible messages. */
-    /* Example: */
-    /* padding: var(--spacing-unit); */
-    /* margin-top: var(--spacing-unit); */
-    /* border: 1px dashed var(--secondary-color); */
-}
-p[role="status"], p[role="alert"] { /* For loading/error messages */
+/* ARIA Live Regions - Basic Styling for Visibility */
+p[role="status"], p[role="alert"] { 
     padding: calc(var(--spacing-unit) * 1.5);
     margin-top: var(--spacing-unit);
     border-radius: var(--border-radius);
     font-weight: 500;
+    backdrop-filter: blur(var(--glass-blur-intensity));
+    -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
+    border: 1px solid;
 }
-p[role="status"] { /* Loading messages */
-    background-color: var(--loading-message-bg); /* Use variable */
-    color: var(--loading-message-text); /* Use variable */
-    border: 1px solid var(--loading-message-border); /* Use variable */
+p[role="status"] { 
+    background-color: color-mix(in srgb, var(--accent-color-info) 60%, transparent);
+    color: var(--glass-text-color); 
+    border-color: var(--accent-color-info); 
 }
-p[role="alert"] { /* Error messages */
-    background-color: var(--error-message-bg); /* Use variable */
-    color: var(--error-message-text); /* Use variable */
-    border: 1px solid var(--error-message-border); /* Use variable */
+p[role="alert"] { 
+    background-color: color-mix(in srgb, var(--error-message-bg) 60%, var(--glass-bg-gradient-start-color) 30%);
+    color: var(--error-message-text); 
+    border-color: var(--error-message-border); 
 }
-
 
 html[data-theme="light"] {
-  /* Light Theme Color Palette (Default) */
-  /* New Glassmorphism & Warm Theme Variables - Light Mode */
-  --glass-bg-color: rgba(255, 235, 220, 0.6); /* Light Peach, semi-transparent */
-  --glass-border-color: rgba(255, 182, 193, 0.35); /* Light Pink, low opacity */
-  --glass-shadow-color-soft: rgba(188, 123, 123, 0.15);
-  --glass-shadow-color-strong: rgba(188, 123, 123, 0.25);
-  --glass-blur-intensity: 12px;
-  --glass-text-color: #5D4037; /* Dark Brown */
-  --glass-border-radius: 16px;
+  /* Page Gradient */
+  --gradient-page-start-color: #FF8C00;
+  --gradient-page-end-color: #4682B4;
+  --header-text-color: var(--header-text-color-light); /* Ensures it's explicitly set for light */
 
-  --gradient-start-color: #FFDAB9; /* Peach Puff */
-  --gradient-end-color: #FFC0CB; /* Soft Pink */
-  
-  --button-glass-bg-color: rgba(255, 235, 220, 0.5);
-  --button-glass-text-color: #5D4037;
-  --input-glass-bg-color: rgba(255, 240, 230, 0.5);
-  --input-glass-text-color: #5D4037;
-  --input-glass-border-color: rgba(255, 182, 193, 0.3);
+  /* Glassmorphic & General - Light Mode */
+  --glass-bg-gradient-start-color: rgba(255, 165, 0, 0.5);
+  --glass-bg-gradient-end-color: rgba(135, 206, 235, 0.4);
+  --glass-border-color: rgba(70, 130, 180, 0.4);
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.1);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.15);
+  --glass-blur-intensity: 10px;
+  --glass-text-color: #1A2A3A;
+  --glass-heading-color: #005A9C;
+  --glass-border-radius: 14px;
 
-  /* Update existing variables if needed to align with the new theme, e.g.: */
-  --primary-color: #FF8A65; /* Deep Coral for light theme */
-  --primary-hover-color: #FF7043; /* Darker Coral */
-  --text-color: var(--glass-text-color); /* Align main text with glass text */
-  --background-color: transparent; /* Page background will be gradient */
-  --surface-color: transparent; /* Card/panel surfaces will be glass */
+  --primary-color: #FF6F00;
+  --primary-hover-color: #FF8F00;
+  --on-primary-text-color: #FFFFFF;
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #5A6F80;
+  --background-color: transparent;
+  --surface-color: transparent;
   --border-color: var(--glass-border-color);
+  
+  --button-glass-bg-start-color: rgba(255, 175, 20, 0.4);
+  --button-glass-bg-end-color: rgba(155, 216, 245, 0.3);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
 
-  --secondary-color: #6c757d; /* Cool Gray - Keeping for now */
-  --text-muted-color: #5a6268; /* Medium Gray - Keeping for now */
-  --accent-color-success: #28a745; /* Green */
-  --accent-color-warning: #ffc107; /* Yellow */
-  --accent-color-warning-text: #212529; /* Dark text for light yellow */
-  --accent-color-info: #17a2b8; /* Teal */
-  --table-header-bg: #e9ecef;
-  --table-row-even-bg: var(--background-color);
-  --table-row-hover-bg: #ddeeff;
-  --control-bg: #e9ecef; /* Background for control groups */
-  --input-bg: var(--surface-color);
-  --input-text-color: var(--text-color);
-  --input-border-color: var(--border-color);
-  --button-text-color: var(--surface-color);
+  --input-glass-bg-color: rgba(220, 235, 245, 0.4);
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+
+  /* Kept from previous theme for compatibility, can be reviewed */
+  --secondary-color: #6c757d; 
+  --accent-color-success: #28a745;
+  --accent-color-warning: #ffc107;
+  --accent-color-warning-text: #212529;
+  --accent-color-info: #17a2b8;
   --disabled-bg-color: var(--secondary-color);
   --disabled-text-color: #e9ecef;
   --footer-bg-color: #343a40;
   --footer-text-color: #f8f9fa;
-  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07);
-  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1);
   --link-color: var(--primary-color);
   --link-hover-color: var(--primary-hover-color);
   --loading-message-bg: var(--accent-color-info);
-  --loading-message-text: var(--surface-color);
+  --loading-message-text: #FFFFFF;
   --loading-message-border: #117a8b;
   --error-message-bg: #f8d7da;
   --error-message-text: #721c24;
@@ -630,61 +610,60 @@ html[data-theme="light"] {
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --spacing-unit: 8px;
-  --border-radius: 0.3rem;
+  --border-radius: var(--glass-border-radius);
   --max-content-width: 1280px;
-  --on-primary-text-color: #FFFFFF; /* Ensure it's here for light theme */
 }
 
 html[data-theme="dark"] {
-  /* Apply new Glassmorphism & Warm Theme Variables - Dark Mode */
-  --glass-bg-color: var(--glass-bg-color-dark);
+  /* Page Gradient */
+  --gradient-page-start-color: var(--gradient-page-start-color-dark);
+  --gradient-page-end-color: var(--gradient-page-end-color-dark);
+  --header-text-color: var(--header-text-color-dark); /* Ensures it's explicitly set for dark */
+
+  /* Glassmorphic & General - Dark Mode */
+  --glass-bg-gradient-start-color: var(--glass-bg-gradient-start-color-dark);
+  --glass-bg-gradient-end-color: var(--glass-bg-gradient-end-color-dark);
   --glass-border-color: var(--glass-border-color-dark);
   --glass-shadow-color-soft: var(--glass-shadow-color-soft-dark);
   --glass-shadow-color-strong: var(--glass-shadow-color-strong-dark);
+  --glass-blur-intensity: 10px; /* Can be same as light or themed */
   --glass-text-color: var(--glass-text-color-dark);
-  /* --glass-blur-intensity and --glass-border-radius typically remain same but can be themed if needed */
+  --glass-heading-color: var(--glass-heading-color-dark);
+  --glass-border-radius: 14px; /* Can be same as light or themed */
 
-  --gradient-start-color: var(--gradient-start-color-dark);
-  --gradient-end-color: var(--gradient-end-color-dark);
-  
-  --button-glass-bg-color: var(--button-glass-bg-color-dark);
-  --button-glass-text-color: var(--button-glass-text-color-dark);
-  --input-glass-bg-color: var(--input-glass-bg-color-dark);
-  --input-glass-text-color: var(--input-glass-text-color-dark);
-  --input-glass-border-color: var(--input-glass-border-color-dark);
-
-  /* Update existing variables for dark mode */
   --primary-color: var(--primary-color-dark);
   --primary-hover-color: var(--primary-hover-color-dark);
-  --text-color: var(--text-color-dark);
-  --background-color: var(--background-color-dark);
-  --surface-color: var(--surface-color-dark);
-  --border-color: var(--border-color-dark);
-  --on-primary-text-color: #2C1E1A; /* Very Dark Brown text on Orange Amber */
+  --on-primary-text-color: var(--on-primary-text-color-dark);
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: var(--text-muted-color-dark);
+  --background-color: transparent;
+  --surface-color: transparent;
+  --border-color: var(--glass-border-color);
   
-  --text-muted-color: var(--text-muted-color-dark); /* Keep existing muted text color */
+  --button-glass-bg-start-color: var(--button-glass-bg-start-color-dark);
+  --button-glass-bg-end-color: var(--button-glass-bg-end-color-dark);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--button-border-color-dark);
+
+  --input-glass-bg-color: var(--input-glass-bg-color-dark);
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--input-glass-border-color-dark);
+  
+  /* Kept from previous theme for compatibility, can be reviewed */
+  --secondary-color: #5a6268; /* Darker cool gray for dark mode */
   --accent-color-success: var(--accent-color-success-dark);
   --accent-color-warning: var(--accent-color-warning-dark);
-  --accent-color-warning-text: var(--accent-color-warning-text-dark);
+  --accent-color-warning-text: var(--glass-text-color-dark); /* Updated */
   --accent-color-info: var(--accent-color-info-dark);
-  --table-header-bg: var(--table-header-bg-dark);
-  --table-row-even-bg: var(--table-row-even-bg-dark);
-  --table-row-hover-bg: var(--table-row-hover-bg-dark);
-  --control-bg: var(--control-bg-dark);
-  --input-bg: var(--input-bg-dark);
-  --input-text-color: var(--input-text-color-dark);
-  --input-border-color: var(--input-border-color-dark);
-  --button-text-color: var(--button-text-color-dark);
   --disabled-bg-color: var(--disabled-bg-color-dark);
   --disabled-text-color: var(--disabled-text-color-dark);
   --footer-bg-color: var(--footer-bg-color-dark);
   --footer-text-color: var(--footer-text-color-dark);
-  --box-shadow-light: var(--box-shadow-light-dark);
-  --box-shadow-medium: var(--box-shadow-medium-dark);
   --link-color: var(--link-color-dark);
   --link-hover-color: var(--link-hover-color-dark);
   --loading-message-bg: var(--loading-message-bg-dark);
-  --loading-message-text: var(--loading-message-text-dark);
+  --loading-message-text: var(--glass-text-color-dark);
   --loading-message-border: var(--loading-message-border-dark);
   --error-message-bg: var(--error-message-bg-dark);
   --error-message-text: var(--error-message-text-dark);
@@ -694,61 +673,48 @@ html[data-theme="dark"] {
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --spacing-unit: 8px;
-  --border-radius: 0.3rem;
+  --border-radius: var(--glass-border-radius);
   --max-content-width: 1280px;
-
-  /* Specific overrides for dark mode elements if variables are not enough */
-  /* (These were previously outside the :root block in the media query, so they should remain outside the html[data-theme='dark'] block too if they target specific elements) */
-  /* However, the request was to replace the *entire* media query block, so we'll put element-specific overrides inside if they need to be theme-dependent */
 }
 
-html[data-theme="dark"] header {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover-color) 100%);
-}
-html[data-theme="dark"] button,
-html[data-theme="dark"] .button {
-  color: var(--surface-color-dark); /* Example of specific dark theme override for button text */
-}
-html[data-theme="dark"] button.warning,
-html[data-theme="dark"] .button.warning {
-  color: var(--text-color-dark);
-}
-html[data-theme="dark"] #scenario-simulation textarea {
-  background-color: var(--input-bg-dark);
-  color: var(--input-text-color-dark);
-  border-color: var(--input-border-color-dark);
+/* Specific overrides for dark mode elements */
+/* html[data-theme="dark"] header rule for color was removed as h1 now handles its color directly via --header-text-color */
+
+html[data-theme="dark"] button.success, 
+html[data-theme="dark"] .button.success {
+  color: var(--on-primary-text-color-dark); /* Ensure text contrast on success buttons */
 }
 html[data-theme="dark"] select:focus,
 html[data-theme="dark"] input[type="text"]:focus,
 html[data-theme="dark"] input[type="number"]:focus,
 html[data-theme="dark"] textarea:focus {
-  box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-dark-rgb, 255, 171, 64), 0.35); /* Assuming --primary-color-dark-rgb or similar for focus ring */
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 html[data-theme="dark"] input[type="radio"],
 html[data-theme="dark"] input[type="checkbox"] {
-  accent-color: var(--primary-color);
+  accent-color: var(--primary-color); /* Primary color should be the dark theme primary */
 }
 
 /* Responsive adjustments */
 @media (max-width: 992px) { /* Tablets */
   #app-container {
-    padding: var(--spacing-unit) * 1.5; /* 12px */
+    padding: var(--spacing-unit) * 1.5; 
   }
   header h1 {
-    font-size: 2rem; /* 32px */
+    font-size: 2rem; 
   }
   section h2 {
-    font-size: 1.65rem; /* 26.4px */
+    font-size: 1.65rem; 
   }
   section h3 {
-    font-size: 1.35rem; /* 21.6px */
+    font-size: 1.35rem; 
   }
 
   .analysis-controls,
   .qualification-path-controls,
   .simulation-controls {
     flex-direction: column;
-    align-items: stretch; /* Make controls take full width */
+    align-items: stretch; 
   }
   .control-group {
     flex-direction: column;
@@ -756,59 +722,57 @@ html[data-theme="dark"] input[type="checkbox"] {
     width: 100%;
   }
   .control-group label, .control-group fieldset legend {
-    margin-bottom: calc(var(--spacing-unit) * 0.5); /* 4px */
+    margin-bottom: calc(var(--spacing-unit) * 0.5); 
   }
   .control-group select, .control-group input[type="radio"] + label, .control-group input[type="checkbox"] + label {
     width: 100%;
   }
-  fieldset.control-group label { /* For radio buttons */
-    width: auto; /* Override full width for radio labels */
+  fieldset.control-group label { 
+    width: auto; 
     margin-bottom: 0;
   }
-
 
   #scenario-simulation .simulation-results-container {
     flex-direction: column;
   }
-  #overall-probabilities > div[style*="flex-direction: row"] { /* The flex container for charts */
-    flex-direction: column !important; /* Force charts to stack */
+  #overall-probabilities > div[style*="flex-direction: row"] { 
+    flex-direction: column !important; 
   }
   #overall-probabilities > div > div[style*="flex: 1"] {
-      margin-bottom: var(--spacing-unit) * 2; /* Add space between stacked charts */
+      margin-bottom: var(--spacing-unit) * 2; 
   }
-
 }
 
 @media (max-width: 576px) { /* Small phones */
   body {
-    font-size: 15px; /* Slightly smaller base for small devices */
+    font-size: 15px; 
   }
   #app-container {
-    padding: var(--spacing-unit); /* 8px */
+    padding: var(--spacing-unit); 
   }
   header h1 {
-    font-size: 1.75rem; /* 28px */
+    font-size: 1.75rem; 
   }
   section h2 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem; 
   }
   section h3 {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.25rem; 
   }
   th, td {
-    padding: var(--spacing-unit); /* 8px */
+    padding: var(--spacing-unit); 
   }
   button, .button {
     width: 100%;
-    margin-bottom: var(--spacing-unit); /* Add some space if they stack */
+    margin-bottom: var(--spacing-unit); 
   }
   .analysis-controls button,
   .qualification-path-controls button,
-  .simulation-controls button { /* Ensure buttons in control groups also follow this */
+  .simulation-controls button { 
       width: 100%;
   }
 
   select, input[type="text"], input[type="number"], textarea {
-      font-size: 0.95em; /* Slightly smaller inputs on very small screens */
+      font-size: 0.95em; 
   }
 }
