@@ -18,8 +18,8 @@
   --glass-dark-bg-hover: rgba(34,34,34,0.25); /* Note: Lighter than default dark, as per instruction */
 
   /* Page Gradient Variables */
-  --gradient-page-start-color: #D2691E; /* Chocolate (darker orange) */
-  --gradient-page-end-color: #2C3E50;   /* Dark Slate Blue */
+  --gradient-page-start-color: #FFFFFF; /* White - For new light mode gradient */
+  --gradient-page-end-color: #F0F0F0;   /* Light Grey - For new light mode gradient */
   --header-text-color-light: #E0E0E0; /* Header text for this mode */
   --header-text-color: var(--header-text-color-light);
 
@@ -92,16 +92,56 @@ html[data-base-theme="default-orange-blue"][data-mode="light"] {
   --bg-page:      #FFFFFF;
   --bg-section:   #F7F3EF;
   --text-primary: #000000; /* Black text for primary content in light mode */
+  --header-text-color: var(--text-primary); /* MODIFIED: Ensure header text is black in light mode */
 
   /* The following variables are essentially re-stating what's in :root 
      or are part of the :root definition of the light theme.
      They are removed for clarity and to rely on :root as the source of truth for light mode defaults.
      If light mode needs to specifically differ from the :root base, those overrides would remain.
   */
+
+  /* Light Mode Table Cell Backgrounds for White Text */
+  /* General table data cells in Light Mode */
+  /* This rule needs to be specific enough to override .table-responsive background-color */
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="light"] .table-responsive td {
+    /* color: #FFFFFF !important; /* This is already globally set on 'th, td' and is inherited */
+    background-color: #757575; /* Dark grey background for general cells */
+}
+
+/* Team-specific table data cells in Light Mode */
+html[data-base-theme="default-orange-blue"][data-mode="light"] .table-responsive td.team-specific-cell {
+    /* color: #FFFFFF !important; /* This is already globally set on 'th, td' and is inherited */
+    background-color: color-mix(in srgb, var(--team-bg-color, #808080) 50%, #404040) !important; /* Darker team-tinted background */
+}
+
+/* Hover state for general td cells in light mode - ensure it contrasts with white text */
+html[data-base-theme="default-orange-blue"][data-mode="light"] .table-responsive tbody tr:hover td {
+    /* Ensure this doesn't get overridden by a more specific team-specific-cell hover rule if not intended */
+    background-color: color-mix(in srgb, #757575 85%, var(--primary-hover-color, #FFB733) 15%); /* Slightly tint the dark grey with primary color on hover */
+}
+
+/* Hover state for team-specific td cells in light mode - ensure it contrasts with white text */
+html[data-base-theme="default-orange-blue"][data-mode="light"] .table-responsive tbody tr:hover td.team-specific-cell {
+    background-color: color-mix(in srgb, var(--team-bg-color, #808080) 60%, #303030) !important; /* Darker hover mix for team specific cells */
+}
+
+/* Original commented out variables from light theme for reference, can be fully deleted */
+/*html[data-base-theme="default-orange-blue"][data-mode="light"] {*/
+} /* Closing the empty or nearly empty light mode block from previous refactoring correctly */
+
+/* Light Mode Table Header Specific Styles */
+html[data-base-theme="default-orange-blue"][data-mode="light"] .table-responsive th {
+    color: var(--text-primary) !important; /* Black text in Light Mode */
+    text-shadow: none; /* Remove shadow previously added for white text */
+}
+
+/*html[data-base-theme="default-orange-blue"][data-mode="light"] {*/
   /*  
   --gradient-page-start-color: #D2691E; 
   --gradient-page-end-color: #2C3E50;   
-  --header-text-color: #E0E0E0; 
+  /* --header-text-color: #E0E0E0; /* This line is effectively replaced by the one above */
 
   --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);  
   --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55); 
@@ -158,8 +198,8 @@ html[data-base-theme="default-orange-blue"][data-mode="dark"] {
   --bg-section: #121212; /* This remains a dark gray for contrast */
   --text-primary: #FFFFFF;
 
-  --gradient-page-start-color: #5D2A0C;   /* Darkest Orange/Brown */
-  --gradient-page-end-color: #0d1117;     /* Very Dark Blue */
+  --gradient-page-start-color: #000000;   /* Black - For new dark mode gradient */
+  --gradient-page-end-color: #1A1A1A;     /* Dark Grey - For new dark mode gradient */
   --header-text-color: #F0F0F0; /* Header text for this mode */
 
   --glass-bg-gradient-start-color: rgba(20, 28, 35, 0.7);  /* Very Dark Slate Blue */
@@ -333,6 +373,18 @@ section h4 {
   font-weight: 600;
 }
 
+/* Fix for h3 elements directly under section in Light Mode */
+html[data-base-theme="default-orange-blue"][data-mode="light"] section > h3 {
+    color: var(--text-primary) !important; /* --text-primary is black in light mode */
+    /* text-shadow: none; /* Optional: remove any shadow if previously applied */
+}
+
+/* Fix for h4 elements directly under section in Light Mode */
+html[data-base-theme="default-orange-blue"][data-mode="light"] section > h4 {
+    color: var(--text-primary) !important; /* --text-primary is black in light mode */
+    /* text-shadow: none; /* Optional: remove any shadow if previously applied */
+}
+
 /* Generic Table Styling for Glassmorphism */
 .table-responsive {
   overflow-x: auto;
@@ -356,14 +408,14 @@ th, td {
   vertical-align: middle;
   border: none; 
   border-bottom: 1px solid var(--glass-border-color); 
-  color: var(--text-primary); /* MODIFIED for better contrast from --glass-text-color */
-  text-shadow: 1px 1px 2px color-mix(in srgb, var(--text-primary) 30%, black); /* Adjusted shadow to use --text-primary */
+  color: #FFFFFF !important; /* MODIFIED: Set to white for all modes */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* MODIFIED: Soft black shadow for white text */
 }
 
 /* New rule for cells that will display team colors */
 td.team-specific-cell {
   background-color: color-mix(in srgb, var(--team-bg-color, transparent) 15%, transparent) !important; /* MODIFIED for 0.15 opacity */
-  color: var(--text-primary) !important; /* MODIFIED: Always use primary text color for contrast on opacified background */
+  color: #FFFFFF !important; /* MODIFIED: Set to white for all modes */
   font-weight: 600; /* Make team names a bit bolder */
 }
 /* Ensure specificity if other td styles might override background/color */
@@ -382,7 +434,7 @@ td:last-child, th:last-child {
 th {
   /* background: linear-gradient(135deg, var(--glass-bg-gradient-start-color), var(--glass-bg-gradient-end-color)); /* REMOVED old gradient */
   background-color: color-mix(in srgb, var(--glass-bg-gradient-end-color) 20%, transparent); /* UPDATED */
-  color: var(--text-primary); /* MODIFIED for better contrast from --glass-text-color */
+  color: #FFFFFF !important; /* MODIFIED: Set to white for all modes (ensure it overrides th, td rule if needed, though !important on td,th might cover) */
   font-weight: 700;
   white-space: nowrap;
   border-bottom-width: 2px; 
