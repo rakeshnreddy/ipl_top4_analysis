@@ -41,16 +41,17 @@ export const team_short_names: TeamNames = {
 };
 
 export const team_styles: TeamStyles = {
-  Rajasthan: { bg: "#FFC0CB", text: "#000000" }, // Pink bg, Black text
-  Kolkata: { bg: "#3A225D", text: "#FFFFFF" }, // Purple bg, White text
-  Lucknow: { bg: "#00AEEF", text: "#000000" }, // Light Blue bg, Black text
-  Hyderabad: { bg: "#FF822A", text: "#000000" }, // Orange bg, Black text
-  Chennai: { bg: "#FDB913", text: "#000000" }, // Yellow bg, Black text
-  Delhi: { bg: "#004C93", text: "#FFFFFF" }, // Dark Blue bg, White text
-  Punjab: { bg: "#AF0000", text: "#FFFFFF" }, // Darker Red bg, White text
-  Gujarat: { bg: "#1C2C5B", text: "#FFFFFF" }, // Navy bg, White text
-  Mumbai: { bg: "#006CB7", text: "#FFFFFF" }, // Blue bg, White text
-  Bangalore: { bg: "#D11F2D", text: "#FFD700" }, // Red bg, Gold text
+  // Updated with official hex codes and contrast-safe text colors
+  Mumbai: { bg: "#004B8D", text: "#FFFFFF" },
+  Chennai: { bg: "#F9CD05", text: "#000000" },
+  Bangalore: { bg: "#EC1C24", text: "#FFFFFF" },
+  Kolkata: { bg: "#3A225D", text: "#FFFFFF" },
+  Hyderabad: { bg: "#FEDC32", text: "#000000" },
+  Delhi: { bg: "#2561AE", text: "#FFFFFF" },
+  Punjab: { bg: "#ED1D24", text: "#FFFFFF" },
+  Rajasthan: { bg: "#254AA5", text: "#FFFFFF" },
+  Gujarat: { bg: "#0A1C34", text: "#FFFFFF" },
+  Lucknow: { bg: "#0057E2", text: "#FFFFFF" },
 };
 
 // Reverse mapping from FULL name to key

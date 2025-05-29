@@ -1,0 +1,145 @@
+/* Custom Styles for IPL Analyzer - Pickers and Buttons */
+
+/* Team Picker Option Styles */
+/* Base styles for team picker options (assumed to be div or button like elements) */
+.team-picker-option {
+  background: var(--glass-light-bg);
+  border: 1px solid var(--glass-light-border);
+  border-radius: var(--glass-border-radius);
+  padding: var(--spacing-unit);
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(var(--glass-blur-intensity));
+  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
+  color: var(--text-primary); /* Ensure good contrast from light glass bg */
+  transition: background 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  margin: calc(var(--spacing-unit) / 2);
+}
+
+.team-picker-option:hover {
+  background: var(--glass-light-bg-hover);
+  border-color: var(--primary-hover-color); /* Use a theme hover color */
+}
+
+.team-picker-option.selected {
+  /* --team-bg-color and --team-text-color are expected to be set via inline styles */
+  background-color: color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 40%, var(--glass-light-bg, rgba(255,255,255,0.15)));
+  color: var(--team-text-color, var(--text-primary));
+  font-weight: bold;
+  border-color: var(--team-bg-color, var(--primary-color)); /* Or a slightly darker/brighter version for emphasis */
+  box-shadow: 0 0 8px color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 50%, transparent); /* Add a glow effect */
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .team-picker-option {
+  background: var(--glass-dark-bg);
+  border-color: var(--glass-dark-border);
+  color: var(--text-primary); /* Ensure good contrast from dark glass bg */
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .team-picker-option:hover {
+  background: var(--glass-dark-bg-hover);
+  border-color: var(--primary-hover-color); /* Use a theme hover color */
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .team-picker-option.selected {
+  background-color: color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 40%, var(--glass-dark-bg, rgba(34,34,34,0.50)));
+  color: var(--team-text-color, var(--text-primary));
+  border-color: var(--team-bg-color, var(--primary-color));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 50%, transparent);
+}
+
+/* Primary Button Styles */
+.button-primary {
+  /* Base properties are inherited from .button if used together, or should be redeclared if used alone */
+  background-color: var(--color-mocha-mousse, #A47864); /* Changed to background-color for solid */
+  color: #FFFFFF; /* Contrast ratio for #A47864 vs #FFFFFF is ~5.7:1 (Good) */
+  border: 1px solid transparent; /* Or a shade of mocha */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  backdrop-filter: none; /* Explicitly remove backdrop filter */
+  -webkit-backdrop-filter: none; /* Explicitly remove backdrop filter */
+  /* Ensure other base button styles like padding, font-weight, etc., are consistent if this class is used alone */
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5);
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button-primary:hover {
+  background-color: #D8B196; /* Lighter Mocha Mousse */
+  color: #000000; /* Contrast ratio for #D8B196 vs #000000 is ~6.9:1 (Good) */
+  border-color: transparent;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+.button-primary:active {
+  background-color: color-mix(in srgb, var(--color-mocha-mousse, #A47864) 85%, #000); /* Darken Mocha Mousse, 85% instead of 90% for slightly more noticeable change */
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Disabled Button Styles (Overrides) */
+/* Apply these after any existing general button disabled styles to ensure they override */
+button:disabled,
+.button:disabled,
+.button-primary:disabled,
+button[disabled], /* Target attribute selector for broader coverage */
+.button[disabled],
+.button-primary[disabled] {
+    background-color: #CCCCCC !important;
+    color: #595959 !important; /* Adjusted for better contrast (was #757575) */
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: #BDBDBD !important; /* Slightly darker gray for border */
+    opacity: 0.7 !important; /* Often used for disabled state clarity */
+    /* Reset any transforms that might be on the enabled state */
+    transform: none !important;
+}
+
+/* Accessibility & Performance Additions */
+
+/* Analysis Panel Heading Contrast Fixes */
+/* Overriding styles from index.css for .analysis-panel-card h2, h3 */
+/* Note: These rules assume .analysis-panel-card itself is defined in index.css */
+/* and that custom-styles.css is imported after those base definitions if specificity is a concern. */
+/* Given the @import is at the top of index.css, these rules might need to be more specific or moved to index.css if they don't apply. */
+/* However, the task is to add to custom-styles.css. */
+
+/* Light Mode - Analysis Panel Heading Contrast Fix */
+.analysis-panel-card h2,
+.analysis-panel-card h3 {
+    color: var(--text-primary); /* Was --color-mocha-mousse in index.css */
+}
+
+/* Dark Mode - Analysis Panel Heading Contrast Fix */
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .analysis-panel-card h2,
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .analysis-panel-card h3 {
+    color: color-mix(in srgb, var(--color-mocha-mousse, #A47864) 70%, #FFFFFF); /* Was --color-mocha-mousse in index.css */
+}
+
+/* Mobile Performance Improvement (Reduce backdrop-filter) */
+@media (max-width: 576px) {
+  .glass-card,
+  .analysis-panel-card,
+  .team-picker-option, 
+  select { 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    /* 
+       Note: The original .glass-card definition in index.css already has a 
+       background-color: rgba(255, 255, 255, 0.75); (light) and 
+       background-color: rgba(34, 34, 34, 0.85); (dark)
+       which serve as fallbacks when backdrop-filter is not supported or disabled.
+       These should provide a reasonable appearance.
+       If further adjustments are needed after visual testing, specific background-color 
+       overrides can be added here for these elements within the media query.
+    */
+  }
+}

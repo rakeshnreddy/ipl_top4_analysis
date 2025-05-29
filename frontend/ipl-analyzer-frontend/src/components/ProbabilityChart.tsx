@@ -35,10 +35,8 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
       {
         label: 'Probability',
         data: chartData.map(d => d.probability),
-        // For simplicity in this subtask, using fixed colors.
-        // Proper theming would require passing theme variables as props or using Chart.js scripting.
-        backgroundColor: 'rgba(255, 111, 0, 0.6)', // Representative of light theme --primary-color (Vibrant Orange) with alpha
-        borderColor: 'rgba(255, 111, 0, 1)',     // Opaque version for border
+        backgroundColor: ["#B7525E", "#E6C88C", "#2561AE", "#F9CD05", "#A47864", "#004B8D"],
+        borderColor: ["#B7525E", "#E6C88C", "#2561AE", "#F9CD05", "#A47864", "#004B8D"],
         borderWidth: 2,
         borderRadius: 6, // Rounded bars
         borderSkipped: false, // Border on all sides
