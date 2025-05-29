@@ -1,0 +1,27 @@
+/* ThemeSwitcher.css */
+.theme-switcher {
+  background-color: var(--panel-bg); /* Use theme variable */
+  padding: 15px;
+  border-radius: var(--border-radius); /* Use theme variable */
+  margin: 15px auto; /* Centering and margin */
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  box-shadow: var(--panel-box-shadow); /* Use theme variable */
+  max-width: fit-content; /* Make container only as wide as content */
+  justify-content: center; /* Center items if they wrap */
+}
+.theme-switcher label {
+  margin-right: 5px;
+  font-weight: 500; /* Consistent with new label styles */
+  color: var(--text-light); /* Consistent with new label styles */
+}
+.theme-switcher select {
+  padding: 8px 12px; /* Adjust padding */
+  border-radius: 6px; /* Using the newer input border-radius */
+  border: 1px solid var(--input-border-color); /* Use theme variable */
+  background-color: var(--bg-light); /* Use theme variable for input background */
+  color: var(--text-light); /* Use theme variable for text */
+  min-width: 150px; /* Give selects a decent minimum width */
+}
