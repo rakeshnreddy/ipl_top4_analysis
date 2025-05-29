@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import ThemeToggle from './components/ThemeToggle'; // Import ThemeToggle
-import GlassCard from './components/GlassCard'; // Import GlassCard
+import ThemeToggle from './components/ThemeToggle'; 
+import PaletteSwitcher from './components/PaletteSwitcher'; // Add this
+import GlassCard from './components/GlassCard'; 
 import CurrentStandings from './components/CurrentStandings';
 import OverallProbabilities from './components/OverallProbabilities';
 import DetailedTeamAnalysis from './components/DetailedTeamAnalysis';
@@ -14,7 +15,10 @@ const App: React.FC = () => {
     <div id="app-container">
       <header>
         <h1>IPL Qualification Analyzer</h1>
-        <ThemeToggle />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <ThemeToggle />
+          <PaletteSwitcher />
+        </div>
       </header>
 
       <section id="current-standings" aria-labelledby="current-standings-heading">

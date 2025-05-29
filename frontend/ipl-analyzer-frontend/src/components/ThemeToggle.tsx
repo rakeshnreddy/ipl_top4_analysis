@@ -3,7 +3,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import styles from './ThemeToggle.module.css';
 
 const ThemeToggle: React.FC = () => {
-  const { theme, setTheme } = useTheme();
+  const { currentMode, setMode } = useTheme(); // UPDATED to use currentMode and setMode
 
   const themes: { value: 'light' | 'dark' | 'system'; label: string }[] = [
     { value: 'light', label: 'Light' },
@@ -16,10 +16,10 @@ const ThemeToggle: React.FC = () => {
       {themes.map((t) => (
         <button
           key={t.value}
-          className={`${styles.toggleButton} ${theme === t.value ? styles.active : ''}`}
-          onClick={() => setTheme(t.value)}
+          className={`${styles.toggleButton} ${currentMode === t.value ? styles.active : ''}`} // UPDATED to use currentMode
+          onClick={() => setMode(t.value)} // UPDATED to use setMode
           role="radio"
-          aria-checked={theme === t.value}
+          aria-checked={currentMode === t.value} // UPDATED to use currentMode
           aria-label={`Select ${t.label} theme`}
         >
           {t.label}

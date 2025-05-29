@@ -9,20 +9,23 @@ import styles from './ThemeToggle.module.css'; // Import CSS Modules
 // but often testing through ThemeProvider is more robust.
 
 // Mock window.matchMedia for ThemeContext
-beforeAll(() => {
+beforeEach(() => { // Changed from beforeAll to beforeEach
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: vi.fn().mockImplementation(query => ({
       matches: false, // Default to light theme for system preference in tests
       media: query,
       onchange: null,
-      addListener: vi.fn(), // Deprecated but included for completeness
-      removeListener: vi.fn(), // Deprecated
+      addListener: vi.fn(), 
+      removeListener: vi.fn(), 
       addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
     })),
   });
+  // Clear localStorage for themeMode to ensure consistent default state for relevant tests
+  localStorage.removeItem('themeMode');
+  localStorage.removeItem('basePalette'); // Also clear basePalette for good measure
 });
 
 describe('ThemeToggle Component', () => {
@@ -45,20 +48,15 @@ describe('ThemeToggle Component', () => {
         <ThemeToggle />
       </ThemeProvider>
     );
-    // This depends on ThemeProvider's default. Let's assume it's 'system'.
-    // Or we can mock localStorage.getItem('theme') to return 'system'.
+    // Default initial themeMode is 'system' due to ThemeContext and beforeEach localStorage.clear
     expect(screen.getByRole('radio', { name: /Select System theme/i })).toHaveClass(styles.active);
+    expect(screen.getByRole('radio', { name: /Select Light theme/i })).not.toHaveClass(styles.active);
+    expect(screen.getByRole('radio', { name: /Select Dark theme/i })).not.toHaveClass(styles.active);
   });
 
-  it('Test 3: Calls setTheme when a button is clicked', () => {
-    // It's hard to verify actual theme change without deeper mocking or visual inspection.
-    // We can test if the button click attempts to set the theme.
-    // For this, we might need to mock part of ThemeContext or spy on setTheme.
-    // A simpler way is to check if the active class changes.
-
-    // Spy on localStorage.setItem as an indirect way to see if setTheme logic runs
+  it('Test 3: Calls setMode and updates active class on click, also checks localStorage', () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
-
+    
     render(
       <ThemeProvider>
         <ThemeToggle />
@@ -68,12 +66,19 @@ describe('ThemeToggle Component', () => {
     const lightButton = screen.getByRole('radio', { name: /Select Light theme/i });
     fireEvent.click(lightButton);
     
-    // Check if localStorage was called (part of setTheme in context)
-    expect(setItemSpy).toHaveBeenCalledWith('theme', 'light');
+    // Check if localStorage was called with the correct key and value for themeMode
+    expect(setItemSpy).toHaveBeenCalledWith('themeMode', 'light');
     // Check if active class updates
     expect(lightButton).toHaveClass(styles.active);
     expect(screen.getByRole('radio', { name: /Select System theme/i })).not.toHaveClass(styles.active);
 
-    setItemSpy.mockRestore(); // Clean up spy
+    // Now click Dark button
+    const darkButton = screen.getByRole('radio', { name: /Select Dark theme/i });
+    fireEvent.click(darkButton);
+    expect(setItemSpy).toHaveBeenCalledWith('themeMode', 'dark');
+    expect(darkButton).toHaveClass(styles.active);
+    expect(lightButton).not.toHaveClass(styles.active);
+
+    setItemSpy.mockRestore();
   });
 });

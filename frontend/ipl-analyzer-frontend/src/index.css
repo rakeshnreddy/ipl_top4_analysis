@@ -1,119 +1,208 @@
 :root {
-  /* New Page Gradient Variables - Light Mode */
-  --gradient-page-start-color: #FF8C00; /* Dark Orange */
-  --gradient-page-end-color: #4682B4;   /* Steel Blue */
-  --header-text-color-light: #FFFFFF;
-  --header-text-color: var(--header-text-color-light); /* General header text color */
+  /* Default Theme: "default-orange-blue" Light Mode */
+  /* (Based on the previous "Orange & Blue Glassmorphic Theme - Dark Mode") */
 
-  /* Orange & Blue Glassmorphic - Light Mode */
-  --glass-bg-gradient-start-color: rgba(255, 165, 0, 0.5);  /* Light Orange, semi-transparent */
-  --glass-bg-gradient-end-color: rgba(135, 206, 235, 0.4); /* Sky Blue, semi-transparent */
-  --glass-border-color: rgba(70, 130, 180, 0.4); /* Steel Blue, low opacity for borders */
-  --glass-shadow-color-soft: rgba(0, 0, 0, 0.1);
-  --glass-shadow-color-strong: rgba(0, 0, 0, 0.15);
-  --glass-blur-intensity: 10px;
-  --glass-text-color: #1A2A3A;    /* Dark Blue-Gray */
-  --glass-heading-color: #005A9C; /* Stronger Blue for headings on glass */
+  /* Page Gradient Variables */
+  --gradient-page-start-color: #D2691E; /* Chocolate (darker orange) */
+  --gradient-page-end-color: #2C3E50;   /* Dark Slate Blue */
+  --header-text-color-light: #E0E0E0; /* Header text for this mode */
+  --header-text-color: var(--header-text-color-light);
+
+  /* Glassmorphic & General Variables */
+  --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);  /* Dark Slate Blue, semi-transparent */
+  --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55); /* Dark Orange/Amber, semi-transparent */
+  --glass-border-color: rgba(255, 140, 0, 0.3); /* Dark Orange, low opacity for borders */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
+  --glass-blur-intensity: 10px; 
+  --glass-text-color: #EAEAEA;     /* Light Gray */
+  --glass-heading-color: #FFA500;  /* Orange for headings on dark glass */
   --glass-border-radius: 14px;
 
-  --primary-color: #FF6F00; /* Vibrant Orange */
-  --primary-hover-color: #FF8F00; /* Lighter Vibrant Orange */
-  --on-primary-text-color: #FFFFFF;
+  --primary-color: #FFA500; /* Orange */
+  --primary-hover-color: #FFB733; /* Lighter Orange */
+  --on-primary-text-color: #1A2A3A; /* Dark text on orange */
 
   --text-color: var(--glass-text-color);
-  --text-muted-color: #5A6F80; /* Muted Blue-Gray */
-  --background-color: transparent; /* Page background is gradient */
-  --surface-color: transparent;    /* Surfaces are glass */
-  --border-color: var(--glass-border-color); /* General border for non-glass elements if any */
+  --text-muted-color: #9EADBA; /* Lighter Muted Blue-Gray */
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
   
-  --button-glass-bg-start-color: rgba(255, 175, 20, 0.4);
-  --button-glass-bg-end-color: rgba(155, 216, 245, 0.3);
+  --button-glass-bg-start-color: rgba(50, 68, 81, 0.5);
+  --button-glass-bg-end-color: rgba(210, 110, 10, 0.4);
   --button-glass-text-color: var(--glass-text-color);
   --button-border-color: var(--glass-border-color);
 
-  --input-glass-bg-color: rgba(220, 235, 245, 0.4); /* Very light blue, semi-transparent */
+  --input-glass-bg-color: rgba(26, 42, 58, 0.5); /* Darker Blue, semi-transparent */
   --input-glass-text-color: var(--glass-text-color);
   --input-glass-border-color: var(--glass-border-color);
 
-  /* Kept from previous theme for compatibility, can be reviewed */
-  --secondary-color: #6c757d; 
-  --accent-color-success: #28a745;
-  --accent-color-warning: #ffc107;
-  --accent-color-warning-text: #212529;
-  --accent-color-info: #17a2b8;
-  --table-header-bg: #e9ecef; /* Will be overridden by new table styles */
-  --table-row-even-bg: var(--background-color); /* Will be overridden */
-  --table-row-hover-bg: #ddeeff; /* Will be overridden */
-  --control-bg: #e9ecef; /* To be reviewed if control containers become glass */
-  --input-bg: var(--surface-color); /* Overridden by input-glass-bg-color */
-  --input-text-color: var(--text-color); /* Overridden by input-glass-text-color */
-  --input-border-color: var(--border-color); /* Overridden by input-glass-border-color */
-  --button-text-color: var(--on-primary-text-color); /* Default button text on primary bg */
-  --disabled-bg-color: var(--secondary-color);
-  --disabled-text-color: #e9ecef;
-  --footer-bg-color: #343a40; /* Consider making footer glass or themed */
-  --footer-text-color: #f8f9fa;
-  --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.07); /* Replaced by glass shadows for cards */
-  --box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1); /* Replaced by glass shadows for cards */
-  --link-color: var(--primary-color);
-  --link-hover-color: var(--primary-hover-color);
+  /* Accent & Utility Colors (can be part of the base theme or adjusted per palette) */
+  --accent-color-success: #28a745; 
+  --accent-color-warning: #b8860b; /* Darker yellow, good for this "darker" light theme */
+  --accent-color-warning-text: var(--glass-text-color); /* Ensure contrast */
+  --accent-color-info: #17a2b8; 
+  
+  --disabled-bg-color: #495057;
+  --disabled-text-color: #adb5bd;
+  --footer-bg-color: #212529;
+  --footer-text-color: #ced4da;
+  --link-color: #FFB733; 
+  --link-hover-color: #FFA500; 
+
   --loading-message-bg: var(--accent-color-info);
-  --loading-message-text: #FFFFFF;
-  --loading-message-border: #117a8b;
-  --error-message-bg: #f8d7da;
-  --error-message-text: #721c24;
-  --error-message-border: #f5c6cb;
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: #106777;
+  --error-message-bg: #58181F;
+  --error-message-text: #F8D7DA;
+  --error-message-border: #721c24;
 
-  /* Dark Theme Variable Placeholders (values defined in html[data-theme="dark"]) */
-  --gradient-page-start-color-dark: #D2691E;
-  --gradient-page-end-color-dark: #2C3E50;
-  --header-text-color-dark: #E0E0E0;
-  --glass-bg-gradient-start-color-dark: rgba(40, 58, 71, 0.65);
-  --glass-bg-gradient-end-color-dark: rgba(200, 100, 0, 0.55);
-  --glass-border-color-dark: rgba(255, 140, 0, 0.3);
-  --glass-shadow-color-soft-dark: rgba(0, 0, 0, 0.25);
-  --glass-shadow-color-strong-dark: rgba(0, 0, 0, 0.35);
-  --glass-text-color-dark: #EAEAEA;
-  --glass-heading-color-dark: #FFA500;
-  --primary-color-dark: #FFA500;
-  --primary-hover-color-dark: #FFB733;
-  --on-primary-text-color-dark: #1A2A3A;
-  --text-muted-color-dark: #9EADBA;
-  --button-glass-bg-start-color-dark: rgba(50, 68, 81, 0.5);
-  --button-glass-bg-end-color-dark: rgba(210, 110, 10, 0.4);
-  --button-border-color-dark: var(--glass-border-color-dark);
-  --input-glass-bg-color-dark: rgba(26, 42, 58, 0.5);
-  --input-glass-border-color-dark: var(--glass-border-color-dark);
-  /* Keep other dark theme specific vars like accent colors, footer, etc. */
-  --accent-color-success-dark: #28a745; 
-  --accent-color-warning-dark: #b8860b; 
-  --accent-color-warning-text-dark: var(--glass-text-color-dark);
-  --accent-color-info-dark: #17a2b8; 
-  --table-header-bg-dark: #2c2c2c;
-  --table-row-even-bg-dark: #252525;
-  --table-row-hover-bg-dark: #3a3a3a;
-  --control-bg-dark: #2c2c2c;
-  --disabled-bg-color-dark: #495057;
-  --disabled-text-color-dark: #adb5bd;
-  --footer-bg-color-dark: #212529;
-  --footer-text-color-dark: #ced4da;
-  --link-color-dark: #FFB733; /* Updated link color for dark */
-  --link-hover-color-dark: #FFA500; /* Updated link hover for dark */
-  --loading-message-bg-dark: var(--accent-color-info-dark);
-  --loading-message-text-dark: var(--glass-text-color-dark);
-  --loading-message-border-dark: #106777;
-  --error-message-bg-dark: #58181F;
-  --error-message-text-dark: #F8D7DA;
-  --error-message-border-dark: #721c24;
-
-  /* Fonts */
+  /* Base structural variables (kept from original :root) */
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-  /* Spacing & Sizing */
   --spacing-unit: 8px;
   --border-radius: var(--glass-border-radius); /* Global radius to use glass radius */
   --max-content-width: 1280px;
+
+  /* Placeholders for variables defined in the previous Orange & Blue Light theme (now to be removed or re-mapped if needed) */
+  /* These are effectively superseded by the above "default-orange-blue" light definitions */
+  /* --header-text-color-light: #FFFFFF; (already covered by new structure) */
+  /* --glass-text-color-light: #1A2A3A; (now --glass-text-color) */
+  /* --glass-heading-color-light: #005A9C; (now --glass-heading-color) */
+  /* --primary-color-light: #FF6F00; (now --primary-color) */
+  /* --primary-hover-color-light: #FF8F00; (now --primary-hover-color) */
+  /* --on-primary-text-color-light: #FFFFFF; (now --on-primary-text-color) */
+
+  /* Placeholders for variables defined in the previous Orange & Blue Dark theme (now used for "default-orange-blue" light) */
+  --gradient-page-start-color-dark: #D2691E; /* Used for default light */
+  --gradient-page-end-color-dark: #2C3E50;   /* Used for default light */
+  --header-text-color-dark: #E0E0E0;         /* Used for default light */
+  --glass-bg-gradient-start-color-dark: rgba(40, 58, 71, 0.65); /* Used for default light */
+  --glass-bg-gradient-end-color-dark: rgba(200, 100, 0, 0.55); /* Used for default light */
+  --glass-border-color-dark: rgba(255, 140, 0, 0.3); /* Used for default light */
+  --glass-shadow-color-soft-dark: rgba(0, 0, 0, 0.25); /* Used for default light */
+  --glass-shadow-color-strong-dark: rgba(0, 0, 0, 0.35); /* Used for default light */
+  --glass-text-color-dark: #EAEAEA; /* Used for default light */
+  --glass-heading-color-dark: #FFA500; /* Used for default light */
+  --primary-color-dark: #FFA500; /* Used for default light */
+  --primary-hover-color-dark: #FFB733; /* Used for default light */
+  --on-primary-text-color-dark: #1A2A3A; /* Used for default light */
+  --text-muted-color-dark: #9EADBA; /* Used for default light */
+  --button-glass-bg-start-color-dark: rgba(50, 68, 81, 0.5); /* Used for default light */
+  --button-glass-bg-end-color-dark: rgba(210, 110, 10, 0.4); /* Used for default light */
+  --button-border-color-dark: var(--glass-border-color-dark); /* Used for default light */
+  --input-glass-bg-color-dark: rgba(26, 42, 58, 0.5); /* Used for default light */
+  --input-glass-border-color-dark: var(--glass-border-color-dark); /* Used for default light */
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="light"] {
+  /* This is the default theme, so variables are same as :root */
+  --gradient-page-start-color: #D2691E; 
+  --gradient-page-end-color: #2C3E50;   
+  --header-text-color: #E0E0E0;
+
+  --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);  
+  --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55); 
+  --glass-border-color: rgba(255, 140, 0, 0.3); 
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
+  --glass-blur-intensity: 10px; 
+  --glass-text-color: #EAEAEA;     
+  --glass-heading-color: #FFA500;  
+  --glass-border-radius: 14px;
+
+  --primary-color: #FFA500; 
+  --primary-hover-color: #FFB733; 
+  --on-primary-text-color: #1A2A3A; 
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #9EADBA; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
+  
+  --button-glass-bg-start-color: rgba(50, 68, 81, 0.5);
+  --button-glass-bg-end-color: rgba(210, 110, 10, 0.4);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(26, 42, 58, 0.5); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+
+  --accent-color-success: #28a745; 
+  --accent-color-warning: #b8860b;
+  --accent-color-warning-text: var(--glass-text-color);
+  --accent-color-info: #17a2b8; 
+  
+  --disabled-bg-color: #495057;
+  --disabled-text-color: #adb5bd;
+  --footer-bg-color: #212529;
+  --footer-text-color: #ced4da;
+  --link-color: #FFB733; 
+  --link-hover-color: #FFA500; 
+
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: #106777;
+  --error-message-bg: #58181F;
+  --error-message-text: #F8D7DA;
+  --error-message-border: #721c24;
+}
+
+html[data-base-theme="default-orange-blue"][data-mode="dark"] {
+  --gradient-page-start-color: #5D2A0C;   /* Darkest Orange/Brown */
+  --gradient-page-end-color: #0d1117;     /* Very Dark Blue */
+  --header-text-color: #F0F0F0; /* Header text for this mode */
+
+  --glass-bg-gradient-start-color: rgba(20, 28, 35, 0.7);  /* Very Dark Slate Blue */
+  --glass-bg-gradient-end-color: rgba(130, 65, 0, 0.6); /* Very Dark Orange */
+  --glass-border-color: rgba(200, 100, 0, 0.25); /* Muted Dark Orange */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.35);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.45);
+  /* --glass-blur-intensity: 10px; (can inherit or be redefined) */
+  --glass-text-color: #F5F5F5;     /* Lighter Gray */
+  --glass-heading-color: #FFB74D;  /* Brighter Orange */
+  /* --glass-border-radius: 14px; (can inherit) */
+
+  --primary-color: #FFB74D; /* Brighter Orange */
+  --primary-hover-color: #FFC777; 
+  --on-primary-text-color: #1A2A3A; 
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #AEBAC7; 
+  /* --background-color: transparent; (already set in :root) */
+  /* --surface-color: transparent; (already set in :root) */
+  --border-color: var(--glass-border-color); 
+  
+  --button-glass-bg-start-color: rgba(30, 38, 45, 0.6);
+  --button-glass-bg-end-color: rgba(140, 75, 10, 0.5);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(16, 22, 38, 0.6); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+
+  --accent-color-success: #39C15D; /* Brighter Green */
+  --accent-color-warning: #FFC107; /* Standard Yellow, more visible */
+  --accent-color-warning-text: #1A2A3A; /* Darker text for yellow */
+  --accent-color-info: #3EACCF; /* Brighter Info Blue */
+  
+  --disabled-bg-color: #3A3A3A;
+  --disabled-text-color: #888888;
+  --footer-bg-color: #1A1A1A;
+  --footer-text-color: #BBBBBB;
+  --link-color: #FFC777; 
+  --link-hover-color: #FFB74D; 
+
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: color-mix(in srgb, var(--accent-color-info) 80%, #000);
+  --error-message-bg: #7A282F;
+  --error-message-text: #FADADD;
+  --error-message-border: #A53842;
 }
 
 /* Global Resets & Defaults */
@@ -243,6 +332,18 @@ th, td {
   color: var(--glass-text-color);
   text-shadow: 1px 1px 2px color-mix(in srgb, var(--glass-text-color) 30%, black); /* ADDED "3D" effect */
 }
+
+/* New rule for cells that will display team colors */
+td.team-specific-cell {
+  background-color: color-mix(in srgb, var(--team-bg-color, transparent) 70%, var(--glass-bg-gradient-start-color) 30%) !important; /* Mix with a base from glass */
+  color: var(--team-text-color, var(--glass-text-color)) !important; /* Fallback to default glass text color */
+  font-weight: 600; /* Make team names a bit bolder */
+}
+/* Ensure specificity if other td styles might override background/color */
+.table-responsive tbody tr:hover td.team-specific-cell {
+    background-color: color-mix(in srgb, var(--team-bg-color, transparent) 60%, var(--primary-color) 40%) !important; /* More pronounced on hover */
+}
+
 td:first-child, th:first-child {
     padding-left: calc(var(--spacing-unit) * 2); 
 }
@@ -551,147 +652,136 @@ p[role="alert"] {
     border-color: var(--error-message-border); 
 }
 
-html[data-theme="light"] {
-  /* Page Gradient */
-  --gradient-page-start-color: #FF8C00;
-  --gradient-page-end-color: #4682B4;
-  --header-text-color: var(--header-text-color-light); /* Ensures it's explicitly set for light */
+/* REMOVED old html[data-theme="light"] and html[data-theme="dark"] blocks */
+/* New theme structure using data-base-theme and data-mode follows */
 
-  /* Glassmorphic & General - Light Mode */
-  --glass-bg-gradient-start-color: rgba(255, 165, 0, 0.5);
-  --glass-bg-gradient-end-color: rgba(135, 206, 235, 0.4);
-  --glass-border-color: rgba(70, 130, 180, 0.4);
-  --glass-shadow-color-soft: rgba(0, 0, 0, 0.1);
-  --glass-shadow-color-strong: rgba(0, 0, 0, 0.15);
-  --glass-blur-intensity: 10px;
-  --glass-text-color: #1A2A3A;
-  --glass-heading-color: #005A9C;
+html[data-base-theme="default-orange-blue"][data-mode="light"] {
+  /* This is the default theme, so variables are same as :root */
+  --gradient-page-start-color: #D2691E; 
+  --gradient-page-end-color: #2C3E50;   
+  --header-text-color: #E0E0E0;
+
+  --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);  
+  --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55); 
+  --glass-border-color: rgba(255, 140, 0, 0.3); 
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
+  --glass-blur-intensity: 10px; 
+  --glass-text-color: #EAEAEA;     
+  --glass-heading-color: #FFA500;  
   --glass-border-radius: 14px;
 
-  --primary-color: #FF6F00;
-  --primary-hover-color: #FF8F00;
-  --on-primary-text-color: #FFFFFF;
+  --primary-color: #FFA500; 
+  --primary-hover-color: #FFB733; 
+  --on-primary-text-color: #1A2A3A; 
 
   --text-color: var(--glass-text-color);
-  --text-muted-color: #5A6F80;
-  --background-color: transparent;
-  --surface-color: transparent;
-  --border-color: var(--glass-border-color);
+  --text-muted-color: #9EADBA; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
   
-  --button-glass-bg-start-color: rgba(255, 175, 20, 0.4);
-  --button-glass-bg-end-color: rgba(155, 216, 245, 0.3);
+  --button-glass-bg-start-color: rgba(50, 68, 81, 0.5);
+  --button-glass-bg-end-color: rgba(210, 110, 10, 0.4);
   --button-glass-text-color: var(--glass-text-color);
   --button-border-color: var(--glass-border-color);
 
-  --input-glass-bg-color: rgba(220, 235, 245, 0.4);
+  --input-glass-bg-color: rgba(26, 42, 58, 0.5); 
   --input-glass-text-color: var(--glass-text-color);
   --input-glass-border-color: var(--glass-border-color);
 
-  /* Kept from previous theme for compatibility, can be reviewed */
-  --secondary-color: #6c757d; 
-  --accent-color-success: #28a745;
-  --accent-color-warning: #ffc107;
-  --accent-color-warning-text: #212529;
-  --accent-color-info: #17a2b8;
-  --disabled-bg-color: var(--secondary-color);
-  --disabled-text-color: #e9ecef;
-  --footer-bg-color: #343a40;
-  --footer-text-color: #f8f9fa;
-  --link-color: var(--primary-color);
-  --link-hover-color: var(--primary-hover-color);
-  --loading-message-bg: var(--accent-color-info);
-  --loading-message-text: #FFFFFF;
-  --loading-message-border: #117a8b;
-  --error-message-bg: #f8d7da;
-  --error-message-text: #721c24;
-  --error-message-border: #f5c6cb;
+  --accent-color-success: #28a745; 
+  --accent-color-warning: #b8860b;
+  --accent-color-warning-text: var(--glass-text-color);
+  --accent-color-info: #17a2b8; 
   
-  /* Fonts & other base vars copied from :root */
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --spacing-unit: 8px;
-  --border-radius: var(--glass-border-radius);
-  --max-content-width: 1280px;
+  --disabled-bg-color: #495057;
+  --disabled-text-color: #adb5bd;
+  --footer-bg-color: #212529;
+  --footer-text-color: #ced4da;
+  --link-color: #FFB733; 
+  --link-hover-color: #FFA500; 
+
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: #106777;
+  --error-message-bg: #58181F;
+  --error-message-text: #F8D7DA;
+  --error-message-border: #721c24;
 }
 
-html[data-theme="dark"] {
-  /* Page Gradient */
-  --gradient-page-start-color: var(--gradient-page-start-color-dark);
-  --gradient-page-end-color: var(--gradient-page-end-color-dark);
-  --header-text-color: var(--header-text-color-dark); /* Ensures it's explicitly set for dark */
+html[data-base-theme="default-orange-blue"][data-mode="dark"] {
+  --gradient-page-start-color: #5D2A0C;   /* Darkest Orange/Brown */
+  --gradient-page-end-color: #0d1117;     /* Very Dark Blue */
+  --header-text-color: #F0F0F0; /* Header text for this mode */
 
-  /* Glassmorphic & General - Dark Mode */
-  --glass-bg-gradient-start-color: var(--glass-bg-gradient-start-color-dark);
-  --glass-bg-gradient-end-color: var(--glass-bg-gradient-end-color-dark);
-  --glass-border-color: var(--glass-border-color-dark);
-  --glass-shadow-color-soft: var(--glass-shadow-color-soft-dark);
-  --glass-shadow-color-strong: var(--glass-shadow-color-strong-dark);
-  --glass-blur-intensity: 10px; /* Can be same as light or themed */
-  --glass-text-color: var(--glass-text-color-dark);
-  --glass-heading-color: var(--glass-heading-color-dark);
-  --glass-border-radius: 14px; /* Can be same as light or themed */
+  --glass-bg-gradient-start-color: rgba(20, 28, 35, 0.7);  /* Very Dark Slate Blue */
+  --glass-bg-gradient-end-color: rgba(130, 65, 0, 0.6); /* Very Dark Orange */
+  --glass-border-color: rgba(200, 100, 0, 0.25); /* Muted Dark Orange */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.35);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.45);
+  /* --glass-blur-intensity: 10px; (can inherit or be redefined) */
+  --glass-text-color: #F5F5F5;     /* Lighter Gray */
+  --glass-heading-color: #FFB74D;  /* Brighter Orange */
+  /* --glass-border-radius: 14px; (can inherit) */
 
-  --primary-color: var(--primary-color-dark);
-  --primary-hover-color: var(--primary-hover-color-dark);
-  --on-primary-text-color: var(--on-primary-text-color-dark);
+  --primary-color: #FFB74D; /* Brighter Orange */
+  --primary-hover-color: #FFC777; 
+  --on-primary-text-color: #1A2A3A; 
 
   --text-color: var(--glass-text-color);
-  --text-muted-color: var(--text-muted-color-dark);
-  --background-color: transparent;
-  --surface-color: transparent;
-  --border-color: var(--glass-border-color);
+  --text-muted-color: #AEBAC7; 
+  /* --background-color: transparent; (already set in :root) */
+  /* --surface-color: transparent; (already set in :root) */
+  --border-color: var(--glass-border-color); 
   
-  --button-glass-bg-start-color: var(--button-glass-bg-start-color-dark);
-  --button-glass-bg-end-color: var(--button-glass-bg-end-color-dark);
+  --button-glass-bg-start-color: rgba(30, 38, 45, 0.6);
+  --button-glass-bg-end-color: rgba(140, 75, 10, 0.5);
   --button-glass-text-color: var(--glass-text-color);
-  --button-border-color: var(--button-border-color-dark);
+  --button-border-color: var(--glass-border-color);
 
-  --input-glass-bg-color: var(--input-glass-bg-color-dark);
+  --input-glass-bg-color: rgba(16, 22, 38, 0.6); 
   --input-glass-text-color: var(--glass-text-color);
-  --input-glass-border-color: var(--input-glass-border-color-dark);
+  --input-glass-border-color: var(--glass-border-color);
+
+  --accent-color-success: #39C15D; /* Brighter Green */
+  --accent-color-warning: #FFC107; /* Standard Yellow, more visible */
+  --accent-color-warning-text: #1A2A3A; /* Darker text for yellow */
+  --accent-color-info: #3EACCF; /* Brighter Info Blue */
   
-  /* Kept from previous theme for compatibility, can be reviewed */
-  --secondary-color: #5a6268; /* Darker cool gray for dark mode */
-  --accent-color-success: var(--accent-color-success-dark);
-  --accent-color-warning: var(--accent-color-warning-dark);
-  --accent-color-warning-text: var(--glass-text-color-dark); /* Updated */
-  --accent-color-info: var(--accent-color-info-dark);
-  --disabled-bg-color: var(--disabled-bg-color-dark);
-  --disabled-text-color: var(--disabled-text-color-dark);
-  --footer-bg-color: var(--footer-bg-color-dark);
-  --footer-text-color: var(--footer-text-color-dark);
-  --link-color: var(--link-color-dark);
-  --link-hover-color: var(--link-hover-color-dark);
-  --loading-message-bg: var(--loading-message-bg-dark);
-  --loading-message-text: var(--glass-text-color-dark);
-  --loading-message-border: var(--loading-message-border-dark);
-  --error-message-bg: var(--error-message-bg-dark);
-  --error-message-text: var(--error-message-text-dark);
-  --error-message-border: var(--error-message-border-dark);
-  
-  /* Fonts & other base vars copied from :root */
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --spacing-unit: 8px;
-  --border-radius: var(--glass-border-radius);
-  --max-content-width: 1280px;
+  --disabled-bg-color: #3A3A3A;
+  --disabled-text-color: #888888;
+  --footer-bg-color: #1A1A1A;
+  --footer-text-color: #BBBBBB;
+  --link-color: #FFC777; 
+  --link-hover-color: #FFB74D; 
+
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: color-mix(in srgb, var(--accent-color-info) 80%, #000);
+  --error-message-bg: #7A282F;
+  --error-message-text: #FADADD;
+  --error-message-border: #A53842;
 }
 
 /* Specific overrides for dark mode elements */
 /* html[data-theme="dark"] header rule for color was removed as h1 now handles its color directly via --header-text-color */
 
-html[data-theme="dark"] button.success, 
-html[data-theme="dark"] .button.success {
-  color: var(--on-primary-text-color-dark); /* Ensure text contrast on success buttons */
+html[data-base-theme="default-orange-blue"][data-mode="dark"] header {
+  color: var(--header-text-color); /* This ensures header text color respects the theme */
 }
-html[data-theme="dark"] select:focus,
-html[data-theme="dark"] input[type="text"]:focus,
-html[data-theme="dark"] input[type="number"]:focus,
-html[data-theme="dark"] textarea:focus {
+html[data-base-theme="default-orange-blue"][data-mode="dark"] button.success, 
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .button.success {
+  color: var(--on-primary-text-color); /* Use on-primary from the dark theme definition */
+}
+html[data-base-theme="default-orange-blue"][data-mode="dark"] select:focus,
+html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="text"]:focus,
+html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="number"]:focus,
+html[data-base-theme="default-orange-blue"][data-mode="dark"] textarea:focus {
   box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
-html[data-theme="dark"] input[type="radio"],
-html[data-theme="dark"] input[type="checkbox"] {
+html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="radio"],
+html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="checkbox"] {
   accent-color: var(--primary-color); /* Primary color should be the dark theme primary */
 }
 
@@ -776,3 +866,146 @@ html[data-theme="dark"] input[type="checkbox"] {
       font-size: 0.95em; 
   }
 }
+
+/* == Oceanic Teal - Light Mode == */
+html[data-base-theme="oceanic-teal"][data-mode="light"] {
+  --gradient-page-start-color: #A0D2DB; /* Light Teal */
+  --gradient-page-end-color: #76C7C0;   /* Soft Cyan */
+  --header-text-color-light: #135D66; /* Dark Teal for header text */
+  --header-text-color: var(--header-text-color-light);
+
+  --glass-bg-gradient-start-color: rgba(126, 199, 192, 0.5);  /* Light Teal, semi-transparent */
+  --glass-bg-gradient-end-color: rgba(170, 210, 219, 0.4); /* Light Aqua, semi-transparent */
+  --glass-border-color: rgba(68, 158, 150, 0.4); 
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.08);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.12);
+  --glass-text-color: #135D66;    /* Dark Teal */
+  --glass-heading-color: #008080; /* Medium Teal */
+  
+  --primary-color: #008080; /* Medium Teal */
+  --primary-hover-color: #00A0A0; 
+  --on-primary-text-color: #FFFFFF;
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #4A7C85; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
+   
+  --button-glass-bg-start-color: rgba(136, 209, 202, 0.4);
+  --button-glass-bg-end-color: rgba(180, 220, 229, 0.3);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(200, 230, 235, 0.4); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+  /* Inherit --glass-blur-intensity, --glass-border-radius or redefine if needed */
+}
+
+/* == Oceanic Teal - Dark Mode == */
+html[data-base-theme="oceanic-teal"][data-mode="dark"] {
+  --gradient-page-start-color: #1A5276; /* Dark Teal/Blue */
+  --gradient-page-end-color: #117864;   /* Deeper Ocean Blue/Green */
+  --header-text-color-dark: #E1F5FE; 
+  --header-text-color: var(--header-text-color-dark);
+
+  --glass-bg-gradient-start-color: rgba(20, 80, 100, 0.65);  
+  --glass-bg-gradient-end-color: rgba(10, 100, 80, 0.55); 
+  --glass-border-color: rgba(127, 255, 212, 0.3); /* Aquamarine, low opacity */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
+  --glass-text-color: #E1F5FE;     /* Light Cyan */
+  --glass-heading-color: #76D7C4;  /* Bright Teal/Cyan */
+  
+  --primary-color: #76D7C4; 
+  --primary-hover-color: #A2D9CE; 
+  --on-primary-text-color: #135D66; /* Dark Teal on light cyan */
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #A0BCC5; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
+   
+  --button-glass-bg-start-color: rgba(30, 90, 110, 0.5);
+  --button-glass-bg-end-color: rgba(20, 110, 90, 0.4);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(15, 60, 80, 0.5); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+}
+
+/* == Ruby Radiance - Light Mode == */
+html[data-base-theme="ruby-radiance"][data-mode="light"] {
+  --gradient-page-start-color: #FFD1DC; /* Soft Pink */
+  --gradient-page-end-color: #E06377;   /* Light Ruby */
+  --header-text-color-light: #7A1F3D; /* Dark Berry for header text */
+  --header-text-color: var(--header-text-color-light);
+
+  --glass-bg-gradient-start-color: rgba(255, 221, 229, 0.5);  /* Very Light Pink */
+  --glass-bg-gradient-end-color: rgba(240, 180, 190, 0.4); /* Pale Ruby */
+  --glass-border-color: rgba(224, 99, 119, 0.4); 
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.08);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.12);
+  --glass-text-color: #7A1F3D;    /* Dark Berry/Maroon */
+  --glass-heading-color: #C32B47; /* Medium Ruby Red */
+  
+  --primary-color: #C32B47; /* Medium Ruby Red */
+  --primary-hover-color: #D74E64; 
+  --on-primary-text-color: #FFFFFF;
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #8F5B6C; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
+   
+  --button-glass-bg-start-color: rgba(255, 231, 239, 0.4);
+  --button-glass-bg-end-color: rgba(250, 190, 200, 0.3);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(255, 240, 245, 0.4); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+}
+
+/* == Ruby Radiance - Dark Mode == */
+html[data-base-theme="ruby-radiance"][data-mode="dark"] {
+  --gradient-page-start-color: #6A0D27; /* Deep Ruby/Wine */
+  --gradient-page-end-color: #4B000F;   /* Darkest Berry */
+  --header-text-color-dark: #FFDDE5; 
+  --header-text-color: var(--header-text-color-dark);
+
+  --glass-bg-gradient-start-color: rgba(100, 10, 30, 0.65);  
+  --glass-bg-gradient-end-color: rgba(70, 0, 10, 0.55); 
+  --glass-border-color: rgba(255, 105, 180, 0.3); /* Hot Pink, low opacity */
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
+  --glass-text-color: #FFDDE5;     /* Light Pink */
+  --glass-heading-color: #F4718D;  /* Bright Ruby/Magenta */
+  
+  --primary-color: #F4718D; 
+  --primary-hover-color: #F8A0B3; 
+  --on-primary-text-color: #4B000F; /* Dark Berry on light pink/magenta */
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #C7A7B2; 
+  --background-color: transparent; 
+  --surface-color: transparent;    
+  --border-color: var(--glass-border-color); 
+   
+  --button-glass-bg-start-color: rgba(110, 20, 40, 0.5);
+  --button-glass-bg-end-color: rgba(80, 10, 20, 0.4);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(90, 0, 30, 0.5); 
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+}
+
+[end of frontend/ipl-analyzer-frontend/src/index.css]

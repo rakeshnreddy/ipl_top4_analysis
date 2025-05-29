@@ -9,34 +9,74 @@ exports[`App Component > Test 1: Renders correctly and matches snapshot 1`] = `
       IPL Qualification Analyzer
     </h1>
     <div
-      aria-label="Theme selection"
-      class="_toggleContainer_f72571"
-      role="radiogroup"
+      style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;"
     >
-      <button
-        aria-checked="false"
-        aria-label="Select Light theme"
-        class="_toggleButton_f72571 "
-        role="radio"
+      <div
+        aria-label="Theme selection"
+        class="_toggleContainer_f72571"
+        role="radiogroup"
       >
-        Light
-      </button>
-      <button
-        aria-checked="false"
-        aria-label="Select Dark theme"
-        class="_toggleButton_f72571 "
-        role="radio"
+        <button
+          aria-checked="false"
+          aria-label="Select Light theme"
+          class="_toggleButton_f72571 "
+          role="radio"
+        >
+          Light
+        </button>
+        <button
+          aria-checked="false"
+          aria-label="Select Dark theme"
+          class="_toggleButton_f72571 "
+          role="radio"
+        >
+          Dark
+        </button>
+        <button
+          aria-checked="true"
+          aria-label="Select System theme"
+          class="_toggleButton_f72571 _active_f72571"
+          role="radio"
+        >
+          System
+        </button>
+      </div>
+      <div
+        aria-labelledby="palette-switcher-label"
+        class="_switcherContainer_8d15a3"
+        role="radiogroup"
       >
-        Dark
-      </button>
-      <button
-        aria-checked="true"
-        aria-label="Select System theme"
-        class="_toggleButton_f72571 _active_f72571"
-        role="radio"
-      >
-        System
-      </button>
+        <span
+          class="_label_8d15a3"
+          id="palette-switcher-label"
+        >
+          Palette:
+        </span>
+        <button
+          aria-checked="true"
+          aria-label="Select Default Orange/Blue palette"
+          class="_paletteButton_8d15a3 _active_8d15a3"
+          role="radio"
+        >
+          Default Orange/Blue
+        </button>
+        <button
+          aria-checked="false"
+          aria-label="Select Oceanic Teal palette"
+          class="_paletteButton_8d15a3 "
+          role="radio"
+        >
+          Oceanic Teal
+        </button>
+        <button
+          aria-checked="false"
+          aria-label="Select Ruby Radiance palette"
+          class="_paletteButton_8d15a3 "
+          role="radio"
+        >
+          Ruby Radiance
+        </button>
+      </div>
     </div>
   </header>
   <section
