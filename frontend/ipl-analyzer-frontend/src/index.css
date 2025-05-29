@@ -154,8 +154,8 @@ html[data-base-theme="default-orange-blue"][data-mode="light"] {
 }
 
 html[data-base-theme="default-orange-blue"][data-mode="dark"] {
-  --bg-page:    #1E1E1E;
-  --bg-section: #121212;
+  --bg-page:    #000000; /* Changed from #1E1E1E to pure black */
+  --bg-section: #121212; /* This remains a dark gray for contrast */
   --text-primary: #FFFFFF;
 
   --gradient-page-start-color: #5D2A0C;   /* Darkest Orange/Brown */
@@ -363,7 +363,7 @@ th, td {
 /* New rule for cells that will display team colors */
 td.team-specific-cell {
   background-color: color-mix(in srgb, var(--team-bg-color, transparent) 15%, transparent) !important; /* MODIFIED for 0.15 opacity */
-  color: var(--team-text-color, var(--text-primary)) !important; /* MODIFIED to use --team-text-color with fallback */
+  color: var(--text-primary) !important; /* MODIFIED: Always use primary text color for contrast on opacified background */
   font-weight: 600; /* Make team names a bit bolder */
 }
 /* Ensure specificity if other td styles might override background/color */
@@ -761,14 +761,21 @@ html[data-base-theme="default-orange-blue"][data-mode="dark"] button.success,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .button.success {
   color: var(--on-primary-text-color); /* Use on-primary from the dark theme definition */
 }
-html[data-base-theme="default-orange-blue"][data-mode="dark"] select,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="text"],
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="number"],
 html[data-base-theme="default-orange-blue"][data-mode="dark"] textarea {
   border-color: var(--glass-dark-border);
   background: var(--glass-dark-bg);
   color: var(--text-primary); /* Will be white in dark mode */
+}
+
+/* Specific dark mode styling for select, including the arrow */
+html[data-base-theme="default-orange-blue"][data-mode="dark"] select {
+  border-color: var(--glass-dark-border);
+  background: var(--glass-dark-bg);
+  color: var(--text-primary); /* Will be white in dark mode */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23eee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Custom arrow for dark mode */
+  /* Inherits appearance: none, background-position, background-repeat, background-size from base select rule */
 }
 
 html[data-base-theme="default-orange-blue"][data-mode="dark"] select:hover {

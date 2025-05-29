@@ -11,7 +11,7 @@ import { // Values from chart.js
 } from 'chart.js'; // Values from chart.js
 import type { ChartOptions, ChartData, TooltipItem } from 'chart.js'; // Types from chart.js
 
-import { team_short_names } from '../teamStyles'; // Removed unused team_styles and TeamStyle
+import { team_short_names, team_styles } from '../teamStyles'; // Import team_styles
 
 ChartJS.register(
   CategoryScale,
@@ -35,8 +35,8 @@ const ProbabilityChart: React.FC<ProbabilityChartProps> = ({ chartData, titleTex
       {
         label: 'Probability',
         data: chartData.map(d => d.probability),
-        backgroundColor: ["#B7525E", "#E6C88C", "#2561AE", "#F9CD05", "#A47864", "#004B8D"],
-        borderColor: ["#B7525E", "#E6C88C", "#2561AE", "#F9CD05", "#A47864", "#004B8D"],
+        backgroundColor: chartData.map(d => team_styles[d.teamKey]?.bg || '#CCCCCC'), // Use team color, fallback to gray
+        borderColor: chartData.map(d => team_styles[d.teamKey]?.bg || '#CCCCCC'), // Use team color for border, fallback to gray
         borderWidth: 2,
         borderRadius: 6, // Rounded bars
         borderSkipped: false, // Border on all sides

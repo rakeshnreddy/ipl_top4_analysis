@@ -1,14 +1,12 @@
 import React, { createContext, useContext, useEffect, useState, type ReactNode, useCallback } from 'react';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
-export type BasePalette = 'default-orange-blue' | 'oceanic-teal' | 'ruby-radiance'; // Add more as they are defined
+export type BasePalette = 'default-orange-blue'; // Only default-orange-blue remains
 
 // Define a list of available palettes for the PaletteSwitcher later
 export const availablePalettes: { key: BasePalette; name: string }[] = [
   { key: 'default-orange-blue', name: 'Default Orange/Blue' },
-  { key: 'oceanic-teal', name: 'Oceanic Teal' },
-  { key: 'ruby-radiance', name: 'Ruby Radiance' },
-  // Add more palettes here as they are defined in CSS
+  // Removed Oceanic Teal and Ruby Radiance
 ];
 
 interface ThemeContextType {

@@ -24,7 +24,7 @@
 .team-picker-option.selected {
   /* --team-bg-color and --team-text-color are expected to be set via inline styles */
   background-color: color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 40%, var(--glass-light-bg, rgba(255,255,255,0.15)));
-  color: var(--team-text-color, var(--text-primary));
+  color: var(--text-primary) !important; /* MODIFIED: Always use primary text color for contrast */
   font-weight: bold;
   border-color: var(--team-bg-color, var(--primary-color)); /* Or a slightly darker/brighter version for emphasis */
   box-shadow: 0 0 8px color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 50%, transparent); /* Add a glow effect */
@@ -43,7 +43,7 @@ html[data-base-theme="default-orange-blue"][data-mode="dark"] .team-picker-optio
 
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .team-picker-option.selected {
   background-color: color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 40%, var(--glass-dark-bg, rgba(34,34,34,0.50)));
-  color: var(--team-text-color, var(--text-primary));
+  color: var(--text-primary) !important; /* MODIFIED: Always use primary text color for contrast */
   border-color: var(--team-bg-color, var(--primary-color));
   box-shadow: 0 0 8px color-mix(in srgb, var(--team-bg-color, var(--primary-color)) 50%, transparent);
 }
