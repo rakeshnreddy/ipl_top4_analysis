@@ -1,70 +1,235 @@
 @import url("./custom-styles.css");
 
 :root {
-  /* Default Theme: "default-orange-blue" Light Mode */
-  /* (Based on the previous "Orange & Blue Glassmorphic Theme - Dark Mode") */
+  /* Base structural variables */
+  --font-family-sans-serif: 'Roboto', sans-serif;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size: 16px; /* Base font size */
+  --spacing-unit: 8px;
+  --glass-border-radius: 16px; /* Updated panel radius */
+  --border-radius: var(--glass-border-radius); /* Global radius, updated */
+  --max-content-width: 1280px;
 
-  /* New Color Palette */
+  /* New Panel Variables - Light/Default */
+  --panel-border-color: rgba(255, 255, 255, 0.18);
+  --panel-box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+
+  /* New Light Theme Variables */
+  --bg-light: #fefefe;
+  --bg-accent: #A8E6CF;
+  --bg-secondary: #FFD3B6;
+  --text-light: #333;
+  --panel-rgb: 255, 255, 255;
+  --panel-alpha: 0.7;
+  --panel-bg: rgba(var(--panel-rgb), var(--panel-alpha));
+  --input-range-bg: rgba(255,255,255,0.4);
+  --thumb-bg: #fff;
+  --thumb-border: #A8E6CF;
+
+  /* Default theme variables that might be used by components if not overridden by a specific theme context.
+     These will likely be overridden by the active theme (legacy, default-orange-blue, or new-theme).
+     Consider these as a fallback or base for unthemed contexts if any. */
+  --primary-color: #FFA500; /* Example fallback */
+  --text-color: #333333; /* Example fallback */
+  --background-color: #FFFFFF; /* Example fallback */
+  --header-text-color: #333333; /* Example fallback */
+  --button-border-color: #FFA500; /* Example fallback */
+  --button-glass-text-color: #FFFFFF; /* Example fallback */
+  --glass-border-color: #FFA500; /* Example fallback */
+  /* Add other generic fallbacks as needed */
+}
+
+/* New Theme: "new-theme" Light Mode (mirroring :root for now) */
+html[data-base-theme="new-theme"][data-mode="light"] {
+  /* Base structural variables */
+  --font-family-sans-serif: 'Roboto', sans-serif;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size: 16px;
+  --spacing-unit: 8px;
+  --glass-border-radius: 16px; /* Updated panel radius */
+  --border-radius: var(--glass-border-radius); /* Updated panel radius */
+  --max-content-width: 1280px;
+
+  /* New Panel Variables - Light */
+  --panel-border-color: rgba(255, 255, 255, 0.18);
+  --panel-box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+
+  /* New Light Theme Variables */
+  --bg-light: #fefefe;
+  --bg-accent: #A8E6CF;
+  --bg-secondary: #FFD3B6;
+  --text-light: #333;
+  --panel-rgb: 255, 255, 255;
+  --panel-alpha: 0.7;
+  --panel-bg: rgba(var(--panel-rgb), var(--panel-alpha));
+  --input-range-bg: rgba(255,255,255,0.4);
+  --thumb-bg: #fff;
+  --thumb-border: #A8E6CF;
+
+  /* Fallback/default values for new-theme light mode, can be customized further */
+  --primary-color: #A8E6CF; /* Example: using bg-accent as primary */
+  --text-color: var(--text-light);
+  --background-color: var(--bg-light);
+  --header-text-color: var(--text-light);
+  --button-border-color: var(--thumb-border);
+  --button-glass-text-color: var(--text-light);
+  --glass-border-color: var(--thumb-border);
+
+  /* Define other variables needed for this theme, for example: */
+  --gradient-page-start-color: var(--bg-light);
+  --gradient-page-end-color: var(--bg-accent);
+  --text-primary: var(--text-light); /* Common text color */
+  --text-muted-color: #777; /* Muted text for new theme */
+  --link-color: #2a7a65; /* Darker green for links */
+  --link-hover-color: #38a386;
+  --accent-color-success: #28a745;
+  --accent-color-warning: #ffc107;
+  --accent-color-warning-text: #333;
+  --accent-color-info: #17a2b8;
+  --error-message-bg: #f8d7da;
+  --error-message-text: #721c24;
+  --error-message-border: #f5c6cb;
+  --loading-message-bg: #e2e3e5;
+  --loading-message-text: #333;
+  --loading-message-border: #d6d8db;
+  --submit-light-hover-bg: #8fd9b6;
+  --input-border-color: #ccc;
+  --link-color: var(--bg-accent); /* Using theme's bg-accent */
+  --link-hover-color: color-mix(in srgb, var(--link-color) 80%, #000);
+  --link-light-hover-bg: rgba(255,255,255,0.9); /* For pill button link hover */
+}
+
+html[data-base-theme="new-theme"][data-mode="dark"] {
+  /* Base structural variables (typically inherited, but can be overridden if needed) */
+  /* --font-family-sans-serif: 'Roboto', sans-serif; */ /* Inherited */
+  /* --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; */ /* Inherited */
+  /* --font-size: 16px; */ /* Inherited */
+  /* --spacing-unit: 8px; */ /* Inherited */
+  /* --border-radius: var(--glass-border-radius); */ /* Inherited, or define new one */
+  /* --max-content-width: 1280px; */ /* Inherited */
+
+  /* New Panel Variables - Dark */
+  --panel-border-color: rgba(var(--panel-rgb), 0.25); /* Uses panel-rgb (30,30,30 for dark) */
+  --panel-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* Button Variables - Dark */
+  --button-dark-bg: #37474F;
+  --button-dark-hover-bg: #4DB6AC;
+
+  /* Input & Link Variables - Dark */
+  --input-border-color: #555;
+  --link-color: var(--thumb-border); /* Using dark theme's thumb-border for links */
+  --link-hover-color: color-mix(in srgb, var(--link-color) 80%, #fff); /* Lighten for hover */
+  --link-dark-hover-bg: rgba(70,70,70,0.9); /* For pill button link hover */
+
+  /* New Dark Theme Variables */
+  --bg-light: #1E1E1E; /* Main background for dark mode */
+  --bg-accent: #2E3C40; /* Dark Slate / Deep Teal - used for gradients or accents */
+  --bg-secondary: #1A2930; /* Very Dark Blue / Almost Black Blue - for secondary elements */
+  --text-light: #e0e0e0; /* Primary text color for dark mode */
+  
+  --panel-rgb: 30, 30, 30; /* Darker panel base */
+  --panel-alpha: 0.9;       /* Slightly more opaque for readability on dark bg */
+  --panel-bg: rgba(var(--panel-rgb), var(--panel-alpha));
+  
+  --input-range-bg: rgba(255,255,255,0.2); /* Lighter track for contrast */
+  --thumb-bg: #e0e0e0;                    /* Thumb color matching text */
+  --thumb-border: #80CBC4;                /* Teal accent for thumb border */
+
+  /* General variable overrides for dark mode functionality */
+  --primary-color: var(--thumb-border); /* Using teal as primary for consistency */
+  --text-color: var(--text-light);
+  --text-primary: var(--text-light); /* Common text color */
+  --background-color: var(--bg-light);
+  --header-text-color: var(--text-light);
+  
+  --gradient-page-start-color: var(--bg-light);
+  --gradient-page-end-color: var(--bg-accent);
+  
+  --text-muted-color: #8899A6; /* Muted text for dark theme */
+  /* --link-color: var(--thumb-border); Already defined in "Input & Link Variables - Dark" */
+  --link-hover-color: color-mix(in srgb, var(--link-color) 80%, #fff); /* Updated as per request */
+
+  --button-border-color: var(--thumb-border);
+  --button-glass-text-color: var(--text-light); 
+  /* Note: button background might need specific dark theme variables if using gradients like the old theme */
+  --glass-border-color: var(--thumb-border); /* General border color, if glassmorphism is adapted */
+
+  /* Dark theme specific accent & message colors */
+  --accent-color-success: #66bb6a;  /* Material Green 300 */
+  --accent-color-warning: #ffa726;  /* Material Orange 300 */
+  --accent-color-warning-text: #1E1E1E; /* Dark text for good contrast on orange warning */
+  --accent-color-info: #42a5f5;     /* Material Blue 300 */
+  
+  --error-message-bg: #ef5350;      /* Material Red 300 */
+  --error-message-text: #ffffff;    /* White text for error messages */
+  --error-message-border: #e53935;  /* Material Red 400 */
+  
+  --loading-message-bg: #546e7a;    /* Blue Grey 500 */
+  --loading-message-text: #ffffff;  /* White text for loading messages */
+  --loading-message-border: #455a64;/* Blue Grey 600 */
+}
+
+
+/* Legacy Theme: "legacy-orange-blue" */
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] {
+  /* Copied from :root */
   --color-honey-neutral: #E6C88C;
   --color-terra-cotta:  #B7525E;
   --color-mocha-mousse: #A47864;
 
-  /* Glassmorphism Overlay Variables */
   --glass-light-bg:    rgba(255,255,255,0.15);
   --glass-light-border:rgba(255,255,255,0.30);
   --glass-dark-bg:     rgba(34,34,34,0.50);
   --glass-dark-border: rgba(255,255,255,0.30);
   --glass-light-bg-hover: rgba(255,255,255,0.25);
-  --glass-dark-bg-hover: rgba(34,34,34,0.25); /* Note: Lighter than default dark, as per instruction */
+  --glass-dark-bg-hover: rgba(34,34,34,0.25);
 
-  /* Page Gradient Variables */
-  --gradient-page-start-color: #FFFFFF; /* White - For new light mode gradient */
-  --gradient-page-end-color: #F0F0F0;   /* Light Grey - For new light mode gradient */
-  --header-text-color-light: #E0E0E0; /* Header text for this mode */
+  --gradient-page-start-color: #FFFFFF;
+  --gradient-page-end-color: #F0F0F0;
+  --header-text-color-light: #E0E0E0;
   --header-text-color: var(--header-text-color-light);
 
-  /* Glassmorphic & General Variables */
-  --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);  /* Dark Slate Blue, semi-transparent */
-  --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55); /* Dark Orange/Amber, semi-transparent */
-  --glass-border-color: rgba(255, 140, 0, 0.3); /* Dark Orange, low opacity for borders */
+  --glass-bg-gradient-start-color: rgba(40, 58, 71, 0.65);
+  --glass-bg-gradient-end-color: rgba(200, 100, 0, 0.55);
+  --glass-border-color: rgba(255, 140, 0, 0.3);
   --glass-shadow-color-soft: rgba(0, 0, 0, 0.25);
   --glass-shadow-color-strong: rgba(0, 0, 0, 0.35);
-  --glass-blur-intensity: 10px; 
-  --glass-text-color: #EAEAEA;     /* Light Gray */
-  --glass-heading-color: #FFA500;  /* Orange for headings on dark glass */
+  --glass-blur-intensity: 10px;
+  --glass-text-color: #EAEAEA;
+  --glass-heading-color: #FFA500;
   --glass-border-radius: 14px;
 
-  --primary-color: #FFA500; /* Orange */
-  --primary-hover-color: #FFB733; /* Lighter Orange */
-  --on-primary-text-color: #1A2A3A; /* Dark text on orange */
+  --primary-color: #FFA500;
+  --primary-hover-color: #FFB733;
+  --on-primary-text-color: #1A2A3A;
 
   --text-color: var(--glass-text-color);
-  --text-muted-color: #9EADBA; /* Lighter Muted Blue-Gray */
-  --background-color: transparent; 
-  --surface-color: transparent;    
-  --border-color: var(--glass-border-color); 
-  
+  --text-muted-color: #9EADBA;
+  --background-color: transparent;
+  --surface-color: transparent;
+  --border-color: var(--glass-border-color);
+
   --button-glass-bg-start-color: rgba(50, 68, 81, 0.5);
   --button-glass-bg-end-color: rgba(210, 110, 10, 0.4);
   --button-glass-text-color: var(--glass-text-color);
   --button-border-color: var(--glass-border-color);
 
-  --input-glass-bg-color: rgba(26, 42, 58, 0.5); /* Darker Blue, semi-transparent */
+  --input-glass-bg-color: rgba(26, 42, 58, 0.5);
   --input-glass-text-color: var(--glass-text-color);
   --input-glass-border-color: var(--glass-border-color);
 
-  /* Accent & Utility Colors (can be part of the base theme or adjusted per palette) */
-  --accent-color-success: #28a745; 
-  --accent-color-warning: #b8860b; /* Darker yellow, good for this "darker" light theme */
-  --accent-color-warning-text: var(--glass-text-color); /* Ensure contrast */
-  --accent-color-info: #17a2b8; 
-  
+  --accent-color-success: #28a745;
+  --accent-color-warning: #b8860b;
+  --accent-color-warning-text: var(--glass-text-color);
+  --accent-color-info: #17a2b8;
+
   --disabled-bg-color: #495057;
   --disabled-text-color: #adb5bd;
   --footer-bg-color: #212529;
   --footer-text-color: #ced4da;
-  --link-color: #FFB733; 
-  --link-hover-color: #FFA500; 
+  --link-color: #FFB733;
+  --link-hover-color: #FFA500;
 
   --loading-message-bg: var(--accent-color-info);
   --loading-message-text: var(--glass-text-color);
@@ -73,18 +238,171 @@
   --error-message-text: #F8D7DA;
   --error-message-border: #721c24;
 
-  /* Base structural variables (kept from original :root) */
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --spacing-unit: 8px;
-  --border-radius: var(--glass-border-radius); /* Global radius to use glass radius */
+  --border-radius: var(--glass-border-radius);
   --max-content-width: 1280px;
 
-  /* The following placeholder sections are removed as they are obsolete.
-     The :root now defines the base for the default (light) theme.
-     Mode-specific overrides are in their respective blocks. */
+  /* Light mode specific overrides from default-orange-blue light mode */
+  --bg-page:      #FFFFFF;
+  --bg-section:   #F7F3EF;
+  --text-primary: #000000;
+  --header-text-color: var(--text-primary); /* Override for light mode header text */
 }
 
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] .table-responsive td {
+    background-color: #757575;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] .table-responsive td.team-specific-cell {
+    background-color: color-mix(in srgb, var(--team-bg-color, #808080) 50%, #404040) !important;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] .table-responsive tbody tr:hover td {
+    background-color: color-mix(in srgb, #757575 85%, var(--primary-hover-color, #FFB733) 15%);
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] .table-responsive tbody tr:hover td.team-specific-cell {
+    background-color: color-mix(in srgb, var(--team-bg-color, #808080) 60%, #303030) !important;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] .table-responsive th {
+    color: var(--text-primary) !important;
+    text-shadow: none;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] section > h3 {
+    color: var(--text-primary) !important;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="light"] section > h4 {
+    color: var(--text-primary) !important;
+}
+
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] {
+  /* Copied from html[data-base-theme="default-orange-blue"][data-mode="dark"] */
+  --bg-page:    #000000;
+  --bg-section: #121212;
+  --text-primary: #FFFFFF;
+
+  --gradient-page-start-color: #000000;
+  --gradient-page-end-color: #1A1A1A;
+  --header-text-color: #F0F0F0;
+
+  --glass-bg-gradient-start-color: rgba(20, 28, 35, 0.7);
+  --glass-bg-gradient-end-color: rgba(130, 65, 0, 0.6);
+  --glass-border-color: rgba(200, 100, 0, 0.25);
+  --glass-shadow-color-soft: rgba(0, 0, 0, 0.35);
+  --glass-shadow-color-strong: rgba(0, 0, 0, 0.45);
+  --glass-text-color: #F5F5F5;
+  --glass-heading-color: #FFB74D;
+
+  --primary-color: #FFB74D;
+  --primary-hover-color: #FFC777;
+  --on-primary-text-color: #1A2A3A;
+
+  --text-color: var(--glass-text-color);
+  --text-muted-color: #AEBAC7;
+  --border-color: var(--glass-border-color);
+
+  --button-glass-bg-start-color: rgba(30, 38, 45, 0.6);
+  --button-glass-bg-end-color: rgba(140, 75, 10, 0.5);
+  --button-glass-text-color: var(--glass-text-color);
+  --button-border-color: var(--glass-border-color);
+
+  --input-glass-bg-color: rgba(16, 22, 38, 0.6);
+  --input-glass-text-color: var(--glass-text-color);
+  --input-glass-border-color: var(--glass-border-color);
+
+  --accent-color-success: #39C15D;
+  --accent-color-warning: #FFC107;
+  --accent-color-warning-text: #1A2A3A;
+  --accent-color-info: #3EACCF;
+
+  --disabled-bg-color: #3A3A3A;
+  --disabled-text-color: #888888;
+  --footer-bg-color: #1A1A1A;
+  --footer-text-color: #BBBBBB;
+  --link-color: #FFC777;
+  --link-hover-color: #FFB74D;
+
+  --loading-message-bg: var(--accent-color-info);
+  --loading-message-text: var(--glass-text-color);
+  --loading-message-border: color-mix(in srgb, var(--accent-color-info) 80%, #000);
+  --error-message-bg: #7A282F;
+  --error-message-text: #FADADD;
+  --error-message-border: #A53842;
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card {
+  background: var(--glass-dark-bg, rgba(34, 34, 34, 0.50)); /* Kept for legacy */
+  border: 1px solid var(--glass-dark-border, rgba(255, 255, 255, 0.30)); /* Kept for legacy */
+  background-color: rgba(34, 34, 34, 0.85); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card h2,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card h3,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card h4 {
+  color: var(--glass-heading-color); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card p,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card li,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .glass-card span {
+  color: var(--glass-text-color); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .table-responsive td.team-specific-cell {
+  background-color: color-mix(in srgb, var(--team-bg-color, transparent) 30%, transparent) !important; /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] header {
+  color: var(--header-text-color); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] button.success,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] .button.success {
+  color: var(--on-primary-text-color); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="text"],
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="number"],
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] textarea {
+  border-color: var(--glass-dark-border); /* Kept for legacy */
+  background: var(--glass-dark-bg); /* Kept for legacy */
+  color: var(--text-primary); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] select {
+  border-color: var(--glass-dark-border); /* Kept for legacy */
+  background: var(--glass-dark-bg); /* Kept for legacy */
+  color: var(--text-primary); /* Kept for legacy */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23eee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] select:hover {
+  background: var(--glass-dark-bg-hover); /* Kept for legacy */
+  border-color: var(--primary-hover-color); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] select:focus,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="text"]:focus,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="number"]:focus,
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] textarea:focus {
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent); /* Kept for legacy */
+  background: var(--glass-dark-bg-hover); /* Kept for legacy */
+}
+
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="radio"],
+html[data-base-theme="legacy-orange-blue"][data-mode="dark"] input[type="checkbox"] {
+  accent-color: var(--primary-color); /* Kept for legacy */
+}
+
+/* End Legacy Theme */
+
+/* Default Orange Blue theme specific overrides */
 html[data-base-theme="default-orange-blue"][data-mode="light"] {
   /* This block defines mode-specific overrides for light mode.
      Most common variables are now inherited directly from :root,
@@ -251,26 +569,26 @@ html[data-base-theme="default-orange-blue"][data-mode="dark"] {
 }
 
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card {
-  background: var(--glass-dark-bg, rgba(34, 34, 34, 0.50)); /* Fallback for --glass-dark-bg */
-  border: 1px solid var(--glass-dark-border, rgba(255, 255, 255, 0.30)); /* Fallback for --glass-dark-border */
-  background-color: rgba(34, 34, 34, 0.85); /* Fallback solid background for dark mode */
-  /* backdrop-filter: blur(10px); /* Inherited or can be redefined if different blur needed */
-  /* border-radius is inherited */
-  /* color: var(--glass-text-color); /* Should be inherited from the dark mode's --glass-text-color if set right */
+  background: var(--glass-dark-bg, rgba(34, 34, 34, 0.50)); 
+  border: 1px solid var(--glass-dark-border, rgba(255, 255, 255, 0.30)); 
+  background-color: rgba(34, 34, 34, 0.85); 
+  /* These specific overrides for default-orange-blue dark .glass-card are now less relevant */
+  /* as the new --panel-bg, --panel-border-color should be used by .glass-card directly */
+  /* Keeping them for now to ensure legacy theme isn't broken, but they should be reviewed/removed if .glass-card is fully refactored */
 }
-/* Ensure heading/text colors inside glass-card also adapt in dark mode if not automatically handled by vars */
+
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card h2,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card h3,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card h4 {
-  color: var(--glass-heading-color); /* This will use the dark mode's --glass-heading-color */
+  color: var(--glass-heading-color); 
 }
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card p,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card li,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card span {
-  color: var(--glass-text-color); /* This will use the dark mode's --glass-text-color */
+  color: var(--glass-text-color);
 }
 
-/* Dark Mode: Team-specific table cell background override to 30% opacity */
+/* Dark Mode: Team-specific table cell background override for default-orange-blue theme */
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .table-responsive td.team-specific-cell {
   background-color: color-mix(in srgb, var(--team-bg-color, transparent) 30%, transparent) !important;
 }
@@ -288,26 +606,28 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans-serif);
+  font-family: var(--font-family, var(--font-family-sans-serif));
+  font-size: var(--font-size);
+  background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+  color: var(--text-light);
   margin: 0;
   padding: 0;
-  background-color: var(--background-color); 
-  color: var(--text-color);
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
   line-height: 1.65; 
-  font-size: 16px; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  background-image: linear-gradient(135deg, var(--gradient-page-start-color), var(--gradient-page-end-color));
-  background-size: 200% 200%; 
-  animation: pageGradientAnimation 20s ease infinite;
 }
 
+/* Removing pageGradientAnimation as the new body background is a static gradient */
+/*
 @keyframes pageGradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+*/
 
 #root {
   display: flex;
@@ -327,22 +647,28 @@ body {
 
 /* Header */
 header {
-  /* background: transparent; /* REMOVED - Header is part of page gradient */
-  /* color: var(--header-text-color-light); /* REMOVED - h1 handles its own color */
-  padding: calc(var(--spacing-unit) * 2.5) 0; 
-  text-align: center;
-  border-radius: var(--glass-border-radius); /* UPDATED */
-  margin-bottom: calc(var(--spacing-unit) * 4); 
-  /* box-shadow: none; /* REMOVED */
-  border-bottom: 1px solid var(--glass-border-color); /* ADDED */
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  color: var(--text-light);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26px; /* This will apply to text directly in header, not necessarily h1 if it has its own size */
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.5s, color 0.5s;
+  /* Removed: text-align, border-radius, margin-bottom, border-bottom from previous styling */
+  /* Retained for context, child h1 will primarily use its own styling for font size/weight */
 }
 
 header h1 {
-  margin: 0;
-  font-size: 2.25rem; 
-  font-weight: 700;
+  margin: 0; /* Keep margin 0 for h1 inside flex header */
+  font-size: 1.8rem; /* Adjust h1 font size if needed, relative to header's 26px */
+  font-weight: 700; /* Keep or adjust as per design for h1 */
   letter-spacing: -0.5px;
-  color: var(--header-text-color); /* ADDED/UPDATED */
+  color: var(--header-text-color, var(--text-light)); /* Fallback to text-light if header-text-color not defined */
 }
 
 /* Sections */
@@ -464,22 +790,31 @@ table caption {
   text-align: left;
 }
 
-/* Form Elements */
+/* Form Elements / Control Panels */
 .analysis-controls,
 .qualification-path-controls,
 .simulation-controls {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: calc(var(--spacing-unit) * 2); /* approx 16px, close to 20px */
+  background: var(--panel-bg);
+  border-radius: 16px; /* Use new panel radius */
+  border: 1px solid var(--panel-border-color);
+  box-shadow: var(--panel-box-shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
-  flex-wrap: wrap;
-  gap: calc(var(--spacing-unit) * 2.5); 
-  margin-bottom: calc(var(--spacing-unit) * 3); 
-  padding: calc(var(--spacing-unit) * 2); 
-  background: linear-gradient(135deg, var(--glass-bg-gradient-start-color), var(--glass-bg-gradient-end-color));
-  border-radius: var(--glass-border-radius);
-  border: 1px solid var(--glass-border-color);
-  backdrop-filter: blur(var(--glass-blur-intensity));
-  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
-  box-shadow: var(--glass-shadow-color-soft) 0 4px 6px;
-  align-items: center;
+  flex-direction: column; /* Changed from flex-wrap: wrap */
+  align-items: stretch; /* Changed from align-items: center */
+  /* gap: calc(var(--spacing-unit) * 2.5); /* Removed, children should manage their own margins/spacing */
+}
+
+/* General Label Styling */
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text-light);
 }
 
 .control-group {
@@ -488,11 +823,12 @@ table caption {
   gap: var(--spacing-unit); 
 }
 
+/* Specific label styling within control groups, inherits from general label */
 .control-group label, fieldset legend {
-  font-weight: 600; 
-  color: var(--glass-text-color);
-  margin-right: calc(var(--spacing-unit) * 0.5); 
-  font-size: 0.95em; 
+  font-weight: 600; /* Slightly more prominent for control groups/legends */
+  color: var(--text-light); /* Updated from --glass-text-color */
+  margin-right: calc(var(--spacing-unit) * 0.5); /* Kept for inline spacing if needed */
+  /* font-size: 0.95em; /* Removed to allow global font sizing or more specific control */
 }
 fieldset {
     border: none;
@@ -512,54 +848,48 @@ select,
 input[type="text"],
 input[type="number"],
 textarea {
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); 
-  border-radius: var(--glass-border-radius); 
-  border: 1px solid var(--glass-light-border);
-  background: var(--glass-light-bg);
-  font-size: 1em;
-  color: var(--text-primary); /* Changed from --input-glass-text-color */
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--input-border-color);
+  background: var(--bg-light); /* Themed for light/dark */
+  font-size: 16px;
+  color: var(--text-primary);
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease, background 0.2s ease;
-  min-width: 180px; 
-  backdrop-filter: blur(var(--glass-blur-intensity));
-  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); 
+  min-width: 180px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+  box-sizing: border-box;
+  /* Removed backdrop-filter from here */
 }
 
-select { /* Explicitly separate select for individual styling */
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.5); 
-  border-radius: var(--glass-border-radius); 
-  border: 1px solid var(--glass-light-border);
-  background: var(--glass-light-bg);
-  font-size: 1em;
-  color: var(--text-primary); /* Changed from --input-glass-text-color */
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease, background 0.2s ease;
-  min-width: 180px; 
-  backdrop-filter: blur(var(--glass-blur-intensity));
-  -webkit-backdrop-filter: blur(var(--glass-blur-intensity));
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075); 
-  -webkit-appearance: none; /* Remove default styling */
-  -moz-appearance: none;    /* Remove default styling */
-  appearance: none;         /* Remove default styling */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Custom arrow */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right calc(var(--spacing-unit) * 1.5) center;
   background-size: 1em;
+  padding-right: calc(var(--spacing-unit) * 4); /* Ensure space for arrow */
 }
 
-select:hover {
-  background: var(--glass-light-bg-hover);
-  border-color: var(--primary-hover-color); /* Keep some hover feedback on border */
+html[data-base-theme="new-theme"][data-mode="dark"] select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23eee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Dark mode arrow */
+}
+
+select:hover,
+input[type="text"]:hover,
+input[type="number"]:hover,
+textarea:hover {
+  border-color: var(--thumb-border); /* Consistent hover border */
 }
 
 select:focus,
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus {
-  border-color: var(--primary-color);
+  border-color: var(--thumb-border); /* Themed border color on focus */
   outline: 0;
-  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent); 
-  /* background-color for focus should align with hover or be distinct */
-  background: var(--glass-light-bg-hover); /* Using hover background for focus */
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--thumb-border) 25%, transparent);
 }
 
 input[type="radio"],
@@ -573,72 +903,93 @@ input[type="checkbox"] {
 .control-group label[for*="-checkbox"] {
   margin-right: var(--spacing-unit); 
   font-weight: normal; 
-  color: var(--glass-text-color); /* Ensure these labels also use glass text color */
+  color: var(--text-light); /* Updated from --glass-text-color */
 }
 
 button, .button {
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5); 
-  border: 1px solid var(--button-border-color);
-  border-radius: var(--border-radius); 
-  background: linear-gradient(135deg, var(--button-glass-bg-start-color), var(--button-glass-bg-end-color));
-  color: var(--button-glass-text-color);
-  font-size: 1em;
-  font-weight: 600; 
+  padding: 10px 20px; 
+  border: 1px solid var(--thumb-border); /* Default uses light thumb-border */
+  border-radius: 8px; 
+  background-color: var(--panel-bg); /* Default uses light panel-bg */
+  color: var(--text-light); /* Default uses light text-light */
+  font-size: 16px;
+  font-weight: 500; 
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
   text-align: center;
   display: inline-block;
   text-decoration: none;
   white-space: nowrap; 
-  backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2));
-  box-shadow: 0 2px 4px var(--glass-shadow-color-soft);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  /* backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2)); Removed */
+  /* -webkit-backdrop-filter: blur(calc(var(--glass-blur-intensity) / 2)); Removed */
 }
 button:hover, .button:hover {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 80%, var(--primary-color) 20%), color-mix(in srgb, var(--button-glass-bg-end-color) 80%, var(--primary-color) 20%));
-  border-color: var(--primary-color);
-  box-shadow: 0 3px 6px var(--glass-shadow-color-strong);
+  background-color: var(--bg-accent); /* Light theme hover */
+  border-color: var(--bg-accent);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 button:active, .button:active {
     transform: translateY(1px);
-    box-shadow: 0 1px 2px var(--glass-shadow-color-strong);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Adjusted shadow for active state */
 }
 button:focus-visible, .button:focus-visible { 
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--primary-color); /* Fallback primary color, should be themed */
   outline-offset: 2px;
-  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color, #A8E6CF) 30%, transparent);
 }
 
 button:disabled, .button:disabled {
-  background: color-mix(in srgb, var(--button-glass-bg-start-color) 40%, #888888 60%); /* More muted */
-  border-color: color-mix(in srgb, var(--glass-border-color) 50%, #888888 50%);
-  color: color-mix(in srgb, var(--button-glass-text-color) 50%, #777777 50%);
+  background-color: #CCCCCC !important; /* More specific than old theme disabled */
+  color: #595959 !important;
+  border-color: #BDBDBD !important;
   cursor: not-allowed;
-  opacity: 0.6; 
+  opacity: 0.7; 
   box-shadow: none;
   transform: none;
-  backdrop-filter: none;
+  /* backdrop-filter: none; Already removed from base */
 }
 
 button.success, .button.success {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 70%, var(--accent-color-success) 30%), color-mix(in srgb, var(--button-glass-bg-end-color) 70%, var(--accent-color-success) 30%));
+  background-color: var(--accent-color-success);
   border-color: var(--accent-color-success);
-  color: var(--on-primary-text-color); /* Assuming success buttons use primary-like text contrast */
+  color: #fff; /* Assuming white text for success buttons */
 }
 button.success:hover, .button.success:hover {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 50%, var(--accent-color-success) 50%), color-mix(in srgb, var(--button-glass-bg-end-color) 50%, var(--accent-color-success) 50%));
-  border-color: color-mix(in srgb, var(--accent-color-success) 80%, #000000 20%);
+  background-color: color-mix(in srgb, var(--accent-color-success) 85%, #000);
+  border-color: color-mix(in srgb, var(--accent-color-success) 85%, #000);
 }
 button.warning, .button.warning {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 70%, var(--accent-color-warning) 30%), color-mix(in srgb, var(--button-glass-bg-end-color) 70%, var(--accent-color-warning) 30%));
+  background-color: var(--accent-color-warning);
   border-color: var(--accent-color-warning);
   color: var(--accent-color-warning-text); 
 }
 button.warning:hover, .button.warning:hover {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--button-glass-bg-start-color) 50%, var(--accent-color-warning) 50%), color-mix(in srgb, var(--button-glass-bg-end-color) 50%, var(--accent-color-warning) 50%));
-  border-color: color-mix(in srgb, var(--accent-color-warning) 80%, #000000 20%);
+  background-color: color-mix(in srgb, var(--accent-color-warning) 85%, #000);
+  border-color: color-mix(in srgb, var(--accent-color-warning) 85%, #000);
 }
 
+input[type="submit"] {
+  display: block; /* Make it block to take full width */
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-light); /* Default light theme text */
+  background-color: var(--bg-accent); /* Light theme submit bg */
+  border: 1px solid var(--bg-accent); /* Light theme submit border */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+input[type="submit"]:hover {
+  background-color: var(--submit-light-hover-bg); /* Light theme hover */
+  border-color: var(--submit-light-hover-bg);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
 
 /* Utilities */
 .text-center { text-align: center; }
@@ -656,44 +1007,49 @@ button.warning:hover, .button.warning:hover {
   border: 1px solid var(--accent-color-warning);
 }
 
-/* Glass Card Component Style */
+/* Glass Card Component Style / Panel Style */
 .glass-card {
-  background: var(--glass-light-bg, rgba(255, 255, 255, 0.15)); /* Fallback for --glass-light-bg */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-light-border, rgba(255, 255, 255, 0.30)); /* Fallback for --glass-light-border */
-  background-color: rgba(255, 255, 255, 0.75); /* Fallback solid background for light mode */
-  border-radius: var(--glass-border-radius, 14px);
-  padding: calc(var(--spacing-unit) * 2.5); /* Default padding, can be overridden */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow for depth */
-  color: var(--text-primary); /* MODIFIED: Ensure text contrasts with card background */
+  background: var(--panel-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--panel-border-color);
+  border-radius: 16px; /* Updated from 14px */
+  padding: 20px; /* Updated from calc(var(--spacing-unit) * 2.5) */
+  box-shadow: var(--panel-box-shadow);
+  color: var(--text-primary); 
+  margin: 20px; /* Added default margin */
+  transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+  /* Removed old background-color fallback, var(--glass-light-bg), var(--glass-light-border) */
 }
 .glass-card h2, .glass-card h3, .glass-card h4 {
-  color: var(--text-primary); /* MODIFIED: Ensure headings contrast (can be refined by design) */
+  color: var(--text-primary); 
 }
 .glass-card p, .glass-card li, .glass-card span {
-  color: var(--text-primary); /* MODIFIED: Ensure text contrasts with card background */
+  color: var(--text-primary); 
 }
 
-/* Analysis Panel Specific Styles */
+/* Analysis Panel Specific Styles in index.css - to be reviewed if it should use custom-styles.css or be merged */
+/* This rule for .analysis-panel-card is currently in index.css using old variables. */
+/* It will be overridden by custom-styles.css if specific enough, or should be updated here. */
+/* For now, changing its background to use the new panel variable. */
 .analysis-panel-card {
-  /* Assuming this class is added to a .glass-card element */
-  /* This will override the default .glass-card 'background' property */
-  /* The backdrop-filter and border from .glass-card will still apply */
-  background: color-mix(in srgb, var(--color-honey-neutral) 20%, transparent);
+  background: var(--panel-bg); /* Updated to use new panel background */
+  /* Other properties like padding, border-radius, etc., would come from .glass-card if applied together */
 }
 
-.analysis-panel-card h2,
-.analysis-panel-card h3 {
-  color: var(--color-mocha-mousse);
-}
+/* Headings inside .analysis-panel-card will now default to var(--text-primary) from .glass-card rules */
+/* Specific color overrides for these headings were in custom-styles.css and will be addressed there. */
+/* .analysis-panel-card h2, */
+/* .analysis-panel-card h3 { */
+  /* color: var(--color-mocha-mousse); */ /* Old style from index.css */
+/* } */
 /* Fallback if --color-mocha-mousse is not defined, or to ensure it overrides general glass-card heading colors */
-.analysis-panel-card h2 {
-  color: var(--color-mocha-mousse, #A47864); 
-}
-.analysis-panel-card h3 {
-  color: var(--color-mocha-mousse, #A47864);
-}
+/* .analysis-panel-card h2 { */
+  /* color: var(--color-mocha-mousse, #A47864); */ 
+/* } */
+/* .analysis-panel-card h3 { */
+  /* color: var(--color-mocha-mousse, #A47864); */
+/* } */
 
 
 /* Current Standings Metadata */
@@ -810,47 +1166,70 @@ p[role="alert"] {
 /* Specific overrides for dark mode elements */
 /* html[data-theme="dark"] header rule for color was removed as h1 now handles its color directly via --header-text-color */
 
+/* Specific overrides for legacy default-orange-blue dark mode elements */
+/* These are mostly for inputs/selects, keeping them separate from new theme button logic */
 html[data-base-theme="default-orange-blue"][data-mode="dark"] header {
-  color: var(--header-text-color); /* This ensures header text color respects the theme */
+  color: var(--header-text-color); 
 }
 html[data-base-theme="default-orange-blue"][data-mode="dark"] button.success, 
 html[data-base-theme="default-orange-blue"][data-mode="dark"] .button.success {
-  color: var(--on-primary-text-color); /* Use on-primary from the dark theme definition */
+  /* Legacy success button text color in dark mode */
+  color: var(--on-primary-text-color); 
 }
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="text"],
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="number"],
 html[data-base-theme="default-orange-blue"][data-mode="dark"] textarea {
   border-color: var(--glass-dark-border);
   background: var(--glass-dark-bg);
-  color: var(--text-primary); /* Will be white in dark mode */
+  color: var(--text-primary); 
 }
-
-/* Specific dark mode styling for select, including the arrow */
 html[data-base-theme="default-orange-blue"][data-mode="dark"] select {
   border-color: var(--glass-dark-border);
   background: var(--glass-dark-bg);
-  color: var(--text-primary); /* Will be white in dark mode */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23eee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); /* Custom arrow for dark mode */
-  /* Inherits appearance: none, background-position, background-repeat, background-size from base select rule */
+  color: var(--text-primary); 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23eee' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E"); 
 }
-
 html[data-base-theme="default-orange-blue"][data-mode="dark"] select:hover {
   background: var(--glass-dark-bg-hover);
   border-color: var(--primary-hover-color);
 }
-
 html[data-base-theme="default-orange-blue"][data-mode="dark"] select:focus,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="text"]:focus,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="number"]:focus,
 html[data-base-theme="default-orange-blue"][data-mode="dark"] textarea:focus {
   box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--primary-color) 30%, transparent);
-  background: var(--glass-dark-bg-hover); /* Using hover background for focus in dark mode */
+  background: var(--glass-dark-bg-hover); 
 }
-
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="radio"],
 html[data-base-theme="default-orange-blue"][data-mode="dark"] input[type="checkbox"] {
-  accent-color: var(--primary-color); /* Primary color should be the dark theme primary */
+  accent-color: var(--primary-color); 
 }
+
+/* New Theme Dark Mode Button & Submit Overrides */
+html[data-base-theme="new-theme"][data-mode="dark"] button,
+html[data-base-theme="new-theme"][data-mode="dark"] .button {
+  background-color: var(--button-dark-bg);
+  border-color: var(--thumb-border); /* Dark theme thumb border */
+  color: var(--text-light); /* Dark theme text light */
+}
+
+html[data-base-theme="new-theme"][data-mode="dark"] button:hover,
+html[data-base-theme="new-theme"][data-mode="dark"] .button:hover {
+  background-color: var(--button-dark-hover-bg);
+  border-color: var(--button-dark-hover-bg);
+}
+
+html[data-base-theme="new-theme"][data-mode="dark"] input[type="submit"] {
+  background-color: var(--thumb-border); /* Dark theme thumb border for submit bg */
+  color: var(--text-light); /* Re-evaluate if contrast is good, maybe use panel-rgb based text */
+  border-color: var(--thumb-border);
+}
+
+html[data-base-theme="new-theme"][data-mode="dark"] input[type="submit"]:hover {
+  background-color: var(--button-dark-hover-bg);
+  border-color: var(--button-dark-hover-bg);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 992px) { /* Tablets */

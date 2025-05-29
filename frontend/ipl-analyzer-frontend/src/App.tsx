@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import ThemeToggle from './components/ThemeToggle'; 
 import PaletteSwitcher from './components/PaletteSwitcher'; // Add this
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher'; // Import the new ThemeSwitcher
 import GlassCard from './components/GlassCard'; 
 import CurrentStandings from './components/CurrentStandings';
 import OverallProbabilities from './components/OverallProbabilities';
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <ThemeToggle />
           <PaletteSwitcher />
+          <ThemeSwitcher /> {/* Add the new ThemeSwitcher here */}
         </div>
       </header>
 
