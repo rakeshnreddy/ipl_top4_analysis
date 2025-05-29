@@ -1707,78 +1707,64 @@ def main():
 
     # --- Display Qualification Path ---
     st.subheader(f"Qualification Path for {full_team_name} (Top {top_n})")
-    st.caption("Minimum wins analysis (Exhaustive method only).")
-    path_data = None
+    # path_data = None # Not needed here anymore
 
-    # Explicitly check if method was Exhaustive AND data exists
-    if (
-        analysis
-        and analysis_method_used == "Exhaustive"
-        and analysis_data
-        and "qualification_path" in analysis_data
-    ):
-        try:
-            path_data = analysis_data["qualification_path"][str(top_n)][team_key]
-            possible_wins = path_data.get("possible")
-            guaranteed_wins = path_data.get("guaranteed")
-            target_matches = path_data.get("target_matches", "N/A")
+    if analysis_method_used.startswith("Exhaustive"):
+        st.caption("Minimum wins analysis (Exhaustive method only).")
+        if analysis_data and "qualification_path" in analysis_data:
+            try:
+                path_data = analysis_data["qualification_path"][str(top_n)][team_key]
+                possible_wins = path_data.get("possible")
+                guaranteed_wins = path_data.get("guaranteed")
+                target_matches = path_data.get("target_matches", "N/A")
 
-            ##  # --- <<< ADD DEBUG PRINTS >>> ---
-            ##  st.write(f"DEBUG: possible_wins = {possible_wins} (type: {type(possible_wins)})")
-            ##  st.write(f"DEBUG: guaranteed_wins = {guaranteed_wins} (type: {type(guaranteed_wins)})")
-            ##  # --- <<< END DEBUG PRINTS >>> ---
+                st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
 
-            st.write(f"**Remaining Matches for {full_team_name}:** {target_matches}")
+                if isinstance(possible_wins, int):
+                    st.success(
+                        f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results)."
+                    )
+                elif possible_wins is None:
+                    st.error(f"**Possible Qualification:** Cannot qualify.")
+                else:
+                    st.warning(
+                        f"**Possible Qualification:** Analysis result: {possible_wins}"
+                    )
 
-            # Now check the conditions
-            if isinstance(possible_wins, int):
-                st.success(
-                    f"**Possible Qualification:** Win **{possible_wins}** match(es) (with favorable results)."
+                if isinstance(guaranteed_wins, int):
+                    st.success(
+                        f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results)."
+                    )
+                elif guaranteed_wins is None and possible_wins is not None:
+                    st.info(
+                        f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins."
+                    )
+                elif guaranteed_wins is None and possible_wins is None:
+                    # Error for "Cannot qualify" is already shown by possible_wins block, so pass here.
+                    pass
+                else: # e.g. unexpected type
+                    st.warning(
+                        f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}"
+                    )
+            except KeyError:
+                st.error(
+                    f"Exhaustive qualification path data not found for {full_team_name} (Top {top_n}) in precomputed results."
                 )
-            elif possible_wins is None:
-                st.error(f"**Possible Qualification:** Cannot qualify.")
-            else:
-                st.warning(
-                    f"**Possible Qualification:** Analysis result: {possible_wins}"
-                )
-            if isinstance(guaranteed_wins, int):
-                st.success(
-                    f"**Guaranteed Qualification:** Win **{guaranteed_wins}** match(es) (irrespective of other results)."
-                )
-            elif (
-                guaranteed_wins is None and possible_wins is not None
-            ):  # Check possible_wins to avoid repeating error
-                st.info(
-                    f"**Guaranteed Qualification:** Cannot guarantee qualification based solely on own wins."
-                )
-            elif guaranteed_wins is None and possible_wins is None:
-                pass  # Error already shown by possible_wins block
-            else:  # Handle unexpected non-int, non-None types if necessary
-                st.warning(
-                    f"**Guaranteed Qualification:** Analysis result: {guaranteed_wins}"
-                )
-            # --- <<< END ADDED BLOCK >>> ---
+            except Exception as e:
+                st.error(f"An error occurred while displaying qualification path data: {e}")
+        else:
+            st.warning("Exhaustive qualification path data structure is missing in precomputed results.")
 
-        except KeyError:
-            st.error(
-                f"Could not retrieve Exhaustive path data for {full_team_name} (Top {top_n}). Key missing."
-            )
-        except Exception as e:
-            st.error(f"Error displaying Exhaustive path analysis: {e}")
-    else:
-        # Explain why it's not shown
-        if analysis_method_used == "Monte Carlo (Precomputed)":
-            st.info(
-                "Qualification Path analysis is only available when Exhaustive method is used."
-            )
-        elif analysis_method_used == "Exhaustive (Precomputed)":
-            st.warning(
-                "Exhaustive qualification path data not found in precomputed results."
-            )
-        else:  # Unavailable or Error
-            st.info(
-                "Qualification Path analysis requires precomputed Exhaustive results."
-            )
+    elif analysis_method_used.startswith("Monte Carlo"):
+        st.info(
+            "Qualification Path analysis (minimum/guaranteed wins) is only available with the Exhaustive analysis method. "
+            "The current data was computed using Monte Carlo."
+        )
+    else: # Unknown, Error, Unavailable, or any other value
+        st.info(
+            f"Qualification Path data is not available because the analysis method used was '{analysis_method_used}' or data is incomplete."
+        )
+
     st.markdown("---")
     # --- End Qualification Path ---
 
