@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { team_full_names, type TeamNames } from '../teamStyles';
+import { team_full_names, team_styles, type TeamStyle, type TeamNames } from '../teamStyles';
 
 
 interface TeamAnalysisResult {
@@ -187,12 +187,20 @@ const DetailedTeamAnalysis: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {fixtureOutcomes.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.fixture}</td>
-                        <td>{item.outcome.Outcome}</td>
-                      </tr>
-                    ))}
+                    {fixtureOutcomes.map((item, index) => {
+                      const styleProps = team_styles[selectedTeamKey] as TeamStyle | undefined; // Use selectedTeamKey for styling
+                      const cellStyle = styleProps ? {
+                        '--team-bg-color': styleProps.bg,
+                        '--team-text-color': styleProps.text
+                      } as React.CSSProperties : {};
+
+                      return (
+                        <tr key={index}>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{item.fixture}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{item.outcome.Outcome}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
