@@ -77,7 +77,7 @@ const QualificationPath: React.FC = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [selectedTeamKey]);
+  }, []); // Dependency array changed to empty
 
   useEffect(() => {
     if (pathData && selectedTeamKey && selectedTarget && metadata?.method_used.toLowerCase().includes('exhaustive')) {
@@ -104,7 +104,8 @@ const QualificationPath: React.FC = () => {
     return <p role="alert" aria-live="assertive" style={{ color: 'red' }}>{error}</p>;
   }
 
-  const isExhaustive = metadata?.method_used.toLowerCase().includes('exhaustive');
+  const isExhaustive = typeof metadata?.method_used === 'string' && 
+                           metadata.method_used.toLowerCase().includes('exhaustive');
 
   return (
     <div>
