@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { team_full_names, team_styles, type TeamNames, type TeamStyle } from '../teamStyles';
+import { team_full_names, type TeamNames } from '../teamStyles'; // Removed unused team_styles and TeamStyle
 
 // Copied from CurrentStandings.tsx
 interface TeamStats {
@@ -288,9 +288,10 @@ const ScenarioSimulation: React.FC = () => {
                   </thead>
                   <tbody>
                     {simulatedFinalStandings.map((team) => {
-                      const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined;
+                      // const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined; // Removed
                       return (
-                        <tr key={team.teamKey} style={{ backgroundColor: teamStyle?.bg || '#FFFFFF', color: teamStyle?.text || '#000000' }}>
+                        // Inline style removed from tr below
+                        <tr key={team.teamKey}>
                           <td>{team.pos}</td>
                           <td>{team.teamFullName}</td>
                           <td>{team.Matches}</td>

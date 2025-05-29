@@ -23,15 +23,11 @@ exports[`ProbabilityChart Component > Test 1: Renders correctly with mock data a
         75.5,
         50.25
       ],
-      "backgroundColor": [
-        "#ff8800",
-        "#88ff00"
-      ],
-      "borderColor": [
-        "#ffffff",
-        "#000000"
-      ],
-      "borderWidth": 1
+      "backgroundColor": "rgba(255, 111, 0, 0.6)",
+      "borderColor": "rgba(255, 111, 0, 1)",
+      "borderWidth": 2,
+      "borderRadius": 6,
+      "borderSkipped": false
     }
   ]
 }
@@ -50,19 +46,19 @@ exports[`ProbabilityChart Component > Test 1: Renders correctly with mock data a
         "text": "Probability (%)"
       },
       "ticks": {
-        "color": "var(--text-color-light)"
+        "color": "var(--text-color)"
       },
       "grid": {
-        "color": "var(--panel-border-light, #e0e0e0)"
+        "display": false
       }
     },
     "y": {
       "ticks": {
         "autoSkip": false,
-        "color": "var(--text-color-light)"
+        "color": "var(--text-color)"
       },
       "grid": {
-        "color": "var(--panel-border-light, #e0e0e0)"
+        "display": false
       }
     }
   },
