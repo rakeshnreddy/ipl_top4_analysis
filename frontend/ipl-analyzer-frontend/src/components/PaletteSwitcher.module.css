@@ -1,0 +1,38 @@
+.switcherContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin-left: 1rem; /* Space from ThemeToggle if they are side-by-side */
+  border-radius: var(--glass-border-radius);
+  background-color: var(--button-glass-bg-start-color); /* Use a theme variable, maybe a start color of button gradient */
+  border: 1px solid var(--glass-border-color);
+}
+
+.paletteButton {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: calc(var(--glass-border-radius) - 4px);
+  cursor: pointer;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--button-glass-text-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  text-transform: capitalize; /* Optional: if keys are hyphenated */
+}
+
+.paletteButton.active {
+  background-color: var(--primary-color);
+  color: var(--on-primary-text-color);
+  border-color: var(--primary-hover-color);
+}
+
+.paletteButton:not(.active):hover {
+  background-color: rgba(128, 128, 128, 0.1); /* Subtle hover */
+}
+
+.label {
+  color: var(--glass-text-color);
+  font-size: 0.9em;
+  margin-right: 0.5rem;
+}
