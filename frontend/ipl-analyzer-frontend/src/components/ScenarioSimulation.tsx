@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { team_full_names, type TeamNames } from '../teamStyles'; // Removed unused team_styles and TeamStyle
+import { team_full_names, team_styles, type TeamStyle, type TeamNames } from '../teamStyles';
 
 // Copied from CurrentStandings.tsx
 interface TeamStats {
@@ -288,15 +288,19 @@ const ScenarioSimulation: React.FC = () => {
                   </thead>
                   <tbody>
                     {simulatedFinalStandings.map((team) => {
-                      // const teamStyle = team_styles[team.teamKey] as TeamStyle | undefined; // Removed
+                      const styleProps = team_styles[team.teamKey] as TeamStyle | undefined;
+                      const cellStyle = styleProps ? {
+                        '--team-bg-color': styleProps.bg,
+                        '--team-text-color': styleProps.text // Will be overridden by global !important in CSS, but good for completeness
+                      } as React.CSSProperties : {};
+
                       return (
-                        // Inline style removed from tr below
                         <tr key={team.teamKey}>
-                          <td>{team.pos}</td>
-                          <td>{team.teamFullName}</td>
-                          <td>{team.Matches}</td>
-                          <td>{team.Wins}</td>
-                          <td>{team.Points}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.pos}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.teamFullName}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Matches}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Wins}</td>
+                          <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Points}</td>
                         </tr>
                       );
                     })}
