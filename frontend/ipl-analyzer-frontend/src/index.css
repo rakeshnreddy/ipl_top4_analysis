@@ -271,6 +271,11 @@ html[data-base-theme="default-orange-blue"][data-mode="dark"] .glass-card span {
   color: var(--glass-text-color); /* This will use the dark mode's --glass-text-color */
 }
 
+/* Dark Mode: Team-specific table cell background override to 30% opacity */
+html[data-base-theme="default-orange-blue"][data-mode="dark"] .table-responsive td.team-specific-cell {
+  background-color: color-mix(in srgb, var(--team-bg-color, transparent) 30%, transparent) !important;
+}
+
 
 /* Global Resets & Defaults */
 *,
