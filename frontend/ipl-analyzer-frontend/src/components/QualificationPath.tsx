@@ -120,7 +120,11 @@ const QualificationPath: React.FC = () => {
       )}
 
       {!pathData && !loading && !isExhaustive && (
-         <p role="status">Qualification Path data is not available for the current analysis method ({metadata?.method_used || 'Unknown'}). This feature requires Exhaustive analysis.</p>
+        metadata?.method_used && metadata.method_used.trim() !== '' ? ( // Check if method_used is present and not empty
+          <p role="status">Qualification Path data is not available for the current analysis method ({metadata.method_used}). This feature requires Exhaustive analysis.</p>
+        ) : (
+          <p role="status">Qualification Path data is not available. The analysis method used for the current data could not be determined or was not specified. This feature typically requires Exhaustive analysis.</p>
+        )
       )}
       
       {isExhaustive && !pathData && !loading && (
