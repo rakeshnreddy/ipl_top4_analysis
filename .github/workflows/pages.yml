@@ -39,6 +39,9 @@ jobs:
           CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
         run: python extract_table.py
 
+      - name: Generate Instagram carousel slides
+        run: python scripts/create_instagram_carousel.py
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

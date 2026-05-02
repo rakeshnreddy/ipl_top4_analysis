@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -39,6 +39,26 @@ jobs:
           CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
           CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
         run: python extract_table.py
+
+      - name: Generate Instagram carousel slides
+        run: python scripts/create_instagram_carousel.py
+
+      - name: Persist generated data and carousel
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis_results.json current_standings.json remaining_fixtures.json
+          git add frontend/ipl-analyzer-frontend/public/analysis_results.json
+          git add frontend/ipl-analyzer-frontend/public/current_standings.json
+          git add frontend/ipl-analyzer-frontend/public/remaining_fixtures.json
+          git add frontend/ipl-analyzer-frontend/public/data/ipl-2026.json
+          git add frontend/ipl-analyzer-frontend/public/social/instagram-carousel
+          if git diff --cached --quiet; then
+            echo "No generated data or carousel changes to commit."
+          else
+            git commit -m "Update IPL data and carousel [skip ci]"
+            git push
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
