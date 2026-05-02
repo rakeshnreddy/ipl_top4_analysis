@@ -16,7 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "frontend/ipl-analyzer-frontend/public/data/ipl-2026.json"
 OUTPUT_ROOT = ROOT / "frontend/ipl-analyzer-frontend/public/social/instagram-carousel"
 WIDTH = 1080
-HEIGHT = 1350
+HEIGHT = 1920
+SAFE_X = 70
+SAFE_BOTTOM = 1800
 DISCLAIMER = "Probabilities exclude NRR calculation. Final qualification outcomes may still change due to NRR."
 
 TEAM_STYLES = {
@@ -162,6 +164,25 @@ def draw_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, size: i
     draw.text(xy, text, font=font(size, weight), fill=fill)
 
 
+def draw_wrapped_text(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[int, int],
+    text: str,
+    size: int,
+    fill: Any,
+    weight: str = "regular",
+    max_width: int = 900,
+    line_gap: int = 8,
+    max_lines: int = 3,
+) -> int:
+    text_font = font(size, weight)
+    y = xy[1]
+    for line in wrapped_lines(draw, text, text_font, max_width, max_lines):
+        draw.text((xy[0], y), line, font=text_font, fill=fill)
+        y += size + line_gap
+    return y
+
+
 def draw_chip(draw: ImageDraw.ImageDraw, x: int, y: int, label: str, fill: str, text_fill: str = "#08111F") -> None:
     chip_font = font(30, "bold")
     padding_x = 22
@@ -173,9 +194,9 @@ def draw_chip(draw: ImageDraw.ImageDraw, x: int, y: int, label: str, fill: str, 
 def draw_footer(draw: ImageDraw.ImageDraw) -> None:
     footer_font = font(18, "regular")
     lines = wrapped_lines(draw, DISCLAIMER, footer_font, 920, 2)
-    y = 1280
+    y = SAFE_BOTTOM + 18
     for line in lines:
-        draw.text((70, y), line, font=footer_font, fill=(190, 203, 222))
+        draw.text((SAFE_X, y), line, font=footer_font, fill=(190, 203, 222))
         y += 24
 
 
@@ -184,9 +205,9 @@ def slide_base(accent: str = "#2563EB") -> tuple[Image.Image, ImageDraw.ImageDra
     draw = ImageDraw.Draw(image, "RGBA")
     draw_gradient(draw, "#07111F", "#16111C")
     accent_rgb = hex_to_rgb(accent)
-    draw.ellipse((-250, -220, 510, 530), fill=(*accent_rgb, 72))
-    draw.ellipse((670, 850, 1280, 1510), fill=(*accent_rgb, 48))
-    rounded(draw, (48, 48, 1032, 1302), 34, (255, 255, 255, 22), (255, 255, 255, 42), 2)
+    draw.ellipse((-300, -260, 560, 600), fill=(*accent_rgb, 72))
+    draw.ellipse((570, 1110, 1340, 1960), fill=(*accent_rgb, 48))
+    rounded(draw, (48, 48, 1032, 1872), 34, (255, 255, 255, 22), (255, 255, 255, 42), 2)
     return image, draw
 
 
@@ -268,20 +289,21 @@ def takeaway(payload: dict[str, Any], team: dict[str, Any]) -> str:
 
 def draw_overview(payload: dict[str, Any], teams: list[dict[str, Any]], output_dir: Path) -> Path:
     image, draw = slide_base("#F59E0B")
-    draw_text(draw, (78, 92), "IPL ROAD TO TOP 4", 62, "#FFFFFF", "black")
-    draw_text(draw, (82, 168), "Daily qualification probability update", 32, "#CBD5E1", "bold")
-    draw_text(draw, (82, 224), generated_date(payload), 28, "#FDE68A", "bold")
+    draw_text(draw, (78, 94), "IPL ROAD TO TOP 4", 68, "#FFFFFF", "black")
+    draw_text(draw, (82, 178), "Daily qualification probability update", 34, "#CBD5E1", "bold")
+    draw_text(draw, (82, 240), generated_date(payload), 30, "#FDE68A", "bold")
 
     table_x = 70
-    table_y = 300
+    table_y = 340
     table_w = 940
-    header_h = 54
-    row_h = 74
-    rounded(draw, (table_x, table_y, table_x + table_w, table_y + header_h + row_h * len(teams) + 22), 28, (255, 255, 255, 28), (255, 255, 255, 48), 2)
+    header_h = 66
+    row_h = 106
+    table_h = header_h + row_h * len(teams) + 28
+    rounded(draw, (table_x, table_y, table_x + table_w, table_y + table_h), 32, (255, 255, 255, 28), (255, 255, 255, 48), 2)
 
     headers = [("Rank", 92), ("Team", 245), ("Top 4 %", 450), ("Top 2 %", 610), ("Status", 760)]
     for label, x in headers:
-        draw_text(draw, (table_x + x, table_y + 22), label.upper(), 22, "#9FB2CC", "bold")
+        draw_text(draw, (table_x + x, table_y + 26), label.upper(), 22, "#9FB2CC", "bold")
 
     probs = payload["analysis"]["overallProbabilities"]
     y = table_y + header_h
@@ -291,19 +313,33 @@ def draw_overview(payload: dict[str, Any], teams: list[dict[str, Any]], output_d
         status, status_color = status_for(top4)
         accent = TEAM_STYLES[team["teamKey"]]["bg"]
         row_fill = (*hex_to_rgb(accent), 45) if index <= 4 else (255, 255, 255, 18)
-        rounded(draw, (table_x + 20, y + 7, table_x + table_w - 20, y + row_h - 7), 18, row_fill, (255, 255, 255, 35), 1)
-        draw.ellipse((table_x + 38, y + 20, table_x + 84, y + 66), fill=(8, 17, 31, 245))
-        draw_text(draw, (table_x + 54, y + 32), str(index), 24, "#FFFFFF", "bold")
-        draw.rectangle((table_x + 112, y + 18, table_x + 122, y + 66), fill=rgba(accent, 255))
-        draw_text(draw, (table_x + 142, y + 17), team["shortName"], 30, "#FFFFFF", "black")
-        draw_text(draw, (table_x + 142, y + 49), fit_text(draw, team["fullName"], font(20, "regular"), 210), 20, "#BFD0E6")
-        draw_text(draw, (table_x + 450, y + 28), pct(top4), 32, "#FFFFFF", "black")
-        draw_text(draw, (table_x + 620, y + 29), pct(top2), 31, "#E5E7EB", "bold")
-        rounded(draw, (table_x + 760, y + 21, table_x + 910, y + 61), 20, rgba(status_color, 225))
+        rounded(draw, (table_x + 20, y + 9, table_x + table_w - 20, y + row_h - 9), 22, row_fill, (255, 255, 255, 35), 1)
+        draw.ellipse((table_x + 38, y + 31, table_x + 94, y + 87), fill=(8, 17, 31, 245))
+        draw_text(draw, (table_x + 57, y + 45), str(index), 28, "#FFFFFF", "bold")
+        draw.rectangle((table_x + 112, y + 24, table_x + 124, y + 88), fill=rgba(accent, 255))
+        draw_text(draw, (table_x + 144, y + 24), team["shortName"], 34, "#FFFFFF", "black")
+        draw_text(draw, (table_x + 144, y + 62), fit_text(draw, team["fullName"], font(21, "regular"), 290), 21, "#BFD0E6")
+        draw_text(draw, (table_x + 450, y + 42), pct(top4), 34, "#FFFFFF", "black")
+        draw_text(draw, (table_x + 620, y + 43), pct(top2), 32, "#E5E7EB", "bold")
+        rounded(draw, (table_x + 760, y + 34, table_x + 910, y + 76), 21, rgba(status_color, 225))
         status_font = font(18, "bold")
-        draw.text((table_x + 835 - text_width(draw, status, status_font) // 2, y + 32), status, font=status_font, fill="#08111F")
+        draw.text((table_x + 835 - text_width(draw, status, status_font) // 2, y + 46), status, font=status_font, fill="#08111F")
         y += row_h
 
+    note_y = table_y + table_h + 46
+    rounded(draw, (70, note_y, 1010, note_y + 154), 28, (255, 255, 255, 22), (255, 255, 255, 40), 1)
+    draw_text(draw, (100, note_y + 28), "READ THIS TABLE", 25, "#FDE68A", "black")
+    draw_wrapped_text(
+        draw,
+        (100, note_y + 66),
+        "Top 4 and Top 2 percentages are based on all remaining result combinations, excluding NRR movement.",
+        28,
+        "#E2E8F0",
+        "bold",
+        850,
+        8,
+        2,
+    )
     draw_footer(draw)
     output = output_dir / "slide-01-overview.png"
     image.save(output)
@@ -320,18 +356,18 @@ def draw_team_slide(payload: dict[str, Any], team: dict[str, Any], slide_number:
     status, status_color = status_for(top4)
     path = path_for(payload, team["teamKey"])
 
-    draw_text(draw, (78, 76), team["shortName"], 92, "#FFFFFF", "black")
-    draw_text(draw, (82, 174), team["fullName"], 32, "#CBD5E1", "bold")
-    draw_chip(draw, 745, 92, status, status_color)
+    draw_text(draw, (78, 86), team["shortName"], 108, "#FFFFFF", "black")
+    draw_text(draw, (82, 202), team["fullName"], 34, "#CBD5E1", "bold")
+    draw_chip(draw, 722, 112, status, status_color)
 
-    rounded(draw, (70, 250, 1010, 510), 34, (255, 255, 255, 32), (255, 255, 255, 50), 2)
-    draw_text(draw, (110, 284), "TOP 4 CHANCE", 30, "#FDE68A", "bold")
-    draw_text(draw, (106, 318), pct(top4), 118, "#FFFFFF", "black")
-    rounded(draw, (720, 304, 950, 440), 28, rgba(accent, 155), (255, 255, 255, 45), 2)
-    draw_text(draw, (754, 328), "TOP 2", 30, "#E2E8F0", "bold")
-    draw_text(draw, (754, 366), pct(top2), 54, "#FFFFFF", "black")
+    rounded(draw, (70, 290, 1010, 632), 36, (255, 255, 255, 32), (255, 255, 255, 50), 2)
+    draw_text(draw, (110, 328), "TOP 4 CHANCE", 31, "#FDE68A", "bold")
+    draw_text(draw, (106, 366), pct(top4), 146, "#FFFFFF", "black")
+    rounded(draw, (702, 366, 950, 542), 30, rgba(accent, 155), (255, 255, 255, 45), 2)
+    draw_text(draw, (738, 397), "TOP 2", 31, "#E2E8F0", "bold")
+    draw_text(draw, (738, 442), pct(top2), 62, "#FFFFFF", "black")
 
-    stat_y = 550
+    stat_y = 680
     stat_boxes = [
         ("POSITION", f"#{team['rank']}"),
         ("POINTS", f"{team['points']}"),
@@ -339,40 +375,42 @@ def draw_team_slide(payload: dict[str, Any], team: dict[str, Any], slide_number:
     ]
     for idx, (label, value) in enumerate(stat_boxes):
         x = 70 + idx * 315
-        rounded(draw, (x, stat_y, x + 285, stat_y + 112), 24, (255, 255, 255, 25), (255, 255, 255, 40), 1)
-        draw_text(draw, (x + 24, stat_y + 22), label, 24, "#9FB2CC", "bold")
-        draw_text(draw, (x + 24, stat_y + 52), value, 38, "#FFFFFF", "black")
+        rounded(draw, (x, stat_y, x + 285, stat_y + 124), 24, (255, 255, 255, 25), (255, 255, 255, 40), 1)
+        draw_text(draw, (x + 24, stat_y + 24), label, 24, "#9FB2CC", "bold")
+        draw_text(draw, (x + 24, stat_y + 58), value, 42, "#FFFFFF", "black")
 
-    need_y = 705
-    rounded(draw, (70, need_y, 1010, need_y + 236), 28, (255, 255, 255, 25), (255, 255, 255, 40), 1)
-    draw_text(draw, (100, need_y + 28), "WHAT THEY NEED", 30, "#FDE68A", "black")
-    bullet_font = font(30, "bold")
-    y = need_y + 78
+    need_y = 842
+    rounded(draw, (70, need_y, 1010, need_y + 320), 30, (255, 255, 255, 25), (255, 255, 255, 40), 1)
+    draw_text(draw, (100, need_y + 30), "WHAT THEY NEED", 31, "#FDE68A", "black")
+    y = need_y + 86
     for line in need_lines(payload, team):
-        draw.ellipse((104, y + 11, 116, y + 23), fill=rgba(accent, 255))
-        draw.text((132, y), fit_text(draw, line, bullet_font, 810), font=bullet_font, fill="#FFFFFF")
-        y += 38
+        draw.ellipse((104, y + 13, 118, y + 27), fill=rgba(accent, 255))
+        y = draw_wrapped_text(draw, (134, y), line, 29, "#FFFFFF", "bold", 810, 6, 2) + 4
 
     key_label, key_text = key_result(payload, team)
-    rounded(draw, (70, 974, 1010, 1078), 28, rgba(accent, 78), (255, 255, 255, 45), 2)
-    draw_text(draw, (100, 998), key_label, 24, "#C7D2FE", "bold")
-    draw_text(draw, (100, 1028), fit_text(draw, key_text, font(34, "black"), 835), 34, "#FFFFFF", "black")
+    key_y = 1204
+    rounded(draw, (70, key_y, 1010, key_y + 154), 30, rgba(accent, 78), (255, 255, 255, 45), 2)
+    draw_text(draw, (100, key_y + 28), key_label, 25, "#C7D2FE", "bold")
+    draw_wrapped_text(draw, (100, key_y + 64), key_text, 36, "#FFFFFF", "black", 835, 8, 2)
 
-    bucket_y = 1094
-    draw_text(draw, (78, bucket_y), "WIN BUCKETS", 26, "#9FB2CC", "black")
+    bucket_y = 1400
+    draw_text(draw, (78, bucket_y), "WIN BUCKETS", 28, "#9FB2CC", "black")
     buckets = path.get("ownWinBuckets", [])
-    cell_gap = 10
-    cell_w = math.floor((940 - cell_gap * (len(buckets) - 1)) / len(buckets)) if buckets else 120
+    columns = 4
+    cell_gap = 14
+    cell_w = math.floor((940 - cell_gap * (columns - 1)) / columns)
+    cell_h = 112
     for idx, bucket in enumerate(buckets):
-        x = 70 + idx * (cell_w + cell_gap)
-        rounded(draw, (x, bucket_y + 42, x + cell_w, bucket_y + 118), 18, (255, 255, 255, 27), (255, 255, 255, 40), 1)
+        x = 70 + (idx % columns) * (cell_w + cell_gap)
+        y = bucket_y + 50 + (idx // columns) * (cell_h + cell_gap)
+        rounded(draw, (x, y, x + cell_w, y + cell_h), 20, (255, 255, 255, 27), (255, 255, 255, 40), 1)
         label = f"{bucket['wins']}W"
         value = pct(bucket["probability"])
-        draw.text((x + 14, bucket_y + 52), label, font=font(20, "bold"), fill="#BFD0E6")
-        draw.text((x + 14, bucket_y + 78), value, font=font(24, "black"), fill="#FFFFFF")
+        draw.text((x + 18, y + 20), label, font=font(24, "bold"), fill="#BFD0E6")
+        draw.text((x + 18, y + 56), value, font=font(32, "black"), fill="#FFFFFF")
 
     takeaway_text = takeaway(payload, team)
-    draw_text(draw, (76, 1228), fit_text(draw, takeaway_text, font(28, "bold"), 930), 28, "#FFFFFF", "bold")
+    draw_wrapped_text(draw, (76, 1716), takeaway_text, 30, "#FFFFFF", "bold", 930, 8, 2)
     draw_footer(draw)
 
     safe_name = team["shortName"].lower()
@@ -382,14 +420,26 @@ def draw_team_slide(payload: dict[str, Any], team: dict[str, Any], slide_number:
 
 
 def draw_contact_sheet(paths: list[Path], output_dir: Path) -> Path:
-    thumb_w = 216
-    thumb_h = 270
+    sheet, draw = slide_base("#F59E0B")
+    draw_text(draw, (78, 94), "REELS EXPORT SET", 64, "#FFFFFF", "black")
+    draw_text(draw, (82, 170), "One overview plus every team slide", 32, "#CBD5E1", "bold")
+
+    thumb_w = 220
+    thumb_h = 391
     columns = 4
-    rows = math.ceil(len(paths) / columns)
-    sheet = Image.new("RGB", (thumb_w * columns, thumb_h * rows), "#0B1020")
+    gap_x = 20
+    gap_y = 28
+    grid_x = 70
+    grid_y = 270
     for index, path in enumerate(paths):
-        image = Image.open(path).resize((thumb_w, thumb_h))
-        sheet.paste(image, ((index % columns) * thumb_w, (index // columns) * thumb_h))
+        image = Image.open(path).resize((thumb_w, thumb_h), Image.Resampling.LANCZOS)
+        x = grid_x + (index % columns) * (thumb_w + gap_x)
+        y = grid_y + (index // columns) * (thumb_h + gap_y)
+        rounded(draw, (x - 3, y - 3, x + thumb_w + 3, y + thumb_h + 3), 14, (255, 255, 255, 26), (255, 255, 255, 42), 1)
+        sheet.paste(image, (x, y))
+        draw_text(draw, (x + 10, y + thumb_h - 38), f"{index + 1:02d}", 22, "#FFFFFF", "black")
+
+    draw_footer(draw)
     output = output_dir / "contact-sheet.png"
     sheet.save(output)
     return output
