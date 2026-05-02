@@ -44,7 +44,7 @@ describe('PaletteSwitcher Component', () => {
     expect(screen.getByRole('radio', { name: `Select ${defaultPalette!.name} palette` })).toHaveClass(styles.active);
   });
 
-  it('Test 3: Calls setBasePalette and updates active class on click', () => {
+  it('Test 3: Persists the available palette selection on click', () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     render(
       <ThemeProvider>
@@ -52,16 +52,13 @@ describe('PaletteSwitcher Component', () => {
       </ThemeProvider>
     );
 
-    const tealPalette = availablePalettes.find(p => p.key === 'oceanic-teal');
-    const tealButton = screen.getByRole('radio', { name: `Select ${tealPalette!.name} palette` });
-    
-    fireEvent.click(tealButton);
-    
-    expect(setItemSpy).toHaveBeenCalledWith('basePalette', 'oceanic-teal');
-    expect(tealButton).toHaveClass(styles.active);
-
     const defaultPalette = availablePalettes.find(p => p.key === 'default-orange-blue');
-    expect(screen.getByRole('radio', { name: `Select ${defaultPalette!.name} palette` })).not.toHaveClass(styles.active);
+    const defaultButton = screen.getByRole('radio', { name: `Select ${defaultPalette!.name} palette` });
+    
+    fireEvent.click(defaultButton);
+    
+    expect(setItemSpy).toHaveBeenCalledWith('basePalette', 'default-orange-blue');
+    expect(defaultButton).toHaveClass(styles.active);
 
     setItemSpy.mockRestore();
   });

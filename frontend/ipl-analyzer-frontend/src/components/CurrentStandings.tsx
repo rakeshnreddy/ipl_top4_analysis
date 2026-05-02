@@ -4,7 +4,10 @@ import { team_full_names, team_styles, type TeamStyle } from '../teamStyles';
 interface TeamStats {
   Matches: number;
   Wins: number;
+  Losses: number;
+  NR: number;
   Points: number;
+  NRR: number;
 }
 
 interface StandingsData {
@@ -52,8 +55,10 @@ const CurrentStandings: React.FC = () => {
             if (b.Points !== a.Points) {
               return b.Points - a.Points; // Primary sort: Points
             }
-            // Add NRR sorting here if available, or wins as secondary
-            return b.Wins - a.Wins; // Secondary sort: Wins
+            if (b.NRR !== a.NRR) {
+              return b.NRR - a.NRR; // Secondary sort: NRR
+            }
+            return b.Wins - a.Wins; // Tertiary sort: Wins
           })
           .map((team, index) => ({
             ...team,
@@ -99,8 +104,8 @@ const CurrentStandings: React.FC = () => {
               <th scope="col">Team</th>
               <th scope="col">Matches</th>
               <th scope="col">Wins</th>
+              <th scope="col">NRR</th>
               <th scope="col">Points</th>
-              {/* Add NRR header if data becomes available */}
             </tr>
           </thead>
           <tbody>
@@ -117,8 +122,8 @@ const CurrentStandings: React.FC = () => {
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.teamFullName}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Matches}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Wins}</td>
+                  <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.NRR >= 0 ? '+' : ''}{team.NRR.toFixed(3)}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Points}</td>
-                  {/* Add NRR data cell if available */}
                 </tr>
               );
             })}

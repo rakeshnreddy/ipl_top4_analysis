@@ -13,7 +13,8 @@ interface OverallProbabilitiesData {
 
 interface AnalysisMetadata {
   method_used: string;
-  timestamp: string; // ISO string format
+  precomputed_at: string;
+  last_data_update: string;
 }
 
 interface FetchedAnalysisData {
@@ -38,7 +39,7 @@ const OverallProbabilities: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.BASE_URL}analysis_results.json`) // This line will be changed
+    fetch(`${import.meta.env.BASE_URL}analysis_results.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -96,7 +97,7 @@ const OverallProbabilities: React.FC = () => {
       {metadata && (
         <div className="metadata mb-2">
           <p>Analysis Method: {metadata.method_used}</p>
-          <p>Last Updated: {new Date(metadata.timestamp).toLocaleString()}</p>
+          <p>Last Updated: {new Date(metadata.last_data_update || metadata.precomputed_at).toLocaleString()}</p>
         </div>
       )}
       <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', flexWrap: 'wrap' }}>

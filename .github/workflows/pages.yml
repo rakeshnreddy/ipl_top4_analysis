@@ -2,11 +2,16 @@ name: Deploy frontend to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
+  contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -15,24 +20,49 @@ jobs:
       name: github-pages
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Generate canonical IPL payload
+        env:
+          CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
+          CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
+        run: python extract_table.py
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/ipl-analyzer-frontend/package-lock.json
 
-      - name: Install & build
+      - name: Install frontend dependencies
+        working-directory: frontend/ipl-analyzer-frontend
+        run: npm ci
+
+      - name: Build frontend
         working-directory: frontend/ipl-analyzer-frontend
         run: |
-          npm ci
           npm run build
-          touch dist/.nojekyll # Add .nojekyll to the build output directory
+          touch dist/.nojekyll
 
-      - uses: actions/configure-pages@v5
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/ipl-analyzer-frontend/dist # Point directly to Vite's output
+          path: frontend/ipl-analyzer-frontend/dist
 
-      - uses: actions/deploy-pages@v4
+      - name: Deploy Pages
+        uses: actions/deploy-pages@v4

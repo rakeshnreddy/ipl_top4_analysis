@@ -6,7 +6,10 @@ import { team_full_names, team_styles, type TeamStyle, type TeamNames } from '..
 interface TeamStats {
   Matches: number;
   Wins: number;
+  Losses?: number;
+  NR?: number;
   Points: number;
+  NRR?: number;
 }
 
 // Copied from CurrentStandings.tsx
@@ -32,7 +35,8 @@ interface TeamAnalysisData {
 
 interface AnalysisMetadata {
   method_used: string;
-  timestamp: string;
+  precomputed_at: string;
+  last_data_update: string;
 }
 
 interface FetchedAnalysisData {
@@ -101,15 +105,21 @@ const runSimulation = (
     priority: teamKey === analyzedTeamKey ? 0 : 1, // Lower number = higher priority
   }));
 
-  // Sort: Points (desc), Priority (asc), Wins (desc)
+  // Sort: Points (desc), NRR (desc), Wins (desc), Priority (asc)
   finalStandingsArray.sort((a, b) => {
     if (b.Points !== a.Points) {
       return b.Points - a.Points;
     }
+    if ((b.NRR || 0) !== (a.NRR || 0)) {
+      return (b.NRR || 0) - (a.NRR || 0);
+    }
+    if (b.Wins !== a.Wins) {
+      return b.Wins - a.Wins;
+    }
     if (a.priority !== b.priority) {
       return a.priority - b.priority;
     }
-    return b.Wins - a.Wins;
+    return (team_full_names[a.teamKey] || a.teamKey).localeCompare(team_full_names[b.teamKey] || b.teamKey);
   });
 
   const finalProcessedStandings: SimulatedTeamStats[] = finalStandingsArray.map((team, index) => ({
@@ -136,15 +146,12 @@ const ScenarioSimulation: React.FC = () => {
   const [simulationMessage, setSimulationMessage] = useState<string>('');
 
   useEffect(() => {
-    console.log('ScenarioSimulation.tsx - BASE_URL for analysis_results:', import.meta.env.BASE_URL);
     setLoading(true);
     Promise.all([
       fetch(`${import.meta.env.BASE_URL}current_standings.json`).then(res => res.ok ? res.json() : Promise.reject(new Error(`Standings fetch error: ${res.status}`))),
       (() => {
         const analysisFile = 'analysis_results.json';
-        console.log('ScenarioSimulation.tsx - Fetching filename:', analysisFile);
         const constructedURL = `${import.meta.env.BASE_URL}${analysisFile}`;
-        console.log('ScenarioSimulation.tsx - Constructed URL for analysis_results:', constructedURL);
         return fetch(constructedURL).then(res => {
           if (!res.ok) throw new Error(`Analysis fetch error: ${res.status}`);
           return res.json();

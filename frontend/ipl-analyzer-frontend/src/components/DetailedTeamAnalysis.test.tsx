@@ -18,7 +18,11 @@ vi.mock('../teamStyles', () => ({
 
 
 const mockAnalysisData = {
-  metadata: { method_used: "Test Analysis", timestamp: new Date().toISOString() },
+  metadata: {
+    method_used: "Test Analysis",
+    precomputed_at: new Date().toISOString(),
+    last_data_update: new Date().toISOString(),
+  },
   analysis_data: {
     team_analysis: {
       "4": { // Top 4

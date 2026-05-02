@@ -1,69 +1,69 @@
-# .github/workflows/update-ipl.yml
-name: Update IPL Data & Precompute Analysis
- 
+name: Update IPL Data and Deploy
 
 on:
   schedule:
-    - cron: '0 19 * * *'    # daily at 19:00 UTC
-  workflow_dispatch:      # manual trigger support
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  update:
+  update-build-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    environment:
+      name: github-pages
 
     steps:
-      # 1) Checkout full repo history so we can rebase & push
       - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
-      # 2) Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
 
-      # 3) Install your dependencies
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install requests pandas streamlit altair
-      # 4) Scrape the latest standings & fixtures
-      - name: Run scraper
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Generate canonical IPL payload
+        env:
+          CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
+          CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
         run: python extract_table.py
 
-      # 5) Precompute full exhaustive analysis
-      - name: Precompute exhaustive analysis
-        run: python precompute_analysis.py
-
-      - name: Debug show files & git status
-        run: |
-          echo "=== Listing working directory ==="
-          ls -la
-          echo ""
-          echo "=== Git status (including ignored) ==="
-          git status --ignored
-
-         
-      # 6) Commit all three JSONs back to the repo
-      - name: Commit updated data & analysis
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # auto‑stash our generated JSONs, pull & rebase, then pop stash
-          git pull --rebase --autostash origin ${GITHUB_REF##*/} || true
-
-          git add current_standings.json remaining_fixtures.json analysis_results.json
-          git commit -m "ci: update IPL data & analysis $(date +'%Y-%m-%d')" || echo "No changes to commit"
-
-      # 7) Push the commit
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main        # ← explicitly push back to main
-          force: true
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/ipl-analyzer-frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend/ipl-analyzer-frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend/ipl-analyzer-frontend
+        run: |
+          npm run build
+          touch dist/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/ipl-analyzer-frontend/dist
+
+      - name: Deploy Pages
+        uses: actions/deploy-pages@v4

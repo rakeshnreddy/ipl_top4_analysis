@@ -1,56 +1,539 @@
 {
   "metadata": {
-    "precomputed_at": "2026-05-02T02:11:58Z",
-    "num_fixtures": 27,
-    "last_data_update": "2026-05-02T02:11:58Z",
-    "data_source": "CricketData",
-    "method_used": "Exact all-combinations",
-    "simulation_count": 134217728
+    "season": 2026,
+    "generated_at": "2026-05-02T02:11:58Z",
+    "source": "CricketData",
+    "source_url": "https://cricketdata.org/",
+    "data_freshness_status": "warning",
+    "warnings": [
+      "CricketData standings omitted NRR; NRR was enriched from Cricbuzz."
+    ]
   },
-  "analysis_data": {
-    "overall_probabilities": {
+  "standings": [
+    {
+      "teamKey": "Punjab",
+      "shortName": "PBKS",
+      "fullName": "Punjab Kings",
+      "matches": 8,
+      "wins": 6,
+      "losses": 1,
+      "noResult": 1,
+      "points": 13,
+      "nrr": 1.043,
+      "rank": 1,
+      "remainingMatches": 6
+    },
+    {
+      "teamKey": "Bangalore",
+      "shortName": "RCB",
+      "fullName": "Royal Challengers Bengaluru",
+      "matches": 9,
+      "wins": 6,
+      "losses": 3,
+      "noResult": 0,
+      "points": 12,
+      "nrr": 1.42,
+      "rank": 2,
+      "remainingMatches": 5
+    },
+    {
+      "teamKey": "Hyderabad",
+      "shortName": "SRH",
+      "fullName": "Sunrisers Hyderabad",
+      "matches": 9,
+      "wins": 6,
+      "losses": 3,
+      "noResult": 0,
+      "points": 12,
+      "nrr": 0.832,
+      "rank": 3,
+      "remainingMatches": 5
+    },
+    {
+      "teamKey": "Rajasthan",
+      "shortName": "RR",
+      "fullName": "Rajasthan Royals",
+      "matches": 10,
+      "wins": 6,
+      "losses": 4,
+      "noResult": 0,
+      "points": 12,
+      "nrr": 0.51,
+      "rank": 4,
+      "remainingMatches": 4
+    },
+    {
+      "teamKey": "Gujarat",
+      "shortName": "GT",
+      "fullName": "Gujarat Titans",
+      "matches": 9,
+      "wins": 5,
+      "losses": 4,
+      "noResult": 0,
+      "points": 10,
+      "nrr": -0.192,
+      "rank": 5,
+      "remainingMatches": 5
+    },
+    {
+      "teamKey": "Delhi",
+      "shortName": "DC",
+      "fullName": "Delhi Capitals",
+      "matches": 9,
+      "wins": 4,
+      "losses": 5,
+      "noResult": 0,
+      "points": 8,
+      "nrr": -0.895,
+      "rank": 6,
+      "remainingMatches": 5
+    },
+    {
+      "teamKey": "Chennai",
+      "shortName": "CSK",
+      "fullName": "Chennai Super Kings",
+      "matches": 8,
+      "wins": 3,
+      "losses": 5,
+      "noResult": 0,
+      "points": 6,
+      "nrr": -0.121,
+      "rank": 7,
+      "remainingMatches": 6
+    },
+    {
+      "teamKey": "Lucknow",
+      "shortName": "LSG",
+      "fullName": "Lucknow Super Giants",
+      "matches": 8,
+      "wins": 2,
+      "losses": 5,
+      "noResult": 1,
+      "points": 5,
+      "nrr": -1.106,
+      "rank": 8,
+      "remainingMatches": 6
+    },
+    {
+      "teamKey": "Kolkata",
+      "shortName": "KKR",
+      "fullName": "Kolkata Knight Riders",
+      "matches": 8,
+      "wins": 1,
+      "losses": 5,
+      "noResult": 2,
+      "points": 4,
+      "nrr": -0.751,
+      "rank": 9,
+      "remainingMatches": 6
+    },
+    {
+      "teamKey": "Mumbai",
+      "shortName": "MI",
+      "fullName": "Mumbai Indians",
+      "matches": 8,
+      "wins": 2,
+      "losses": 6,
+      "noResult": 0,
+      "points": 4,
+      "nrr": -0.784,
+      "rank": 10,
+      "remainingMatches": 6
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+      "matchNo": 44,
+      "teamA": "Chennai",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-02T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "1153edf6-3ae1-4722-be1e-0256495b49cb",
+      "matchNo": 45,
+      "teamA": "Hyderabad",
+      "teamB": "Kolkata",
+      "dateTimeGMT": "2026-05-03T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "f039998e-28b0-4445-b431-8bbccbbc6f1f",
+      "matchNo": 46,
+      "teamA": "Gujarat",
+      "teamB": "Punjab",
+      "dateTimeGMT": "2026-05-03T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+      "matchNo": 47,
+      "teamA": "Mumbai",
+      "teamB": "Lucknow",
+      "dateTimeGMT": "2026-05-04T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Wankhede Stadium, Mumbai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "4804409b-28ee-4f3e-ab55-a4a4cb090198",
+      "matchNo": 48,
+      "teamA": "Delhi",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-05T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "312ba6aa-5e93-4673-bb0c-cb207fdc9e2d",
+      "matchNo": 49,
+      "teamA": "Hyderabad",
+      "teamB": "Punjab",
+      "dateTimeGMT": "2026-05-06T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8b326da3-8ff6-4e64-abe4-cb430d7a6c53",
+      "matchNo": 50,
+      "teamA": "Lucknow",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-07T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+      "matchNo": 51,
+      "teamA": "Delhi",
+      "teamB": "Kolkata",
+      "dateTimeGMT": "2026-05-08T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6ffec712-6562-490c-a4fa-ae4b6ae59188",
+      "matchNo": 52,
+      "teamA": "Rajasthan",
+      "teamB": "Gujarat",
+      "dateTimeGMT": "2026-05-09T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Sawai Mansingh Stadium, Jaipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6aced947-319c-4e4a-9214-6f94f14c043e",
+      "matchNo": 53,
+      "teamA": "Chennai",
+      "teamB": "Lucknow",
+      "dateTimeGMT": "2026-05-10T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "02d3614d-9727-43c5-a80c-0bf46c7499c6",
+      "matchNo": 54,
+      "teamA": "Bangalore",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-10T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
+      "matchNo": 55,
+      "teamA": "Punjab",
+      "teamB": "Delhi",
+      "dateTimeGMT": "2026-05-11T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+      "matchNo": 56,
+      "teamA": "Gujarat",
+      "teamB": "Hyderabad",
+      "dateTimeGMT": "2026-05-12T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "0b3bab15-12b2-4a16-9f41-1096e40ff202",
+      "matchNo": 57,
+      "teamA": "Bangalore",
+      "teamB": "Kolkata",
+      "dateTimeGMT": "2026-05-13T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
+      "matchNo": 58,
+      "teamA": "Punjab",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-14T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+      "matchNo": 59,
+      "teamA": "Lucknow",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-15T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "166633a2-cecb-4cf3-a984-78dc898b5345",
+      "matchNo": 60,
+      "teamA": "Kolkata",
+      "teamB": "Gujarat",
+      "dateTimeGMT": "2026-05-16T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+      "matchNo": 61,
+      "teamA": "Punjab",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-17T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "990e89ea-3f6a-4196-ac73-7ad1a5f8c451",
+      "matchNo": 62,
+      "teamA": "Delhi",
+      "teamB": "Rajasthan",
+      "dateTimeGMT": "2026-05-17T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8416c2a9-4a74-4ac2-a6ae-5ad2538cbc56",
+      "matchNo": 63,
+      "teamA": "Chennai",
+      "teamB": "Hyderabad",
+      "dateTimeGMT": "2026-05-18T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "3b225f44-ddf2-41d4-8079-7a3f81876e35",
+      "matchNo": 64,
+      "teamA": "Rajasthan",
+      "teamB": "Lucknow",
+      "dateTimeGMT": "2026-05-19T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Sawai Mansingh Stadium, Jaipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "5b1d59f9-51fd-449d-8cf1-9fc15ef15675",
+      "matchNo": 65,
+      "teamA": "Kolkata",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-20T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
+      "matchNo": 66,
+      "teamA": "Gujarat",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-21T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+      "matchNo": 67,
+      "teamA": "Hyderabad",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-22T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "7134216b-553c-4099-82a8-ee48bd9c46f3",
+      "matchNo": 68,
+      "teamA": "Lucknow",
+      "teamB": "Punjab",
+      "dateTimeGMT": "2026-05-23T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
+      "matchNo": 69,
+      "teamA": "Mumbai",
+      "teamB": "Rajasthan",
+      "dateTimeGMT": "2026-05-24T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Wankhede Stadium, Mumbai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8f61d649-f53b-4e79-9bfb-661cfe69be3b",
+      "matchNo": 70,
+      "teamA": "Kolkata",
+      "teamB": "Delhi",
+      "dateTimeGMT": "2026-05-24T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    }
+  ],
+  "analysis": {
+    "method": "Exact all-combinations",
+    "simulationCount": 134217728,
+    "generatedAt": "2026-05-02T02:11:58Z",
+    "stateCount": 2282822,
+    "modelNotes": [
+      "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
+      "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
+      "Current NRR is retained for the standings ladder only.",
+      "Fixture-impact guidance is computed for the next 1 fixture(s)."
+    ],
+    "overallProbabilities": {
       "Punjab": {
-        "Top 4 Probability": 92.89,
-        "Top 2 Probability": 73.46
+        "top4": 92.89,
+        "top2": 73.46,
+        "top4Clear": 92.58,
+        "top2Clear": 73.33,
+        "top4Possible": 93.2,
+        "top2Possible": 73.59
       },
       "Bangalore": {
-        "Top 4 Probability": 79.47,
-        "Top 2 Probability": 41.77
+        "top4": 79.47,
+        "top2": 41.77,
+        "top4Clear": 69.7,
+        "top2Clear": 32.24,
+        "top4Possible": 88.06,
+        "top2Possible": 53.72
       },
       "Hyderabad": {
-        "Top 4 Probability": 78.27,
-        "Top 2 Probability": 42.15
+        "top4": 78.27,
+        "top2": 42.15,
+        "top4Clear": 68.49,
+        "top2Clear": 32.86,
+        "top4Possible": 86.86,
+        "top2Possible": 53.84
       },
       "Rajasthan": {
-        "Top 4 Probability": 65.53,
-        "Top 2 Probability": 22.36
+        "top4": 65.53,
+        "top2": 22.36,
+        "top4Clear": 53.2,
+        "top2Clear": 14.25,
+        "top4Possible": 77.13,
+        "top2Possible": 32.85
       },
       "Gujarat": {
-        "Top 4 Probability": 47.02,
-        "Top 2 Probability": 15.23
+        "top4": 47.02,
+        "top2": 15.23,
+        "top4Clear": 35.09,
+        "top2Clear": 9.76,
+        "top4Possible": 58.74,
+        "top2Possible": 22.63
       },
       "Delhi": {
-        "Top 4 Probability": 17.46,
-        "Top 2 Probability": 2.76
+        "top4": 17.46,
+        "top2": 2.76,
+        "top4Clear": 9.82,
+        "top2Clear": 1.15,
+        "top4Possible": 26.16,
+        "top2Possible": 5.3
       },
       "Chennai": {
-        "Top 4 Probability": 11.0,
-        "Top 2 Probability": 1.53
+        "top4": 11.0,
+        "top2": 1.53,
+        "top4Clear": 5.76,
+        "top2Clear": 0.58,
+        "top4Possible": 17.31,
+        "top2Possible": 3.16
       },
       "Lucknow": {
-        "Top 4 Probability": 5.17,
-        "Top 2 Probability": 0.57
+        "top4": 5.17,
+        "top2": 0.57,
+        "top4Clear": 4.86,
+        "top2Clear": 0.44,
+        "top4Possible": 5.47,
+        "top2Possible": 0.7
       },
       "Kolkata": {
-        "Top 4 Probability": 0.9,
-        "Top 2 Probability": 0.01
+        "top4": 0.9,
+        "top2": 0.01,
+        "top4Clear": 0.9,
+        "top2Clear": 0.01,
+        "top4Possible": 0.9,
+        "top2Possible": 0.01
       },
       "Mumbai": {
-        "Top 4 Probability": 2.29,
-        "Top 2 Probability": 0.15
+        "top4": 2.29,
+        "top2": 0.15,
+        "top4Clear": 0.8,
+        "top2Clear": 0.01,
+        "top4Possible": 4.54,
+        "top2Possible": 0.44
       }
     },
-    "team_analysis": {
+    "teamAnalysis": {
       "4": {
         "Punjab": {
           "percentage": 92.89,
@@ -236,7 +719,7 @@
         }
       }
     },
-    "qualification_path": {
+    "qualificationPath": {
       "4": {
         "Punjab": {
           "possible": 0,
@@ -1895,6 +2378,1328 @@
             }
           ],
           "impactFixtureWindow": 1
+        }
+      }
+    },
+    "scenarioBreakdown": {
+      "4": {
+        "Punjab": {
+          "clearRate": 92.58,
+          "possibleRate": 93.2,
+          "sharedTieAdjustedRate": 92.89,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.18,
+              "possibleRate": 0.27,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 43.72,
+              "possibleRate": 46.87,
+              "guaranteedRate": 40.58
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 98.83,
+              "possibleRate": 98.87,
+              "guaranteedRate": 98.78
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 92.61,
+              "teamBWinProbability": 93.17,
+              "impact": 0.56
+            }
+          ]
+        },
+        "Bangalore": {
+          "clearRate": 69.7,
+          "possibleRate": 88.06,
+          "sharedTieAdjustedRate": 79.47,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.16,
+              "possibleRate": 0.62,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 20.75,
+              "possibleRate": 46.97,
+              "guaranteedRate": 3.13
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 84.07,
+              "possibleRate": 98.23,
+              "guaranteedRate": 62.08
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 99.83,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.4
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 78.7,
+              "teamBWinProbability": 80.23,
+              "impact": 1.53
+            }
+          ]
+        },
+        "Hyderabad": {
+          "clearRate": 68.49,
+          "possibleRate": 86.86,
+          "sharedTieAdjustedRate": 78.27,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.05,
+              "possibleRate": 0.2,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 16.99,
+              "possibleRate": 40.73,
+              "guaranteedRate": 1.73
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 82.15,
+              "possibleRate": 97.58,
+              "guaranteedRate": 58.96
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 99.82,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.36
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 77.26,
+              "teamBWinProbability": 79.28,
+              "impact": 2.02
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 53.2,
+          "possibleRate": 77.13,
+          "sharedTieAdjustedRate": 65.53,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 8388608,
+              "probability": 0.04,
+              "possibleRate": 0.16,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 33554432,
+              "probability": 15.9,
+              "possibleRate": 38.1,
+              "guaranteedRate": 1.72
+            },
+            {
+              "wins": 2,
+              "scenarios": 50331648,
+              "probability": 80.97,
+              "possibleRate": 96.93,
+              "guaranteedRate": 57.95
+            },
+            {
+              "wins": 3,
+              "scenarios": 33554432,
+              "probability": 99.75,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.15
+            },
+            {
+              "wins": 4,
+              "scenarios": 8388608,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 64.51,
+              "teamBWinProbability": 66.55,
+              "impact": 2.04
+            }
+          ]
+        },
+        "Gujarat": {
+          "clearRate": 35.09,
+          "possibleRate": 58.74,
+          "sharedTieAdjustedRate": 47.02,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.04,
+              "possibleRate": 0.16,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 13.32,
+              "possibleRate": 32.51,
+              "guaranteedRate": 1.19
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 77.28,
+              "possibleRate": 95.39,
+              "guaranteedRate": 51.67
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 99.66,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.86
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 46.09,
+              "teamBWinProbability": 47.95,
+              "impact": 1.85
+            }
+          ]
+        },
+        "Delhi": {
+          "clearRate": 9.82,
+          "possibleRate": 26.16,
+          "sharedTieAdjustedRate": 17.46,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 0.02,
+              "possibleRate": 0.08,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 9.98,
+              "possibleRate": 26.58,
+              "guaranteedRate": 0.51
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 71.82,
+              "possibleRate": 94.1,
+              "guaranteedRate": 42.16
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 99.53,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.39
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 17.02,
+              "teamBWinProbability": 17.89,
+              "impact": 0.87
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 5.76,
+          "possibleRate": 17.31,
+          "sharedTieAdjustedRate": 11.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.02,
+              "possibleRate": 0.08,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 10.98,
+              "possibleRate": 29.15,
+              "guaranteedRate": 0.6
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 73.3,
+              "possibleRate": 94.83,
+              "guaranteedRate": 43.57
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 99.39,
+              "possibleRate": 99.99,
+              "guaranteedRate": 97.98
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat MI",
+              "teamAWinProbability": 17.53,
+              "teamBWinProbability": 4.47,
+              "impact": 13.06
+            }
+          ]
+        },
+        "Lucknow": {
+          "clearRate": 4.86,
+          "possibleRate": 5.47,
+          "sharedTieAdjustedRate": 5.17,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.18,
+              "possibleRate": 0.19,
+              "guaranteedRate": 0.18
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 38.25,
+              "possibleRate": 41.4,
+              "guaranteedRate": 35.1
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 98.4,
+              "possibleRate": 99.12,
+              "guaranteedRate": 97.69
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 5.09,
+              "teamBWinProbability": 5.24,
+              "impact": 0.16
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 0.9,
+          "possibleRate": 0.9,
+          "sharedTieAdjustedRate": 0.9,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 0.54,
+              "possibleRate": 0.54,
+              "guaranteedRate": 0.54
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 54.61,
+              "possibleRate": 54.61,
+              "guaranteedRate": 54.61
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 0.83,
+              "teamBWinProbability": 0.98,
+              "impact": 0.15
+            }
+          ]
+        },
+        "Mumbai": {
+          "clearRate": 0.8,
+          "possibleRate": 4.54,
+          "sharedTieAdjustedRate": 2.29,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.02,
+              "possibleRate": 0.08,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 11.45,
+              "possibleRate": 31.94,
+              "guaranteedRate": 0.49
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 77.81,
+              "possibleRate": 97.69,
+              "guaranteedRate": 48.2
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 0.35,
+              "teamBWinProbability": 4.24,
+              "impact": 3.89
+            }
+          ]
+        }
+      },
+      "2": {
+        "Punjab": {
+          "clearRate": 73.33,
+          "possibleRate": 73.59,
+          "sharedTieAdjustedRate": 73.46,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.3,
+              "possibleRate": 0.38,
+              "guaranteedRate": 0.22
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 39.31,
+              "possibleRate": 39.84,
+              "guaranteedRate": 38.79
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 95.5,
+              "possibleRate": 95.5,
+              "guaranteedRate": 95.5
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 73.29,
+              "teamBWinProbability": 73.64,
+              "impact": 0.35
+            }
+          ]
+        },
+        "Bangalore": {
+          "clearRate": 32.24,
+          "possibleRate": 53.72,
+          "sharedTieAdjustedRate": 41.77,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.05,
+              "possibleRate": 0.24,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 9.57,
+              "possibleRate": 25.13,
+              "guaranteedRate": 1.01
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 65.01,
+              "possibleRate": 86.71,
+              "guaranteedRate": 44.09
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 98.12,
+              "possibleRate": 99.92,
+              "guaranteedRate": 96.14
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 41.48,
+              "teamBWinProbability": 42.06,
+              "impact": 0.58
+            }
+          ]
+        },
+        "Hyderabad": {
+          "clearRate": 32.86,
+          "possibleRate": 53.84,
+          "sharedTieAdjustedRate": 42.15,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.05,
+              "possibleRate": 0.23,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 9.65,
+              "possibleRate": 25.16,
+              "guaranteedRate": 1.09
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 66.08,
+              "possibleRate": 87.05,
+              "guaranteedRate": 45.85
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 98.26,
+              "possibleRate": 99.92,
+              "guaranteedRate": 96.42
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 41.89,
+              "teamBWinProbability": 42.41,
+              "impact": 0.52
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 14.25,
+          "possibleRate": 32.85,
+          "sharedTieAdjustedRate": 22.36,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 8388608,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 33554432,
+              "probability": 0.03,
+              "possibleRate": 0.14,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 50331648,
+              "probability": 7.08,
+              "possibleRate": 19.06,
+              "guaranteedRate": 0.63
+            },
+            {
+              "wins": 3,
+              "scenarios": 33554432,
+              "probability": 55.19,
+              "possibleRate": 77.98,
+              "guaranteedRate": 33.7
+            },
+            {
+              "wins": 4,
+              "scenarios": 8388608,
+              "probability": 94.36,
+              "possibleRate": 98.83,
+              "guaranteedRate": 89.5
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 22.12,
+              "teamBWinProbability": 22.6,
+              "impact": 0.49
+            }
+          ]
+        },
+        "Gujarat": {
+          "clearRate": 9.76,
+          "possibleRate": 22.63,
+          "sharedTieAdjustedRate": 15.23,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 0.02,
+              "possibleRate": 0.11,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 7.3,
+              "possibleRate": 19.73,
+              "guaranteedRate": 0.68
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 63.09,
+              "possibleRate": 85.19,
+              "guaranteedRate": 41.67
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 98.6,
+              "possibleRate": 99.8,
+              "guaranteedRate": 97.27
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 15.11,
+              "teamBWinProbability": 15.35,
+              "impact": 0.24
+            }
+          ]
+        },
+        "Delhi": {
+          "clearRate": 1.15,
+          "possibleRate": 5.3,
+          "sharedTieAdjustedRate": 2.76,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4194304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.01,
+              "possibleRate": 0.08,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 20971520,
+              "probability": 5.84,
+              "possibleRate": 17.1,
+              "guaranteedRate": 0.33
+            },
+            {
+              "wins": 5,
+              "scenarios": 4194304,
+              "probability": 58.9,
+              "possibleRate": 83.3,
+              "guaranteedRate": 35.22
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 2.73,
+              "teamBWinProbability": 2.78,
+              "impact": 0.05
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 0.58,
+          "possibleRate": 3.16,
+          "sharedTieAdjustedRate": 1.53,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.02,
+              "possibleRate": 0.1,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 6.72,
+              "possibleRate": 19.67,
+              "guaranteedRate": 0.4
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 57.51,
+              "possibleRate": 82.42,
+              "guaranteedRate": 34.55
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat MI",
+              "teamAWinProbability": 2.8,
+              "teamBWinProbability": 0.26,
+              "impact": 2.54
+            }
+          ]
+        },
+        "Lucknow": {
+          "clearRate": 0.44,
+          "possibleRate": 0.7,
+          "sharedTieAdjustedRate": 0.57,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 0.27,
+              "possibleRate": 0.35,
+              "guaranteedRate": 0.19
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 35.17,
+              "possibleRate": 43.02,
+              "guaranteedRate": 27.31
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.57,
+              "teamBWinProbability": 0.58,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 0.01,
+          "possibleRate": 0.01,
+          "sharedTieAdjustedRate": 0.01,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 0.86,
+              "possibleRate": 0.86,
+              "guaranteedRate": 0.86
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.01,
+              "teamBWinProbability": 0.02,
+              "impact": 0.01
+            }
+          ]
+        },
+        "Mumbai": {
+          "clearRate": 0.01,
+          "possibleRate": 0.44,
+          "sharedTieAdjustedRate": 0.15,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2097152,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12582912,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 41943040,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 31457280,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 12582912,
+              "probability": 0.03,
+              "possibleRate": 0.15,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 2097152,
+              "probability": 9.52,
+              "possibleRate": 27.31,
+              "guaranteedRate": 0.64
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "d2cceca7-65d7-441e-8483-4505fd7cd073",
+              "matchNo": 44,
+              "label": "M44: CSK vs MI",
+              "teamA": "Chennai",
+              "teamB": "Mumbai",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat CSK",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.3,
+              "impact": 0.3
+            }
+          ]
         }
       }
     }
