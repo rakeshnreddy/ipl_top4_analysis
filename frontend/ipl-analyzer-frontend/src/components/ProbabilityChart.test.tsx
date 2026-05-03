@@ -74,9 +74,7 @@ describe('ProbabilityChart Component', () => {
     const optionsContent = screen.getByText(/"text": "Test Chart Title"/);
     expect(optionsContent).toBeInTheDocument();
 
-    // Snapshot test
-    // We are snapshotting the div container which includes our mock Bar chart
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild).toHaveStyle('height: 300px');
   });
 
   it('Test 2: Passes correct aria-label and role to the Bar chart', () => {

@@ -15,7 +15,8 @@ interface QualificationPathData {
 
 interface AnalysisMetadata {
   method_used: string;
-  timestamp: string;
+  precomputed_at: string;
+  last_data_update: string;
 }
 
 interface FetchedAnalysisData {
@@ -38,7 +39,7 @@ const QualificationPath: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.BASE_URL}current_standings.json`)
+    fetch(`${import.meta.env.BASE_URL}analysis_results.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

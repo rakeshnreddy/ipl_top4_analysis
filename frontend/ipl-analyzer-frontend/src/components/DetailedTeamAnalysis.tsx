@@ -15,7 +15,8 @@ interface TeamAnalysisData {
 
 interface AnalysisMetadata {
   method_used: string;
-  timestamp: string;
+  precomputed_at: string;
+  last_data_update: string;
 }
 
 interface FetchedAnalysisData {
@@ -45,9 +46,7 @@ const DetailedTeamAnalysis: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     const analysisFile = 'analysis_results.json';
-    console.log('DetailedTeamAnalysis.tsx - Fetching filename:', analysisFile);
     const constructedURL = `${import.meta.env.BASE_URL}${analysisFile}`;
-    console.log('DetailedTeamAnalysis.tsx - Constructed URL for analysis_results:', constructedURL);
     fetch(constructedURL)
       .then((response) => {
         if (!response.ok) {
@@ -84,7 +83,7 @@ const DetailedTeamAnalysis: React.FC = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [selectedTeamKey]); // Re-fetch or re-process if selectedTeamKey logic changes, though not typical for initial load
+  }, []);
 
   useEffect(() => {
     if (analysisData && selectedTeamKey && selectedTarget) {
@@ -124,7 +123,7 @@ const DetailedTeamAnalysis: React.FC = () => {
       {metadata && (
         <div className="metadata mb-1">
           <p>Analysis Method: {metadata.method_used}</p>
-          <p>Last Updated: {new Date(metadata.timestamp).toLocaleString()}</p>
+          <p>Last Updated: {new Date(metadata.last_data_update || metadata.precomputed_at).toLocaleString()}</p>
         </div>
       )}
 

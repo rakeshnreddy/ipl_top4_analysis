@@ -24,7 +24,7 @@ export const team_full_names: TeamNames = {
   Punjab: "Punjab Kings",
   Gujarat: "Gujarat Titans",
   Mumbai: "Mumbai Indians",
-  Bangalore: "Royal Challengers Bangalore",
+  Bangalore: "Royal Challengers Bengaluru",
 };
 
 export const team_short_names: TeamNames = {
@@ -55,6 +55,7 @@ export const team_styles: TeamStyles = {
 };
 
 // Reverse mapping from FULL name to key
-export const full_name_key_mapping: TeamNames = Object.fromEntries(
-  Object.entries(team_full_names).map(([key, value]) => [value, key])
-);
+export const full_name_key_mapping: TeamNames = {
+  ...Object.fromEntries(Object.entries(team_full_names).map(([key, value]) => [value, key])),
+  "Royal Challengers Bangalore": "Bangalore",
+};
