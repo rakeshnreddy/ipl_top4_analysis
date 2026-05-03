@@ -2,7 +2,8 @@ name: Update IPL Data and Deploy
 
 on:
   schedule:
-    - cron: '0 19 * * *'
+    # 01:00 IST, safely after the IPL night match has usually finished.
+    - cron: '30 19 * * *'
   workflow_dispatch:
 
 permissions:
