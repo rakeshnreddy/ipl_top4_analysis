@@ -1,13 +1,12 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-03T22:52:56Z",
-    "source": "Cricbuzz",
-    "source_url": "https://www.cricbuzz.com/cricket-series/9241/indian-premier-league-2026/points-table",
+    "generated_at": "2026-05-04T08:06:47Z",
+    "source": "CricketData",
+    "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
     "warnings": [
-      "CricketData source failed: CRICDATA_API_KEY is not configured",
-      "Fixture feed appears partial: found 1 scheduled match(es), but standings imply about 24 league match(es) remaining."
+      "CricketData standings omitted NRR; NRR was enriched from Cricbuzz."
     ]
   },
   "standings": [
@@ -107,13 +106,26 @@
       "shortName": "KKR",
       "fullName": "Kolkata Knight Riders",
       "matches": 9,
-      "wins": 3,
+      "wins": 2,
       "losses": 5,
-      "noResult": 1,
-      "points": 7,
+      "noResult": 2,
+      "points": 6,
       "nrr": -0.539,
       "rank": 8,
       "remainingMatches": 5
+    },
+    {
+      "teamKey": "Lucknow",
+      "shortName": "LSG",
+      "fullName": "Lucknow Super Giants",
+      "matches": 8,
+      "wins": 2,
+      "losses": 5,
+      "noResult": 1,
+      "points": 5,
+      "nrr": -1.106,
+      "rank": 9,
+      "remainingMatches": 6
     },
     {
       "teamKey": "Mumbai",
@@ -125,41 +137,281 @@
       "noResult": 0,
       "points": 4,
       "nrr": -0.803,
-      "rank": 9,
-      "remainingMatches": 5
-    },
-    {
-      "teamKey": "Lucknow",
-      "shortName": "LSG",
-      "fullName": "Lucknow Super Giants",
-      "matches": 8,
-      "wins": 2,
-      "losses": 6,
-      "noResult": 0,
-      "points": 4,
-      "nrr": -1.106,
       "rank": 10,
-      "remainingMatches": 6
+      "remainingMatches": 5
     }
   ],
   "fixtures": [
     {
-      "id": "cricbuzz-47",
+      "id": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
       "matchNo": 47,
       "teamA": "Mumbai",
       "teamB": "Lucknow",
       "dateTimeGMT": "2026-05-04T14:00:00Z",
-      "dateTimeLocal": "Tomorrow , 7:30 PM LOCAL",
+      "dateTimeLocal": null,
       "venue": "Wankhede Stadium, Mumbai",
       "status": "scheduled",
-      "sourceUrl": "https://www.cricbuzz.com/live-cricket-scores/152020/mi-vs-lsg-47th-match-ipl-2026"
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "4804409b-28ee-4f3e-ab55-a4a4cb090198",
+      "matchNo": 48,
+      "teamA": "Delhi",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-05T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "312ba6aa-5e93-4673-bb0c-cb207fdc9e2d",
+      "matchNo": 49,
+      "teamA": "Hyderabad",
+      "teamB": "Punjab",
+      "dateTimeGMT": "2026-05-06T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8b326da3-8ff6-4e64-abe4-cb430d7a6c53",
+      "matchNo": 50,
+      "teamA": "Lucknow",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-07T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+      "matchNo": 51,
+      "teamA": "Delhi",
+      "teamB": "Kolkata",
+      "dateTimeGMT": "2026-05-08T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6ffec712-6562-490c-a4fa-ae4b6ae59188",
+      "matchNo": 52,
+      "teamA": "Rajasthan",
+      "teamB": "Gujarat",
+      "dateTimeGMT": "2026-05-09T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Sawai Mansingh Stadium, Jaipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6aced947-319c-4e4a-9214-6f94f14c043e",
+      "matchNo": 53,
+      "teamA": "Chennai",
+      "teamB": "Lucknow",
+      "dateTimeGMT": "2026-05-10T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "02d3614d-9727-43c5-a80c-0bf46c7499c6",
+      "matchNo": 54,
+      "teamA": "Bangalore",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-10T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
+      "matchNo": 55,
+      "teamA": "Punjab",
+      "teamB": "Delhi",
+      "dateTimeGMT": "2026-05-11T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+      "matchNo": 56,
+      "teamA": "Gujarat",
+      "teamB": "Hyderabad",
+      "dateTimeGMT": "2026-05-12T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "0b3bab15-12b2-4a16-9f41-1096e40ff202",
+      "matchNo": 57,
+      "teamA": "Bangalore",
+      "teamB": "Kolkata",
+      "dateTimeGMT": "2026-05-13T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
+      "matchNo": 58,
+      "teamA": "Punjab",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-14T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+      "matchNo": 59,
+      "teamA": "Lucknow",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-15T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "166633a2-cecb-4cf3-a984-78dc898b5345",
+      "matchNo": 60,
+      "teamA": "Kolkata",
+      "teamB": "Gujarat",
+      "dateTimeGMT": "2026-05-16T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+      "matchNo": 61,
+      "teamA": "Punjab",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-17T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "990e89ea-3f6a-4196-ac73-7ad1a5f8c451",
+      "matchNo": 62,
+      "teamA": "Delhi",
+      "teamB": "Rajasthan",
+      "dateTimeGMT": "2026-05-17T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8416c2a9-4a74-4ac2-a6ae-5ad2538cbc56",
+      "matchNo": 63,
+      "teamA": "Chennai",
+      "teamB": "Hyderabad",
+      "dateTimeGMT": "2026-05-18T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "3b225f44-ddf2-41d4-8079-7a3f81876e35",
+      "matchNo": 64,
+      "teamA": "Rajasthan",
+      "teamB": "Lucknow",
+      "dateTimeGMT": "2026-05-19T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Sawai Mansingh Stadium, Jaipur",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "5b1d59f9-51fd-449d-8cf1-9fc15ef15675",
+      "matchNo": 65,
+      "teamA": "Kolkata",
+      "teamB": "Mumbai",
+      "dateTimeGMT": "2026-05-20T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
+      "matchNo": 66,
+      "teamA": "Gujarat",
+      "teamB": "Chennai",
+      "dateTimeGMT": "2026-05-21T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+      "matchNo": 67,
+      "teamA": "Hyderabad",
+      "teamB": "Bangalore",
+      "dateTimeGMT": "2026-05-22T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "7134216b-553c-4099-82a8-ee48bd9c46f3",
+      "matchNo": 68,
+      "teamA": "Lucknow",
+      "teamB": "Punjab",
+      "dateTimeGMT": "2026-05-23T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
+      "matchNo": 69,
+      "teamA": "Mumbai",
+      "teamB": "Rajasthan",
+      "dateTimeGMT": "2026-05-24T10:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Wankhede Stadium, Mumbai",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "8f61d649-f53b-4e79-9bfb-661cfe69be3b",
+      "matchNo": 70,
+      "teamA": "Kolkata",
+      "teamB": "Delhi",
+      "dateTimeGMT": "2026-05-24T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Eden Gardens, Kolkata",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
     }
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 2,
-    "generatedAt": "2026-05-03T22:52:56Z",
-    "stateCount": 2,
+    "simulationCount": 16777216,
+    "generatedAt": "2026-05-04T08:06:47Z",
+    "stateCount": 826400,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -168,227 +420,227 @@
     ],
     "overallProbabilities": {
       "Punjab": {
-        "top4": 100.0,
-        "top2": 100.0,
-        "top4Clear": 100.0,
-        "top2Clear": 100.0,
-        "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top4": 87.73,
+        "top2": 63.65,
+        "top4Clear": 87.25,
+        "top2Clear": 63.49,
+        "top4Possible": 88.22,
+        "top2Possible": 63.81
       },
       "Bangalore": {
-        "top4": 75.0,
-        "top2": 25.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top4": 78.21,
+        "top2": 45.34,
+        "top4Clear": 68.11,
+        "top2Clear": 35.8,
+        "top4Possible": 86.67,
+        "top2Possible": 57.31
       },
       "Hyderabad": {
-        "top4": 75.0,
-        "top2": 25.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top4": 63.93,
+        "top2": 28.83,
+        "top4Clear": 51.67,
+        "top2Clear": 20.66,
+        "top4Possible": 74.89,
+        "top2Possible": 39.48
       },
       "Rajasthan": {
-        "top4": 75.0,
-        "top2": 25.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top4": 64.6,
+        "top2": 26.64,
+        "top4Clear": 52.02,
+        "top2Clear": 18.02,
+        "top4Possible": 75.93,
+        "top2Possible": 37.94
       },
       "Gujarat": {
-        "top4": 75.0,
-        "top2": 25.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top4": 63.85,
+        "top2": 27.73,
+        "top4Clear": 51.72,
+        "top2Clear": 19.53,
+        "top4Possible": 74.57,
+        "top2Possible": 38.63
       },
       "Chennai": {
-        "top4": 0.0,
-        "top2": 0.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 0.0,
-        "top2Possible": 0.0
+        "top4": 17.7,
+        "top2": 3.55,
+        "top4Clear": 10.3,
+        "top2Clear": 1.57,
+        "top4Possible": 25.94,
+        "top2Possible": 6.84
       },
       "Delhi": {
-        "top4": 0.0,
-        "top2": 0.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 0.0,
-        "top2Possible": 0.0
+        "top4": 17.16,
+        "top2": 3.5,
+        "top4Clear": 9.94,
+        "top2Clear": 1.56,
+        "top4Possible": 25.22,
+        "top2Possible": 6.6
       },
       "Kolkata": {
-        "top4": 0.0,
-        "top2": 0.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 0.0,
-        "top2Possible": 0.0
-      },
-      "Mumbai": {
-        "top4": 0.0,
-        "top2": 0.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 0.0,
-        "top2Possible": 0.0
+        "top4": 1.44,
+        "top2": 0.02,
+        "top4Clear": 1.44,
+        "top2Clear": 0.02,
+        "top4Possible": 1.44,
+        "top2Possible": 0.02
       },
       "Lucknow": {
-        "top4": 0.0,
+        "top4": 5.06,
+        "top2": 0.75,
+        "top4Clear": 4.57,
+        "top2Clear": 0.58,
+        "top4Possible": 5.54,
+        "top2Possible": 0.91
+      },
+      "Mumbai": {
+        "top4": 0.32,
         "top2": 0.0,
-        "top4Clear": 0.0,
+        "top4Clear": 0.01,
         "top2Clear": 0.0,
-        "top4Possible": 0.0,
+        "top4Possible": 0.99,
         "top2Possible": 0.0
       }
     },
     "teamAnalysis": {
       "4": {
         "Punjab": {
-          "percentage": 100.0,
+          "percentage": 87.73,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.97
             }
           }
         },
         "Bangalore": {
-          "percentage": 75.0,
+          "percentage": 78.21,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.98
             }
           }
         },
         "Hyderabad": {
-          "percentage": 75.0,
+          "percentage": 63.93,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 1.02
             }
           }
         },
         "Rajasthan": {
-          "percentage": 75.0,
+          "percentage": 64.6,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 1.26
             }
           }
         },
         "Gujarat": {
-          "percentage": 75.0,
+          "percentage": 63.85,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.99
             }
           }
         },
         "Chennai": {
-          "percentage": 0.0,
+          "percentage": 17.7,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.51
             }
           }
         },
         "Delhi": {
-          "percentage": 0.0,
+          "percentage": 17.16,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.83
             }
           }
         },
         "Kolkata": {
-          "percentage": 0.0,
+          "percentage": 1.44,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Mumbai": {
-          "percentage": 0.0,
-          "results_df": {
-            "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.06
             }
           }
         },
         "Lucknow": {
-          "percentage": 0.0,
+          "percentage": 5.06,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "LSG beat MI",
+              "Impact": 7.25
+            }
+          }
+        },
+        "Mumbai": {
+          "percentage": 0.32,
+          "results_df": {
+            "M47: MI vs LSG": {
+              "Outcome": "MI beat LSG",
+              "Impact": 0.64
             }
           }
         }
       },
       "2": {
         "Punjab": {
-          "percentage": 100.0,
+          "percentage": 63.65,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.32
             }
           }
         },
         "Bangalore": {
-          "percentage": 25.0,
+          "percentage": 45.34,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.26
             }
           }
         },
         "Hyderabad": {
-          "percentage": 25.0,
+          "percentage": 28.83,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.27
             }
           }
         },
         "Rajasthan": {
-          "percentage": 25.0,
+          "percentage": 26.64,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.23
             }
           }
         },
         "Gujarat": {
-          "percentage": 25.0,
+          "percentage": 27.73,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.27
             }
           }
         },
         "Chennai": {
-          "percentage": 0.0,
+          "percentage": 3.55,
           "results_df": {
             "M47: MI vs LSG": {
               "Outcome": "Either result",
@@ -397,25 +649,16 @@
           }
         },
         "Delhi": {
-          "percentage": 0.0,
+          "percentage": 3.5,
           "results_df": {
             "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+              "Outcome": "MI beat LSG",
+              "Impact": 0.09
             }
           }
         },
         "Kolkata": {
-          "percentage": 0.0,
-          "results_df": {
-            "M47: MI vs LSG": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Mumbai": {
-          "percentage": 0.0,
+          "percentage": 0.02,
           "results_df": {
             "M47: MI vs LSG": {
               "Outcome": "Either result",
@@ -424,6 +667,15 @@
           }
         },
         "Lucknow": {
+          "percentage": 0.75,
+          "results_df": {
+            "M47: MI vs LSG": {
+              "Outcome": "LSG beat MI",
+              "Impact": 1.46
+            }
+          }
+        },
+        "Mumbai": {
           "percentage": 0.0,
           "results_df": {
             "M47: MI vs LSG": {
@@ -438,14 +690,49 @@
       "4": {
         "Punjab": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": 0,
-          "target_matches": 0,
+          "likely": 2,
+          "guaranteed": 3,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
+              "probability": 0.07,
+              "possibleRate": 0.11,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 42.86,
+              "possibleRate": 45.91,
+              "guaranteedRate": 39.8
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 99.31,
+              "possibleRate": 99.33,
+              "guaranteedRate": 99.28
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -453,449 +740,736 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 88.22,
+              "teamBWinProbability": 87.25,
+              "impact": 0.97
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 88.22,
+              "teamBWinProbability": 87.25,
+              "impact": 0.97
             }
           ],
           "impactFixtureWindow": 1
         },
         "Bangalore": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": null,
-          "target_matches": 0,
+          "likely": 2,
+          "guaranteed": 4,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 524288,
+              "probability": 0.01,
+              "possibleRate": 0.06,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 14.66,
+              "possibleRate": 37.51,
+              "guaranteedRate": 0.94
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 83.02,
+              "possibleRate": 98.6,
+              "guaranteedRate": 57.82
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 99.91,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.67
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 78.7,
+              "teamBWinProbability": 77.72,
+              "impact": 0.98
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 78.7,
+              "teamBWinProbability": 77.72,
+              "impact": 0.98
             }
           ],
           "impactFixtureWindow": 1
         },
         "Hyderabad": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": null,
-          "target_matches": 0,
+          "likely": 2,
+          "guaranteed": 4,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.01,
+              "possibleRate": 0.04,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 10.86,
+              "possibleRate": 28.79,
+              "guaranteedRate": 0.56
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 79.98,
+              "possibleRate": 97.17,
+              "guaranteedRate": 54.36
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.88,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.58
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.44,
+              "teamBWinProbability": 63.42,
+              "impact": 1.02
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.44,
+              "teamBWinProbability": 63.42,
+              "impact": 1.02
             }
           ],
           "impactFixtureWindow": 1
         },
         "Rajasthan": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": null,
-          "target_matches": 0,
+          "likely": 2,
+          "guaranteed": 4,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.01,
+              "possibleRate": 0.05,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 12.27,
+              "possibleRate": 32.05,
+              "guaranteedRate": 0.76
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 80.85,
+              "possibleRate": 97.77,
+              "guaranteedRate": 55.18
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.87,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.54
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 65.23,
+              "teamBWinProbability": 63.97,
+              "impact": 1.26
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 65.23,
+              "teamBWinProbability": 63.97,
+              "impact": 1.26
             }
           ],
           "impactFixtureWindow": 1
         },
         "Gujarat": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": null,
-          "target_matches": 0,
+          "likely": 2,
+          "guaranteed": 4,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 10.44,
+              "possibleRate": 27.61,
+              "guaranteedRate": 0.58
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 80.05,
+              "possibleRate": 97.11,
+              "guaranteedRate": 54.48
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.88,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.57
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.34,
+              "teamBWinProbability": 63.35,
+              "impact": 0.99
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.34,
+              "teamBWinProbability": 63.35,
+              "impact": 0.99
             }
           ],
           "impactFixtureWindow": 1
         },
         "Chennai": {
-          "possible": null,
-          "likely": null,
+          "possible": 2,
+          "likely": 4,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 8.67,
+              "possibleRate": 24.54,
+              "guaranteedRate": 0.26
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 75.99,
+              "possibleRate": 96.89,
+              "guaranteedRate": 45.53
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 99.84,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.42
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.96,
+              "teamBWinProbability": 17.45,
+              "impact": 0.51
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.96,
+              "teamBWinProbability": 17.45,
+              "impact": 0.51
             }
           ],
           "impactFixtureWindow": 1
         },
         "Delhi": {
-          "possible": null,
-          "likely": null,
+          "possible": 2,
+          "likely": 4,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 7.88,
+              "possibleRate": 22.63,
+              "guaranteedRate": 0.25
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 74.06,
+              "possibleRate": 96.1,
+              "guaranteedRate": 43.22
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 99.83,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.36
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.57,
+              "teamBWinProbability": 16.74,
+              "impact": 0.83
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.57,
+              "teamBWinProbability": 16.74,
+              "impact": 0.83
             }
           ],
           "impactFixtureWindow": 1
         },
         "Kolkata": {
-          "possible": null,
+          "possible": 4,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Mumbai": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 2621440,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.12,
+              "possibleRate": 0.12,
+              "guaranteedRate": 0.12
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 45.6,
+              "possibleRate": 45.6,
+              "guaranteedRate": 45.6
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 1.47,
+              "teamBWinProbability": 1.42,
+              "impact": 0.06
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 1.47,
+              "teamBWinProbability": 1.42,
+              "impact": 0.06
             }
           ],
           "impactFixtureWindow": 1
         },
         "Lucknow": {
-          "possible": null,
-          "likely": null,
+          "possible": 4,
+          "likely": 6,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 6,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 1572864,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 3932160,
+              "probability": 0.05,
+              "possibleRate": 0.05,
+              "guaranteedRate": 0.04
+            },
+            {
+              "wins": 5,
+              "scenarios": 1572864,
+              "probability": 37.3,
+              "possibleRate": 42.39,
+              "guaranteedRate": 32.22
+            },
+            {
+              "wins": 6,
+              "scenarios": 262144,
+              "probability": 99.22,
+              "possibleRate": 99.7,
+              "guaranteedRate": 98.75
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 1.43,
+              "teamBWinProbability": 8.68,
+              "impact": 7.25
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 1.43,
+              "teamBWinProbability": 8.68,
+              "impact": 7.25
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": 4,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 5,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 10.17,
+              "possibleRate": 31.45,
+              "guaranteedRate": 0.19
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 0.64,
               "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "impact": 0.64
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 0.64,
+              "teamBWinProbability": 0.0,
+              "impact": 0.64
             }
           ],
           "impactFixtureWindow": 1
@@ -903,15 +1477,50 @@
       },
       "2": {
         "Punjab": {
-          "possible": 0,
-          "likely": 0,
-          "guaranteed": 0,
-          "target_matches": 0,
+          "possible": 1,
+          "likely": 3,
+          "guaranteed": 4,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.28,
+              "possibleRate": 0.36,
+              "guaranteedRate": 0.2
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 46.03,
+              "possibleRate": 46.5,
+              "guaranteedRate": 45.55
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 97.52,
+              "possibleRate": 97.52,
+              "guaranteedRate": 97.52
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -919,426 +1528,713 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 63.81,
+              "teamBWinProbability": 63.49,
+              "impact": 0.32
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 63.81,
+              "teamBWinProbability": 63.49,
+              "impact": 0.32
             }
           ],
           "impactFixtureWindow": 1
         },
         "Bangalore": {
-          "possible": 0,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 0,
+          "possible": 1,
+          "likely": 3,
+          "guaranteed": 5,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.02,
+              "possibleRate": 0.09,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 11.33,
+              "possibleRate": 30.39,
+              "guaranteedRate": 0.97
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 74.13,
+              "possibleRate": 92.95,
+              "guaranteedRate": 54.38
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 99.24,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.44
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 45.47,
+              "teamBWinProbability": 45.21,
+              "impact": 0.26
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 45.47,
+              "teamBWinProbability": 45.21,
+              "impact": 0.26
             }
           ],
           "impactFixtureWindow": 1
         },
         "Hyderabad": {
-          "possible": 0,
-          "likely": null,
+          "possible": 1,
+          "likely": 3,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.05,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.98,
+              "possibleRate": 26.46,
+              "guaranteedRate": 0.92
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 75.4,
+              "possibleRate": 93.16,
+              "guaranteedRate": 56.47
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 99.67,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.22
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 28.96,
+              "teamBWinProbability": 28.69,
+              "impact": 0.27
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 28.96,
+              "teamBWinProbability": 28.69,
+              "impact": 0.27
             }
           ],
           "impactFixtureWindow": 1
         },
         "Rajasthan": {
-          "possible": 0,
-          "likely": null,
+          "possible": 1,
+          "likely": 3,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.06,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.21,
+              "possibleRate": 25.17,
+              "guaranteedRate": 0.69
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 68.1,
+              "possibleRate": 89.01,
+              "guaranteedRate": 46.72
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 98.6,
+              "possibleRate": 99.8,
+              "guaranteedRate": 97.27
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 26.76,
+              "teamBWinProbability": 26.53,
+              "impact": 0.23
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 26.76,
+              "teamBWinProbability": 26.53,
+              "impact": 0.23
             }
           ],
           "impactFixtureWindow": 1
         },
         "Gujarat": {
-          "possible": 0,
-          "likely": null,
+          "possible": 1,
+          "likely": 3,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.06,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.84,
+              "possibleRate": 26.24,
+              "guaranteedRate": 0.91
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 71.41,
+              "possibleRate": 90.14,
+              "guaranteedRate": 52.23
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 98.93,
+              "possibleRate": 99.8,
+              "guaranteedRate": 98.05
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 27.86,
+              "teamBWinProbability": 27.59,
+              "impact": 0.27
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 27.86,
+              "teamBWinProbability": 27.59,
+              "impact": 0.27
             }
           ],
           "impactFixtureWindow": 1
         },
         "Chennai": {
-          "possible": null,
-          "likely": null,
+          "possible": 3,
+          "likely": 5,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 8.89,
+              "possibleRate": 25.77,
+              "guaranteedRate": 0.46
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 68.99,
+              "possibleRate": 89.55,
+              "guaranteedRate": 48.11
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.55,
               "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.55,
               "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
         },
         "Delhi": {
-          "possible": null,
-          "likely": null,
+          "possible": 3,
+          "likely": 5,
           "guaranteed": null,
-          "target_matches": 0,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Kolkata": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 0,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Mumbai": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 2621440,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 8.14,
+              "possibleRate": 23.64,
+              "guaranteedRate": 0.43
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 71.25,
+              "possibleRate": 92.63,
+              "guaranteedRate": 47.81
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.45,
+              "impact": 0.09
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.45,
+              "impact": 0.09
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Kolkata": {
+          "possible": 5,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 5,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 0.54,
+              "possibleRate": 0.54,
+              "guaranteedRate": 0.54
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 0.02,
               "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 0.02,
               "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
         },
         "Lucknow": {
-          "possible": null,
+          "possible": 5,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 6,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 1572864,
               "probability": 0.0,
               "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 1572864,
+              "probability": 0.25,
+              "possibleRate": 0.38,
+              "guaranteedRate": 0.12
+            },
+            {
+              "wins": 6,
+              "scenarios": 262144,
+              "probability": 46.27,
+              "possibleRate": 55.82,
+              "guaranteedRate": 36.72
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 1.48,
+              "impact": 1.46
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 1.48,
+              "impact": 1.46
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": 5,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 5,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 0.02,
+              "possibleRate": 0.11,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
@@ -1352,7 +2248,7 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
@@ -1371,13 +2267,48 @@
     "scenarioBreakdown": {
       "4": {
         "Punjab": {
-          "clearRate": 100.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 100.0,
+          "clearRate": 87.25,
+          "possibleRate": 88.22,
+          "sharedTieAdjustedRate": 87.73,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
+              "probability": 0.07,
+              "possibleRate": 0.11,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 42.86,
+              "possibleRate": 45.91,
+              "guaranteedRate": 39.8
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 99.31,
+              "possibleRate": 99.33,
+              "guaranteedRate": 99.28
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1385,295 +2316,617 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 88.22,
+              "teamBWinProbability": 87.25,
+              "impact": 0.97
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "clearRate": 68.11,
+          "possibleRate": 86.67,
+          "sharedTieAdjustedRate": 78.21,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 524288,
+              "probability": 0.01,
+              "possibleRate": 0.06,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 14.66,
+              "possibleRate": 37.51,
+              "guaranteedRate": 0.94
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 83.02,
+              "possibleRate": 98.6,
+              "guaranteedRate": 57.82
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 99.91,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.67
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 78.7,
+              "teamBWinProbability": 77.72,
+              "impact": 0.98
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "clearRate": 51.67,
+          "possibleRate": 74.89,
+          "sharedTieAdjustedRate": 63.93,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.01,
+              "possibleRate": 0.04,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 10.86,
+              "possibleRate": 28.79,
+              "guaranteedRate": 0.56
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 79.98,
+              "possibleRate": 97.17,
+              "guaranteedRate": 54.36
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.88,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.58
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.44,
+              "teamBWinProbability": 63.42,
+              "impact": 1.02
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "clearRate": 52.02,
+          "possibleRate": 75.93,
+          "sharedTieAdjustedRate": 64.6,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.01,
+              "possibleRate": 0.05,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 12.27,
+              "possibleRate": 32.05,
+              "guaranteedRate": 0.76
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 80.85,
+              "possibleRate": 97.77,
+              "guaranteedRate": 55.18
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.87,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.54
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 65.23,
+              "teamBWinProbability": 63.97,
+              "impact": 1.26
             }
           ]
         },
         "Gujarat": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "clearRate": 51.72,
+          "possibleRate": 74.57,
+          "sharedTieAdjustedRate": 63.85,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 75.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 10.44,
+              "possibleRate": 27.61,
+              "guaranteedRate": 0.58
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 80.05,
+              "possibleRate": 97.11,
+              "guaranteedRate": 54.48
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 99.88,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.57
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 64.34,
+              "teamBWinProbability": 63.35,
+              "impact": 0.99
             }
           ]
         },
         "Chennai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 10.3,
+          "possibleRate": 25.94,
+          "sharedTieAdjustedRate": 17.7,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 8.67,
+              "possibleRate": 24.54,
+              "guaranteedRate": 0.26
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 75.99,
+              "possibleRate": 96.89,
+              "guaranteedRate": 45.53
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 99.84,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.42
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.96,
+              "teamBWinProbability": 17.45,
+              "impact": 0.51
             }
           ]
         },
         "Delhi": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 9.94,
+          "possibleRate": 25.22,
+          "sharedTieAdjustedRate": 17.16,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 7.88,
+              "possibleRate": 22.63,
+              "guaranteedRate": 0.25
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 74.06,
+              "possibleRate": 96.1,
+              "guaranteedRate": 43.22
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 99.83,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.36
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 17.57,
+              "teamBWinProbability": 16.74,
+              "impact": 0.83
             }
           ]
         },
         "Kolkata": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 1.44,
+          "possibleRate": 1.44,
+          "sharedTieAdjustedRate": 1.44,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Mumbai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 2621440,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.12,
+              "possibleRate": 0.12,
+              "guaranteedRate": 0.12
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 45.6,
+              "possibleRate": 45.6,
+              "guaranteedRate": 45.6
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 1.47,
+              "teamBWinProbability": 1.42,
+              "impact": 0.06
             }
           ]
         },
         "Lucknow": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 4.57,
+          "possibleRate": 5.54,
+          "sharedTieAdjustedRate": 5.06,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
+              "scenarios": 1572864,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 3932160,
+              "probability": 0.05,
+              "possibleRate": 0.05,
+              "guaranteedRate": 0.04
+            },
+            {
+              "wins": 5,
+              "scenarios": 1572864,
+              "probability": 37.3,
+              "possibleRate": 42.39,
+              "guaranteedRate": 32.22
+            },
+            {
+              "wins": 6,
+              "scenarios": 262144,
+              "probability": 99.22,
+              "possibleRate": 99.7,
+              "guaranteedRate": 98.75
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 1.43,
+              "teamBWinProbability": 8.68,
+              "impact": 7.25
+            }
+          ]
+        },
+        "Mumbai": {
+          "clearRate": 0.01,
+          "possibleRate": 0.99,
+          "sharedTieAdjustedRate": 0.32,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 10.17,
+              "possibleRate": 31.45,
+              "guaranteedRate": 0.19
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 0.64,
               "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "impact": 0.64
             }
           ]
         }
       },
       "2": {
         "Punjab": {
-          "clearRate": 100.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 100.0,
+          "clearRate": 63.49,
+          "possibleRate": 63.81,
+          "sharedTieAdjustedRate": 63.65,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.28,
+              "possibleRate": 0.36,
+              "guaranteedRate": 0.2
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 46.03,
+              "possibleRate": 46.5,
+              "guaranteedRate": 45.55
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 97.52,
+              "possibleRate": 97.52,
+              "guaranteedRate": 97.52
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1681,212 +2934,506 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 63.81,
+              "teamBWinProbability": 63.49,
+              "impact": 0.32
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 25.0,
+          "clearRate": 35.8,
+          "possibleRate": 57.31,
+          "sharedTieAdjustedRate": 45.34,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.02,
+              "possibleRate": 0.09,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 11.33,
+              "possibleRate": 30.39,
+              "guaranteedRate": 0.97
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 74.13,
+              "possibleRate": 92.95,
+              "guaranteedRate": 54.38
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 99.24,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.44
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 45.47,
+              "teamBWinProbability": 45.21,
+              "impact": 0.26
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 25.0,
+          "clearRate": 20.66,
+          "possibleRate": 39.48,
+          "sharedTieAdjustedRate": 28.83,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.05,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.98,
+              "possibleRate": 26.46,
+              "guaranteedRate": 0.92
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 75.4,
+              "possibleRate": 93.16,
+              "guaranteedRate": 56.47
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 99.67,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.22
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 28.96,
+              "teamBWinProbability": 28.69,
+              "impact": 0.27
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 25.0,
+          "clearRate": 18.02,
+          "possibleRate": 37.94,
+          "sharedTieAdjustedRate": 26.64,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.06,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.21,
+              "possibleRate": 25.17,
+              "guaranteedRate": 0.69
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 68.1,
+              "possibleRate": 89.01,
+              "guaranteedRate": 46.72
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 98.6,
+              "possibleRate": 99.8,
+              "guaranteedRate": 97.27
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 26.76,
+              "teamBWinProbability": 26.53,
+              "impact": 0.23
             }
           ]
         },
         "Gujarat": {
-          "clearRate": 0.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 25.0,
+          "clearRate": 19.53,
+          "possibleRate": 38.63,
+          "sharedTieAdjustedRate": 27.73,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
-              "probability": 25.0,
-              "possibleRate": 100.0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 4194304,
+              "probability": 0.01,
+              "possibleRate": 0.06,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 6291456,
+              "probability": 9.84,
+              "possibleRate": 26.24,
+              "guaranteedRate": 0.91
+            },
+            {
+              "wins": 3,
+              "scenarios": 4194304,
+              "probability": 71.41,
+              "possibleRate": 90.14,
+              "guaranteedRate": 52.23
+            },
+            {
+              "wins": 4,
+              "scenarios": 1048576,
+              "probability": 98.93,
+              "possibleRate": 99.8,
+              "guaranteedRate": 98.05
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 25.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 27.86,
+              "teamBWinProbability": 27.59,
+              "impact": 0.27
             }
           ]
         },
         "Chennai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 1.57,
+          "possibleRate": 6.84,
+          "sharedTieAdjustedRate": 3.55,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 8.89,
+              "possibleRate": 25.77,
+              "guaranteedRate": 0.46
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 68.99,
+              "possibleRate": 89.55,
+              "guaranteedRate": 48.11
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.55,
               "impact": 0.0
             }
           ]
         },
         "Delhi": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 1.56,
+          "possibleRate": 6.6,
+          "sharedTieAdjustedRate": 3.5,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 8.14,
+              "possibleRate": 23.64,
+              "guaranteedRate": 0.43
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 71.25,
+              "possibleRate": 92.63,
+              "guaranteedRate": 47.81
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "preferredWinner": "Mumbai",
+              "preferredLabel": "MI beat LSG",
+              "teamAWinProbability": 3.55,
+              "teamBWinProbability": 3.45,
+              "impact": 0.09
             }
           ]
         },
         "Kolkata": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+          "clearRate": 0.02,
+          "possibleRate": 0.02,
+          "sharedTieAdjustedRate": 0.02,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 0.54,
+              "possibleRate": 0.54,
+              "guaranteedRate": 0.54
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
               "teamB": "Lucknow",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 0.02,
               "impact": 0.0
+            }
+          ]
+        },
+        "Lucknow": {
+          "clearRate": 0.58,
+          "possibleRate": 0.91,
+          "sharedTieAdjustedRate": 0.75,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1572864,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 3932160,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 1572864,
+              "probability": 0.25,
+              "possibleRate": 0.38,
+              "guaranteedRate": 0.12
+            },
+            {
+              "wins": 6,
+              "scenarios": 262144,
+              "probability": 46.27,
+              "possibleRate": 55.82,
+              "guaranteedRate": 36.72
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
+              "matchNo": 47,
+              "label": "M47: MI vs LSG",
+              "teamA": "Mumbai",
+              "teamB": "Lucknow",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat MI",
+              "teamAWinProbability": 0.02,
+              "teamBWinProbability": 1.48,
+              "impact": 1.46
             }
           ]
         },
@@ -1897,57 +3444,50 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1,
+              "scenarios": 524288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "cricbuzz-47",
-              "matchNo": 47,
-              "label": "M47: MI vs LSG",
-              "teamA": "Mumbai",
-              "teamB": "Lucknow",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Lucknow": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1,
+              "scenarios": 2621440,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
-              "wins": 1,
-              "scenarios": 1,
+              "wins": 2,
+              "scenarios": 5242880,
               "probability": 0.0,
               "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 5242880,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2621440,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 524288,
+              "probability": 0.02,
+              "possibleRate": 0.11,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "cricbuzz-47",
+              "fixtureId": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
               "matchNo": 47,
               "label": "M47: MI vs LSG",
               "teamA": "Mumbai",
