@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import math
+import re
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -20,6 +22,7 @@ HEIGHT = 1920
 SAFE_X = 70
 SAFE_BOTTOM = 1800
 DISCLAIMER = "Probabilities exclude NRR calculation. Final qualification outcomes may still change due to NRR."
+DATE_DIR_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 TEAM_STYLES = {
     "Mumbai": {"bg": "#004B8D", "text": "#FFFFFF"},
@@ -111,6 +114,97 @@ def generated_date_slug(payload: dict[str, Any]) -> str:
     value = payload["metadata"]["generated_at"]
     dt = datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
     return dt.strftime("%Y-%m-%d")
+
+
+def utc_now_slug() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def carousel_dates(output_root: Path = OUTPUT_ROOT) -> list[str]:
+    if not output_root.exists():
+        return []
+    return sorted(path.name for path in output_root.iterdir() if path.is_dir() and DATE_DIR_PATTERN.match(path.name))
+
+
+def latest_carousel_folder(output_root: Path = OUTPUT_ROOT) -> Path | None:
+    dates = carousel_dates(output_root)
+    if not dates:
+        return None
+    return output_root / dates[-1]
+
+
+def public_carousel_path(path: Path, output_root: Path = OUTPUT_ROOT) -> str:
+    return f"social/instagram-carousel/{path.relative_to(output_root).as_posix()}"
+
+
+def slide_paths(folder: Path) -> list[Path]:
+    return sorted(folder.glob("slide-*.png"))
+
+
+def validate_png_dimensions(paths: list[Path], width: int = WIDTH, height: int = HEIGHT) -> list[str]:
+    warnings: list[str] = []
+    for path in paths:
+        try:
+            with Image.open(path) as image:
+                if image.size != (width, height):
+                    warnings.append(f"{path.name} is {image.size[0]}x{image.size[1]}, expected {width}x{height}.")
+        except OSError as exc:
+            warnings.append(f"{path.name} could not be read as a PNG: {exc}.")
+    return warnings
+
+
+def build_manifest(
+    payload: dict[str, Any],
+    output_root: Path = OUTPUT_ROOT,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    dates = carousel_dates(output_root)
+    latest_folder = latest_carousel_folder(output_root)
+    latest_date = latest_folder.name if latest_folder else None
+    latest_slides = slide_paths(latest_folder) if latest_folder else []
+    metadata = payload.get("metadata", {})
+    warnings = list(metadata.get("warnings") or [])
+
+    if latest_folder is None:
+        warnings.append("No dated Instagram carousel folder found.")
+    else:
+        warnings.extend(validate_png_dimensions(latest_slides))
+
+    slides = [
+        {
+            "date": latest_date,
+            "fileName": path.name,
+            "path": public_carousel_path(path, output_root),
+            "downloadName": f"ipl-playoff-pulse-{latest_date}-{path.stem}.png",
+            "imageWidth": WIDTH,
+            "imageHeight": HEIGHT,
+        }
+        for path in latest_slides
+    ]
+
+    return {
+        "latestDate": latest_date,
+        "dates": dates,
+        "slides": slides,
+        "generatedAt": generated_at or utc_now_slug(),
+        "source": {
+            "name": metadata.get("source"),
+            "url": metadata.get("source_url"),
+            "dataGeneratedAt": metadata.get("generated_at"),
+        },
+        "warnings": warnings,
+        "imageWidth": WIDTH,
+        "imageHeight": HEIGHT,
+        "latestPackPath": f"social/instagram-carousel/{latest_date}/" if latest_date else None,
+        "latestPreviewPath": "social/instagram-carousel/latest-overview.png" if latest_date else None,
+    }
+
+
+def write_manifest(payload: dict[str, Any], output_root: Path = OUTPUT_ROOT) -> Path:
+    manifest = build_manifest(payload, output_root)
+    manifest_path = output_root / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    return manifest_path
 
 
 def draw_gradient(draw: ImageDraw.ImageDraw, start: str, end: str) -> None:
@@ -457,6 +551,8 @@ def main() -> None:
     for index, team in enumerate(teams, start=2):
         outputs.append(draw_team_slide(payload, team, index, output_dir))
     outputs.append(draw_contact_sheet(outputs, output_dir))
+    shutil.copyfile(outputs[0], OUTPUT_ROOT / "latest-overview.png")
+    outputs.append(write_manifest(payload))
 
     print("\n".join(str(path) for path in outputs))
 

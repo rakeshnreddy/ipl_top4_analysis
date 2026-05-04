@@ -19,9 +19,16 @@ import {
   type IplStanding,
   type QualificationPathResult,
 } from './data/iplData';
+import { loadReelsManifest, publicAssetUrl, type ReelsManifest, type ReelsSlide } from './data/reelsManifest';
 import { team_styles } from './teamStyles';
 
 type TargetGoal = '4' | '2';
+type ShareKind = 'instagram' | 'x' | 'whatsapp';
+
+const SEO_TITLE = 'IPL Top 4 Qualification Chances Today | IPL Playoff Pulse';
+const SEO_DESCRIPTION =
+  'Daily IPL Top 4 and Top 2 qualification probabilities, standings, cutline teams, team paths, and ready-to-share Reels slides from IPL Playoff Pulse.';
+const SECTION_HASHES = new Set(['standings', 'top4', 'reels', 'deep-dive']);
 
 const formatPercent = (value: number) =>
   `${value.toLocaleString(undefined, { maximumFractionDigits: value % 1 === 0 ? 0 : 1 })}%`;
@@ -74,6 +81,51 @@ function teamShortName(payload: IplSeasonPayload, teamKey: string) {
   return payload.standings.find((team) => team.teamKey === teamKey)?.shortName || teamKey;
 }
 
+function top4Probability(payload: IplSeasonPayload, teamKey: string) {
+  return payload.analysis.overallProbabilities[teamKey]?.top4 ?? 0;
+}
+
+function top2Probability(payload: IplSeasonPayload, teamKey: string) {
+  return payload.analysis.overallProbabilities[teamKey]?.top2 ?? 0;
+}
+
+function teamKeyFromHash(payload: IplSeasonPayload) {
+  const hash = window.location.hash.replace(/^#/, '');
+  if (!hash.startsWith('team=')) {
+    return null;
+  }
+
+  const requested = decodeURIComponent(hash.slice('team='.length)).trim().toLowerCase();
+  if (!requested) {
+    return null;
+  }
+
+  return (
+    payload.standings.find(
+      (team) =>
+        team.teamKey.toLowerCase() === requested ||
+        team.shortName.toLowerCase() === requested ||
+        team.fullName.toLowerCase() === requested,
+    )?.teamKey || null
+  );
+}
+
+function sectionIdFromHash() {
+  const hash = window.location.hash.replace(/^#/, '');
+  return SECTION_HASHES.has(hash) ? hash : null;
+}
+
+function scrollToSection(sectionId: string) {
+  window.setTimeout(() => {
+    document.getElementById(sectionId)?.scrollIntoView?.({ block: 'start', behavior: 'smooth' });
+  }, 0);
+}
+
+function updateHash(value: string) {
+  const nextUrl = `${window.location.pathname}${window.location.search}#${value}`;
+  window.history.pushState(null, '', nextUrl);
+}
+
 function getPath(payload: IplSeasonPayload, teamKey: string, target: TargetGoal): QualificationPathResult | null {
   return payload.analysis.qualificationPath[target]?.[teamKey] || null;
 }
@@ -102,6 +154,164 @@ function pathShort(path: QualificationPathResult | null) {
 
 function sortedImpacts(path: QualificationPathResult | null, limit = 6) {
   return [...(path?.fixtureImpacts || [])].sort((a, b) => b.impact - a.impact).slice(0, limit);
+}
+
+function raceSnapshot(payload: IplSeasonPayload) {
+  const ordered = [...payload.standings].sort(rankingSort);
+  const currentTopFour = ordered.slice(0, 4);
+  const cutlineTeam = currentTopFour[3] || null;
+  const nearestChallenger =
+    [...ordered.slice(4)].sort((a, b) => top4Probability(payload, b.teamKey) - top4Probability(payload, a.teamKey))[0] ||
+    ordered[4] ||
+    null;
+  const inDanger = [...currentTopFour]
+    .sort((a, b) => top4Probability(payload, a.teamKey) - top4Probability(payload, b.teamKey))
+    .slice(0, 2);
+  const almostSafeByThreshold = ordered.filter((team) => top4Probability(payload, team.teamKey) >= 90);
+  const almostSafe = almostSafeByThreshold.length > 0
+    ? almostSafeByThreshold
+    : [...ordered].sort((a, b) => top4Probability(payload, b.teamKey) - top4Probability(payload, a.teamKey)).slice(0, 2);
+
+  return {
+    ordered,
+    currentTopFour,
+    cutlineTeam,
+    nearestChallenger,
+    inDanger,
+    almostSafe,
+    almostSafeIsFallback: almostSafeByThreshold.length === 0,
+  };
+}
+
+function shareTexts(payload: IplSeasonPayload): Record<ShareKind, string> {
+  const snapshot = raceSnapshot(payload);
+  const topFour = snapshot.currentTopFour.map((team) => team.shortName).join(', ');
+  const cutline = snapshot.cutlineTeam
+    ? `${snapshot.cutlineTeam.shortName} (${formatPercent(top4Probability(payload, snapshot.cutlineTeam.teamKey))})`
+    : 'Unavailable';
+  const challenger = snapshot.nearestChallenger
+    ? `${snapshot.nearestChallenger.shortName} (${formatPercent(top4Probability(payload, snapshot.nearestChallenger.teamKey))})`
+    : 'Unavailable';
+  const date = formatGeneratedDate(payload.metadata.generated_at);
+
+  return {
+    instagram: `IPL Top 4 Qualification Probabilities - ${date}\n\nCurrent Top 4: ${topFour}\nCutline: ${cutline}\nNearest challenger: ${challenger}\n\nProbabilities exclude NRR simulation.\n#IPL2026 #IPLPlayoffs`,
+    x: `IPL Top 4 chances today: ${topFour}. Cutline: ${cutline}. Nearest challenger: ${challenger}. Updated ${date}. Probabilities exclude NRR simulation.`,
+    whatsapp: `IPL Playoff Pulse (${date})\nTop 4: ${topFour}\nCutline: ${cutline}\nNearest challenger: ${challenger}\nProbabilities exclude NRR simulation.`,
+  };
+}
+
+function oppositeResultLabel(payload: IplSeasonPayload, impact: FixtureImpact) {
+  const otherWinner = impact.preferredWinner === impact.teamA ? impact.teamB : impact.teamA;
+  const loser = impact.preferredWinner === impact.teamA ? impact.teamA : impact.teamB;
+  return `${teamShortName(payload, otherWinner)} beat ${teamShortName(payload, loser)}`;
+}
+
+function practicalTakeaway(payload: IplSeasonPayload, team: IplStanding, path: QualificationPathResult | null) {
+  const chance = top4Probability(payload, team.teamKey);
+  const likely = path?.likely;
+  const guaranteed = path?.guaranteed;
+
+  if (chance >= 90) {
+    return `${team.shortName} can shift attention toward a Top 2 finish.`;
+  }
+  if (chance >= 75) {
+    return `${team.shortName} control most of the job if they avoid a late slide.`;
+  }
+  if (chance >= 55) {
+    return `${team.shortName} are above the line, but the next wins still matter.`;
+  }
+  if (typeof likely === 'number') {
+    return `${team.shortName} need at least ${likely} more win(s) to reach a 50% Top 4 path.`;
+  }
+  if (typeof guaranteed === 'number') {
+    return `${team.shortName} still have a route, but it depends on a clean finish and help.`;
+  }
+  return `${team.shortName} need wins and rival results immediately.`;
+}
+
+function appBaseHref() {
+  return new URL(import.meta.env.BASE_URL, window.location.origin).href;
+}
+
+function absoluteAssetHref(path: string | null | undefined) {
+  return path ? new URL(publicAssetUrl(path), window.location.origin).href : undefined;
+}
+
+function setMetaTag(attribute: 'name' | 'property', key: string, content: string) {
+  let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attribute, key);
+    document.head.appendChild(element);
+  }
+  element.content = content;
+}
+
+function setCanonical(href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!element) {
+    element = document.createElement('link');
+    element.rel = 'canonical';
+    document.head.appendChild(element);
+  }
+  element.href = href;
+}
+
+function setJsonLd(payload: IplSeasonPayload, manifest: ReelsManifest | null) {
+  const baseHref = appBaseHref();
+  const imageUrl = absoluteAssetHref(manifest?.latestPreviewPath || manifest?.slides[0]?.path);
+  let script = document.head.querySelector<HTMLScriptElement>('script[data-ipl-jsonld="true"]');
+  if (!script) {
+    script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.dataset.iplJsonld = 'true';
+    document.head.appendChild(script);
+  }
+
+  script.text = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${baseHref}#website`,
+        name: 'IPL Playoff Pulse',
+        url: baseHref,
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${baseHref}#webpage`,
+        name: SEO_TITLE,
+        description: SEO_DESCRIPTION,
+        url: baseHref,
+        dateModified: payload.metadata.generated_at,
+        isPartOf: { '@id': `${baseHref}#website` },
+        primaryImageOfPage: imageUrl ? { '@type': 'ImageObject', url: imageUrl, width: 1080, height: 1920 } : undefined,
+      },
+      {
+        '@type': 'Dataset',
+        '@id': `${baseHref}#dataset`,
+        name: 'IPL 2026 Top 4 Qualification Probabilities',
+        description: SEO_DESCRIPTION,
+        url: new URL(`${import.meta.env.BASE_URL}data/ipl-2026.json`, window.location.origin).href,
+        dateModified: payload.metadata.generated_at,
+        creator: payload.metadata.source ? { '@type': 'Organization', name: payload.metadata.source } : undefined,
+      },
+    ],
+  });
+}
+
+async function copyToClipboard(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const element = document.createElement('textarea');
+    element.value = text;
+    document.body.appendChild(element);
+    element.select();
+    document.execCommand('copy');
+    document.body.removeChild(element);
+  }
 }
 
 function raceCaption(payload: IplSeasonPayload) {
@@ -226,11 +436,14 @@ async function exportRacePng(payload: IplSeasonPayload) {
 
 function App() {
   const [payload, setPayload] = useState<IplSeasonPayload | null>(null);
+  const [reelsManifest, setReelsManifest] = useState<ReelsManifest | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>('');
   const [targetGoal, setTargetGoal] = useState<TargetGoal>('4');
   const [copiedCaption, setCopiedCaption] = useState(false);
+  const [copiedShare, setCopiedShare] = useState<ShareKind | null>(null);
   const [exportingRace, setExportingRace] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [reelsError, setReelsError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -244,7 +457,7 @@ function App() {
         }
         const sorted = [...data.standings].sort(rankingSort);
         setPayload(data);
-        setSelectedTeamKey(sorted[0]?.teamKey || '');
+        setSelectedTeamKey(teamKeyFromHash(data) || sorted[0]?.teamKey || '');
         setError(null);
       })
       .catch((fetchError: Error) => {
@@ -263,12 +476,86 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    let active = true;
+
+    loadReelsManifest()
+      .then((manifest) => {
+        if (active) {
+          setReelsManifest(manifest);
+          setReelsError(null);
+        }
+      })
+      .catch((fetchError: Error) => {
+        if (active) {
+          setReelsError(fetchError.message);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!payload) {
+      return undefined;
+    }
+
+    const syncTeamFromHash = () => {
+      const hashTeam = teamKeyFromHash(payload);
+      if (hashTeam) {
+        setSelectedTeamKey(hashTeam);
+        scrollToSection('deep-dive');
+        return;
+      }
+
+      const sectionId = sectionIdFromHash();
+      if (sectionId) {
+        scrollToSection(sectionId);
+      }
+    };
+
+    window.addEventListener('hashchange', syncTeamFromHash);
+    window.addEventListener('popstate', syncTeamFromHash);
+    syncTeamFromHash();
+
+    return () => {
+      window.removeEventListener('hashchange', syncTeamFromHash);
+      window.removeEventListener('popstate', syncTeamFromHash);
+    };
+  }, [payload]);
+
+  useEffect(() => {
+    if (!payload) {
+      return;
+    }
+
+    const baseHref = appBaseHref();
+    const preview = absoluteAssetHref(reelsManifest?.latestPreviewPath || reelsManifest?.slides[0]?.path);
+
+    document.title = SEO_TITLE;
+    setCanonical(baseHref);
+    setMetaTag('name', 'description', SEO_DESCRIPTION);
+    setMetaTag('property', 'og:title', SEO_TITLE);
+    setMetaTag('property', 'og:description', SEO_DESCRIPTION);
+    setMetaTag('property', 'og:type', 'website');
+    setMetaTag('property', 'og:url', baseHref);
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
+    setMetaTag('name', 'twitter:title', SEO_TITLE);
+    setMetaTag('name', 'twitter:description', SEO_DESCRIPTION);
+    if (preview) {
+      setMetaTag('property', 'og:image', preview);
+      setMetaTag('name', 'twitter:image', preview);
+    }
+    setJsonLd(payload, reelsManifest);
+  }, [payload, reelsManifest]);
+
   const sortedStandings = useMemo(() => [...(payload?.standings || [])].sort(rankingSort), [payload]);
   const selectedTeam = useMemo(
     () => sortedStandings.find((team) => team.teamKey === selectedTeamKey) || sortedStandings[0],
     [selectedTeamKey, sortedStandings],
   );
-  const nextFixture = payload?.fixtures[0] || null;
 
   if (loading) {
     return (
@@ -293,26 +580,34 @@ function App() {
     );
   }
 
-  const topFourProbability = payload.analysis.overallProbabilities[selectedTeam.teamKey]?.top4 ?? 0;
-  const topTwoProbability = payload.analysis.overallProbabilities[selectedTeam.teamKey]?.top2 ?? 0;
+  const snapshot = raceSnapshot(payload);
+  const topFourProbability = top4Probability(payload, selectedTeam.teamKey);
+  const topTwoProbability = top2Probability(payload, selectedTeam.teamKey);
   const selectedTop4Path = getPath(payload, selectedTeam.teamKey, '4');
   const selectedTop2Path = getPath(payload, selectedTeam.teamKey, '2');
   const selectedGoalPath = getPath(payload, selectedTeam.teamKey, targetGoal);
   const sourceWarning = payload.metadata.data_freshness_status !== 'fresh' || payload.metadata.warnings.length > 0;
+  const sourceIsStale = ['stale', 'invalid'].includes(payload.metadata.data_freshness_status.toLowerCase());
+  const sourceWarningText = payload.metadata.warnings.join(' ') || `Freshness status: ${payload.metadata.data_freshness_status}.`;
+  const shareTextMap = shareTexts(payload);
+  const latestPackHref = `${appBaseHref()}#reels`;
+
+  const handleTeamSelect = (team: IplStanding) => {
+    setSelectedTeamKey(team.teamKey);
+    updateHash(`team=${encodeURIComponent(team.shortName)}`);
+    scrollToSection('deep-dive');
+  };
+
   const handleCopyCaption = async () => {
-    const caption = raceCaption(payload);
-    try {
-      await navigator.clipboard.writeText(caption);
-    } catch {
-      const element = document.createElement('textarea');
-      element.value = caption;
-      document.body.appendChild(element);
-      element.select();
-      document.execCommand('copy');
-      document.body.removeChild(element);
-    }
+    await copyToClipboard(raceCaption(payload));
     setCopiedCaption(true);
     window.setTimeout(() => setCopiedCaption(false), 1600);
+  };
+
+  const handleCopyShare = async (kind: ShareKind) => {
+    await copyToClipboard(shareTextMap[kind]);
+    setCopiedShare(kind);
+    window.setTimeout(() => setCopiedShare(null), 1600);
   };
 
   const handleExportRace = async () => {
@@ -326,20 +621,12 @@ function App() {
 
   return (
     <main className="pulse-app" data-testid="app-loaded">
-      <section className="hero-band compact-hero" aria-labelledby="page-title">
-        <div className="hero-copy">
-          <div>
-            <span className="eyebrow">
-              <Zap size={14} aria-hidden="true" />
-              IPL 2026 race board
-            </span>
-            <h1 id="page-title">IPL Playoff Pulse</h1>
-          </div>
-        </div>
-      </section>
+      <HeroSummary payload={payload} snapshot={snapshot} sourceIsStale={sourceIsStale} />
 
-      <section className="race-grid" aria-label="IPL playoff race summary">
-        <div className="ladder-panel" data-testid="standings-ladder">
+      <TodayRaceSummary payload={payload} snapshot={snapshot} />
+
+      <section className="race-grid" aria-label="IPL playoff race board">
+        <div className="ladder-panel" id="standings" data-testid="standings-ladder">
           <div className="section-heading">
             <div>
               <h2>Standings</h2>
@@ -367,7 +654,7 @@ function App() {
                 <div className="team-row-block" key={team.teamKey}>
                   <button
                     className={`standing-row ${isTopFour ? 'is-playoff-zone' : ''} ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
-                    onClick={() => setSelectedTeamKey(team.teamKey)}
+                    onClick={() => handleTeamSelect(team)}
                     type="button"
                   >
                     <span className="rank-pill">{team.rank}</span>
@@ -389,7 +676,7 @@ function App() {
           </div>
         </div>
 
-        <div className="probability-panel" data-testid="probability-panel">
+        <div className="probability-panel" id="top4" data-testid="probability-panel">
           <div className="section-heading">
             <div>
               <span className="panel-kicker">Exact path lab</span>
@@ -415,9 +702,7 @@ function App() {
                   className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
                   key={team.teamKey}
                   type="button"
-                  onClick={() => {
-                    setSelectedTeamKey(team.teamKey);
-                  }}
+                  onClick={() => handleTeamSelect(team)}
                 >
                   <span className="race-team">{team.shortName}</span>
                   <span className="race-track">
@@ -435,7 +720,7 @@ function App() {
         </div>
       </section>
 
-      <section className="team-detail-panel spotlight-card" aria-label="Selected team detail">
+      <section className="team-detail-panel spotlight-card" id="deep-dive" aria-label="Selected team detail">
         <div className="team-detail-header">
           <div className="spotlight-title">
             <span style={{ backgroundColor: teamColor(selectedTeam.teamKey), color: teamTextColor(selectedTeam.teamKey) }}>
@@ -460,48 +745,37 @@ function App() {
           </div>
         </div>
 
-        <dl>
-          <div>
-            <dt>Top 4</dt>
-            <dd>{formatPercent(topFourProbability)}</dd>
-          </div>
-          <div>
-            <dt>Top 2</dt>
-            <dd>{formatPercent(topTwoProbability)}</dd>
-          </div>
-          <div>
-            <dt>Ceiling</dt>
-            <dd>{maxPoints(selectedTeam)} pts</dd>
-          </div>
-          <div>
-            <dt>Path</dt>
-            <dd>{pathSummary(targetGoal === '4' ? selectedTop4Path : selectedTop2Path, targetGoal)}</dd>
-          </div>
-        </dl>
-
         <TeamDeepDive
+          path={selectedGoalPath}
           payload={payload}
           selectedTop2Path={selectedTop2Path}
           selectedTop4Path={selectedTop4Path}
+          target={targetGoal}
           team={selectedTeam}
+          topFourProbability={topFourProbability}
+          topTwoProbability={topTwoProbability}
         />
+      </section>
 
-        <div className="detail-content-grid">
+      <section className="reels-panel" id="reels" aria-labelledby="reels-title">
+        <div className="section-heading reels-heading">
           <div>
-            {nextFixture && <NextUpNote fixture={nextFixture} payload={payload} />}
-            <SelectedTeamContext
-              impacts={sortedImpacts(selectedGoalPath, 5)}
-              payload={payload}
-              target={targetGoal}
-              team={selectedTeam}
-            />
+            <span className="panel-kicker">Share pack</span>
+            <h2 id="reels-title">Reels Pack</h2>
           </div>
-          <TeamPathDetails
-            path={selectedGoalPath}
-            target={targetGoal}
-            team={selectedTeam}
-          />
+          <a className="latest-pack-link" href={latestPackHref}>
+            Latest pack
+            <ExternalLink size={12} aria-hidden="true" />
+          </a>
         </div>
+
+        <ReelsPack
+          copiedShare={copiedShare}
+          error={reelsError}
+          manifest={reelsManifest}
+          onCopyShare={handleCopyShare}
+          payload={payload}
+        />
       </section>
 
       <footer className="pulse-footer">
@@ -516,7 +790,7 @@ function App() {
         </a>
         {sourceWarning && (
           <span className="footer-warning" data-testid="freshness-warning">
-            Data note: {payload.metadata.warnings.join(' ')}
+            Data note: {sourceWarningText}
           </span>
         )}
       </footer>
@@ -524,147 +798,337 @@ function App() {
   );
 }
 
-const SelectedTeamContext = ({
-  impacts,
+const HeroSummary = ({
   payload,
+  snapshot,
+  sourceIsStale,
+}: {
+  payload: IplSeasonPayload;
+  snapshot: ReturnType<typeof raceSnapshot>;
+  sourceIsStale: boolean;
+}) => (
+  <section className="hero-band compact-hero" aria-labelledby="page-title">
+    <div className="hero-copy">
+      <div className="hero-main">
+        <span className="eyebrow">
+          <Zap size={14} aria-hidden="true" />
+          IPL Playoff Pulse
+        </span>
+        <h1 id="page-title">IPL Top 4 Qualification Probabilities</h1>
+        <p>Updated daily after the night match</p>
+        <nav className="quick-links" aria-label="Page sections">
+          <a href="#standings">Standings</a>
+          <a href="#top4">Top 4</a>
+          <a href="#reels">Reels</a>
+          <a href="#deep-dive">Deep dive</a>
+        </nav>
+      </div>
+
+      <div className="hero-facts" aria-label="Race snapshot">
+        <div>
+          <span>Current Top 4</span>
+          <strong>{snapshot.currentTopFour.map((team) => team.shortName).join(', ')}</strong>
+        </div>
+        <div>
+          <span>Cutline team</span>
+          <strong>
+            {snapshot.cutlineTeam
+              ? `${snapshot.cutlineTeam.shortName} ${formatPercent(top4Probability(payload, snapshot.cutlineTeam.teamKey))}`
+              : 'Unavailable'}
+          </strong>
+        </div>
+        <div>
+          <span>Nearest challenger</span>
+          <strong>
+            {snapshot.nearestChallenger
+              ? `${snapshot.nearestChallenger.shortName} ${formatPercent(top4Probability(payload, snapshot.nearestChallenger.teamKey))}`
+              : 'Unavailable'}
+          </strong>
+        </div>
+        <div>
+          <span>Latest update</span>
+          <strong data-testid="latest-update">{formatGeneratedAt(payload.metadata.generated_at)}</strong>
+        </div>
+      </div>
+
+      <div className="hero-meta">
+        <span>Source: {payload.metadata.source}</span>
+        <span>{payload.analysis.method}</span>
+        <span>Probabilities exclude NRR simulation</span>
+      </div>
+      {sourceIsStale && <p className="stale-alert">Data freshness is marked {payload.metadata.data_freshness_status}.</p>}
+    </div>
+  </section>
+);
+
+const TodayRaceSummary = ({
+  payload,
+  snapshot,
+}: {
+  payload: IplSeasonPayload;
+  snapshot: ReturnType<typeof raceSnapshot>;
+}) => (
+  <section className="race-summary-panel" aria-labelledby="race-summary-title">
+    <div className="section-heading">
+      <div>
+        <span className="panel-kicker">Today&apos;s race summary</span>
+        <h2 id="race-summary-title">Today&apos;s Race Summary</h2>
+      </div>
+      <ShieldCheck aria-hidden="true" />
+    </div>
+
+    <div className="race-summary-grid">
+      <article>
+        <span>Current Top 4</span>
+        <strong>{snapshot.currentTopFour.map((team) => team.shortName).join(', ')}</strong>
+      </article>
+      <article>
+        <span>Cutline team</span>
+        <strong>{snapshot.cutlineTeam?.shortName || 'Unavailable'}</strong>
+        {snapshot.cutlineTeam && <small>{formatPercent(top4Probability(payload, snapshot.cutlineTeam.teamKey))} Top 4 chance</small>}
+      </article>
+      <article>
+        <span>Biggest Top 4 riser</span>
+        <strong>Previous snapshot unavailable</strong>
+        <small>Daily delta needs a prior probability payload.</small>
+      </article>
+      <article>
+        <span>Biggest Top 4 faller</span>
+        <strong>Previous snapshot unavailable</strong>
+        <small>Daily delta needs a prior probability payload.</small>
+      </article>
+      <article>
+        <span>Teams in danger</span>
+        <strong>{snapshot.inDanger.map((team) => team.shortName).join(', ') || 'Unavailable'}</strong>
+        <small>Lowest Top 4 odds inside the current top four.</small>
+      </article>
+      <article>
+        <span>Teams almost safe</span>
+        <strong>{snapshot.almostSafe.map((team) => team.shortName).join(', ') || 'Unavailable'}</strong>
+        <small>{snapshot.almostSafeIsFallback ? 'No team is at 90%; showing highest current odds.' : 'At or above 90% Top 4 chance.'}</small>
+      </article>
+    </div>
+  </section>
+);
+
+const TeamDeepDive = ({
+  path,
+  payload,
+  selectedTop2Path,
+  selectedTop4Path,
   target,
   team,
+  topFourProbability,
+  topTwoProbability,
 }: {
-  impacts: FixtureImpact[];
+  path: QualificationPathResult | null;
   payload: IplSeasonPayload;
+  selectedTop2Path: QualificationPathResult | null;
+  selectedTop4Path: QualificationPathResult | null;
   target: TargetGoal;
   team: IplStanding;
+  topFourProbability: number;
+  topTwoProbability: number;
 }) => {
   const ownFixtures = payload.fixtures
     .filter((fixture) => fixture.teamA === team.teamKey || fixture.teamB === team.teamKey)
     .slice(0, 5);
-  const neutralImpacts = impacts.filter((impact) => impact.teamA !== team.teamKey && impact.teamB !== team.teamKey).slice(0, 5);
+  const rivalImpacts = sortedImpacts(path, 6)
+    .filter((impact) => impact.teamA !== team.teamKey && impact.teamB !== team.teamKey)
+    .slice(0, 4);
 
   return (
-    <div className="selected-team-context">
-      <div className="context-columns">
-        <div>
-          <h4>Own wins to control</h4>
+    <div className="deep-dive-layout">
+      <div className="deep-dive-grid">
+        <article>
+          <span className="mini-label">Top 4 chance</span>
+          <strong>{formatPercent(topFourProbability)}</strong>
+          <small>{pathShort(selectedTop4Path)}</small>
+        </article>
+        <article>
+          <span className="mini-label">Top 2 chance</span>
+          <strong>{formatPercent(topTwoProbability)}</strong>
+          <small>{pathShort(selectedTop2Path)}</small>
+        </article>
+        <article>
+          <span className="mini-label">Points, rank, NRR</span>
+          <strong>#{team.rank} · {team.points} pts · {formatNrr(team.nrr)}</strong>
+          <small>{team.matches} played, {team.remainingMatches} left, max {maxPoints(team)} pts</small>
+        </article>
+        <article>
+          <span className="mini-label">What they need</span>
+          <strong>{pathSummary(path, target)}</strong>
+          <small>{targetLabel(target)} model, excluding NRR simulation.</small>
+        </article>
+      </div>
+
+      <div className="deep-dive-columns">
+        <article className="deep-dive-section">
+          <h4>
+            <CalendarClock size={15} aria-hidden="true" />
+            Own fixtures
+          </h4>
           <ul className="fixture-list">
             {ownFixtures.map((fixture) => {
               const opponentKey = fixture.teamA === team.teamKey ? fixture.teamB : fixture.teamA;
               return (
                 <li key={fixture.id}>
-                  <span>{team.shortName} beat {teamShortName(payload, opponentKey)}</span>
-                  <small>{formatFixtureTime(fixture)}</small>
+                  <span>{team.shortName} vs {teamShortName(payload, opponentKey)}</span>
+                  <small>{formatFixtureTime(fixture)} · {fixture.venue || 'Venue TBA'}</small>
                 </li>
               );
             })}
-          </ul>
-        </div>
-        <div>
-          <h4>{neutralImpacts.length > 0 ? 'Helpful neutral results' : 'Highest swing results'}</h4>
-          <ul className="impact-list compact-impact-list">
-            {neutralImpacts.length > 0 ? (
-              neutralImpacts.map((impact) => (
-                <li key={`${team.teamKey}-${target}-${impact.fixtureId}`}>
-                  <strong>{impact.preferredLabel}</strong>
-                  <small>{impact.label} · adds {impact.impact.toFixed(1)} pts to {targetLabel(target)} odds</small>
-                </li>
-              ))
-            ) : (
-              impacts.slice(0, 3).map((impact) => (
-                <li key={`${team.teamKey}-${target}-${impact.fixtureId}`}>
-                  <strong>{impact.preferredLabel}</strong>
-                  <small>{impact.label} · adds {impact.impact.toFixed(1)} pts to {targetLabel(target)} odds</small>
-                </li>
-              ))
-            )}
-            {impacts.length === 0 && (
+            {ownFixtures.length === 0 && (
               <li>
-                <span>No material fixture dependency found.</span>
-                <strong>Either result</strong>
-                <small>0.0 point swing</small>
+                <span>No own fixtures listed.</span>
+                <small>The current fixture feed does not list another match for {team.shortName}.</small>
               </li>
             )}
           </ul>
+        </article>
+
+        <article className="deep-dive-section">
+          <h4>Rival results that help</h4>
+          <ul className="impact-list compact-impact-list">
+            {rivalImpacts.map((impact) => (
+              <li key={`${team.teamKey}-${target}-help-${impact.fixtureId}`}>
+                <strong>{impact.preferredLabel}</strong>
+                <small>{impact.label} · adds {impact.impact.toFixed(1)} pts to {targetLabel(target)} odds</small>
+              </li>
+            ))}
+            {rivalImpacts.length === 0 && (
+              <li>
+                <strong>No clear rival swing.</strong>
+                <small>The current model does not show a material neutral fixture dependency.</small>
+              </li>
+            )}
+          </ul>
+        </article>
+
+        <article className="deep-dive-section">
+          <h4>Rival results that hurt</h4>
+          <ul className="impact-list compact-impact-list">
+            {rivalImpacts.map((impact) => (
+              <li key={`${team.teamKey}-${target}-hurt-${impact.fixtureId}`}>
+                <strong>{oppositeResultLabel(payload, impact)}</strong>
+                <small>{impact.label} · costs {impact.impact.toFixed(1)} pts versus preferred result</small>
+              </li>
+            ))}
+            {rivalImpacts.length === 0 && (
+              <li>
+                <strong>No clear rival swing.</strong>
+                <small>No material opposite result is available from this payload.</small>
+              </li>
+            )}
+          </ul>
+        </article>
+      </div>
+
+      <div className="deep-dive-bottom">
+        <article className="deep-dive-section practical-takeaway">
+          <h4>Practical takeaway</h4>
+          <strong>{practicalTakeaway(payload, team, selectedTop4Path)}</strong>
+        </article>
+
+        <div className="path-details">
+          <h4>{team.shortName} {targetLabel(target)} win buckets</h4>
+          <div className="bucket-grid">
+            {(path?.ownWinBuckets || []).map((bucket) => (
+              <div className="bucket-cell" key={`${team.teamKey}-${target}-${bucket.wins}`}>
+                <span>{bucket.wins}W</span>
+                <strong>{formatPercent(bucket.probability)}</strong>
+                <small>{bucket.scenarios.toLocaleString()} scenarios</small>
+              </div>
+            ))}
+            {(path?.ownWinBuckets || []).length === 0 && (
+              <div className="bucket-cell">
+                <span>No buckets</span>
+                <strong>Unavailable</strong>
+                <small>No own-win bucket data in this payload.</small>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const TeamDeepDive = ({
+const ReelsPack = ({
+  copiedShare,
+  error,
+  manifest,
+  onCopyShare,
   payload,
-  selectedTop2Path,
-  selectedTop4Path,
-  team,
 }: {
+  copiedShare: ShareKind | null;
+  error: string | null;
+  manifest: ReelsManifest | null;
+  onCopyShare: (kind: ShareKind) => void;
   payload: IplSeasonPayload;
-  selectedTop2Path: QualificationPathResult | null;
-  selectedTop4Path: QualificationPathResult | null;
-  team: IplStanding;
 }) => {
-  const top4 = payload.analysis.overallProbabilities[team.teamKey]?.top4 ?? 0;
-  const top2 = payload.analysis.overallProbabilities[team.teamKey]?.top2 ?? 0;
+  if (error) {
+    return <p className="reels-state" role="status">Latest Reels manifest unavailable: {error}</p>;
+  }
+
+  if (!manifest) {
+    return <p className="reels-state" role="status">Loading latest Reels pack...</p>;
+  }
 
   return (
-    <div className="deep-dive-grid">
-      <article>
-        <span className="mini-label">Table position</span>
-        <strong>#{team.rank} · {team.points} pts · {formatNrr(team.nrr)} NRR</strong>
-        <small>{team.matches} played, {team.remainingMatches} left, max {maxPoints(team)} pts</small>
-      </article>
-      <article>
-        <span className="mini-label">Top 4 outlook</span>
-        <strong>{formatPercent(top4)}</strong>
-        <small>{pathShort(selectedTop4Path)}</small>
-      </article>
-      <article>
-        <span className="mini-label">Top 2 outlook</span>
-        <strong>{formatPercent(top2)}</strong>
-        <small>{pathShort(selectedTop2Path)}</small>
-      </article>
-      <article>
-        <span className="mini-label">Practical brief</span>
-        <strong>{team.shortName} need own wins first.</strong>
-        <small>Neutral help matters most where the swing list calls out direct playoff rivals dropping points.</small>
-      </article>
-    </div>
+    <>
+      <div className="reels-toolbar">
+        <div>
+          <span className="mini-label">Latest folder</span>
+          <strong>{manifest.latestDate || 'Unavailable'}</strong>
+          <small>Data updated {formatGeneratedAt(payload.metadata.generated_at)}</small>
+        </div>
+        <div className="caption-actions" aria-label="Copy captions">
+          {(['instagram', 'x', 'whatsapp'] as ShareKind[]).map((kind) => (
+            <button key={kind} onClick={() => onCopyShare(kind)} type="button">
+              {copiedShare === kind ? <Check size={13} aria-hidden="true" /> : <Clipboard size={13} aria-hidden="true" />}
+              {kind === 'instagram' ? 'Instagram caption' : kind === 'x' ? 'X short post' : 'WhatsApp share text'}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="reels-gallery" data-testid="reels-gallery">
+        {manifest.slides.map((slide, index) => (
+          <ReelSlideCard index={index} key={slide.path} slide={slide} />
+        ))}
+      </div>
+
+      {manifest.slides.length === 0 && <p className="reels-state">No slide PNGs were listed in the latest manifest.</p>}
+      {manifest.warnings.length > 0 && (
+        <p className="reels-warning">Pack note: {manifest.warnings.join(' ')}</p>
+      )}
+    </>
   );
 };
 
-const TeamPathDetails = ({
-  path,
-  target,
-  team,
-}: {
-  path: QualificationPathResult | null;
-  target: TargetGoal;
-  team: IplStanding;
-}) => (
-  <div className="path-details">
-    <h4>{team.shortName} {targetLabel(target)} Win Buckets</h4>
-    <div className="bucket-grid">
-      {(path?.ownWinBuckets || []).map((bucket) => (
-        <div className="bucket-cell" key={`${team.teamKey}-${target}-${bucket.wins}`}>
-          <span>{bucket.wins}W</span>
-          <strong>{formatPercent(bucket.probability)}</strong>
-          <small>{bucket.scenarios.toLocaleString()} scenarios</small>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const NextUpNote = ({ fixture, payload }: { fixture: IplFixture; payload: IplSeasonPayload }) => {
-  const left = payload.standings.find((team) => team.teamKey === fixture.teamA);
-  const right = payload.standings.find((team) => team.teamKey === fixture.teamB);
-
+const ReelSlideCard = ({ index, slide }: { index: number; slide: ReelsSlide }) => {
+  const href = publicAssetUrl(slide.path);
   return (
-    <aside className="next-up-note" aria-label="Next fixture">
-      <CalendarClock size={16} aria-hidden="true" />
+    <article className="reel-slide-card">
+      <a href={href} aria-label={`Open Reels slide ${index + 1}`}>
+        <img
+          alt={`IPL Playoff Pulse Reels slide ${index + 1}`}
+          decoding="async"
+          height={slide.imageHeight}
+          loading="lazy"
+          src={href}
+          width={slide.imageWidth}
+        />
+      </a>
       <div>
-        <span className="mini-label">Next fixture</span>
-        <strong>{left?.shortName || fixture.teamA} vs {right?.shortName || fixture.teamB}</strong>
-        <small>{formatFixtureTime(fixture)} · {fixture.venue || 'Venue TBA'}</small>
+        <span>Slide {String(index + 1).padStart(2, '0')}</span>
+        <a href={href} download={slide.downloadName}>
+          <Download size={13} aria-hidden="true" />
+          Download
+        </a>
       </div>
-    </aside>
+    </article>
   );
 };
 
