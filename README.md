@@ -62,8 +62,9 @@ The application consists of a Python backend (Streamlit app) that also serves da
         python extract_table.py
         python scripts/create_instagram_carousel.py
         ```
-    *   `CRICDATA_SERIES_ID` is recommended so the scheduled GitHub workflow uses a pinned API path. If it is absent, the generator discovers the IPL 2026 series id through CricketData's `series` endpoint before calling `series_points` and `series_info`.
-    *   The generator fails if standings arithmetic is impossible, NRR is missing, or the fixture feed is partial. It does not scrape fallback standings for production probabilities.
+    *   `CRICDATA_SERIES_ID` is recommended so the scheduled GitHub workflow uses a pinned API path. If it is absent, the generator discovers the IPL 2026 series id through CricketData's `series` endpoint before calling `series_info` and `series_points`.
+    *   Standings are derived from CricketData match results in `series_info`; `series_points` is used only for display NRR when its record agrees with the derived match ledger.
+    *   The generator fails if standings arithmetic is impossible or the fixture feed is partial. Missing NRR is allowed because probability calculations do not use NRR.
 
 2.  **Run the Python Streamlit Application (Backend/API):**
     *   The Streamlit application (`ipl_analysis_app.py`) can serve as an interactive UI itself and also potentially as an API if the frontend is configured to fetch data from it (though current frontend setup seems to fetch static JSONs).

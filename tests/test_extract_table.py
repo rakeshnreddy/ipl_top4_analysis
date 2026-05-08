@@ -185,6 +185,71 @@ class ExtractTableTests(unittest.TestCase):
         self.assertEqual(len(standings), 10)
         self.assertIsNone(standings[0]["nrr"])
 
+    def test_derive_cricdata_standings_from_match_results(self) -> None:
+        info_payload = {
+            "status": "success",
+            "data": {
+                "matchList": [
+                    {
+                        "id": "m1",
+                        "name": "Punjab Kings vs Royal Challengers Bengaluru, 1st Match",
+                        "teams": ["Punjab Kings", "Royal Challengers Bengaluru"],
+                        "status": "Punjab Kings won by 7 wickets",
+                        "matchEnded": True,
+                    },
+                    {
+                        "id": "m2",
+                        "name": "Sunrisers Hyderabad vs Rajasthan Royals, 2nd Match",
+                        "teams": ["Sunrisers Hyderabad", "Rajasthan Royals"],
+                        "status": "No result",
+                        "matchEnded": True,
+                    },
+                    {
+                        "id": "m3",
+                        "name": "Gujarat Titans vs Delhi Capitals, 3rd Match",
+                        "teams": ["Gujarat Titans", "Delhi Capitals"],
+                        "status": "Match not started",
+                    },
+                ]
+            },
+        }
+
+        standings = extract_table.derive_cricdata_standings_from_matches(info_payload)
+        by_key = {row["teamKey"]: row for row in standings}
+
+        self.assertEqual(by_key["Punjab"]["wins"], 1)
+        self.assertEqual(by_key["Punjab"]["points"], 2)
+        self.assertEqual(by_key["Bangalore"]["losses"], 1)
+        self.assertEqual(by_key["Hyderabad"]["noResult"], 1)
+        self.assertEqual(by_key["Rajasthan"]["points"], 1)
+        self.assertEqual(by_key["Gujarat"]["matches"], 0)
+
+    def test_points_table_nrr_is_attached_only_when_record_matches_results(self) -> None:
+        standings = valid_standings(nrr=None)
+        points_payload = {
+            "status": "success",
+            "data": [
+                {
+                    "teamname": row["fullName"],
+                    "matches": row["matches"],
+                    "wins": row["wins"],
+                    "losses": row["losses"],
+                    "nr": row["noResult"],
+                    "points": row["points"],
+                    "nrr": "0.250",
+                }
+                for row in standings
+            ],
+        }
+        points_payload["data"][0]["losses"] = 5
+        warnings: list[str] = []
+
+        extract_table.apply_cricdata_nrr_from_points(standings, points_payload, warnings)
+
+        self.assertIsNone(standings[0]["nrr"])
+        self.assertEqual(standings[1]["nrr"], 0.25)
+        self.assertTrue(any("did not match match results" in warning for warning in warnings))
+
     def test_validation_rejects_impossible_match_counts(self) -> None:
         standings = [
             {

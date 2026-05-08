@@ -508,6 +508,133 @@ def extract_cricdata_match_rows(payload: dict[str, Any]) -> list[dict[str, Any]]
     return []
 
 
+def cricdata_match_number(item: dict[str, Any]) -> int | None:
+    raw_name = str(first_present(item, ("name", "matchName"), ""))
+    match_no = first_present(item, ("matchNumber", "matchNo", "match_no"))
+    if match_no not in (None, "") and numeric_token(str(match_no)):
+        return parse_int(str(match_no))
+    return parse_match_number(raw_name)
+
+
+def cricdata_winner(item: dict[str, Any], teams: tuple[str, str], status: str) -> str | None:
+    winner_raw = first_present(item, ("winner", "winningTeam", "matchWinner"))
+    if winner_raw:
+        winner = team_key(str(winner_raw))
+        if winner in teams:
+            return winner
+
+    lower_status = status.lower()
+    if "won" not in lower_status:
+        return None
+    for team in teams:
+        meta = TEAM_META[team]
+        candidates = (team.lower(), meta.short_name.lower(), meta.full_name.lower())
+        if any(candidate in lower_status for candidate in candidates):
+            return team
+    return None
+
+
+def cricdata_no_result(status: str) -> bool:
+    lower_status = status.lower()
+    return any(token in lower_status for token in ("no result", "no-result", "abandoned", "washed out"))
+
+
+def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    table = {
+        meta.key: {
+            "teamKey": meta.key,
+            "shortName": meta.short_name,
+            "fullName": meta.full_name,
+            "matches": 0,
+            "wins": 0,
+            "losses": 0,
+            "noResult": 0,
+            "points": 0,
+            "nrr": None,
+            "rank": 999,
+            "remainingMatches": LEAGUE_MATCHES_PER_TEAM,
+        }
+        for meta in TEAM_META.values()
+    }
+
+    completed = 0
+    for item in extract_cricdata_match_rows(payload):
+        teams = extract_match_teams(item)
+        if not teams:
+            continue
+        match_no = cricdata_match_number(item)
+        if match_no is not None and match_no > 70:
+            continue
+
+        status = clean_text(str(first_present(item, ("status", "matchStatus", "state"), "")))
+        winner = cricdata_winner(item, teams, status)
+        no_result = cricdata_no_result(status)
+        match_ended = bool(item.get("matchEnded") or item.get("completed"))
+        has_result = winner is not None or no_result
+        if not has_result and not match_ended:
+            continue
+        if not has_result:
+            continue
+
+        left, right = teams
+        table[left]["matches"] += 1
+        table[right]["matches"] += 1
+        completed += 1
+
+        if winner:
+            loser = right if winner == left else left
+            table[winner]["wins"] += 1
+            table[winner]["points"] += 2
+            table[loser]["losses"] += 1
+        else:
+            table[left]["noResult"] += 1
+            table[right]["noResult"] += 1
+            table[left]["points"] += 1
+            table[right]["points"] += 1
+
+    if completed == 0:
+        raise SourceValidationError("CricketData series_info did not contain completed match results")
+
+    for row in table.values():
+        row["remainingMatches"] = max(0, LEAGUE_MATCHES_PER_TEAM - row["matches"])
+    return list(table.values())
+
+
+def apply_cricdata_nrr_from_points(
+    standings: list[dict[str, Any]],
+    points_payload: dict[str, Any],
+    warnings: list[str],
+) -> None:
+    by_key = {row["teamKey"]: row for row in standings}
+    try:
+        points_rows = parse_cricdata_standings(points_payload)
+    except SourceValidationError as exc:
+        warnings.append(f"CricketData points table could not be used for NRR: {exc}")
+        return
+
+    attached = 0
+    mismatched: list[str] = []
+    for points_row in points_rows:
+        derived = by_key.get(points_row["teamKey"])
+        if not derived:
+            continue
+        same_record = all(
+            derived[field] == points_row[field]
+            for field in ("matches", "wins", "losses", "noResult", "points")
+        )
+        if not same_record:
+            mismatched.append(points_row["shortName"])
+            continue
+        if points_row.get("nrr") is not None:
+            derived["nrr"] = points_row["nrr"]
+            attached += 1
+
+    if mismatched:
+        warnings.append(
+            "CricketData points table record did not match match results for "
+            f"{', '.join(mismatched)}; standings were derived from match results."
+        )
+
 def parse_cricdata_fixtures(payload: dict[str, Any], now: datetime) -> list[dict[str, Any]]:
     fixtures: list[dict[str, Any]] = []
 
@@ -531,9 +658,7 @@ def parse_cricdata_fixtures(payload: dict[str, Any], now: datetime) -> list[dict
         if status and not any(token in status for token in ("not started", "upcoming", "scheduled")) and not is_future_date:
             continue
 
-        raw_name = str(first_present(item, ("name", "matchName"), ""))
-        match_no = first_present(item, ("matchNumber", "matchNo", "match_no"))
-        match_no_int = parse_int(str(match_no)) if match_no not in (None, "") and numeric_token(str(match_no)) else parse_match_number(raw_name)
+        match_no_int = cricdata_match_number(item)
 
         fixtures.append(
             {
@@ -560,15 +685,19 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
 
     session = requests.Session()
     series_id = find_cricdata_series_id(session, api_key)
-    points_payload = fetch_cricdata_json(session, "series_points", api_key, {"id": series_id})
     info_payload = fetch_cricdata_json(session, "series_info", api_key, {"offset": 0, "id": series_id})
 
     warnings: list[str] = []
-    standings = parse_cricdata_standings(points_payload)
+    standings = derive_cricdata_standings_from_matches(info_payload)
+    try:
+        points_payload = fetch_cricdata_json(session, "series_points", api_key, {"id": series_id})
+        apply_cricdata_nrr_from_points(standings, points_payload, warnings)
+    except SourceValidationError as exc:
+        warnings.append(f"CricketData points table could not be used for NRR: {exc}")
     missing_nrr = [row["shortName"] for row in standings if row.get("nrr") is None]
     if missing_nrr:
         warnings.append(
-            "CricketData standings omitted NRR for "
+            "CricketData did not provide usable NRR for "
             f"{', '.join(missing_nrr)}; probabilities were generated without NRR."
         )
     fixtures = parse_cricdata_fixtures(info_payload, now)
@@ -702,7 +831,7 @@ def validate_source_data(
 
 def ranked_standings(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     has_complete_nrr = all(isinstance(row.get("nrr"), float) for row in rows)
-    has_source_rank = all(isinstance(row.get("rank"), int) and row["rank"] > 0 for row in rows)
+    has_source_rank = all(isinstance(row.get("rank"), int) and 0 < row["rank"] <= len(TEAM_META) for row in rows)
     if has_complete_nrr:
         ranked = sorted(
             rows,
