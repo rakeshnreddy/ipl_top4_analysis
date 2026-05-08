@@ -116,7 +116,7 @@ function installFetch(payload: IplSeasonPayload = mockPayload, manifest: ReelsMa
 describe('App', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    window.history.replaceState(null, '', '/ipl_top4_analysis/');
+    window.history.replaceState(null, '', '/');
     window.HTMLElement.prototype.scrollIntoView = vi.fn();
     installFetch();
   });
@@ -136,7 +136,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /^caption$/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /png/i })).toBeInTheDocument();
     expect(screen.queryByTestId('share-lab')).not.toBeInTheDocument();
-    expect(globalThis.fetch).toHaveBeenCalledWith('/ipl_top4_analysis/data/ipl-2026.json', { cache: 'no-cache' });
+    expect(globalThis.fetch).toHaveBeenCalledWith('/data/ipl-2026.json', { cache: 'no-cache' });
   });
 
   it('sorts the standings by points, then NRR, then wins', async () => {
@@ -180,7 +180,7 @@ describe('App', () => {
   });
 
   it('selects a team from a deep link hash', async () => {
-    window.history.replaceState(null, '', '/ipl_top4_analysis/#team=CSK');
+    window.history.replaceState(null, '', '/#team=CSK');
 
     render(<App />);
 

@@ -43,7 +43,7 @@ describe('loadIplData', () => {
     });
 
     await expect(loadIplData(fetchImpl as unknown as typeof fetch)).resolves.toEqual(validPayload);
-    expect(fetchImpl).toHaveBeenCalledWith('/ipl_top4_analysis/data/ipl-2026.json', { cache: 'no-cache' });
+    expect(fetchImpl).toHaveBeenCalledWith('/data/ipl-2026.json', { cache: 'no-cache' });
   });
 
   it('allows standings rows without NRR', async () => {

@@ -36,7 +36,7 @@ describe('loadReelsManifest', () => {
     });
 
     await expect(loadReelsManifest(fetchImpl as unknown as typeof fetch)).resolves.toEqual(validManifest);
-    expect(fetchImpl).toHaveBeenCalledWith('/ipl_top4_analysis/social/instagram-carousel/manifest.json', { cache: 'no-cache' });
+    expect(fetchImpl).toHaveBeenCalledWith('/social/instagram-carousel/manifest.json', { cache: 'no-cache' });
   });
 
   it('rejects malformed manifests', async () => {
@@ -50,7 +50,7 @@ describe('loadReelsManifest', () => {
 
   it('builds public asset URLs under the app base path', () => {
     expect(publicAssetUrl('social/instagram-carousel/latest-overview.png')).toBe(
-      '/ipl_top4_analysis/social/instagram-carousel/latest-overview.png',
+      '/social/instagram-carousel/latest-overview.png',
     );
   });
 });

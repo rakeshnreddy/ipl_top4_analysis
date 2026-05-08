@@ -95,7 +95,7 @@ jobs:
       - name: Build frontend
         working-directory: frontend/ipl-analyzer-frontend
         run: |
-          npm run build
+          npm run build:github
           touch dist/.nojekyll
 
       - name: Configure Pages

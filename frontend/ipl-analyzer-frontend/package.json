@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run build:cloudflare",
+    "build:cloudflare": "tsc -b && vite build --base=/",
+    "build:github": "tsc -b && vite build --base=/ipl_top4_analysis/",
     "lint": "eslint .",
     "preview": "vite preview",
+    "preview:cloudflare": "vite preview --host 127.0.0.1",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },

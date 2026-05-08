@@ -1,0 +1,11 @@
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/social/instagram-carousel/manifest.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/social/instagram-carousel/latest-overview.png
+  Cache-Control: public, max-age=300, must-revalidate
