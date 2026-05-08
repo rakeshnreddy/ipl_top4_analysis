@@ -7,6 +7,57 @@ from unittest import mock
 import extract_table
 
 
+def valid_standings() -> list[dict[str, object]]:
+    return [
+        {
+            "teamKey": meta.key,
+            "shortName": meta.short_name,
+            "fullName": meta.full_name,
+            "matches": 8,
+            "wins": 4,
+            "losses": 4,
+            "noResult": 0,
+            "points": 8,
+            "nrr": float(index) / 10,
+            "rank": index,
+            "remainingMatches": 6,
+        }
+        for index, meta in enumerate(extract_table.TEAM_META.values(), start=1)
+    ]
+
+
+def valid_fixture(match_no: int = 44) -> dict[str, object]:
+    team_keys = list(extract_table.TEAM_META)
+    team_a = team_keys[match_no % len(team_keys)]
+    team_b = team_keys[(match_no + 1) % len(team_keys)]
+    return {
+        "id": f"test-fixture-{match_no}",
+        "matchNo": match_no,
+        "teamA": team_a,
+        "teamB": team_b,
+        "dateTimeGMT": "2026-05-02T14:00:00Z",
+        "dateTimeLocal": None,
+        "venue": "MA Chidambaram Stadium, Chennai",
+        "status": "scheduled",
+        "sourceUrl": extract_table.CRICDATA_SERIES_INFO_URL,
+    }
+
+
+def valid_fixtures(count: int) -> list[dict[str, object]]:
+    return [valid_fixture(match_no) for match_no in range(44, 44 + count)]
+
+
+def analysis_stub() -> dict[str, object]:
+    return {
+        "method": "Exact all-combinations",
+        "simulationCount": 1,
+        "generatedAt": "2026-05-01T12:00:00Z",
+        "overallProbabilities": {},
+        "teamAnalysis": {"4": {}, "2": {}},
+        "qualificationPath": {"4": {}, "2": {}},
+    }
+
+
 class ExtractTableTests(unittest.TestCase):
     def test_parse_cricbuzz_points_table_fixture(self) -> None:
         html = """
@@ -136,6 +187,44 @@ class ExtractTableTests(unittest.TestCase):
                 strict_zero_fixtures=True,
             )
 
+    def test_validation_rejects_bad_row_arithmetic(self) -> None:
+        standings = valid_standings()
+        standings[0]["points"] = 9
+
+        with self.assertRaisesRegex(extract_table.SourceValidationError, "Invalid standings points"):
+            extract_table.validate_source_data(
+                standings,
+                [valid_fixture()],
+                datetime(2026, 5, 1, tzinfo=timezone.utc),
+                strict_zero_fixtures=True,
+            )
+
+    def test_validation_rejects_inconsistent_win_loss_totals(self) -> None:
+        standings = valid_standings()
+        standings[0]["matches"] = 9
+        standings[0]["losses"] = 5
+        standings[0]["remainingMatches"] = 5
+
+        with self.assertRaisesRegex(extract_table.SourceValidationError, "wins=40, losses=41"):
+            extract_table.validate_source_data(
+                standings,
+                [valid_fixture()],
+                datetime(2026, 5, 1, tzinfo=timezone.utc),
+                strict_zero_fixtures=True,
+            )
+
+    def test_validation_rejects_partial_fixture_feed_when_required(self) -> None:
+        standings = valid_standings()
+
+        with self.assertRaisesRegex(extract_table.SourceValidationError, "Fixture feed appears partial"):
+            extract_table.validate_source_data(
+                standings,
+                [valid_fixture()],
+                datetime(2026, 5, 1, tzinfo=timezone.utc),
+                strict_zero_fixtures=True,
+                strict_partial_fixtures=True,
+            )
+
     def test_legacy_outputs_are_derived_from_canonical_payload(self) -> None:
         standings = [
             {
@@ -183,47 +272,66 @@ class ExtractTableTests(unittest.TestCase):
         )
 
     def test_build_payload_prefers_cricketdata_before_cricbuzz(self) -> None:
-        standings = [
-            {
-                "teamKey": meta.key,
-                "shortName": meta.short_name,
-                "fullName": meta.full_name,
-                "matches": 8,
-                "wins": 4,
-                "losses": 4,
-                "noResult": 0,
-                "points": 8,
-                "nrr": float(index) / 10,
-                "rank": index,
-                "remainingMatches": 6,
-            }
-            for index, meta in enumerate(extract_table.TEAM_META.values(), start=1)
-        ]
-        fixtures = [
-            {
-                "id": "cricdata-test",
-                "matchNo": 44,
-                "teamA": "Chennai",
-                "teamB": "Mumbai",
-                "dateTimeGMT": "2026-05-02T14:00:00Z",
-                "dateTimeLocal": None,
-                "venue": "MA Chidambaram Stadium, Chennai",
-                "status": "scheduled",
-                "sourceUrl": extract_table.CRICDATA_SERIES_INFO_URL,
-            }
-        ]
+        standings = valid_standings()
+        fixtures = valid_fixtures(30)
 
         with mock.patch.object(
             extract_table,
             "fetch_cricdata_data",
             return_value=(standings, fixtures, ["Loaded CricketData series id test-series"]),
-        ) as cricdata_mock, mock.patch.object(extract_table, "fetch_cricbuzz_data") as cricbuzz_mock:
+        ) as cricdata_mock, mock.patch.object(
+            extract_table,
+            "run_analysis",
+            return_value=analysis_stub(),
+        ), mock.patch.object(extract_table, "fetch_cricbuzz_data") as cricbuzz_mock:
             payload = extract_table.build_payload()
 
         self.assertEqual(payload["metadata"]["source"], "CricketData")
         self.assertEqual(payload["metadata"]["source_url"], extract_table.CRICDATA_SOURCE_URL)
         cricdata_mock.assert_called_once()
         cricbuzz_mock.assert_not_called()
+
+    def test_build_payload_falls_back_when_cricketdata_standings_are_invalid(self) -> None:
+        invalid_standings = valid_standings()
+        invalid_standings[0]["matches"] = 9
+        invalid_standings[0]["losses"] = 5
+        invalid_standings[0]["remainingMatches"] = 5
+        fallback_standings = valid_standings()
+        cricdata_fixtures = valid_fixtures(30)
+        cricbuzz_fixtures = [valid_fixture()]
+
+        with mock.patch.object(
+            extract_table,
+            "fetch_cricdata_data",
+            return_value=(invalid_standings, cricdata_fixtures, []),
+        ) as cricdata_mock, mock.patch.object(
+            extract_table,
+            "fetch_cricbuzz_data",
+            return_value=(fallback_standings, cricbuzz_fixtures, []),
+        ) as cricbuzz_mock, mock.patch.object(
+            extract_table,
+            "run_analysis",
+            return_value=analysis_stub(),
+        ):
+            payload = extract_table.build_payload()
+
+        self.assertEqual(payload["metadata"]["source"], "Cricbuzz")
+        self.assertEqual(payload["metadata"]["source_url"], extract_table.CRICBUZZ_TABLE_URL)
+        self.assertEqual(payload["fixtures"], cricdata_fixtures)
+        self.assertTrue(
+            any(
+                "Inconsistent league result totals" in warning
+                for warning in payload["metadata"]["warnings"]
+            )
+        )
+        self.assertTrue(
+            any(
+                "Using CricketData fixtures with Cricbuzz standings" in warning
+                for warning in payload["metadata"]["warnings"]
+            )
+        )
+        cricdata_mock.assert_called_once()
+        cricbuzz_mock.assert_called_once()
 
 
 if __name__ == "__main__":

@@ -107,6 +107,15 @@ def iso_utc(dt: datetime) -> str:
     return dt.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
+def parse_iso_utc(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00")).astimezone(timezone.utc)
+    except ValueError:
+        return None
+
+
 def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", value or "").strip()
 
@@ -585,7 +594,6 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
 
     standings = parse_cricdata_standings(points_payload, nrr_overrides)
     fixtures = parse_cricdata_fixtures(info_payload, now)
-    validate_source_data(standings, fixtures, now, strict_zero_fixtures=True)
     return standings, fixtures, warnings
 
 
@@ -624,8 +632,33 @@ def fetch_cricbuzz_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
             warnings.append(f"Could not enrich {fixture['teamA']} vs {fixture['teamB']}: {exc}")
 
     fixtures = [fixture for fixture in fixtures if fixture.get("status") == "scheduled"]
-    validate_source_data(standings, fixtures, now, strict_zero_fixtures=True)
     return standings, fixtures, warnings
+
+
+def expected_remaining_fixture_count(standings: list[dict[str, Any]]) -> int:
+    return sum(row["remainingMatches"] for row in standings) // 2
+
+
+def load_existing_canonical_fixtures(now: datetime) -> list[dict[str, Any]]:
+    if not CANONICAL_OUTPUT.exists():
+        return []
+    try:
+        payload = json.loads(CANONICAL_OUTPUT.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+
+    fixtures = payload.get("fixtures")
+    if not isinstance(fixtures, list):
+        return []
+
+    future_fixtures: list[dict[str, Any]] = []
+    for fixture in fixtures:
+        if not isinstance(fixture, dict) or fixture.get("status") != "scheduled":
+            continue
+        fixture_time = parse_iso_utc(fixture.get("dateTimeGMT"))
+        if fixture_time is None or fixture_time >= now:
+            future_fixtures.append(fixture)
+    return future_fixtures
 
 
 def validate_source_data(
@@ -633,6 +666,7 @@ def validate_source_data(
     fixtures: list[dict[str, Any]],
     now: datetime,
     strict_zero_fixtures: bool,
+    strict_partial_fixtures: bool = False,
 ) -> None:
     if len(standings) != len(TEAM_META):
         raise SourceValidationError(f"Expected 10 teams, found {len(standings)}")
@@ -647,8 +681,70 @@ def validate_source_data(
     missing_nrr = [row["shortName"] for row in standings if not isinstance(row.get("nrr"), float)]
     if missing_nrr:
         raise SourceValidationError(f"Missing NRR for: {', '.join(missing_nrr)}")
-    if strict_zero_fixtures and now < SEASON_END_UTC and not fixtures:
+    bad_row_totals = [
+        row
+        for row in standings
+        if row["matches"] != row["wins"] + row["losses"] + row["noResult"]
+    ]
+    if bad_row_totals:
+        details = ", ".join(
+            (
+                f"{row['shortName']} matches={row['matches']} "
+                f"W-L-NR={row['wins']}-{row['losses']}-{row['noResult']}"
+            )
+            for row in bad_row_totals
+        )
+        raise SourceValidationError(f"Invalid standings row totals: {details}")
+    bad_points = [
+        row
+        for row in standings
+        if row["points"] != (row["wins"] * 2) + row["noResult"]
+    ]
+    if bad_points:
+        details = ", ".join(
+            (
+                f"{row['shortName']} points={row['points']} "
+                f"expected={(row['wins'] * 2) + row['noResult']}"
+            )
+            for row in bad_points
+        )
+        raise SourceValidationError(f"Invalid standings points totals: {details}")
+    bad_remaining = [
+        row
+        for row in standings
+        if row["remainingMatches"] != max(0, LEAGUE_MATCHES_PER_TEAM - row["matches"])
+    ]
+    if bad_remaining:
+        details = ", ".join(
+            (
+                f"{row['shortName']} remaining={row['remainingMatches']} "
+                f"expected={max(0, LEAGUE_MATCHES_PER_TEAM - row['matches'])}"
+            )
+            for row in bad_remaining
+        )
+        raise SourceValidationError(f"Invalid remaining-match totals: {details}")
+    total_wins = sum(row["wins"] for row in standings)
+    total_losses = sum(row["losses"] for row in standings)
+    if total_wins != total_losses:
+        raise SourceValidationError(
+            f"Inconsistent league result totals: wins={total_wins}, losses={total_losses}"
+        )
+    total_no_results = sum(row["noResult"] for row in standings)
+    if total_no_results % 2 != 0:
+        raise SourceValidationError(f"Inconsistent no-result total: {total_no_results}")
+    expected_remaining = expected_remaining_fixture_count(standings)
+    if strict_zero_fixtures and now < SEASON_END_UTC and expected_remaining > 0 and not fixtures:
         raise SourceValidationError("No future fixtures found before league-stage end")
+    if (
+        strict_partial_fixtures
+        and now < SEASON_END_UTC
+        and expected_remaining > 0
+        and len(fixtures) < expected_remaining
+    ):
+        raise SourceValidationError(
+            f"Fixture feed appears partial: found {len(fixtures)} scheduled match(es), "
+            f"but standings imply about {expected_remaining} league match(es) remaining."
+        )
 
 
 def ranked_standings(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1202,34 +1298,68 @@ def build_payload() -> dict[str, Any]:
     warnings: list[str] = []
     source = "CricketData"
     source_url = CRICDATA_SOURCE_URL
+    existing_fixtures = load_existing_canonical_fixtures(now)
+    cricdata_fixtures: list[dict[str, Any]] | None = None
+
+    def choose_complete_fixtures(
+        loaded_standings: list[dict[str, Any]],
+        fixture_options: list[tuple[str, list[dict[str, Any]]]],
+    ) -> tuple[list[dict[str, Any]], str]:
+        errors: list[str] = []
+        for label, candidate_fixtures in fixture_options:
+            try:
+                validate_source_data(
+                    loaded_standings,
+                    candidate_fixtures,
+                    now,
+                    strict_zero_fixtures=True,
+                    strict_partial_fixtures=True,
+                )
+            except SourceValidationError as exc:
+                errors.append(f"{label}: {exc}")
+                continue
+            return candidate_fixtures, label
+        raise SourceValidationError("; ".join(errors) if errors else "No fixture candidates found")
+
+    def cricketdata_failure_warning(exc: Exception) -> str:
+        if str(exc) == "CRICDATA_API_KEY is not configured":
+            return "CricketData source unavailable; using fallback source."
+        return f"CricketData source failed: {exc}"
 
     try:
-        standings, fixtures, source_warnings = fetch_cricdata_data(now)
+        standings, cricdata_fixtures, source_warnings = fetch_cricdata_data(now)
+        standings = ranked_standings(standings)
+        fixture_options = [("CricketData", cricdata_fixtures)]
+        if existing_fixtures:
+            fixture_options.append(("existing canonical data", existing_fixtures))
+        fixtures, fixture_source = choose_complete_fixtures(standings, fixture_options)
         warnings.extend(source_warnings)
+        if fixture_source != "CricketData":
+            warnings.append(
+                f"Using {fixture_source} fixtures with CricketData standings because the CricketData fixture feed was incomplete."
+            )
     except Exception as cricdata_error:
-        warnings.append(f"CricketData source failed: {cricdata_error}")
+        warnings.append(cricketdata_failure_warning(cricdata_error))
         try:
-            standings, fixtures, source_warnings = fetch_cricbuzz_data(now)
+            standings, cricbuzz_fixtures, source_warnings = fetch_cricbuzz_data(now)
+            standings = ranked_standings(standings)
+            fixture_options = [("Cricbuzz", cricbuzz_fixtures)]
+            if cricdata_fixtures:
+                fixture_options.append(("CricketData", cricdata_fixtures))
+            if existing_fixtures:
+                fixture_options.append(("existing canonical data", existing_fixtures))
+            fixtures, fixture_source = choose_complete_fixtures(standings, fixture_options)
             warnings.extend(source_warnings)
             source = "Cricbuzz"
             source_url = CRICBUZZ_TABLE_URL
+            if fixture_source != "Cricbuzz":
+                warnings.append(
+                    f"Using {fixture_source} fixtures with Cricbuzz standings because the Cricbuzz fixture feed was incomplete."
+                )
         except Exception as cricbuzz_error:
             raise SourceValidationError(
                 f"All data sources failed. CricketData: {cricdata_error}; Cricbuzz: {cricbuzz_error}"
             ) from cricbuzz_error
-
-    standings = ranked_standings(standings)
-    try:
-        validate_source_data(standings, fixtures, now, strict_zero_fixtures=False)
-    except SourceValidationError as exc:
-        warnings.append(str(exc))
-
-    expected_remaining = sum(row["remainingMatches"] for row in standings) // 2
-    if fixtures and now < SEASON_END_UTC and len(fixtures) < expected_remaining:
-        warnings.append(
-            f"Fixture feed appears partial: found {len(fixtures)} scheduled match(es), "
-            f"but standings imply about {expected_remaining} league match(es) remaining."
-        )
 
     if not fixtures and now < SEASON_END_UTC:
         warnings.append("No future fixtures were found; probabilities are current-table only.")
