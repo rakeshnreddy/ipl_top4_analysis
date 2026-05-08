@@ -723,6 +723,9 @@ function App() {
             })}
           </div>
 
+          <p className="probability-note">
+            Equal points do not imply equal odds; the exact model also evaluates remaining fixtures and direct rival games.
+          </p>
         </div>
       </section>
 

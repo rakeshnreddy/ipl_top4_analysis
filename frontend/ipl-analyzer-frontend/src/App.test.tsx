@@ -132,6 +132,7 @@ describe('App', () => {
     expect(screen.getAllByText('CSK').length).toBeGreaterThan(0);
     expect(screen.getAllByText('MI').length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { name: 'Top 4 Odds' })).toBeInTheDocument();
+    expect(screen.getByText(/Equal points do not imply equal odds/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^caption$/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /png/i })).toBeInTheDocument();
     expect(screen.queryByTestId('share-lab')).not.toBeInTheDocument();

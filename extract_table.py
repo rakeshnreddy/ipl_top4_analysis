@@ -1173,6 +1173,7 @@ def run_exact_dp_analysis(
         "modelNotes": [
             "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
             "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
+            "Teams with identical records can have different probabilities because remaining fixtures and direct rival games change the exact scenario tree.",
             "Current NRR is displayed when the source provides it; probability math does not require NRR.",
             f"Fixture-impact guidance is computed for the next {impact_fixture_count} fixture(s).",
         ],

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from itertools import product
 import unittest
 from unittest import mock
 
@@ -452,6 +453,98 @@ class ExtractTableTests(unittest.TestCase):
                 extract_table.build_payload()
 
         cricdata_mock.assert_called_once()
+
+    def test_exact_model_notes_explain_equal_records_can_diverge_by_schedule(self) -> None:
+        standings = valid_standings(nrr=None)
+        fixtures = [valid_fixture()]
+
+        analysis = extract_table.run_exact_dp_analysis(
+            standings,
+            fixtures,
+            datetime(2026, 5, 1, tzinfo=timezone.utc),
+        )
+
+        self.assertTrue(
+            any("identical records" in note and "remaining fixtures" in note for note in analysis["modelNotes"])
+        )
+
+    def test_exact_dp_matches_bruteforce_when_equal_records_have_different_schedules(self) -> None:
+        def row(team_key: str, points: int, wins: int, rank: int) -> dict[str, object]:
+            meta = extract_table.TEAM_META[team_key]
+            return {
+                "teamKey": team_key,
+                "shortName": meta.short_name,
+                "fullName": meta.full_name,
+                "matches": 10,
+                "wins": wins,
+                "losses": 10 - wins,
+                "noResult": 0,
+                "points": points,
+                "nrr": None,
+                "rank": rank,
+                "remainingMatches": 1,
+            }
+
+        standings = [
+            row("Chennai", 16, 8, 1),
+            row("Delhi", 16, 8, 2),
+            row("Kolkata", 14, 7, 3),
+            row("Gujarat", 12, 6, 4),
+            row("Rajasthan", 12, 6, 5),
+            row("Bangalore", 12, 6, 6),
+            row("Mumbai", 10, 5, 7),
+            row("Punjab", 10, 5, 8),
+            row("Hyderabad", 8, 4, 9),
+            row("Lucknow", 6, 3, 10),
+        ]
+        fixtures = [
+            {"id": "f1", "matchNo": 1, "teamA": "Gujarat", "teamB": "Rajasthan"},
+            {"id": "f2", "matchNo": 2, "teamA": "Bangalore", "teamB": "Lucknow"},
+            {"id": "f3", "matchNo": 3, "teamA": "Mumbai", "teamB": "Punjab"},
+        ]
+
+        analysis = extract_table.run_exact_dp_analysis(
+            standings,
+            fixtures,
+            datetime(2026, 5, 1, tzinfo=timezone.utc),
+        )
+
+        team_keys = [item["teamKey"] for item in standings]
+        team_index = {team_key: idx for idx, team_key in enumerate(team_keys)}
+        base_points = [int(item["points"]) for item in standings]
+        base_wins = [int(item["wins"]) for item in standings]
+        fixture_pairs = [(str(item["teamA"]), str(item["teamB"])) for item in fixtures]
+        brute_force_totals = {team_key: 0.0 for team_key in team_keys}
+
+        for outcomes in product((0, 1), repeat=len(fixture_pairs)):
+            points = base_points[:]
+            wins = base_wins[:]
+            for outcome, (left, right) in zip(outcomes, fixture_pairs):
+                winner = left if outcome == 0 else right
+                idx = team_index[winner]
+                points[idx] += 2
+                wins[idx] += 1
+            shares = extract_table.top_share_for_state(points, wins, 4)
+            for idx, team_key in enumerate(team_keys):
+                brute_force_totals[team_key] += shares[idx]
+
+        scenario_count = 2 ** len(fixture_pairs)
+        for team_key in ("Gujarat", "Rajasthan", "Bangalore"):
+            expected = round((brute_force_totals[team_key] / scenario_count) * 100, 2)
+            self.assertEqual(analysis["overallProbabilities"][team_key]["top4"], expected)
+
+        self.assertEqual(
+            (standings[3]["matches"], standings[3]["wins"], standings[3]["points"]),
+            (standings[4]["matches"], standings[4]["wins"], standings[4]["points"]),
+        )
+        self.assertEqual(
+            (standings[4]["matches"], standings[4]["wins"], standings[4]["points"]),
+            (standings[5]["matches"], standings[5]["wins"], standings[5]["points"]),
+        )
+        self.assertGreater(
+            analysis["overallProbabilities"]["Gujarat"]["top4"],
+            analysis["overallProbabilities"]["Bangalore"]["top4"],
+        )
 
 
 if __name__ == "__main__":
