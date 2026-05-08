@@ -271,14 +271,28 @@ class ExtractTableTests(unittest.TestCase):
             50,
         )
 
-    def test_build_payload_prefers_cricketdata_before_cricbuzz(self) -> None:
+    def test_series_id_prefers_explicit_configuration(self) -> None:
+        session = mock.Mock()
+
+        with mock.patch.dict(extract_table.os.environ, {"CRICDATA_SERIES_ID": "ipl-2026-series"}, clear=True):
+            series_id = extract_table.find_cricdata_series_id(session, "api-key")
+
+        self.assertEqual(series_id, "ipl-2026-series")
+        session.get.assert_not_called()
+
+    def test_build_payload_requires_cricketdata_api_key(self) -> None:
+        with mock.patch.dict(extract_table.os.environ, {}, clear=True):
+            with self.assertRaisesRegex(extract_table.SourceValidationError, "CRICDATA_API_KEY"):
+                extract_table.build_payload()
+
+    def test_build_payload_uses_cricketdata_only(self) -> None:
         standings = valid_standings()
         fixtures = valid_fixtures(30)
 
         with mock.patch.object(
             extract_table,
             "fetch_cricdata_data",
-            return_value=(standings, fixtures, ["Loaded CricketData series id test-series"]),
+            return_value=(standings, fixtures, []),
         ) as cricdata_mock, mock.patch.object(
             extract_table,
             "run_analysis",
@@ -288,17 +302,16 @@ class ExtractTableTests(unittest.TestCase):
 
         self.assertEqual(payload["metadata"]["source"], "CricketData")
         self.assertEqual(payload["metadata"]["source_url"], extract_table.CRICDATA_SOURCE_URL)
+        self.assertEqual(payload["metadata"]["warnings"], [])
         cricdata_mock.assert_called_once()
         cricbuzz_mock.assert_not_called()
 
-    def test_build_payload_falls_back_when_cricketdata_standings_are_invalid(self) -> None:
+    def test_build_payload_rejects_invalid_cricketdata_standings_without_fallback(self) -> None:
         invalid_standings = valid_standings()
         invalid_standings[0]["matches"] = 9
         invalid_standings[0]["losses"] = 5
         invalid_standings[0]["remainingMatches"] = 5
-        fallback_standings = valid_standings()
         cricdata_fixtures = valid_fixtures(30)
-        cricbuzz_fixtures = [valid_fixture()]
 
         with mock.patch.object(
             extract_table,
@@ -307,31 +320,26 @@ class ExtractTableTests(unittest.TestCase):
         ) as cricdata_mock, mock.patch.object(
             extract_table,
             "fetch_cricbuzz_data",
-            return_value=(fallback_standings, cricbuzz_fixtures, []),
-        ) as cricbuzz_mock, mock.patch.object(
-            extract_table,
-            "run_analysis",
-            return_value=analysis_stub(),
-        ):
-            payload = extract_table.build_payload()
+        ) as cricbuzz_mock:
+            with self.assertRaisesRegex(extract_table.SourceValidationError, "Inconsistent league result totals"):
+                extract_table.build_payload()
 
-        self.assertEqual(payload["metadata"]["source"], "Cricbuzz")
-        self.assertEqual(payload["metadata"]["source_url"], extract_table.CRICBUZZ_TABLE_URL)
-        self.assertEqual(payload["fixtures"], cricdata_fixtures)
-        self.assertTrue(
-            any(
-                "Inconsistent league result totals" in warning
-                for warning in payload["metadata"]["warnings"]
-            )
-        )
-        self.assertTrue(
-            any(
-                "Using CricketData fixtures with Cricbuzz standings" in warning
-                for warning in payload["metadata"]["warnings"]
-            )
-        )
         cricdata_mock.assert_called_once()
-        cricbuzz_mock.assert_called_once()
+        cricbuzz_mock.assert_not_called()
+
+    def test_build_payload_rejects_partial_cricketdata_fixtures(self) -> None:
+        standings = valid_standings()
+        partial_fixtures = [valid_fixture()]
+
+        with mock.patch.object(
+            extract_table,
+            "fetch_cricdata_data",
+            return_value=(standings, partial_fixtures, []),
+        ) as cricdata_mock:
+            with self.assertRaisesRegex(extract_table.SourceValidationError, "Fixture feed appears partial"):
+                extract_table.build_payload()
+
+        cricdata_mock.assert_called_once()
 
 
 if __name__ == "__main__":

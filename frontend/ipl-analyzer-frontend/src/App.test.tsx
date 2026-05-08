@@ -22,10 +22,10 @@ const mockPayload: IplSeasonPayload = {
   metadata: {
     season: 2026,
     generated_at: '2026-05-01T21:13:08Z',
-    source: 'Cricbuzz',
-    source_url: 'https://www.cricbuzz.com/cricket-series/9241/indian-premier-league-2026/points-table',
+    source: 'CricketData',
+    source_url: 'https://cricketdata.org/',
     data_freshness_status: 'warning',
-    warnings: ['Fixture feed appears partial: found 1 scheduled match(es), but standings imply about 27 league match(es) remaining.'],
+    warnings: ['Test source warning'],
   },
   standings,
   fixtures: [
@@ -127,7 +127,7 @@ describe('App', () => {
     expect(await screen.findByRole('heading', { name: 'IPL Top 4 Qualification Probabilities' })).toBeInTheDocument();
     expect(screen.getByText('Updated daily after the night match')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: "Today's Race Summary" })).toBeInTheDocument();
-    expect(screen.getByTestId('freshness-warning')).toHaveTextContent('Fixture feed appears partial');
+    expect(screen.getByTestId('freshness-warning')).toHaveTextContent('Test source warning');
     expect(screen.getByText('Royal Challengers Bengaluru')).toBeInTheDocument();
     expect(screen.getAllByText('CSK').length).toBeGreaterThan(0);
     expect(screen.getAllByText('MI').length).toBeGreaterThan(0);
@@ -191,7 +191,7 @@ describe('App', () => {
     render(<App />);
 
     expect(await screen.findByTestId('latest-update')).toHaveTextContent('2026');
-    expect(screen.getAllByText(/Source: Cricbuzz/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Source: CricketData/).length).toBeGreaterThan(0);
     expect(screen.getByText(/Probabilities exclude NRR simulation/)).toBeInTheDocument();
   });
 });

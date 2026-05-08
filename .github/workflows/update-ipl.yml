@@ -35,6 +35,19 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
+      - name: Validate CricketData configuration
+        env:
+          CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
+          CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
+        run: |
+          if [ -z "$CRICDATA_API_KEY" ]; then
+            echo "::error::CRICDATA_API_KEY repository secret is required."
+            exit 1
+          fi
+          if [ -z "$CRICDATA_SERIES_ID" ]; then
+            echo "::warning::CRICDATA_SERIES_ID is not set. The generator will discover the IPL 2026 series id from CricketData."
+          fi
+
       - name: Generate canonical IPL payload
         env:
           CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
@@ -43,6 +56,9 @@ jobs:
 
       - name: Generate Instagram carousel slides
         run: python scripts/create_instagram_carousel.py
+
+      - name: Validate generated data
+        run: python -m unittest discover -s tests
 
       - name: Persist generated data and carousel
         run: |
@@ -71,6 +87,10 @@ jobs:
       - name: Install frontend dependencies
         working-directory: frontend/ipl-analyzer-frontend
         run: npm ci
+
+      - name: Test frontend
+        working-directory: frontend/ipl-analyzer-frontend
+        run: npm test -- --run
 
       - name: Build frontend
         working-directory: frontend/ipl-analyzer-frontend

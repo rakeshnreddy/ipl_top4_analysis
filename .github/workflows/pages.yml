@@ -23,25 +23,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-
-      - name: Generate canonical IPL payload
-        env:
-          CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
-          CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
-        run: python extract_table.py
-
-      - name: Generate Instagram carousel slides
-        run: python scripts/create_instagram_carousel.py
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

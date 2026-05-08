@@ -54,20 +54,16 @@ The backend is powered by Python scripts that handle data extraction, processing
 The application consists of a Python backend (Streamlit app) that also serves data, and a React frontend that consumes this data.
 
 1.  **Generate/Update Data (if necessary):**
-    *   The application relies on JSON data files (`current_standings.json`, `remaining_fixtures.json`, `analysis_results.json`).
-    *   To update `current_standings.json` and `remaining_fixtures.json` from live sources (requires CricAPI key for `extract_table.py` or web scraping for `generate_ipl_data.py`):
+    *   The static site relies on checked-in JSON data files (`frontend/ipl-analyzer-frontend/public/data/ipl-2026.json`, plus legacy JSON mirrors).
+    *   Production data generation is CricketData-only. It requires:
         ```bash
-        # Option 1: Using CricAPI (Update API_KEY in script)
-        # python extract_table.py 
-        
-        # Option 2: Using ESPNCricinfo Scraper (Potentially less stable)
-        python generate_ipl_data.py 
+        export CRICDATA_API_KEY="..."
+        export CRICDATA_SERIES_ID="..."
+        python extract_table.py
+        python scripts/create_instagram_carousel.py
         ```
-    *   To precompute analysis results (creates `analysis_results.json`):
-        ```bash
-        python precompute_analysis.py
-        ```
-    *   Note: The frontend expects these JSON files to be available in its `public` directory to be served by Vite during development, or copied to the build output. The Python scripts currently save them at the root. You may need to copy these files to `frontend/ipl-analyzer-frontend/public/` after generation for the React app to fetch them directly.
+    *   `CRICDATA_SERIES_ID` is recommended so the scheduled GitHub workflow uses a pinned API path. If it is absent, the generator discovers the IPL 2026 series id through CricketData's `series` endpoint before calling `series_points` and `series_info`.
+    *   The generator fails if standings arithmetic is impossible, NRR is missing, or the fixture feed is partial. It does not scrape fallback standings for production probabilities.
 
 2.  **Run the Python Streamlit Application (Backend/API):**
     *   The Streamlit application (`ipl_analysis_app.py`) can serve as an interactive UI itself and also potentially as an API if the frontend is configured to fetch data from it (though current frontend setup seems to fetch static JSONs).
@@ -84,7 +80,7 @@ The application consists of a Python backend (Streamlit app) that also serves da
     This will usually start the frontend on `http://localhost:5173` (or another port if 5173 is busy). The frontend fetches data from its `public` folder.
 
 **Note on Data Flow for Frontend:**
-The React frontend (`frontend/ipl-analyzer-frontend`) is configured to fetch `analysis_results.json` and `current_standings.json` from its `public` folder (via `import.meta.env.BASE_URL`). Ensure these JSON files are up-to-date and placed in `frontend/ipl-analyzer-frontend/public/` for the frontend to function correctly.
+The React frontend (`frontend/ipl-analyzer-frontend`) fetches static JSON and carousel assets from its `public` folder. Scheduled data updates run through `.github/workflows/update-ipl.yml`, commit the generated JSON and Instagram carousel PNGs, then build the site from those committed artifacts.
 
 ## Project Structure
 

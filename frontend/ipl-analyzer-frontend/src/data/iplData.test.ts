@@ -6,8 +6,8 @@ const validPayload: IplSeasonPayload = {
   metadata: {
     season: 2026,
     generated_at: '2026-05-01T21:13:08Z',
-    source: 'Cricbuzz',
-    source_url: 'https://example.com',
+    source: 'CricketData',
+    source_url: 'https://cricketdata.org/',
     data_freshness_status: 'fresh',
     warnings: [],
   },

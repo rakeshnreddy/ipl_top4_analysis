@@ -32,7 +32,7 @@ class InstagramCarouselManifestTests(unittest.TestCase):
                 "generated_at": "2026-05-04T08:06:47Z",
                 "source": "CricketData",
                 "source_url": "https://cricketdata.org/",
-                "warnings": ["CricketData standings omitted NRR; NRR was enriched from Cricbuzz."],
+                "warnings": ["Test source warning."],
             }
         }
 
@@ -53,7 +53,7 @@ class InstagramCarouselManifestTests(unittest.TestCase):
             self.assertEqual(manifest["slides"][0]["imageHeight"], 1920)
             self.assertEqual(manifest["generatedAt"], "2026-05-04T09:00:00Z")
             self.assertEqual(manifest["source"]["name"], "CricketData")
-            self.assertIn("CricketData standings omitted NRR", manifest["warnings"][0])
+            self.assertIn("Test source warning", manifest["warnings"][0])
 
     def test_png_dimension_validation_reports_wrong_size(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
