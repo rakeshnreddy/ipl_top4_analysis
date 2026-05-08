@@ -33,7 +33,10 @@ const SECTION_HASHES = new Set(['standings', 'top4', 'reels', 'deep-dive']);
 const formatPercent = (value: number) =>
   `${value.toLocaleString(undefined, { maximumFractionDigits: value % 1 === 0 ? 0 : 1 })}%`;
 
-const formatNrr = (value: number) => `${value >= 0 ? '+' : ''}${value.toFixed(3)}`;
+const hasNrr = (value: number | null | undefined): value is number =>
+  typeof value === 'number' && Number.isFinite(value);
+
+const formatNrr = (value: number | null | undefined) => (hasNrr(value) ? `${value >= 0 ? '+' : ''}${value.toFixed(3)}` : 'N/A');
 
 const formatGeneratedAt = (value: string) =>
   new Intl.DateTimeFormat(undefined, {
@@ -66,7 +69,8 @@ const teamColor = (teamKey: string) => team_styles[teamKey]?.bg || '#2d405f';
 const teamTextColor = (teamKey: string) => team_styles[teamKey]?.text || '#ffffff';
 
 function rankingSort(a: IplStanding, b: IplStanding) {
-  return b.points - a.points || b.nrr - a.nrr || b.wins - a.wins || a.fullName.localeCompare(b.fullName);
+  const nrrSort = hasNrr(a.nrr) && hasNrr(b.nrr) ? b.nrr - a.nrr : 0;
+  return b.points - a.points || nrrSort || a.rank - b.rank || b.wins - a.wins || a.fullName.localeCompare(b.fullName);
 }
 
 function maxPoints(team: IplStanding) {
@@ -319,7 +323,7 @@ function raceCaption(payload: IplSeasonPayload) {
   const topFour = ordered.slice(0, 4).map((team) => team.shortName).join(', ');
   const chase = ordered.slice(4, 7).map((team) => team.shortName).join(', ');
 
-  return `IPL 2026 Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. Exact all-combinations model, NRR shown for standings only. #IPL2026 #IPLPlayoffs`;
+  return `IPL 2026 Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. Exact all-combinations model, NRR shown when available. #IPL2026 #IPLPlayoffs`;
 }
 
 function drawRoundedRect(
@@ -665,7 +669,9 @@ function App() {
                     </span>
                     <span className="team-record">{team.wins}W-{team.losses}L-{team.noResult}NR</span>
                     <span className="team-points">{team.points} pts</span>
-                    <span className={`team-nrr ${team.nrr >= 0 ? 'positive' : 'negative'}`}>{formatNrr(team.nrr)}</span>
+                    <span className={`team-nrr ${hasNrr(team.nrr) ? (team.nrr >= 0 ? 'positive' : 'negative') : 'neutral'}`}>
+                      {formatNrr(team.nrr)}
+                    </span>
                     <span className="remaining">{team.remainingMatches} left</span>
                     <span className="prob-mini top4-prob">{formatPercent(top4)}</span>
                     <span className="prob-mini top2-prob">{formatPercent(top2)}</span>
@@ -783,7 +789,7 @@ function App() {
           Updated {formatGeneratedAt(payload.metadata.generated_at)} · {payload.analysis.method} ·{' '}
           {payload.analysis.simulationCount.toLocaleString()} scenarios
         </span>
-        <span>NRR is used for standings tiebreaking; scenario math excludes NRR swings.</span>
+        <span>Current NRR is shown when available; scenario math excludes NRR swings.</span>
         <a href={payload.metadata.source_url} target="_blank" rel="noreferrer">
           Source: {payload.metadata.source}
           <ExternalLink size={12} aria-hidden="true" />

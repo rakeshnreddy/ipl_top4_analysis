@@ -46,6 +46,19 @@ describe('loadIplData', () => {
     expect(fetchImpl).toHaveBeenCalledWith('/ipl_top4_analysis/data/ipl-2026.json', { cache: 'no-cache' });
   });
 
+  it('allows standings rows without NRR', async () => {
+    const payloadWithoutNrr = {
+      ...validPayload,
+      standings: validPayload.standings.map((team) => ({ ...team, nrr: null })),
+    };
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => payloadWithoutNrr,
+    });
+
+    await expect(loadIplData(fetchImpl as unknown as typeof fetch)).resolves.toEqual(payloadWithoutNrr);
+  });
+
   it('rejects malformed payloads', async () => {
     const fetchImpl = vi.fn().mockResolvedValue({
       ok: true,

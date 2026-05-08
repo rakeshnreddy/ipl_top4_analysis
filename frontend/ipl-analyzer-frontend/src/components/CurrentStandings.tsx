@@ -7,7 +7,7 @@ interface TeamStats {
   Losses: number;
   NR: number;
   Points: number;
-  NRR: number;
+  NRR: number | null;
 }
 
 interface StandingsData {
@@ -25,6 +25,11 @@ interface StandingRow extends TeamStats {
   teamFullName: string;
   pos: number;
 }
+
+const hasNrr = (value: number | null | undefined): value is number =>
+  typeof value === 'number' && Number.isFinite(value);
+
+const formatNrr = (value: number | null | undefined) => (hasNrr(value) ? `${value >= 0 ? '+' : ''}${value.toFixed(3)}` : 'N/A');
 
 const CurrentStandings: React.FC = () => {
   const [standings, setStandings] = useState<StandingRow[]>([]);
@@ -55,7 +60,7 @@ const CurrentStandings: React.FC = () => {
             if (b.Points !== a.Points) {
               return b.Points - a.Points; // Primary sort: Points
             }
-            if (b.NRR !== a.NRR) {
+            if (hasNrr(a.NRR) && hasNrr(b.NRR) && b.NRR !== a.NRR) {
               return b.NRR - a.NRR; // Secondary sort: NRR
             }
             return b.Wins - a.Wins; // Tertiary sort: Wins
@@ -122,7 +127,7 @@ const CurrentStandings: React.FC = () => {
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.teamFullName}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Matches}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Wins}</td>
-                  <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.NRR >= 0 ? '+' : ''}{team.NRR.toFixed(3)}</td>
+                  <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{formatNrr(team.NRR)}</td>
                   <td className={styleProps ? "team-specific-cell" : ""} style={cellStyle}>{team.Points}</td>
                 </tr>
               );

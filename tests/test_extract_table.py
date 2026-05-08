@@ -7,7 +7,10 @@ from unittest import mock
 import extract_table
 
 
-def valid_standings() -> list[dict[str, object]]:
+_DEFAULT_NRR = object()
+
+
+def valid_standings(nrr: object = _DEFAULT_NRR) -> list[dict[str, object]]:
     return [
         {
             "teamKey": meta.key,
@@ -18,7 +21,7 @@ def valid_standings() -> list[dict[str, object]]:
             "losses": 4,
             "noResult": 0,
             "points": 8,
-            "nrr": float(index) / 10,
+            "nrr": float(index) / 10 if nrr is _DEFAULT_NRR else nrr,
             "rank": index,
             "remainingMatches": 6,
         }
@@ -160,6 +163,27 @@ class ExtractTableTests(unittest.TestCase):
         self.assertEqual(fixtures[0]["teamA"], "Chennai")
         self.assertEqual(fixtures[0]["teamB"], "Mumbai")
         self.assertEqual(fixtures[0]["dateTimeGMT"], "2026-05-02T14:00:00Z")
+
+    def test_parse_cricdata_standings_allows_missing_nrr(self) -> None:
+        points_payload = {
+            "status": "success",
+            "data": [
+                {
+                    "teamname": meta.full_name,
+                    "matches": 8,
+                    "wins": 4,
+                    "losses": 4,
+                    "nr": 0,
+                    "points": 8,
+                }
+                for meta in extract_table.TEAM_META.values()
+            ],
+        }
+
+        standings = extract_table.parse_cricdata_standings(points_payload)
+
+        self.assertEqual(len(standings), 10)
+        self.assertIsNone(standings[0]["nrr"])
 
     def test_validation_rejects_impossible_match_counts(self) -> None:
         standings = [
@@ -305,6 +329,29 @@ class ExtractTableTests(unittest.TestCase):
         self.assertEqual(payload["metadata"]["warnings"], [])
         cricdata_mock.assert_called_once()
         cricbuzz_mock.assert_not_called()
+
+    def test_build_payload_allows_missing_nrr_for_probability_generation(self) -> None:
+        standings = valid_standings(nrr=None)
+        fixtures = valid_fixtures(30)
+
+        with mock.patch.object(
+            extract_table,
+            "fetch_cricdata_data",
+            return_value=(
+                standings,
+                fixtures,
+                ["CricketData standings omitted NRR for all teams; probabilities were generated without NRR."],
+            ),
+        ), mock.patch.object(
+            extract_table,
+            "run_analysis",
+            return_value=analysis_stub(),
+        ):
+            payload = extract_table.build_payload()
+
+        self.assertEqual(payload["metadata"]["source"], "CricketData")
+        self.assertIsNone(payload["standings"][0]["nrr"])
+        self.assertIn("omitted NRR", payload["metadata"]["warnings"][0])
 
     def test_build_payload_rejects_invalid_cricketdata_standings_without_fallback(self) -> None:
         invalid_standings = valid_standings()

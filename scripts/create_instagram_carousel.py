@@ -84,7 +84,9 @@ def pct(value: float) -> str:
     return f"{rounded:.1f}%"
 
 
-def nrr(value: float) -> str:
+def nrr(value: float | None) -> str:
+    if value is None:
+        return "N/A"
     return f"{value:+.3f}"
 
 

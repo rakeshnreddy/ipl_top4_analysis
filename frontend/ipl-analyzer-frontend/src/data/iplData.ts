@@ -16,7 +16,7 @@ export interface IplStanding {
   losses: number;
   noResult: number;
   points: number;
-  nrr: number;
+  nrr: number | null;
   rank: number;
   remainingMatches: number;
 }
@@ -122,8 +122,11 @@ function assertPayload(payload: unknown): asserts payload is IplSeasonPayload {
   }
 
   candidate.standings.forEach((team) => {
-    if (!isString(team.teamKey) || !isString(team.shortName) || !isNumber(team.points) || !isNumber(team.nrr)) {
-      throw new Error('One or more standings rows are missing team, points, or NRR fields.');
+    if (!isString(team.teamKey) || !isString(team.shortName) || !isNumber(team.points)) {
+      throw new Error('One or more standings rows are missing team or points fields.');
+    }
+    if (team.nrr !== null && !isNumber(team.nrr)) {
+      throw new Error('One or more standings rows have malformed NRR fields.');
     }
   });
 }

@@ -415,9 +415,10 @@ def parse_cricdata_standings(
         nrr_raw = first_present(item, ("nrr", "netRunRate", "net_run_rate"))
         nrr = nrr_overrides.get(mapped) if nrr_overrides and mapped in nrr_overrides else None
         if nrr_raw not in (None, ""):
-            nrr = parse_float(str(nrr_raw))
-        if nrr is None:
-            raise SourceValidationError("CricketData standings are missing NRR")
+            try:
+                nrr = parse_float(str(nrr_raw))
+            except ValueError:
+                nrr = None
 
         matches = parse_int(str(first_present(item, ("matches", "match", "played", "all"), 0)))
         wins = parse_int(str(first_present(item, ("wins", "won", "w"), 0)))
@@ -564,6 +565,12 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
 
     warnings: list[str] = []
     standings = parse_cricdata_standings(points_payload)
+    missing_nrr = [row["shortName"] for row in standings if row.get("nrr") is None]
+    if missing_nrr:
+        warnings.append(
+            "CricketData standings omitted NRR for "
+            f"{', '.join(missing_nrr)}; probabilities were generated without NRR."
+        )
     fixtures = parse_cricdata_fixtures(info_payload, now)
     return standings, fixtures, warnings
 
@@ -627,9 +634,6 @@ def validate_source_data(
     if too_many:
         details = ", ".join(f"{row['shortName']}={row['matches']}" for row in too_many)
         raise SourceValidationError(f"Invalid match counts above 14: {details}")
-    missing_nrr = [row["shortName"] for row in standings if not isinstance(row.get("nrr"), float)]
-    if missing_nrr:
-        raise SourceValidationError(f"Missing NRR for: {', '.join(missing_nrr)}")
     bad_row_totals = [
         row
         for row in standings
@@ -697,10 +701,17 @@ def validate_source_data(
 
 
 def ranked_standings(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    ranked = sorted(
-        rows,
-        key=lambda row: (-row["points"], -row["nrr"], -row["wins"], row["fullName"]),
-    )
+    has_complete_nrr = all(isinstance(row.get("nrr"), float) for row in rows)
+    has_source_rank = all(isinstance(row.get("rank"), int) and row["rank"] > 0 for row in rows)
+    if has_complete_nrr:
+        ranked = sorted(
+            rows,
+            key=lambda row: (-row["points"], -row["nrr"], -row["wins"], row["fullName"]),
+        )
+    elif has_source_rank:
+        ranked = sorted(rows, key=lambda row: row["rank"])
+    else:
+        ranked = sorted(rows, key=lambda row: (-row["points"], -row["wins"], row["fullName"]))
     for idx, row in enumerate(ranked, start=1):
         row["rank"] = idx
     return ranked
@@ -1033,7 +1044,7 @@ def run_exact_dp_analysis(
         "modelNotes": [
             "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
             "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
-            "Current NRR is retained for the standings ladder only.",
+            "Current NRR is displayed when the source provides it; probability math does not require NRR.",
             f"Fixture-impact guidance is computed for the next {impact_fixture_count} fixture(s).",
         ],
         "overallProbabilities": overall,
