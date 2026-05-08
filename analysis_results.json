@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "precomputed_at": "2026-05-08T01:27:19Z",
+    "precomputed_at": "2026-05-08T04:47:43Z",
     "num_fixtures": 20,
-    "last_data_update": "2026-05-08T01:27:19Z",
-    "data_source": "Cricbuzz",
+    "last_data_update": "2026-05-08T04:47:43Z",
+    "data_source": "CricketData",
     "method_used": "Exact all-combinations",
     "simulation_count": 1048576
   },
@@ -17,17 +17,17 @@
         "Top 4 Probability": 80.32,
         "Top 2 Probability": 49.93
       },
-      "Bangalore": {
-        "Top 4 Probability": 64.58,
-        "Top 2 Probability": 31.07
+      "Gujarat": {
+        "Top 4 Probability": 63.98,
+        "Top 2 Probability": 31.12
       },
       "Rajasthan": {
         "Top 4 Probability": 64.87,
         "Top 2 Probability": 29.57
       },
-      "Gujarat": {
-        "Top 4 Probability": 63.98,
-        "Top 2 Probability": 31.12
+      "Bangalore": {
+        "Top 4 Probability": 64.58,
+        "Top 2 Probability": 31.07
       },
       "Chennai": {
         "Top 4 Probability": 28.2,
@@ -41,12 +41,12 @@
         "Top 4 Probability": 8.46,
         "Top 2 Probability": 1.44
       },
-      "Mumbai": {
-        "Top 4 Probability": 0.67,
-        "Top 2 Probability": 0.0
-      },
       "Lucknow": {
         "Top 4 Probability": 0.68,
+        "Top 2 Probability": 0.0
+      },
+      "Mumbai": {
+        "Top 4 Probability": 0.67,
         "Top 2 Probability": 0.0
       }
     },
@@ -70,12 +70,12 @@
             }
           }
         },
-        "Bangalore": {
-          "percentage": 64.58,
+        "Gujarat": {
+          "percentage": 63.98,
           "results_df": {
             "M51: DC vs KKR": {
               "Outcome": "DC beat KKR",
-              "Impact": 0.41
+              "Impact": 0.36
             }
           }
         },
@@ -88,12 +88,12 @@
             }
           }
         },
-        "Gujarat": {
-          "percentage": 63.98,
+        "Bangalore": {
+          "percentage": 64.58,
           "results_df": {
             "M51: DC vs KKR": {
               "Outcome": "DC beat KKR",
-              "Impact": 0.36
+              "Impact": 0.41
             }
           }
         },
@@ -124,21 +124,21 @@
             }
           }
         },
-        "Mumbai": {
-          "percentage": 0.67,
-          "results_df": {
-            "M51: DC vs KKR": {
-              "Outcome": "KKR beat DC",
-              "Impact": 0.05
-            }
-          }
-        },
         "Lucknow": {
           "percentage": 0.68,
           "results_df": {
             "M51: DC vs KKR": {
               "Outcome": "DC beat KKR",
               "Impact": 0.04
+            }
+          }
+        },
+        "Mumbai": {
+          "percentage": 0.67,
+          "results_df": {
+            "M51: DC vs KKR": {
+              "Outcome": "KKR beat DC",
+              "Impact": 0.05
             }
           }
         }
@@ -162,12 +162,12 @@
             }
           }
         },
-        "Bangalore": {
-          "percentage": 31.07,
+        "Gujarat": {
+          "percentage": 31.12,
           "results_df": {
             "M51: DC vs KKR": {
               "Outcome": "DC beat KKR",
-              "Impact": 0.09
+              "Impact": 0.11
             }
           }
         },
@@ -180,12 +180,12 @@
             }
           }
         },
-        "Gujarat": {
-          "percentage": 31.12,
+        "Bangalore": {
+          "percentage": 31.07,
           "results_df": {
             "M51: DC vs KKR": {
               "Outcome": "DC beat KKR",
-              "Impact": 0.11
+              "Impact": 0.09
             }
           }
         },
@@ -216,7 +216,7 @@
             }
           }
         },
-        "Mumbai": {
+        "Lucknow": {
           "percentage": 0.0,
           "results_df": {
             "M51: DC vs KKR": {
@@ -225,7 +225,7 @@
             }
           }
         },
-        "Lucknow": {
+        "Mumbai": {
           "percentage": 0.0,
           "results_df": {
             "M51: DC vs KKR": {
@@ -377,7 +377,7 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Bangalore": {
+        "Gujarat": {
           "possible": 0,
           "likely": 2,
           "guaranteed": 4,
@@ -387,30 +387,30 @@
             {
               "wins": 0,
               "scenarios": 65536,
-              "probability": 0.01,
-              "possibleRate": 0.06,
+              "probability": 0.0,
+              "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
               "scenarios": 262144,
-              "probability": 10.98,
-              "possibleRate": 29.99,
-              "guaranteedRate": 0.6
+              "probability": 8.82,
+              "possibleRate": 24.07,
+              "guaranteedRate": 0.52
             },
             {
               "wins": 2,
               "scenarios": 393216,
-              "probability": 81.61,
-              "possibleRate": 98.05,
-              "guaranteedRate": 56.29
+              "probability": 81.44,
+              "possibleRate": 97.7,
+              "guaranteedRate": 56.58
             },
             {
               "wins": 3,
               "scenarios": 262144,
               "probability": 99.94,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.77
+              "guaranteedRate": 99.79
             },
             {
               "wins": 4,
@@ -429,9 +429,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 64.79,
-              "teamBWinProbability": 64.38,
-              "impact": 0.41
+              "teamAWinProbability": 64.16,
+              "teamBWinProbability": 63.8,
+              "impact": 0.36
             }
           ],
           "nextFixtureImpacts": [
@@ -443,9 +443,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 64.79,
-              "teamBWinProbability": 64.38,
-              "impact": 0.41
+              "teamAWinProbability": 64.16,
+              "teamBWinProbability": 63.8,
+              "impact": 0.36
             }
           ],
           "impactFixtureWindow": 1
@@ -523,7 +523,7 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Gujarat": {
+        "Bangalore": {
           "possible": 0,
           "likely": 2,
           "guaranteed": 4,
@@ -533,30 +533,30 @@
             {
               "wins": 0,
               "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.01,
+              "probability": 0.01,
+              "possibleRate": 0.06,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
               "scenarios": 262144,
-              "probability": 8.82,
-              "possibleRate": 24.07,
-              "guaranteedRate": 0.52
+              "probability": 10.98,
+              "possibleRate": 29.99,
+              "guaranteedRate": 0.6
             },
             {
               "wins": 2,
               "scenarios": 393216,
-              "probability": 81.44,
-              "possibleRate": 97.7,
-              "guaranteedRate": 56.58
+              "probability": 81.61,
+              "possibleRate": 98.05,
+              "guaranteedRate": 56.29
             },
             {
               "wins": 3,
               "scenarios": 262144,
               "probability": 99.94,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.79
+              "guaranteedRate": 99.77
             },
             {
               "wins": 4,
@@ -575,9 +575,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 64.16,
-              "teamBWinProbability": 63.8,
-              "impact": 0.36
+              "teamAWinProbability": 64.79,
+              "teamBWinProbability": 64.38,
+              "impact": 0.41
             }
           ],
           "nextFixtureImpacts": [
@@ -589,9 +589,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 64.16,
-              "teamBWinProbability": 63.8,
-              "impact": 0.36
+              "teamAWinProbability": 64.79,
+              "teamBWinProbability": 64.38,
+              "impact": 0.41
             }
           ],
           "impactFixtureWindow": 1
@@ -822,79 +822,6 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Mumbai": {
-          "possible": 3,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 262144,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 262144,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 65536,
-              "probability": 10.76,
-              "possibleRate": 33.28,
-              "guaranteedRate": 0.22
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
-              "matchNo": 51,
-              "label": "M51: DC vs KKR",
-              "teamA": "Delhi",
-              "teamB": "Kolkata",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat DC",
-              "teamAWinProbability": 0.65,
-              "teamBWinProbability": 0.7,
-              "impact": 0.05
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
-              "matchNo": 51,
-              "label": "M51: DC vs KKR",
-              "teamA": "Delhi",
-              "teamB": "Kolkata",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat DC",
-              "teamAWinProbability": 0.65,
-              "teamBWinProbability": 0.7,
-              "impact": 0.05
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
         "Lucknow": {
           "possible": 3,
           "likely": null,
@@ -964,6 +891,79 @@
               "teamAWinProbability": 0.7,
               "teamBWinProbability": 0.66,
               "impact": 0.04
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": 3,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 4,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 65536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 393216,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 65536,
+              "probability": 10.76,
+              "possibleRate": 33.28,
+              "guaranteedRate": 0.22
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+              "matchNo": 51,
+              "label": "M51: DC vs KKR",
+              "teamA": "Delhi",
+              "teamB": "Kolkata",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat DC",
+              "teamAWinProbability": 0.65,
+              "teamBWinProbability": 0.7,
+              "impact": 0.05
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+              "matchNo": 51,
+              "label": "M51: DC vs KKR",
+              "teamA": "Delhi",
+              "teamB": "Kolkata",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat DC",
+              "teamAWinProbability": 0.65,
+              "teamBWinProbability": 0.7,
+              "impact": 0.05
             }
           ],
           "impactFixtureWindow": 1
@@ -1109,7 +1109,7 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Bangalore": {
+        "Gujarat": {
           "possible": 1,
           "likely": 3,
           "guaranteed": 4,
@@ -1127,22 +1127,22 @@
               "wins": 1,
               "scenarios": 262144,
               "probability": 0.01,
-              "possibleRate": 0.04,
+              "possibleRate": 0.05,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
               "scenarios": 393216,
-              "probability": 12.2,
-              "possibleRate": 30.7,
-              "guaranteedRate": 1.31
+              "probability": 12.23,
+              "possibleRate": 31.0,
+              "guaranteedRate": 1.37
             },
             {
               "wins": 3,
               "scenarios": 262144,
-              "probability": 80.99,
-              "possibleRate": 96.19,
-              "guaranteedRate": 62.6
+              "probability": 81.1,
+              "possibleRate": 96.14,
+              "guaranteedRate": 64.03
             },
             {
               "wins": 4,
@@ -1161,9 +1161,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 31.12,
-              "teamBWinProbability": 31.03,
-              "impact": 0.09
+              "teamAWinProbability": 31.17,
+              "teamBWinProbability": 31.06,
+              "impact": 0.11
             }
           ],
           "nextFixtureImpacts": [
@@ -1175,9 +1175,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 31.12,
-              "teamBWinProbability": 31.03,
-              "impact": 0.09
+              "teamAWinProbability": 31.17,
+              "teamBWinProbability": 31.06,
+              "impact": 0.11
             }
           ],
           "impactFixtureWindow": 1
@@ -1255,7 +1255,7 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Gujarat": {
+        "Bangalore": {
           "possible": 1,
           "likely": 3,
           "guaranteed": 4,
@@ -1273,22 +1273,22 @@
               "wins": 1,
               "scenarios": 262144,
               "probability": 0.01,
-              "possibleRate": 0.05,
+              "possibleRate": 0.04,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
               "scenarios": 393216,
-              "probability": 12.23,
-              "possibleRate": 31.0,
-              "guaranteedRate": 1.37
+              "probability": 12.2,
+              "possibleRate": 30.7,
+              "guaranteedRate": 1.31
             },
             {
               "wins": 3,
               "scenarios": 262144,
-              "probability": 81.1,
-              "possibleRate": 96.14,
-              "guaranteedRate": 64.03
+              "probability": 80.99,
+              "possibleRate": 96.19,
+              "guaranteedRate": 62.6
             },
             {
               "wins": 4,
@@ -1307,9 +1307,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 31.17,
-              "teamBWinProbability": 31.06,
-              "impact": 0.11
+              "teamAWinProbability": 31.12,
+              "teamBWinProbability": 31.03,
+              "impact": 0.09
             }
           ],
           "nextFixtureImpacts": [
@@ -1321,9 +1321,9 @@
               "teamB": "Kolkata",
               "preferredWinner": "Delhi",
               "preferredLabel": "DC beat KKR",
-              "teamAWinProbability": 31.17,
-              "teamBWinProbability": 31.06,
-              "impact": 0.11
+              "teamAWinProbability": 31.12,
+              "teamBWinProbability": 31.03,
+              "impact": 0.09
             }
           ],
           "impactFixtureWindow": 1
@@ -1554,79 +1554,6 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Mumbai": {
-          "possible": 4,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 262144,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 262144,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 65536,
-              "probability": 0.02,
-              "possibleRate": 0.13,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
-              "matchNo": 51,
-              "label": "M51: DC vs KKR",
-              "teamA": "Delhi",
-              "teamB": "Kolkata",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
-              "matchNo": 51,
-              "label": "M51: DC vs KKR",
-              "teamA": "Delhi",
-              "teamB": "Kolkata",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
         "Lucknow": {
           "possible": 4,
           "likely": null,
@@ -1667,6 +1594,79 @@
               "scenarios": 65536,
               "probability": 0.02,
               "possibleRate": 0.1,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+              "matchNo": 51,
+              "label": "M51: DC vs KKR",
+              "teamA": "Delhi",
+              "teamB": "Kolkata",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
+              "matchNo": 51,
+              "label": "M51: DC vs KKR",
+              "teamA": "Delhi",
+              "teamB": "Kolkata",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": 4,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 4,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 65536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 393216,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 65536,
+              "probability": 0.02,
+              "possibleRate": 0.13,
               "guaranteedRate": 0.0
             }
           ],
