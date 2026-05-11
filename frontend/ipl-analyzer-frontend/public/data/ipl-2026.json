@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-10T20:08:10Z",
+    "generated_at": "2026-05-11T20:58:23Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -54,14 +54,14 @@
       "teamKey": "Punjab",
       "shortName": "PBKS",
       "fullName": "Punjab Kings",
-      "matches": 10,
+      "matches": 11,
       "wins": 6,
-      "losses": 3,
+      "losses": 4,
       "noResult": 1,
       "points": 13,
       "nrr": null,
       "rank": 4,
-      "remainingMatches": 4
+      "remainingMatches": 3
     },
     {
       "teamKey": "Chennai",
@@ -90,6 +90,19 @@
       "remainingMatches": 3
     },
     {
+      "teamKey": "Delhi",
+      "shortName": "DC",
+      "fullName": "Delhi Capitals",
+      "matches": 12,
+      "wins": 5,
+      "losses": 7,
+      "noResult": 0,
+      "points": 10,
+      "nrr": null,
+      "rank": 7,
+      "remainingMatches": 2
+    },
+    {
       "teamKey": "Kolkata",
       "shortName": "KKR",
       "fullName": "Kolkata Knight Riders",
@@ -99,21 +112,8 @@
       "noResult": 1,
       "points": 9,
       "nrr": null,
-      "rank": 7,
-      "remainingMatches": 4
-    },
-    {
-      "teamKey": "Delhi",
-      "shortName": "DC",
-      "fullName": "Delhi Capitals",
-      "matches": 11,
-      "wins": 4,
-      "losses": 7,
-      "noResult": 0,
-      "points": 8,
-      "nrr": null,
       "rank": 8,
-      "remainingMatches": 3
+      "remainingMatches": 4
     },
     {
       "teamKey": "Lucknow",
@@ -143,17 +143,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-      "matchNo": 55,
-      "teamA": "Punjab",
-      "teamB": "Delhi",
-      "dateTimeGMT": "2026-05-11T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
       "matchNo": 56,
@@ -322,9 +311,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 65536,
-    "generatedAt": "2026-05-10T20:08:10Z",
-    "stateCount": 33008,
+    "simulationCount": 32768,
+    "generatedAt": "2026-05-11T20:58:23Z",
+    "stateCount": 19830,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -334,68 +323,68 @@
     ],
     "overallProbabilities": {
       "Gujarat": {
-        "top4": 77.94,
-        "top2": 43.87,
-        "top4Clear": 66.0,
-        "top2Clear": 33.34,
-        "top4Possible": 87.42,
-        "top2Possible": 55.76
+        "top4": 80.16,
+        "top2": 48.15,
+        "top4Clear": 69.47,
+        "top2Clear": 37.49,
+        "top4Possible": 88.18,
+        "top2Possible": 60.03
       },
       "Bangalore": {
-        "top4": 78.39,
-        "top2": 44.21,
-        "top4Clear": 66.35,
-        "top2Clear": 34.02,
-        "top4Possible": 88.08,
-        "top2Possible": 55.25
+        "top4": 80.08,
+        "top2": 48.36,
+        "top4Clear": 69.37,
+        "top2Clear": 37.87,
+        "top4Possible": 88.44,
+        "top2Possible": 59.44
       },
       "Hyderabad": {
-        "top4": 77.62,
-        "top2": 44.35,
-        "top4Clear": 65.68,
-        "top2Clear": 34.6,
-        "top4Possible": 87.22,
-        "top2Possible": 55.31
+        "top4": 79.96,
+        "top2": 48.2,
+        "top4Clear": 69.21,
+        "top2Clear": 38.49,
+        "top4Possible": 88.1,
+        "top2Possible": 59.01
       },
       "Punjab": {
-        "top4": 76.63,
-        "top2": 44.43,
-        "top4Clear": 75.38,
-        "top2Clear": 43.77,
-        "top4Possible": 77.87,
-        "top2Possible": 45.1
+        "top4": 62.49,
+        "top2": 27.62,
+        "top4Clear": 60.62,
+        "top2Clear": 26.93,
+        "top4Possible": 64.36,
+        "top2Possible": 28.32
       },
       "Chennai": {
-        "top4": 40.03,
-        "top2": 11.98,
-        "top4Clear": 25.99,
-        "top2Clear": 6.95,
-        "top4Possible": 52.31,
-        "top2Possible": 18.92
+        "top4": 42.7,
+        "top2": 13.98,
+        "top4Clear": 29.5,
+        "top2Clear": 8.34,
+        "top4Possible": 53.81,
+        "top2Possible": 21.95
       },
       "Rajasthan": {
-        "top4": 38.4,
-        "top2": 8.79,
-        "top4Clear": 23.72,
-        "top2Clear": 3.5,
-        "top4Possible": 51.68,
-        "top2Possible": 15.58
-      },
-      "Kolkata": {
-        "top4": 10.4,
-        "top2": 2.37,
-        "top4Clear": 9.15,
-        "top2Clear": 1.7,
-        "top4Possible": 11.64,
-        "top2Possible": 3.03
+        "top4": 41.79,
+        "top2": 10.65,
+        "top4Clear": 28.09,
+        "top2Clear": 4.51,
+        "top4Possible": 53.6,
+        "top2Possible": 18.49
       },
       "Delhi": {
-        "top4": 0.59,
+        "top4": 1.19,
         "top2": 0.0,
-        "top4Clear": 0.04,
+        "top4Clear": 0.09,
         "top2Clear": 0.0,
-        "top4Possible": 1.64,
+        "top4Possible": 3.28,
         "top2Possible": 0.0
+      },
+      "Kolkata": {
+        "top4": 11.64,
+        "top2": 3.03,
+        "top4Clear": 9.77,
+        "top2Clear": 2.34,
+        "top4Possible": 13.5,
+        "top2Possible": 3.73
       },
       "Lucknow": {
         "top4": 0.0,
@@ -417,81 +406,81 @@
     "teamAnalysis": {
       "4": {
         "Gujarat": {
-          "percentage": 77.94,
+          "percentage": 80.16,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 4.44
+            "M56: GT vs SRH": {
+              "Outcome": "GT beat SRH",
+              "Impact": 29.54
             }
           }
         },
         "Bangalore": {
-          "percentage": 78.39,
+          "percentage": 80.08,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 3.37
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.69
             }
           }
         },
         "Hyderabad": {
-          "percentage": 77.62,
+          "percentage": 79.96,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 4.67
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 28.51
             }
           }
         },
         "Punjab": {
-          "percentage": 76.63,
+          "percentage": 62.49,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "PBKS beat DC",
-              "Impact": 28.27
+            "M56: GT vs SRH": {
+              "Outcome": "GT beat SRH",
+              "Impact": 0.41
             }
           }
         },
         "Chennai": {
-          "percentage": 40.03,
+          "percentage": 42.7,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 5.34
+            "M56: GT vs SRH": {
+              "Outcome": "GT beat SRH",
+              "Impact": 0.25
             }
           }
         },
         "Rajasthan": {
-          "percentage": 38.4,
+          "percentage": 41.79,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 6.77
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 10.4,
-          "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 2.48
+            "M56: GT vs SRH": {
+              "Outcome": "GT beat SRH",
+              "Impact": 0.28
             }
           }
         },
         "Delhi": {
-          "percentage": 0.59,
+          "percentage": 1.19,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 1.19
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.02
+            }
+          }
+        },
+        "Kolkata": {
+          "percentage": 11.64,
+          "results_df": {
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 1.26
             }
           }
         },
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M55: PBKS vs DC": {
+            "M56: GT vs SRH": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -500,7 +489,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M55: PBKS vs DC": {
+            "M56: GT vs SRH": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -509,81 +498,81 @@
       },
       "2": {
         "Gujarat": {
-          "percentage": 43.87,
+          "percentage": 48.15,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 8.56
+            "M56: GT vs SRH": {
+              "Outcome": "GT beat SRH",
+              "Impact": 49.29
             }
           }
         },
         "Bangalore": {
-          "percentage": 44.21,
+          "percentage": 48.36,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 8.29
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.64
             }
           }
         },
         "Hyderabad": {
-          "percentage": 44.35,
+          "percentage": 48.2,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 7.71
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 46.61
             }
           }
         },
         "Punjab": {
-          "percentage": 44.43,
+          "percentage": 27.62,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "PBKS beat DC",
-              "Impact": 33.62
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.88
             }
           }
         },
         "Chennai": {
-          "percentage": 11.98,
+          "percentage": 13.98,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 4.01
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.53
             }
           }
         },
         "Rajasthan": {
-          "percentage": 8.79,
+          "percentage": 10.65,
           "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 3.71
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 2.37,
-          "results_df": {
-            "M55: PBKS vs DC": {
-              "Outcome": "DC beat PBKS",
-              "Impact": 1.33
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.5
             }
           }
         },
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M55: PBKS vs DC": {
+            "M56: GT vs SRH": {
               "Outcome": "Either result",
               "Impact": 0.0
+            }
+          }
+        },
+        "Kolkata": {
+          "percentage": 3.03,
+          "results_df": {
+            "M56: GT vs SRH": {
+              "Outcome": "SRH beat GT",
+              "Impact": 0.12
             }
           }
         },
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M55: PBKS vs DC": {
+            "M56: GT vs SRH": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -592,7 +581,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M55: PBKS vs DC": {
+            "M56: GT vs SRH": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -611,28 +600,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
-              "probability": 4.03,
-              "possibleRate": 10.94,
-              "guaranteedRate": 0.1
+              "scenarios": 4096,
+              "probability": 4.76,
+              "possibleRate": 12.89,
+              "guaranteedRate": 0.2
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 73.28,
-              "possibleRate": 96.13,
-              "guaranteedRate": 43.07
+              "scenarios": 12288,
+              "probability": 78.87,
+              "possibleRate": 97.53,
+              "guaranteedRate": 51.95
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.88,
+              "scenarios": 12288,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.56
+              "guaranteedRate": 99.9
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -640,30 +629,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.72,
-              "teamBWinProbability": 80.16,
-              "impact": 4.44
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 94.93,
+              "teamBWinProbability": 65.39,
+              "impact": 29.54
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.72,
-              "teamBWinProbability": 80.16,
-              "impact": 4.44
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 94.93,
+              "teamBWinProbability": 65.39,
+              "impact": 29.54
             }
           ],
           "impactFixtureWindow": 1
@@ -677,28 +666,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
-              "probability": 5.82,
+              "scenarios": 4096,
+              "probability": 5.22,
               "possibleRate": 15.23,
-              "guaranteedRate": 0.49
+              "guaranteedRate": 0.2
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 73.9,
-              "possibleRate": 96.46,
-              "guaranteedRate": 43.88
+              "scenarios": 12288,
+              "probability": 78.49,
+              "possibleRate": 97.43,
+              "guaranteedRate": 51.69
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.88,
+              "scenarios": 12288,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.54
+              "guaranteedRate": 99.9
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -706,30 +695,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 76.71,
-              "teamBWinProbability": 80.08,
-              "impact": 3.37
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 79.73,
+              "teamBWinProbability": 80.42,
+              "impact": 0.69
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 76.71,
-              "teamBWinProbability": 80.08,
-              "impact": 3.37
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 79.73,
+              "teamBWinProbability": 80.42,
+              "impact": 0.69
             }
           ],
           "impactFixtureWindow": 1
@@ -743,28 +732,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
-              "probability": 4.3,
-              "possibleRate": 10.99,
-              "guaranteedRate": 0.2
+              "scenarios": 4096,
+              "probability": 5.38,
+              "possibleRate": 13.38,
+              "guaranteedRate": 0.39
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 72.33,
-              "possibleRate": 95.6,
-              "guaranteedRate": 42.11
+              "scenarios": 12288,
+              "probability": 78.11,
+              "possibleRate": 97.14,
+              "guaranteedRate": 51.17
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.91,
+              "scenarios": 12288,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.64
+              "guaranteedRate": 99.93
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -772,30 +761,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.29,
-              "teamBWinProbability": 79.96,
-              "impact": 4.67
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 65.7,
+              "teamBWinProbability": 94.22,
+              "impact": 28.51
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.29,
-              "teamBWinProbability": 79.96,
-              "impact": 4.67
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 65.7,
+              "teamBWinProbability": 94.22,
+              "impact": 28.51
             }
           ],
           "impactFixtureWindow": 1
@@ -804,7 +793,7 @@
           "possible": 0,
           "likely": 2,
           "guaranteed": 3,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -816,27 +805,20 @@
             },
             {
               "wins": 1,
-              "scenarios": 16384,
-              "probability": 33.2,
-              "possibleRate": 37.99,
-              "guaranteedRate": 28.42
+              "scenarios": 12288,
+              "probability": 34.11,
+              "possibleRate": 38.96,
+              "guaranteedRate": 29.26
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 98.83,
-              "possibleRate": 98.93,
-              "guaranteedRate": 98.73
+              "scenarios": 12288,
+              "probability": 99.11,
+              "possibleRate": 99.19,
+              "guaranteedRate": 99.03
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
               "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -845,30 +827,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 62.49,
-              "impact": 28.27
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 62.69,
+              "teamBWinProbability": 62.29,
+              "impact": 0.41
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 62.49,
-              "impact": 28.27
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 62.69,
+              "teamBWinProbability": 62.29,
+              "impact": 0.41
             }
           ],
           "impactFixtureWindow": 1
@@ -882,59 +864,59 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 4.14,
-              "possibleRate": 10.82,
-              "guaranteedRate": 0.2
+              "scenarios": 12288,
+              "probability": 5.13,
+              "possibleRate": 13.18,
+              "guaranteedRate": 0.39
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 69.3,
-              "possibleRate": 95.34,
-              "guaranteedRate": 35.94
+              "scenarios": 12288,
+              "probability": 75.41,
+              "possibleRate": 96.99,
+              "guaranteedRate": 44.99
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 99.89,
+              "scenarios": 4096,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.56
+              "guaranteedRate": 99.9
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 37.35,
-              "teamBWinProbability": 42.7,
-              "impact": 5.34
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 42.82,
+              "teamBWinProbability": 42.57,
+              "impact": 0.25
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 37.35,
-              "teamBWinProbability": 42.7,
-              "impact": 5.34
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 42.82,
+              "teamBWinProbability": 42.57,
+              "impact": 0.25
             }
           ],
           "impactFixtureWindow": 1
@@ -948,6 +930,72 @@
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 4096,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12288,
+              "probability": 5.11,
+              "possibleRate": 12.87,
+              "guaranteedRate": 0.62
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 73.02,
+              "possibleRate": 96.73,
+              "guaranteedRate": 41.06
+            },
+            {
+              "wins": 3,
+              "scenarios": 4096,
+              "probability": 99.93,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.71
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 41.93,
+              "teamBWinProbability": 41.65,
+              "impact": 0.28
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 41.93,
+              "teamBWinProbability": 41.65,
+              "impact": 0.28
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Delhi": {
+          "possible": 2,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 8192,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -955,52 +1003,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 3.83,
-              "possibleRate": 10.1,
-              "guaranteedRate": 0.31
+              "scenarios": 16384,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 65.37,
-              "possibleRate": 94.37,
-              "guaranteedRate": 30.11
-            },
-            {
-              "wins": 3,
               "scenarios": 8192,
-              "probability": 99.59,
-              "possibleRate": 100.0,
-              "guaranteedRate": 98.49
+              "probability": 4.75,
+              "possibleRate": 13.13,
+              "guaranteedRate": 0.34
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 35.01,
-              "teamBWinProbability": 41.79,
-              "impact": 6.77
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 1.18,
+              "teamBWinProbability": 1.2,
+              "impact": 0.02
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 35.01,
-              "teamBWinProbability": 41.79,
-              "impact": 6.77
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 1.18,
+              "teamBWinProbability": 1.2,
+              "impact": 0.02
             }
           ],
           "impactFixtureWindow": 1
@@ -1014,132 +1055,66 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16384,
+              "scenarios": 8192,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.02,
-              "possibleRate": 0.05,
+              "scenarios": 12288,
+              "probability": 0.05,
+              "possibleRate": 0.1,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 16.85,
-              "possibleRate": 21.63,
-              "guaranteedRate": 12.06
+              "scenarios": 8192,
+              "probability": 21.63,
+              "possibleRate": 28.91,
+              "guaranteedRate": 14.36
             },
             {
               "wins": 4,
-              "scenarios": 4096,
-              "probability": 98.8,
-              "possibleRate": 99.39,
-              "guaranteedRate": 98.22
+              "scenarios": 2048,
+              "probability": 99.39,
+              "possibleRate": 99.85,
+              "guaranteedRate": 98.93
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.15,
-              "teamBWinProbability": 11.64,
-              "impact": 2.48
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 11.01,
+              "teamBWinProbability": 12.27,
+              "impact": 1.26
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.15,
-              "teamBWinProbability": 11.64,
-              "impact": 2.48
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Delhi": {
-          "possible": 3,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 4.75,
-              "possibleRate": 13.13,
-              "guaranteedRate": 0.34
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 1.19,
-              "impact": 1.19
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 1.19,
-              "impact": 1.19
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 11.01,
+              "teamBWinProbability": 12.27,
+              "impact": 1.26
             }
           ],
           "impactFixtureWindow": 1
@@ -1153,28 +1128,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1182,11 +1157,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1196,11 +1171,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1219,28 +1194,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1248,11 +1223,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1262,11 +1237,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1287,28 +1262,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.8,
-              "possibleRate": 19.52,
-              "guaranteedRate": 0.26
+              "scenarios": 12288,
+              "probability": 10.22,
+              "possibleRate": 27.8,
+              "guaranteedRate": 0.52
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 76.84,
-              "possibleRate": 95.83,
-              "guaranteedRate": 55.32
+              "scenarios": 12288,
+              "probability": 84.84,
+              "possibleRate": 98.96,
+              "guaranteedRate": 66.11
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1316,30 +1291,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 39.59,
-              "teamBWinProbability": 48.15,
-              "impact": 8.56
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 72.79,
+              "teamBWinProbability": 23.5,
+              "impact": 49.29
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 39.59,
-              "teamBWinProbability": 48.15,
-              "impact": 8.56
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 72.79,
+              "teamBWinProbability": 23.5,
+              "impact": 49.29
             }
           ],
           "impactFixtureWindow": 1
@@ -1353,28 +1328,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.51,
-              "possibleRate": 18.16,
-              "guaranteedRate": 0.42
+              "scenarios": 12288,
+              "probability": 9.95,
+              "possibleRate": 26.2,
+              "guaranteedRate": 0.75
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 78.05,
-              "possibleRate": 95.83,
-              "guaranteedRate": 56.97
+              "scenarios": 12288,
+              "probability": 85.67,
+              "possibleRate": 98.96,
+              "guaranteedRate": 66.89
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1382,30 +1357,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.06,
-              "teamBWinProbability": 48.36,
-              "impact": 8.29
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 48.04,
+              "teamBWinProbability": 48.68,
+              "impact": 0.64
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.06,
-              "teamBWinProbability": 48.36,
-              "impact": 8.29
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 48.04,
+              "teamBWinProbability": 48.68,
+              "impact": 0.64
             }
           ],
           "impactFixtureWindow": 1
@@ -1419,28 +1394,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.03,
-              "possibleRate": 17.81,
-              "guaranteedRate": 0.11
+              "scenarios": 12288,
+              "probability": 8.93,
+              "possibleRate": 25.07,
+              "guaranteedRate": 0.23
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 78.9,
-              "possibleRate": 96.35,
-              "guaranteedRate": 58.82
+              "scenarios": 12288,
+              "probability": 86.28,
+              "possibleRate": 98.96,
+              "guaranteedRate": 69.08
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1448,30 +1423,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.49,
-              "teamBWinProbability": 48.2,
-              "impact": 7.71
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 24.9,
+              "teamBWinProbability": 71.51,
+              "impact": 46.61
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.49,
-              "teamBWinProbability": 48.2,
-              "impact": 7.71
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 24.9,
+              "teamBWinProbability": 71.51,
+              "impact": 46.61
             }
           ],
           "impactFixtureWindow": 1
@@ -1479,8 +1454,8 @@
         "Punjab": {
           "possible": 1,
           "likely": 3,
-          "guaranteed": 4,
-          "target_matches": 4,
+          "guaranteed": 3,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1492,27 +1467,20 @@
             },
             {
               "wins": 1,
-              "scenarios": 16384,
-              "probability": 0.05,
-              "possibleRate": 0.07,
-              "guaranteedRate": 0.02
+              "scenarios": 12288,
+              "probability": 0.07,
+              "possibleRate": 0.1,
+              "guaranteedRate": 0.03
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 35.64,
-              "possibleRate": 37.4,
-              "guaranteedRate": 33.89
+              "scenarios": 12288,
+              "probability": 40.26,
+              "possibleRate": 42.09,
+              "guaranteedRate": 38.44
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 99.22,
-              "possibleRate": 99.22,
-              "guaranteedRate": 99.22
-            },
-            {
-              "wins": 4,
               "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -1521,30 +1489,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 61.24,
-              "teamBWinProbability": 27.62,
-              "impact": 33.62
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 27.18,
+              "teamBWinProbability": 28.06,
+              "impact": 0.88
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 61.24,
-              "teamBWinProbability": 27.62,
-              "impact": 33.62
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 27.18,
+              "teamBWinProbability": 28.06,
+              "impact": 0.88
             }
           ],
           "impactFixtureWindow": 1
@@ -1558,59 +1526,59 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 5.8,
-              "possibleRate": 17.63,
-              "guaranteedRate": 0.1
+              "scenarios": 12288,
+              "probability": 8.69,
+              "possibleRate": 25.21,
+              "guaranteedRate": 0.2
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 78.43,
-              "possibleRate": 98.44,
-              "guaranteedRate": 55.32
+              "scenarios": 4096,
+              "probability": 85.8,
+              "possibleRate": 100.0,
+              "guaranteedRate": 66.11
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.97,
-              "teamBWinProbability": 13.98,
-              "impact": 4.01
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 13.72,
+              "teamBWinProbability": 14.25,
+              "impact": 0.53
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.97,
-              "teamBWinProbability": 13.98,
-              "impact": 4.01
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 13.72,
+              "teamBWinProbability": 14.25,
+              "impact": 0.53
             }
           ],
           "impactFixtureWindow": 1
@@ -1624,6 +1592,72 @@
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 4096,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 12288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 5.49,
+              "possibleRate": 17.53,
+              "guaranteedRate": 0.07
+            },
+            {
+              "wins": 3,
+              "scenarios": 4096,
+              "probability": 68.73,
+              "possibleRate": 95.31,
+              "guaranteedRate": 35.84
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 10.4,
+              "teamBWinProbability": 10.9,
+              "impact": 0.5
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 10.4,
+              "teamBWinProbability": 10.9,
+              "impact": 0.5
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Delhi": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 8192,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1631,52 +1665,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 16384,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 3.52,
-              "possibleRate": 11.73,
-              "guaranteedRate": 0.04
-            },
-            {
-              "wins": 3,
               "scenarios": 8192,
-              "probability": 59.78,
-              "possibleRate": 89.45,
-              "guaranteedRate": 27.88
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 6.94,
-              "teamBWinProbability": 10.65,
-              "impact": 3.71
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 6.94,
-              "teamBWinProbability": 10.65,
-              "impact": 3.71
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1690,132 +1717,66 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16384,
+              "scenarios": 8192,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 0.02,
-              "possibleRate": 0.05,
+              "scenarios": 8192,
+              "probability": 0.05,
+              "possibleRate": 0.1,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 4096,
-              "probability": 37.82,
-              "possibleRate": 48.36,
-              "guaranteedRate": 27.27
+              "scenarios": 2048,
+              "probability": 48.36,
+              "possibleRate": 59.33,
+              "guaranteedRate": 37.4
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 1.7,
-              "teamBWinProbability": 3.03,
-              "impact": 1.33
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 2.98,
+              "teamBWinProbability": 3.09,
+              "impact": 0.12
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 1.7,
-              "teamBWinProbability": 3.03,
-              "impact": 1.33
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Delhi": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 2.98,
+              "teamBWinProbability": 3.09,
+              "impact": 0.12
             }
           ],
           "impactFixtureWindow": 1
@@ -1829,28 +1790,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1858,11 +1819,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1872,11 +1833,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1895,28 +1856,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1924,11 +1885,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1938,11 +1899,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1957,132 +1918,34 @@
     "scenarioBreakdown": {
       "4": {
         "Gujarat": {
-          "clearRate": 66.0,
-          "possibleRate": 87.42,
-          "sharedTieAdjustedRate": 77.94,
+          "clearRate": 69.47,
+          "possibleRate": 88.18,
+          "sharedTieAdjustedRate": 80.16,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
-              "probability": 4.03,
-              "possibleRate": 10.94,
-              "guaranteedRate": 0.1
-            },
-            {
-              "wins": 1,
-              "scenarios": 24576,
-              "probability": 73.28,
-              "possibleRate": 96.13,
-              "guaranteedRate": 43.07
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.88,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.56
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.72,
-              "teamBWinProbability": 80.16,
-              "impact": 4.44
-            }
-          ]
-        },
-        "Bangalore": {
-          "clearRate": 66.35,
-          "possibleRate": 88.08,
-          "sharedTieAdjustedRate": 78.39,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8192,
-              "probability": 5.82,
-              "possibleRate": 15.23,
-              "guaranteedRate": 0.49
-            },
-            {
-              "wins": 1,
-              "scenarios": 24576,
-              "probability": 73.9,
-              "possibleRate": 96.46,
-              "guaranteedRate": 43.88
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.88,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.54
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 76.71,
-              "teamBWinProbability": 80.08,
-              "impact": 3.37
-            }
-          ]
-        },
-        "Hyderabad": {
-          "clearRate": 65.68,
-          "possibleRate": 87.22,
-          "sharedTieAdjustedRate": 77.62,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8192,
-              "probability": 4.3,
-              "possibleRate": 10.99,
+              "scenarios": 4096,
+              "probability": 4.76,
+              "possibleRate": 12.89,
               "guaranteedRate": 0.2
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 72.33,
-              "possibleRate": 95.6,
-              "guaranteedRate": 42.11
+              "scenarios": 12288,
+              "probability": 78.87,
+              "possibleRate": 97.53,
+              "guaranteedRate": 51.95
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 99.91,
+              "scenarios": 12288,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.64
+              "guaranteedRate": 99.9
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2090,23 +1953,121 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 75.29,
-              "teamBWinProbability": 79.96,
-              "impact": 4.67
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 94.93,
+              "teamBWinProbability": 65.39,
+              "impact": 29.54
+            }
+          ]
+        },
+        "Bangalore": {
+          "clearRate": 69.37,
+          "possibleRate": 88.44,
+          "sharedTieAdjustedRate": 80.08,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4096,
+              "probability": 5.22,
+              "possibleRate": 15.23,
+              "guaranteedRate": 0.2
+            },
+            {
+              "wins": 1,
+              "scenarios": 12288,
+              "probability": 78.49,
+              "possibleRate": 97.43,
+              "guaranteedRate": 51.69
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 99.98,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.9
+            },
+            {
+              "wins": 3,
+              "scenarios": 4096,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 79.73,
+              "teamBWinProbability": 80.42,
+              "impact": 0.69
+            }
+          ]
+        },
+        "Hyderabad": {
+          "clearRate": 69.21,
+          "possibleRate": 88.1,
+          "sharedTieAdjustedRate": 79.96,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4096,
+              "probability": 5.38,
+              "possibleRate": 13.38,
+              "guaranteedRate": 0.39
+            },
+            {
+              "wins": 1,
+              "scenarios": 12288,
+              "probability": 78.11,
+              "possibleRate": 97.14,
+              "guaranteedRate": 51.17
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 99.98,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.93
+            },
+            {
+              "wins": 3,
+              "scenarios": 4096,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 65.7,
+              "teamBWinProbability": 94.22,
+              "impact": 28.51
             }
           ]
         },
         "Punjab": {
-          "clearRate": 75.38,
-          "possibleRate": 77.87,
-          "sharedTieAdjustedRate": 76.63,
+          "clearRate": 60.62,
+          "possibleRate": 64.36,
+          "sharedTieAdjustedRate": 62.49,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2117,27 +2078,20 @@
             },
             {
               "wins": 1,
-              "scenarios": 16384,
-              "probability": 33.2,
-              "possibleRate": 37.99,
-              "guaranteedRate": 28.42
+              "scenarios": 12288,
+              "probability": 34.11,
+              "possibleRate": 38.96,
+              "guaranteedRate": 29.26
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 98.83,
-              "possibleRate": 98.93,
-              "guaranteedRate": 98.73
+              "scenarios": 12288,
+              "probability": 99.11,
+              "possibleRate": 99.19,
+              "guaranteedRate": 99.03
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
               "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2146,177 +2100,121 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 62.49,
-              "impact": 28.27
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 62.69,
+              "teamBWinProbability": 62.29,
+              "impact": 0.41
             }
           ]
         },
         "Chennai": {
-          "clearRate": 25.99,
-          "possibleRate": 52.31,
-          "sharedTieAdjustedRate": 40.03,
+          "clearRate": 29.5,
+          "possibleRate": 53.81,
+          "sharedTieAdjustedRate": 42.7,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 4.14,
-              "possibleRate": 10.82,
-              "guaranteedRate": 0.2
+              "scenarios": 12288,
+              "probability": 5.13,
+              "possibleRate": 13.18,
+              "guaranteedRate": 0.39
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 69.3,
-              "possibleRate": 95.34,
-              "guaranteedRate": 35.94
+              "scenarios": 12288,
+              "probability": 75.41,
+              "possibleRate": 96.99,
+              "guaranteedRate": 44.99
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 99.89,
+              "scenarios": 4096,
+              "probability": 99.98,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.56
+              "guaranteedRate": 99.9
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 37.35,
-              "teamBWinProbability": 42.7,
-              "impact": 5.34
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 42.82,
+              "teamBWinProbability": 42.57,
+              "impact": 0.25
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 23.72,
-          "possibleRate": 51.68,
-          "sharedTieAdjustedRate": 38.4,
+          "clearRate": 28.09,
+          "possibleRate": 53.6,
+          "sharedTieAdjustedRate": 41.79,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 3.83,
-              "possibleRate": 10.1,
-              "guaranteedRate": 0.31
+              "scenarios": 12288,
+              "probability": 5.11,
+              "possibleRate": 12.87,
+              "guaranteedRate": 0.62
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 65.37,
-              "possibleRate": 94.37,
-              "guaranteedRate": 30.11
+              "scenarios": 12288,
+              "probability": 73.02,
+              "possibleRate": 96.73,
+              "guaranteedRate": 41.06
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 99.59,
+              "scenarios": 4096,
+              "probability": 99.93,
               "possibleRate": 100.0,
-              "guaranteedRate": 98.49
+              "guaranteedRate": 99.71
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 35.01,
-              "teamBWinProbability": 41.79,
-              "impact": 6.77
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 9.15,
-          "possibleRate": 11.64,
-          "sharedTieAdjustedRate": 10.4,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4096,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16384,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.02,
-              "possibleRate": 0.05,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 16384,
-              "probability": 16.85,
-              "possibleRate": 21.63,
-              "guaranteedRate": 12.06
-            },
-            {
-              "wins": 4,
-              "scenarios": 4096,
-              "probability": 98.8,
-              "possibleRate": 99.39,
-              "guaranteedRate": 98.22
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.15,
-              "teamBWinProbability": 11.64,
-              "impact": 2.48
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 41.93,
+              "teamBWinProbability": 41.65,
+              "impact": 0.28
             }
           ]
         },
         "Delhi": {
-          "clearRate": 0.04,
-          "possibleRate": 1.64,
-          "sharedTieAdjustedRate": 0.59,
+          "clearRate": 0.09,
+          "possibleRate": 3.28,
+          "sharedTieAdjustedRate": 1.19,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2327,20 +2225,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 16384,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 8192,
               "probability": 4.75,
               "possibleRate": 13.13,
@@ -2349,16 +2240,72 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 1.19,
-              "impact": 1.19
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 1.18,
+              "teamBWinProbability": 1.2,
+              "impact": 0.02
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 9.77,
+          "possibleRate": 13.5,
+          "sharedTieAdjustedRate": 11.64,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 8192,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 0.05,
+              "possibleRate": 0.1,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 8192,
+              "probability": 21.63,
+              "possibleRate": 28.91,
+              "guaranteedRate": 14.36
+            },
+            {
+              "wins": 4,
+              "scenarios": 2048,
+              "probability": 99.39,
+              "possibleRate": 99.85,
+              "guaranteedRate": 98.93
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 11.01,
+              "teamBWinProbability": 12.27,
+              "impact": 1.26
             }
           ]
         },
@@ -2369,28 +2316,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2398,11 +2345,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2418,28 +2365,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2447,11 +2394,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2463,34 +2410,34 @@
       },
       "2": {
         "Gujarat": {
-          "clearRate": 33.34,
-          "possibleRate": 55.76,
-          "sharedTieAdjustedRate": 43.87,
+          "clearRate": 37.49,
+          "possibleRate": 60.03,
+          "sharedTieAdjustedRate": 48.15,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.8,
-              "possibleRate": 19.52,
-              "guaranteedRate": 0.26
+              "scenarios": 12288,
+              "probability": 10.22,
+              "possibleRate": 27.8,
+              "guaranteedRate": 0.52
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 76.84,
-              "possibleRate": 95.83,
-              "guaranteedRate": 55.32
+              "scenarios": 12288,
+              "probability": 84.84,
+              "possibleRate": 98.96,
+              "guaranteedRate": 66.11
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2498,48 +2445,48 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 39.59,
-              "teamBWinProbability": 48.15,
-              "impact": 8.56
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat SRH",
+              "teamAWinProbability": 72.79,
+              "teamBWinProbability": 23.5,
+              "impact": 49.29
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 34.02,
-          "possibleRate": 55.25,
-          "sharedTieAdjustedRate": 44.21,
+          "clearRate": 37.87,
+          "possibleRate": 59.44,
+          "sharedTieAdjustedRate": 48.36,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.51,
-              "possibleRate": 18.16,
-              "guaranteedRate": 0.42
+              "scenarios": 12288,
+              "probability": 9.95,
+              "possibleRate": 26.2,
+              "guaranteedRate": 0.75
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 78.05,
-              "possibleRate": 95.83,
-              "guaranteedRate": 56.97
+              "scenarios": 12288,
+              "probability": 85.67,
+              "possibleRate": 98.96,
+              "guaranteedRate": 66.89
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2547,48 +2494,48 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.06,
-              "teamBWinProbability": 48.36,
-              "impact": 8.29
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 48.04,
+              "teamBWinProbability": 48.68,
+              "impact": 0.64
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 34.6,
-          "possibleRate": 55.31,
-          "sharedTieAdjustedRate": 44.35,
+          "clearRate": 38.49,
+          "possibleRate": 59.01,
+          "sharedTieAdjustedRate": 48.2,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
-              "probability": 6.03,
-              "possibleRate": 17.81,
-              "guaranteedRate": 0.11
+              "scenarios": 12288,
+              "probability": 8.93,
+              "possibleRate": 25.07,
+              "guaranteedRate": 0.23
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 78.9,
-              "possibleRate": 96.35,
-              "guaranteedRate": 58.82
+              "scenarios": 12288,
+              "probability": 86.28,
+              "possibleRate": 98.96,
+              "guaranteedRate": 69.08
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2596,23 +2543,23 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 40.49,
-              "teamBWinProbability": 48.2,
-              "impact": 7.71
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 24.9,
+              "teamBWinProbability": 71.51,
+              "impact": 46.61
             }
           ]
         },
         "Punjab": {
-          "clearRate": 43.77,
-          "possibleRate": 45.1,
-          "sharedTieAdjustedRate": 44.43,
+          "clearRate": 26.93,
+          "possibleRate": 28.32,
+          "sharedTieAdjustedRate": 27.62,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2623,27 +2570,20 @@
             },
             {
               "wins": 1,
-              "scenarios": 16384,
-              "probability": 0.05,
-              "possibleRate": 0.07,
-              "guaranteedRate": 0.02
+              "scenarios": 12288,
+              "probability": 0.07,
+              "possibleRate": 0.1,
+              "guaranteedRate": 0.03
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 35.64,
-              "possibleRate": 37.4,
-              "guaranteedRate": 33.89
+              "scenarios": 12288,
+              "probability": 40.26,
+              "possibleRate": 42.09,
+              "guaranteedRate": 38.44
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 99.22,
-              "possibleRate": 99.22,
-              "guaranteedRate": 99.22
-            },
-            {
-              "wins": 4,
               "scenarios": 4096,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2652,121 +2592,72 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat DC",
-              "teamAWinProbability": 61.24,
-              "teamBWinProbability": 27.62,
-              "impact": 33.62
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 27.18,
+              "teamBWinProbability": 28.06,
+              "impact": 0.88
             }
           ]
         },
         "Chennai": {
-          "clearRate": 6.95,
-          "possibleRate": 18.92,
-          "sharedTieAdjustedRate": 11.98,
+          "clearRate": 8.34,
+          "possibleRate": 21.95,
+          "sharedTieAdjustedRate": 13.98,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 5.8,
-              "possibleRate": 17.63,
-              "guaranteedRate": 0.1
+              "scenarios": 12288,
+              "probability": 8.69,
+              "possibleRate": 25.21,
+              "guaranteedRate": 0.2
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 78.43,
-              "possibleRate": 98.44,
-              "guaranteedRate": 55.32
+              "scenarios": 4096,
+              "probability": 85.8,
+              "possibleRate": 100.0,
+              "guaranteedRate": 66.11
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 9.97,
-              "teamBWinProbability": 13.98,
-              "impact": 4.01
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 13.72,
+              "teamBWinProbability": 14.25,
+              "impact": 0.53
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 3.5,
-          "possibleRate": 15.58,
-          "sharedTieAdjustedRate": 8.79,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 24576,
-              "probability": 3.52,
-              "possibleRate": 11.73,
-              "guaranteedRate": 0.04
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 59.78,
-              "possibleRate": 89.45,
-              "guaranteedRate": 27.88
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 6.94,
-              "teamBWinProbability": 10.65,
-              "impact": 3.71
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 1.7,
-          "possibleRate": 3.03,
-          "sharedTieAdjustedRate": 2.37,
+          "clearRate": 4.51,
+          "possibleRate": 18.49,
+          "sharedTieAdjustedRate": 10.65,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2777,45 +2668,38 @@
             },
             {
               "wins": 1,
-              "scenarios": 16384,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
+              "scenarios": 12288,
+              "probability": 5.49,
+              "possibleRate": 17.53,
+              "guaranteedRate": 0.07
             },
             {
               "wins": 3,
-              "scenarios": 16384,
-              "probability": 0.02,
-              "possibleRate": 0.05,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
               "scenarios": 4096,
-              "probability": 37.82,
-              "possibleRate": 48.36,
-              "guaranteedRate": 27.27
+              "probability": 68.73,
+              "possibleRate": 95.31,
+              "guaranteedRate": 35.84
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
-              "preferredWinner": "Delhi",
-              "preferredLabel": "DC beat PBKS",
-              "teamAWinProbability": 1.7,
-              "teamBWinProbability": 3.03,
-              "impact": 1.33
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 10.4,
+              "teamBWinProbability": 10.9,
+              "impact": 0.5
             }
           ]
         },
@@ -2833,20 +2717,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 16384,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 8192,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2855,16 +2732,72 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
               "impact": 0.0
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 2.34,
+          "possibleRate": 3.73,
+          "sharedTieAdjustedRate": 3.03,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 8192,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 12288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 8192,
+              "probability": 0.05,
+              "possibleRate": 0.1,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 2048,
+              "probability": 48.36,
+              "possibleRate": 59.33,
+              "guaranteedRate": 37.4
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat GT",
+              "teamAWinProbability": 2.98,
+              "teamBWinProbability": 3.09,
+              "impact": 0.12
             }
           ]
         },
@@ -2875,28 +2808,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2904,11 +2837,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2924,28 +2857,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 24576,
+              "scenarios": 12288,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 4096,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2953,11 +2886,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "ee5ab0d9-acd2-42bf-b5bc-f4d287e0f434",
-              "matchNo": 55,
-              "label": "M55: PBKS vs DC",
-              "teamA": "Punjab",
-              "teamB": "Delhi",
+              "fixtureId": "9413d7dd-bf8e-49f6-8ce7-91faf29a0115",
+              "matchNo": 56,
+              "label": "M56: GT vs SRH",
+              "teamA": "Gujarat",
+              "teamB": "Hyderabad",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
