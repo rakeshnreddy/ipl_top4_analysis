@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-13T21:02:34Z",
+    "generated_at": "2026-05-14T20:50:42Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -54,14 +54,14 @@
       "teamKey": "Punjab",
       "shortName": "PBKS",
       "fullName": "Punjab Kings",
-      "matches": 11,
+      "matches": 12,
       "wins": 6,
-      "losses": 4,
+      "losses": 5,
       "noResult": 1,
       "points": 13,
       "nrr": null,
       "rank": 4,
-      "remainingMatches": 3
+      "remainingMatches": 2
     },
     {
       "teamKey": "Chennai",
@@ -116,22 +116,22 @@
       "remainingMatches": 3
     },
     {
-      "teamKey": "Lucknow",
-      "shortName": "LSG",
-      "fullName": "Lucknow Super Giants",
-      "matches": 11,
-      "wins": 3,
-      "losses": 8,
-      "noResult": 0,
-      "points": 6,
-      "nrr": null,
-      "rank": 9,
-      "remainingMatches": 3
-    },
-    {
       "teamKey": "Mumbai",
       "shortName": "MI",
       "fullName": "Mumbai Indians",
+      "matches": 12,
+      "wins": 4,
+      "losses": 8,
+      "noResult": 0,
+      "points": 8,
+      "nrr": null,
+      "rank": 9,
+      "remainingMatches": 2
+    },
+    {
+      "teamKey": "Lucknow",
+      "shortName": "LSG",
+      "fullName": "Lucknow Super Giants",
       "matches": 11,
       "wins": 3,
       "losses": 8,
@@ -143,17 +143,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-      "matchNo": 58,
-      "teamA": "Punjab",
-      "teamB": "Mumbai",
-      "dateTimeGMT": "2026-05-14T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
       "matchNo": 59,
@@ -289,9 +278,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 8192,
-    "generatedAt": "2026-05-13T21:02:34Z",
-    "stateCount": 6666,
+    "simulationCount": 4096,
+    "generatedAt": "2026-05-14T20:50:42Z",
+    "stateCount": 3624,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -301,70 +290,70 @@
     ],
     "overallProbabilities": {
       "Gujarat": {
-        "top4": 94.85,
-        "top2": 69.4,
-        "top4Clear": 87.45,
-        "top2Clear": 55.52,
-        "top4Possible": 99.66,
-        "top2Possible": 82.57
+        "top4": 96.62,
+        "top2": 73.17,
+        "top4Clear": 90.62,
+        "top2Clear": 59.77,
+        "top4Possible": 99.9,
+        "top2Possible": 86.04
       },
       "Bangalore": {
-        "top4": 92.62,
-        "top2": 66.74,
-        "top4Clear": 84.33,
-        "top2Clear": 54.35,
-        "top4Possible": 98.97,
-        "top2Possible": 77.59
+        "top4": 94.49,
+        "top2": 70.94,
+        "top4Clear": 87.5,
+        "top2Clear": 58.59,
+        "top4Possible": 99.32,
+        "top2Possible": 81.93
       },
       "Hyderabad": {
-        "top4": 64.68,
-        "top2": 21.44,
-        "top4Clear": 50.15,
-        "top2Clear": 11.91,
-        "top4Possible": 77.0,
-        "top2Possible": 31.45
+        "top4": 69.63,
+        "top2": 24.36,
+        "top4Clear": 56.54,
+        "top2Clear": 14.06,
+        "top4Possible": 79.69,
+        "top2Possible": 36.04
       },
       "Punjab": {
-        "top4": 62.82,
-        "top2": 22.17,
-        "top4Clear": 61.99,
-        "top2Clear": 22.17,
-        "top4Possible": 63.65,
-        "top2Possible": 22.17
+        "top4": 42.68,
+        "top2": 8.3,
+        "top4Clear": 41.55,
+        "top2Clear": 8.3,
+        "top4Possible": 43.8,
+        "top2Possible": 8.3
       },
       "Chennai": {
-        "top4": 41.67,
-        "top2": 11.87,
-        "top4Clear": 28.3,
-        "top2Clear": 6.3,
-        "top4Possible": 53.17,
-        "top2Possible": 19.04
+        "top4": 46.1,
+        "top2": 13.49,
+        "top4Clear": 33.25,
+        "top2Clear": 7.03,
+        "top4Possible": 56.25,
+        "top2Possible": 22.17
       },
       "Rajasthan": {
-        "top4": 40.57,
-        "top2": 8.38,
-        "top4Clear": 26.83,
-        "top2Clear": 2.59,
-        "top4Possible": 53.04,
-        "top2Possible": 15.28
+        "top4": 46.16,
+        "top2": 9.73,
+        "top4Clear": 33.06,
+        "top2Clear": 3.12,
+        "top4Possible": 56.96,
+        "top2Possible": 17.87
       },
       "Delhi": {
-        "top4": 1.03,
+        "top4": 1.74,
         "top2": 0.0,
-        "top4Clear": 0.1,
+        "top4Clear": 0.2,
         "top2Clear": 0.0,
-        "top4Possible": 2.69,
+        "top4Possible": 4.2,
         "top2Possible": 0.0
       },
       "Kolkata": {
-        "top4": 1.76,
+        "top4": 2.59,
         "top2": 0.0,
-        "top4Clear": 0.93,
+        "top4Clear": 1.46,
         "top2Clear": 0.0,
-        "top4Possible": 2.59,
+        "top4Possible": 3.71,
         "top2Possible": 0.0
       },
-      "Lucknow": {
+      "Mumbai": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -372,7 +361,7 @@
         "top4Possible": 0.0,
         "top2Possible": 0.0
       },
-      "Mumbai": {
+      "Lucknow": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -384,90 +373,90 @@
     "teamAnalysis": {
       "4": {
         "Gujarat": {
-          "percentage": 94.85,
+          "percentage": 96.62,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 3.53
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 2.77
             }
           }
         },
         "Bangalore": {
-          "percentage": 92.62,
+          "percentage": 94.49,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 3.73
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 3.16
             }
           }
         },
         "Hyderabad": {
-          "percentage": 64.68,
+          "percentage": 69.63,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 9.9
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 8.17
             }
           }
         },
         "Punjab": {
-          "percentage": 62.82,
+          "percentage": 42.68,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "PBKS beat MI",
-              "Impact": 40.28
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 12.3
             }
           }
         },
         "Chennai": {
-          "percentage": 41.67,
+          "percentage": 46.1,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 8.86
+            "M59: LSG vs CSK": {
+              "Outcome": "CSK beat LSG",
+              "Impact": 38.89
             }
           }
         },
         "Rajasthan": {
-          "percentage": 40.57,
+          "percentage": 46.16,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 11.18
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 8.76
             }
           }
         },
         "Delhi": {
-          "percentage": 1.03,
+          "percentage": 1.74,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 1.42
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 1.76,
-          "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
               "Impact": 1.66
             }
           }
         },
-        "Lucknow": {
-          "percentage": 0.0,
+        "Kolkata": {
+          "percentage": 2.59,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 2.05
             }
           }
         },
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M58: PBKS vs MI": {
+            "M59: LSG vs CSK": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Lucknow": {
+          "percentage": 0.0,
+          "results_df": {
+            "M59: LSG vs CSK": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -476,63 +465,63 @@
       },
       "2": {
         "Gujarat": {
-          "percentage": 69.4,
+          "percentage": 73.17,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 7.55
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 7.38
             }
           }
         },
         "Bangalore": {
-          "percentage": 66.74,
+          "percentage": 70.94,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 8.4
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 3.74
             }
           }
         },
         "Hyderabad": {
-          "percentage": 21.44,
+          "percentage": 24.36,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 5.84
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 2.7
             }
           }
         },
         "Punjab": {
-          "percentage": 22.17,
+          "percentage": 8.3,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "PBKS beat MI",
-              "Impact": 27.73
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 2.93
             }
           }
         },
         "Chennai": {
-          "percentage": 11.87,
+          "percentage": 13.49,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 3.24
+            "M59: LSG vs CSK": {
+              "Outcome": "CSK beat LSG",
+              "Impact": 19.05
             }
           }
         },
         "Rajasthan": {
-          "percentage": 8.38,
+          "percentage": 9.73,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "MI beat PBKS",
-              "Impact": 2.7
+            "M59: LSG vs CSK": {
+              "Outcome": "LSG beat CSK",
+              "Impact": 2.3
             }
           }
         },
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M58: PBKS vs MI": {
+            "M59: LSG vs CSK": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -541,16 +530,7 @@
         "Kolkata": {
           "percentage": 0.0,
           "results_df": {
-            "M58: PBKS vs MI": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Lucknow": {
-          "percentage": 0.0,
-          "results_df": {
-            "M58: PBKS vs MI": {
+            "M59: LSG vs CSK": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -559,7 +539,16 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M58: PBKS vs MI": {
+            "M59: LSG vs CSK": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Lucknow": {
+          "percentage": 0.0,
+          "results_df": {
+            "M59: LSG vs CSK": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -572,27 +561,27 @@
         "Gujarat": {
           "possible": 0,
           "likely": 0,
-          "guaranteed": 2,
+          "guaranteed": 1,
           "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 79.45,
-              "possibleRate": 98.63,
-              "guaranteedRate": 50.0
+              "scenarios": 1024,
+              "probability": 86.47,
+              "possibleRate": 99.61,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 99.98,
+              "scenarios": 2048,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.9
+              "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -600,30 +589,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 93.08,
-              "teamBWinProbability": 96.62,
-              "impact": 3.53
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 98.0,
+              "teamBWinProbability": 95.23,
+              "impact": 2.77
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 93.08,
-              "teamBWinProbability": 96.62,
-              "impact": 3.53
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 98.0,
+              "teamBWinProbability": 95.23,
+              "impact": 2.77
             }
           ],
           "impactFixtureWindow": 1
@@ -631,27 +620,27 @@
         "Bangalore": {
           "possible": 0,
           "likely": 0,
-          "guaranteed": 2,
+          "guaranteed": 1,
           "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 70.53,
-              "possibleRate": 95.9,
-              "guaranteedRate": 37.5
+              "scenarios": 1024,
+              "probability": 77.94,
+              "possibleRate": 97.27,
+              "guaranteedRate": 50.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 99.98,
+              "scenarios": 2048,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.9
+              "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -659,30 +648,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 94.49,
-              "impact": 3.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 96.07,
+              "teamBWinProbability": 92.9,
+              "impact": 3.16
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 94.49,
-              "impact": 3.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 96.07,
+              "teamBWinProbability": 92.9,
+              "impact": 3.16
             }
           ],
           "impactFixtureWindow": 1
@@ -696,21 +685,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 6.83,
-              "possibleRate": 16.6,
-              "guaranteedRate": 0.59
+              "scenarios": 1024,
+              "probability": 10.07,
+              "possibleRate": 22.27,
+              "guaranteedRate": 1.17
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 75.94,
-              "possibleRate": 95.7,
-              "guaranteedRate": 50.0
+              "scenarios": 2048,
+              "probability": 84.22,
+              "possibleRate": 98.24,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -718,30 +707,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 59.73,
-              "teamBWinProbability": 69.63,
-              "impact": 9.9
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 73.71,
+              "teamBWinProbability": 65.54,
+              "impact": 8.17
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 59.73,
-              "teamBWinProbability": 69.63,
-              "impact": 9.9
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 73.71,
+              "teamBWinProbability": 65.54,
+              "impact": 8.17
             }
           ],
           "impactFixtureWindow": 1
@@ -749,8 +738,8 @@
         "Punjab": {
           "possible": 0,
           "likely": 2,
-          "guaranteed": 3,
-          "target_matches": 3,
+          "guaranteed": null,
+          "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -762,52 +751,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 35.35,
               "possibleRate": 37.5,
               "guaranteedRate": 33.2
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 98.7,
-              "possibleRate": 98.7,
-              "guaranteedRate": 98.7
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "probability": 99.61,
+              "possibleRate": 99.61,
+              "guaranteedRate": 99.61
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 82.96,
-              "teamBWinProbability": 42.68,
-              "impact": 40.28
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 48.83,
+              "teamBWinProbability": 36.52,
+              "impact": 12.3
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 82.96,
-              "teamBWinProbability": 42.68,
-              "impact": 40.28
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 48.83,
+              "teamBWinProbability": 36.52,
+              "impact": 12.3
             }
           ],
           "impactFixtureWindow": 1
@@ -815,65 +797,65 @@
         "Chennai": {
           "possible": 1,
           "likely": 2,
-          "guaranteed": null,
+          "guaranteed": 3,
           "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
-              "probability": 5.47,
-              "possibleRate": 12.89,
-              "guaranteedRate": 0.59
+              "scenarios": 1536,
+              "probability": 8.56,
+              "possibleRate": 18.49,
+              "guaranteedRate": 1.17
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 72.35,
-              "possibleRate": 95.57,
-              "guaranteedRate": 41.67
+              "scenarios": 1536,
+              "probability": 81.04,
+              "possibleRate": 98.18,
+              "guaranteedRate": 54.17
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 99.9,
+              "scenarios": 512,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.61
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 37.24,
-              "teamBWinProbability": 46.1,
-              "impact": 8.86
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 26.66,
+              "teamBWinProbability": 65.54,
+              "impact": 38.89
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 37.24,
-              "teamBWinProbability": 46.1,
-              "impact": 8.86
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 26.66,
+              "teamBWinProbability": 65.54,
+              "impact": 38.89
             }
           ],
           "impactFixtureWindow": 1
@@ -881,65 +863,65 @@
         "Rajasthan": {
           "possible": 1,
           "likely": 2,
-          "guaranteed": null,
+          "guaranteed": 3,
           "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
-              "probability": 5.38,
-              "possibleRate": 12.4,
-              "guaranteedRate": 0.85
+              "scenarios": 1536,
+              "probability": 9.11,
+              "possibleRate": 19.34,
+              "guaranteedRate": 1.69
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 69.51,
-              "possibleRate": 95.7,
-              "guaranteedRate": 37.5
+              "scenarios": 1536,
+              "probability": 80.65,
+              "possibleRate": 99.22,
+              "guaranteedRate": 53.12
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 99.9,
+              "scenarios": 512,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.61
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 34.98,
-              "teamBWinProbability": 46.16,
-              "impact": 11.18
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 50.54,
+              "teamBWinProbability": 41.78,
+              "impact": 8.76
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 34.98,
-              "teamBWinProbability": 46.16,
-              "impact": 11.18
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 50.54,
+              "teamBWinProbability": 41.78,
+              "impact": 8.76
             }
           ],
           "impactFixtureWindow": 1
@@ -953,52 +935,52 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
-              "probability": 4.13,
-              "possibleRate": 10.74,
-              "guaranteedRate": 0.39
+              "scenarios": 1024,
+              "probability": 6.97,
+              "possibleRate": 16.8,
+              "guaranteedRate": 0.78
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.33,
-              "teamBWinProbability": 1.74,
-              "impact": 1.42
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 2.57,
+              "teamBWinProbability": 0.91,
+              "impact": 1.66
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.33,
-              "teamBWinProbability": 1.74,
-              "impact": 1.42
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 2.57,
+              "teamBWinProbability": 0.91,
+              "impact": 1.66
             }
           ],
           "impactFixtureWindow": 1
@@ -1012,6 +994,72 @@
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.13,
+              "possibleRate": 0.26,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 20.31,
+              "possibleRate": 28.91,
+              "guaranteedRate": 11.72
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 3.61,
+              "teamBWinProbability": 1.56,
+              "impact": 2.05
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 3.61,
+              "teamBWinProbability": 1.56,
+              "impact": 2.05
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1019,52 +1067,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.07,
-              "possibleRate": 0.13,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
-              "probability": 13.87,
-              "possibleRate": 20.31,
-              "guaranteedRate": 7.42
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.93,
-              "teamBWinProbability": 2.59,
-              "impact": 1.66
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.93,
-              "teamBWinProbability": 2.59,
-              "impact": 1.66
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1078,28 +1119,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1107,11 +1148,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1121,77 +1162,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Mumbai": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1212,21 +1187,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 10.55,
-              "possibleRate": 30.27,
+              "scenarios": 1024,
+              "probability": 15.87,
+              "possibleRate": 44.14,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 83.52,
+              "scenarios": 2048,
+              "probability": 88.41,
               "possibleRate": 100.0,
-              "guaranteedRate": 61.04
+              "guaranteedRate": 69.53
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1234,30 +1209,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 65.62,
-              "teamBWinProbability": 73.17,
-              "impact": 7.55
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 76.87,
+              "teamBWinProbability": 69.48,
+              "impact": 7.38
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 65.62,
-              "teamBWinProbability": 73.17,
-              "impact": 7.55
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 76.87,
+              "teamBWinProbability": 69.48,
+              "impact": 7.38
             }
           ],
           "impactFixtureWindow": 1
@@ -1271,21 +1246,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 5.4,
-              "possibleRate": 16.6,
+              "scenarios": 1024,
+              "probability": 9.56,
+              "possibleRate": 27.73,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 80.79,
-              "possibleRate": 96.88,
-              "guaranteedRate": 58.69
+              "scenarios": 2048,
+              "probability": 87.11,
+              "possibleRate": 100.0,
+              "guaranteedRate": 67.19
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1293,30 +1268,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 62.54,
-              "teamBWinProbability": 70.94,
-              "impact": 8.4
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 72.81,
+              "teamBWinProbability": 69.08,
+              "impact": 3.74
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 62.54,
-              "teamBWinProbability": 70.94,
-              "impact": 8.4
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 72.81,
+              "teamBWinProbability": 69.08,
+              "impact": 3.74
             }
           ],
           "impactFixtureWindow": 1
@@ -1330,61 +1305,61 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 4.8,
-              "possibleRate": 14.45,
+              "scenarios": 2048,
+              "probability": 7.58,
+              "possibleRate": 22.07,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
-              "probability": 76.17,
-              "possibleRate": 96.88,
-              "guaranteedRate": 47.66
+              "scenarios": 1024,
+              "probability": 82.29,
+              "possibleRate": 100.0,
+              "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 18.53,
-              "teamBWinProbability": 24.36,
-              "impact": 5.84
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 25.71,
+              "teamBWinProbability": 23.01,
+              "impact": 2.7
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 18.53,
-              "teamBWinProbability": 24.36,
-              "impact": 5.84
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 25.71,
+              "teamBWinProbability": 23.01,
+              "impact": 2.7
             }
           ],
           "impactFixtureWindow": 1
         },
         "Punjab": {
           "possible": 2,
-          "likely": 3,
-          "guaranteed": 3,
-          "target_matches": 3,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1396,52 +1371,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 25.78,
-              "possibleRate": 25.78,
-              "guaranteedRate": 25.78
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "probability": 33.2,
+              "possibleRate": 33.2,
+              "guaranteedRate": 33.2
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 36.04,
-              "teamBWinProbability": 8.3,
-              "impact": 27.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 9.77,
+              "teamBWinProbability": 6.84,
+              "impact": 2.93
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 36.04,
-              "teamBWinProbability": 8.3,
-              "impact": 27.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 9.77,
+              "teamBWinProbability": 6.84,
+              "impact": 2.93
             }
           ],
           "impactFixtureWindow": 1
@@ -1455,59 +1423,59 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 5.62,
-              "possibleRate": 17.45,
+              "scenarios": 1536,
+              "probability": 8.54,
+              "possibleRate": 25.78,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 78.09,
+              "scenarios": 512,
+              "probability": 82.29,
               "possibleRate": 100.0,
-              "guaranteedRate": 50.39
+              "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 10.25,
-              "teamBWinProbability": 13.49,
-              "impact": 3.24
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 3.96,
+              "teamBWinProbability": 23.01,
+              "impact": 19.05
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 10.25,
-              "teamBWinProbability": 13.49,
-              "impact": 3.24
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 3.96,
+              "teamBWinProbability": 23.01,
+              "impact": 19.05
             }
           ],
           "impactFixtureWindow": 1
@@ -1521,59 +1489,59 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 2.99,
-              "possibleRate": 10.55,
+              "scenarios": 1536,
+              "probability": 4.77,
+              "possibleRate": 16.41,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 58.04,
-              "possibleRate": 90.62,
-              "guaranteedRate": 20.7
+              "scenarios": 512,
+              "probability": 63.54,
+              "possibleRate": 93.75,
+              "guaranteedRate": 25.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 7.03,
-              "teamBWinProbability": 9.73,
-              "impact": 2.7
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 10.88,
+              "teamBWinProbability": 8.58,
+              "impact": 2.3
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 7.03,
-              "teamBWinProbability": 9.73,
-              "impact": 2.7
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 10.88,
+              "teamBWinProbability": 8.58,
+              "impact": 2.3
             }
           ],
           "impactFixtureWindow": 1
@@ -1587,21 +1555,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1609,11 +1577,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1623,11 +1591,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1646,28 +1614,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1675,11 +1643,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1689,11 +1657,70 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Mumbai": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1024,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1024,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1712,28 +1739,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1741,11 +1768,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1755,77 +1782,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Mumbai": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1840,27 +1801,27 @@
     "scenarioBreakdown": {
       "4": {
         "Gujarat": {
-          "clearRate": 87.45,
-          "possibleRate": 99.66,
-          "sharedTieAdjustedRate": 94.85,
+          "clearRate": 90.62,
+          "possibleRate": 99.9,
+          "sharedTieAdjustedRate": 96.62,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 79.45,
-              "possibleRate": 98.63,
-              "guaranteedRate": 50.0
+              "scenarios": 1024,
+              "probability": 86.47,
+              "possibleRate": 99.61,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 99.98,
+              "scenarios": 2048,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.9
+              "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1868,41 +1829,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 93.08,
-              "teamBWinProbability": 96.62,
-              "impact": 3.53
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 98.0,
+              "teamBWinProbability": 95.23,
+              "impact": 2.77
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 84.33,
-          "possibleRate": 98.97,
-          "sharedTieAdjustedRate": 92.62,
+          "clearRate": 87.5,
+          "possibleRate": 99.32,
+          "sharedTieAdjustedRate": 94.49,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 70.53,
-              "possibleRate": 95.9,
-              "guaranteedRate": 37.5
+              "scenarios": 1024,
+              "probability": 77.94,
+              "possibleRate": 97.27,
+              "guaranteedRate": 50.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 99.98,
+              "scenarios": 2048,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.9
+              "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1910,41 +1871,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 90.76,
-              "teamBWinProbability": 94.49,
-              "impact": 3.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 96.07,
+              "teamBWinProbability": 92.9,
+              "impact": 3.16
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 50.15,
-          "possibleRate": 77.0,
-          "sharedTieAdjustedRate": 64.68,
+          "clearRate": 56.54,
+          "possibleRate": 79.69,
+          "sharedTieAdjustedRate": 69.63,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 6.83,
-              "possibleRate": 16.6,
-              "guaranteedRate": 0.59
+              "scenarios": 1024,
+              "probability": 10.07,
+              "possibleRate": 22.27,
+              "guaranteedRate": 1.17
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 75.94,
-              "possibleRate": 95.7,
-              "guaranteedRate": 50.0
+              "scenarios": 2048,
+              "probability": 84.22,
+              "possibleRate": 98.24,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1952,23 +1913,23 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 59.73,
-              "teamBWinProbability": 69.63,
-              "impact": 9.9
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 73.71,
+              "teamBWinProbability": 65.54,
+              "impact": 8.17
             }
           ]
         },
         "Punjab": {
-          "clearRate": 61.99,
-          "possibleRate": 63.65,
-          "sharedTieAdjustedRate": 62.82,
+          "clearRate": 41.55,
+          "possibleRate": 43.8,
+          "sharedTieAdjustedRate": 42.68,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -1979,21 +1940,63 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 35.35,
               "possibleRate": 37.5,
               "guaranteedRate": 33.2
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 98.7,
-              "possibleRate": 98.7,
-              "guaranteedRate": 98.7
+              "scenarios": 1024,
+              "probability": 99.61,
+              "possibleRate": 99.61,
+              "guaranteedRate": 99.61
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 48.83,
+              "teamBWinProbability": 36.52,
+              "impact": 12.3
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 33.25,
+          "possibleRate": 56.25,
+          "sharedTieAdjustedRate": 46.1,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 8.56,
+              "possibleRate": 18.49,
+              "guaranteedRate": 1.17
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 81.04,
+              "possibleRate": 98.18,
+              "guaranteedRate": 54.17
             },
             {
               "wins": 3,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2001,163 +2004,72 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 82.96,
-              "teamBWinProbability": 42.68,
-              "impact": 40.28
-            }
-          ]
-        },
-        "Chennai": {
-          "clearRate": 28.3,
-          "possibleRate": 53.17,
-          "sharedTieAdjustedRate": 41.67,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 3072,
-              "probability": 5.47,
-              "possibleRate": 12.89,
-              "guaranteedRate": 0.59
-            },
-            {
-              "wins": 2,
-              "scenarios": 3072,
-              "probability": 72.35,
-              "possibleRate": 95.57,
-              "guaranteedRate": 41.67
-            },
-            {
-              "wins": 3,
-              "scenarios": 1024,
-              "probability": 99.9,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.61
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 37.24,
-              "teamBWinProbability": 46.1,
-              "impact": 8.86
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 26.66,
+              "teamBWinProbability": 65.54,
+              "impact": 38.89
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 26.83,
-          "possibleRate": 53.04,
-          "sharedTieAdjustedRate": 40.57,
+          "clearRate": 33.06,
+          "possibleRate": 56.96,
+          "sharedTieAdjustedRate": 46.16,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
-              "probability": 5.38,
-              "possibleRate": 12.4,
-              "guaranteedRate": 0.85
+              "scenarios": 1536,
+              "probability": 9.11,
+              "possibleRate": 19.34,
+              "guaranteedRate": 1.69
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 69.51,
-              "possibleRate": 95.7,
-              "guaranteedRate": 37.5
+              "scenarios": 1536,
+              "probability": 80.65,
+              "possibleRate": 99.22,
+              "guaranteedRate": 53.12
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 99.9,
+              "scenarios": 512,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.61
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 34.98,
-              "teamBWinProbability": 46.16,
-              "impact": 11.18
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 50.54,
+              "teamBWinProbability": 41.78,
+              "impact": 8.76
             }
           ]
         },
         "Delhi": {
-          "clearRate": 0.1,
-          "possibleRate": 2.69,
-          "sharedTieAdjustedRate": 1.03,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4096,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 2048,
-              "probability": 4.13,
-              "possibleRate": 10.74,
-              "guaranteedRate": 0.39
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.33,
-              "teamBWinProbability": 1.74,
-              "impact": 1.42
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 0.93,
-          "possibleRate": 2.59,
-          "sharedTieAdjustedRate": 1.76,
+          "clearRate": 0.2,
+          "possibleRate": 4.2,
+          "sharedTieAdjustedRate": 1.74,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2168,87 +2080,80 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.07,
-              "possibleRate": 0.13,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
-              "probability": 13.87,
-              "possibleRate": 20.31,
-              "guaranteedRate": 7.42
+              "probability": 6.97,
+              "possibleRate": 16.8,
+              "guaranteedRate": 0.78
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 0.93,
-              "teamBWinProbability": 2.59,
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 2.57,
+              "teamBWinProbability": 0.91,
               "impact": 1.66
             }
           ]
         },
-        "Lucknow": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
+        "Kolkata": {
+          "clearRate": 1.46,
+          "possibleRate": 3.71,
+          "sharedTieAdjustedRate": 2.59,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
+              "scenarios": 1536,
+              "probability": 0.13,
+              "possibleRate": 0.26,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
+              "scenarios": 512,
+              "probability": 20.31,
+              "possibleRate": 28.91,
+              "guaranteedRate": 11.72
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 3.61,
+              "teamBWinProbability": 1.56,
+              "impact": 2.05
             }
           ]
         },
@@ -2266,20 +2171,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2288,11 +2186,60 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Lucknow": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2304,27 +2251,27 @@
       },
       "2": {
         "Gujarat": {
-          "clearRate": 55.52,
-          "possibleRate": 82.57,
-          "sharedTieAdjustedRate": 69.4,
+          "clearRate": 59.77,
+          "possibleRate": 86.04,
+          "sharedTieAdjustedRate": 73.17,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 10.55,
-              "possibleRate": 30.27,
+              "scenarios": 1024,
+              "probability": 15.87,
+              "possibleRate": 44.14,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 83.52,
+              "scenarios": 2048,
+              "probability": 88.41,
               "possibleRate": 100.0,
-              "guaranteedRate": 61.04
+              "guaranteedRate": 69.53
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2332,41 +2279,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 65.62,
-              "teamBWinProbability": 73.17,
-              "impact": 7.55
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 76.87,
+              "teamBWinProbability": 69.48,
+              "impact": 7.38
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 54.35,
-          "possibleRate": 77.59,
-          "sharedTieAdjustedRate": 66.74,
+          "clearRate": 58.59,
+          "possibleRate": 81.93,
+          "sharedTieAdjustedRate": 70.94,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 5.4,
-              "possibleRate": 16.6,
+              "scenarios": 1024,
+              "probability": 9.56,
+              "possibleRate": 27.73,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 80.79,
-              "possibleRate": 96.88,
-              "guaranteedRate": 58.69
+              "scenarios": 2048,
+              "probability": 87.11,
+              "possibleRate": 100.0,
+              "guaranteedRate": 67.19
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2374,65 +2321,65 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 62.54,
-              "teamBWinProbability": 70.94,
-              "impact": 8.4
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 72.81,
+              "teamBWinProbability": 69.08,
+              "impact": 3.74
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 11.91,
-          "possibleRate": 31.45,
-          "sharedTieAdjustedRate": 21.44,
+          "clearRate": 14.06,
+          "possibleRate": 36.04,
+          "sharedTieAdjustedRate": 24.36,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
-              "probability": 4.8,
-              "possibleRate": 14.45,
+              "scenarios": 2048,
+              "probability": 7.58,
+              "possibleRate": 22.07,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
-              "probability": 76.17,
-              "possibleRate": 96.88,
-              "guaranteedRate": 47.66
+              "scenarios": 1024,
+              "probability": 82.29,
+              "possibleRate": 100.0,
+              "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 18.53,
-              "teamBWinProbability": 24.36,
-              "impact": 5.84
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 25.71,
+              "teamBWinProbability": 23.01,
+              "impact": 2.7
             }
           ]
         },
         "Punjab": {
-          "clearRate": 22.17,
-          "possibleRate": 22.17,
-          "sharedTieAdjustedRate": 22.17,
+          "clearRate": 8.3,
+          "possibleRate": 8.3,
+          "sharedTieAdjustedRate": 8.3,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2443,136 +2390,129 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 25.78,
-              "possibleRate": 25.78,
-              "guaranteedRate": 25.78
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "probability": 33.2,
+              "possibleRate": 33.2,
+              "guaranteedRate": 33.2
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Punjab",
-              "preferredLabel": "PBKS beat MI",
-              "teamAWinProbability": 36.04,
-              "teamBWinProbability": 8.3,
-              "impact": 27.73
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 9.77,
+              "teamBWinProbability": 6.84,
+              "impact": 2.93
             }
           ]
         },
         "Chennai": {
-          "clearRate": 6.3,
-          "possibleRate": 19.04,
-          "sharedTieAdjustedRate": 11.87,
+          "clearRate": 7.03,
+          "possibleRate": 22.17,
+          "sharedTieAdjustedRate": 13.49,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 5.62,
-              "possibleRate": 17.45,
+              "scenarios": 1536,
+              "probability": 8.54,
+              "possibleRate": 25.78,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 78.09,
+              "scenarios": 512,
+              "probability": 82.29,
               "possibleRate": 100.0,
-              "guaranteedRate": 50.39
+              "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 10.25,
-              "teamBWinProbability": 13.49,
-              "impact": 3.24
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Chennai",
+              "preferredLabel": "CSK beat LSG",
+              "teamAWinProbability": 3.96,
+              "teamBWinProbability": 23.01,
+              "impact": 19.05
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 2.59,
-          "possibleRate": 15.28,
-          "sharedTieAdjustedRate": 8.38,
+          "clearRate": 3.12,
+          "possibleRate": 17.87,
+          "sharedTieAdjustedRate": 9.73,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 2.99,
-              "possibleRate": 10.55,
+              "scenarios": 1536,
+              "probability": 4.77,
+              "possibleRate": 16.41,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
-              "probability": 58.04,
-              "possibleRate": 90.62,
-              "guaranteedRate": 20.7
+              "scenarios": 512,
+              "probability": 63.54,
+              "possibleRate": 93.75,
+              "guaranteedRate": 25.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat PBKS",
-              "teamAWinProbability": 7.03,
-              "teamBWinProbability": 9.73,
-              "impact": 2.7
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "Lucknow",
+              "preferredLabel": "LSG beat CSK",
+              "teamAWinProbability": 10.88,
+              "teamBWinProbability": 8.58,
+              "impact": 2.3
             }
           ]
         },
@@ -2583,21 +2523,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4096,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2605,11 +2545,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2625,28 +2565,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2654,60 +2594,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Lucknow": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2730,20 +2621,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 3072,
+              "scenarios": 2048,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 3072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2752,11 +2636,60 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
-              "matchNo": 58,
-              "label": "M58: PBKS vs MI",
-              "teamA": "Punjab",
-              "teamB": "Mumbai",
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Lucknow": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+              "matchNo": 59,
+              "label": "M59: LSG vs CSK",
+              "teamA": "Lucknow",
+              "teamB": "Chennai",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
