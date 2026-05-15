@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-14T20:50:42Z",
+    "generated_at": "2026-05-15T20:38:41Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -67,14 +67,14 @@
       "teamKey": "Chennai",
       "shortName": "CSK",
       "fullName": "Chennai Super Kings",
-      "matches": 11,
+      "matches": 12,
       "wins": 6,
-      "losses": 5,
+      "losses": 6,
       "noResult": 0,
       "points": 12,
       "nrr": null,
       "rank": 5,
-      "remainingMatches": 3
+      "remainingMatches": 2
     },
     {
       "teamKey": "Rajasthan",
@@ -116,9 +116,9 @@
       "remainingMatches": 3
     },
     {
-      "teamKey": "Mumbai",
-      "shortName": "MI",
-      "fullName": "Mumbai Indians",
+      "teamKey": "Lucknow",
+      "shortName": "LSG",
+      "fullName": "Lucknow Super Giants",
       "matches": 12,
       "wins": 4,
       "losses": 8,
@@ -129,31 +129,20 @@
       "remainingMatches": 2
     },
     {
-      "teamKey": "Lucknow",
-      "shortName": "LSG",
-      "fullName": "Lucknow Super Giants",
-      "matches": 11,
-      "wins": 3,
+      "teamKey": "Mumbai",
+      "shortName": "MI",
+      "fullName": "Mumbai Indians",
+      "matches": 12,
+      "wins": 4,
       "losses": 8,
       "noResult": 0,
-      "points": 6,
+      "points": 8,
       "nrr": null,
       "rank": 10,
-      "remainingMatches": 3
+      "remainingMatches": 2
     }
   ],
   "fixtures": [
-    {
-      "id": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-      "matchNo": 59,
-      "teamA": "Lucknow",
-      "teamB": "Chennai",
-      "dateTimeGMT": "2026-05-15T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "166633a2-cecb-4cf3-a984-78dc898b5345",
       "matchNo": 60,
@@ -278,9 +267,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 4096,
-    "generatedAt": "2026-05-14T20:50:42Z",
-    "stateCount": 3624,
+    "simulationCount": 2048,
+    "generatedAt": "2026-05-15T20:38:41Z",
+    "stateCount": 1914,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -290,70 +279,70 @@
     ],
     "overallProbabilities": {
       "Gujarat": {
-        "top4": 96.62,
-        "top2": 73.17,
-        "top4Clear": 90.62,
-        "top2Clear": 59.77,
-        "top4Possible": 99.9,
-        "top2Possible": 86.04
+        "top4": 98.0,
+        "top2": 76.87,
+        "top4Clear": 93.75,
+        "top2Clear": 64.06,
+        "top4Possible": 100.0,
+        "top2Possible": 90.23
       },
       "Bangalore": {
-        "top4": 94.49,
-        "top2": 70.94,
-        "top4Clear": 87.5,
-        "top2Clear": 58.59,
-        "top4Possible": 99.32,
-        "top2Possible": 81.93
+        "top4": 96.07,
+        "top2": 72.81,
+        "top4Clear": 90.62,
+        "top2Clear": 61.72,
+        "top4Possible": 99.41,
+        "top2Possible": 83.4
       },
       "Hyderabad": {
-        "top4": 69.63,
-        "top2": 24.36,
-        "top4Clear": 56.54,
+        "top4": 73.71,
+        "top2": 25.71,
+        "top4Clear": 62.79,
         "top2Clear": 14.06,
-        "top4Possible": 79.69,
-        "top2Possible": 36.04
+        "top4Possible": 82.81,
+        "top2Possible": 38.87
       },
       "Punjab": {
-        "top4": 42.68,
-        "top2": 8.3,
-        "top4Clear": 41.55,
-        "top2Clear": 8.3,
-        "top4Possible": 43.8,
-        "top2Possible": 8.3
+        "top4": 48.83,
+        "top2": 9.77,
+        "top4Clear": 47.36,
+        "top2Clear": 9.77,
+        "top4Possible": 50.29,
+        "top2Possible": 9.77
       },
       "Chennai": {
-        "top4": 46.1,
-        "top2": 13.49,
-        "top4Clear": 33.25,
-        "top2Clear": 7.03,
-        "top4Possible": 56.25,
-        "top2Possible": 22.17
+        "top4": 26.66,
+        "top2": 3.96,
+        "top4Clear": 16.21,
+        "top2Clear": 0.0,
+        "top4Possible": 35.94,
+        "top2Possible": 11.13
       },
       "Rajasthan": {
-        "top4": 46.16,
-        "top2": 9.73,
-        "top4Clear": 33.06,
-        "top2Clear": 3.12,
-        "top4Possible": 56.96,
-        "top2Possible": 17.87
+        "top4": 50.54,
+        "top2": 10.88,
+        "top4Clear": 39.55,
+        "top2Clear": 3.91,
+        "top4Possible": 60.4,
+        "top2Possible": 19.92
       },
       "Delhi": {
-        "top4": 1.74,
+        "top4": 2.57,
         "top2": 0.0,
-        "top4Clear": 0.2,
+        "top4Clear": 0.39,
         "top2Clear": 0.0,
-        "top4Possible": 4.2,
+        "top4Possible": 6.05,
         "top2Possible": 0.0
       },
       "Kolkata": {
-        "top4": 2.59,
+        "top4": 3.61,
         "top2": 0.0,
-        "top4Clear": 1.46,
+        "top4Clear": 2.15,
         "top2Clear": 0.0,
-        "top4Possible": 3.71,
+        "top4Possible": 5.08,
         "top2Possible": 0.0
       },
-      "Mumbai": {
+      "Lucknow": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -361,7 +350,7 @@
         "top4Possible": 0.0,
         "top2Possible": 0.0
       },
-      "Lucknow": {
+      "Mumbai": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -373,90 +362,90 @@
     "teamAnalysis": {
       "4": {
         "Gujarat": {
-          "percentage": 96.62,
+          "percentage": 98.0,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 2.77
+            "M60: KKR vs GT": {
+              "Outcome": "GT beat KKR",
+              "Impact": 3.99
             }
           }
         },
         "Bangalore": {
-          "percentage": 94.49,
+          "percentage": 96.07,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 3.16
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 0.79
             }
           }
         },
         "Hyderabad": {
-          "percentage": 69.63,
+          "percentage": 73.71,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 8.17
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 0.09
             }
           }
         },
         "Punjab": {
-          "percentage": 42.68,
+          "percentage": 48.83,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 12.3
+            "M60: KKR vs GT": {
+              "Outcome": "GT beat KKR",
+              "Impact": 2.93
             }
           }
         },
         "Chennai": {
-          "percentage": 46.1,
+          "percentage": 26.66,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "CSK beat LSG",
-              "Impact": 38.89
+            "M60: KKR vs GT": {
+              "Outcome": "GT beat KKR",
+              "Impact": 0.39
             }
           }
         },
         "Rajasthan": {
-          "percentage": 46.16,
+          "percentage": 50.54,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 8.76
+            "M60: KKR vs GT": {
+              "Outcome": "GT beat KKR",
+              "Impact": 0.61
             }
           }
         },
         "Delhi": {
-          "percentage": 1.74,
+          "percentage": 2.57,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 1.66
+            "M60: KKR vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "Kolkata": {
-          "percentage": 2.59,
+          "percentage": 3.61,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 2.05
-            }
-          }
-        },
-        "Mumbai": {
-          "percentage": 0.0,
-          "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 7.03
             }
           }
         },
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M59: LSG vs CSK": {
+            "M60: KKR vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Mumbai": {
+          "percentage": 0.0,
+          "results_df": {
+            "M60: KKR vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -465,63 +454,63 @@
       },
       "2": {
         "Gujarat": {
-          "percentage": 73.17,
+          "percentage": 76.87,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 7.38
+            "M60: KKR vs GT": {
+              "Outcome": "GT beat KKR",
+              "Impact": 38.2
             }
           }
         },
         "Bangalore": {
-          "percentage": 70.94,
+          "percentage": 72.81,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 3.74
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 6.5
             }
           }
         },
         "Hyderabad": {
-          "percentage": 24.36,
+          "percentage": 25.71,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 2.7
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 9.69
             }
           }
         },
         "Punjab": {
-          "percentage": 8.3,
+          "percentage": 9.77,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 2.93
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 8.59
             }
           }
         },
         "Chennai": {
-          "percentage": 13.49,
+          "percentage": 3.96,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "CSK beat LSG",
-              "Impact": 19.05
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 6.3
             }
           }
         },
         "Rajasthan": {
-          "percentage": 9.73,
+          "percentage": 10.88,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "LSG beat CSK",
-              "Impact": 2.3
+            "M60: KKR vs GT": {
+              "Outcome": "KKR beat GT",
+              "Impact": 7.12
             }
           }
         },
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M59: LSG vs CSK": {
+            "M60: KKR vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -530,16 +519,7 @@
         "Kolkata": {
           "percentage": 0.0,
           "results_df": {
-            "M59: LSG vs CSK": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Mumbai": {
-          "percentage": 0.0,
-          "results_df": {
-            "M59: LSG vs CSK": {
+            "M60: KKR vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -548,7 +528,16 @@
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M59: LSG vs CSK": {
+            "M60: KKR vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Mumbai": {
+          "percentage": 0.0,
+          "results_df": {
+            "M60: KKR vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -567,21 +556,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 86.47,
-              "possibleRate": 99.61,
-              "guaranteedRate": 62.5
+              "scenarios": 512,
+              "probability": 92.02,
+              "possibleRate": 100.0,
+              "guaranteedRate": 75.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -589,30 +578,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 98.0,
-              "teamBWinProbability": 95.23,
-              "impact": 2.77
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 96.01,
+              "teamBWinProbability": 100.0,
+              "impact": 3.99
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 98.0,
-              "teamBWinProbability": 95.23,
-              "impact": 2.77
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 96.01,
+              "teamBWinProbability": 100.0,
+              "impact": 3.99
             }
           ],
           "impactFixtureWindow": 1
@@ -626,21 +615,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 77.94,
-              "possibleRate": 97.27,
-              "guaranteedRate": 50.0
+              "scenarios": 512,
+              "probability": 84.27,
+              "possibleRate": 97.66,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -648,30 +637,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 96.07,
-              "teamBWinProbability": 92.9,
-              "impact": 3.16
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 96.46,
+              "teamBWinProbability": 95.67,
+              "impact": 0.79
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 96.07,
-              "teamBWinProbability": 92.9,
-              "impact": 3.16
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 96.46,
+              "teamBWinProbability": 95.67,
+              "impact": 0.79
             }
           ],
           "impactFixtureWindow": 1
@@ -685,21 +674,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 10.07,
-              "possibleRate": 22.27,
+              "scenarios": 512,
+              "probability": 14.62,
+              "possibleRate": 33.59,
               "guaranteedRate": 1.17
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 84.22,
-              "possibleRate": 98.24,
-              "guaranteedRate": 62.5
+              "scenarios": 1024,
+              "probability": 90.12,
+              "possibleRate": 98.83,
+              "guaranteedRate": 75.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -707,30 +696,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 73.71,
-              "teamBWinProbability": 65.54,
-              "impact": 8.17
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 73.76,
+              "teamBWinProbability": 73.67,
+              "impact": 0.09
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 73.71,
-              "teamBWinProbability": 65.54,
-              "impact": 8.17
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 73.76,
+              "teamBWinProbability": 73.67,
+              "impact": 0.09
             }
           ],
           "impactFixtureWindow": 1
@@ -738,58 +727,58 @@
         "Punjab": {
           "possible": 0,
           "likely": 2,
-          "guaranteed": null,
+          "guaranteed": 2,
           "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.39,
-              "possibleRate": 0.59,
-              "guaranteedRate": 0.2
+              "scenarios": 512,
+              "probability": 0.78,
+              "possibleRate": 1.17,
+              "guaranteedRate": 0.39
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 35.35,
-              "possibleRate": 37.5,
-              "guaranteedRate": 33.2
+              "scenarios": 1024,
+              "probability": 47.27,
+              "possibleRate": 50.0,
+              "guaranteedRate": 44.53
             },
             {
               "wins": 2,
-              "scenarios": 1024,
-              "probability": 99.61,
-              "possibleRate": 99.61,
-              "guaranteedRate": 99.61
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 48.83,
-              "teamBWinProbability": 36.52,
-              "impact": 12.3
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 47.36,
+              "teamBWinProbability": 50.29,
+              "impact": 2.93
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 48.83,
-              "teamBWinProbability": 36.52,
-              "impact": 12.3
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 47.36,
+              "teamBWinProbability": 50.29,
+              "impact": 2.93
             }
           ],
           "impactFixtureWindow": 1
@@ -797,8 +786,8 @@
         "Chennai": {
           "possible": 1,
           "likely": 2,
-          "guaranteed": 3,
-          "target_matches": 3,
+          "guaranteed": null,
+          "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -810,52 +799,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
-              "probability": 8.56,
-              "possibleRate": 18.49,
+              "scenarios": 1024,
+              "probability": 10.07,
+              "possibleRate": 22.27,
               "guaranteedRate": 1.17
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 81.04,
-              "possibleRate": 98.18,
-              "guaranteedRate": 54.17
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "probability": 86.48,
+              "possibleRate": 99.22,
+              "guaranteedRate": 62.5
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 26.66,
-              "teamBWinProbability": 65.54,
-              "impact": 38.89
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 26.46,
+              "teamBWinProbability": 26.86,
+              "impact": 0.39
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 26.66,
-              "teamBWinProbability": 65.54,
-              "impact": 38.89
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 26.46,
+              "teamBWinProbability": 26.86,
+              "impact": 0.39
             }
           ],
           "impactFixtureWindow": 1
@@ -869,28 +851,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
-              "probability": 9.11,
-              "possibleRate": 19.34,
-              "guaranteedRate": 1.69
+              "scenarios": 768,
+              "probability": 13.45,
+              "possibleRate": 27.73,
+              "guaranteedRate": 3.39
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 80.65,
-              "possibleRate": 99.22,
-              "guaranteedRate": 53.12
+              "scenarios": 768,
+              "probability": 87.99,
+              "possibleRate": 100.0,
+              "guaranteedRate": 68.75
             },
             {
               "wins": 3,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -898,30 +880,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 50.54,
-              "teamBWinProbability": 41.78,
-              "impact": 8.76
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 50.24,
+              "teamBWinProbability": 50.85,
+              "impact": 0.61
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 50.54,
-              "teamBWinProbability": 41.78,
-              "impact": 8.76
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 50.24,
+              "teamBWinProbability": 50.85,
+              "impact": 0.61
             }
           ],
           "impactFixtureWindow": 1
@@ -935,52 +917,52 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
-              "probability": 6.97,
-              "possibleRate": 16.8,
-              "guaranteedRate": 0.78
+              "scenarios": 512,
+              "probability": 10.29,
+              "possibleRate": 24.22,
+              "guaranteedRate": 1.56
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 2.57,
-              "teamBWinProbability": 0.91,
-              "impact": 1.66
+              "teamBWinProbability": 2.57,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 2.57,
-              "teamBWinProbability": 0.91,
-              "impact": 1.66
+              "teamBWinProbability": 2.57,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -994,6 +976,72 @@
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 768,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 768,
+              "probability": 0.26,
+              "possibleRate": 0.52,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 256,
+              "probability": 28.12,
+              "possibleRate": 39.06,
+              "guaranteedRate": 17.19
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.13,
+              "teamBWinProbability": 0.1,
+              "impact": 7.03
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.13,
+              "teamBWinProbability": 0.1,
+              "impact": 7.03
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Lucknow": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1001,52 +1049,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.13,
-              "possibleRate": 0.26,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
-              "probability": 20.31,
-              "possibleRate": 28.91,
-              "guaranteedRate": 11.72
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 3.61,
-              "teamBWinProbability": 1.56,
-              "impact": 2.05
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 3.61,
-              "teamBWinProbability": 1.56,
-              "impact": 2.05
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1060,21 +1101,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1082,11 +1123,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1096,77 +1137,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Lucknow": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1187,21 +1162,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 15.87,
-              "possibleRate": 44.14,
+              "scenarios": 512,
+              "probability": 23.61,
+              "possibleRate": 60.94,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 88.41,
+              "scenarios": 1024,
+              "probability": 91.93,
               "possibleRate": 100.0,
-              "guaranteedRate": 69.53
+              "guaranteedRate": 78.12
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1209,30 +1184,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 76.87,
-              "teamBWinProbability": 69.48,
-              "impact": 7.38
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 57.77,
+              "teamBWinProbability": 95.96,
+              "impact": 38.2
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 76.87,
-              "teamBWinProbability": 69.48,
-              "impact": 7.38
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 57.77,
+              "teamBWinProbability": 95.96,
+              "impact": 38.2
             }
           ],
           "impactFixtureWindow": 1
@@ -1246,21 +1221,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 9.56,
-              "possibleRate": 27.73,
+              "scenarios": 512,
+              "probability": 12.6,
+              "possibleRate": 33.59,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 87.11,
+              "scenarios": 1024,
+              "probability": 89.32,
               "possibleRate": 100.0,
-              "guaranteedRate": 67.19
+              "guaranteedRate": 73.44
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1268,30 +1243,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 72.81,
-              "teamBWinProbability": 69.08,
-              "impact": 3.74
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 76.06,
+              "teamBWinProbability": 69.56,
+              "impact": 6.5
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 72.81,
-              "teamBWinProbability": 69.08,
-              "impact": 3.74
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 76.06,
+              "teamBWinProbability": 69.56,
+              "impact": 6.5
             }
           ],
           "impactFixtureWindow": 1
@@ -1305,21 +1280,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 7.58,
-              "possibleRate": 22.07,
+              "scenarios": 1024,
+              "probability": 10.27,
+              "possibleRate": 27.73,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 82.29,
               "possibleRate": 100.0,
               "guaranteedRate": 56.25
@@ -1327,30 +1302,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 25.71,
-              "teamBWinProbability": 23.01,
-              "impact": 2.7
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 30.55,
+              "teamBWinProbability": 20.87,
+              "impact": 9.69
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 25.71,
-              "teamBWinProbability": 23.01,
-              "impact": 2.7
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 30.55,
+              "teamBWinProbability": 20.87,
+              "impact": 9.69
             }
           ],
           "impactFixtureWindow": 1
@@ -1364,61 +1339,61 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
-              "probability": 33.2,
-              "possibleRate": 33.2,
-              "guaranteedRate": 33.2
+              "scenarios": 512,
+              "probability": 39.06,
+              "possibleRate": 39.06,
+              "guaranteedRate": 39.06
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 9.77,
-              "teamBWinProbability": 6.84,
-              "impact": 2.93
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.06,
+              "teamBWinProbability": 5.47,
+              "impact": 8.59
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 9.77,
-              "teamBWinProbability": 6.84,
-              "impact": 2.93
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.06,
+              "teamBWinProbability": 5.47,
+              "impact": 8.59
             }
           ],
           "impactFixtureWindow": 1
         },
         "Chennai": {
           "possible": 2,
-          "likely": 3,
+          "likely": null,
           "guaranteed": null,
-          "target_matches": 3,
+          "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1430,52 +1405,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 8.54,
-              "possibleRate": 25.78,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
-              "probability": 82.29,
-              "possibleRate": 100.0,
-              "guaranteedRate": 56.25
+              "probability": 15.86,
+              "possibleRate": 44.53,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 3.96,
-              "teamBWinProbability": 23.01,
-              "impact": 19.05
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.12,
+              "teamBWinProbability": 0.81,
+              "impact": 6.3
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 3.96,
-              "teamBWinProbability": 23.01,
-              "impact": 19.05
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.12,
+              "teamBWinProbability": 0.81,
+              "impact": 6.3
             }
           ],
           "impactFixtureWindow": 1
@@ -1489,59 +1457,59 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 4.77,
-              "possibleRate": 16.41,
+              "scenarios": 768,
+              "probability": 6.8,
+              "possibleRate": 21.88,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 512,
-              "probability": 63.54,
+              "scenarios": 256,
+              "probability": 66.67,
               "possibleRate": 93.75,
-              "guaranteedRate": 25.0
+              "guaranteedRate": 31.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 10.88,
-              "teamBWinProbability": 8.58,
-              "impact": 2.3
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.44,
+              "teamBWinProbability": 7.32,
+              "impact": 7.12
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 10.88,
-              "teamBWinProbability": 8.58,
-              "impact": 2.3
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.44,
+              "teamBWinProbability": 7.32,
+              "impact": 7.12
             }
           ],
           "impactFixtureWindow": 1
@@ -1555,21 +1523,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1577,11 +1545,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1591,11 +1559,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1614,28 +1582,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1643,11 +1611,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1657,11 +1625,70 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Lucknow": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1024,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1680,21 +1707,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1702,11 +1729,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1716,77 +1743,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Lucknow": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1801,27 +1762,27 @@
     "scenarioBreakdown": {
       "4": {
         "Gujarat": {
-          "clearRate": 90.62,
-          "possibleRate": 99.9,
-          "sharedTieAdjustedRate": 96.62,
+          "clearRate": 93.75,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 98.0,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 86.47,
-              "possibleRate": 99.61,
-              "guaranteedRate": 62.5
+              "scenarios": 512,
+              "probability": 92.02,
+              "possibleRate": 100.0,
+              "guaranteedRate": 75.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1829,41 +1790,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 98.0,
-              "teamBWinProbability": 95.23,
-              "impact": 2.77
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 96.01,
+              "teamBWinProbability": 100.0,
+              "impact": 3.99
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 87.5,
-          "possibleRate": 99.32,
-          "sharedTieAdjustedRate": 94.49,
+          "clearRate": 90.62,
+          "possibleRate": 99.41,
+          "sharedTieAdjustedRate": 96.07,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 77.94,
-              "possibleRate": 97.27,
-              "guaranteedRate": 50.0
+              "scenarios": 512,
+              "probability": 84.27,
+              "possibleRate": 97.66,
+              "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1871,181 +1832,174 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 96.07,
-              "teamBWinProbability": 92.9,
-              "impact": 3.16
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 96.46,
+              "teamBWinProbability": 95.67,
+              "impact": 0.79
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 56.54,
-          "possibleRate": 79.69,
-          "sharedTieAdjustedRate": 69.63,
+          "clearRate": 62.79,
+          "possibleRate": 82.81,
+          "sharedTieAdjustedRate": 73.71,
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 512,
+              "probability": 14.62,
+              "possibleRate": 33.59,
+              "guaranteedRate": 1.17
+            },
+            {
+              "wins": 1,
+              "scenarios": 1024,
+              "probability": 90.12,
+              "possibleRate": 98.83,
+              "guaranteedRate": 75.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 73.76,
+              "teamBWinProbability": 73.67,
+              "impact": 0.09
+            }
+          ]
+        },
+        "Punjab": {
+          "clearRate": 47.36,
+          "possibleRate": 50.29,
+          "sharedTieAdjustedRate": 48.83,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.78,
+              "possibleRate": 1.17,
+              "guaranteedRate": 0.39
+            },
+            {
+              "wins": 1,
+              "scenarios": 1024,
+              "probability": 47.27,
+              "possibleRate": 50.0,
+              "guaranteedRate": 44.53
+            },
+            {
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 47.36,
+              "teamBWinProbability": 50.29,
+              "impact": 2.93
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 16.21,
+          "possibleRate": 35.94,
+          "sharedTieAdjustedRate": 26.66,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
               "scenarios": 1024,
               "probability": 10.07,
               "possibleRate": 22.27,
               "guaranteedRate": 1.17
             },
             {
-              "wins": 1,
-              "scenarios": 2048,
-              "probability": 84.22,
-              "possibleRate": 98.24,
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 86.48,
+              "possibleRate": 99.22,
               "guaranteedRate": 62.5
-            },
-            {
-              "wins": 2,
-              "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 73.71,
-              "teamBWinProbability": 65.54,
-              "impact": 8.17
-            }
-          ]
-        },
-        "Punjab": {
-          "clearRate": 41.55,
-          "possibleRate": 43.8,
-          "sharedTieAdjustedRate": 42.68,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.39,
-              "possibleRate": 0.59,
-              "guaranteedRate": 0.2
-            },
-            {
-              "wins": 1,
-              "scenarios": 2048,
-              "probability": 35.35,
-              "possibleRate": 37.5,
-              "guaranteedRate": 33.2
-            },
-            {
-              "wins": 2,
-              "scenarios": 1024,
-              "probability": 99.61,
-              "possibleRate": 99.61,
-              "guaranteedRate": 99.61
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 48.83,
-              "teamBWinProbability": 36.52,
-              "impact": 12.3
-            }
-          ]
-        },
-        "Chennai": {
-          "clearRate": 33.25,
-          "possibleRate": 56.25,
-          "sharedTieAdjustedRate": 46.1,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1536,
-              "probability": 8.56,
-              "possibleRate": 18.49,
-              "guaranteedRate": 1.17
-            },
-            {
-              "wins": 2,
-              "scenarios": 1536,
-              "probability": 81.04,
-              "possibleRate": 98.18,
-              "guaranteedRate": 54.17
-            },
-            {
-              "wins": 3,
-              "scenarios": 512,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 26.66,
-              "teamBWinProbability": 65.54,
-              "impact": 38.89
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 26.46,
+              "teamBWinProbability": 26.86,
+              "impact": 0.39
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 33.06,
-          "possibleRate": 56.96,
-          "sharedTieAdjustedRate": 46.16,
+          "clearRate": 39.55,
+          "possibleRate": 60.4,
+          "sharedTieAdjustedRate": 50.54,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
-              "probability": 9.11,
-              "possibleRate": 19.34,
-              "guaranteedRate": 1.69
+              "scenarios": 768,
+              "probability": 13.45,
+              "possibleRate": 27.73,
+              "guaranteedRate": 3.39
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 80.65,
-              "possibleRate": 99.22,
-              "guaranteedRate": 53.12
+              "scenarios": 768,
+              "probability": 87.99,
+              "possibleRate": 100.0,
+              "guaranteedRate": 68.75
             },
             {
               "wins": 3,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2053,149 +2007,107 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 50.54,
-              "teamBWinProbability": 41.78,
-              "impact": 8.76
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 50.24,
+              "teamBWinProbability": 50.85,
+              "impact": 0.61
             }
           ]
         },
         "Delhi": {
-          "clearRate": 0.2,
-          "possibleRate": 4.2,
-          "sharedTieAdjustedRate": 1.74,
+          "clearRate": 0.39,
+          "possibleRate": 6.05,
+          "sharedTieAdjustedRate": 2.57,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
-              "probability": 6.97,
-              "possibleRate": 16.8,
-              "guaranteedRate": 0.78
+              "scenarios": 512,
+              "probability": 10.29,
+              "possibleRate": 24.22,
+              "guaranteedRate": 1.56
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 2.57,
-              "teamBWinProbability": 0.91,
-              "impact": 1.66
+              "teamBWinProbability": 2.57,
+              "impact": 0.0
             }
           ]
         },
         "Kolkata": {
-          "clearRate": 1.46,
-          "possibleRate": 3.71,
-          "sharedTieAdjustedRate": 2.59,
+          "clearRate": 2.15,
+          "possibleRate": 5.08,
+          "sharedTieAdjustedRate": 3.61,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.13,
-              "possibleRate": 0.26,
+              "scenarios": 768,
+              "probability": 0.26,
+              "possibleRate": 0.52,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 512,
-              "probability": 20.31,
-              "possibleRate": 28.91,
-              "guaranteedRate": 11.72
+              "scenarios": 256,
+              "probability": 28.12,
+              "possibleRate": 39.06,
+              "guaranteedRate": 17.19
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 3.61,
-              "teamBWinProbability": 1.56,
-              "impact": 2.05
-            }
-          ]
-        },
-        "Mumbai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.13,
+              "teamBWinProbability": 0.1,
+              "impact": 7.03
             }
           ]
         },
@@ -2213,20 +2125,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2235,11 +2140,53 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Mumbai": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1024,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2251,27 +2198,27 @@
       },
       "2": {
         "Gujarat": {
-          "clearRate": 59.77,
-          "possibleRate": 86.04,
-          "sharedTieAdjustedRate": 73.17,
+          "clearRate": 64.06,
+          "possibleRate": 90.23,
+          "sharedTieAdjustedRate": 76.87,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 15.87,
-              "possibleRate": 44.14,
+              "scenarios": 512,
+              "probability": 23.61,
+              "possibleRate": 60.94,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 88.41,
+              "scenarios": 1024,
+              "probability": 91.93,
               "possibleRate": 100.0,
-              "guaranteedRate": 69.53
+              "guaranteedRate": 78.12
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2279,41 +2226,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 76.87,
-              "teamBWinProbability": 69.48,
-              "impact": 7.38
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat KKR",
+              "teamAWinProbability": 57.77,
+              "teamBWinProbability": 95.96,
+              "impact": 38.2
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 58.59,
-          "possibleRate": 81.93,
-          "sharedTieAdjustedRate": 70.94,
+          "clearRate": 61.72,
+          "possibleRate": 83.4,
+          "sharedTieAdjustedRate": 72.81,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
-              "probability": 9.56,
-              "possibleRate": 27.73,
+              "scenarios": 512,
+              "probability": 12.6,
+              "possibleRate": 33.59,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 87.11,
+              "scenarios": 1024,
+              "probability": 89.32,
               "possibleRate": 100.0,
-              "guaranteedRate": 67.19
+              "guaranteedRate": 73.44
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2321,41 +2268,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 72.81,
-              "teamBWinProbability": 69.08,
-              "impact": 3.74
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 76.06,
+              "teamBWinProbability": 69.56,
+              "impact": 6.5
             }
           ]
         },
         "Hyderabad": {
           "clearRate": 14.06,
-          "possibleRate": 36.04,
-          "sharedTieAdjustedRate": 24.36,
+          "possibleRate": 38.87,
+          "sharedTieAdjustedRate": 25.71,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
-              "probability": 7.58,
-              "possibleRate": 22.07,
+              "scenarios": 1024,
+              "probability": 10.27,
+              "possibleRate": 27.73,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 82.29,
               "possibleRate": 100.0,
               "guaranteedRate": 56.25
@@ -2363,65 +2310,65 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 25.71,
-              "teamBWinProbability": 23.01,
-              "impact": 2.7
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 30.55,
+              "teamBWinProbability": 20.87,
+              "impact": 9.69
             }
           ]
         },
         "Punjab": {
-          "clearRate": 8.3,
-          "possibleRate": 8.3,
-          "sharedTieAdjustedRate": 8.3,
+          "clearRate": 9.77,
+          "possibleRate": 9.77,
+          "sharedTieAdjustedRate": 9.77,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
-              "probability": 33.2,
-              "possibleRate": 33.2,
-              "guaranteedRate": 33.2
+              "scenarios": 512,
+              "probability": 39.06,
+              "possibleRate": 39.06,
+              "guaranteedRate": 39.06
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 9.77,
-              "teamBWinProbability": 6.84,
-              "impact": 2.93
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.06,
+              "teamBWinProbability": 5.47,
+              "impact": 8.59
             }
           ]
         },
         "Chennai": {
-          "clearRate": 7.03,
-          "possibleRate": 22.17,
-          "sharedTieAdjustedRate": 13.49,
+          "clearRate": 0.0,
+          "possibleRate": 11.13,
+          "sharedTieAdjustedRate": 3.96,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2432,87 +2379,80 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 8.54,
-              "possibleRate": 25.78,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
-              "probability": 82.29,
-              "possibleRate": 100.0,
-              "guaranteedRate": 56.25
+              "probability": 15.86,
+              "possibleRate": 44.53,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat LSG",
-              "teamAWinProbability": 3.96,
-              "teamBWinProbability": 23.01,
-              "impact": 19.05
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 7.12,
+              "teamBWinProbability": 0.81,
+              "impact": 6.3
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 3.12,
-          "possibleRate": 17.87,
-          "sharedTieAdjustedRate": 9.73,
+          "clearRate": 3.91,
+          "possibleRate": 19.92,
+          "sharedTieAdjustedRate": 10.88,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 4.77,
-              "possibleRate": 16.41,
+              "scenarios": 768,
+              "probability": 6.8,
+              "possibleRate": 21.88,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 512,
-              "probability": 63.54,
+              "scenarios": 256,
+              "probability": 66.67,
               "possibleRate": 93.75,
-              "guaranteedRate": 25.0
+              "guaranteedRate": 31.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "Lucknow",
-              "preferredLabel": "LSG beat CSK",
-              "teamAWinProbability": 10.88,
-              "teamBWinProbability": 8.58,
-              "impact": 2.3
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "Kolkata",
+              "preferredLabel": "KKR beat GT",
+              "teamAWinProbability": 14.44,
+              "teamBWinProbability": 7.32,
+              "impact": 7.12
             }
           ]
         },
@@ -2523,21 +2463,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2048,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2545,11 +2485,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2565,28 +2505,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
+              "scenarios": 768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2594,53 +2534,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Mumbai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2663,20 +2561,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 1536,
+              "scenarios": 1024,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2685,11 +2576,53 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
-              "matchNo": 59,
-              "label": "M59: LSG vs CSK",
-              "teamA": "Lucknow",
-              "teamB": "Chennai",
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Mumbai": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1024,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
+              "matchNo": 60,
+              "label": "M60: KKR vs GT",
+              "teamA": "Kolkata",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
