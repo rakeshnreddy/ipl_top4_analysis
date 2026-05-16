@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-15T20:38:41Z",
+    "generated_at": "2026-05-16T20:09:42Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -15,14 +15,14 @@
       "teamKey": "Gujarat",
       "shortName": "GT",
       "fullName": "Gujarat Titans",
-      "matches": 12,
+      "matches": 13,
       "wins": 8,
-      "losses": 4,
+      "losses": 5,
       "noResult": 0,
       "points": 16,
       "nrr": null,
       "rank": 1,
-      "remainingMatches": 2
+      "remainingMatches": 1
     },
     {
       "teamKey": "Bangalore",
@@ -90,6 +90,19 @@
       "remainingMatches": 3
     },
     {
+      "teamKey": "Kolkata",
+      "shortName": "KKR",
+      "fullName": "Kolkata Knight Riders",
+      "matches": 12,
+      "wins": 5,
+      "losses": 6,
+      "noResult": 1,
+      "points": 11,
+      "nrr": null,
+      "rank": 7,
+      "remainingMatches": 2
+    },
+    {
       "teamKey": "Delhi",
       "shortName": "DC",
       "fullName": "Delhi Capitals",
@@ -99,21 +112,8 @@
       "noResult": 0,
       "points": 10,
       "nrr": null,
-      "rank": 7,
-      "remainingMatches": 2
-    },
-    {
-      "teamKey": "Kolkata",
-      "shortName": "KKR",
-      "fullName": "Kolkata Knight Riders",
-      "matches": 11,
-      "wins": 4,
-      "losses": 6,
-      "noResult": 1,
-      "points": 9,
-      "nrr": null,
       "rank": 8,
-      "remainingMatches": 3
+      "remainingMatches": 2
     },
     {
       "teamKey": "Lucknow",
@@ -143,17 +143,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "166633a2-cecb-4cf3-a984-78dc898b5345",
-      "matchNo": 60,
-      "teamA": "Kolkata",
-      "teamB": "Gujarat",
-      "dateTimeGMT": "2026-05-16T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Eden Gardens, Kolkata",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
       "matchNo": 61,
@@ -267,9 +256,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 2048,
-    "generatedAt": "2026-05-15T20:38:41Z",
-    "stateCount": 1914,
+    "simulationCount": 1024,
+    "generatedAt": "2026-05-16T20:09:42Z",
+    "stateCount": 960,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -279,52 +268,60 @@
     ],
     "overallProbabilities": {
       "Gujarat": {
-        "top4": 98.0,
-        "top2": 76.87,
-        "top4Clear": 93.75,
-        "top2Clear": 64.06,
+        "top4": 96.01,
+        "top2": 57.77,
+        "top4Clear": 87.5,
+        "top2Clear": 39.06,
         "top4Possible": 100.0,
-        "top2Possible": 90.23
+        "top2Possible": 80.47
       },
       "Bangalore": {
-        "top4": 96.07,
-        "top2": 72.81,
+        "top4": 96.46,
+        "top2": 76.06,
         "top4Clear": 90.62,
-        "top2Clear": 61.72,
-        "top4Possible": 99.41,
-        "top2Possible": 83.4
+        "top2Clear": 65.62,
+        "top4Possible": 99.61,
+        "top2Possible": 86.33
       },
       "Hyderabad": {
-        "top4": 73.71,
-        "top2": 25.71,
-        "top4Clear": 62.79,
-        "top2Clear": 14.06,
-        "top4Possible": 82.81,
-        "top2Possible": 38.87
+        "top4": 73.76,
+        "top2": 30.55,
+        "top4Clear": 62.7,
+        "top2Clear": 17.19,
+        "top4Possible": 82.03,
+        "top2Possible": 47.27
       },
       "Punjab": {
-        "top4": 48.83,
-        "top2": 9.77,
-        "top4Clear": 47.36,
-        "top2Clear": 9.77,
-        "top4Possible": 50.29,
-        "top2Possible": 9.77
+        "top4": 47.36,
+        "top2": 14.06,
+        "top4Clear": 44.53,
+        "top2Clear": 14.06,
+        "top4Possible": 50.2,
+        "top2Possible": 14.06
       },
       "Chennai": {
-        "top4": 26.66,
-        "top2": 3.96,
-        "top4Clear": 16.21,
+        "top4": 26.46,
+        "top2": 7.12,
+        "top4Clear": 16.02,
         "top2Clear": 0.0,
-        "top4Possible": 35.94,
-        "top2Possible": 11.13
+        "top4Possible": 34.77,
+        "top2Possible": 19.53
       },
       "Rajasthan": {
-        "top4": 50.54,
-        "top2": 10.88,
-        "top4Clear": 39.55,
-        "top2Clear": 3.91,
-        "top4Possible": 60.4,
-        "top2Possible": 19.92
+        "top4": 50.24,
+        "top2": 14.44,
+        "top4Clear": 39.26,
+        "top2Clear": 6.25,
+        "top4Possible": 59.08,
+        "top2Possible": 26.56
+      },
+      "Kolkata": {
+        "top4": 7.13,
+        "top2": 0.0,
+        "top4Clear": 4.3,
+        "top2Clear": 0.0,
+        "top4Possible": 9.96,
+        "top2Possible": 0.0
       },
       "Delhi": {
         "top4": 2.57,
@@ -332,14 +329,6 @@
         "top4Clear": 0.39,
         "top2Clear": 0.0,
         "top4Possible": 6.05,
-        "top2Possible": 0.0
-      },
-      "Kolkata": {
-        "top4": 3.61,
-        "top2": 0.0,
-        "top4Clear": 2.15,
-        "top2Clear": 0.0,
-        "top4Possible": 5.08,
         "top2Possible": 0.0
       },
       "Lucknow": {
@@ -362,81 +351,81 @@
     "teamAnalysis": {
       "4": {
         "Gujarat": {
-          "percentage": 98.0,
+          "percentage": 96.01,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "GT beat KKR",
-              "Impact": 3.99
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 4.6
             }
           }
         },
         "Bangalore": {
-          "percentage": 96.07,
+          "percentage": 96.46,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 0.79
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 7.07
             }
           }
         },
         "Hyderabad": {
-          "percentage": 73.71,
+          "percentage": 73.76,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 0.09
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 8.67
             }
           }
         },
         "Punjab": {
-          "percentage": 48.83,
+          "percentage": 47.36,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "GT beat KKR",
-              "Impact": 2.93
+            "M61: PBKS vs RCB": {
+              "Outcome": "PBKS beat RCB",
+              "Impact": 49.8
             }
           }
         },
         "Chennai": {
-          "percentage": 26.66,
+          "percentage": 26.46,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "GT beat KKR",
-              "Impact": 0.39
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 7.82
             }
           }
         },
         "Rajasthan": {
-          "percentage": 50.54,
+          "percentage": 50.24,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "GT beat KKR",
-              "Impact": 0.61
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 12.15
+            }
+          }
+        },
+        "Kolkata": {
+          "percentage": 7.13,
+          "results_df": {
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 5.66
             }
           }
         },
         "Delhi": {
           "percentage": 2.57,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 3.61,
-          "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 7.03
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 3.84
             }
           }
         },
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M60: KKR vs GT": {
+            "M61: PBKS vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -445,7 +434,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M60: KKR vs GT": {
+            "M61: PBKS vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -454,72 +443,72 @@
       },
       "2": {
         "Gujarat": {
-          "percentage": 76.87,
+          "percentage": 57.77,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "GT beat KKR",
-              "Impact": 38.2
+            "M61: PBKS vs RCB": {
+              "Outcome": "PBKS beat RCB",
+              "Impact": 3.29
             }
           }
         },
         "Bangalore": {
-          "percentage": 72.81,
+          "percentage": 76.06,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 6.5
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 36.94
             }
           }
         },
         "Hyderabad": {
-          "percentage": 25.71,
+          "percentage": 30.55,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 9.69
+            "M61: PBKS vs RCB": {
+              "Outcome": "PBKS beat RCB",
+              "Impact": 5.12
             }
           }
         },
         "Punjab": {
-          "percentage": 9.77,
+          "percentage": 14.06,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 8.59
+            "M61: PBKS vs RCB": {
+              "Outcome": "PBKS beat RCB",
+              "Impact": 28.12
             }
           }
         },
         "Chennai": {
-          "percentage": 3.96,
+          "percentage": 7.12,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 6.3
+            "M61: PBKS vs RCB": {
+              "Outcome": "RCB beat PBKS",
+              "Impact": 1.65
             }
           }
         },
         "Rajasthan": {
-          "percentage": 10.88,
+          "percentage": 14.44,
           "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "KKR beat GT",
-              "Impact": 7.12
-            }
-          }
-        },
-        "Delhi": {
-          "percentage": 0.0,
-          "results_df": {
-            "M60: KKR vs GT": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+            "M61: PBKS vs RCB": {
+              "Outcome": "PBKS beat RCB",
+              "Impact": 2.06
             }
           }
         },
         "Kolkata": {
           "percentage": 0.0,
           "results_df": {
-            "M60: KKR vs GT": {
+            "M61: PBKS vs RCB": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Delhi": {
+          "percentage": 0.0,
+          "results_df": {
+            "M61: PBKS vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -528,7 +517,7 @@
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M60: KKR vs GT": {
+            "M61: PBKS vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -537,7 +526,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M60: KKR vs GT": {
+            "M61: PBKS vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -551,7 +540,7 @@
           "possible": 0,
           "likely": 0,
           "guaranteed": 1,
-          "target_matches": 2,
+          "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -563,13 +552,6 @@
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 2,
               "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -578,30 +560,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 96.01,
-              "teamBWinProbability": 100.0,
-              "impact": 3.99
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 93.71,
+              "teamBWinProbability": 98.31,
+              "impact": 4.6
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 96.01,
-              "teamBWinProbability": 100.0,
-              "impact": 3.99
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 93.71,
+              "teamBWinProbability": 98.31,
+              "impact": 4.6
             }
           ],
           "impactFixtureWindow": 1
@@ -615,21 +597,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 84.27,
-              "possibleRate": 97.66,
+              "scenarios": 256,
+              "probability": 85.86,
+              "possibleRate": 98.44,
               "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -637,30 +619,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 96.46,
-              "teamBWinProbability": 95.67,
-              "impact": 0.79
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 92.93,
+              "teamBWinProbability": 100.0,
+              "impact": 7.07
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 96.46,
-              "teamBWinProbability": 95.67,
-              "impact": 0.79
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 92.93,
+              "teamBWinProbability": 100.0,
+              "impact": 7.07
             }
           ],
           "impactFixtureWindow": 1
@@ -674,21 +656,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 14.62,
-              "possibleRate": 33.59,
-              "guaranteedRate": 1.17
+              "scenarios": 256,
+              "probability": 12.57,
+              "possibleRate": 29.69,
+              "guaranteedRate": 0.78
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 90.12,
-              "possibleRate": 98.83,
+              "scenarios": 512,
+              "probability": 91.24,
+              "possibleRate": 99.22,
               "guaranteedRate": 75.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -696,30 +678,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 73.76,
-              "teamBWinProbability": 73.67,
-              "impact": 0.09
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 69.43,
+              "teamBWinProbability": 78.09,
+              "impact": 8.67
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 73.76,
-              "teamBWinProbability": 73.67,
-              "impact": 0.09
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 69.43,
+              "teamBWinProbability": 78.09,
+              "impact": 8.67
             }
           ],
           "impactFixtureWindow": 1
@@ -733,21 +715,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 0.78,
-              "possibleRate": 1.17,
-              "guaranteedRate": 0.39
+              "scenarios": 256,
+              "probability": 0.39,
+              "possibleRate": 0.78,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 47.27,
+              "scenarios": 512,
+              "probability": 44.53,
               "possibleRate": 50.0,
-              "guaranteedRate": 44.53
+              "guaranteedRate": 39.06
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -755,30 +737,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 47.36,
-              "teamBWinProbability": 50.29,
-              "impact": 2.93
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 72.27,
+              "teamBWinProbability": 22.46,
+              "impact": 49.8
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 47.36,
-              "teamBWinProbability": 50.29,
-              "impact": 2.93
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 72.27,
+              "teamBWinProbability": 22.46,
+              "impact": 49.8
             }
           ],
           "impactFixtureWindow": 1
@@ -792,52 +774,52 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 10.07,
-              "possibleRate": 22.27,
-              "guaranteedRate": 1.17
+              "scenarios": 512,
+              "probability": 8.56,
+              "possibleRate": 19.53,
+              "guaranteedRate": 0.78
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 86.48,
-              "possibleRate": 99.22,
+              "scenarios": 256,
+              "probability": 88.72,
+              "possibleRate": 100.0,
               "guaranteedRate": 62.5
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 26.46,
-              "teamBWinProbability": 26.86,
-              "impact": 0.39
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 22.55,
+              "teamBWinProbability": 30.37,
+              "impact": 7.82
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 26.46,
-              "teamBWinProbability": 26.86,
-              "impact": 0.39
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 22.55,
+              "teamBWinProbability": 30.37,
+              "impact": 7.82
             }
           ],
           "impactFixtureWindow": 1
@@ -851,28 +833,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 256,
+              "scenarios": 128,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 768,
-              "probability": 13.45,
-              "possibleRate": 27.73,
-              "guaranteedRate": 3.39
+              "scenarios": 384,
+              "probability": 11.37,
+              "possibleRate": 24.22,
+              "guaranteedRate": 2.6
             },
             {
               "wins": 2,
-              "scenarios": 768,
-              "probability": 87.99,
+              "scenarios": 384,
+              "probability": 89.27,
               "possibleRate": 100.0,
               "guaranteedRate": 68.75
             },
             {
               "wins": 3,
-              "scenarios": 256,
+              "scenarios": 128,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -880,30 +862,89 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 50.24,
-              "teamBWinProbability": 50.85,
-              "impact": 0.61
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 44.17,
+              "teamBWinProbability": 56.32,
+              "impact": 12.15
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 50.24,
-              "teamBWinProbability": 50.85,
-              "impact": 0.61
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 44.17,
+              "teamBWinProbability": 56.32,
+              "impact": 12.15
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Kolkata": {
+          "possible": 1,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 512,
+              "probability": 0.2,
+              "possibleRate": 0.39,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 256,
+              "probability": 28.12,
+              "possibleRate": 39.06,
+              "guaranteedRate": 17.19
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 4.3,
+              "teamBWinProbability": 9.96,
+              "impact": 5.66
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 4.3,
+              "teamBWinProbability": 9.96,
+              "impact": 5.66
             }
           ],
           "impactFixtureWindow": 1
@@ -917,21 +958,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 10.29,
               "possibleRate": 24.22,
               "guaranteedRate": 1.56
@@ -939,96 +980,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 2.57,
-              "teamBWinProbability": 2.57,
-              "impact": 0.0
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 0.65,
+              "teamBWinProbability": 4.49,
+              "impact": 3.84
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 2.57,
-              "teamBWinProbability": 2.57,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Kolkata": {
-          "possible": 2,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 256,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 768,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 768,
-              "probability": 0.26,
-              "possibleRate": 0.52,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 256,
-              "probability": 28.12,
-              "possibleRate": 39.06,
-              "guaranteedRate": 17.19
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.13,
-              "teamBWinProbability": 0.1,
-              "impact": 7.03
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.13,
-              "teamBWinProbability": 0.1,
-              "impact": 7.03
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 0.65,
+              "teamBWinProbability": 4.49,
+              "impact": 3.84
             }
           ],
           "impactFixtureWindow": 1
@@ -1042,21 +1017,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1064,11 +1039,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1078,11 +1053,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1101,21 +1076,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1123,11 +1098,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1137,11 +1112,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1156,8 +1131,8 @@
         "Gujarat": {
           "possible": 0,
           "likely": 1,
-          "guaranteed": 2,
-          "target_matches": 2,
+          "guaranteed": null,
+          "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1169,45 +1144,38 @@
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 91.93,
               "possibleRate": 100.0,
               "guaranteedRate": 78.12
-            },
-            {
-              "wins": 2,
-              "scenarios": 512,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 57.77,
-              "teamBWinProbability": 95.96,
-              "impact": 38.2
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 59.41,
+              "teamBWinProbability": 56.12,
+              "impact": 3.29
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 57.77,
-              "teamBWinProbability": 95.96,
-              "impact": 38.2
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 59.41,
+              "teamBWinProbability": 56.12,
+              "impact": 3.29
             }
           ],
           "impactFixtureWindow": 1
@@ -1221,21 +1189,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 12.6,
-              "possibleRate": 33.59,
+              "scenarios": 256,
+              "probability": 17.27,
+              "possibleRate": 45.31,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 89.32,
+              "scenarios": 512,
+              "probability": 93.49,
               "possibleRate": 100.0,
-              "guaranteedRate": 73.44
+              "guaranteedRate": 81.25
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1243,30 +1211,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 76.06,
-              "teamBWinProbability": 69.56,
-              "impact": 6.5
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 57.59,
+              "teamBWinProbability": 94.53,
+              "impact": 36.94
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 76.06,
-              "teamBWinProbability": 69.56,
-              "impact": 6.5
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 57.59,
+              "teamBWinProbability": 94.53,
+              "impact": 36.94
             }
           ],
           "impactFixtureWindow": 1
@@ -1280,111 +1248,111 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 10.27,
-              "possibleRate": 27.73,
+              "scenarios": 512,
+              "probability": 16.58,
+              "possibleRate": 44.53,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 82.29,
+              "scenarios": 256,
+              "probability": 89.06,
               "possibleRate": 100.0,
-              "guaranteedRate": 56.25
+              "guaranteedRate": 68.75
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 30.55,
-              "teamBWinProbability": 20.87,
-              "impact": 9.69
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 33.11,
+              "teamBWinProbability": 27.99,
+              "impact": 5.12
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 30.55,
-              "teamBWinProbability": 20.87,
-              "impact": 9.69
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 33.11,
+              "teamBWinProbability": 27.99,
+              "impact": 5.12
             }
           ],
           "impactFixtureWindow": 1
         },
         "Punjab": {
           "possible": 2,
-          "likely": null,
+          "likely": 2,
           "guaranteed": null,
           "target_matches": 2,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 39.06,
-              "possibleRate": 39.06,
-              "guaranteedRate": 39.06
+              "scenarios": 256,
+              "probability": 56.25,
+              "possibleRate": 56.25,
+              "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.06,
-              "teamBWinProbability": 5.47,
-              "impact": 8.59
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 28.12,
+              "teamBWinProbability": 0.0,
+              "impact": 28.12
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.06,
-              "teamBWinProbability": 5.47,
-              "impact": 8.59
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 28.12,
+              "teamBWinProbability": 0.0,
+              "impact": 28.12
             }
           ],
           "impactFixtureWindow": 1
@@ -1398,52 +1366,52 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 15.86,
-              "possibleRate": 44.53,
+              "scenarios": 256,
+              "probability": 28.46,
+              "possibleRate": 78.12,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.12,
-              "teamBWinProbability": 0.81,
-              "impact": 6.3
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 6.29,
+              "teamBWinProbability": 7.94,
+              "impact": 1.65
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.12,
-              "teamBWinProbability": 0.81,
-              "impact": 6.3
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 6.29,
+              "teamBWinProbability": 7.94,
+              "impact": 1.65
             }
           ],
           "impactFixtureWindow": 1
@@ -1457,6 +1425,72 @@
           "ownWinBuckets": [
             {
               "wins": 0,
+              "scenarios": 128,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 384,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 384,
+              "probability": 11.77,
+              "possibleRate": 37.5,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 128,
+              "probability": 80.21,
+              "possibleRate": 100.0,
+              "guaranteedRate": 50.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 15.47,
+              "teamBWinProbability": 13.41,
+              "impact": 2.06
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 15.47,
+              "teamBWinProbability": 13.41,
+              "impact": 2.06
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Kolkata": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 2,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1464,52 +1498,45 @@
             },
             {
               "wins": 1,
-              "scenarios": 768,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 768,
-              "probability": 6.8,
-              "possibleRate": 21.88,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 256,
-              "probability": 66.67,
-              "possibleRate": 93.75,
-              "guaranteedRate": 31.25
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.44,
-              "teamBWinProbability": 7.32,
-              "impact": 7.12
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.44,
-              "teamBWinProbability": 7.32,
-              "impact": 7.12
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1523,21 +1550,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1545,11 +1572,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1559,77 +1586,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Kolkata": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 3,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 256,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 768,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 768,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 256,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1648,21 +1609,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1670,11 +1631,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1684,11 +1645,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1707,21 +1668,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1729,11 +1690,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1743,11 +1704,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1762,9 +1723,9 @@
     "scenarioBreakdown": {
       "4": {
         "Gujarat": {
-          "clearRate": 93.75,
+          "clearRate": 87.5,
           "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 98.0,
+          "sharedTieAdjustedRate": 96.01,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -1775,13 +1736,6 @@
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 2,
               "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -1790,41 +1744,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 96.01,
-              "teamBWinProbability": 100.0,
-              "impact": 3.99
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 93.71,
+              "teamBWinProbability": 98.31,
+              "impact": 4.6
             }
           ]
         },
         "Bangalore": {
           "clearRate": 90.62,
-          "possibleRate": 99.41,
-          "sharedTieAdjustedRate": 96.07,
+          "possibleRate": 99.61,
+          "sharedTieAdjustedRate": 96.46,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 84.27,
-              "possibleRate": 97.66,
+              "scenarios": 256,
+              "probability": 85.86,
+              "possibleRate": 98.44,
               "guaranteedRate": 62.5
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1832,41 +1786,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 96.46,
-              "teamBWinProbability": 95.67,
-              "impact": 0.79
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 92.93,
+              "teamBWinProbability": 100.0,
+              "impact": 7.07
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 62.79,
-          "possibleRate": 82.81,
-          "sharedTieAdjustedRate": 73.71,
+          "clearRate": 62.7,
+          "possibleRate": 82.03,
+          "sharedTieAdjustedRate": 73.76,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 14.62,
-              "possibleRate": 33.59,
-              "guaranteedRate": 1.17
+              "scenarios": 256,
+              "probability": 12.57,
+              "possibleRate": 29.69,
+              "guaranteedRate": 0.78
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 90.12,
-              "possibleRate": 98.83,
+              "scenarios": 512,
+              "probability": 91.24,
+              "possibleRate": 99.22,
               "guaranteedRate": 75.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1874,41 +1828,41 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 73.76,
-              "teamBWinProbability": 73.67,
-              "impact": 0.09
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 69.43,
+              "teamBWinProbability": 78.09,
+              "impact": 8.67
             }
           ]
         },
         "Punjab": {
-          "clearRate": 47.36,
-          "possibleRate": 50.29,
-          "sharedTieAdjustedRate": 48.83,
+          "clearRate": 44.53,
+          "possibleRate": 50.2,
+          "sharedTieAdjustedRate": 47.36,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 0.78,
-              "possibleRate": 1.17,
-              "guaranteedRate": 0.39
+              "scenarios": 256,
+              "probability": 0.39,
+              "possibleRate": 0.78,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 47.27,
+              "scenarios": 512,
+              "probability": 44.53,
               "possibleRate": 50.0,
-              "guaranteedRate": 44.53
+              "guaranteedRate": 39.06
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1916,65 +1870,23 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 47.36,
-              "teamBWinProbability": 50.29,
-              "impact": 2.93
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 72.27,
+              "teamBWinProbability": 22.46,
+              "impact": 49.8
             }
           ]
         },
         "Chennai": {
-          "clearRate": 16.21,
-          "possibleRate": 35.94,
-          "sharedTieAdjustedRate": 26.66,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1024,
-              "probability": 10.07,
-              "possibleRate": 22.27,
-              "guaranteedRate": 1.17
-            },
-            {
-              "wins": 2,
-              "scenarios": 512,
-              "probability": 86.48,
-              "possibleRate": 99.22,
-              "guaranteedRate": 62.5
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 26.46,
-              "teamBWinProbability": 26.86,
-              "impact": 0.39
-            }
-          ]
-        },
-        "Rajasthan": {
-          "clearRate": 39.55,
-          "possibleRate": 60.4,
-          "sharedTieAdjustedRate": 50.54,
+          "clearRate": 16.02,
+          "possibleRate": 34.77,
+          "sharedTieAdjustedRate": 26.46,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -1985,21 +1897,63 @@
             },
             {
               "wins": 1,
-              "scenarios": 768,
-              "probability": 13.45,
-              "possibleRate": 27.73,
-              "guaranteedRate": 3.39
+              "scenarios": 512,
+              "probability": 8.56,
+              "possibleRate": 19.53,
+              "guaranteedRate": 0.78
             },
             {
               "wins": 2,
-              "scenarios": 768,
-              "probability": 87.99,
+              "scenarios": 256,
+              "probability": 88.72,
+              "possibleRate": 100.0,
+              "guaranteedRate": 62.5
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 22.55,
+              "teamBWinProbability": 30.37,
+              "impact": 7.82
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 39.26,
+          "possibleRate": 59.08,
+          "sharedTieAdjustedRate": 50.24,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 128,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 384,
+              "probability": 11.37,
+              "possibleRate": 24.22,
+              "guaranteedRate": 2.6
+            },
+            {
+              "wins": 2,
+              "scenarios": 384,
+              "probability": 89.27,
               "possibleRate": 100.0,
               "guaranteedRate": 68.75
             },
             {
               "wins": 3,
-              "scenarios": 256,
+              "scenarios": 128,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2007,16 +1961,58 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 50.24,
-              "teamBWinProbability": 50.85,
-              "impact": 0.61
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 44.17,
+              "teamBWinProbability": 56.32,
+              "impact": 12.15
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 4.3,
+          "possibleRate": 9.96,
+          "sharedTieAdjustedRate": 7.13,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 512,
+              "probability": 0.2,
+              "possibleRate": 0.39,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 256,
+              "probability": 28.12,
+              "possibleRate": 39.06,
+              "guaranteedRate": 17.19
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 4.3,
+              "teamBWinProbability": 9.96,
+              "impact": 5.66
             }
           ]
         },
@@ -2027,21 +2023,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 10.29,
               "possibleRate": 24.22,
               "guaranteedRate": 1.56
@@ -2049,65 +2045,16 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 2.57,
-              "teamBWinProbability": 2.57,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 2.15,
-          "possibleRate": 5.08,
-          "sharedTieAdjustedRate": 3.61,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 256,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 768,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 768,
-              "probability": 0.26,
-              "possibleRate": 0.52,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 256,
-              "probability": 28.12,
-              "possibleRate": 39.06,
-              "guaranteedRate": 17.19
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.13,
-              "teamBWinProbability": 0.1,
-              "impact": 7.03
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 0.65,
+              "teamBWinProbability": 4.49,
+              "impact": 3.84
             }
           ]
         },
@@ -2118,21 +2065,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2140,11 +2087,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2160,21 +2107,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2182,11 +2129,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2198,9 +2145,9 @@
       },
       "2": {
         "Gujarat": {
-          "clearRate": 64.06,
-          "possibleRate": 90.23,
-          "sharedTieAdjustedRate": 76.87,
+          "clearRate": 39.06,
+          "possibleRate": 80.47,
+          "sharedTieAdjustedRate": 57.77,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2211,56 +2158,49 @@
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 91.93,
               "possibleRate": 100.0,
               "guaranteedRate": 78.12
-            },
-            {
-              "wins": 2,
-              "scenarios": 512,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat KKR",
-              "teamAWinProbability": 57.77,
-              "teamBWinProbability": 95.96,
-              "impact": 38.2
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 59.41,
+              "teamBWinProbability": 56.12,
+              "impact": 3.29
             }
           ]
         },
         "Bangalore": {
-          "clearRate": 61.72,
-          "possibleRate": 83.4,
-          "sharedTieAdjustedRate": 72.81,
+          "clearRate": 65.62,
+          "possibleRate": 86.33,
+          "sharedTieAdjustedRate": 76.06,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
-              "probability": 12.6,
-              "possibleRate": 33.59,
+              "scenarios": 256,
+              "probability": 17.27,
+              "possibleRate": 45.31,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 89.32,
+              "scenarios": 512,
+              "probability": 93.49,
               "possibleRate": 100.0,
-              "guaranteedRate": 73.44
+              "guaranteedRate": 81.25
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2268,233 +2208,191 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 76.06,
-              "teamBWinProbability": 69.56,
-              "impact": 6.5
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 57.59,
+              "teamBWinProbability": 94.53,
+              "impact": 36.94
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 14.06,
-          "possibleRate": 38.87,
-          "sharedTieAdjustedRate": 25.71,
+          "clearRate": 17.19,
+          "possibleRate": 47.27,
+          "sharedTieAdjustedRate": 30.55,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
-              "probability": 10.27,
-              "possibleRate": 27.73,
+              "scenarios": 512,
+              "probability": 16.58,
+              "possibleRate": 44.53,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 82.29,
+              "scenarios": 256,
+              "probability": 89.06,
               "possibleRate": 100.0,
+              "guaranteedRate": 68.75
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 33.11,
+              "teamBWinProbability": 27.99,
+              "impact": 5.12
+            }
+          ]
+        },
+        "Punjab": {
+          "clearRate": 14.06,
+          "possibleRate": 14.06,
+          "sharedTieAdjustedRate": 14.06,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 256,
+              "probability": 56.25,
+              "possibleRate": 56.25,
               "guaranteedRate": 56.25
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 30.55,
-              "teamBWinProbability": 20.87,
-              "impact": 9.69
-            }
-          ]
-        },
-        "Punjab": {
-          "clearRate": 9.77,
-          "possibleRate": 9.77,
-          "sharedTieAdjustedRate": 9.77,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 512,
-              "probability": 39.06,
-              "possibleRate": 39.06,
-              "guaranteedRate": 39.06
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.06,
-              "teamBWinProbability": 5.47,
-              "impact": 8.59
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 28.12,
+              "teamBWinProbability": 0.0,
+              "impact": 28.12
             }
           ]
         },
         "Chennai": {
           "clearRate": 0.0,
-          "possibleRate": 11.13,
-          "sharedTieAdjustedRate": 3.96,
+          "possibleRate": 19.53,
+          "sharedTieAdjustedRate": 7.12,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
-              "probability": 15.86,
-              "possibleRate": 44.53,
+              "scenarios": 256,
+              "probability": 28.46,
+              "possibleRate": 78.12,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 7.12,
-              "teamBWinProbability": 0.81,
-              "impact": 6.3
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat PBKS",
+              "teamAWinProbability": 6.29,
+              "teamBWinProbability": 7.94,
+              "impact": 1.65
             }
           ]
         },
         "Rajasthan": {
-          "clearRate": 3.91,
-          "possibleRate": 19.92,
-          "sharedTieAdjustedRate": 10.88,
+          "clearRate": 6.25,
+          "possibleRate": 26.56,
+          "sharedTieAdjustedRate": 14.44,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 256,
+              "scenarios": 128,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 768,
+              "scenarios": 384,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 768,
-              "probability": 6.8,
-              "possibleRate": 21.88,
+              "scenarios": 384,
+              "probability": 11.77,
+              "possibleRate": 37.5,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 256,
-              "probability": 66.67,
-              "possibleRate": 93.75,
-              "guaranteedRate": 31.25
+              "scenarios": 128,
+              "probability": 80.21,
+              "possibleRate": 100.0,
+              "guaranteedRate": 50.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "Kolkata",
-              "preferredLabel": "KKR beat GT",
-              "teamAWinProbability": 14.44,
-              "teamBWinProbability": 7.32,
-              "impact": 7.12
-            }
-          ]
-        },
-        "Delhi": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1024,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 512,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "Punjab",
+              "preferredLabel": "PBKS beat RCB",
+              "teamAWinProbability": 15.47,
+              "teamBWinProbability": 13.41,
+              "impact": 2.06
             }
           ]
         },
@@ -2512,20 +2410,13 @@
             },
             {
               "wins": 1,
-              "scenarios": 768,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 768,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
               "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2534,11 +2425,53 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Delhi": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 256,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2554,21 +2487,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2576,11 +2509,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2596,21 +2529,21 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 1024,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 512,
+              "scenarios": 256,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2618,11 +2551,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "166633a2-cecb-4cf3-a984-78dc898b5345",
-              "matchNo": 60,
-              "label": "M60: KKR vs GT",
-              "teamA": "Kolkata",
-              "teamB": "Gujarat",
+              "fixtureId": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+              "matchNo": 61,
+              "label": "M61: PBKS vs RCB",
+              "teamA": "Punjab",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
