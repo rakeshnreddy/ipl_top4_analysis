@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-20T21:16:57Z",
+    "generated_at": "2026-05-21T21:07:46Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -12,6 +12,19 @@
   },
   "standings": [
     {
+      "teamKey": "Gujarat",
+      "shortName": "GT",
+      "fullName": "Gujarat Titans",
+      "matches": 14,
+      "wins": 9,
+      "losses": 5,
+      "noResult": 0,
+      "points": 18,
+      "nrr": null,
+      "rank": 1,
+      "remainingMatches": 0
+    },
+    {
       "teamKey": "Bangalore",
       "shortName": "RCB",
       "fullName": "Royal Challengers Bengaluru",
@@ -20,19 +33,6 @@
       "losses": 4,
       "noResult": 0,
       "points": 18,
-      "nrr": null,
-      "rank": 1,
-      "remainingMatches": 1
-    },
-    {
-      "teamKey": "Gujarat",
-      "shortName": "GT",
-      "fullName": "Gujarat Titans",
-      "matches": 13,
-      "wins": 8,
-      "losses": 5,
-      "noResult": 0,
-      "points": 16,
       "nrr": null,
       "rank": 2,
       "remainingMatches": 1
@@ -93,14 +93,14 @@
       "teamKey": "Chennai",
       "shortName": "CSK",
       "fullName": "Chennai Super Kings",
-      "matches": 13,
+      "matches": 14,
       "wins": 6,
-      "losses": 7,
+      "losses": 8,
       "noResult": 0,
       "points": 12,
       "nrr": null,
       "rank": 7,
-      "remainingMatches": 1
+      "remainingMatches": 0
     },
     {
       "teamKey": "Delhi",
@@ -143,17 +143,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-      "matchNo": 66,
-      "teamA": "Gujarat",
-      "teamB": "Chennai",
-      "dateTimeGMT": "2026-05-21T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Narendra Modi Stadium, Ahmedabad",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
       "matchNo": 67,
@@ -201,9 +190,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 32,
-    "generatedAt": "2026-05-20T21:16:57Z",
-    "stateCount": 32,
+    "simulationCount": 16,
+    "generatedAt": "2026-05-21T21:07:46Z",
+    "stateCount": 16,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -212,37 +201,37 @@
       "Fixture-impact guidance is computed for the next 1 fixture(s)."
     ],
     "overallProbabilities": {
-      "Bangalore": {
+      "Gujarat": {
         "top4": 100.0,
-        "top2": 91.67,
+        "top2": 83.33,
         "top4Clear": 100.0,
-        "top2Clear": 75.0,
+        "top2Clear": 50.0,
         "top4Possible": 100.0,
         "top2Possible": 100.0
       },
-      "Gujarat": {
+      "Bangalore": {
         "top4": 100.0,
-        "top2": 52.08,
+        "top2": 83.33,
         "top4Clear": 100.0,
-        "top2Clear": 25.0,
+        "top2Clear": 50.0,
         "top4Possible": 100.0,
-        "top2Possible": 75.0
+        "top2Possible": 100.0
       },
       "Hyderabad": {
         "top4": 100.0,
-        "top2": 52.08,
+        "top2": 33.33,
         "top4Clear": 100.0,
-        "top2Clear": 25.0,
+        "top2Clear": 0.0,
         "top4Possible": 100.0,
-        "top2Possible": 75.0
+        "top2Possible": 50.0
       },
       "Rajasthan": {
-        "top4": 55.21,
-        "top2": 4.17,
+        "top4": 56.25,
+        "top2": 0.0,
         "top4Clear": 50.0,
         "top2Clear": 0.0,
         "top4Possible": 62.5,
-        "top2Possible": 12.5
+        "top2Possible": 0.0
       },
       "Kolkata": {
         "top4": 18.75,
@@ -261,15 +250,15 @@
         "top2Possible": 0.0
       },
       "Chennai": {
-        "top4": 2.08,
+        "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
         "top2Clear": 0.0,
-        "top4Possible": 6.25,
+        "top4Possible": 0.0,
         "top2Possible": 0.0
       },
       "Delhi": {
-        "top4": 5.21,
+        "top4": 6.25,
         "top2": 0.0,
         "top4Clear": 0.0,
         "top2Clear": 0.0,
@@ -295,19 +284,19 @@
     },
     "teamAnalysis": {
       "4": {
-        "Bangalore": {
+        "Gujarat": {
           "percentage": 100.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
-        "Gujarat": {
+        "Bangalore": {
           "percentage": 100.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -316,25 +305,25 @@
         "Hyderabad": {
           "percentage": 100.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
         "Rajasthan": {
-          "percentage": 55.21,
+          "percentage": 56.25,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "GT beat CSK",
-              "Impact": 2.08
+            "M67: SRH vs RCB": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "Kolkata": {
           "percentage": 18.75,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -343,34 +332,34 @@
         "Punjab": {
           "percentage": 18.75,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
         "Chennai": {
-          "percentage": 2.08,
+          "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "CSK beat GT",
-              "Impact": 4.17
+            "M67: SRH vs RCB": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "Delhi": {
-          "percentage": 5.21,
+          "percentage": 6.25,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "GT beat CSK",
-              "Impact": 2.08
+            "M67: SRH vs RCB": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -379,7 +368,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -387,46 +376,46 @@
         }
       },
       "2": {
-        "Bangalore": {
-          "percentage": 91.67,
+        "Gujarat": {
+          "percentage": 83.33,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "CSK beat GT",
-              "Impact": 16.67
+            "M67: SRH vs RCB": {
+              "Outcome": "RCB beat SRH",
+              "Impact": 33.33
             }
           }
         },
-        "Gujarat": {
-          "percentage": 52.08,
+        "Bangalore": {
+          "percentage": 83.33,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "GT beat CSK",
-              "Impact": 62.5
+            "M67: SRH vs RCB": {
+              "Outcome": "RCB beat SRH",
+              "Impact": 33.33
             }
           }
         },
         "Hyderabad": {
-          "percentage": 52.08,
+          "percentage": 33.33,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "CSK beat GT",
-              "Impact": 37.5
+            "M67: SRH vs RCB": {
+              "Outcome": "SRH beat RCB",
+              "Impact": 66.67
             }
           }
         },
         "Rajasthan": {
-          "percentage": 4.17,
+          "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
-              "Outcome": "CSK beat GT",
-              "Impact": 8.33
+            "M67: SRH vs RCB": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "Kolkata": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -435,7 +424,7 @@
         "Punjab": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -444,7 +433,7 @@
         "Chennai": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -453,7 +442,7 @@
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -462,7 +451,7 @@
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -471,7 +460,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M66: GT vs CSK": {
+            "M67: SRH vs RCB": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -481,11 +470,11 @@
     },
     "qualificationPath": {
       "4": {
-        "Bangalore": {
+        "Gujarat": {
           "possible": 0,
           "likely": 0,
           "guaranteed": 0,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -494,22 +483,15 @@
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -519,11 +501,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -533,7 +515,7 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Gujarat": {
+        "Bangalore": {
           "possible": 0,
           "likely": 0,
           "guaranteed": 0,
@@ -542,14 +524,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -557,11 +539,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -571,11 +553,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -594,14 +576,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -609,11 +591,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -623,11 +605,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -646,14 +628,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
-              "probability": 10.42,
+              "scenarios": 8,
+              "probability": 12.5,
               "possibleRate": 25.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -661,30 +643,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 56.25,
-              "teamBWinProbability": 54.17,
-              "impact": 2.08
+              "teamBWinProbability": 56.25,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 56.25,
-              "teamBWinProbability": 54.17,
-              "impact": 2.08
+              "teamBWinProbability": 56.25,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -698,14 +680,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 37.5,
               "possibleRate": 50.0,
               "guaranteedRate": 25.0
@@ -713,11 +695,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -727,11 +709,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -750,14 +732,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 37.5,
               "possibleRate": 50.0,
               "guaranteedRate": 25.0
@@ -765,11 +747,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -779,11 +761,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -794,10 +776,10 @@
           "impactFixtureWindow": 1
         },
         "Chennai": {
-          "possible": 1,
+          "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -806,41 +788,34 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 4.17,
-              "possibleRate": 12.5,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 4.17,
-              "impact": 4.17
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 4.17,
-              "impact": 4.17
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -854,45 +829,45 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
-              "probability": 10.42,
+              "scenarios": 8,
+              "probability": 12.5,
               "possibleRate": 25.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 6.25,
-              "teamBWinProbability": 4.17,
-              "impact": 2.08
+              "teamBWinProbability": 6.25,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 6.25,
-              "teamBWinProbability": 4.17,
-              "impact": 2.08
+              "teamBWinProbability": 6.25,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -906,14 +881,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -921,11 +896,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -935,11 +910,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -958,14 +933,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -973,11 +948,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -987,11 +962,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1003,6 +978,51 @@
         }
       },
       "2": {
+        "Gujarat": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 16,
+              "probability": 83.33,
+              "possibleRate": 100.0,
+              "guaranteedRate": 50.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 100.0,
+              "impact": 33.33
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 100.0,
+              "impact": 33.33
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
         "Bangalore": {
           "possible": 0,
           "likely": 0,
@@ -1012,14 +1032,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
-              "probability": 83.33,
+              "scenarios": 8,
+              "probability": 66.67,
               "possibleRate": 100.0,
-              "guaranteedRate": 50.0
+              "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1027,88 +1047,36 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 83.33,
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
               "teamBWinProbability": 100.0,
-              "impact": 16.67
+              "impact": 33.33
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 83.33,
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
               "teamBWinProbability": 100.0,
-              "impact": 16.67
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Gujarat": {
-          "possible": 0,
-          "likely": 1,
-          "guaranteed": null,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 16,
-              "probability": 20.83,
-              "possibleRate": 50.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 83.33,
-              "possibleRate": 100.0,
-              "guaranteedRate": 50.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
-              "teamAWinProbability": 83.33,
-              "teamBWinProbability": 20.83,
-              "impact": 62.5
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
-              "teamAWinProbability": 83.33,
-              "teamBWinProbability": 20.83,
-              "impact": 62.5
+              "impact": 33.33
             }
           ],
           "impactFixtureWindow": 1
         },
         "Hyderabad": {
-          "possible": 0,
+          "possible": 1,
           "likely": 1,
           "guaranteed": null,
           "target_matches": 1,
@@ -1116,51 +1084,51 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
-              "probability": 20.83,
-              "possibleRate": 50.0,
+              "scenarios": 8,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
-              "probability": 83.33,
+              "scenarios": 8,
+              "probability": 66.67,
               "possibleRate": 100.0,
-              "guaranteedRate": 50.0
+              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 33.33,
-              "teamBWinProbability": 70.83,
-              "impact": 37.5
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat RCB",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 0.0,
+              "impact": 66.67
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 33.33,
-              "teamBWinProbability": 70.83,
-              "impact": 37.5
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat RCB",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 0.0,
+              "impact": 66.67
             }
           ],
           "impactFixtureWindow": 1
         },
         "Rajasthan": {
-          "possible": 1,
+          "possible": null,
           "likely": null,
           "guaranteed": null,
           "target_matches": 1,
@@ -1168,45 +1136,45 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
-              "probability": 8.33,
-              "possibleRate": 25.0,
+              "scenarios": 8,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 8.33,
-              "impact": 8.33
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 8.33,
-              "impact": 8.33
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1220,14 +1188,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1235,11 +1203,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1249,11 +1217,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1272,14 +1240,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1287,11 +1255,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1301,11 +1269,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1319,7 +1287,7 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1328,22 +1296,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1353,11 +1314,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1376,14 +1337,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1391,11 +1352,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1405,11 +1366,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1428,14 +1389,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1443,11 +1404,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1457,11 +1418,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1480,14 +1441,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1495,11 +1456,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1509,11 +1470,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1527,41 +1488,6 @@
     },
     "scenarioBreakdown": {
       "4": {
-        "Bangalore": {
-          "clearRate": 100.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 100.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 16,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 100.0,
-              "teamBWinProbability": 100.0,
-              "impact": 0.0
-            }
-          ]
-        },
         "Gujarat": {
           "clearRate": 100.0,
           "possibleRate": 100.0,
@@ -1573,10 +1499,38 @@
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 100.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Bangalore": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 8,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1584,11 +1538,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -1604,14 +1558,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1619,11 +1573,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -1635,18 +1589,18 @@
         "Rajasthan": {
           "clearRate": 50.0,
           "possibleRate": 62.5,
-          "sharedTieAdjustedRate": 55.21,
+          "sharedTieAdjustedRate": 56.25,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
-              "probability": 10.42,
+              "scenarios": 8,
+              "probability": 12.5,
               "possibleRate": 25.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1654,16 +1608,16 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 56.25,
-              "teamBWinProbability": 54.17,
-              "impact": 2.08
+              "teamBWinProbability": 56.25,
+              "impact": 0.0
             }
           ]
         },
@@ -1674,14 +1628,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 37.5,
               "possibleRate": 50.0,
               "guaranteedRate": 25.0
@@ -1689,11 +1643,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -1709,14 +1663,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 37.5,
               "possibleRate": 50.0,
               "guaranteedRate": 25.0
@@ -1724,11 +1678,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 18.75,
@@ -1739,8 +1693,8 @@
         },
         "Chennai": {
           "clearRate": 0.0,
-          "possibleRate": 6.25,
-          "sharedTieAdjustedRate": 2.08,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -1748,62 +1702,55 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 4.17,
-              "possibleRate": 12.5,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 4.17,
-              "impact": 4.17
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ]
         },
         "Delhi": {
           "clearRate": 0.0,
           "possibleRate": 12.5,
-          "sharedTieAdjustedRate": 5.21,
+          "sharedTieAdjustedRate": 6.25,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
-              "probability": 10.42,
+              "scenarios": 8,
+              "probability": 12.5,
               "possibleRate": 25.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 6.25,
-              "teamBWinProbability": 4.17,
-              "impact": 2.08
+              "teamBWinProbability": 6.25,
+              "impact": 0.0
             }
           ]
         },
@@ -1814,14 +1761,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1829,11 +1776,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1849,14 +1796,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1864,11 +1811,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1879,10 +1826,10 @@
         }
       },
       "2": {
-        "Bangalore": {
-          "clearRate": 75.0,
+        "Gujarat": {
+          "clearRate": 50.0,
           "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 91.67,
+          "sharedTieAdjustedRate": 83.33,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -1890,10 +1837,38 @@
               "probability": 83.33,
               "possibleRate": 100.0,
               "guaranteedRate": 50.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 100.0,
+              "impact": 33.33
+            }
+          ]
+        },
+        "Bangalore": {
+          "clearRate": 50.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 83.33,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 8,
+              "probability": 66.67,
+              "possibleRate": 100.0,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1901,121 +1876,86 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 83.33,
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat SRH",
+              "teamAWinProbability": 66.67,
               "teamBWinProbability": 100.0,
-              "impact": 16.67
-            }
-          ]
-        },
-        "Gujarat": {
-          "clearRate": 25.0,
-          "possibleRate": 75.0,
-          "sharedTieAdjustedRate": 52.08,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 16,
-              "probability": 20.83,
-              "possibleRate": 50.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 83.33,
-              "possibleRate": 100.0,
-              "guaranteedRate": 50.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Gujarat",
-              "preferredLabel": "GT beat CSK",
-              "teamAWinProbability": 83.33,
-              "teamBWinProbability": 20.83,
-              "impact": 62.5
+              "impact": 33.33
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 25.0,
-          "possibleRate": 75.0,
-          "sharedTieAdjustedRate": 52.08,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 16,
-              "probability": 20.83,
-              "possibleRate": 50.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 83.33,
-              "possibleRate": 100.0,
-              "guaranteedRate": 50.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
-              "teamAWinProbability": 33.33,
-              "teamBWinProbability": 70.83,
-              "impact": 37.5
-            }
-          ]
-        },
-        "Rajasthan": {
           "clearRate": 0.0,
-          "possibleRate": 12.5,
-          "sharedTieAdjustedRate": 4.17,
+          "possibleRate": 50.0,
+          "sharedTieAdjustedRate": 33.33,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
-              "probability": 8.33,
-              "possibleRate": 25.0,
+              "scenarios": 8,
+              "probability": 66.67,
+              "possibleRate": 100.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
-              "preferredWinner": "Chennai",
-              "preferredLabel": "CSK beat GT",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "Hyderabad",
+              "preferredLabel": "SRH beat RCB",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 0.0,
+              "impact": 66.67
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 8,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 8,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
-              "teamBWinProbability": 8.33,
-              "impact": 8.33
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ]
         },
@@ -2026,14 +1966,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2041,11 +1981,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2061,14 +2001,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2076,11 +2016,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2100,22 +2040,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 16,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2131,14 +2064,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2146,11 +2079,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2166,14 +2099,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2181,11 +2114,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2201,14 +2134,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 16,
+              "scenarios": 8,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2216,11 +2149,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
-              "matchNo": 66,
-              "label": "M66: GT vs CSK",
-              "teamA": "Gujarat",
-              "teamB": "Chennai",
+              "fixtureId": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+              "matchNo": 67,
+              "label": "M67: SRH vs RCB",
+              "teamA": "Hyderabad",
+              "teamB": "Bangalore",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
