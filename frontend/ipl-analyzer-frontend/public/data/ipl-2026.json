@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": 2026,
-    "generated_at": "2026-05-23T20:13:26Z",
+    "generated_at": "2026-05-24T20:29:37Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -51,6 +51,19 @@
       "remainingMatches": 0
     },
     {
+      "teamKey": "Rajasthan",
+      "shortName": "RR",
+      "fullName": "Rajasthan Royals",
+      "matches": 14,
+      "wins": 8,
+      "losses": 6,
+      "noResult": 0,
+      "points": 16,
+      "nrr": null,
+      "rank": 4,
+      "remainingMatches": 0
+    },
+    {
       "teamKey": "Punjab",
       "shortName": "PBKS",
       "fullName": "Punjab Kings",
@@ -60,34 +73,34 @@
       "noResult": 1,
       "points": 15,
       "nrr": null,
-      "rank": 4,
+      "rank": 5,
       "remainingMatches": 0
     },
     {
-      "teamKey": "Rajasthan",
-      "shortName": "RR",
-      "fullName": "Rajasthan Royals",
-      "matches": 13,
+      "teamKey": "Delhi",
+      "shortName": "DC",
+      "fullName": "Delhi Capitals",
+      "matches": 14,
       "wins": 7,
-      "losses": 6,
+      "losses": 7,
       "noResult": 0,
       "points": 14,
       "nrr": null,
-      "rank": 5,
-      "remainingMatches": 1
+      "rank": 6,
+      "remainingMatches": 0
     },
     {
       "teamKey": "Kolkata",
       "shortName": "KKR",
       "fullName": "Kolkata Knight Riders",
-      "matches": 13,
+      "matches": 14,
       "wins": 6,
-      "losses": 6,
+      "losses": 7,
       "noResult": 1,
       "points": 13,
       "nrr": null,
-      "rank": 6,
-      "remainingMatches": 1
+      "rank": 7,
+      "remainingMatches": 0
     },
     {
       "teamKey": "Chennai",
@@ -99,21 +112,8 @@
       "noResult": 0,
       "points": 12,
       "nrr": null,
-      "rank": 7,
-      "remainingMatches": 0
-    },
-    {
-      "teamKey": "Delhi",
-      "shortName": "DC",
-      "fullName": "Delhi Capitals",
-      "matches": 13,
-      "wins": 6,
-      "losses": 7,
-      "noResult": 0,
-      "points": 12,
-      "nrr": null,
       "rank": 8,
-      "remainingMatches": 1
+      "remainingMatches": 0
     },
     {
       "teamKey": "Lucknow",
@@ -132,39 +132,17 @@
       "teamKey": "Mumbai",
       "shortName": "MI",
       "fullName": "Mumbai Indians",
-      "matches": 13,
+      "matches": 14,
       "wins": 4,
-      "losses": 9,
+      "losses": 10,
       "noResult": 0,
       "points": 8,
       "nrr": null,
       "rank": 10,
-      "remainingMatches": 1
+      "remainingMatches": 0
     }
   ],
   "fixtures": [
-    {
-      "id": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-      "matchNo": 69,
-      "teamA": "Mumbai",
-      "teamB": "Rajasthan",
-      "dateTimeGMT": "2026-05-24T10:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Wankhede Stadium, Mumbai",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
-    {
-      "id": "8f61d649-f53b-4e79-9bfb-661cfe69be3b",
-      "matchNo": 70,
-      "teamA": "Kolkata",
-      "teamB": "Delhi",
-      "dateTimeGMT": "2026-05-24T14:00:00Z",
-      "dateTimeLocal": null,
-      "venue": "Eden Gardens, Kolkata",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
       "matchNo": null,
@@ -175,13 +153,24 @@
       "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
       "status": "scheduled",
       "sourceUrl": "https://api.cricapi.com/v1/series_info"
+    },
+    {
+      "id": "58ddaae3-9fa7-4110-97f8-c9ae6d80099b",
+      "matchNo": null,
+      "teamA": "Hyderabad",
+      "teamB": "Rajasthan",
+      "dateTimeGMT": "2026-05-27T14:00:00Z",
+      "dateTimeLocal": null,
+      "venue": "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh",
+      "status": "scheduled",
+      "sourceUrl": "https://api.cricapi.com/v1/series_info"
     }
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 8,
-    "generatedAt": "2026-05-23T20:13:26Z",
-    "stateCount": 8,
+    "simulationCount": 4,
+    "generatedAt": "2026-05-24T20:29:37Z",
+    "stateCount": 4,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -192,53 +181,37 @@
     "overallProbabilities": {
       "Gujarat": {
         "top4": 100.0,
-        "top2": 75.0,
+        "top2": 58.33,
         "top4Clear": 100.0,
         "top2Clear": 50.0,
         "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top2Possible": 75.0
       },
       "Bangalore": {
         "top4": 100.0,
-        "top2": 75.0,
+        "top2": 58.33,
+        "top4Clear": 100.0,
+        "top2Clear": 50.0,
+        "top4Possible": 100.0,
+        "top2Possible": 75.0
+      },
+      "Hyderabad": {
+        "top4": 100.0,
+        "top2": 66.67,
         "top4Clear": 100.0,
         "top2Clear": 50.0,
         "top4Possible": 100.0,
         "top2Possible": 100.0
       },
-      "Hyderabad": {
+      "Rajasthan": {
         "top4": 100.0,
-        "top2": 50.0,
+        "top2": 16.67,
         "top4Clear": 100.0,
         "top2Clear": 0.0,
         "top4Possible": 100.0,
-        "top2Possible": 100.0
+        "top2Possible": 50.0
       },
       "Punjab": {
-        "top4": 37.5,
-        "top2": 0.0,
-        "top4Clear": 25.0,
-        "top2Clear": 0.0,
-        "top4Possible": 50.0,
-        "top2Possible": 0.0
-      },
-      "Rajasthan": {
-        "top4": 50.0,
-        "top2": 0.0,
-        "top4Clear": 50.0,
-        "top2Clear": 0.0,
-        "top4Possible": 50.0,
-        "top2Possible": 0.0
-      },
-      "Kolkata": {
-        "top4": 12.5,
-        "top2": 0.0,
-        "top4Clear": 0.0,
-        "top2Clear": 0.0,
-        "top4Possible": 25.0,
-        "top2Possible": 0.0
-      },
-      "Chennai": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -247,6 +220,22 @@
         "top2Possible": 0.0
       },
       "Delhi": {
+        "top4": 0.0,
+        "top2": 0.0,
+        "top4Clear": 0.0,
+        "top2Clear": 0.0,
+        "top4Possible": 0.0,
+        "top2Possible": 0.0
+      },
+      "Kolkata": {
+        "top4": 0.0,
+        "top2": 0.0,
+        "top4Clear": 0.0,
+        "top2Clear": 0.0,
+        "top4Possible": 0.0,
+        "top2Possible": 0.0
+      },
+      "Chennai": {
         "top4": 0.0,
         "top2": 0.0,
         "top4Clear": 0.0,
@@ -276,7 +265,7 @@
         "Gujarat": {
           "percentage": 100.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -285,7 +274,7 @@
         "Bangalore": {
           "percentage": 100.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -294,43 +283,25 @@
         "Hyderabad": {
           "percentage": 100.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Rajasthan": {
+          "percentage": 100.0,
+          "results_df": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
         "Punjab": {
-          "percentage": 37.5,
-          "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "MI beat RR",
-              "Impact": 75.0
-            }
-          }
-        },
-        "Rajasthan": {
-          "percentage": 50.0,
-          "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "RR beat MI",
-              "Impact": 100.0
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 12.5,
-          "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "MI beat RR",
-              "Impact": 25.0
-            }
-          }
-        },
-        "Chennai": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -339,7 +310,25 @@
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Kolkata": {
+          "percentage": 0.0,
+          "results_df": {
+            "RCB vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Chennai": {
+          "percentage": 0.0,
+          "results_df": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -348,7 +337,7 @@
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -357,7 +346,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -366,27 +355,36 @@
       },
       "2": {
         "Gujarat": {
-          "percentage": 75.0,
+          "percentage": 58.33,
           "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "Either result",
-              "Impact": 0.0
+            "RCB vs GT": {
+              "Outcome": "GT beat RCB",
+              "Impact": 83.33
             }
           }
         },
         "Bangalore": {
-          "percentage": 75.0,
+          "percentage": 58.33,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
+              "Outcome": "RCB beat GT",
+              "Impact": 83.33
+            }
+          }
+        },
+        "Hyderabad": {
+          "percentage": 66.67,
+          "results_df": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
-        "Hyderabad": {
-          "percentage": 50.0,
+        "Rajasthan": {
+          "percentage": 16.67,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -395,34 +393,7 @@
         "Punjab": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Rajasthan": {
-          "percentage": 0.0,
-          "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Kolkata": {
-          "percentage": 0.0,
-          "results_df": {
-            "M69: MI vs RR": {
-              "Outcome": "Either result",
-              "Impact": 0.0
-            }
-          }
-        },
-        "Chennai": {
-          "percentage": 0.0,
-          "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -431,7 +402,25 @@
         "Delhi": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Kolkata": {
+          "percentage": 0.0,
+          "results_df": {
+            "RCB vs GT": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "Chennai": {
+          "percentage": 0.0,
+          "results_df": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -440,7 +429,7 @@
         "Lucknow": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -449,7 +438,7 @@
         "Mumbai": {
           "percentage": 0.0,
           "results_df": {
-            "M69: MI vs RR": {
+            "RCB vs GT": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -468,14 +457,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -483,11 +472,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -497,11 +486,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -520,14 +509,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -535,11 +524,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -549,11 +538,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -567,12 +556,19 @@
           "possible": 0,
           "likely": 0,
           "guaranteed": 0,
-          "target_matches": 0,
+          "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -580,11 +576,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -594,11 +590,63 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 100.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Rajasthan": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 1,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 100.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -609,155 +657,6 @@
           "impactFixtureWindow": 1
         },
         "Punjab": {
-          "possible": 0,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 0,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8,
-              "probability": 37.5,
-              "possibleRate": 50.0,
-              "guaranteedRate": 25.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 0.0,
-              "impact": 75.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 0.0,
-              "impact": 75.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Rajasthan": {
-          "possible": 1,
-          "likely": 1,
-          "guaranteed": 1,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Rajasthan",
-              "preferredLabel": "RR beat MI",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 100.0,
-              "impact": 100.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Rajasthan",
-              "preferredLabel": "RR beat MI",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 100.0,
-              "impact": 100.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Kolkata": {
-          "possible": 1,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 25.0,
-              "possibleRate": 50.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 0.0,
-              "impact": 25.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 0.0,
-              "impact": 25.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Chennai": {
           "possible": null,
           "likely": null,
           "guaranteed": null,
@@ -766,7 +665,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -774,11 +673,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -788,11 +687,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -806,7 +705,7 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -815,22 +714,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -840,11 +732,101 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Kolkata": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Chennai": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -863,7 +845,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -871,11 +853,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -885,11 +867,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -903,7 +885,7 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -912,22 +894,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -937,11 +912,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -955,21 +930,21 @@
       "2": {
         "Gujarat": {
           "possible": 0,
-          "likely": 0,
+          "likely": 1,
           "guaranteed": 1,
           "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
-              "probability": 50.0,
-              "possibleRate": 100.0,
+              "scenarios": 2,
+              "probability": 16.67,
+              "possibleRate": 50.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -977,51 +952,51 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat RCB",
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 100.0,
+              "impact": 83.33
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat RCB",
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 100.0,
+              "impact": 83.33
             }
           ],
           "impactFixtureWindow": 1
         },
         "Bangalore": {
           "possible": 0,
-          "likely": 0,
+          "likely": 1,
           "guaranteed": 1,
           "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
-              "probability": 50.0,
-              "possibleRate": 100.0,
+              "scenarios": 2,
+              "probability": 16.67,
+              "possibleRate": 50.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1029,74 +1004,133 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat GT",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 16.67,
+              "impact": 83.33
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat GT",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 16.67,
+              "impact": 83.33
             }
           ],
           "impactFixtureWindow": 1
         },
         "Hyderabad": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": null,
-          "target_matches": 0,
+          "likely": 1,
+          "guaranteed": 1,
+          "target_matches": 1,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
-              "probability": 50.0,
+              "scenarios": 2,
+              "probability": 33.33,
+              "possibleRate": 100.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 66.67,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 66.67,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "Rajasthan": {
+          "possible": 1,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 1,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 33.33,
               "possibleRate": 100.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 50.0,
-              "teamBWinProbability": 50.0,
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 16.67,
               "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 50.0,
-              "teamBWinProbability": 50.0,
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 16.67,
               "impact": 0.0
             }
           ],
@@ -1111,7 +1145,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1119,11 +1153,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1133,11 +1167,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1147,11 +1181,11 @@
           ],
           "impactFixtureWindow": 1
         },
-        "Rajasthan": {
+        "Delhi": {
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1160,22 +1194,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1185,11 +1212,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1203,7 +1230,7 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1212,22 +1239,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1237,11 +1257,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1260,7 +1280,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1268,11 +1288,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1282,63 +1302,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "Delhi": {
-          "possible": null,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 1,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1357,7 +1325,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1365,11 +1333,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1379,11 +1347,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1397,7 +1365,7 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 1,
+          "target_matches": 0,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1406,22 +1374,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1431,11 +1392,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1456,14 +1417,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1471,11 +1432,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -1491,14 +1452,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1506,11 +1467,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -1526,7 +1487,14 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1534,11 +1502,46 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 100.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 100.0,
@@ -1548,111 +1551,13 @@
           ]
         },
         "Punjab": {
-          "clearRate": 25.0,
-          "possibleRate": 50.0,
-          "sharedTieAdjustedRate": 37.5,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8,
-              "probability": 37.5,
-              "possibleRate": 50.0,
-              "guaranteedRate": 25.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 0.0,
-              "impact": 75.0
-            }
-          ]
-        },
-        "Rajasthan": {
-          "clearRate": 50.0,
-          "possibleRate": 50.0,
-          "sharedTieAdjustedRate": 50.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Rajasthan",
-              "preferredLabel": "RR beat MI",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 100.0,
-              "impact": 100.0
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 0.0,
-          "possibleRate": 25.0,
-          "sharedTieAdjustedRate": 12.5,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 25.0,
-              "possibleRate": 50.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "Mumbai",
-              "preferredLabel": "MI beat RR",
-              "teamAWinProbability": 25.0,
-              "teamBWinProbability": 0.0,
-              "impact": 25.0
-            }
-          ]
-        },
-        "Chennai": {
           "clearRate": 0.0,
           "possibleRate": 0.0,
           "sharedTieAdjustedRate": 0.0,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1660,11 +1565,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1684,9 +1589,30 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
+            }
+          ],
+          "fixtureImpacts": [
             {
-              "wins": 1,
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1695,11 +1621,39 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1715,7 +1669,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1723,11 +1677,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1747,22 +1701,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1775,19 +1722,19 @@
       "2": {
         "Gujarat": {
           "clearRate": 50.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "possibleRate": 75.0,
+          "sharedTieAdjustedRate": 58.33,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
-              "probability": 50.0,
-              "possibleRate": 100.0,
+              "scenarios": 2,
+              "probability": 16.67,
+              "possibleRate": 50.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1795,34 +1742,34 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Gujarat",
+              "preferredLabel": "GT beat RCB",
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 100.0,
+              "impact": 83.33
             }
           ]
         },
         "Bangalore": {
           "clearRate": 50.0,
-          "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 75.0,
+          "possibleRate": 75.0,
+          "sharedTieAdjustedRate": 58.33,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4,
-              "probability": 50.0,
-              "possibleRate": 100.0,
+              "scenarios": 2,
+              "probability": 16.67,
+              "possibleRate": 50.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 4,
+              "scenarios": 2,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1830,43 +1777,85 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 75.0,
-              "teamBWinProbability": 75.0,
-              "impact": 0.0
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "Bangalore",
+              "preferredLabel": "RCB beat GT",
+              "teamAWinProbability": 100.0,
+              "teamBWinProbability": 16.67,
+              "impact": 83.33
             }
           ]
         },
         "Hyderabad": {
-          "clearRate": 0.0,
+          "clearRate": 50.0,
           "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 50.0,
+          "sharedTieAdjustedRate": 66.67,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
-              "probability": 50.0,
+              "scenarios": 2,
+              "probability": 33.33,
+              "possibleRate": 100.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 66.67,
+              "teamBWinProbability": 66.67,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Rajasthan": {
+          "clearRate": 0.0,
+          "possibleRate": 50.0,
+          "sharedTieAdjustedRate": 16.67,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 2,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 2,
+              "probability": 33.33,
               "possibleRate": 100.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
-              "teamAWinProbability": 50.0,
-              "teamBWinProbability": 50.0,
+              "teamAWinProbability": 16.67,
+              "teamBWinProbability": 16.67,
               "impact": 0.0
             }
           ]
@@ -1878,41 +1867,6 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Rajasthan": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
               "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -1921,74 +1875,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Kolkata": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
-              "preferredWinner": "neutral",
-              "preferredLabel": "Either result",
-              "teamAWinProbability": 0.0,
-              "teamBWinProbability": 0.0,
-              "impact": 0.0
-            }
-          ]
-        },
-        "Chennai": {
-          "clearRate": 0.0,
-          "possibleRate": 0.0,
-          "sharedTieAdjustedRate": 0.0,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 8,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2008,9 +1899,30 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
+            }
+          ],
+          "fixtureImpacts": [
             {
-              "wins": 1,
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Kolkata": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
               "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
@@ -2019,11 +1931,39 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        },
+        "Chennai": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 4,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2039,7 +1979,7 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 8,
+              "scenarios": 4,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2047,11 +1987,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2071,22 +2011,15 @@
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 4,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
-              "matchNo": 69,
-              "label": "M69: MI vs RR",
-              "teamA": "Mumbai",
-              "teamB": "Rajasthan",
+              "fixtureId": "cae89dea-04b5-4b01-85c9-e0c05419fa4f",
+              "matchNo": null,
+              "label": "RCB vs GT",
+              "teamA": "Bangalore",
+              "teamB": "Gujarat",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
