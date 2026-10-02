@@ -1,12 +1,16 @@
 {
-  "name": "Python 3",
+  "name": "IPL Playoff Pulse",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
   "customizations": {
     "codespaces": {
       "openFiles": [
-        "README.md",
-        "ipl_analysis_app.py"
+        "README.md"
       ]
     },
     "vscode": {
@@ -17,17 +21,14 @@
       ]
     }
   },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
-  "postAttachCommand": {
-    "server": "streamlit run ipl_analysis_app.py --server.enableCORS false --server.enableXsrfProtection false"
-  },
+  "updateContentCommand": "pip3 install --user -r requirements.txt && npm ci --prefix frontend/ipl-analyzer-frontend",
   "portsAttributes": {
-    "8501": {
-      "label": "Application",
+    "5173": {
+      "label": "Frontend (Vite)",
       "onAutoForward": "openPreview"
     }
   },
   "forwardPorts": [
-    8501
+    5173
   ]
 }
