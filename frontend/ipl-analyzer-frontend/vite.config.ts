@@ -6,6 +6,15 @@ import { configDefaults } from 'vitest/config';
 export default defineConfig({
   base: '/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      // Two pages: the standings site and the separate social share kit.
+      input: {
+        main: 'index.html',
+        share: 'share.html',
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
