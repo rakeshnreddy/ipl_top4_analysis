@@ -48,7 +48,18 @@ def valid_fixture(match_no: int = 44) -> dict[str, object]:
 
 
 def valid_fixtures(count: int) -> list[dict[str, object]]:
-    return [valid_fixture(match_no) for match_no in range(44, 44 + count)]
+    # Eight games each are played, so the remaining league matches are numbered 41-70.
+    return [valid_fixture(match_no) for match_no in range(41, 41 + count)]
+
+
+def completed_standings(nrr: object = _DEFAULT_NRR) -> list[dict[str, object]]:
+    rows = valid_standings(nrr)
+    for row in rows:
+        row.update({"matches": 14, "wins": 7, "losses": 7, "points": 14, "remainingMatches": 0})
+    return rows
+
+
+FROZEN_MID_SEASON = datetime(2026, 5, 1, 12, tzinfo=timezone.utc)
 
 
 def analysis_stub() -> dict[str, object]:
@@ -63,54 +74,6 @@ def analysis_stub() -> dict[str, object]:
 
 
 class ExtractTableTests(unittest.TestCase):
-    def test_parse_cricbuzz_points_table_fixture(self) -> None:
-        html = """
-        <html><body>
-          <div>Teams</div><div>P</div><div>W</div><div>L</div><div>NR</div><div>Pts</div><div>NRR</div>
-          <div>1</div><div>Punjab Kings</div><div>8</div><div>6</div><div>1</div><div>1</div><div>13</div><div>+1.043</div>
-          <div>2</div><div>Royal Challengers Bengaluru</div><div>9</div><div>6</div><div>3</div><div>0</div><div>12</div><div>+1.420</div>
-          <div>3</div><div>Sunrisers Hyderabad</div><div>9</div><div>6</div><div>3</div><div>0</div><div>12</div><div>+0.832</div>
-          <div>4</div><div>Rajasthan Royals</div><div>10</div><div>6</div><div>4</div><div>0</div><div>12</div><div>+0.510</div>
-          <div>5</div><div>Gujarat Titans</div><div>9</div><div>5</div><div>4</div><div>0</div><div>10</div><div>-0.192</div>
-          <div>6</div><div>Delhi Capitals</div><div>9</div><div>4</div><div>5</div><div>0</div><div>8</div><div>-0.895</div>
-          <div>7</div><div>Chennai Super Kings</div><div>8</div><div>3</div><div>5</div><div>0</div><div>6</div><div>-0.121</div>
-          <div>8</div><div>Kolkata Knight Riders</div><div>8</div><div>2</div><div>5</div><div>1</div><div>5</div><div>-0.751</div>
-          <div>9</div><div>Mumbai Indians</div><div>8</div><div>2</div><div>6</div><div>0</div><div>4</div><div>-0.784</div>
-          <div>10</div><div>Lucknow Super Giants</div><div>8</div><div>2</div><div>6</div><div>0</div><div>4</div><div>-1.106</div>
-        </body></html>
-        """
-
-        standings = extract_table.parse_cricbuzz_standings(html)
-
-        self.assertEqual(len(standings), 10)
-        self.assertEqual(standings[0]["shortName"], "PBKS")
-        self.assertEqual(standings[1]["fullName"], "Royal Challengers Bengaluru")
-        self.assertEqual(standings[1]["nrr"], 1.42)
-        self.assertEqual(standings[-1]["remainingMatches"], 6)
-
-    def test_parse_and_enrich_next_fixture(self) -> None:
-        list_html = """
-        <a href="/live-cricket-scores/151987/csk-vs-mi-44th-match-ipl-2026">
-          Chennai Super Kings vs Mumbai Indians, 44th Match
-        </a>
-        """
-        detail_html = """
-        <main>
-          <span>Match starts at May 02, 14:00 GMT</span>
-          <span>Venue: MA Chidambaram Stadium, Chennai</span>
-          <span>Date & Time: Sat, May 02, 7:30 PM LOCAL Info</span>
-        </main>
-        """
-
-        fixtures = extract_table.parse_cricbuzz_fixtures(list_html, extract_table.CRICBUZZ_TABLE_URL)
-        enriched = extract_table.enrich_fixture_from_match_page(fixtures[0], detail_html)
-
-        self.assertEqual(enriched["matchNo"], 44)
-        self.assertEqual(enriched["teamA"], "Chennai")
-        self.assertEqual(enriched["teamB"], "Mumbai")
-        self.assertEqual(enriched["dateTimeGMT"], "2026-05-02T14:00:00Z")
-        self.assertEqual(enriched["venue"], "MA Chidambaram Stadium, Chennai")
-
     def test_parse_cricdata_points_and_fixtures_payloads(self) -> None:
         points_payload = {
             "status": "success",
@@ -315,52 +278,6 @@ class ExtractTableTests(unittest.TestCase):
                 strict_partial_fixtures=True,
             )
 
-    def test_legacy_outputs_are_derived_from_canonical_payload(self) -> None:
-        standings = [
-            {
-                "teamKey": meta.key,
-                "shortName": meta.short_name,
-                "fullName": meta.full_name,
-                "matches": 8,
-                "wins": 4,
-                "losses": 4,
-                "noResult": 0,
-                "points": 8,
-                "nrr": 0.123,
-                "rank": index,
-                "remainingMatches": 6,
-            }
-            for index, meta in enumerate(extract_table.TEAM_META.values(), start=1)
-        ]
-        payload = {
-            "metadata": {
-                "generated_at": "2026-05-01T12:00:00Z",
-                "source": "Test",
-            },
-            "standings": standings,
-            "fixtures": [{"teamA": "Chennai", "teamB": "Mumbai"}],
-            "analysis": {
-                "generatedAt": "2026-05-01T12:00:00Z",
-                "method": "Exhaustive",
-                "simulationCount": 2,
-                "overallProbabilities": {
-                    team["teamKey"]: {"top4": 50, "top2": 25} for team in standings
-                },
-                "teamAnalysis": {"4": {}, "2": {}},
-                "qualificationPath": {"4": {}, "2": {}},
-            },
-        }
-
-        legacy_standings, legacy_fixtures, legacy_analysis = extract_table.legacy_outputs(payload)
-
-        self.assertEqual(legacy_standings["standings"]["Chennai"]["NRR"], 0.123)
-        self.assertEqual(legacy_fixtures["fixtures"], [["Chennai", "Mumbai"]])
-        self.assertEqual(legacy_analysis["metadata"]["last_data_update"], "2026-05-01T12:00:00Z")
-        self.assertEqual(
-            legacy_analysis["analysis_data"]["overall_probabilities"]["Mumbai"]["Top 4 Probability"],
-            50,
-        )
-
     def test_series_id_prefers_explicit_configuration(self) -> None:
         session = mock.Mock()
 
@@ -387,14 +304,14 @@ class ExtractTableTests(unittest.TestCase):
             extract_table,
             "run_analysis",
             return_value=analysis_stub(),
-        ), mock.patch.object(extract_table, "fetch_cricbuzz_data") as cricbuzz_mock:
+        ):
             payload = extract_table.build_payload()
 
         self.assertEqual(payload["metadata"]["source"], "CricketData")
         self.assertEqual(payload["metadata"]["source_url"], extract_table.CRICDATA_SOURCE_URL)
+        self.assertEqual(payload["metadata"]["season_status"], "league_stage")
         self.assertEqual(payload["metadata"]["warnings"], [])
         cricdata_mock.assert_called_once()
-        cricbuzz_mock.assert_not_called()
 
     def test_build_payload_allows_missing_nrr_for_probability_generation(self) -> None:
         standings = valid_standings(nrr=None)
@@ -430,29 +347,83 @@ class ExtractTableTests(unittest.TestCase):
             extract_table,
             "fetch_cricdata_data",
             return_value=(invalid_standings, cricdata_fixtures, []),
-        ) as cricdata_mock, mock.patch.object(
-            extract_table,
-            "fetch_cricbuzz_data",
-        ) as cricbuzz_mock:
+        ) as cricdata_mock:
             with self.assertRaisesRegex(extract_table.SourceValidationError, "Inconsistent league result totals"):
                 extract_table.build_payload()
 
         cricdata_mock.assert_called_once()
-        cricbuzz_mock.assert_not_called()
 
     def test_build_payload_rejects_partial_cricketdata_fixtures(self) -> None:
         standings = valid_standings()
         partial_fixtures = [valid_fixture()]
 
+        # The partial-feed check only applies before the league stage ends, so pin the clock.
         with mock.patch.object(
             extract_table,
             "fetch_cricdata_data",
             return_value=(standings, partial_fixtures, []),
-        ) as cricdata_mock:
+        ) as cricdata_mock, mock.patch.object(extract_table, "utc_now", return_value=FROZEN_MID_SEASON):
             with self.assertRaisesRegex(extract_table.SourceValidationError, "Fixture feed appears partial"):
                 extract_table.build_payload()
 
         cricdata_mock.assert_called_once()
+
+    def test_build_payload_ignores_playoff_fixtures_once_league_is_complete(self) -> None:
+        playoff_fixtures = [dict(valid_fixture(), matchNo=None), dict(valid_fixture(45), matchNo=None)]
+
+        with mock.patch.object(
+            extract_table,
+            "fetch_cricdata_data",
+            return_value=(completed_standings(), playoff_fixtures, []),
+        ), mock.patch.object(extract_table, "utc_now", return_value=FROZEN_MID_SEASON):
+            payload = extract_table.build_payload()
+
+        self.assertEqual(payload["fixtures"], [])
+        self.assertEqual(payload["metadata"]["season_status"], "playoffs")
+        self.assertIn("Ignored 2 non-league fixture(s)", payload["metadata"]["warnings"][0])
+        self.assertEqual(payload["analysis"]["method"], "Final standings")
+
+    def test_league_stage_fixtures_drops_match_numbers_beyond_the_league(self) -> None:
+        warnings: list[str] = []
+        fixtures = valid_fixtures(29) + [valid_fixture(71)]
+
+        kept = extract_table.league_stage_fixtures(fixtures, valid_standings(), warnings)
+
+        self.assertEqual(len(kept), 29)
+        self.assertNotIn(71, [fixture["matchNo"] for fixture in kept])
+        self.assertEqual(len(warnings), 1)
+
+    def test_league_stage_fixtures_rejects_more_fixtures_than_remain(self) -> None:
+        fixtures = [dict(valid_fixture(41 + index % 30), id=f"dup-{index}") for index in range(31)]
+
+        with self.assertRaisesRegex(extract_table.SourceValidationError, "lists 31 league match"):
+            extract_table.league_stage_fixtures(fixtures, valid_standings(), [])
+
+    def test_completed_league_with_nrr_uses_final_table(self) -> None:
+        standings = extract_table.ranked_standings(completed_standings())
+
+        analysis = extract_table.run_analysis(standings, [], FROZEN_MID_SEASON)
+
+        top4 = {key for key, value in analysis["overallProbabilities"].items() if value["top4"] == 100.0}
+        self.assertEqual(analysis["method"], "Final standings")
+        self.assertEqual(top4, {row["teamKey"] for row in standings if row["rank"] <= 4})
+        self.assertEqual(sum(value["top2"] for value in analysis["overallProbabilities"].values()), 200.0)
+
+    def test_completed_league_without_nrr_shares_tied_slots(self) -> None:
+        standings = completed_standings(nrr=None)
+
+        analysis = extract_table.run_analysis(standings, [], FROZEN_MID_SEASON)
+
+        # All ten teams finish level on points and wins, so four slots are shared ten ways.
+        self.assertEqual({value["top4"] for value in analysis["overallProbabilities"].values()}, {40.0})
+
+    def test_simulation_rank_tolerates_missing_nrr(self) -> None:
+        table = {
+            row["teamKey"]: {"points": row["points"], "wins": row["wins"], "nrr": None}
+            for row in valid_standings(nrr=None)
+        }
+
+        self.assertEqual(len(extract_table.simulation_rank(table)), 10)
 
     def test_exact_model_notes_explain_equal_records_can_diverge_by_schedule(self) -> None:
         standings = valid_standings(nrr=None)
