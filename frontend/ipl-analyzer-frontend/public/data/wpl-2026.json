@@ -1,0 +1,453 @@
+{
+  "metadata": {
+    "season": "2026",
+    "generated_at": "2026-10-02T02:37:32Z",
+    "source": "Cricsheet",
+    "source_url": "https://cricsheet.org/",
+    "source_license": "ODC-By 1.0",
+    "source_license_url": "https://opendatacommons.org/licenses/by/1-0/",
+    "data_freshness_status": "fresh",
+    "season_status": "complete",
+    "warnings": [],
+    "notes": []
+  },
+  "league": {
+    "id": "wpl-2026",
+    "name": "Women's Premier League",
+    "shortName": "WPL",
+    "season": "2025/26",
+    "seasonLabel": "2026",
+    "matchesPerTeam": 8,
+    "qualification": [
+      {
+        "size": 3,
+        "label": "Top 3"
+      },
+      {
+        "size": 1,
+        "label": "Top 1"
+      }
+    ],
+    "secondChanceStages": [],
+    "teams": [
+      {
+        "key": "RCB",
+        "shortName": "RCB",
+        "fullName": "Royal Challengers Bengaluru",
+        "color": "#EC1C24",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "GG",
+        "shortName": "GG",
+        "fullName": "Gujarat Giants",
+        "color": "#E8601C",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "DC",
+        "shortName": "DC",
+        "fullName": "Delhi Capitals",
+        "color": "#2561AE",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "MI",
+        "shortName": "MI",
+        "fullName": "Mumbai Indians",
+        "color": "#004B8D",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "UPW",
+        "shortName": "UPW",
+        "fullName": "UP Warriorz",
+        "color": "#5B2C83",
+        "textColor": "#FFFFFF"
+      }
+    ]
+  },
+  "standings": [
+    {
+      "teamKey": "RCB",
+      "shortName": "RCB",
+      "fullName": "Royal Challengers Bengaluru",
+      "matches": 8,
+      "wins": 6,
+      "losses": 2,
+      "noResult": 0,
+      "points": 12,
+      "nrr": 1.247,
+      "rank": 1,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "GG",
+      "shortName": "GG",
+      "fullName": "Gujarat Giants",
+      "matches": 8,
+      "wins": 5,
+      "losses": 3,
+      "noResult": 0,
+      "points": 10,
+      "nrr": -0.168,
+      "rank": 2,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "DC",
+      "shortName": "DC",
+      "fullName": "Delhi Capitals",
+      "matches": 8,
+      "wins": 4,
+      "losses": 4,
+      "noResult": 0,
+      "points": 8,
+      "nrr": -0.055,
+      "rank": 3,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "MI",
+      "shortName": "MI",
+      "fullName": "Mumbai Indians",
+      "matches": 8,
+      "wins": 3,
+      "losses": 5,
+      "noResult": 0,
+      "points": 6,
+      "nrr": 0.059,
+      "rank": 4,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "UPW",
+      "shortName": "UPW",
+      "fullName": "UP Warriorz",
+      "matches": 8,
+      "wins": 2,
+      "losses": 6,
+      "noResult": 0,
+      "points": 4,
+      "nrr": -1.076,
+      "rank": 5,
+      "remainingMatches": 0
+    }
+  ],
+  "fixtures": [],
+  "playoffs": {
+    "matches": [
+      {
+        "id": "1513702",
+        "stage": "Eliminator",
+        "date": "2026-02-03",
+        "teamA": "GG",
+        "teamB": "DC",
+        "winner": "DC",
+        "result": "DC won by 7 wickets",
+        "venue": "Kotambi Stadium, Vadodara"
+      },
+      {
+        "id": "1513703",
+        "stage": "Final",
+        "date": "2026-02-05",
+        "teamA": "DC",
+        "teamB": "RCB",
+        "winner": "RCB",
+        "result": "RCB won by 6 wickets",
+        "venue": "Kotambi Stadium, Vadodara"
+      }
+    ],
+    "champion": "RCB",
+    "runnerUp": "DC"
+  },
+  "analysis": {
+    "method": "Final standings",
+    "simulationCount": 1,
+    "generatedAt": "2026-10-02T02:37:32Z",
+    "stateCount": 1,
+    "modelNotes": [
+      "The league stage is complete, so qualification is decided by the final table: points, then net run rate."
+    ],
+    "overallProbabilities": {
+      "RCB": {
+        "top3": 100.0,
+        "top3Clear": 100.0,
+        "top3Possible": 100.0,
+        "top1": 100.0,
+        "top1Clear": 100.0,
+        "top1Possible": 100.0
+      },
+      "GG": {
+        "top3": 100.0,
+        "top3Clear": 100.0,
+        "top3Possible": 100.0,
+        "top1": 0.0,
+        "top1Clear": 0.0,
+        "top1Possible": 0.0
+      },
+      "DC": {
+        "top3": 100.0,
+        "top3Clear": 100.0,
+        "top3Possible": 100.0,
+        "top1": 0.0,
+        "top1Clear": 0.0,
+        "top1Possible": 0.0
+      },
+      "MI": {
+        "top3": 0.0,
+        "top3Clear": 0.0,
+        "top3Possible": 0.0,
+        "top1": 0.0,
+        "top1Clear": 0.0,
+        "top1Possible": 0.0
+      },
+      "UPW": {
+        "top3": 0.0,
+        "top3Clear": 0.0,
+        "top3Possible": 0.0,
+        "top1": 0.0,
+        "top1Clear": 0.0,
+        "top1Possible": 0.0
+      }
+    },
+    "teamAnalysis": {
+      "3": {
+        "RCB": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "GG": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "DC": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "MI": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "UPW": {
+          "percentage": 0.0,
+          "results_df": {}
+        }
+      },
+      "1": {
+        "RCB": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "GG": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "DC": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "MI": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "UPW": {
+          "percentage": 0.0,
+          "results_df": {}
+        }
+      }
+    },
+    "qualificationPath": {
+      "3": {
+        "RCB": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "GG": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "DC": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "MI": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "UPW": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        }
+      },
+      "1": {
+        "RCB": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "GG": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "DC": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "MI": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "UPW": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        }
+      }
+    },
+    "scenarioBreakdown": {
+      "3": {
+        "RCB": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "GG": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "DC": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "MI": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "UPW": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        }
+      },
+      "1": {
+        "RCB": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "GG": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "DC": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "MI": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "UPW": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        }
+      }
+    }
+  }
+}
