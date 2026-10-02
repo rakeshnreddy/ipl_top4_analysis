@@ -135,6 +135,16 @@ def latest_carousel_folder(output_root: Path = OUTPUT_ROOT) -> Path | None:
     return output_root / dates[-1]
 
 
+def prune_old_carousels(output_root: Path = OUTPUT_ROOT, keep: int = 1) -> list[Path]:
+    """Delete all but the newest ``keep`` dated slide folders; only the latest pack is published."""
+    removed = []
+    for date in carousel_dates(output_root)[:-keep]:
+        folder = output_root / date
+        shutil.rmtree(folder)
+        removed.append(folder)
+    return removed
+
+
 def public_carousel_path(path: Path, output_root: Path = OUTPUT_ROOT) -> str:
     return f"social/instagram-carousel/{path.relative_to(output_root).as_posix()}"
 
@@ -554,6 +564,7 @@ def main() -> None:
         outputs.append(draw_team_slide(payload, team, index, output_dir))
     outputs.append(draw_contact_sheet(outputs, output_dir))
     shutil.copyfile(outputs[0], OUTPUT_ROOT / "latest-overview.png")
+    prune_old_carousels()
     outputs.append(write_manifest(payload))
 
     print("\n".join(str(path) for path in outputs))
