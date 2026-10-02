@@ -36,6 +36,37 @@ Canonical generated files:
 - `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/latest-overview.png`
 - `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/<YYYY-MM-DD>/slide-*.png` (only the newest dated folder is kept)
 
+## Leagues
+
+Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL), playoff stage labels, playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources.
+
+Configured seasons, each checked against its official table:
+
+| Id | League | Source |
+| --- | --- | --- |
+| `ipl-2026` | Indian Premier League 2026 | CricketData in season, Cricsheet once complete |
+| `wpl-2026` | Women's Premier League 2026 | Cricsheet |
+| `psl-2026` | Pakistan Super League 2026 | Cricsheet, plus one abandoned match in `extraResults` |
+| `bbl-2025-26` | Big Bash League 2025-26 | Cricsheet |
+| `mlc-2026` | Major League Cricket 2026 | Cricsheet |
+
+Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
+
+```bash
+venv/bin/python extract_table.py --league wpl-2026
+venv/bin/python extract_table.py --league all --source cricsheet
+```
+
+`--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. The site shows the default league (IPL) at `/` and any other at `/?league=<id>`.
+
+To add a league season:
+
+1. Copy a similar config in `leagues/` and update teams, games per team, qualification tiers, and playoff stages.
+2. Cricsheet has no file for matches abandoned before a ball was bowled; list them under `extraResults`.
+3. Build it and compare the table with the official one, then add the official points and NRR to `OFFICIAL_TABLES` in `tests/test_cricsheet.py`.
+
+Live odds currently cover only the IPL; other leagues show completed seasons. Leagues with bonus points (such as SA20) are not supported yet.
+
 ## Setup
 
 ```bash

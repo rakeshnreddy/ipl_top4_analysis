@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 import json
 from pathlib import Path
 import tempfile
@@ -10,6 +11,7 @@ from datetime import datetime, timezone
 
 import cricsheet
 import extract_table
+from leagues import DEFAULT_LEAGUE_ID, ExtraResult, load_league
 
 
 TEAMS = [meta.full_name for meta in extract_table.TEAM_META.values()]
@@ -91,7 +93,26 @@ def season_matches(league_match_count: int = 70) -> list[dict[str, object]]:
     return matches
 
 
-def playoff(stage: str, winner: str, loser: str, date: str) -> dict[str, object]:
+def round_robin_season(names: list[str], season: str = "2026", rounds: int = 2) -> list[dict[str, object]]:
+    """Every pair meets ``rounds`` times and the team listed first always wins."""
+    matches = []
+    for _ in range(rounds):
+        for left in range(len(names)):
+            for right in range(left + 1, len(names)):
+                matches.append(
+                    raw_match(
+                        names[left],
+                        names[right],
+                        {"winner": names[left], "by": {"runs": 120}},
+                        [innings(names[left], 120, 2), innings(names[right], 120, 1, target={"runs": 241, "overs": 20})],
+                        match_number=len(matches) + 1,
+                        season=season,
+                    )
+                )
+    return matches
+
+
+def playoff(stage: str, winner: str, loser: str, date: str, season: str = "2026") -> dict[str, object]:
     return raw_match(
         winner,
         loser,
@@ -99,6 +120,7 @@ def playoff(stage: str, winner: str, loser: str, date: str) -> dict[str, object]
         [innings(loser, 120, 1), innings(winner, 100, 2, target={"runs": 121, "overs": 20})],
         stage=stage,
         date=date,
+        season=season,
     )
 
 
@@ -237,6 +259,67 @@ class CricsheetPayloadTests(unittest.TestCase):
             self.build(season_matches(league_match_count=60))
 
 
+class LeagueSeasonTests(unittest.TestCase):
+    frozen_now = datetime(2026, 3, 1, tzinfo=timezone.utc)
+
+    def setUp(self) -> None:
+        self.wpl = load_league("wpl-2026")
+        self.names = [team.full_name for team in self.wpl.teams]
+
+    def tearDown(self) -> None:
+        extract_table.use_league(load_league(DEFAULT_LEAGUE_ID))
+
+    def build(self, league, matches: list[dict[str, object]]) -> dict[str, object]:
+        extract_table.use_league(league)
+        with tempfile.TemporaryDirectory() as tmp:
+            archive = write_archive(Path(tmp), matches)
+            with mock.patch.object(extract_table, "utc_now", return_value=self.frozen_now):
+                return extract_table.build_cricsheet_payload(archive)
+
+    def test_wpl_qualifies_top_three_with_one_bye_to_the_final(self) -> None:
+        rcb, gg, dc = self.names[:3]
+        playoffs = [
+            playoff("Eliminator", dc, gg, "2026-02-03", season="2025/26"),
+            playoff("Final", rcb, dc, "2026-02-05", season="2025/26"),
+        ]
+
+        payload = self.build(self.wpl, round_robin_season(self.names, season="2025/26") + playoffs)
+
+        probabilities = payload["analysis"]["overallProbabilities"]
+        self.assertEqual([tier["label"] for tier in payload["league"]["qualification"]], ["Top 3", "Top 1"])
+        self.assertEqual([row["teamKey"] for row in payload["standings"]], ["RCB", "GG", "DC", "MI", "UPW"])
+        self.assertEqual({key for key, value in probabilities.items() if value["top3"] == 100.0}, {"RCB", "GG", "DC"})
+        self.assertEqual(probabilities["RCB"]["top1"], 100.0)
+        self.assertEqual(payload["playoffs"]["champion"], "RCB")
+        self.assertEqual(payload["playoffs"]["matches"][0]["result"], "DC won by 5 wickets")
+
+    def test_extra_results_fill_matches_missing_from_cricsheet(self) -> None:
+        rcb, gg = self.names[:2]
+        matches = round_robin_season(self.names, season="2025/26")
+        del matches[10]  # the second RCB v GG game had no play
+        league = dataclasses.replace(
+            self.wpl,
+            extra_results=(ExtraResult("2026-01-20", (rcb, gg), "Abandoned without a ball bowled"),),
+        )
+
+        payload = self.build(league, matches)
+
+        rows = {row["teamKey"]: row for row in payload["standings"]}
+        self.assertEqual((rows["RCB"]["noResult"], rows["RCB"]["points"]), (1, 15))
+        self.assertEqual((rows["GG"]["noResult"], rows["GG"]["points"]), (1, 13))
+        self.assertIn("Abandoned without a ball bowled", payload["metadata"]["notes"][0])
+
+    def test_unexpected_playoff_count_keeps_cricsheet_stage_names(self) -> None:
+        _, gg, dc = self.names[:3]
+        semi = playoff("Semi-final", dc, gg, "2026-02-03", season="2025/26")
+
+        payload = self.build(self.wpl, round_robin_season(self.names, season="2025/26") + [semi])
+
+        self.assertEqual(payload["playoffs"]["matches"][0]["stage"], "Semi-final")
+        self.assertIn("Expected 2 playoff matches but Cricsheet has 1", payload["metadata"]["warnings"][0])
+        self.assertEqual(payload["metadata"]["season_status"], "playoffs")
+
+
 OFFICIAL_IPL_2026_NRR = {
     "Bangalore": 0.783,
     "Gujarat": 0.695,
@@ -260,6 +343,47 @@ class CricsheetRealDataTests(unittest.TestCase):
         table = cricsheet.league_table(matches, extract_table.team_key)
 
         self.assertEqual({key: row.nrr for key, row in table.items()}, OFFICIAL_IPL_2026_NRR)
+
+
+# Final league tables (points, NRR) as published by each competition.
+OFFICIAL_TABLES = {
+    "wpl-2026": {"RCB": (12, 1.247), "GG": (10, -0.168), "DC": (8, -0.055), "MI": (6, 0.059), "UPW": (4, -1.076)},
+    "psl-2026": {
+        "PZ": (17, 2.324), "IU": (13, 1.667), "MS": (12, 0.326), "HK": (10, -0.361),
+        "LQ": (10, -0.482), "KK": (10, -0.869), "QG": (6, -0.41), "RPZ": (2, -1.76),
+    },
+    "bbl-2025-26": {
+        "SCO": (14, 1.363), "SIX": (13, 0.605), "HUR": (13, 0.331), "STA": (12, 0.759),
+        "HEA": (10, -0.431), "STR": (8, -0.231), "REN": (6, -1.202), "THU": (4, -1.212),
+    },
+    "mlc-2026": {
+        "SFU": (12, 0.487), "LAKR": (12, 0.245), "WAF": (12, -0.399),
+        "MINY": (10, -0.165), "SEO": (8, 0.034), "TSK": (6, -0.151),
+    },
+}
+
+
+class OfficialTablesTests(unittest.TestCase):
+    """Runs against cached Cricsheet archives; skipped when none are cached."""
+
+    def tearDown(self) -> None:
+        extract_table.use_league(load_league(DEFAULT_LEAGUE_ID))
+
+    def test_cricsheet_reproduces_official_tables(self) -> None:
+        checked = 0
+        for league_id, expected in OFFICIAL_TABLES.items():
+            league = load_league(league_id)
+            archive = extract_table.CRICSHEET_CACHE_DIR / f"{league.cricsheet_competition}_json.zip"
+            if not archive.exists():
+                continue
+            with self.subTest(league=league_id):
+                extract_table.use_league(league)
+                payload = extract_table.build_cricsheet_payload(archive)
+                actual = {row["teamKey"]: (row["points"], row["nrr"]) for row in payload["standings"]}
+                self.assertEqual(actual, expected)
+            checked += 1
+        if not checked:
+            self.skipTest("No Cricsheet archives cached locally")
 
 
 if __name__ == "__main__":

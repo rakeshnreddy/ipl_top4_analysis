@@ -16,7 +16,6 @@ import json
 import os
 import random
 import re
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -25,21 +24,19 @@ import requests
 import numpy as np
 
 import cricsheet
+from leagues import DEFAULT_LEAGUE_ID, League, TeamMeta, available_league_ids, load_league
 
 
-SEASON = 2026
-LEAGUE_MATCHES_PER_TEAM = 14
-SEASON_END_UTC = datetime(SEASON, 5, 31, 23, 59, tzinfo=timezone.utc)
 CRICDATA_API_BASE = "https://api.cricapi.com/v1"
 CRICDATA_SERIES_LIST_URL = f"{CRICDATA_API_BASE}/series"
 CRICDATA_SERIES_INFO_URL = f"{CRICDATA_API_BASE}/series_info"
 CRICDATA_SERIES_POINTS_URL = f"{CRICDATA_API_BASE}/series_points"
 CRICDATA_SOURCE_URL = "https://cricketdata.org/"
-CRICSHEET_COMPETITION = "ipl"
 
 ROOT_DIR = Path(__file__).resolve().parent
 FRONTEND_PUBLIC_DIR = ROOT_DIR / "frontend" / "ipl-analyzer-frontend" / "public"
-CANONICAL_OUTPUT = FRONTEND_PUBLIC_DIR / "data" / "ipl-2026.json"
+DATA_DIR = FRONTEND_PUBLIC_DIR / "data"
+LEAGUE_INDEX_OUTPUT = DATA_DIR / "leagues.json"
 CRICSHEET_CACHE_DIR = Path(os.getenv("CRICSHEET_CACHE_DIR", ROOT_DIR / ".cache" / "cricsheet"))
 
 REQUEST_TIMEOUT_SECONDS = 20
@@ -48,45 +45,16 @@ RANDOM_SEED = int(os.getenv("IPL_RANDOM_SEED", "20260501"))
 EXACT_MAX_FIXTURES = int(os.getenv("IPL_EXACT_MAX_FIXTURES", "27"))
 IMPACT_FIXTURE_WINDOW = int(os.getenv("IPL_IMPACT_FIXTURE_WINDOW", "1"))
 
-
-@dataclass(frozen=True)
-class TeamMeta:
-    key: str
-    short_name: str
-    full_name: str
-
-
-TEAM_META: dict[str, TeamMeta] = {
-    "Chennai": TeamMeta("Chennai", "CSK", "Chennai Super Kings"),
-    "Delhi": TeamMeta("Delhi", "DC", "Delhi Capitals"),
-    "Gujarat": TeamMeta("Gujarat", "GT", "Gujarat Titans"),
-    "Kolkata": TeamMeta("Kolkata", "KKR", "Kolkata Knight Riders"),
-    "Lucknow": TeamMeta("Lucknow", "LSG", "Lucknow Super Giants"),
-    "Mumbai": TeamMeta("Mumbai", "MI", "Mumbai Indians"),
-    "Punjab": TeamMeta("Punjab", "PBKS", "Punjab Kings"),
-    "Rajasthan": TeamMeta("Rajasthan", "RR", "Rajasthan Royals"),
-    "Bangalore": TeamMeta("Bangalore", "RCB", "Royal Challengers Bengaluru"),
-    "Hyderabad": TeamMeta("Hyderabad", "SRH", "Sunrisers Hyderabad"),
-}
-LEAGUE_MATCH_COUNT = len(TEAM_META) * LEAGUE_MATCHES_PER_TEAM // 2
-
-
-TEAM_ALIASES: dict[str, str] = {}
-for meta in TEAM_META.values():
-    TEAM_ALIASES[meta.key.lower()] = meta.key
-    TEAM_ALIASES[meta.short_name.lower()] = meta.key
-    TEAM_ALIASES[meta.full_name.lower()] = meta.key
-TEAM_ALIASES.update(
-    {
-        "royal challengers bangalore": "Bangalore",
-        "royal challengers bengaluru": "Bangalore",
-        "rc bengaluru": "Bangalore",
-        "sunrisers hyderabad": "Hyderabad",
-        "sunrisers": "Hyderabad",
-        "punjab kings": "Punjab",
-        "pbks": "Punjab",
-    }
-)
+# The active league. use_league() swaps these so one run can build several leagues.
+LEAGUE: League
+SEASON: str
+LEAGUE_MATCHES_PER_TEAM: int
+SEASON_END_UTC: datetime
+TEAM_META: dict[str, TeamMeta]
+TEAM_ALIASES: dict[str, str]
+LEAGUE_MATCH_COUNT: int
+QUALIFICATION_SIZES: list[int]
+CANONICAL_OUTPUT: Path
 
 
 class SourceValidationError(RuntimeError):
@@ -105,17 +73,40 @@ def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", value or "").strip()
 
 
+def normalize_name(name: str) -> str:
+    raw = clean_text(name).lower().replace("\xa0", " ")
+    return clean_text(re.sub(r"[^a-z0-9 ]+", "", raw))
+
+
+def use_league(league: League) -> None:
+    global LEAGUE, SEASON, LEAGUE_MATCHES_PER_TEAM, SEASON_END_UTC, TEAM_META, TEAM_ALIASES
+    global LEAGUE_MATCH_COUNT, QUALIFICATION_SIZES, CANONICAL_OUTPUT
+    LEAGUE = league
+    SEASON = league.season_label
+    LEAGUE_MATCHES_PER_TEAM = league.matches_per_team
+    SEASON_END_UTC = league.season_end
+    TEAM_META = league.team_meta
+    TEAM_ALIASES = {
+        normalize_name(alias): meta.key
+        for meta in league.teams
+        for alias in (meta.key, meta.short_name, meta.full_name, *meta.aliases)
+    }
+    LEAGUE_MATCH_COUNT = league.league_match_count
+    QUALIFICATION_SIZES = league.qualification_sizes
+    CANONICAL_OUTPUT = DATA_DIR / f"{league.id}.json"
+
+
 def team_key(name: str) -> str | None:
-    raw = clean_text(name).lower()
-    raw = raw.replace("\xa0", " ").strip()
-    raw = re.sub(r"[^a-z0-9 ]+", "", raw)
-    raw = clean_text(raw)
+    raw = normalize_name(name)
     if raw in TEAM_ALIASES:
         return TEAM_ALIASES[raw]
     for alias, key in TEAM_ALIASES.items():
         if len(alias) > 3 and (alias in raw or raw in alias):
             return key
     return None
+
+
+use_league(load_league(DEFAULT_LEAGUE_ID))
 
 
 def numeric_token(value: str) -> bool:
@@ -204,17 +195,16 @@ def find_cricdata_series_id(session: requests.Session, api_key: str) -> str:
         for item in data:
             if not isinstance(item, dict):
                 continue
-            name = clean_text(str(item.get("name", "")))
-            lower_name = name.lower()
-            if (
-                ("indian premier league" in lower_name or re.search(r"\bipl\b", lower_name))
-                and str(SEASON) in lower_name
+            name = normalize_name(str(item.get("name", "")))
+            if SEASON in name and any(
+                re.search(rf"\b{re.escape(normalize_name(series))}\b", name)
+                for series in LEAGUE.cricketdata_series_names
             ):
                 candidates.append(item)
 
     if not candidates:
         raise SourceValidationError(
-            "Could not discover CricketData IPL 2026 series id. Set CRICDATA_SERIES_ID."
+            f"Could not discover CricketData {LEAGUE.short_name} {SEASON} series id. Set CRICDATA_SERIES_ID."
         )
 
     return str(first_present(candidates[0], ("id", "series_id", "seriesId")))
@@ -523,6 +513,8 @@ def parse_cricdata_fixtures(payload: dict[str, Any], now: datetime) -> list[dict
 
 
 def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
+    if not LEAGUE.cricketdata_series_names:
+        raise SourceValidationError(f"{LEAGUE.id} has no CricketData source configured")
     api_key = cricdata_api_key()
     if not api_key:
         raise SourceValidationError("CRICDATA_API_KEY is not configured")
@@ -560,7 +552,7 @@ def validate_source_data(
     strict_partial_fixtures: bool = False,
 ) -> None:
     if len(standings) != len(TEAM_META):
-        raise SourceValidationError(f"Expected 10 teams, found {len(standings)}")
+        raise SourceValidationError(f"Expected {len(TEAM_META)} teams, found {len(standings)}")
     keys = {row["teamKey"] for row in standings}
     missing = sorted(set(TEAM_META) - keys)
     if missing:
@@ -568,7 +560,7 @@ def validate_source_data(
     too_many = [row for row in standings if row["matches"] > LEAGUE_MATCHES_PER_TEAM]
     if too_many:
         details = ", ".join(f"{row['shortName']}={row['matches']}" for row in too_many)
-        raise SourceValidationError(f"Invalid match counts above 14: {details}")
+        raise SourceValidationError(f"Invalid match counts above {LEAGUE_MATCHES_PER_TEAM}: {details}")
     bad_row_totals = [
         row
         for row in standings
@@ -748,7 +740,7 @@ def accumulate_exact_state_counts(
     include_buckets: bool,
 ) -> dict[str, Any]:
     team_count = len(team_keys)
-    target_sizes = {"4": 4, "2": 2}
+    target_sizes = {str(size): size for size in QUALIFICATION_SIZES}
     states = np.array(list(state_counts.keys()), dtype=np.int16)
     counts = np.array(list(state_counts.values()), dtype=np.float64)
     count_ints = counts.astype(np.int64)
@@ -837,21 +829,19 @@ def run_exact_dp_analysis(
         include_buckets=True,
     )
 
+    targets = [str(size) for size in QUALIFICATION_SIZES]
     overall: dict[str, dict[str, float]] = {}
     for team_idx, key in enumerate(team_keys):
-        overall[key] = {
-            "top4": round((accumulated["weightedTotals"]["4"][team_idx] / total_scenarios) * 100, 2),
-            "top2": round((accumulated["weightedTotals"]["2"][team_idx] / total_scenarios) * 100, 2),
-            "top4Clear": round((accumulated["exactTotals"]["4"][team_idx] / total_scenarios) * 100, 2),
-            "top2Clear": round((accumulated["exactTotals"]["2"][team_idx] / total_scenarios) * 100, 2),
-            "top4Possible": round((accumulated["possibleTotals"]["4"][team_idx] / total_scenarios) * 100, 2),
-            "top2Possible": round((accumulated["possibleTotals"]["2"][team_idx] / total_scenarios) * 100, 2),
-        }
+        overall[key] = {}
+        for prefix, totals in (("", "weightedTotals"), ("Clear", "exactTotals"), ("Possible", "possibleTotals")):
+            for target in targets:
+                share = accumulated[totals][target][team_idx] / total_scenarios
+                overall[key][f"top{target}{prefix}"] = round(share * 100, 2)
 
     impact_fixture_count = min(len(fixtures), IMPACT_FIXTURE_WINDOW)
     fixture_impacts: dict[str, dict[str, list[list[dict[str, Any]]]]] = {
         target: {key: [] for key in team_keys}
-        for target in ("4", "2")
+        for target in targets
     }
 
     for fixture_idx, fixture in enumerate(fixtures[:impact_fixture_count]):
@@ -876,7 +866,7 @@ def run_exact_dp_analysis(
             include_buckets=False,
         )
 
-        for target in ("4", "2"):
+        for target in targets:
             for team_idx, key in enumerate(team_keys):
                 left_avg = left_acc["weightedTotals"][target][team_idx] / left_total
                 right_avg = right_acc["weightedTotals"][target][team_idx] / right_total
@@ -905,11 +895,11 @@ def run_exact_dp_analysis(
                     }
                 )
 
-    team_analysis: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
-    qualification_path: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
-    scenario_breakdown: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
+    team_analysis: dict[str, dict[str, Any]] = {target: {} for target in targets}
+    qualification_path: dict[str, dict[str, Any]] = {target: {} for target in targets}
+    scenario_breakdown: dict[str, dict[str, Any]] = {target: {} for target in targets}
 
-    for target in ("4", "2"):
+    for target in targets:
         for team_idx, key in enumerate(team_keys):
             bucket = accumulated["ownBuckets"][target][key]
             rows = []
@@ -992,24 +982,19 @@ def run_exact_dp_analysis(
 
 def final_table_analysis(standings_rows: list[dict[str, Any]], now: datetime) -> dict[str, Any]:
     """Qualification once the league stage is over: decided by the final ranked table."""
+    targets = [str(size) for size in QUALIFICATION_SIZES]
     overall: dict[str, dict[str, float]] = {}
-    team_analysis: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
-    qualification_path: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
-    scenario_breakdown: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
+    team_analysis: dict[str, dict[str, Any]] = {target: {} for target in targets}
+    qualification_path: dict[str, dict[str, Any]] = {target: {} for target in targets}
+    scenario_breakdown: dict[str, dict[str, Any]] = {target: {} for target in targets}
 
     for row in standings_rows:
         key = row["teamKey"]
-        top4 = 100.0 if row["rank"] <= 4 else 0.0
-        top2 = 100.0 if row["rank"] <= 2 else 0.0
-        overall[key] = {
-            "top4": top4,
-            "top2": top2,
-            "top4Clear": top4,
-            "top2Clear": top2,
-            "top4Possible": top4,
-            "top2Possible": top2,
-        }
-        for target, value in (("4", top4), ("2", top2)):
+        overall[key] = {}
+        for target in targets:
+            value = 100.0 if row["rank"] <= int(target) else 0.0
+            for prefix in ("", "Clear", "Possible"):
+                overall[key][f"top{target}{prefix}"] = value
             settled = 0 if value else None
             team_analysis[target][key] = {"percentage": value, "results_df": {}}
             qualification_path[target][key] = {
@@ -1081,19 +1066,17 @@ def run_analysis(
     ]
     method = "Monte Carlo"
 
-    top_counts = {key: {"top4": 0, "top2": 0} for key in team_keys}
+    targets = [str(size) for size in QUALIFICATION_SIZES]
+    top_counts = {key: {target: 0 for target in targets} for key in team_keys}
     team_analysis_counts: dict[str, dict[str, dict[str, list[int]]]] = {
         key: {
-            "4": {label: [0, 0] for label in fixture_labels},
-            "2": {label: [0, 0] for label in fixture_labels},
+            target: {label: [0, 0] for label in fixture_labels}
+            for target in targets
         }
         for key in team_keys
     }
     own_win_buckets = {
-        key: {
-            "4": {},
-            "2": {},
-        }
+        key: {target: {} for target in targets}
         for key in team_keys
     }
 
@@ -1110,36 +1093,32 @@ def run_analysis(
             own_wins[winner] += 1
 
         ordered = simulation_rank(table)
-        top4 = set(ordered[:4])
-        top2 = set(ordered[:2])
+        qualified_sets = {target: set(ordered[: int(target)]) for target in targets}
 
         for key in team_keys:
-            for target, qualified in (("4", key in top4), ("2", key in top2)):
+            for target in targets:
+                qualified = key in qualified_sets[target]
                 bucket = own_win_buckets[key][target].setdefault(
                     own_wins[key], {"total": 0, "qualified": 0}
                 )
                 bucket["total"] += 1
                 if qualified:
                     bucket["qualified"] += 1
-                    if target == "4":
-                        top_counts[key]["top4"] += 1
-                    else:
-                        top_counts[key]["top2"] += 1
+                    top_counts[key][target] += 1
                     for idx, outcome in enumerate(scenario):
                         team_analysis_counts[key][target][fixture_labels[idx]][outcome] += 1
 
     overall = {}
-    team_analysis = {"4": {}, "2": {}}
-    qualification_path = {"4": {}, "2": {}}
+    team_analysis: dict[str, dict[str, Any]] = {target: {} for target in targets}
+    qualification_path: dict[str, dict[str, Any]] = {target: {} for target in targets}
 
     for key in team_keys:
         overall[key] = {
-            "top4": round((top_counts[key]["top4"] / simulation_count) * 100, 2),
-            "top2": round((top_counts[key]["top2"] / simulation_count) * 100, 2),
+            f"top{target}": round((top_counts[key][target] / simulation_count) * 100, 2) for target in targets
         }
         own_remaining = sum(1 for left, right in fixture_pairs if key in (left, right))
-        for target in ("4", "2"):
-            success_count = top_counts[key]["top4" if target == "4" else "top2"]
+        for target in targets:
+            success_count = top_counts[key][target]
             outcomes = {}
             if success_count:
                 for label, counts in team_analysis_counts[key][target].items():
@@ -1242,6 +1221,7 @@ def build_payload() -> dict[str, Any]:
             "season_status": "playoffs" if league_complete else "league_stage",
             "warnings": warnings,
         },
+        "league": LEAGUE.payload_block(),
         "standings": standings,
         "fixtures": fixtures,
         "analysis": analysis,
@@ -1265,13 +1245,24 @@ def describe_result(match: cricsheet.Match, winner: str | None) -> str:
     return f"{text} ({match.method})" if match.method else text
 
 
-def build_playoffs(matches: list[cricsheet.Match]) -> dict[str, Any]:
+def build_playoffs(matches: list[cricsheet.Match], warnings: list[str]) -> dict[str, Any]:
+    playoff_matches = [match for match in matches if not match.is_league]
+    # Cricsheet can repeat a stage name (PSL has two "Eliminator" games), so use
+    # the league's configured labels whenever the number of games lines up.
+    labels = list(LEAGUE.playoff_stages)
+    if labels and len(labels) != len(playoff_matches):
+        if playoff_matches:
+            warnings.append(
+                f"Expected {len(labels)} playoff matches but Cricsheet has {len(playoff_matches)}; "
+                "kept Cricsheet stage names."
+            )
+        labels = []
+
     rows: list[dict[str, Any]] = []
     champion = None
     runner_up = None
-    for match in matches:
-        if match.is_league:
-            continue
+    for index, match in enumerate(playoff_matches):
+        stage = labels[index] if labels else match.stage
         team_a, team_b = (team_key(name) for name in match.teams)
         if not team_a or not team_b:
             raise SourceValidationError(f"Unknown team in Cricsheet playoff match {match.match_id}")
@@ -1279,7 +1270,7 @@ def build_playoffs(matches: list[cricsheet.Match]) -> dict[str, Any]:
         rows.append(
             {
                 "id": match.match_id,
-                "stage": match.stage,
+                "stage": stage,
                 "date": match.date,
                 "teamA": team_a,
                 "teamB": team_b,
@@ -1288,22 +1279,49 @@ def build_playoffs(matches: list[cricsheet.Match]) -> dict[str, Any]:
                 "venue": match.venue,
             }
         )
-        if match.stage == "Final" and winner:
+        if stage == "Final" and winner:
             champion = winner
             runner_up = team_b if winner == team_a else team_a
     return {"matches": rows, "champion": champion, "runnerUp": runner_up}
 
 
+def extra_result_matches() -> list[cricsheet.Match]:
+    """League matches with no Cricsheet file (abandoned before a ball), recorded as no results."""
+    return [
+        cricsheet.Match(
+            match_id=f"extra-{index}",
+            date=item.date,
+            season=LEAGUE.season,
+            match_number=None,
+            stage=None,
+            teams=item.teams,
+            venue=None,
+            winner=None,
+            result="no result",
+            super_over=False,
+            method=None,
+            margin={},
+            scheduled_overs=20,
+            target_runs=None,
+            target_balls=None,
+            innings=(),
+        )
+        for index, item in enumerate(LEAGUE.extra_results, start=1)
+    ]
+
+
 def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
     """Rebuild a season from Cricsheet: final table with exact NRR, plus playoffs."""
     now = utc_now()
-    archive = archive or cricsheet.fetch_archive(CRICSHEET_COMPETITION, CRICSHEET_CACHE_DIR)
-    matches = cricsheet.load_season(archive, str(SEASON))
+    if not LEAGUE.cricsheet_competition:
+        raise SourceValidationError(f"{LEAGUE.id} has no Cricsheet source configured")
+    archive = archive or cricsheet.fetch_archive(LEAGUE.cricsheet_competition, CRICSHEET_CACHE_DIR)
+    matches = cricsheet.load_season(archive, LEAGUE.season)
     if not matches:
-        raise SourceValidationError(f"Cricsheet archive has no IPL {SEASON} matches")
+        raise SourceValidationError(f"Cricsheet archive has no {LEAGUE.short_name} {LEAGUE.season} matches")
 
     try:
-        table = cricsheet.league_table(matches, team_key)
+        table = cricsheet.league_table(matches + extra_result_matches(), team_key)
     except ValueError as exc:
         raise SourceValidationError(str(exc)) from exc
 
@@ -1333,7 +1351,8 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
         )
 
     standings = ranked_standings(standings)
-    playoffs = build_playoffs(matches)
+    warnings: list[str] = []
+    playoffs = build_playoffs(matches, warnings)
     return {
         "metadata": {
             "season": SEASON,
@@ -1342,15 +1361,46 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
             "source_url": cricsheet.CRICSHEET_URL,
             "source_license": cricsheet.CRICSHEET_LICENSE,
             "source_license_url": cricsheet.CRICSHEET_LICENSE_URL,
-            "data_freshness_status": "fresh",
+            "data_freshness_status": "warning" if warnings else "fresh",
             "season_status": "complete" if playoffs["champion"] else "playoffs",
-            "warnings": [],
+            "warnings": warnings,
+            "notes": [
+                f"{item.teams[0]} v {item.teams[1]} ({item.date}): {item.note}" for item in LEAGUE.extra_results
+            ],
         },
+        "league": LEAGUE.payload_block(),
         "standings": standings,
         "fixtures": [],
         "playoffs": playoffs,
         "analysis": run_analysis(standings, [], now),
     }
+
+
+def write_league_index() -> None:
+    """List every published league payload so the site can offer a league switcher."""
+    entries = []
+    for league_id in available_league_ids():
+        path = DATA_DIR / f"{league_id}.json"
+        if not path.exists():
+            continue
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        league = payload.get("league") or {}
+        metadata = payload["metadata"]
+        champion_key = (payload.get("playoffs") or {}).get("champion")
+        champion = next((row["shortName"] for row in payload["standings"] if row["teamKey"] == champion_key), None)
+        entries.append(
+            {
+                "id": league_id,
+                "name": league.get("name", league_id),
+                "shortName": league.get("shortName", league_id.upper()),
+                "seasonLabel": league.get("seasonLabel", str(metadata.get("season", ""))),
+                "status": metadata.get("season_status", "league_stage"),
+                "champion": champion,
+                "generatedAt": metadata["generated_at"],
+                "path": f"data/{league_id}.json",
+            }
+        )
+    write_json(LEAGUE_INDEX_OUTPUT, {"default": DEFAULT_LEAGUE_ID, "leagues": entries})
 
 
 def write_json(path: Path, data: dict[str, Any]) -> None:
@@ -1360,28 +1410,55 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate the canonical IPL season payload.")
+    parser = argparse.ArgumentParser(description="Generate league season payloads for the site.")
+    parser.add_argument(
+        "--league",
+        action="append",
+        dest="leagues",
+        metavar="ID",
+        help=f"League config id from leagues/ (repeatable), or 'all'. Default: {DEFAULT_LEAGUE_ID}.",
+    )
     parser.add_argument(
         "--source",
-        choices=("cricketdata", "cricsheet"),
-        default="cricketdata",
-        help="cricketdata for live in-season data; cricsheet to rebuild a completed season.",
+        choices=("auto", "cricketdata", "cricsheet"),
+        default="auto",
+        help="auto uses CricketData when the league has it configured, otherwise Cricsheet.",
     )
     parser.add_argument(
         "--cricsheet-archive",
         type=Path,
-        help="Use a local Cricsheet JSON zip instead of downloading it.",
+        help="Use a local Cricsheet JSON zip instead of downloading it (single league only).",
     )
     return parser.parse_args(argv)
 
 
+def build_league(league: League, source: str, archive: Path | None = None) -> dict[str, Any]:
+    use_league(league)
+    if source == "auto":
+        source = "cricketdata" if league.cricketdata_series_names else "cricsheet"
+    if source == "cricsheet":
+        return build_cricsheet_payload(archive)
+    return build_payload()
+
+
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
-    if args.source == "cricsheet":
-        payload = build_cricsheet_payload(args.cricsheet_archive)
-    else:
-        payload = build_payload()
-    write_json(CANONICAL_OUTPUT, payload)
+    requested = args.leagues or [DEFAULT_LEAGUE_ID]
+    league_ids = available_league_ids() if "all" in requested else requested
+    if args.cricsheet_archive and len(league_ids) > 1:
+        raise SystemExit("--cricsheet-archive works with a single --league")
+
+    failures = []
+    for league_id in league_ids:
+        try:
+            payload = build_league(load_league(league_id), args.source, args.cricsheet_archive)
+        except SourceValidationError as exc:
+            failures.append(f"{league_id}: {exc}")
+            continue
+        write_json(CANONICAL_OUTPUT, payload)
+    write_league_index()
+    if failures:
+        raise SystemExit("Some leagues failed:\n" + "\n".join(failures))
 
 
 if __name__ == "__main__":
