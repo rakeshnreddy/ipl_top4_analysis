@@ -3,7 +3,7 @@ import { AlertTriangle, ArrowLeft, Check, Clipboard, Download, Flame } from 'luc
 import '../App.css';
 import { isLeagueComplete, loadIplData, type IplSeasonPayload } from '../data/iplData';
 import { loadReelsManifest, publicAssetUrl, type ReelsManifest, type ReelsSlide } from '../data/reelsManifest';
-import { formatGeneratedAt } from '../lib/standings';
+import { formatGeneratedAt, setTeamPalette } from '../lib/standings';
 import { copyToClipboard, exportRacePng, raceCaption, shareTexts, type ShareKind } from './sharing';
 
 type CopyTarget = ShareKind | 'caption';
@@ -29,6 +29,7 @@ function SharePage() {
     loadIplData()
       .then((data) => {
         if (active) {
+          setTeamPalette(data.league?.teams);
           setPayload(data);
         }
       })

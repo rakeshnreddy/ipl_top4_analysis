@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import {
+  DEFAULT_LEAGUE_ID,
   isLeagueComplete,
   loadIplData,
   type FixtureImpact,
@@ -18,7 +19,9 @@ import {
   type IplSeasonPayload,
   type IplStanding,
   type QualificationPathResult,
+  type QualificationTier,
 } from './data/iplData';
+import { leagueHref, leagueIdFromLocation, loadLeagueIndex, type LeagueIndex } from './data/leagues';
 import {
   formatGeneratedAt,
   formatNrr,
@@ -26,6 +29,7 @@ import {
   hasNrr,
   raceSnapshot,
   rankingSort,
+  setTeamPalette,
   teamColor,
   teamTextColor,
   top2Probability,
@@ -37,9 +41,10 @@ type TargetGoal = '4' | '2';
 const SEO_TITLE = 'IPL Top 4 Qualification Chances Today | IPL Playoff Pulse';
 const SEO_DESCRIPTION =
   'Daily IPL Top 4 and Top 2 qualification probabilities, standings, cutline teams and team paths from IPL Playoff Pulse.';
-const FINAL_SEO_TITLE = 'IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse';
-const FINAL_SEO_DESCRIPTION =
-  'Final IPL 2026 points table with net run rate, playoff results and the champion, rebuilt from Cricsheet ball-by-ball data.';
+const DEFAULT_TIERS: QualificationTier[] = [
+  { size: 4, label: 'Top 4' },
+  { size: 2, label: 'Top 2' },
+];
 const SECTION_HASHES = new Set(['standings', 'top4', 'deep-dive', 'playoffs']);
 const SHARE_KIT_HREF = `${import.meta.env.BASE_URL}share.html`;
 
@@ -93,6 +98,27 @@ function finalSnapshot(payload: IplSeasonPayload) {
   };
 }
 
+/** League name, season and playoff format, with IPL defaults for older payloads. */
+function leagueInfo(payload: IplSeasonPayload) {
+  const league = payload.league;
+  const [playoffTier, topTier] = league?.qualification?.length ? league.qualification : DEFAULT_TIERS;
+  return {
+    shortName: league?.shortName ?? 'IPL',
+    seasonLabel: league?.seasonLabel ?? String(payload.metadata.season),
+    playoffTier,
+    topTier: topTier ?? playoffTier,
+    secondChanceStages: league?.secondChanceStages ?? ['Qualifier 1'],
+  };
+}
+
+function finalSeo(payload: IplSeasonPayload) {
+  const { shortName, seasonLabel } = leagueInfo(payload);
+  return {
+    title: `${shortName} ${seasonLabel} Final Standings, NRR & Playoff Results | ${shortName} Playoff Pulse`,
+    description: `Final ${shortName} ${seasonLabel} points table with net run rate, playoff results and the champion, rebuilt from Cricsheet ball-by-ball data.`,
+  };
+}
+
 function pointsGap(team: IplStanding, cutline: IplStanding) {
   const gap = cutline.points - team.points;
   if (gap === 0) {
@@ -108,10 +134,11 @@ function seasonOutcome(payload: IplSeasonPayload, team: IplStanding) {
   if (payload.playoffs?.runnerUp === team.teamKey) {
     return 'Runners-up';
   }
-  // Losing Qualifier 1 is not an exit: that team still plays Qualifier 2.
+  // Some playoff losses are not exits: the IPL's Qualifier 1 loser still plays Qualifier 2.
+  const { playoffTier, secondChanceStages } = leagueInfo(payload);
   const exits = (payload.playoffs?.matches || []).filter(
     (match) =>
-      match.stage !== 'Qualifier 1' &&
+      !secondChanceStages.includes(match.stage) &&
       match.winner !== null &&
       match.winner !== team.teamKey &&
       (match.teamA === team.teamKey || match.teamB === team.teamKey),
@@ -120,7 +147,7 @@ function seasonOutcome(payload: IplSeasonPayload, team: IplStanding) {
   if (exit) {
     return `Knocked out in ${exit.stage}`;
   }
-  return team.rank <= 4 ? 'Reached the playoffs' : `Finished ${ordinal(team.rank)}`;
+  return team.rank <= playoffTier.size ? 'Reached the playoffs' : `Finished ${ordinal(team.rank)}`;
 }
 
 function teamKeyFromHash(payload: IplSeasonPayload) {
@@ -243,7 +270,7 @@ function setCanonical(href: string) {
   element.href = href;
 }
 
-function setJsonLd(payload: IplSeasonPayload, title: string, description: string) {
+function setJsonLd(payload: IplSeasonPayload, pageHref: string, title: string, description: string) {
   const baseHref = appBaseHref();
   let script = document.head.querySelector<HTMLScriptElement>('script[data-ipl-jsonld="true"]');
   if (!script) {
@@ -264,19 +291,20 @@ function setJsonLd(payload: IplSeasonPayload, title: string, description: string
       },
       {
         '@type': 'WebPage',
-        '@id': `${baseHref}#webpage`,
+        '@id': `${pageHref}#webpage`,
         name: title,
         description,
-        url: baseHref,
+        url: pageHref,
         dateModified: payload.metadata.generated_at,
         isPartOf: { '@id': `${baseHref}#website` },
       },
       {
         '@type': 'Dataset',
-        '@id': `${baseHref}#dataset`,
+        '@id': `${pageHref}#dataset`,
         name: title.split(' | ')[0],
         description,
-        url: new URL(`${import.meta.env.BASE_URL}data/ipl-2026.json`, window.location.origin).href,
+        url: new URL(`${import.meta.env.BASE_URL}data/${payload.league?.id ?? DEFAULT_LEAGUE_ID}.json`, window.location.origin)
+          .href,
         dateModified: payload.metadata.generated_at,
         creator: payload.metadata.source ? { '@type': 'Organization', name: payload.metadata.source } : undefined,
       },
@@ -285,7 +313,9 @@ function setJsonLd(payload: IplSeasonPayload, title: string, description: string
 }
 
 function App() {
+  const leagueId = useMemo(() => leagueIdFromLocation() || DEFAULT_LEAGUE_ID, []);
   const [payload, setPayload] = useState<IplSeasonPayload | null>(null);
+  const [leagueIndex, setLeagueIndex] = useState<LeagueIndex | null>(null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>('');
   const [targetGoal, setTargetGoal] = useState<TargetGoal>('4');
   const [error, setError] = useState<string | null>(null);
@@ -295,11 +325,12 @@ function App() {
     let active = true;
     setLoading(true);
 
-    loadIplData()
+    loadIplData(fetch, leagueId)
       .then((data) => {
         if (!active) {
           return;
         }
+        setTeamPalette(data.league?.teams);
         const sorted = [...data.standings].sort(rankingSort);
         setPayload(data);
         setSelectedTeamKey(teamKeyFromHash(data) || sorted[0]?.teamKey || '');
@@ -313,6 +344,27 @@ function App() {
       .finally(() => {
         if (active) {
           setLoading(false);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [leagueId]);
+
+  useEffect(() => {
+    let active = true;
+
+    // The league switcher is optional; the page still works without the list.
+    loadLeagueIndex()
+      .then((index) => {
+        if (active) {
+          setLeagueIndex(index);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setLeagueIndex(null);
         }
       });
 
@@ -361,23 +413,23 @@ function App() {
       return;
     }
 
-    const baseHref = appBaseHref();
-    const isFinal = isLeagueComplete(payload);
-    const title = isFinal ? FINAL_SEO_TITLE : SEO_TITLE;
-    const description = isFinal ? FINAL_SEO_DESCRIPTION : SEO_DESCRIPTION;
+    const { title, description } = isLeagueComplete(payload)
+      ? finalSeo(payload)
+      : { title: SEO_TITLE, description: SEO_DESCRIPTION };
+    const pageHref = new URL(leagueHref(payload.league?.id ?? leagueId, DEFAULT_LEAGUE_ID), window.location.origin).href;
 
     document.title = title;
-    setCanonical(baseHref);
+    setCanonical(pageHref);
     setMetaTag('name', 'description', description);
     setMetaTag('property', 'og:title', title);
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', 'website');
-    setMetaTag('property', 'og:url', baseHref);
+    setMetaTag('property', 'og:url', pageHref);
     setMetaTag('name', 'twitter:card', 'summary');
     setMetaTag('name', 'twitter:title', title);
     setMetaTag('name', 'twitter:description', description);
-    setJsonLd(payload, title, description);
-  }, [payload]);
+    setJsonLd(payload, pageHref, title, description);
+  }, [payload, leagueId]);
 
   const sortedStandings = useMemo(() => [...(payload?.standings || [])].sort(rankingSort), [payload]);
   const selectedTeam = useMemo(
@@ -403,6 +455,7 @@ function App() {
           <AlertTriangle aria-hidden="true" />
           <h1>IPL Playoff Pulse could not load</h1>
           <p>{error || 'The IPL payload is unavailable.'}</p>
+          {leagueId !== DEFAULT_LEAGUE_ID && <a href={import.meta.env.BASE_URL}>Go to the IPL page</a>}
         </section>
       </main>
     );
@@ -418,6 +471,7 @@ function App() {
   const sourceIsStale = ['stale', 'invalid'].includes(payload.metadata.data_freshness_status.toLowerCase());
   const sourceWarningText = payload.metadata.warnings.join(' ') || `Freshness status: ${payload.metadata.data_freshness_status}.`;
   const isFinal = isLeagueComplete(payload);
+  const { playoffTier, topTier } = leagueInfo(payload);
 
   const handleTeamSelect = (team: IplStanding) => {
     setSelectedTeamKey(team.teamKey);
@@ -427,6 +481,8 @@ function App() {
 
   return (
     <main className="pulse-app" data-testid="app-loaded">
+      <LeagueSwitcher currentId={payload.league?.id ?? leagueId} index={leagueIndex} />
+
       {isFinal ? (
         <FinalHero payload={payload} />
       ) : (
@@ -453,17 +509,17 @@ function App() {
               <span className="heading-points">Pts</span>
               <span className="heading-nrr">NRR</span>
               <span className="heading-left">{isFinal ? 'Played' : 'Left'}</span>
-              <span className="heading-top4">Top 4</span>
-              <span className="heading-top2">Top 2</span>
+              <span className="heading-top4">{isFinal ? playoffTier.label : 'Top 4'}</span>
+              <span className="heading-top2">{isFinal ? topTier.label : 'Top 2'}</span>
             </div>
             {sortedStandings.map((team) => {
-              const isTopFour = team.rank <= 4;
+              const inPlayoffZone = team.rank <= playoffTier.size;
               const top4 = payload.analysis.overallProbabilities[team.teamKey]?.top4 ?? 0;
               const top2 = payload.analysis.overallProbabilities[team.teamKey]?.top2 ?? 0;
               return (
                 <div className="team-row-block" key={team.teamKey}>
                   <button
-                    className={`standing-row ${isTopFour ? 'is-playoff-zone' : ''} ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
+                    className={`standing-row ${inPlayoffZone ? 'is-playoff-zone' : ''} ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
                     onClick={() => handleTeamSelect(team)}
                     type="button"
                   >
@@ -481,8 +537,8 @@ function App() {
                     <span className="remaining">{isFinal ? team.matches : `${team.remainingMatches} left`}</span>
                     {isFinal ? (
                       <>
-                        <FinishMark achieved={team.rank <= 4} className="top4-prob" label="Top 4" />
-                        <FinishMark achieved={team.rank <= 2} className="top2-prob" label="Top 2" />
+                        <FinishMark achieved={inPlayoffZone} className="top4-prob" label={playoffTier.label} />
+                        <FinishMark achieved={team.rank <= topTier.size} className="top2-prob" label={topTier.label} />
                       </>
                     ) : (
                       <>
@@ -725,6 +781,28 @@ const TodayRaceSummary = ({
   </section>
 );
 
+const LeagueSwitcher = ({ currentId, index }: { currentId: string; index: LeagueIndex | null }) => {
+  if (!index || index.leagues.length < 2) {
+    return null;
+  }
+
+  return (
+    <nav className="league-switcher" aria-label="Leagues">
+      {index.leagues.map((league) => (
+        <a
+          aria-current={league.id === currentId ? 'page' : undefined}
+          href={leagueHref(league.id, index.default)}
+          key={league.id}
+          title={league.name}
+        >
+          {league.shortName} {league.seasonLabel}
+          {league.status !== 'complete' && <small>Live</small>}
+        </a>
+      ))}
+    </nav>
+  );
+};
+
 const FinishMark = ({ achieved, className, label }: { achieved: boolean; className: string; label: string }) => (
   <span
     className={`prob-mini ${className} ${achieved ? 'is-achieved' : 'is-missed'}`}
@@ -736,15 +814,18 @@ const FinishMark = ({ achieved, className, label }: { achieved: boolean; classNa
 
 const FinalHero = ({ payload }: { payload: IplSeasonPayload }) => {
   const { ordered, champion, runnerUp } = finalSnapshot(payload);
+  const { shortName, seasonLabel, playoffTier } = leagueInfo(payload);
   return (
     <section className="hero-band compact-hero" aria-labelledby="page-title">
       <div className="hero-copy">
         <div className="hero-main">
           <span className="eyebrow">
             <Trophy size={14} aria-hidden="true" />
-            IPL Playoff Pulse
+            {shortName} Playoff Pulse
           </span>
-          <h1 id="page-title">IPL {payload.metadata.season} Final Standings</h1>
+          <h1 id="page-title">
+            {shortName} {seasonLabel} Final Standings
+          </h1>
           <p>
             {champion
               ? `Season complete · ${champion.fullName} are champions`
@@ -768,7 +849,7 @@ const FinalHero = ({ payload }: { payload: IplSeasonPayload }) => {
           </div>
           <div>
             <span>Playoff teams</span>
-            <strong>{ordered.slice(0, 4).map((team) => team.shortName).join(', ')}</strong>
+            <strong>{ordered.slice(0, playoffTier.size).map((team) => team.shortName).join(', ')}</strong>
           </div>
           <div>
             <span>Latest update</span>
@@ -788,9 +869,14 @@ const FinalHero = ({ payload }: { payload: IplSeasonPayload }) => {
 
 const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
   const { ordered, champion, finalMatch } = finalSnapshot(payload);
-  const [leader, second, , fourth, firstOut] = ordered;
+  const { playoffTier, topTier } = leagueInfo(payload);
+  const leader = ordered[0];
+  const cutline = ordered[playoffTier.size - 1];
+  const firstOut = ordered[playoffTier.size];
   const bottom = ordered[ordered.length - 1];
-  const levelWithSecond = ordered.slice(2).filter((team) => team.points === second.points);
+  const topTeams = ordered.slice(0, topTier.size);
+  const lastTopTeam = topTeams[topTeams.length - 1];
+  const levelWithTop = ordered.slice(topTier.size).filter((team) => team.points === lastTopTeam.points);
   const leagueMatches = payload.standings.reduce((total, team) => total + team.matches, 0) / 2;
 
   return (
@@ -816,22 +902,24 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
         </article>
         <article>
           <span>Playoff teams</span>
-          <strong>{ordered.slice(0, 4).map((team) => team.shortName).join(', ')}</strong>
-          <small>Top four after {leagueMatches} league matches.</small>
+          <strong>{ordered.slice(0, playoffTier.size).map((team) => team.shortName).join(', ')}</strong>
+          <small>
+            {playoffTier.label} after {leagueMatches} league matches.
+          </small>
         </article>
         <article>
-          <span>Top-two race</span>
-          <strong>{leader.shortName} &amp; {second.shortName}</strong>
+          <span>{topTier.label} finish</span>
+          <strong>{topTeams.map((team) => team.shortName).join(' & ')}</strong>
           <small>
-            {levelWithSecond.length > 0
-              ? `${levelWithSecond.map((team) => team.shortName).join(', ')} also reached ${second.points} pts but had a lower NRR.`
+            {levelWithTop.length > 0
+              ? `${levelWithTop.map((team) => team.shortName).join(', ')} also reached ${lastTopTeam.points} pts but had a lower NRR.`
               : 'Settled on points.'}
           </small>
         </article>
         <article>
           <span>First team out</span>
-          <strong>{firstOut.shortName}</strong>
-          <small>{pointsGap(firstOut, fourth)}</small>
+          <strong>{firstOut?.shortName ?? 'None'}</strong>
+          <small>{firstOut ? pointsGap(firstOut, cutline) : 'Every team reached the playoffs.'}</small>
         </article>
         <article>
           <span>Bottom of the table</span>
@@ -860,6 +948,7 @@ const PlayoffRow = ({ match, payload }: { match: IplPlayoffMatch; payload: IplSe
 const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
   const matches = payload.playoffs?.matches || [];
   const { champion } = finalSnapshot(payload);
+  const { shortName, seasonLabel } = leagueInfo(payload);
   return (
     <div className="probability-panel" id="playoffs" data-testid="playoffs-panel">
       <div className="section-heading">
@@ -884,7 +973,7 @@ const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
 
       {champion && (
         <p className="probability-note">
-          {champion.fullName} won the IPL {payload.metadata.season} title.
+          {champion.fullName} won the {shortName} {seasonLabel} title.
         </p>
       )}
     </div>
@@ -893,6 +982,7 @@ const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
 
 const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: IplStanding }) => {
   const { ordered } = finalSnapshot(payload);
+  const { playoffTier } = leagueInfo(payload);
   const journey = (payload.playoffs?.matches || []).filter(
     (match) => match.teamA === team.teamKey || match.teamB === team.teamKey,
   );
@@ -903,7 +993,9 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
         <article>
           <span className="mini-label">Season outcome</span>
           <strong>{seasonOutcome(payload, team)}</strong>
-          <small>{team.rank <= 4 ? 'Qualified for the playoffs.' : pointsGap(team, ordered[3])}</small>
+          <small>
+            {team.rank <= playoffTier.size ? 'Qualified for the playoffs.' : pointsGap(team, ordered[playoffTier.size - 1])}
+          </small>
         </article>
         <article>
           <span className="mini-label">Final position</span>
