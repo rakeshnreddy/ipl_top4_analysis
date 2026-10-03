@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import contextlib
 import dataclasses
+import io
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -176,17 +178,19 @@ class LiveSeasonTests(unittest.TestCase):
                 raise team_sports.FeedError("epl-2026: offline")
             return good
 
+        # Capture output: a real "::warning::" line would show as an annotation on every CI run.
         with mock.patch.object(
             extract_table, "league_plan", return_value=[("epl", "feed"), ("wpl-2026", "cricketdata")]
-        ), mock.patch.object(extract_table, "build_league", side_effect=build):
+        ), mock.patch.object(extract_table, "build_league", side_effect=build), contextlib.redirect_stdout(io.StringIO()) as output:
             extract_table.main(["--league", "active"])
 
         self.assertTrue((self.data_dir / "wpl-2026.json").exists())
+        self.assertIn("::warning::epl: epl-2026: offline", output.getvalue())
 
     def test_a_night_where_every_league_fails_fails_the_run(self) -> None:
         with mock.patch.object(extract_table, "league_plan", return_value=[("epl", "feed")]), mock.patch.object(
             extract_table, "build_league", side_effect=team_sports.FeedError("epl-2026: offline")
-        ):
+        ), contextlib.redirect_stdout(io.StringIO()):
             with self.assertRaises(SystemExit):
                 extract_table.main(["--league", "active"])
 

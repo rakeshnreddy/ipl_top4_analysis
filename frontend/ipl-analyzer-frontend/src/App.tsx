@@ -280,7 +280,7 @@ function setLeagueJsonLd(payload: IplSeasonPayload, pageHref: string, title: str
       {
         '@type': 'WebSite',
         '@id': `${baseHref}#website`,
-        name: 'IPL Playoff Pulse',
+        name: 'Playoff Pulse',
         url: baseHref,
       },
       {
@@ -407,7 +407,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
       <main className="pulse-app pulse-center">
         <div className="loading-panel" role="status" aria-live="polite">
           <Flame aria-hidden="true" />
-          <span>Loading IPL Playoff Pulse...</span>
+          <span>Loading Playoff Pulse...</span>
         </div>
       </main>
     );
@@ -418,9 +418,9 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
       <main className="pulse-app pulse-center">
         <section className="error-panel" role="alert">
           <AlertTriangle aria-hidden="true" />
-          <h1>IPL Playoff Pulse could not load</h1>
+          <h1>Playoff Pulse could not load</h1>
           <p>{error || 'The IPL payload is unavailable.'}</p>
-          {leagueId !== homeLeagueId && <a href={import.meta.env.BASE_URL}>Go to the IPL page</a>}
+          {leagueId !== homeLeagueId && <a href={import.meta.env.BASE_URL}>Go to the home page</a>}
         </section>
       </main>
     );
