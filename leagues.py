@@ -63,6 +63,17 @@ class League:
     cricketdata_series_id: str | None
     extra_results: tuple[ExtraResult, ...]
     teams: tuple[TeamMeta, ...]
+    points_win: int = 2
+    points_no_result: int = 1
+    points_tie: int = 1
+    # SA20: a win earns a bonus point when the winner's run rate is this multiple of the loser's.
+    bonus_run_rate_ratio: float | None = None
+    # Share of wins that earned a bonus point last season; used when simulating.
+    bonus_simulation_rate: float = 0.0
+    # Balls per NRR unit: 6 (per over) except The Hundred, which uses 5-ball sets.
+    nrr_balls_per_unit: int = 6
+    # Mixed-gender Cricsheet archives (The Hundred) need a filter.
+    gender: str | None = None
 
     @property
     def team_meta(self) -> dict[str, TeamMeta]:
@@ -87,6 +98,12 @@ class League:
             "matchesPerTeam": self.matches_per_team,
             "qualification": [{"size": tier.size, "label": tier.label} for tier in self.qualification],
             "secondChanceStages": list(self.second_chance_stages),
+            "points": {
+                "win": self.points_win,
+                "noResult": self.points_no_result,
+                "tie": self.points_tie,
+                "bonus": self.bonus_run_rate_ratio is not None,
+            },
             "teams": [
                 {
                     "key": team.key,
@@ -115,6 +132,7 @@ def parse_league(raw: dict[str, Any]) -> League:
     qualification = tuple(QualificationTier(size=item["size"], label=item["label"]) for item in raw["qualification"])
     playoffs = raw.get("playoffs", {})
     sources = raw.get("sources", {})
+    points = raw.get("points", {})
     cricketdata = sources.get("cricketdata") or {}
     start = datetime.fromisoformat(raw["seasonStart"]).replace(tzinfo=timezone.utc) if raw.get("seasonStart") else None
     end = datetime.fromisoformat(raw["seasonEnd"]).replace(hour=23, minute=59, tzinfo=timezone.utc)
@@ -140,6 +158,13 @@ def parse_league(raw: dict[str, Any]) -> League:
             for item in raw.get("extraResults", ())
         ),
         teams=teams,
+        points_win=points.get("win", 2),
+        points_no_result=points.get("noResult", 1),
+        points_tie=points.get("tie", 1),
+        bonus_run_rate_ratio=points.get("bonusRunRateRatio"),
+        bonus_simulation_rate=points.get("bonusSimulationRate", 0.0),
+        nrr_balls_per_unit=raw.get("nrrBallsPerUnit", 6),
+        gender=raw.get("gender"),
     )
     validate_league(league)
     return league

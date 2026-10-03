@@ -43,6 +43,7 @@ class Match:
     match_id: str
     date: str
     season: str
+    gender: str | None
     match_number: int | None
     stage: str | None
     teams: tuple[str, str]
@@ -53,6 +54,7 @@ class Match:
     method: str | None
     margin: dict[str, int]
     scheduled_overs: int
+    balls_per_over: int
     target_runs: int | None
     target_balls: int | None
     innings: tuple[Innings, ...]
@@ -60,6 +62,10 @@ class Match:
     @property
     def is_league(self) -> bool:
         return self.stage is None
+
+    @property
+    def scheduled_balls(self) -> int:
+        return self.scheduled_overs * self.balls_per_over
 
     @property
     def no_result(self) -> bool:
@@ -77,13 +83,18 @@ class TableRow:
     balls_faced: int = 0
     runs_against: int = 0
     balls_bowled: int = 0
+    ties: int = 0
+    bonus_points: int = 0
+    # Balls per scoring unit for NRR: 6 (runs per over) for every format except The Hundred.
+    rate_balls: int = 6
     results: list[str] = field(default_factory=list)
 
     @property
     def nrr(self) -> float | None:
         if not self.balls_faced or not self.balls_bowled:
             return None
-        rate = Fraction(self.runs_for * 6, self.balls_faced) - Fraction(self.runs_against * 6, self.balls_bowled)
+        unit = self.rate_balls
+        rate = Fraction(self.runs_for * unit, self.balls_faced) - Fraction(self.runs_against * unit, self.balls_bowled)
         return round(float(rate), 3)
 
 
@@ -111,10 +122,10 @@ def fetch_archive(
     return path
 
 
-def overs_to_balls(overs: float | int) -> int:
+def overs_to_balls(overs: float | int, balls_per_over: int = 6) -> int:
     """Convert cricket notation (16.4 = 16 overs and 4 balls) to legal balls."""
     whole = int(overs)
-    return whole * 6 + round((float(overs) - whole) * 10)
+    return whole * balls_per_over + round((float(overs) - whole) * 10)
 
 
 def summarize_innings(innings: dict[str, Any]) -> Innings:
@@ -138,6 +149,7 @@ def parse_match(match_id: str, data: dict[str, Any]) -> Match:
     event = info.get("event") or {}
     outcome = info.get("outcome") or {}
     teams = info["teams"]
+    balls_per_over = int(info.get("balls_per_over") or 6)
     main_innings = [item for item in data.get("innings", []) if not item.get("super_over")][:2]
     target = main_innings[1].get("target", {}) if len(main_innings) > 1 else {}
 
@@ -145,6 +157,7 @@ def parse_match(match_id: str, data: dict[str, Any]) -> Match:
         match_id=match_id,
         date=info["dates"][0],
         season=str(info.get("season")),
+        gender=info.get("gender"),
         match_number=event.get("match_number"),
         stage=event.get("stage"),
         teams=(teams[0], teams[1]),
@@ -155,21 +168,23 @@ def parse_match(match_id: str, data: dict[str, Any]) -> Match:
         method=outcome.get("method"),
         margin=dict(outcome.get("by") or {}),
         scheduled_overs=int(info.get("overs") or 20),
+        balls_per_over=balls_per_over,
         target_runs=target.get("runs"),
-        target_balls=overs_to_balls(target["overs"]) if target.get("overs") is not None else None,
+        target_balls=overs_to_balls(target["overs"], balls_per_over) if target.get("overs") is not None else None,
         innings=tuple(summarize_innings(item) for item in main_innings),
     )
 
 
-def load_season(archive: Path, season: str) -> list[Match]:
-    """Parse every match in a Cricsheet zip whose ``info.season`` equals ``season``."""
+def load_season(archive: Path, season: str, gender: str | None = None) -> list[Match]:
+    """Parse every match in a Cricsheet zip for ``season`` (and ``gender``, for mixed archives)."""
     matches: list[Match] = []
     with zipfile.ZipFile(archive) as bundle:
         for name in bundle.namelist():
             if not name.endswith(".json"):
                 continue
             data = json.loads(bundle.read(name))
-            if str(data.get("info", {}).get("season")) != season:
+            info = data.get("info", {})
+            if str(info.get("season")) != season or (gender and info.get("gender") != gender):
                 continue
             matches.append(parse_match(Path(name).stem, data))
     matches.sort(key=lambda item: (item.date, item.match_number or 10_000, item.match_id))
@@ -187,27 +202,53 @@ def nrr_lines(match: Match) -> list[tuple[str, int, int]] | None:
     if match.no_result or len(match.innings) < 2:
         return None
 
-    scheduled = match.scheduled_overs * 6
+    scheduled = match.scheduled_balls
     chase_quota = match.target_balls or scheduled
     first, second = match.innings
 
+    # A side that runs out of batters is all out even with fewer than ten wickets
+    # recorded (absent hurt), so without a D/L result an innings that ends early is
+    # charged its full quota: the first innings always, the chase only when it lost.
     if match.method and match.target_runs is not None and match.target_balls:
         first_runs, first_balls = match.target_runs - 1, match.target_balls
     else:
         # Without D/L a reduced chase means both sides had the same reduced quota.
         first_quota = min(chase_quota, scheduled)
+        first_all_out = first.wickets >= 10 or first.legal_balls < first_quota
         first_runs = first.runs
-        first_balls = first_quota if first.wickets >= 10 else first.legal_balls
+        first_balls = first_quota if first_all_out else first.legal_balls
 
-    second_balls = chase_quota if second.wickets >= 10 else second.legal_balls
+    chase_lost = match.winner is not None and match.winner != second.team and not match.super_over
+    second_all_out = second.wickets >= 10 or (chase_lost and not match.method and second.legal_balls < chase_quota)
+    second_balls = chase_quota if second_all_out else second.legal_balls
     return [(first.team, first_runs, first_balls), (second.team, second.runs, second_balls)]
+
+
+@dataclass(frozen=True)
+class PointsRule:
+    win: int = 2
+    no_result: int = 1
+    tie: int = 1
+    # SA20-style bonus: a win earns an extra point when the winner's run rate is at
+    # least this multiple of the loser's. None disables bonus points.
+    bonus_run_rate_ratio: float | None = None
+    # Balls per scoring unit for NRR (6 = runs per over).
+    rate_balls: int = 6
+
+
+def earns_bonus_point(lines: list[tuple[str, int, int]], winner: str, ratio: float) -> bool:
+    by_team = {team: Fraction(runs, balls) for team, runs, balls in lines if balls}
+    loser_rate = next((rate for team, rate in by_team.items() if team != winner), None)
+    winner_rate = by_team.get(winner)
+    if winner_rate is None or loser_rate is None:
+        return False
+    return winner_rate >= loser_rate * Fraction(ratio).limit_denominator(1000)
 
 
 def league_table(
     matches: Iterable[Match],
     team_key: Callable[[str], str | None],
-    win_points: int = 2,
-    no_result_points: int = 1,
+    rule: PointsRule = PointsRule(),
 ) -> dict[str, TableRow]:
     """Build points-table rows (with NRR) from league-stage matches."""
     rows: dict[str, TableRow] = {}
@@ -223,25 +264,36 @@ def league_table(
             continue
         left, right = (key_for(name) for name in match.teams)
         for key in (left, right):
-            rows.setdefault(key, TableRow()).matches += 1
+            rows.setdefault(key, TableRow(rate_balls=rule.rate_balls)).matches += 1
 
+        lines = nrr_lines(match)
         if match.winner:
             winner = key_for(match.winner)
             loser = right if winner == left else left
             rows[winner].wins += 1
-            rows[winner].points += win_points
+            rows[winner].points += rule.win
             rows[loser].losses += 1
             rows[winner].results.append("W")
             rows[loser].results.append("L")
+            if (
+                rule.bonus_run_rate_ratio
+                and lines
+                and not match.super_over
+                and earns_bonus_point(lines, match.winner, rule.bonus_run_rate_ratio)
+            ):
+                rows[winner].points += 1
+                rows[winner].bonus_points += 1
         elif match.result == "tie":
-            raise ValueError(f"Tie without a Super Over is not supported (match {match.match_id})")
+            for key in (left, right):
+                rows[key].ties += 1
+                rows[key].points += rule.tie
+                rows[key].results.append("T")
         else:
             for key in (left, right):
                 rows[key].no_result += 1
-                rows[key].points += no_result_points
+                rows[key].points += rule.no_result
                 rows[key].results.append("NR")
 
-        lines = nrr_lines(match)
         if not lines:
             continue
         for batting_name, runs, balls in lines:

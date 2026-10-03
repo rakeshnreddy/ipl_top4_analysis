@@ -109,20 +109,24 @@ class LiveSeasonTests(unittest.TestCase):
     def test_plan_builds_live_leagues_from_cricketdata(self) -> None:
         plan = extract_table.league_plan(datetime(2026, 12, 20, 19, 30, tzinfo=timezone.utc))
 
-        self.assertEqual(plan, [("bbl-2026-27", "cricketdata")])
+        self.assertEqual(plan, [("bbl-2026-27", "cricketdata"), ("ilt-2026-27", "cricketdata")])
 
     def test_plan_rebuilds_a_finished_league_from_cricsheet_until_it_is_complete(self) -> None:
         now = datetime(2027, 2, 1, 19, 30, tzinfo=timezone.utc)
 
         self.assertEqual(
             extract_table.league_plan(now),
-            [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet")],
+            [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet"), ("sa20-2026-27", "cricketdata")],
         )
         write_payload(self.data_dir, "bbl-2026-27", "complete")
-        self.assertEqual(extract_table.league_plan(now), [("wpl-2027", "cricketdata")])
+        self.assertEqual(
+            extract_table.league_plan(now),
+            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata")],
+        )
 
     def test_active_build_off_season_writes_nothing(self) -> None:
-        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 10, 3, tzinfo=timezone.utc)):
+        # Between CPL's finalize window (to 11 Oct) and ILT20's start (22 Nov).
+        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 1, tzinfo=timezone.utc)):
             extract_table.main(["--league", "active"])
 
         self.assertFalse(self.data_dir.exists())
@@ -139,6 +143,30 @@ class LiveSeasonTests(unittest.TestCase):
             [entry["id"] for entry in index["leagues"]],
             ["bbl-2026-27", "ipl-2026", "wpl-2026", "bbl-2025-26"],
         )
+
+    def test_finalize_run_publishes_only_a_finished_season(self) -> None:
+        playoffs_only = {"metadata": {"season_status": "playoffs"}}
+        now = datetime(2026, 10, 3, 19, 30, tzinfo=timezone.utc)
+
+        with mock.patch.object(extract_table, "utc_now", return_value=now), mock.patch.object(
+            extract_table, "league_plan", return_value=[("cpl-2026", "cricsheet")]
+        ), mock.patch.object(extract_table, "build_league", return_value=playoffs_only):
+            extract_table.main(["--league", "active"])
+
+        self.assertFalse((self.data_dir / "cpl-2026.json").exists())
+
+    def test_index_default_is_the_newest_published_ipl_season(self) -> None:
+        for league_id in ("ipl-2026", "ipl-2027", "wpl-2027"):
+            write_payload(self.data_dir, league_id, "league_stage")
+        for league_id in ("ipl-2026", "ipl-2027"):
+            path = self.data_dir / f"{league_id}.json"
+            payload = json.loads(path.read_text())
+            payload["league"]["shortName"] = "IPL"
+            path.write_text(json.dumps(payload))
+
+        extract_table.write_league_index()
+
+        self.assertEqual(json.loads((self.data_dir / "leagues.json").read_text())["default"], "ipl-2027")
 
     def test_series_id_env_var_only_applies_to_the_default_league(self) -> None:
         bbl = leagues.load_league("bbl-2026-27")

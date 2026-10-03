@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
@@ -93,7 +93,7 @@ describe('App after the season ends', () => {
       'href',
       'https://opendatacommons.org/licenses/by/1-0/',
     );
-    expect(document.title).toBe('IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse');
+    await waitFor(() => expect(document.title).toBe('IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse'));
   });
 
   it('shows a team season outcome from a deep link', async () => {
@@ -130,10 +130,12 @@ describe('App with several leagues', () => {
 
     const stripe = container.querySelector<HTMLElement>('.standing-row .team-stripe');
     expect(stripe?.style.backgroundColor).toBe('rgb(236, 28, 36)');
-    expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse');
-    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
-      'href',
-      'http://localhost:3000/?league=wpl-2026',
+    await waitFor(() => expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse'));
+    await waitFor(() =>
+      expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        'http://localhost:3000/?league=wpl-2026',
+      ),
     );
   });
 
@@ -187,7 +189,7 @@ describe('App during another league\'s season', () => {
     expect(screen.getByText('UPW -8.0')).toBeInTheDocument();
     expect(container.querySelector('.standing-row .top4-prob')).toHaveTextContent('98.5%');
     expect(screen.queryByRole('link', { name: 'Share kit' })).not.toBeInTheDocument();
-    expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse');
+    await waitFor(() => expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse'));
   });
 
   it('shows the opening match instead of a race before the first result', async () => {
@@ -202,6 +204,41 @@ describe('App during another league\'s season', () => {
     expect(within(heroFacts).getByText('3 of 5 teams')).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: "Today's Race Summary" })).not.toBeInTheDocument();
     expect(screen.getByText('Every team starts level; the odds move as results come in.')).toBeInTheDocument();
+  });
+});
+
+describe('App home page', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('shows the league the index names as default', async () => {
+    installFetch(finalPayload, mockManifest, {
+      '/data/leagues.json': { ...leagueIndex, default: 'wpl-2026' },
+      '/data/wpl-2026.json': wplFinalPayload,
+    });
+
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
+    expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
+    expect(globalThis.fetch).not.toHaveBeenCalledWith('/data/ipl-2026.json', { cache: 'no-cache' });
+  });
+
+  it('shows ties and bonus points when a league has them', async () => {
+    const standings = finalPayload.standings.map((team) =>
+      team.teamKey === 'Punjab' ? { ...team, wins: 6, noResult: 0, ties: 1, bonusPoints: 2 } : team,
+    );
+    installFetch({ ...finalPayload, standings });
+    window.history.replaceState(null, '', '/#team=PBKS');
+
+    const { container } = render(<App />);
+
+    await screen.findByRole('heading', { name: 'Punjab Kings' });
+    expect(container.querySelector('.deep-dive-grid')).toHaveTextContent('6W-6L-1T-0NR');
+    expect(screen.getByText('League stage · 2 bonus points')).toBeInTheDocument();
   });
 });
 

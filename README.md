@@ -40,19 +40,30 @@ Canonical generated files:
 
 ## Leagues
 
-Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL), playoff stage labels, playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources.
+Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, the points system (`points`: win, no result, tie, optional bonus point), qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL and The Hundred), playoff stage labels (used only when Cricsheet repeats a stage name), playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources. `gender` filters mixed archives and `nrrBallsPerUnit` sets the NRR scale.
 
 Configured seasons, each checked against its official table:
 
 | Id | League | Source |
 | --- | --- | --- |
 | `ipl-2026` | Indian Premier League 2026 | CricketData in season, Cricsheet once complete |
+| `ipl-2027` | Indian Premier League 2027 (tentative 10 Mar - 30 May 2027) | CricketData in season, Cricsheet once complete |
 | `wpl-2026` | Women's Premier League 2026 | Cricsheet |
 | `wpl-2027` | Women's Premier League 2027 (14 Jan - 7 Feb 2027) | CricketData in season, Cricsheet once complete |
 | `psl-2026` | Pakistan Super League 2026 | Cricsheet, plus one abandoned match in `extraResults` |
+| `psl-2027` | Pakistan Super League 2027 (tentative 19 Mar - 2 May 2027) | CricketData in season, Cricsheet once complete |
 | `bbl-2025-26` | Big Bash League 2025-26 | Cricsheet |
 | `bbl-2026-27` | Big Bash League 2026-27 (12 Dec 2026 - 26 Jan 2027) | CricketData in season, Cricsheet once complete |
 | `mlc-2026` | Major League Cricket 2026 | Cricsheet |
+| `sa20-2025-26` | SA20 2026 (4 points a win, bonus point at 1.25x the loser's run rate) | Cricsheet, plus three abandoned matches |
+| `sa20-2026-27` | SA20 2027 (17 Jan - 21 Feb 2027) | CricketData in season, Cricsheet once complete |
+| `ilt-2025-26` | International League T20 2025-26 | Cricsheet |
+| `ilt-2026-27` | International League T20 2026-27 (22 Nov - 20 Dec 2026) | CricketData in season, Cricsheet once complete |
+| `hundred-men-2026` | The Hundred 2026, men (4 points a win, NRR per 5-ball set) | Cricsheet, filtered by gender |
+| `hundred-women-2026` | The Hundred 2026, women | Cricsheet, plus one abandoned match |
+| `cpl-2026` | Caribbean Premier League 2026 | Cricsheet; published once Cricsheet adds the playoffs |
+| `lpl-2026` | Lanka Premier League 2026 | Cricsheet |
+| `bpl-2025-26` | Bangladesh Premier League 2025-26 | Cricsheet |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
 
@@ -69,7 +80,7 @@ To add a league season:
 2. Cricsheet has no file for matches abandoned before a ball was bowled; list them under `extraResults`.
 3. Build it and compare the table with the official one, then add the official points and NRR to `OFFICIAL_TABLES` in `tests/test_cricsheet.py`.
 
-Live odds work for any league whose config has a CricketData source; the others show completed seasons. Leagues with bonus points (such as SA20) are not supported yet.
+Live odds work for any league whose config has a CricketData source; the others show completed seasons. Bonus points are simulated at the rate seen in the previous season.
 
 ## Setup
 
