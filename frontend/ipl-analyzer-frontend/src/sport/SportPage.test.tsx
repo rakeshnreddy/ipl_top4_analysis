@@ -55,7 +55,7 @@ describe('SportPage', () => {
     openLeague('/?league=epl-2026-27#team=TOT');
 
     const panel = (await screen.findByRole('heading', { name: 'Tottenham Hotspur' })).closest('aside')!;
-    expect(within(panel).getByRole('img', { name: 'Finishing position chances for TOT' })).toBeInTheDocument();
+    expect(within(panel).getByRole('figure', { name: 'Finishing position chances for TOT' })).toBeInTheDocument();
     // Spurs host Arsenal: the win/draw/loss split is from Spurs' side.
     expect(within(panel).getByText('Win 20% · Draw 25% · Loss 55%')).toBeInTheDocument();
   });
@@ -85,7 +85,8 @@ describe('SportPage', () => {
   it('groups the league switcher by sport', async () => {
     openLeague('/?league=epl-2026-27');
 
-    const nav = await screen.findByRole('navigation', { name: 'Leagues' });
+    fireEvent.click(await screen.findByRole('button', { name: 'Leagues: Premier League 2026-27' }));
+    const nav = screen.getByRole('navigation', { name: 'Leagues' });
     expect(within(nav).getByText('Football')).toBeInTheDocument();
     expect(within(nav).getByText('Cricket')).toBeInTheDocument();
     expect(within(nav).getByRole('link', { name: /Premier League 2026-27/ })).toHaveAttribute('aria-current', 'page');
@@ -120,7 +121,7 @@ describe('SportPage for leagues with conferences', () => {
     const panel = (await screen.findByRole('heading', { name: 'Liverpool' })).closest('aside')!;
     expect(within(panel).getByText(/2-1 · 1/)).toHaveTextContent('2-1 · 1st NFC');
     expect(within(panel).getByText(/10 wins/)).toHaveTextContent('avg seed 1.3');
-    expect(within(panel).getByRole('img', { name: 'Conference seed chances for LIV' })).toBeInTheDocument();
+    expect(within(panel).getByRole('figure', { name: 'Conference seed chances for LIV' })).toBeInTheDocument();
   });
 });
 

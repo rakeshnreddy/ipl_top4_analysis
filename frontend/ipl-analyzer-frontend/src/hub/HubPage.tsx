@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import { ArrowRight, Trophy, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import '../App.css';
 import './HubPage.css';
+import PageHeader from '../components/PageHeader';
+import SiteHeader from '../components/SiteHeader';
 import { isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex, type LeagueSummary } from '../data/leagues';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
@@ -10,33 +12,36 @@ const TITLE = 'Playoff Pulse: Live Title & Playoff Odds for Football, NFL, NBA, 
 const DESCRIPTION =
   "Daily title, playoff and relegation odds for Europe's top football leagues, the NFL, NBA, NHL and MLB, and T20 cricket leagues from the IPL to the Big Bash.";
 
-const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueIndex }) => (
-  <a className={`hub-card ${isLive(league) ? 'is-live' : ''}`} href={leagueHref(league.id, index.default)}>
-    <span className="hub-card-top">
-      <strong>
-        {league.shortName} {league.seasonLabel}
-      </strong>
-      <small className={`hub-status status-${statusLabel(league).toLowerCase()}`}>{statusLabel(league)}</small>
-    </span>
-    {league.name !== league.shortName && <span className="hub-card-name">{league.name}</span>}
-    {league.facts && league.facts.length > 0 && (
-      <dl>
-        {league.facts.map((fact) => (
-          <div key={fact.label}>
-            <dt>{fact.label}</dt>
-            <dd>{fact.value}</dd>
-          </div>
-        ))}
-      </dl>
-    )}
-    <span className="hub-card-foot">
-      Updated {formatGeneratedAt(league.generatedAt)}
-      <ArrowRight size={14} aria-hidden="true" />
-    </span>
-  </a>
-);
+const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueIndex }) => {
+  const status = statusLabel(league);
+  return (
+    <a className="hub-card" href={leagueHref(league.id, index.default)}>
+      <span className="hub-card-top">
+        <strong>
+          {league.shortName} {league.seasonLabel}
+        </strong>
+        <small className={`status-pill status-${status.toLowerCase()}`}>{status}</small>
+      </span>
+      {league.name !== league.shortName && <span className="hub-card-name">{league.name}</span>}
+      {league.facts && league.facts.length > 0 && (
+        <dl>
+          {league.facts.map((fact) => (
+            <div key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <span className="hub-card-foot">
+        Updated {formatGeneratedAt(league.generatedAt)}
+        <ArrowRight size={16} aria-hidden="true" />
+      </span>
+    </a>
+  );
+};
 
-/** The all-sports home page: every live race first, then last season's final tables. */
+/** The all-sports home page: every live race first, grouped by sport, then last season's final tables. */
 const HubPage = ({ index }: { index: LeagueIndex }) => {
   useEffect(() => {
     const href = appBaseHref();
@@ -51,75 +56,85 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
     });
   }, [index.default]);
 
-  const live = index.leagues.filter(isLive);
+  const liveLeagues = index.leagues.filter(isLive);
+  const live = leaguesBySport({ ...index, leagues: liveLeagues });
   const finished = leaguesBySport({ ...index, leagues: index.leagues.filter((league) => !isLive(league)) });
+  const latest = index.leagues.reduce<string | null>(
+    (newest, league) => (!newest || Date.parse(league.generatedAt) > Date.parse(newest) ? league.generatedAt : newest),
+    null,
+  );
 
   return (
-    <main className="pulse-app hub-page" data-testid="hub-page">
-      <section className="hero-band compact-hero" aria-labelledby="page-title">
-        <div className="hero-copy hub-hero">
-          <div className="hero-main">
-            <span className="eyebrow">
-              <Zap size={14} aria-hidden="true" />
-              Playoff Pulse
-            </span>
-            <h1 id="page-title">Live Title & Playoff Odds</h1>
-            <p>Football, NFL, NBA, NHL, MLB and T20 cricket, from thousands of simulated seasons, updated daily.</p>
-          </div>
-        </div>
-      </section>
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader index={index} />
+      <main className="pulse-app hub-page" data-testid="hub-page" id="main">
+        <PageHeader
+          facts={[
+            { label: 'Live races', value: liveLeagues.length },
+            { label: 'Leagues covered', value: index.leagues.length },
+            ...(latest ? [{ label: 'Latest update', value: formatGeneratedAt(latest) }] : []),
+          ]}
+          factsLabel="Site snapshot"
+          strap="Title, playoff and relegation chances for football, the NFL, NBA, NHL, MLB and T20 cricket, from thousands of simulated seasons and updated daily."
+          title="Live Title & Playoff Odds"
+        />
 
-      {live.length > 0 && (
-        <section className="race-summary-panel" aria-labelledby="live-title">
-          <div className="section-heading">
-            <div>
-              <span className="panel-kicker">In season</span>
+        {live.length > 0 && (
+          <section className="hub-section" aria-labelledby="live-title">
+            <div className="section-heading">
               <h2 id="live-title">Live Races</h2>
+              <p>Seasons in progress, newest odds first</p>
             </div>
-            <Zap aria-hidden="true" />
-          </div>
-          <div className="hub-grid">
-            {live.map((league) => (
-              <LeagueCard index={index} key={league.id} league={league} />
+            {live.map((group) => (
+              <div className="hub-group" key={group.sport}>
+                <h3>{group.label}</h3>
+                <div className="hub-grid">
+                  {group.leagues.map((league) => (
+                    <LeagueCard index={index} key={league.id} league={league} />
+                  ))}
+                </div>
+              </div>
             ))}
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
-      {finished.length > 0 && (
-        <section className="race-summary-panel" aria-labelledby="final-title">
-          <div className="section-heading">
-            <div>
-              <span className="panel-kicker">Completed seasons</span>
+        {finished.length > 0 && (
+          <section className="panel hub-section" aria-labelledby="final-title">
+            <div className="section-heading">
               <h2 id="final-title">Final Tables</h2>
+              <p>Completed seasons and their champions</p>
             </div>
-            <Trophy aria-hidden="true" />
-          </div>
-          {finished.map((group) => (
-            <div className="hub-finished" key={group.sport}>
-              <h3>{group.label}</h3>
-              <ul>
-                {group.leagues.map((league) => (
-                  <li key={league.id}>
-                    <a href={leagueHref(league.id, index.default)}>
-                      <strong>
-                        {league.shortName} {league.seasonLabel}
-                      </strong>
-                      {league.champion && <span>Champions: {league.champion}</span>}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            <div className="hub-finished-groups">
+              {finished.map((group) => (
+                <div className="hub-finished" key={group.sport}>
+                  <h3>{group.label}</h3>
+                  <ul>
+                    {group.leagues.map((league) => (
+                      <li key={league.id}>
+                        <a href={leagueHref(league.id, index.default)}>
+                          <strong>
+                            {league.shortName} {league.seasonLabel}
+                          </strong>
+                          {league.champion && <span>Champions: {league.champion}</span>}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
-        </section>
-      )}
+          </section>
+        )}
+      </main>
 
       <footer className="pulse-footer">
         <span>Model estimates for fans, not betting advice.</span>
         <span>Sources are credited on each league page.</span>
       </footer>
-    </main>
+    </>
   );
 };
 

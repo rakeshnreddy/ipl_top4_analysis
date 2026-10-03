@@ -1,13 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  AlertTriangle,
-  CalendarClock,
-  ExternalLink,
-  Flame,
-  ShieldCheck,
-  Trophy,
-  Zap,
-} from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import './App.css';
 import {
   DEFAULT_LEAGUE_ID,
@@ -22,8 +14,11 @@ import {
   type QualificationTier,
 } from './data/iplData';
 import { leagueHref, type LeagueIndex } from './data/leagues';
-import LeagueSwitcher from './components/LeagueSwitcher';
+import PageHeader from './components/PageHeader';
+import { ErrorState, LoadingState } from './components/PageState';
+import SiteHeader from './components/SiteHeader';
 import { appBaseHref, setJsonLd, setPageMeta } from './lib/seo';
+import { heatStyle, readableOn, scrollToSection } from './lib/ui';
 import {
   formatGeneratedAt,
   formatNrr,
@@ -199,12 +194,6 @@ function teamKeyFromHash(payload: IplSeasonPayload) {
 function sectionIdFromHash() {
   const hash = window.location.hash.replace(/^#/, '');
   return SECTION_HASHES.has(hash) ? hash : null;
-}
-
-function scrollToSection(sectionId: string) {
-  window.setTimeout(() => {
-    document.getElementById(sectionId)?.scrollIntoView?.({ block: 'start', behavior: 'smooth' });
-  }, 0);
 }
 
 function updateHash(value: string) {
@@ -403,26 +392,16 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
   );
 
   if (loading) {
-    return (
-      <main className="pulse-app pulse-center">
-        <div className="loading-panel" role="status" aria-live="polite">
-          <Flame aria-hidden="true" />
-          <span>Loading Playoff Pulse...</span>
-        </div>
-      </main>
-    );
+    return <LoadingState />;
   }
 
   if (error || !payload || !selectedTeam) {
     return (
-      <main className="pulse-app pulse-center">
-        <section className="error-panel" role="alert">
-          <AlertTriangle aria-hidden="true" />
-          <h1>Playoff Pulse could not load</h1>
-          <p>{error || 'The IPL payload is unavailable.'}</p>
-          {leagueId !== homeLeagueId && <a href={import.meta.env.BASE_URL}>Go to the home page</a>}
-        </section>
-      </main>
+      <ErrorState
+        homeHref={leagueId !== homeLeagueId ? import.meta.env.BASE_URL : undefined}
+        message={error || 'The IPL payload is unavailable.'}
+        title="Playoff Pulse could not load"
+      />
     );
   }
 
@@ -447,150 +426,195 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
     scrollToSection('deep-dive');
   };
 
+  const { shortName, seasonLabel } = leagueInfo(payload);
+
   return (
-    <main className="pulse-app" data-testid="app-loaded">
-      <LeagueSwitcher currentId={payload.league?.id ?? leagueId} index={leagueIndex} />
-
-      {isFinal ? (
-        <FinalHero payload={payload} />
-      ) : (
-        <HeroSummary payload={payload} seasonStarted={seasonStarted} snapshot={snapshot} sourceIsStale={sourceIsStale} />
-      )}
-
-      {isFinal && <SeasonSummary payload={payload} />}
-      {!isFinal && seasonStarted && <TodayRaceSummary payload={payload} snapshot={snapshot} />}
-
-      <section className="race-grid" aria-label={isFinal ? 'IPL final standings and playoffs' : 'IPL playoff race board'}>
-        <div className="ladder-panel" id="standings" data-testid="standings-ladder">
-          <div className="section-heading">
-            <div>
-              <h2>{isFinal ? 'Final Standings' : 'Standings'}</h2>
-            </div>
-            <ShieldCheck aria-hidden="true" />
-          </div>
-
-          <div className="standings-list">
-            <div className="standing-header" aria-hidden="true">
-              <span className="heading-rank">#</span>
-              <span className="heading-stripe" />
-              <span className="heading-team">Team</span>
-              <span className="heading-record">Record</span>
-              <span className="heading-points">Pts</span>
-              <span className="heading-nrr">NRR</span>
-              <span className="heading-left">{isFinal ? 'Played' : 'Left'}</span>
-              <span className="heading-top4">{playoffTier.label}</span>
-              <span className="heading-top2">{topTier.label}</span>
-            </div>
-            {sortedStandings.map((team) => {
-              const inPlayoffZone = team.rank <= playoffTier.size;
-              const playoffOdds = tierProbability(payload, team.teamKey, playoffTier.size);
-              const topOdds = tierProbability(payload, team.teamKey, topTier.size);
-              return (
-                <div className="team-row-block" key={team.teamKey}>
-                  <button
-                    className={`standing-row ${inPlayoffZone ? 'is-playoff-zone' : ''} ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
-                    onClick={() => handleTeamSelect(team)}
-                    type="button"
-                  >
-                    <span className="rank-pill">{team.rank}</span>
-                    <span className="team-stripe" style={{ backgroundColor: teamColor(team.teamKey) }} />
-                    <span className="team-name">
-                      <strong>{team.shortName}</strong>
-                      <small>{team.fullName}</small>
-                    </span>
-                    <span className="team-record">{formatRecord(team)}</span>
-                    <span className="team-points">{team.points} pts</span>
-                    <span className={`team-nrr ${hasNrr(team.nrr) ? (team.nrr >= 0 ? 'positive' : 'negative') : 'neutral'}`}>
-                      {formatNrr(team.nrr)}
-                    </span>
-                    <span className="remaining">{isFinal ? team.matches : `${team.remainingMatches} left`}</span>
-                    {isFinal ? (
-                      <>
-                        <FinishMark achieved={inPlayoffZone} className="top4-prob" label={playoffTier.label} />
-                        <FinishMark achieved={team.rank <= topTier.size} className="top2-prob" label={topTier.label} />
-                      </>
-                    ) : (
-                      <>
-                        <span className="prob-mini top4-prob">{formatPercent(playoffOdds)}</span>
-                        <span className="prob-mini top2-prob">{formatPercent(topOdds)}</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader currentId={payload.league?.id ?? leagueId} currentLabel={`${shortName} ${seasonLabel}`} index={leagueIndex} />
+      <main className="pulse-app" data-testid="app-loaded" id="main">
         {isFinal ? (
-          <PlayoffsPanel payload={payload} />
+          <FinalHero payload={payload} />
         ) : (
-          <div className="probability-panel" id="top4" data-testid="probability-panel">
-            <div className="section-heading">
-              <div>
-                <span className="panel-kicker">Exact path lab</span>
-                <h2>{playoffTier.label} Odds</h2>
-              </div>
-            </div>
-
-            <div className="race-bars">
-              {sortedStandings.map((team) => {
-                const probability = tierProbability(payload, team.teamKey, playoffTier.size);
-                return (
-                  <button
-                    className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
-                    key={team.teamKey}
-                    type="button"
-                    onClick={() => handleTeamSelect(team)}
-                  >
-                    <span className="race-team">{team.shortName}</span>
-                    <span className="race-track">
-                      <span
-                        className="race-fill"
-                        style={{ width: `${Math.max(probability, 2)}%`, backgroundColor: teamColor(team.teamKey) }}
-                      />
-                    </span>
-                    <strong>{formatPercent(probability)}</strong>
-                  </button>
-                );
-              })}
-            </div>
-
-            <p className="probability-note">
-              {seasonStarted
-                ? 'Equal points do not imply equal odds; the exact model also evaluates remaining fixtures and direct rival games.'
-                : 'Every team starts level; the odds move as results come in.'}
-            </p>
-          </div>
+          <HeroSummary payload={payload} seasonStarted={seasonStarted} snapshot={snapshot} sourceIsStale={sourceIsStale} />
         )}
-      </section>
 
-      <section className="team-detail-panel spotlight-card" id="deep-dive" aria-label="Selected team detail">
-        <div className="team-detail-header">
-          <div className="spotlight-title">
-            <span style={{ backgroundColor: teamColor(selectedTeam.teamKey), color: teamTextColor(selectedTeam.teamKey) }}>
-              {selectedTeam.shortName}
-            </span>
-            <div>
-              <span className="panel-kicker">Selected team</span>
-              <h2>{selectedTeam.fullName}</h2>
+        <section className="race-grid" aria-label={isFinal ? 'IPL final standings and playoffs' : 'IPL playoff race board'}>
+          <div className="ladder-panel" id="standings" data-testid="standings-ladder">
+            <div className="section-heading">
+              <h2>{isFinal ? 'Final Standings' : 'Standings'}</h2>
+              <p>{isFinal ? 'Ranked by points, then net run rate' : 'Select a team to see its path'}</p>
+            </div>
+
+            <div className="table-scroll">
+              <table className="data-table standings-table">
+                <caption className="visually-hidden">
+                  {shortName} {seasonLabel} standings
+                </caption>
+                <thead>
+                  <tr>
+                    <th className="col-rank" scope="col">
+                      #
+                    </th>
+                    <th className="col-team" scope="col">
+                      Team
+                    </th>
+                    <th className="col-optional" scope="col">
+                      Record
+                    </th>
+                    <th scope="col">Pts</th>
+                    <th scope="col">NRR</th>
+                    <th className="col-optional" scope="col">
+                      {isFinal ? 'Played' : 'Left'}
+                    </th>
+                    <th className="col-tier" scope="col">
+                      {playoffTier.label}
+                    </th>
+                    <th className="col-tier" scope="col">
+                      {topTier.label}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedStandings.map((team) => {
+                    const inPlayoffZone = team.rank <= playoffTier.size;
+                    const playoffOdds = tierProbability(payload, team.teamKey, playoffTier.size);
+                    const topOdds = tierProbability(payload, team.teamKey, topTier.size);
+                    const selected = selectedTeam.teamKey === team.teamKey;
+                    return (
+                      <tr
+                        className={`standing-row ${inPlayoffZone ? 'zone-top' : ''} ${selected ? 'is-selected' : ''}`}
+                        key={team.teamKey}
+                        onClick={() => handleTeamSelect(team)}
+                      >
+                        <td className="col-rank">{team.rank}</td>
+                        <th className="col-team" scope="row">
+                          <button
+                            aria-pressed={selected}
+                            className="team-button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleTeamSelect(team);
+                            }}
+                            type="button"
+                          >
+                            <span aria-hidden="true" className="team-chip" style={{ backgroundColor: teamColor(team.teamKey) }} />
+                            <strong>{team.shortName}</strong>
+                            <small>{team.fullName}</small>
+                          </button>
+                        </th>
+                        <td className="col-optional">{formatRecord(team)}</td>
+                        <td className="is-strong">{team.points}</td>
+                        <td className={hasNrr(team.nrr) ? (team.nrr >= 0 ? 'nrr-positive' : 'nrr-negative') : undefined}>
+                          {formatNrr(team.nrr)}
+                        </td>
+                        <td className="col-optional">{isFinal ? team.matches : team.remainingMatches}</td>
+                        {isFinal ? (
+                          <>
+                            <td className="col-tier">
+                              <FinishMark achieved={inPlayoffZone} label={playoffTier.label} />
+                            </td>
+                            <td className="col-tier">
+                              <FinishMark achieved={team.rank <= topTier.size} label={topTier.label} />
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="col-tier" style={heatStyle(playoffOdds, 'good')}>
+                              {formatPercent(playoffOdds)}
+                            </td>
+                            <td className="col-tier" style={heatStyle(topOdds, 'good')}>
+                              {formatPercent(topOdds)}
+                            </td>
+                          </>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
-          {!isFinal && (
-            <div className="goal-tabs" role="group" aria-label="Select goal">
-              {tiers.map((tier) => (
-                <button
-                  className={goal === String(tier.size) ? 'active' : ''}
-                  key={tier.size}
-                  onClick={() => setTargetGoal(String(tier.size))}
-                  type="button"
-                >
-                  {tier.label}
-                </button>
-              ))}
+
+          {isFinal ? (
+            <PlayoffsPanel payload={payload} />
+          ) : (
+            <div className="probability-panel" id="top4" data-testid="probability-panel">
+              <div className="section-heading">
+                <h2>{playoffTier.label} Odds</h2>
+                <p>Probabilities exclude NRR simulation</p>
+              </div>
+
+              <div className="race-bars">
+                {sortedStandings.map((team) => {
+                  const probability = tierProbability(payload, team.teamKey, playoffTier.size);
+                  return (
+                    <button
+                      aria-pressed={selectedTeam.teamKey === team.teamKey}
+                      className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
+                      key={team.teamKey}
+                      type="button"
+                      onClick={() => handleTeamSelect(team)}
+                    >
+                      <span className="race-team">{team.shortName}</span>
+                      <span aria-hidden="true" className="race-track">
+                        <span
+                          className="race-fill"
+                          style={{ width: `${Math.max(probability, 2)}%`, backgroundColor: teamColor(team.teamKey) }}
+                        />
+                      </span>
+                      <strong>{formatPercent(probability)}</strong>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <p className="probability-note">
+                {seasonStarted
+                  ? 'Equal points do not imply equal odds; the exact model also evaluates remaining fixtures and direct rival games.'
+                  : 'Every team starts level; the odds move as results come in.'}
+              </p>
             </div>
           )}
-        </div>
+        </section>
+
+        <section className="team-detail-panel spotlight-card" id="deep-dive" aria-label="Selected team detail">
+          <div className="team-detail-header">
+            <div className="spotlight-title">
+              <span
+                aria-hidden="true"
+                className="team-badge"
+                style={{
+                  backgroundColor: teamColor(selectedTeam.teamKey),
+                  color: readableOn(teamColor(selectedTeam.teamKey), teamTextColor(selectedTeam.teamKey)),
+                }}
+              >
+                {selectedTeam.shortName}
+              </span>
+              <h2>{selectedTeam.fullName}</h2>
+            </div>
+            {!isFinal && (
+              <div className="goal-tabs" role="group" aria-label="Select goal">
+                {tiers.map((tier) => (
+                  <button
+                    aria-pressed={goal === String(tier.size)}
+                    className={goal === String(tier.size) ? 'active' : ''}
+                    key={tier.size}
+                    onClick={() => setTargetGoal(String(tier.size))}
+                    type="button"
+                  >
+                    {tier.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {isFinal && <SeasonSummary payload={payload} />}
+        {!isFinal && seasonStarted && <TodayRaceSummary payload={payload} snapshot={snapshot} />}
 
         {isFinal ? (
           <TeamSeasonCard payload={payload} team={selectedTeam} />
@@ -606,9 +630,10 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
             topPath={topPath}
           />
         )}
-      </section>
+      </main>
 
       <footer className="pulse-footer">
+        <span>Model estimates for fans, not betting advice.</span>
         <span>
           Updated {formatGeneratedAt(payload.metadata.generated_at)} · {payload.analysis.method}
           {!isFinal && <> · {payload.analysis.simulationCount.toLocaleString()} scenarios</>}
@@ -635,7 +660,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
           </span>
         )}
       </footer>
-    </main>
+    </>
   );
 }
 
@@ -650,88 +675,53 @@ const HeroSummary = ({
   snapshot: ReturnType<typeof raceSnapshot>;
   sourceIsStale: boolean;
 }) => {
-  const { shortName, playoffTier } = leagueInfo(payload);
+  const { shortName, seasonLabel, playoffTier } = leagueInfo(payload);
   const chance = (team: IplStanding) => formatPercent(tierProbability(payload, team.teamKey, playoffTier.size));
   const opener = payload.fixtures[0];
+  const facts = seasonStarted
+    ? [
+        { label: `Current ${playoffTier.label}`, value: snapshot.currentTop.map((team) => team.shortName).join(', ') },
+        {
+          label: 'Cutline team',
+          value: snapshot.cutlineTeam ? `${snapshot.cutlineTeam.shortName} ${chance(snapshot.cutlineTeam)}` : 'Unavailable',
+        },
+        {
+          label: 'Nearest challenger',
+          value: snapshot.nearestChallenger
+            ? `${snapshot.nearestChallenger.shortName} ${chance(snapshot.nearestChallenger)}`
+            : 'Unavailable',
+        },
+      ]
+    : [
+        {
+          label: 'Opening match',
+          value: opener ? `${teamShortName(payload, opener.teamA)} vs ${teamShortName(payload, opener.teamB)}` : 'To be announced',
+        },
+        { label: 'First ball', value: opener ? formatFixtureTime(opener) : 'To be announced' },
+        { label: 'Playoff places', value: `${playoffTier.size} of ${payload.standings.length} teams` },
+      ];
 
   return (
-    <section className="hero-band compact-hero" aria-labelledby="page-title">
-      <div className="hero-copy">
-        <div className="hero-main">
-          <span className="eyebrow">
-            <Zap size={14} aria-hidden="true" />
-            {shortName} Playoff Pulse
-          </span>
-          <h1 id="page-title">
-            {shortName} {playoffTier.label} Qualification Probabilities
-          </h1>
-          <p>Updated daily after the night match</p>
-          <nav className="quick-links" aria-label="Page sections">
-            <a href="#standings">Standings</a>
-            <a href="#top4">{playoffTier.label}</a>
-            {isIplLeague(payload) && <a href={SHARE_KIT_HREF}>Share kit</a>}
-            <a href="#deep-dive">Deep dive</a>
-          </nav>
-        </div>
-
-        <div className="hero-facts" aria-label="Race snapshot">
-          {seasonStarted ? (
-            <>
-              <div>
-                <span>Current {playoffTier.label}</span>
-                <strong>{snapshot.currentTop.map((team) => team.shortName).join(', ')}</strong>
-              </div>
-              <div>
-                <span>Cutline team</span>
-                <strong>
-                  {snapshot.cutlineTeam ? `${snapshot.cutlineTeam.shortName} ${chance(snapshot.cutlineTeam)}` : 'Unavailable'}
-                </strong>
-              </div>
-              <div>
-                <span>Nearest challenger</span>
-                <strong>
-                  {snapshot.nearestChallenger
-                    ? `${snapshot.nearestChallenger.shortName} ${chance(snapshot.nearestChallenger)}`
-                    : 'Unavailable'}
-                </strong>
-              </div>
-            </>
-          ) : (
-            <>
-              <div>
-                <span>Opening match</span>
-                <strong>
-                  {opener
-                    ? `${teamShortName(payload, opener.teamA)} vs ${teamShortName(payload, opener.teamB)}`
-                    : 'To be announced'}
-                </strong>
-              </div>
-              <div>
-                <span>First ball</span>
-                <strong>{opener ? formatFixtureTime(opener) : 'To be announced'}</strong>
-              </div>
-              <div>
-                <span>Playoff places</span>
-                <strong>
-                  {playoffTier.size} of {payload.standings.length} teams
-                </strong>
-              </div>
-            </>
-          )}
-          <div>
-            <span>Latest update</span>
-            <strong data-testid="latest-update">{formatGeneratedAt(payload.metadata.generated_at)}</strong>
-          </div>
-        </div>
-
-        <div className="hero-meta">
-          <span>Source: {payload.metadata.source}</span>
-          <span>{payload.analysis.method}</span>
-          <span>Probabilities exclude NRR simulation</span>
-        </div>
-        {sourceIsStale && <p className="stale-alert">Data freshness is marked {payload.metadata.data_freshness_status}.</p>}
-      </div>
-    </section>
+    <>
+      <PageHeader
+        crumb={`Cricket · ${shortName} ${seasonLabel}`}
+        facts={[
+          ...facts,
+          { label: 'Latest update', value: formatGeneratedAt(payload.metadata.generated_at), testId: 'latest-update' },
+        ]}
+        factsLabel="Race snapshot"
+        sections={[
+          { href: '#standings', label: 'Standings' },
+          { href: '#top4', label: `${playoffTier.label} odds` },
+          { href: '#deep-dive', label: 'Team path' },
+          ...(isIplLeague(payload) ? [{ href: SHARE_KIT_HREF, label: 'Share kit' }] : []),
+        ]}
+        status={{ label: seasonStarted ? 'Live' : 'Pre-season', tone: seasonStarted ? 'live' : 'pre-season' }}
+        strap="Updated daily after the night match"
+        title={`${shortName} ${playoffTier.label} Qualification Probabilities`}
+      />
+      {sourceIsStale && <p className="stale-alert">Data freshness is marked {payload.metadata.data_freshness_status}.</p>}
+    </>
   );
 };
 
@@ -754,11 +744,7 @@ const TodayRaceSummary = ({
   return (
     <section className="race-summary-panel" aria-labelledby="race-summary-title">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Today&apos;s race summary</span>
-          <h2 id="race-summary-title">Today&apos;s Race Summary</h2>
-        </div>
-        <ShieldCheck aria-hidden="true" />
+        <h2 id="race-summary-title">Today&apos;s Race Summary</h2>
       </div>
 
       <div className="race-summary-grid">
@@ -802,72 +788,48 @@ const TodayRaceSummary = ({
   );
 };
 
-const FinishMark = ({ achieved, className, label }: { achieved: boolean; className: string; label: string }) => (
-  <span
-    className={`prob-mini ${className} ${achieved ? 'is-achieved' : 'is-missed'}`}
-    title={`${achieved ? 'Finished' : 'Did not finish'} in the ${label}`}
-  >
-    {achieved ? '✓' : '–'}
-  </span>
+const FinishMark = ({ achieved, label }: { achieved: boolean; label: string }) => (
+  <>
+    <span aria-hidden="true" className={achieved ? 'mark-yes' : 'mark-no'}>
+      {achieved ? '✓' : '–'}
+    </span>
+    <span className="visually-hidden">{achieved ? `Finished in the ${label}` : `Outside the ${label}`}</span>
+  </>
 );
 
 const FinalHero = ({ payload }: { payload: IplSeasonPayload }) => {
-  const { ordered, champion, runnerUp } = finalSnapshot(payload);
+  const { ordered, champion, runnerUp, finalMatch } = finalSnapshot(payload);
   const { shortName, seasonLabel, playoffTier } = leagueInfo(payload);
+  // Who won leads; the season summary below covers the league stage.
+  const facts = champion
+    ? [
+        { label: 'Champions', value: champion.shortName },
+        ...(runnerUp ? [{ label: 'Runners-up', value: runnerUp.shortName }] : []),
+      ]
+    : [{ label: 'Still in the playoffs', value: ordered.slice(0, playoffTier.size).map((team) => team.shortName).join(', ') }];
   return (
-    <section className="hero-band compact-hero" aria-labelledby="page-title">
-      <div className="hero-copy">
-        <div className="hero-main">
-          <span className="eyebrow">
-            <Trophy size={14} aria-hidden="true" />
-            {shortName} Playoff Pulse
-          </span>
-          <h1 id="page-title">
-            {shortName} {seasonLabel} Final Standings
-          </h1>
-          <p>
-            {champion
-              ? `Season complete · ${champion.fullName} are champions`
-              : 'League stage complete · playoffs in progress'}
-          </p>
-          <nav className="quick-links" aria-label="Page sections">
-            <a href="#standings">Standings</a>
-            <a href="#playoffs">Playoffs</a>
-            <a href="#deep-dive">Team view</a>
-          </nav>
-        </div>
-
-        <div className="hero-facts" aria-label="Season snapshot">
-          <div>
-            <span>Champions</span>
-            <strong>{champion?.shortName || 'To be decided'}</strong>
-          </div>
-          <div>
-            <span>Runners-up</span>
-            <strong>{runnerUp?.shortName || 'To be decided'}</strong>
-          </div>
-          <div>
-            <span>Playoff teams</span>
-            <strong>{ordered.slice(0, playoffTier.size).map((team) => team.shortName).join(', ')}</strong>
-          </div>
-          <div>
-            <span>Latest update</span>
-            <strong data-testid="latest-update">{formatGeneratedAt(payload.metadata.generated_at)}</strong>
-          </div>
-        </div>
-
-        <div className="hero-meta">
-          <span>Source: {payload.metadata.source}</span>
-          <span>{payload.analysis.method}</span>
-          <span>Ranked by points, then NRR</span>
-        </div>
-      </div>
-    </section>
+    <PageHeader
+      crumb={`Cricket · ${shortName} ${seasonLabel}`}
+      facts={[...facts, { label: 'Latest update', value: formatGeneratedAt(payload.metadata.generated_at), testId: 'latest-update' }]}
+      factsLabel="Season snapshot"
+      sections={[
+        { href: '#standings', label: 'Standings' },
+        { href: '#playoffs', label: 'Playoffs' },
+        { href: '#deep-dive', label: 'Team view' },
+      ]}
+      status={champion ? { label: 'Final', tone: 'final' } : { label: 'Playoffs', tone: 'playoffs' }}
+      strap={
+        champion
+          ? `${champion.fullName} are champions${finalMatch ? `. Final: ${finalMatch.result}.` : '.'}`
+          : 'The league stage is over and the playoffs are under way.'
+      }
+      title={`${shortName} ${seasonLabel} Final Standings`}
+    />
   );
 };
 
 const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
-  const { ordered, champion, finalMatch } = finalSnapshot(payload);
+  const { ordered } = finalSnapshot(payload);
   const { playoffTier, topTier } = leagueInfo(payload);
   const leader = ordered[0];
   const cutline = ordered[playoffTier.size - 1];
@@ -881,19 +843,10 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
   return (
     <section className="race-summary-panel" aria-labelledby="season-summary-title">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Season recap</span>
-          <h2 id="season-summary-title">Season Summary</h2>
-        </div>
-        <Trophy aria-hidden="true" />
+        <h2 id="season-summary-title">Season Summary</h2>
       </div>
 
       <div className="race-summary-grid">
-        <article>
-          <span>Champions</span>
-          <strong>{champion?.shortName || 'To be decided'}</strong>
-          <small>{finalMatch ? `Final: ${finalMatch.result}.` : 'The playoffs are still in progress.'}</small>
-        </article>
         <article>
           <span>League stage winners</span>
           <strong>{leader.shortName}</strong>
@@ -951,11 +904,7 @@ const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
   return (
     <div className="probability-panel" id="playoffs" data-testid="playoffs-panel">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Knockouts</span>
-          <h2>Playoffs</h2>
-        </div>
-        <Trophy aria-hidden="true" />
+        <h2>Playoffs</h2>
       </div>
 
       <ol className="fixture-list playoff-list">
@@ -1022,10 +971,7 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
       </div>
 
       <article className="deep-dive-section">
-        <h4>
-          <Trophy size={15} aria-hidden="true" />
-          Playoff journey
-        </h4>
+        <h3>Playoff journey</h3>
         <ul className="fixture-list">
           {journey.map((match) => (
             <li key={match.id}>
@@ -1105,10 +1051,7 @@ const TeamDeepDive = ({
 
       <div className="deep-dive-columns">
         <article className="deep-dive-section">
-          <h4>
-            <CalendarClock size={15} aria-hidden="true" />
-            Own fixtures
-          </h4>
+          <h3>Own fixtures</h3>
           <ul className="fixture-list">
             {ownFixtures.map((fixture) => {
               const opponentKey = fixture.teamA === team.teamKey ? fixture.teamB : fixture.teamA;
@@ -1129,7 +1072,7 @@ const TeamDeepDive = ({
         </article>
 
         <article className="deep-dive-section">
-          <h4>Rival results that help</h4>
+          <h3>Rival results that help</h3>
           <ul className="impact-list compact-impact-list">
             {rivalImpacts.map((impact) => (
               <li key={`${team.teamKey}-${goalLabel}-help-${impact.fixtureId}`}>
@@ -1147,7 +1090,7 @@ const TeamDeepDive = ({
         </article>
 
         <article className="deep-dive-section">
-          <h4>Rival results that hurt</h4>
+          <h3>Rival results that hurt</h3>
           <ul className="impact-list compact-impact-list">
             {rivalImpacts.map((impact) => (
               <li key={`${team.teamKey}-${goalLabel}-hurt-${impact.fixtureId}`}>
@@ -1167,14 +1110,14 @@ const TeamDeepDive = ({
 
       <div className="deep-dive-bottom">
         <article className="deep-dive-section practical-takeaway">
-          <h4>Practical takeaway</h4>
+          <h3>Practical takeaway</h3>
           <strong>{practicalTakeaway(payload, team, playoffPath)}</strong>
         </article>
 
         <div className="path-details">
-          <h4>
+          <h3>
             {team.shortName} {goalLabel} win buckets
-          </h4>
+          </h3>
           <div className="bucket-grid">
             {(path?.ownWinBuckets || []).map((bucket) => (
               <div className="bucket-cell" key={`${team.teamKey}-${goalLabel}-${bucket.wins}`}>

@@ -74,6 +74,18 @@ const SPORT_GROUPS: Record<string, string> = {
 
 export const sportOf = (league: Pick<LeagueSummary, 'sport'>) => league.sport ?? 'cricket';
 
+const SPORT_NAMES: Record<string, string> = {
+  cricket: 'Cricket',
+  football: 'Football',
+  'american-football': 'American football',
+  basketball: 'Basketball',
+  'ice-hockey': 'Ice hockey',
+  baseball: 'Baseball',
+};
+
+/** Display name for a payload's sport, for page breadcrumbs. */
+export const sportName = (sport: string) => SPORT_NAMES[sport] ?? sport;
+
 /** Leagues grouped by sport, keeping the list's order (live leagues first) within each group. */
 export function leaguesBySport(index: LeagueIndex) {
   const groups = new Map<string, LeagueSummary[]>();
