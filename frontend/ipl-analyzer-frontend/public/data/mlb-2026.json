@@ -1,12 +1,19 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-10-03T17:52:01Z",
+    "generated_at": "2026-10-03T18:26:03Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
     "data_freshness_status": "fresh",
-    "season_status": "complete",
-    "warnings": []
+    "season_status": "postseason",
+    "warnings": [],
+    "credits": [
+      {
+        "name": "MLB Stats API",
+        "url": "https://statsapi.mlb.com/",
+        "note": "Playoff results: MLB Stats API"
+      }
+    ]
   },
   "league": {
     "id": "mlb-2026",
@@ -22,19 +29,28 @@
       {
         "key": "playoffs",
         "label": "Playoffs",
-        "kind": "playoffs"
+        "kind": "playoffs",
+        "settled": true
       },
       {
         "key": "division",
         "label": "Division",
         "kind": "division",
-        "shortLabel": "Div"
+        "shortLabel": "Div",
+        "settled": true
       },
       {
         "key": "bye",
         "label": "Bye",
         "kind": "seed",
-        "size": 2
+        "size": 2,
+        "settled": true
+      },
+      {
+        "key": "title",
+        "label": "World Series",
+        "kind": "champion",
+        "shortLabel": "WS"
       }
     ],
     "columns": [
@@ -1296,8 +1312,359 @@
       "gamesBack": 42.0
     }
   ],
-  "fixtures": [],
+  "fixtures": [
+    {
+      "id": "playoff-0",
+      "round": null,
+      "date": "2026-10-03T17:00:00Z",
+      "home": "Cleveland Guardians",
+      "away": "Chicago White Sox",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.51,
+        "away": 0.49
+      }
+    },
+    {
+      "id": "playoff-1",
+      "round": null,
+      "date": "2026-10-03T20:00:00Z",
+      "home": "Los Angeles Dodgers",
+      "away": "Atlanta Braves",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.555,
+        "away": 0.445
+      }
+    },
+    {
+      "id": "playoff-2",
+      "round": null,
+      "date": "2026-10-03T22:30:00Z",
+      "home": "Tampa Bay Rays",
+      "away": "New York Yankees",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.475,
+        "away": 0.525
+      }
+    },
+    {
+      "id": "playoff-3",
+      "round": null,
+      "date": "2026-10-04T00:30:00Z",
+      "home": "Milwaukee Brewers",
+      "away": "San Diego Padres",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.574,
+        "away": 0.426
+      }
+    },
+    {
+      "id": "playoff-4",
+      "round": null,
+      "date": "2026-10-04T20:00:00Z",
+      "home": "Milwaukee Brewers",
+      "away": "San Diego Padres",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.574,
+        "away": 0.426
+      }
+    },
+    {
+      "id": "playoff-5",
+      "round": null,
+      "date": "2026-10-05T00:00:00Z",
+      "home": "Los Angeles Dodgers",
+      "away": "Atlanta Braves",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.555,
+        "away": 0.445
+      }
+    },
+    {
+      "id": "playoff-6",
+      "round": null,
+      "date": "2026-10-05T21:00:00Z",
+      "home": "Cleveland Guardians",
+      "away": "Chicago White Sox",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.51,
+        "away": 0.49
+      }
+    },
+    {
+      "id": "playoff-7",
+      "round": null,
+      "date": "2026-10-06T00:00:00Z",
+      "home": "Tampa Bay Rays",
+      "away": "New York Yankees",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.475,
+        "away": 0.525
+      }
+    },
+    {
+      "id": "playoff-8",
+      "round": null,
+      "date": "2026-10-06T22:00:00Z",
+      "home": "Atlanta Braves",
+      "away": "Los Angeles Dodgers",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.457,
+        "away": 0.543
+      }
+    },
+    {
+      "id": "playoff-9",
+      "round": null,
+      "date": "2026-10-07T01:30:00Z",
+      "home": "San Diego Padres",
+      "away": "Milwaukee Brewers",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.438,
+        "away": 0.562
+      }
+    },
+    {
+      "id": "playoff-10",
+      "round": null,
+      "date": "2026-10-07T20:00:00Z",
+      "home": "Chicago White Sox",
+      "away": "Cleveland Guardians",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.502,
+        "away": 0.498
+      }
+    },
+    {
+      "id": "playoff-11",
+      "round": null,
+      "date": "2026-10-07T22:00:00Z",
+      "home": "Atlanta Braves",
+      "away": "Los Angeles Dodgers",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.457,
+        "away": 0.543
+      }
+    },
+    {
+      "id": "playoff-12",
+      "round": null,
+      "date": "2026-10-08T00:00:00Z",
+      "home": "New York Yankees",
+      "away": "Tampa Bay Rays",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.537,
+        "away": 0.463
+      }
+    },
+    {
+      "id": "playoff-13",
+      "round": null,
+      "date": "2026-10-08T02:00:00Z",
+      "home": "San Diego Padres",
+      "away": "Milwaukee Brewers",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.438,
+        "away": 0.562
+      }
+    },
+    {
+      "id": "playoff-14",
+      "round": null,
+      "date": "2026-10-08T21:00:00Z",
+      "home": "Chicago White Sox",
+      "away": "Cleveland Guardians",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.502,
+        "away": 0.498
+      }
+    },
+    {
+      "id": "playoff-15",
+      "round": null,
+      "date": "2026-10-09T00:00:00Z",
+      "home": "New York Yankees",
+      "away": "Tampa Bay Rays",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.537,
+        "away": 0.463
+      }
+    },
+    {
+      "id": "playoff-16",
+      "round": null,
+      "date": "2026-10-09T20:30:00Z",
+      "home": "Milwaukee Brewers",
+      "away": "San Diego Padres",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.574,
+        "away": 0.426
+      }
+    },
+    {
+      "id": "playoff-17",
+      "round": null,
+      "date": "2026-10-10T00:00:00Z",
+      "home": "Los Angeles Dodgers",
+      "away": "Atlanta Braves",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.555,
+        "away": 0.445
+      }
+    },
+    {
+      "id": "playoff-18",
+      "round": null,
+      "date": "2026-10-10T21:00:00Z",
+      "home": "Cleveland Guardians",
+      "away": "Chicago White Sox",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.51,
+        "away": 0.49
+      }
+    },
+    {
+      "id": "playoff-19",
+      "round": null,
+      "date": "2026-10-11T00:00:00Z",
+      "home": "Tampa Bay Rays",
+      "away": "New York Yankees",
+      "venue": null,
+      "stage": "Division Series",
+      "probabilities": {
+        "home": 0.475,
+        "away": 0.525
+      }
+    }
+  ],
   "results": [
+    {
+      "id": "playoff-result-0",
+      "round": null,
+      "date": "2026-10-02T00:00:00Z",
+      "home": "Atlanta Braves",
+      "away": "Philadelphia Phillies",
+      "homeScore": 6,
+      "awayScore": 2,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-1",
+      "round": null,
+      "date": "2026-10-01T02:00:00Z",
+      "home": "San Diego Padres",
+      "away": "Chicago Cubs",
+      "homeScore": 4,
+      "awayScore": 1,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-2",
+      "round": null,
+      "date": "2026-10-01T00:00:00Z",
+      "home": "New York Yankees",
+      "away": "Boston Red Sox",
+      "homeScore": 9,
+      "awayScore": 2,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-3",
+      "round": null,
+      "date": "2026-09-30T21:00:00Z",
+      "home": "Houston Astros",
+      "away": "Chicago White Sox",
+      "homeScore": 3,
+      "awayScore": 7,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-4",
+      "round": null,
+      "date": "2026-09-30T18:00:00Z",
+      "home": "Atlanta Braves",
+      "away": "Philadelphia Phillies",
+      "homeScore": 3,
+      "awayScore": 4,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-5",
+      "round": null,
+      "date": "2026-09-30T02:00:00Z",
+      "home": "San Diego Padres",
+      "away": "Chicago Cubs",
+      "homeScore": 8,
+      "awayScore": 0,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-6",
+      "round": null,
+      "date": "2026-09-30T00:00:00Z",
+      "home": "New York Yankees",
+      "away": "Boston Red Sox",
+      "homeScore": 9,
+      "awayScore": 0,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-7",
+      "round": null,
+      "date": "2026-09-29T21:00:00Z",
+      "home": "Houston Astros",
+      "away": "Chicago White Sox",
+      "homeScore": 3,
+      "awayScore": 6,
+      "note": "Wild Card Series"
+    },
+    {
+      "id": "playoff-result-8",
+      "round": null,
+      "date": "2026-09-29T18:00:00Z",
+      "home": "Atlanta Braves",
+      "away": "Philadelphia Phillies",
+      "homeScore": 5,
+      "awayScore": 3,
+      "note": "Wild Card Series"
+    },
     {
       "id": "2429",
       "round": 27,
@@ -23159,158 +23526,189 @@
       "Team ratings come from score margins (capped at 6) with home advantage, fitted on this and last season with a 240-day half-life; last season counts 1x as much on top.",
       "The rest of the regular season is simulated 20,000 times, letting team strength drift (more when more of the season is left), then the playoffs are simulated from each simulated table for title odds.",
       "Tiebreakers are simplified: win percentage, then division or conference record; head-to-head and common-games rules are not modelled.",
-      "2 scheduled games were never played and are left out."
+      "2 scheduled games were never played and are left out.",
+      "Playoffs: series still to play are simulated 20,000 times from the regular-season ratings, starting from the real series scores."
     ],
     "probabilities": {
       "Arizona Diamondbacks": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Athletics": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Atlanta Braves": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 8.09
       },
       "Baltimore Orioles": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Boston Red Sox": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Chicago Cubs": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Chicago White Sox": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 6.69
       },
       "Cincinnati Reds": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Cleveland Guardians": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 100.0
+        "bye": 100.0,
+        "title": 7.09
       },
       "Colorado Rockies": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Detroit Tigers": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Houston Astros": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Kansas City Royals": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Los Angeles Angels": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Los Angeles Dodgers": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 100.0
+        "bye": 100.0,
+        "title": 18.11
       },
       "Miami Marlins": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Milwaukee Brewers": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 100.0
+        "bye": 100.0,
+        "title": 23.7
       },
       "Minnesota Twins": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "New York Mets": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "New York Yankees": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 17.45
       },
       "Philadelphia Phillies": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Pittsburgh Pirates": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "San Diego Padres": {
         "playoffs": 100.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 8.2
       },
       "San Francisco Giants": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Seattle Mariners": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "St. Louis Cardinals": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Tampa Bay Rays": {
         "playoffs": 100.0,
         "division": 100.0,
-        "bye": 100.0
+        "bye": 100.0,
+        "title": 10.69
       },
       "Texas Rangers": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Toronto Blue Jays": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       },
       "Washington Nationals": {
         "playoffs": 0.0,
         "division": 0.0,
-        "bye": 0.0
+        "bye": 0.0,
+        "title": 0.0
       }
     },
     "positions": {
@@ -23983,5 +24381,167 @@
     "sigma": 2.41,
     "gamesPerTeam": 161.86666666666667
   },
-  "matchesThatMatter": []
+  "matchesThatMatter": [],
+  "bracket": {
+    "rounds": [
+      {
+        "key": "F",
+        "label": "Wild Card Series",
+        "series": [
+          {
+            "stage": "F",
+            "conference": "AL",
+            "top": "Houston Astros",
+            "bottom": "Chicago White Sox",
+            "topSeed": 3,
+            "bottomSeed": 6,
+            "topWins": 0,
+            "bottomWins": 2,
+            "bestOf": 3,
+            "winner": "Chicago White Sox"
+          },
+          {
+            "stage": "F",
+            "conference": "AL",
+            "top": "New York Yankees",
+            "bottom": "Boston Red Sox",
+            "topSeed": 4,
+            "bottomSeed": 5,
+            "topWins": 2,
+            "bottomWins": 0,
+            "bestOf": 3,
+            "winner": "New York Yankees"
+          },
+          {
+            "stage": "F",
+            "conference": "NL",
+            "top": "Atlanta Braves",
+            "bottom": "Philadelphia Phillies",
+            "topSeed": 3,
+            "bottomSeed": 6,
+            "topWins": 2,
+            "bottomWins": 1,
+            "bestOf": 3,
+            "winner": "Atlanta Braves"
+          },
+          {
+            "stage": "F",
+            "conference": "NL",
+            "top": "San Diego Padres",
+            "bottom": "Chicago Cubs",
+            "topSeed": 4,
+            "bottomSeed": 5,
+            "topWins": 2,
+            "bottomWins": 0,
+            "bestOf": 3,
+            "winner": "San Diego Padres"
+          }
+        ]
+      },
+      {
+        "key": "D",
+        "label": "Division Series",
+        "series": [
+          {
+            "stage": "D",
+            "conference": "AL",
+            "top": "Tampa Bay Rays",
+            "bottom": "New York Yankees",
+            "topSeed": 1,
+            "bottomSeed": 4,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          },
+          {
+            "stage": "D",
+            "conference": "AL",
+            "top": "Cleveland Guardians",
+            "bottom": "Chicago White Sox",
+            "topSeed": 2,
+            "bottomSeed": 6,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          },
+          {
+            "stage": "D",
+            "conference": "NL",
+            "top": "Milwaukee Brewers",
+            "bottom": "San Diego Padres",
+            "topSeed": 1,
+            "bottomSeed": 4,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          },
+          {
+            "stage": "D",
+            "conference": "NL",
+            "top": "Los Angeles Dodgers",
+            "bottom": "Atlanta Braves",
+            "topSeed": 2,
+            "bottomSeed": 3,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          }
+        ]
+      },
+      {
+        "key": "L",
+        "label": "Championship Series",
+        "series": [
+          {
+            "stage": "L",
+            "conference": "AL",
+            "top": null,
+            "bottom": null,
+            "topSeed": null,
+            "bottomSeed": null,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 7,
+            "winner": null
+          },
+          {
+            "stage": "L",
+            "conference": "NL",
+            "top": null,
+            "bottom": null,
+            "topSeed": null,
+            "bottomSeed": null,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 7,
+            "winner": null
+          }
+        ]
+      },
+      {
+        "key": "W",
+        "label": "World Series",
+        "series": [
+          {
+            "stage": "W",
+            "conference": null,
+            "top": null,
+            "bottom": null,
+            "topSeed": null,
+            "bottomSeed": null,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 7,
+            "winner": null
+          }
+        ]
+      }
+    ],
+    "champion": null
+  },
+  "movement": null
 }
