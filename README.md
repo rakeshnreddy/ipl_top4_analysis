@@ -8,10 +8,12 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 During the league stage:
 
-- IPL Top 4 and Top 2 qualification probabilities.
-- Current standings, remaining fixtures, and selected-team paths.
+- Qualification probabilities in each league's own format (Top 4 and Top 2 for the IPL, Top 3 and Top 1 for the WPL).
+- Current standings, remaining fixtures (in the reader's time zone), and selected-team paths.
+- The biggest riser and faller since the previous update.
+- Before the first result: the opening match and the number of playoff places.
 
-Once the league stage is complete (no fixtures left and every team has played 14):
+Once the league stage is complete (no fixtures left and every team has played its full schedule):
 
 - Final standings ranked by points, then NRR.
 - Playoff results, champion and a season recap.
@@ -46,8 +48,10 @@ Configured seasons, each checked against its official table:
 | --- | --- | --- |
 | `ipl-2026` | Indian Premier League 2026 | CricketData in season, Cricsheet once complete |
 | `wpl-2026` | Women's Premier League 2026 | Cricsheet |
+| `wpl-2027` | Women's Premier League 2027 (14 Jan - 7 Feb 2027) | CricketData in season, Cricsheet once complete |
 | `psl-2026` | Pakistan Super League 2026 | Cricsheet, plus one abandoned match in `extraResults` |
 | `bbl-2025-26` | Big Bash League 2025-26 | Cricsheet |
+| `bbl-2026-27` | Big Bash League 2026-27 (12 Dec 2026 - 26 Jan 2027) | CricketData in season, Cricsheet once complete |
 | `mlc-2026` | Major League Cricket 2026 | Cricsheet |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
@@ -65,7 +69,7 @@ To add a league season:
 2. Cricsheet has no file for matches abandoned before a ball was bowled; list them under `extraResults`.
 3. Build it and compare the table with the official one, then add the official points and NRR to `OFFICIAL_TABLES` in `tests/test_cricsheet.py`.
 
-Live odds currently cover only the IPL; other leagues show completed seasons. Leagues with bonus points (such as SA20) are not supported yet.
+Live odds work for any league whose config has a CricketData source; the others show completed seasons. Leagues with bonus points (such as SA20) are not supported yet.
 
 ## Setup
 
@@ -80,17 +84,18 @@ npm ci
 
 ## Daily Data And Social Workflow
 
-Generate canonical IPL data with CricketData:
+The nightly workflow (`.github/workflows/update-ipl.yml`, 01:00 IST) runs:
 
 ```bash
 export CRICDATA_API_KEY="..."
-export CRICDATA_SERIES_ID="..."
-venv/bin/python extract_table.py
+venv/bin/python extract_table.py --league active
 ```
 
-`CRICDATA_SERIES_ID` is recommended. If it is absent, the generator discovers the IPL 2026 series id through CricketData before calling `series_info` and `series_points`.
+`--league active` builds every league inside its `seasonStart`-`seasonEnd` window from CricketData. For 21 days after a season ends it retries the Cricsheet rebuild until the final is published. Off-season nights build nothing and call no API. The workflow commits only when data changed and builds and deploys only after a data commit. It can also be run manually with a league id, `all`, or `active`.
 
-The nightly schedule in `.github/workflows/update-ipl.yml` is paused between seasons; the workflow can still be run manually.
+CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. The `CRICDATA_SERIES_ID` secret applies only to the default league.
+
+GitHub disables scheduled workflows after 60 days without repository activity. Check that the workflow is enabled under Actions before a season starts.
 
 Rebuild a completed season from Cricsheet (no API key needed):
 
