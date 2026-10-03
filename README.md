@@ -210,11 +210,18 @@ Cloudflare Pages build settings, if configuring a Git-connected project:
 - Build output directory: `frontend/ipl-analyzer-frontend/dist`
 - Production branch: `main`
 
-Manual deploy after tests pass:
+Automatic deploys: both workflows that deploy GitHub Pages (code merges and data updates) also build the site for the root path and deploy it to the `ipl-playoff-pulse` project, once two repository secrets exist:
+
+- `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with the **Account > Cloudflare Pages > Edit** permission.
+- `CLOUDFLARE_ACCOUNT_ID`: the Cloudflare account id (shown by `npx wrangler whoami`).
+
+Without them the Cloudflare steps are skipped; if Cloudflare fails, the step shows a warning and the run still succeeds.
+
+Manual deploy after tests pass (wrangler 4 needs Node 22; `npx wrangler@3` works on Node 20):
 
 ```bash
 cd frontend/ipl-analyzer-frontend
-npm run build:cloudflare
+SITE_URL=https://ipl-playoff-pulse.pages.dev/ npm run build:cloudflare
 cd ../..
 npx wrangler pages deploy frontend/ipl-analyzer-frontend/dist --project-name ipl-playoff-pulse --branch main
 ```
