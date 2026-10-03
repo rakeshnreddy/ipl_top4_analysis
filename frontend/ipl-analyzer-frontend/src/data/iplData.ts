@@ -19,6 +19,10 @@ export interface IplStanding {
   wins: number;
   losses: number;
   noResult: number;
+  /** Ties without a Super Over (The Hundred); absent in most leagues. */
+  ties?: number;
+  /** SA20-style bonus points, already included in `points`. */
+  bonusPoints?: number;
   points: number;
   nrr: number | null;
   rank: number;
@@ -123,6 +127,7 @@ export interface IplLeague {
   matchesPerTeam: number;
   qualification: QualificationTier[];
   secondChanceStages: string[];
+  points?: { win: number; noResult: number; tie: number; bonus: boolean };
   teams: LeagueTeam[];
 }
 

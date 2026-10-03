@@ -205,3 +205,38 @@ describe('App during another league\'s season', () => {
   });
 });
 
+describe('App home page', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+    window.history.replaceState(null, '', '/');
+  });
+
+  it('shows the league the index names as default', async () => {
+    installFetch(finalPayload, mockManifest, {
+      '/data/leagues.json': { ...leagueIndex, default: 'wpl-2026' },
+      '/data/wpl-2026.json': wplFinalPayload,
+    });
+
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
+    expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
+    expect(globalThis.fetch).not.toHaveBeenCalledWith('/data/ipl-2026.json', { cache: 'no-cache' });
+  });
+
+  it('shows ties and bonus points when a league has them', async () => {
+    const standings = finalPayload.standings.map((team) =>
+      team.teamKey === 'Punjab' ? { ...team, wins: 6, noResult: 0, ties: 1, bonusPoints: 2 } : team,
+    );
+    installFetch({ ...finalPayload, standings });
+    window.history.replaceState(null, '', '/#team=PBKS');
+
+    const { container } = render(<App />);
+
+    await screen.findByRole('heading', { name: 'Punjab Kings' });
+    expect(container.querySelector('.deep-dive-grid')).toHaveTextContent('6W-6L-1T-0NR');
+    expect(screen.getByText('League stage · 2 bonus points')).toBeInTheDocument();
+  });
+});
+

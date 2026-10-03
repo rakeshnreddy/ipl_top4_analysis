@@ -57,8 +57,13 @@ const formatFixtureTime = (fixture: IplFixture) => {
   }).format(new Date(fixture.dateTimeGMT));
 };
 
-function maxPoints(team: IplStanding) {
-  return team.points + team.remainingMatches * 2;
+function maxPoints(payload: IplSeasonPayload, team: IplStanding) {
+  return team.points + team.remainingMatches * (payload.league?.points?.win ?? 2);
+}
+
+function formatRecord(team: IplStanding) {
+  const ties = team.ties ? `-${team.ties}T` : '';
+  return `${team.wins}W-${team.losses}L${ties}-${team.noResult}NR`;
 }
 
 function tierLabel(payload: IplSeasonPayload, target: string) {
@@ -116,8 +121,9 @@ function movementLeaders(payload: IplSeasonPayload) {
   return { since: payload.movement.since, riser, faller };
 }
 
-function isDefaultLeague(payload: IplSeasonPayload) {
-  return (payload.league?.id ?? DEFAULT_LEAGUE_ID) === DEFAULT_LEAGUE_ID;
+/** The share kit only has IPL slides. */
+function isIplLeague(payload: IplSeasonPayload) {
+  return (payload.league?.shortName ?? 'IPL') === 'IPL';
 }
 
 function liveSeo(payload: IplSeasonPayload) {
@@ -331,9 +337,13 @@ function setJsonLd(payload: IplSeasonPayload, pageHref: string, title: string, d
 }
 
 function App() {
-  const leagueId = useMemo(() => leagueIdFromLocation() || DEFAULT_LEAGUE_ID, []);
+  const requestedLeague = useMemo(() => leagueIdFromLocation(), []);
   const [payload, setPayload] = useState<IplSeasonPayload | null>(null);
   const [leagueIndex, setLeagueIndex] = useState<LeagueIndex | null>(null);
+  const [indexSettled, setIndexSettled] = useState(false);
+  // The home page shows the index's default league (the newest IPL season); ?league= picks another.
+  const homeLeagueId = leagueIndex?.default ?? DEFAULT_LEAGUE_ID;
+  const leagueId = requestedLeague ?? (indexSettled ? homeLeagueId : null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>('');
   // Empty until the reader picks a tier; the league's playoff tier is the default.
   const [targetGoal, setTargetGoal] = useState('');
@@ -341,6 +351,9 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!leagueId) {
+      return undefined;
+    }
     let active = true;
     setLoading(true);
 
@@ -384,6 +397,11 @@ function App() {
       .catch(() => {
         if (active) {
           setLeagueIndex(null);
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setIndexSettled(true);
         }
       });
 
@@ -435,7 +453,7 @@ function App() {
     const { title, description } = isLeagueComplete(payload)
       ? finalSeo(payload)
       : liveSeo(payload);
-    const pageHref = new URL(leagueHref(payload.league?.id ?? leagueId, DEFAULT_LEAGUE_ID), window.location.origin).href;
+    const pageHref = new URL(leagueHref(payload.league?.id ?? leagueId ?? homeLeagueId, homeLeagueId), window.location.origin).href;
 
     document.title = title;
     setCanonical(pageHref);
@@ -448,7 +466,7 @@ function App() {
     setMetaTag('name', 'twitter:title', title);
     setMetaTag('name', 'twitter:description', description);
     setJsonLd(payload, pageHref, title, description);
-  }, [payload, leagueId]);
+  }, [payload, leagueId, homeLeagueId]);
 
   const sortedStandings = useMemo(() => [...(payload?.standings || [])].sort(rankingSort), [payload]);
   const selectedTeam = useMemo(
@@ -474,7 +492,7 @@ function App() {
           <AlertTriangle aria-hidden="true" />
           <h1>IPL Playoff Pulse could not load</h1>
           <p>{error || 'The IPL payload is unavailable.'}</p>
-          {leagueId !== DEFAULT_LEAGUE_ID && <a href={import.meta.env.BASE_URL}>Go to the IPL page</a>}
+          {leagueId !== homeLeagueId && <a href={import.meta.env.BASE_URL}>Go to the IPL page</a>}
         </section>
       </main>
     );
@@ -503,7 +521,7 @@ function App() {
 
   return (
     <main className="pulse-app" data-testid="app-loaded">
-      <LeagueSwitcher currentId={payload.league?.id ?? leagueId} index={leagueIndex} />
+      <LeagueSwitcher currentId={payload.league?.id ?? leagueId ?? homeLeagueId} index={leagueIndex} />
 
       {isFinal ? (
         <FinalHero payload={payload} />
@@ -552,7 +570,7 @@ function App() {
                       <strong>{team.shortName}</strong>
                       <small>{team.fullName}</small>
                     </span>
-                    <span className="team-record">{team.wins}W-{team.losses}L-{team.noResult}NR</span>
+                    <span className="team-record">{formatRecord(team)}</span>
                     <span className="team-points">{team.points} pts</span>
                     <span className={`team-nrr ${hasNrr(team.nrr) ? (team.nrr >= 0 ? 'positive' : 'negative') : 'neutral'}`}>
                       {formatNrr(team.nrr)}
@@ -676,7 +694,7 @@ function App() {
           Source: {payload.metadata.source}
           <ExternalLink size={12} aria-hidden="true" />
         </a>
-        {isDefaultLeague(payload) && <a href={SHARE_KIT_HREF}>Share kit</a>}
+        {isIplLeague(payload) && <a href={SHARE_KIT_HREF}>Share kit</a>}
         {payload.metadata.source_license && (
           <a href={payload.metadata.source_license_url || payload.metadata.source_url} target="_blank" rel="noreferrer">
             Licence: {payload.metadata.source_license}
@@ -723,7 +741,7 @@ const HeroSummary = ({
           <nav className="quick-links" aria-label="Page sections">
             <a href="#standings">Standings</a>
             <a href="#top4">{playoffTier.label}</a>
-            {isDefaultLeague(payload) && <a href={SHARE_KIT_HREF}>Share kit</a>}
+            {isIplLeague(payload) && <a href={SHARE_KIT_HREF}>Share kit</a>}
             <a href="#deep-dive">Deep dive</a>
           </nav>
         </div>
@@ -1083,10 +1101,12 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
         </article>
         <article>
           <span className="mini-label">Record</span>
-          <strong>
-            {team.wins}W-{team.losses}L-{team.noResult}NR
-          </strong>
-          <small>League stage</small>
+          <strong>{formatRecord(team)}</strong>
+          <small>
+            {team.bonusPoints
+              ? `League stage · ${team.bonusPoints} bonus point${team.bonusPoints === 1 ? '' : 's'}`
+              : 'League stage'}
+          </small>
         </article>
         <article>
           <span className="mini-label">Net run rate</span>
@@ -1166,7 +1186,9 @@ const TeamDeepDive = ({
         <article>
           <span className="mini-label">Points, rank, NRR</span>
           <strong>#{team.rank} · {team.points} pts · {formatNrr(team.nrr)}</strong>
-          <small>{team.matches} played, {team.remainingMatches} left, max {maxPoints(team)} pts</small>
+          <small>
+            {team.matches} played, {team.remainingMatches} left, max {maxPoints(payload, team)} pts
+          </small>
         </article>
         <article>
           <span className="mini-label">What they need</span>
