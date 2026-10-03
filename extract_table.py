@@ -16,7 +16,7 @@ import json
 import os
 import random
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +44,8 @@ DEFAULT_MONTE_CARLO_SIMULATIONS = int(os.getenv("IPL_MONTE_CARLO_SIMULATIONS", "
 RANDOM_SEED = int(os.getenv("IPL_RANDOM_SEED", "20260501"))
 EXACT_MAX_FIXTURES = int(os.getenv("IPL_EXACT_MAX_FIXTURES", "27"))
 IMPACT_FIXTURE_WINDOW = int(os.getenv("IPL_IMPACT_FIXTURE_WINDOW", "1"))
+# After a season ends, keep retrying the Cricsheet rebuild until its final is published.
+FINALIZE_DAYS = 21
 
 # The active league. use_league() swaps these so one run can build several leagues.
 LEAGUE: League
@@ -155,7 +157,12 @@ def cricdata_api_key() -> str | None:
 
 
 def cricdata_series_id() -> str | None:
-    return os.getenv("CRICDATA_SERIES_ID") or os.getenv("CRICAPI_SERIES_ID")
+    """A fixed series id: the league config first, then the env var for the default league only."""
+    if LEAGUE.cricketdata_series_id:
+        return LEAGUE.cricketdata_series_id
+    if LEAGUE.id == DEFAULT_LEAGUE_ID:
+        return os.getenv("CRICDATA_SERIES_ID") or os.getenv("CRICAPI_SERIES_ID")
+    return None
 
 
 def fetch_cricdata_json(
@@ -196,7 +203,8 @@ def find_cricdata_series_id(session: requests.Session, api_key: str) -> str:
             if not isinstance(item, dict):
                 continue
             name = normalize_name(str(item.get("name", "")))
-            if SEASON in name and any(
+            # Normalised on both sides, so "2026-27" also matches "2026/27".
+            if normalize_name(SEASON) in name and any(
                 re.search(rf"\b{re.escape(normalize_name(series))}\b", name)
                 for series in LEAGUE.cricketdata_series_names
             ):
@@ -391,8 +399,11 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
         for meta in TEAM_META.values()
     }
 
-    completed = 0
-    for item in extract_cricdata_match_rows(payload):
+    rows = extract_cricdata_match_rows(payload)
+    if not rows:
+        raise SourceValidationError("CricketData series_info did not list any matches")
+
+    for item in rows:
         teams = extract_match_teams(item)
         if not teams:
             continue
@@ -413,7 +424,6 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
         left, right = teams
         table[left]["matches"] += 1
         table[right]["matches"] += 1
-        completed += 1
 
         if winner:
             loser = right if winner == left else left
@@ -425,9 +435,6 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
             table[right]["noResult"] += 1
             table[left]["points"] += 1
             table[right]["points"] += 1
-
-    if completed == 0:
-        raise SourceValidationError("CricketData series_info did not contain completed match results")
 
     for row in table.values():
         row["remainingMatches"] = max(0, LEAGUE_MATCHES_PER_TEAM - row["matches"])
@@ -525,17 +532,19 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
 
     warnings: list[str] = []
     standings = derive_cricdata_standings_from_matches(info_payload)
-    try:
-        points_payload = fetch_cricdata_json(session, "series_points", api_key, {"id": series_id})
-        apply_cricdata_nrr_from_points(standings, points_payload, warnings)
-    except SourceValidationError as exc:
-        warnings.append(f"CricketData points table could not be used for NRR: {exc}")
-    missing_nrr = [row["shortName"] for row in standings if row.get("nrr") is None]
-    if missing_nrr:
-        warnings.append(
-            "CricketData did not provide usable NRR for "
-            f"{', '.join(missing_nrr)}; probabilities were generated without NRR."
-        )
+    # Before the first result there is no points table or NRR to read.
+    if any(row["matches"] for row in standings):
+        try:
+            points_payload = fetch_cricdata_json(session, "series_points", api_key, {"id": series_id})
+            apply_cricdata_nrr_from_points(standings, points_payload, warnings)
+        except SourceValidationError as exc:
+            warnings.append(f"CricketData points table could not be used for NRR: {exc}")
+        missing_nrr = [row["shortName"] for row in standings if row.get("nrr") is None]
+        if missing_nrr:
+            warnings.append(
+                "CricketData did not provide usable NRR for "
+                f"{', '.join(missing_nrr)}; probabilities were generated without NRR."
+            )
     fixtures = parse_cricdata_fixtures(info_payload, now)
     return standings, fixtures, warnings
 
@@ -1379,10 +1388,12 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
 def write_league_index() -> None:
     """List every published league payload so the site can offer a league switcher."""
     entries = []
+    sort_keys = {}
     for league_id in available_league_ids():
         path = DATA_DIR / f"{league_id}.json"
         if not path.exists():
             continue
+        config = load_league(league_id)
         payload = json.loads(path.read_text(encoding="utf-8"))
         league = payload.get("league") or {}
         metadata = payload["metadata"]
@@ -1400,7 +1411,60 @@ def write_league_index() -> None:
                 "path": f"data/{league_id}.json",
             }
         )
+        live = metadata.get("season_status") in ("league_stage", "playoffs")
+        start = config.season_start.timestamp() if config.season_start else 0
+        sort_keys[league_id] = (0 if live else 1, config.priority, -start)
+    entries.sort(key=lambda entry: sort_keys[entry["id"]])
     write_json(LEAGUE_INDEX_OUTPUT, {"default": DEFAULT_LEAGUE_ID, "leagues": entries})
+
+
+def published_payload(league_id: str) -> dict[str, Any] | None:
+    path = DATA_DIR / f"{league_id}.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+
+def published_status(league_id: str) -> str | None:
+    payload = published_payload(league_id)
+    return payload["metadata"].get("season_status") if payload else None
+
+
+def probability_movement(previous: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any] | None:
+    """Change in each team's playoff-tier chance since the previously published payload.
+
+    If no match has finished since then, the previous movement still describes the
+    latest change, so it is carried forward instead of reporting zeros.
+    """
+    if not previous or (previous.get("league") or {}).get("id") != payload["league"]["id"]:
+        return None
+
+    def matches_played(data: dict[str, Any]) -> int:
+        return sum(row["matches"] for row in data.get("standings", []))
+
+    if matches_played(previous) == matches_played(payload):
+        return previous.get("movement")
+
+    tier = f"top{QUALIFICATION_SIZES[0]}"
+    before = previous.get("analysis", {}).get("overallProbabilities", {})
+    changes = {
+        team: round(values[tier] - before[team][tier], 2)
+        for team, values in payload["analysis"]["overallProbabilities"].items()
+        if tier in values and tier in before.get(team, {})
+    }
+    return {"since": previous["metadata"]["generated_at"], "tier": tier, "changes": changes} if changes else None
+
+
+def league_plan(now: datetime) -> list[tuple[str, str]]:
+    """Leagues to build now: in-season ones live, recently finished ones from Cricsheet."""
+    plan = []
+    for league_id in available_league_ids():
+        league = load_league(league_id)
+        if league.season_start and league.season_start <= now <= league.season_end:
+            if league.cricketdata_series_names:
+                plan.append((league_id, "cricketdata"))
+        elif league.season_end < now <= league.season_end + timedelta(days=FINALIZE_DAYS):
+            if published_status(league_id) != "complete":
+                plan.append((league_id, "cricsheet"))
+    return plan
 
 
 def write_json(path: Path, data: dict[str, Any]) -> None:
@@ -1416,7 +1480,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="append",
         dest="leagues",
         metavar="ID",
-        help=f"League config id from leagues/ (repeatable), or 'all'. Default: {DEFAULT_LEAGUE_ID}.",
+        help=(
+            "League config id from leagues/ (repeatable), 'all', or 'active' for leagues in season "
+            f"or awaiting their final Cricsheet rebuild. Default: {DEFAULT_LEAGUE_ID}."
+        ),
     )
     parser.add_argument(
         "--source",
@@ -1444,17 +1511,31 @@ def build_league(league: League, source: str, archive: Path | None = None) -> di
 def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     requested = args.leagues or [DEFAULT_LEAGUE_ID]
-    league_ids = available_league_ids() if "all" in requested else requested
-    if args.cricsheet_archive and len(league_ids) > 1:
+    active = "active" in requested
+    if active:
+        builds = league_plan(utc_now())
+        if not builds:
+            print("No league is in season or awaiting its final rebuild; nothing to build.")
+            return
+    else:
+        league_ids = available_league_ids() if "all" in requested else requested
+        builds = [(league_id, args.source) for league_id in league_ids]
+    if args.cricsheet_archive and (active or len(builds) > 1):
         raise SystemExit("--cricsheet-archive works with a single --league")
 
     failures = []
-    for league_id in league_ids:
+    for league_id, source in builds:
         try:
-            payload = build_league(load_league(league_id), args.source, args.cricsheet_archive)
+            payload = build_league(load_league(league_id), source, args.cricsheet_archive)
         except SourceValidationError as exc:
+            if active and source == "cricsheet":
+                # Cricsheet lags a few days; keep the live payload and retry tomorrow.
+                print(f"{league_id}: final rebuild not possible yet ({exc})")
+                continue
             failures.append(f"{league_id}: {exc}")
             continue
+        if payload["metadata"].get("season_status") != "complete":
+            payload["movement"] = probability_movement(published_payload(league_id), payload)
         write_json(CANONICAL_OUTPUT, payload)
     write_league_index()
     if failures:

@@ -1,14 +1,17 @@
-name: Update IPL Data and Deploy
+name: Update League Data and Deploy
 
 on:
-  # Nightly schedule paused: the IPL 2026 season is over, and since 2026-05-25 the
-  # "Generate canonical IPL payload" step fails with "Could not discover CricketData
-  # IPL 2026 series id" (no CRICDATA_SERIES_ID secret, series no longer listed).
-  # Restore once the next season's series id is configured.
-  # schedule:
-  #   # 01:00 IST, safely after the IPL night match has usually finished.
-  #   - cron: '30 19 * * *'
+  schedule:
+    # 01:00 IST: after evening matches in India and Australia. Off-season nights
+    # build nothing: `--league active` only touches leagues inside their season
+    # window (or awaiting their final Cricsheet rebuild), so no API calls are made.
+    - cron: '30 19 * * *'
   workflow_dispatch:
+    inputs:
+      league:
+        description: "League id to rebuild, 'all', or 'active'"
+        required: false
+        default: active
 
 permissions:
   contents: write
@@ -42,21 +45,19 @@ jobs:
       - name: Validate CricketData configuration
         env:
           CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
-          CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
         run: |
           if [ -z "$CRICDATA_API_KEY" ]; then
             echo "::error::CRICDATA_API_KEY repository secret is required."
             exit 1
           fi
-          if [ -z "$CRICDATA_SERIES_ID" ]; then
-            echo "::warning::CRICDATA_SERIES_ID is not set. The generator will discover the IPL 2026 series id from CricketData."
-          fi
 
-      - name: Generate canonical IPL payload
+      - name: Generate league payloads
         env:
           CRICDATA_API_KEY: ${{ secrets.CRICDATA_API_KEY }}
+          # Optional; applies to the default league only. Other leagues set seriesId in their config.
           CRICDATA_SERIES_ID: ${{ secrets.CRICDATA_SERIES_ID }}
-        run: python extract_table.py
+          LEAGUE: ${{ inputs.league || 'active' }}
+        run: python extract_table.py --league "$LEAGUE"
 
       - name: Generate Instagram carousel slides
         run: python scripts/create_instagram_carousel.py
@@ -65,6 +66,7 @@ jobs:
         run: python -m unittest discover -s tests
 
       - name: Persist generated data and carousel
+        id: persist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -72,12 +74,16 @@ jobs:
           git add frontend/ipl-analyzer-frontend/public/social/instagram-carousel
           if git diff --cached --quiet; then
             echo "No generated data or carousel changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Update IPL data and carousel [skip ci]"
+            git commit -m "Update league data [skip ci]"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      # Nothing below runs unless new data was committed.
       - name: Set up Node.js
+        if: steps.persist.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -85,26 +91,32 @@ jobs:
           cache-dependency-path: frontend/ipl-analyzer-frontend/package-lock.json
 
       - name: Install frontend dependencies
+        if: steps.persist.outputs.changed == 'true'
         working-directory: frontend/ipl-analyzer-frontend
         run: npm ci
 
       - name: Test frontend
+        if: steps.persist.outputs.changed == 'true'
         working-directory: frontend/ipl-analyzer-frontend
         run: npm test -- --run
 
       - name: Build frontend
+        if: steps.persist.outputs.changed == 'true'
         working-directory: frontend/ipl-analyzer-frontend
         run: |
           npm run build:github
           touch dist/.nojekyll
 
       - name: Configure Pages
+        if: steps.persist.outputs.changed == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
+        if: steps.persist.outputs.changed == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/ipl-analyzer-frontend/dist
 
       - name: Deploy Pages
+        if: steps.persist.outputs.changed == 'true'
         uses: actions/deploy-pages@v4

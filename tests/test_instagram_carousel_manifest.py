@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 from PIL import Image
 
@@ -66,6 +67,17 @@ class InstagramCarouselManifestTests(unittest.TestCase):
             self.assertEqual(manifest["generatedAt"], "2026-05-04T09:00:00Z")
             self.assertEqual(manifest["source"]["name"], "CricketData")
             self.assertIn("Test source warning", manifest["warnings"][0])
+
+    def test_completed_season_leaves_the_pack_unchanged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            data_path = Path(tmp) / "ipl-2026.json"
+            data_path.write_text('{"metadata": {"season_status": "complete"}}')
+            output_root = Path(tmp) / "carousel"
+
+            with mock.patch.object(carousel, "DATA_PATH", data_path), mock.patch.object(carousel, "OUTPUT_ROOT", output_root):
+                carousel.main()
+
+            self.assertFalse(output_root.exists())
 
     def test_png_dimension_validation_reports_wrong_size(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

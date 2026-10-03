@@ -553,6 +553,10 @@ def draw_contact_sheet(paths: list[Path], output_dir: Path) -> Path:
 
 def main() -> None:
     payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    if payload["metadata"].get("season_status") == "complete":
+        # Slides show the live race; once the season is over the latest pack stays as it is.
+        print("IPL season is complete; Reels pack left unchanged.")
+        return
     teams = probability_order(payload)
     output_dir = OUTPUT_ROOT / generated_date_slug(payload)
     output_dir.mkdir(parents=True, exist_ok=True)

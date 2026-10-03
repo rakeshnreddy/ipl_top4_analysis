@@ -37,14 +37,8 @@ export interface IplFixture {
   sourceUrl: string;
 }
 
-export interface IplProbability {
-  top4: number;
-  top2: number;
-  top4Clear?: number;
-  top2Clear?: number;
-  top4Possible?: number;
-  top2Possible?: number;
-}
+/** Chances keyed by tier, e.g. `top4`, `top4Clear`, `top2`; WPL payloads use `top3` and `top1`. */
+export type IplProbability = Record<string, number>;
 
 export interface OwnWinBucket {
   wins: number;
@@ -85,8 +79,8 @@ export interface IplAnalysis {
   modelNotes?: string[];
   overallProbabilities: Record<string, IplProbability>;
   teamAnalysis: Record<string, Record<string, unknown>>;
-  qualificationPath: Record<'4' | '2', Record<string, QualificationPathResult>>;
-  scenarioBreakdown?: Record<'4' | '2', Record<string, unknown>>;
+  qualificationPath: Record<string, Record<string, QualificationPathResult>>;
+  scenarioBreakdown?: Record<string, Record<string, unknown>>;
 }
 
 export interface IplPlayoffMatch {
@@ -132,9 +126,17 @@ export interface IplLeague {
   teams: LeagueTeam[];
 }
 
+/** Change in each team's playoff-tier chance (percentage points) since the previous update. */
+export interface ProbabilityMovement {
+  since: string;
+  tier: string;
+  changes: Record<string, number>;
+}
+
 export interface IplSeasonPayload {
   metadata: IplMetadata;
   league?: IplLeague;
+  movement?: ProbabilityMovement | null;
   standings: IplStanding[];
   fixtures: IplFixture[];
   playoffs?: IplPlayoffs;
