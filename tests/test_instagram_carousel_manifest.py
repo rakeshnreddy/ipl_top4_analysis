@@ -82,7 +82,7 @@ class InstagramCarouselManifestTests(unittest.TestCase):
     def test_the_pack_follows_the_newest_ipl_season(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             data_dir = Path(tmp)
-            (data_dir / "leagues.json").write_text('{"default": "ipl-2027", "leagues": []}')
+            (data_dir / "leagues.json").write_text('{"default": "hub", "ipl": "ipl-2027", "leagues": []}')
 
             with mock.patch.object(carousel, "DATA_DIR", data_dir):
                 self.assertEqual(carousel.current_ipl_payload_path(), data_dir / "ipl-2027.json")

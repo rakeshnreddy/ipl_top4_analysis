@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AlertTriangle, ArrowLeft, Check, Clipboard, Download, Flame } from 'lucide-react';
 import '../App.css';
 import { DEFAULT_LEAGUE_ID, isLeagueComplete, loadIplData, type IplSeasonPayload } from '../data/iplData';
-import { loadLeagueIndex } from '../data/leagues';
+import { HUB_ID, loadLeagueIndex } from '../data/leagues';
 import { loadReelsManifest, publicAssetUrl, type ReelsManifest, type ReelsSlide } from '../data/reelsManifest';
 import { formatGeneratedAt, setTeamPalette } from '../lib/standings';
 import { copyToClipboard, exportRacePng, raceCaption, shareTexts, type ShareKind } from './sharing';
@@ -27,9 +27,9 @@ function SharePage() {
     let active = true;
     document.title = 'Share Kit | IPL Playoff Pulse';
 
-    // Slides are for the home league (the newest IPL season).
+    // Slides are for the newest IPL season.
     loadLeagueIndex()
-      .then((index) => index.default)
+      .then((index) => index.ipl ?? (index.default !== HUB_ID ? index.default : DEFAULT_LEAGUE_ID))
       .catch(() => DEFAULT_LEAGUE_ID)
       .then((leagueId) => loadIplData(fetch, leagueId))
       .then((data) => {

@@ -1429,6 +1429,70 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
     }
 
 
+def chance_text(value: float) -> str:
+    """The site's rounding: a Monte Carlo estimate is never printed as a certainty."""
+    if value >= 99.95:
+        return ">99.9%"
+    if value > 99:
+        return f"{value:.1f}%"
+    if value >= 1:
+        return f"{round(value)}%"
+    if value >= 0.1:
+        return f"{value:.1f}%"
+    return "<0.1%" if value > 0 else "0%"
+
+
+def league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[str, str]]:
+    """One or two headline numbers for the home page's league cards (none if the payload is unusual)."""
+    try:
+        return _league_facts(payload, champion)
+    except (KeyError, IndexError, TypeError, ValueError):
+        return []
+
+
+def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[str, str]]:
+    league = payload["league"]
+    status = payload["metadata"].get("season_status")
+    short = {row["teamKey"]: row["shortName"] for row in payload["standings"]}
+    if status == "complete":
+        return [{"label": "Champions", "value": champion}] if champion else []
+
+    if league.get("sport", "cricket") == "cricket":
+        tier = (league.get("qualification") or [{"size": 4, "label": "Top 4"}])[0]
+        odds = {team: values.get(f"top{tier['size']}", 0.0) for team, values in payload["analysis"]["overallProbabilities"].items()}
+        if not any(row["matches"] for row in payload["standings"]):
+            first = payload["fixtures"][0]["dateTimeGMT"] if payload["fixtures"] and payload["fixtures"][0].get("dateTimeGMT") else None
+            return [{"label": "Season starts", "value": first[:10]}] if first else []
+        likely = sorted(odds, key=lambda team: -odds[team])[: tier["size"]]
+        names = ", ".join(short.get(team, team) for team in likely)
+        if status == "playoffs":
+            return [{"label": "In the playoffs", "value": names}]
+        facts = [{"label": f"Likely {tier['label']}", "value": names}]
+        bubble = min(odds, key=lambda team: abs(odds[team] - 50))
+        if 1 < odds[bubble] < 99:
+            facts.append({"label": "On the bubble", "value": f"{short.get(bubble, bubble)} {chance_text(odds[bubble])}"})
+        return facts
+
+    probabilities = payload["analysis"]["probabilities"]
+    live = [tier for tier in league["tiers"] if not tier.get("settled")]
+    facts = []
+    favourite = next((tier for tier in live if tier.get("kind") == "champion"), None) or next((tier for tier in live if tier.get("size") == 1), None)
+    if favourite:
+        team = max(probabilities, key=lambda key: probabilities[key].get(favourite["key"], 0.0))
+        facts.append({"label": f"{favourite['label']} favourite", "value": f"{short.get(team, team)} {chance_text(probabilities[team][favourite['key']])}"})
+    risk = next((tier for tier in live if tier.get("kind") == "bottom"), None)
+    if risk:
+        team = max(probabilities, key=lambda key: probabilities[key].get(risk["key"], 0.0))
+        facts.append({"label": f"{risk['label']} risk", "value": f"{short.get(team, team)} {chance_text(probabilities[team][risk['key']])}"})
+    else:
+        race = next((tier for tier in live if tier.get("kind") == "playoffs"), None)
+        if race:
+            team = min(probabilities, key=lambda key: abs(probabilities[key].get(race["key"], 0.0) - 50))
+            if 1 < probabilities[team][race["key"]] < 99:
+                facts.append({"label": f"{race['label']} bubble", "value": f"{short.get(team, team)} {chance_text(probabilities[team][race['key']])}"})
+    return facts[:2]
+
+
 def index_entry(payload: dict[str, Any]) -> dict[str, Any]:
     league = payload["league"]
     metadata = payload["metadata"]
@@ -1446,6 +1510,8 @@ def index_entry(payload: dict[str, Any]) -> dict[str, Any]:
         "seasonLabel": league.get("seasonLabel", str(metadata.get("season", ""))),
         "status": metadata.get("season_status", "league_stage"),
         "champion": champion,
+        "started": any(row.get("played", row.get("matches", 0)) for row in payload["standings"]),
+        "facts": league_facts(payload, champion),
         "generatedAt": metadata["generated_at"],
         "path": f"data/{league['id']}.json",
     }
@@ -1474,15 +1540,28 @@ def write_league_index() -> None:
         )
     )
     entries = [index_entry(payload) for payload in found]
-    write_json(LEAGUE_INDEX_OUTPUT, {"default": default_league_id(entries), "leagues": entries})
+    write_json(
+        LEAGUE_INDEX_OUTPUT,
+        {"default": default_league_id(entries), "ipl": newest_ipl_id(entries), "leagues": entries},
+    )
+
+
+HUB_ID = "hub"
+
+
+def newest_ipl_id(entries: list[dict[str, Any]]) -> str:
+    ipl = [entry for entry in entries if entry["sport"] == "cricket" and entry["shortName"] == "IPL"]
+    return max(ipl, key=lambda entry: entry["seasonLabel"])["id"] if ipl else DEFAULT_LEAGUE_ID
 
 
 def default_league_id(entries: list[dict[str, Any]]) -> str:
-    """The site's home page shows the newest published IPL season."""
-    ipl = [entry for entry in entries if entry["sport"] == "cricket" and entry["shortName"] == "IPL"]
-    if not ipl:
-        return DEFAULT_LEAGUE_ID
-    return max(ipl, key=lambda entry: entry["seasonLabel"])["id"]
+    """The home page: the IPL while its season is on, otherwise the all-sports hub."""
+    live_ipl = [
+        entry
+        for entry in entries
+        if entry["sport"] == "cricket" and entry["shortName"] == "IPL" and entry["status"] in ("league_stage", "playoffs")
+    ]
+    return max(live_ipl, key=lambda entry: entry["seasonLabel"])["id"] if live_ipl else HUB_ID
 
 
 def published_payload(league_id: str) -> dict[str, Any] | None:

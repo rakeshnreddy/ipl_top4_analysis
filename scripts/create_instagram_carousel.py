@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "frontend/ipl-analyzer-frontend/public/data"
-# The share kit follows the newest IPL season: the league list's default.
+# The share kit follows the newest IPL season named in the league list.
 DATA_PATH: Path | None = None
 OUTPUT_ROOT = ROOT / "frontend/ipl-analyzer-frontend/public/social/instagram-carousel"
 WIDTH = 1080
@@ -557,10 +557,10 @@ def current_ipl_payload_path() -> Path:
     if DATA_PATH is not None:
         return DATA_PATH
     try:
-        default = json.loads((DATA_DIR / "leagues.json").read_text(encoding="utf-8"))["default"]
+        newest = json.loads((DATA_DIR / "leagues.json").read_text(encoding="utf-8"))["ipl"]
     except (OSError, ValueError, KeyError):
-        default = "ipl-2026"
-    return DATA_DIR / f"{default}.json"
+        newest = "ipl-2026"
+    return DATA_DIR / f"{newest}.json"
 
 
 def main() -> None:

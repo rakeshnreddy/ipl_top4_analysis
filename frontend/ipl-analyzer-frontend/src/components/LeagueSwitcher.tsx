@@ -1,4 +1,4 @@
-import { leagueHref, leaguesBySport, type LeagueIndex } from '../data/leagues';
+import { hubHref, leagueHref, leaguesBySport, type LeagueIndex } from '../data/leagues';
 
 /** Every published league, grouped by sport; hidden until there is more than one. */
 const LeagueSwitcher = ({ currentId, index }: { currentId: string; index: LeagueIndex | null }) => {
@@ -8,6 +8,10 @@ const LeagueSwitcher = ({ currentId, index }: { currentId: string; index: League
 
   return (
     <nav className="league-switcher" aria-label="Leagues">
+      <div className="league-group">
+        <span className="league-group-label">Home</span>
+        <a href={hubHref(index.default)}>All live races</a>
+      </div>
       {leaguesBySport(index).map((group) => (
         <div className="league-group" key={group.sport}>
           <span className="league-group-label">{group.label}</span>
