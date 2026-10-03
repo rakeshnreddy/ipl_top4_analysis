@@ -1,0 +1,115 @@
+{
+  "id": "sa20-2025-26",
+  "name": "SA20",
+  "shortName": "SA20",
+  "season": "2025/26",
+  "seasonLabel": "2026",
+  "priority": 6,
+  "matchesPerTeam": 10,
+  "seasonStart": "2025-12-26",
+  "seasonEnd": "2026-01-25",
+  "qualification": [
+    {
+      "size": 4,
+      "label": "Top 4"
+    },
+    {
+      "size": 2,
+      "label": "Top 2"
+    }
+  ],
+  "playoffs": {
+    "stages": [
+      "Qualifier 1",
+      "Eliminator",
+      "Qualifier 2",
+      "Final"
+    ],
+    "secondChance": [
+      "Qualifier 1"
+    ]
+  },
+  "points": {
+    "win": 4,
+    "noResult": 2,
+    "tie": 2,
+    "bonusRunRateRatio": 1.25,
+    "bonusSimulationRate": 0.44
+  },
+  "sources": {
+    "cricsheet": "sat"
+  },
+  "extraResults": [
+    {
+      "date": "2026-01-03",
+      "teams": [
+        "Sunrisers Eastern Cape",
+        "Joburg Super Kings"
+      ],
+      "note": "Abandoned without a ball bowled (rain)"
+    },
+    {
+      "date": "2026-01-03",
+      "teams": [
+        "Durban's Super Giants",
+        "Pretoria Capitals"
+      ],
+      "note": "Abandoned without a ball bowled (rain)"
+    },
+    {
+      "date": "2026-01-09",
+      "teams": [
+        "Durban's Super Giants",
+        "Sunrisers Eastern Cape"
+      ],
+      "note": "Abandoned without a ball bowled (rain)"
+    }
+  ],
+  "teams": [
+    {
+      "key": "SEC",
+      "shortName": "SEC",
+      "fullName": "Sunrisers Eastern Cape",
+      "color": "#F26522",
+      "textColor": "#FFFFFF"
+    },
+    {
+      "key": "PC",
+      "shortName": "PC",
+      "fullName": "Pretoria Capitals",
+      "color": "#2561AE",
+      "textColor": "#FFFFFF"
+    },
+    {
+      "key": "PR",
+      "shortName": "PR",
+      "fullName": "Paarl Royals",
+      "color": "#E5007E",
+      "textColor": "#FFFFFF"
+    },
+    {
+      "key": "JSK",
+      "shortName": "JSK",
+      "fullName": "Joburg Super Kings",
+      "color": "#F9CD05",
+      "textColor": "#000000"
+    },
+    {
+      "key": "DSG",
+      "shortName": "DSG",
+      "fullName": "Durban's Super Giants",
+      "color": "#0057E2",
+      "textColor": "#FFFFFF",
+      "aliases": [
+        "Durban Super Giants"
+      ]
+    },
+    {
+      "key": "MICT",
+      "shortName": "MICT",
+      "fullName": "MI Cape Town",
+      "color": "#004B8D",
+      "textColor": "#FFFFFF"
+    }
+  ]
+}

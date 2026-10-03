@@ -190,6 +190,61 @@ class CricsheetRulesTests(unittest.TestCase):
         self.assertEqual(table["Chennai"].losses, 1)
         self.assertEqual(table["Delhi"].nrr, 0.0)
 
+    def test_tie_without_a_super_over_splits_the_points(self) -> None:
+        match = parse(
+            raw_match(
+                TEAMS[0],
+                TEAMS[1],
+                {"result": "tie"},
+                [innings(TEAMS[0], 120, 1), innings(TEAMS[1], 120, 1, target={"runs": 121, "overs": 20})],
+            )
+        )
+
+        table = cricsheet.league_table([match], extract_table.team_key, cricsheet.PointsRule(win=4, tie=2))
+
+        self.assertEqual((table["Chennai"].ties, table["Chennai"].points), (1, 2))
+        self.assertEqual(table["Delhi"].nrr, 0.0)
+
+    def test_bonus_point_needs_a_run_rate_one_and_a_quarter_times_the_losers(self) -> None:
+        rule = cricsheet.PointsRule(win=4, no_result=2, bonus_run_rate_ratio=1.25)
+        big_win = parse(raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[0], "by": {"runs": 30}},
+                                  [innings(TEAMS[0], 120, 2), innings(TEAMS[1], 120, 1, target={"runs": 241, "overs": 20})]))
+        close_win = parse(raw_match(TEAMS[2], TEAMS[3], {"winner": TEAMS[2], "by": {"runs": 1}},
+                                    [innings(TEAMS[2], 120, 1), innings(TEAMS[3], 119, 1, target={"runs": 121, "overs": 20})]))
+
+        table = cricsheet.league_table([big_win, close_win], extract_table.team_key, rule)
+
+        self.assertEqual((table["Chennai"].bonus_points, table["Chennai"].points), (1, 5))
+        self.assertEqual((table["Gujarat"].bonus_points, table["Gujarat"].points), (0, 4))
+
+    def test_a_side_that_runs_out_of_batters_is_charged_its_full_quota(self) -> None:
+        # Nine wickets down in 18.1 overs and beaten: the tenth batter was absent, so all out.
+        match = parse(raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[0], "by": {"runs": 11}},
+                                [innings(TEAMS[0], 120, 1), innings(TEAMS[1], 109, 1, wickets=9, target={"runs": 121, "overs": 20})]))
+
+        self.assertEqual(cricsheet.nrr_lines(match)[1], (TEAMS[1], 109, 120))
+
+    def test_hundred_style_innings_count_five_ball_sets(self) -> None:
+        data = raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[1], "by": {"wickets": 5}},
+                         [innings(TEAMS[0], 100, 1, wickets=10), innings(TEAMS[1], 50, 2, target={"runs": 101, "overs": 20})])
+        data["info"]["balls_per_over"] = 5
+
+        match = parse(data)
+
+        self.assertEqual((match.scheduled_balls, match.target_balls), (100, 100))
+        self.assertEqual(cricsheet.nrr_lines(match)[0], (TEAMS[0], 100, 100))
+
+    def test_load_season_can_filter_a_mixed_gender_archive(self) -> None:
+        men = raw_match(TEAMS[0], TEAMS[1], {"result": "no result"}, [])
+        women = raw_match(TEAMS[2], TEAMS[3], {"result": "no result"}, [])
+        men["info"]["gender"], women["info"]["gender"] = "male", "female"
+        with tempfile.TemporaryDirectory() as tmp:
+            archive = write_archive(Path(tmp), [men, women])
+
+            matches = cricsheet.load_season(archive, "2026", gender="female")
+
+        self.assertEqual([match.teams for match in matches], [(TEAMS[2], TEAMS[3])])
+
     def test_no_result_gives_a_point_each_and_is_excluded_from_nrr(self) -> None:
         match = parse(raw_match(TEAMS[0], TEAMS[1], {"result": "no result"}, [innings(TEAMS[0], 20, 1)]))
 
@@ -309,6 +364,18 @@ class LeagueSeasonTests(unittest.TestCase):
         self.assertEqual((rows["GG"]["noResult"], rows["GG"]["points"]), (1, 13))
         self.assertIn("Abandoned without a ball bowled", payload["metadata"]["notes"][0])
 
+    def test_unique_cricsheet_stage_names_are_kept_even_on_the_same_day(self) -> None:
+        rcb, gg, dc = self.names[:3]
+        playoffs = [
+            playoff("Final", rcb, dc, "2026-02-03", season="2025/26"),
+            playoff("Eliminator", dc, gg, "2026-02-03", season="2025/26"),
+        ]
+
+        payload = self.build(self.wpl, round_robin_season(self.names, season="2025/26") + playoffs)
+
+        stages = {match["stage"]: match["winner"] for match in payload["playoffs"]["matches"]}
+        self.assertEqual(stages, {"Final": "RCB", "Eliminator": "DC"})
+
     def test_unexpected_playoff_count_keeps_cricsheet_stage_names(self) -> None:
         _, gg, dc = self.names[:3]
         semi = playoff("Semi-final", dc, gg, "2026-02-03", season="2025/26")
@@ -359,6 +426,24 @@ OFFICIAL_TABLES = {
     "mlc-2026": {
         "SFU": (12, 0.487), "LAKR": (12, 0.245), "WAF": (12, -0.399),
         "MINY": (10, -0.165), "SEO": (8, 0.034), "TSK": (6, -0.151),
+    },
+    "ilt-2025-26": {"DV": (16, 0.438), "MIE": (14, 0.676), "DUC": (10, 0.578), "ADKR": (8, -0.559), "GG": (6, -0.31), "SJW": (6, -0.815)},
+    "bpl-2025-26": {"RJW": (16, 0.335), "CHR": (12, 0.497), "RAN": (12, 0.22), "SYT": (10, 0.373), "DHC": (6, -0.381), "NOE": (4, -1.038)},
+    "lpl-2026": {"JK": (11, 0.385), "GG": (10, 0.604), "CK": (8, 0.108), "KR": (6, -0.567), "DS": (5, -0.565)},
+    # 4 points a win, 2 a no result, plus a bonus point for winning at 1.25x the loser's run rate.
+    "sa20-2025-26": {"SEC": (28, 1.762), "PC": (24, 0.218), "PR": (24, -0.922), "JSK": (22, 0.045), "DSG": (19, -0.068), "MICT": (14, -1.013)},
+    # The Hundred measures NRR per 5-ball set.
+    "hundred-men-2026": {
+        "TR": (24, 0.74), "MSG": (20, 0.791), "SRL": (20, 0.603), "MIL": (20, 0.241),
+        "WF": (16, -0.9), "SB": (12, -0.015), "LS": (12, -0.098), "BP": (4, -1.318),
+    },
+    "hundred-women-2026": {
+        "TR": (28, 1.391), "SRL": (20, 1.031), "SB": (20, 0.107), "MSG": (18, 0.344),
+        "WF": (16, 0.133), "LS": (10, -0.363), "BP": (10, -1.602), "MIL": (6, -1.165),
+    },
+    "cpl-2026": {
+        "GAW": (16, 0.615), "ABF": (13, 0.174), "BT": (12, -0.125), "JAK": (8, -0.085),
+        "SLK": (8, -0.887), "SKNP": (7, 0.252), "TKR": (6, -0.01),
     },
 }
 

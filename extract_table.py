@@ -157,10 +157,10 @@ def cricdata_api_key() -> str | None:
 
 
 def cricdata_series_id() -> str | None:
-    """A fixed series id: the league config first, then the env var for the default league only."""
+    """A fixed series id: the league config first, then the env var, which applies to IPL seasons only."""
     if LEAGUE.cricketdata_series_id:
         return LEAGUE.cricketdata_series_id
-    if LEAGUE.id == DEFAULT_LEAGUE_ID:
+    if LEAGUE.short_name == "IPL":
         return os.getenv("CRICDATA_SERIES_ID") or os.getenv("CRICAPI_SERIES_ID")
     return None
 
@@ -267,7 +267,8 @@ def parse_cricdata_standings(
         losses = parse_int(str(first_present(item, ("losses", "loss", "lost", "l"), max(0, matches - wins))))
         ties = parse_int(str(first_present(item, ("ties", "tied", "tie"), 0)))
         no_result = parse_int(str(first_present(item, ("nr", "noResult", "no_result", "noresult"), 0)))
-        points = parse_int(str(first_present(item, ("points", "pts"), wins * 2 + ties + no_result)))
+        default_points = wins * LEAGUE.points_win + ties * LEAGUE.points_tie + no_result * LEAGUE.points_no_result
+        points = parse_int(str(first_present(item, ("points", "pts"), default_points)))
         rank = parse_int(str(first_present(item, ("rank", "pos", "position"), idx)))
         meta = TEAM_META[mapped]
 
@@ -428,13 +429,13 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
         if winner:
             loser = right if winner == left else left
             table[winner]["wins"] += 1
-            table[winner]["points"] += 2
+            table[winner]["points"] += LEAGUE.points_win
             table[loser]["losses"] += 1
         else:
             table[left]["noResult"] += 1
             table[right]["noResult"] += 1
-            table[left]["points"] += 1
-            table[right]["points"] += 1
+            table[left]["points"] += LEAGUE.points_no_result
+            table[right]["points"] += LEAGUE.points_no_result
 
     for row in table.values():
         row["remainingMatches"] = max(0, LEAGUE_MATCHES_PER_TEAM - row["matches"])
@@ -459,13 +460,16 @@ def apply_cricdata_nrr_from_points(
         derived = by_key.get(points_row["teamKey"])
         if not derived:
             continue
-        same_record = all(
-            derived[field] == points_row[field]
-            for field in ("matches", "wins", "losses", "noResult", "points")
-        )
-        if not same_record:
+        # Bonus points can't be derived from match results, so for bonus leagues the
+        # official points total is taken from the table once the W/L/NR record agrees.
+        fields = ("matches", "wins", "losses", "noResult") + (() if LEAGUE.bonus_run_rate_ratio else ("points",))
+        if not all(derived[field] == points_row[field] for field in fields):
             mismatched.append(points_row["shortName"])
             continue
+        bonus = points_row["points"] - derived["points"]
+        if LEAGUE.bonus_run_rate_ratio and bonus >= 0:
+            derived["points"] = points_row["points"]
+            derived["bonusPoints"] = bonus
         if points_row.get("nrr") is not None:
             derived["nrr"] = points_row["nrr"]
             attached += 1
@@ -573,7 +577,7 @@ def validate_source_data(
     bad_row_totals = [
         row
         for row in standings
-        if row["matches"] != row["wins"] + row["losses"] + row["noResult"]
+        if row["matches"] != row["wins"] + row["losses"] + row["noResult"] + row.get("ties", 0)
     ]
     if bad_row_totals:
         details = ", ".join(
@@ -584,18 +588,18 @@ def validate_source_data(
             for row in bad_row_totals
         )
         raise SourceValidationError(f"Invalid standings row totals: {details}")
-    bad_points = [
-        row
-        for row in standings
-        if row["points"] != (row["wins"] * 2) + row["noResult"]
-    ]
+    def expected_points(row: dict[str, Any]) -> int:
+        return (
+            row["wins"] * LEAGUE.points_win
+            + row["noResult"] * LEAGUE.points_no_result
+            + row.get("ties", 0) * LEAGUE.points_tie
+            + row.get("bonusPoints", 0)
+        )
+
+    bad_points = [row for row in standings if row["points"] != expected_points(row)]
     if bad_points:
         details = ", ".join(
-            (
-                f"{row['shortName']} points={row['points']} "
-                f"expected={(row['wins'] * 2) + row['noResult']}"
-            )
-            for row in bad_points
+            f"{row['shortName']} points={row['points']} expected={expected_points(row)}" for row in bad_points
         )
         raise SourceValidationError(f"Invalid standings points totals: {details}")
     bad_remaining = [
@@ -754,7 +758,7 @@ def accumulate_exact_state_counts(
     counts = np.array(list(state_counts.values()), dtype=np.float64)
     count_ints = counts.astype(np.int64)
     final_wins = states + np.array(base_wins, dtype=np.int16)
-    final_points = states * 2 + np.array(base_points, dtype=np.int16)
+    final_points = states * LEAGUE.points_win + np.array(base_points, dtype=np.int16)
     weighted_totals = {target: [0.0] * team_count for target in target_sizes}
     exact_totals = {target: [0] * team_count for target in target_sizes}
     possible_totals = {target: [0] * team_count for target in target_sizes}
@@ -1050,7 +1054,8 @@ def run_analysis(
     if not fixtures and league_complete and has_nrr:
         return final_table_analysis(standings_rows, now)
     # Without NRR, teams level on points and wins keep sharing slots fractionally.
-    if len(fixtures) <= EXACT_MAX_FIXTURES:
+    # Bonus points are random per win, which the exact solver cannot express.
+    if len(fixtures) <= EXACT_MAX_FIXTURES and not LEAGUE.bonus_simulation_rate:
         return run_exact_dp_analysis(standings_rows, fixtures, now)
 
     team_keys = [row["teamKey"] for row in standings_rows]
@@ -1096,7 +1101,9 @@ def run_analysis(
             left, right = fixture_pairs[idx]
             winner, loser = (left, right) if outcome == 0 else (right, left)
             table[winner]["wins"] += 1
-            table[winner]["points"] += 2
+            table[winner]["points"] += LEAGUE.points_win
+            if LEAGUE.bonus_simulation_rate and random.random() < LEAGUE.bonus_simulation_rate:
+                table[winner]["points"] += 1
             table[winner]["matches"] += 1
             table[loser]["matches"] += 1
             own_wins[winner] += 1
@@ -1256,16 +1263,19 @@ def describe_result(match: cricsheet.Match, winner: str | None) -> str:
 
 def build_playoffs(matches: list[cricsheet.Match], warnings: list[str]) -> dict[str, Any]:
     playoff_matches = [match for match in matches if not match.is_league]
-    # Cricsheet can repeat a stage name (PSL has two "Eliminator" games), so use
-    # the league's configured labels whenever the number of games lines up.
-    labels = list(LEAGUE.playoff_stages)
+    # Cricsheet can repeat a stage name (PSL has two "Eliminator" games). Only then
+    # are the league's configured labels used, matched by date order; unique
+    # Cricsheet names are kept because two playoff games can share a date.
+    stages = [match.stage for match in playoff_matches]
+    labels = list(LEAGUE.playoff_stages) if len(set(stages)) < len(stages) else []
     if labels and len(labels) != len(playoff_matches):
-        if playoff_matches:
-            warnings.append(
-                f"Expected {len(labels)} playoff matches but Cricsheet has {len(playoff_matches)}; "
-                "kept Cricsheet stage names."
-            )
+        warnings.append(
+            f"Expected {len(labels)} playoff matches but Cricsheet has {len(playoff_matches)}; "
+            "kept Cricsheet stage names."
+        )
         labels = []
+    elif not labels and LEAGUE.playoff_stages and playoff_matches and len(stages) != len(LEAGUE.playoff_stages):
+        warnings.append(f"Expected {len(LEAGUE.playoff_stages)} playoff matches but Cricsheet has {len(stages)}.")
 
     rows: list[dict[str, Any]] = []
     champion = None
@@ -1311,6 +1321,8 @@ def extra_result_matches() -> list[cricsheet.Match]:
             method=None,
             margin={},
             scheduled_overs=20,
+            balls_per_over=6,
+            gender=LEAGUE.gender,
             target_runs=None,
             target_balls=None,
             innings=(),
@@ -1325,12 +1337,19 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
     if not LEAGUE.cricsheet_competition:
         raise SourceValidationError(f"{LEAGUE.id} has no Cricsheet source configured")
     archive = archive or cricsheet.fetch_archive(LEAGUE.cricsheet_competition, CRICSHEET_CACHE_DIR)
-    matches = cricsheet.load_season(archive, LEAGUE.season)
+    matches = cricsheet.load_season(archive, LEAGUE.season, gender=LEAGUE.gender)
     if not matches:
         raise SourceValidationError(f"Cricsheet archive has no {LEAGUE.short_name} {LEAGUE.season} matches")
 
     try:
-        table = cricsheet.league_table(matches + extra_result_matches(), team_key)
+        rule = cricsheet.PointsRule(
+            win=LEAGUE.points_win,
+            no_result=LEAGUE.points_no_result,
+            tie=LEAGUE.points_tie,
+            bonus_run_rate_ratio=LEAGUE.bonus_run_rate_ratio,
+            rate_balls=LEAGUE.nrr_balls_per_unit,
+        )
+        table = cricsheet.league_table(matches + extra_result_matches(), team_key, rule)
     except ValueError as exc:
         raise SourceValidationError(str(exc)) from exc
 
@@ -1346,6 +1365,8 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
                 "wins": row.wins,
                 "losses": row.losses,
                 "noResult": row.no_result,
+                "ties": row.ties,
+                "bonusPoints": row.bonus_points,
                 "points": row.points,
                 "nrr": row.nrr,
                 "rank": 0,
@@ -1415,7 +1436,16 @@ def write_league_index() -> None:
         start = config.season_start.timestamp() if config.season_start else 0
         sort_keys[league_id] = (0 if live else 1, config.priority, -start)
     entries.sort(key=lambda entry: sort_keys[entry["id"]])
-    write_json(LEAGUE_INDEX_OUTPUT, {"default": DEFAULT_LEAGUE_ID, "leagues": entries})
+    write_json(LEAGUE_INDEX_OUTPUT, {"default": default_league_id(entries), "leagues": entries})
+
+
+def default_league_id(entries: list[dict[str, Any]]) -> str:
+    """The site's home page shows the newest published IPL season."""
+    ipl = [load_league(entry["id"]) for entry in entries if entry["shortName"] == "IPL"]
+    if not ipl:
+        return DEFAULT_LEAGUE_ID
+    newest = max(ipl, key=lambda league: league.season_start.timestamp() if league.season_start else 0)
+    return newest.id
 
 
 def published_payload(league_id: str) -> dict[str, Any] | None:
@@ -1533,6 +1563,9 @@ def main(argv: list[str] | None = None) -> None:
                 print(f"{league_id}: final rebuild not possible yet ({exc})")
                 continue
             failures.append(f"{league_id}: {exc}")
+            continue
+        if active and source == "cricsheet" and payload["metadata"].get("season_status") != "complete":
+            print(f"{league_id}: Cricsheet does not have the final yet; retrying on the next run")
             continue
         if payload["metadata"].get("season_status") != "complete":
             payload["movement"] = probability_movement(published_payload(league_id), payload)

@@ -1,0 +1,491 @@
+{
+  "metadata": {
+    "season": "2026",
+    "generated_at": "2026-10-03T10:44:52Z",
+    "source": "Cricsheet",
+    "source_url": "https://cricsheet.org/",
+    "source_license": "ODC-By 1.0",
+    "source_license_url": "https://opendatacommons.org/licenses/by/1-0/",
+    "data_freshness_status": "fresh",
+    "season_status": "complete",
+    "warnings": [],
+    "notes": []
+  },
+  "league": {
+    "id": "lpl-2026",
+    "name": "Lanka Premier League",
+    "shortName": "LPL",
+    "season": "2026",
+    "seasonLabel": "2026",
+    "matchesPerTeam": 8,
+    "qualification": [
+      {
+        "size": 4,
+        "label": "Top 4"
+      },
+      {
+        "size": 2,
+        "label": "Top 2"
+      }
+    ],
+    "secondChanceStages": [
+      "Qualifier 1"
+    ],
+    "points": {
+      "win": 2,
+      "noResult": 1,
+      "tie": 1,
+      "bonus": false
+    },
+    "teams": [
+      {
+        "key": "JK",
+        "shortName": "JK",
+        "fullName": "Jaffna Kings",
+        "color": "#6D28D9",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "GG",
+        "shortName": "GG",
+        "fullName": "Galle Gallants",
+        "color": "#0369A1",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "CK",
+        "shortName": "CK",
+        "fullName": "Colombo Kaps",
+        "color": "#B91C1C",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "KR",
+        "shortName": "KR",
+        "fullName": "Kandy Royals",
+        "color": "#F59E0B",
+        "textColor": "#000000"
+      },
+      {
+        "key": "DS",
+        "shortName": "DS",
+        "fullName": "Dambulla Sixers",
+        "color": "#DB2777",
+        "textColor": "#FFFFFF"
+      }
+    ]
+  },
+  "standings": [
+    {
+      "teamKey": "JK",
+      "shortName": "JK",
+      "fullName": "Jaffna Kings",
+      "matches": 8,
+      "wins": 5,
+      "losses": 2,
+      "noResult": 1,
+      "ties": 0,
+      "bonusPoints": 0,
+      "points": 11,
+      "nrr": 0.385,
+      "rank": 1,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "GG",
+      "shortName": "GG",
+      "fullName": "Galle Gallants",
+      "matches": 8,
+      "wins": 5,
+      "losses": 3,
+      "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
+      "points": 10,
+      "nrr": 0.604,
+      "rank": 2,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "CK",
+      "shortName": "CK",
+      "fullName": "Colombo Kaps",
+      "matches": 8,
+      "wins": 4,
+      "losses": 4,
+      "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
+      "points": 8,
+      "nrr": 0.108,
+      "rank": 3,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "KR",
+      "shortName": "KR",
+      "fullName": "Kandy Royals",
+      "matches": 8,
+      "wins": 3,
+      "losses": 5,
+      "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
+      "points": 6,
+      "nrr": -0.567,
+      "rank": 4,
+      "remainingMatches": 0
+    },
+    {
+      "teamKey": "DS",
+      "shortName": "DS",
+      "fullName": "Dambulla Sixers",
+      "matches": 8,
+      "wins": 2,
+      "losses": 5,
+      "noResult": 1,
+      "ties": 0,
+      "bonusPoints": 0,
+      "points": 5,
+      "nrr": -0.565,
+      "rank": 5,
+      "remainingMatches": 0
+    }
+  ],
+  "fixtures": [],
+  "playoffs": {
+    "matches": [
+      {
+        "id": "1537351",
+        "stage": "Qualifier 1",
+        "date": "2026-08-05",
+        "teamA": "JK",
+        "teamB": "GG",
+        "winner": "JK",
+        "result": "JK won by 14 runs",
+        "venue": "R Premadasa Stadium, Colombo"
+      },
+      {
+        "id": "1537352",
+        "stage": "Eliminator",
+        "date": "2026-08-05",
+        "teamA": "CK",
+        "teamB": "KR",
+        "winner": "CK",
+        "result": "CK won by 68 runs",
+        "venue": "R Premadasa Stadium, Colombo"
+      },
+      {
+        "id": "1537353",
+        "stage": "Qualifier 2",
+        "date": "2026-08-07",
+        "teamA": "CK",
+        "teamB": "GG",
+        "winner": "GG",
+        "result": "GG won by 6 wickets",
+        "venue": "R Premadasa Stadium, Colombo"
+      },
+      {
+        "id": "1537354",
+        "stage": "Final",
+        "date": "2026-08-08",
+        "teamA": "JK",
+        "teamB": "GG",
+        "winner": "GG",
+        "result": "GG won by 5 wickets",
+        "venue": "R Premadasa Stadium, Colombo"
+      }
+    ],
+    "champion": "GG",
+    "runnerUp": "JK"
+  },
+  "analysis": {
+    "method": "Final standings",
+    "simulationCount": 1,
+    "generatedAt": "2026-10-03T10:44:52Z",
+    "stateCount": 1,
+    "modelNotes": [
+      "The league stage is complete, so qualification is decided by the final table: points, then net run rate."
+    ],
+    "overallProbabilities": {
+      "JK": {
+        "top4": 100.0,
+        "top4Clear": 100.0,
+        "top4Possible": 100.0,
+        "top2": 100.0,
+        "top2Clear": 100.0,
+        "top2Possible": 100.0
+      },
+      "GG": {
+        "top4": 100.0,
+        "top4Clear": 100.0,
+        "top4Possible": 100.0,
+        "top2": 100.0,
+        "top2Clear": 100.0,
+        "top2Possible": 100.0
+      },
+      "CK": {
+        "top4": 100.0,
+        "top4Clear": 100.0,
+        "top4Possible": 100.0,
+        "top2": 0.0,
+        "top2Clear": 0.0,
+        "top2Possible": 0.0
+      },
+      "KR": {
+        "top4": 100.0,
+        "top4Clear": 100.0,
+        "top4Possible": 100.0,
+        "top2": 0.0,
+        "top2Clear": 0.0,
+        "top2Possible": 0.0
+      },
+      "DS": {
+        "top4": 0.0,
+        "top4Clear": 0.0,
+        "top4Possible": 0.0,
+        "top2": 0.0,
+        "top2Clear": 0.0,
+        "top2Possible": 0.0
+      }
+    },
+    "teamAnalysis": {
+      "4": {
+        "JK": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "GG": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "CK": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "KR": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "DS": {
+          "percentage": 0.0,
+          "results_df": {}
+        }
+      },
+      "2": {
+        "JK": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "GG": {
+          "percentage": 100.0,
+          "results_df": {}
+        },
+        "CK": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "KR": {
+          "percentage": 0.0,
+          "results_df": {}
+        },
+        "DS": {
+          "percentage": 0.0,
+          "results_df": {}
+        }
+      }
+    },
+    "qualificationPath": {
+      "4": {
+        "JK": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "GG": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "CK": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "KR": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "DS": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        }
+      },
+      "2": {
+        "JK": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "GG": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 0,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "CK": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "KR": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        },
+        "DS": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 0,
+          "method": "Final standings",
+          "ownWinBuckets": [],
+          "fixtureImpacts": [],
+          "nextFixtureImpacts": [],
+          "impactFixtureWindow": 0
+        }
+      }
+    },
+    "scenarioBreakdown": {
+      "4": {
+        "JK": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "GG": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "CK": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "KR": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "DS": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        }
+      },
+      "2": {
+        "JK": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "GG": {
+          "clearRate": 100.0,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 100.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "CK": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "KR": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        },
+        "DS": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [],
+          "fixtureImpacts": []
+        }
+      }
+    }
+  }
+}
