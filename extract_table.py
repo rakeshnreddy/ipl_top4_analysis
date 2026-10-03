@@ -52,7 +52,13 @@ LEAGUE_INDEX_OUTPUT = DATA_DIR / "leagues.json"
 CRICSHEET_CACHE_DIR = Path(os.getenv("CRICSHEET_CACHE_DIR", ROOT_DIR / ".cache" / "cricsheet"))
 FIXTURES_CACHE_DIR = Path(os.getenv("FIXTURES_CACHE_DIR", ROOT_DIR / ".cache" / "fixtures"))
 # Module that builds each non-cricket sport's payload from a rolling config.
-SPORT_MODULES = {"football": "football"}
+SPORT_MODULES = {
+    "football": "football",
+    "american-football": "us_sports",
+    "basketball": "us_sports",
+    "ice-hockey": "us_sports",
+    "baseball": "us_sports",
+}
 LIVE_STATUSES = {"league_stage", "playoffs", "in_progress"}
 
 REQUEST_TIMEOUT_SECONDS = 20

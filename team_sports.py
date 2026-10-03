@@ -43,6 +43,8 @@ class Game:
     venue: str | None
     home_score: int | None
     away_score: int | None
+    # How a decided game ended when that matters, e.g. "OT" or "SO" in the NHL.
+    note: str | None = None
 
     @property
     def played(self) -> bool:
@@ -87,6 +89,10 @@ def resolve_season(config: dict[str, Any], now: datetime, offset: int = 0) -> Se
     )
 
 
+# Table places from the top or bottom (football), or playoff outcomes (leagues with conferences).
+TIER_KINDS = {"top", "bottom", "playoffs", "division", "seed", "best-record", "champion"}
+
+
 def validate_config(config: dict[str, Any]) -> None:
     """Fail fast on a malformed rolling config instead of on the night it first runs."""
     name = config.get("id", "?")
@@ -97,8 +103,11 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError(f"{name}: season months must be 1-12")
     keys = set()
     for tier in config.get("tiers", []):
-        if tier.get("kind", "top") not in ("top", "bottom") or tier.get("size", 0) < 1 or not tier.get("label"):
-            raise ValueError(f"{name}: every tier needs a label, a positive size and kind top or bottom")
+        kind = tier.get("kind", "top")
+        if kind not in TIER_KINDS or not tier.get("label"):
+            raise ValueError(f"{name}: every tier needs a label and a kind from {', '.join(sorted(TIER_KINDS))}")
+        if kind in ("top", "bottom", "seed") and tier.get("size", 0) < 1:
+            raise ValueError(f"{name}: {kind} tiers need a positive size")
         keys.add(tier["key"])
     if not keys or len(keys) != len(config["tiers"]):
         raise ValueError(f"{name}: tiers need unique keys")
