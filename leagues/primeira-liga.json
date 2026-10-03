@@ -1,0 +1,135 @@
+{
+  "id": "primeira-liga",
+  "sport": "football",
+  "name": "Primeira Liga",
+  "shortName": "Primeira Liga",
+  "priority": 27,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "primeira-liga-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiebreak": "head-to-head",
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top2",
+      "label": "Top 2",
+      "kind": "top",
+      "size": 2
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 2,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "primeira-liga-{year}",
+    "espn": "por.1"
+  },
+  "teams": {
+    "Académico": {
+      "shortName": "ACV",
+      "color": "#1A1A1A",
+      "textColor": "#FFFFFF"
+    },
+    "CD Nacional": {
+      "shortName": "NAC",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    },
+    "Casa Pia AC": {
+      "shortName": "CPI",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    },
+    "Estoril Praia": {
+      "shortName": "EST",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "Estrela Amadora": {
+      "shortName": "EAM",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "FC Alverca": {
+      "shortName": "ALV",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "FC Arouca": {
+      "shortName": "ARO",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "FC Famalicão": {
+      "shortName": "FAM",
+      "color": "#003DA5",
+      "textColor": "#FFFFFF"
+    },
+    "FC Porto": {
+      "shortName": "POR",
+      "color": "#00428C",
+      "textColor": "#FFFFFF"
+    },
+    "Gil Vicente FC": {
+      "shortName": "GIL",
+      "color": "#DA291C",
+      "textColor": "#FFFFFF"
+    },
+    "Marítimo M.": {
+      "shortName": "MAR",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "Moreirense FC": {
+      "shortName": "MOR",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "Rio Ave FC": {
+      "shortName": "RAV",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "SC Braga": {
+      "shortName": "BRA",
+      "color": "#DA291C",
+      "textColor": "#FFFFFF"
+    },
+    "SL Benfica": {
+      "shortName": "BEN",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Santa Clara": {
+      "shortName": "SCL",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Sporting CP": {
+      "shortName": "SCP",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "Vitória SC": {
+      "shortName": "VSC",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    }
+  }
+}

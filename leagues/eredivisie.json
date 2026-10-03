@@ -1,0 +1,134 @@
+{
+  "id": "eredivisie",
+  "sport": "football",
+  "name": "Eredivisie",
+  "shortName": "Eredivisie",
+  "priority": 26,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "eredivisie-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top2",
+      "label": "Top 2",
+      "kind": "top",
+      "size": 2
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 2,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "eredivisie-{year}",
+    "espn": "ned.1"
+  },
+  "teams": {
+    "ADO Den Haag": {
+      "shortName": "ADO",
+      "color": "#00A651",
+      "textColor": "#FFFFFF"
+    },
+    "AZ": {
+      "shortName": "AZ",
+      "color": "#DB0021",
+      "textColor": "#FFFFFF"
+    },
+    "Ajax": {
+      "shortName": "AJA",
+      "color": "#D2122E",
+      "textColor": "#FFFFFF"
+    },
+    "Excelsior Rotterdam": {
+      "shortName": "EXC",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "FC Groningen": {
+      "shortName": "GRO",
+      "color": "#00A651",
+      "textColor": "#FFFFFF"
+    },
+    "FC Twente": {
+      "shortName": "TWE",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "FC Utrecht": {
+      "shortName": "UTR",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Feyenoord": {
+      "shortName": "FEY",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Fortuna Sittard": {
+      "shortName": "FOR",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "Go Ahead Eagles": {
+      "shortName": "GAE",
+      "color": "#FFD100",
+      "textColor": "#000000"
+    },
+    "N.E.C. Nijmegen": {
+      "shortName": "NEC",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "PEC Zwolle": {
+      "shortName": "PEC",
+      "color": "#005DAA",
+      "textColor": "#FFFFFF"
+    },
+    "PSV": {
+      "shortName": "PSV",
+      "color": "#ED1C24",
+      "textColor": "#FFFFFF"
+    },
+    "SC Cambuur": {
+      "shortName": "CAM",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "Sparta Rotterdam": {
+      "shortName": "SPA",
+      "color": "#D71920",
+      "textColor": "#FFFFFF"
+    },
+    "Telstar": {
+      "shortName": "TEL",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    },
+    "Willem II": {
+      "shortName": "WII",
+      "color": "#003DA5",
+      "textColor": "#FFFFFF"
+    },
+    "sc Heerenveen": {
+      "shortName": "HEE",
+      "color": "#1C4DA1",
+      "textColor": "#FFFFFF"
+    }
+  }
+}

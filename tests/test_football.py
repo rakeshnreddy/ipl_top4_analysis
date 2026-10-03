@@ -91,6 +91,42 @@ class TableTests(unittest.TestCase):
         self.assertEqual(football.ranked(table), ["City", "Albion", "Rovers", "Borough"])
         self.assertEqual(table["City"], {"played": 2, "wins": 1, "draws": 1, "losses": 0, "goalsFor": 4, "goalsAgainst": 2, "points": 4, "goalDifference": 2})
 
+    def test_head_to_head_decides_ties_once_the_teams_have_met_both_ways(self) -> None:
+        # Albion and Borough finish level on points; Borough has the better goal difference but lost both meetings.
+        games = [
+            Game("1", 1, KICKOFF, "Albion", "Borough", None, 1, 0),
+            Game("2", 2, KICKOFF, "Borough", "Albion", None, 0, 1),
+            Game("3", 3, KICKOFF, "Borough", "City", None, 6, 0),
+            Game("4", 4, KICKOFF, "Rovers", "Borough", None, 0, 6),
+            Game("5", 5, KICKOFF, "Albion", "City", None, 0, 1),
+            Game("6", 6, KICKOFF, "Rovers", "Albion", None, 1, 0),
+        ]
+        table = football.standings(games, TEAMS)
+        self.assertEqual(table["Albion"]["points"], table["Borough"]["points"])
+
+        self.assertEqual(football.ranked(table)[:2], ["Borough", "Albion"])
+        self.assertEqual(football.ranked(table, games, "head-to-head-complete")[:2], ["Albion", "Borough"])
+        # After one meeting, Spain and Italy still rank by goal difference; Portugal does not wait.
+        first_leg = [
+            Game("1", 1, KICKOFF, "Albion", "Borough", None, 1, 0),
+            Game("2", 2, KICKOFF, "Borough", "City", None, 3, 0),
+            Game("3", 2, KICKOFF, "Rovers", "City", None, 0, 0),
+        ]
+        partial = football.standings(first_leg, TEAMS)
+        self.assertEqual(football.ranked(partial, first_leg, "head-to-head-complete")[:2], ["Borough", "Albion"])
+        self.assertEqual(football.ranked(partial, first_leg, "head-to-head")[:2], ["Albion", "Borough"])
+
+    def test_deductions_are_found_by_matching_records(self) -> None:
+        table = football.standings([Game("1", 1, KICKOFF, "Albion", "Borough", None, 2, 0), Game("2", 1, KICKOFF, "City", "Rovers", None, 1, 1)], TEAMS)
+        official = [dict(row) for row in table.values()]
+        for row in official:
+            if row["wins"] == 1:
+                row["points"] -= 4
+        # Two teams share the drawn record, so no deduction can be pinned on either of them.
+        official[2]["points"] -= 1
+
+        self.assertEqual(football.official_adjustments(table, official), {"Albion": -4})
+
     def test_form_lists_the_latest_result_first(self) -> None:
         games = [
             Game("1", 1, KICKOFF, "Albion", "Borough", None, 2, 0),
