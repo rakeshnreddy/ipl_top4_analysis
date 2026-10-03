@@ -30,25 +30,26 @@ export function leagueHref(leagueId: string, defaultId: string) {
   return leagueId === defaultId ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?league=${leagueId}`;
 }
 
-export const SPORT_LABELS: Record<string, string> = {
+/** Switcher rows: the four North American leagues share one row. */
+const SPORT_GROUPS: Record<string, string> = {
   cricket: 'Cricket',
   football: 'Football',
-  'american-football': 'NFL',
-  basketball: 'NBA',
-  'ice-hockey': 'NHL',
-  baseball: 'MLB',
+  'american-football': 'US sports',
+  basketball: 'US sports',
+  'ice-hockey': 'US sports',
+  baseball: 'US sports',
 };
 
 export const sportOf = (league: Pick<LeagueSummary, 'sport'>) => league.sport ?? 'cricket';
 
-/** Leagues grouped by sport, keeping the list's order (live leagues first) within each sport. */
+/** Leagues grouped by sport, keeping the list's order (live leagues first) within each group. */
 export function leaguesBySport(index: LeagueIndex) {
   const groups = new Map<string, LeagueSummary[]>();
   index.leagues.forEach((league) => {
-    const sport = sportOf(league);
-    groups.set(sport, [...(groups.get(sport) ?? []), league]);
+    const label = SPORT_GROUPS[sportOf(league)] ?? sportOf(league);
+    groups.set(label, [...(groups.get(label) ?? []), league]);
   });
-  return [...groups.entries()].map(([sport, leagues]) => ({ sport, label: SPORT_LABELS[sport] ?? sport, leagues }));
+  return [...groups.entries()].map(([label, leagues]) => ({ sport: label, label, leagues }));
 }
 
 export async function loadLeagueIndex(fetchImpl: typeof fetch = fetch): Promise<LeagueIndex> {

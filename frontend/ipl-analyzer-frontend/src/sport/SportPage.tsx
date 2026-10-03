@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, CalendarClock, ExternalLink, Flame, ListOrdered, ShieldCheck, Swords, Zap } from 'lucide-react';
 import '../App.css';
 import './SportPage.css';
@@ -10,6 +10,7 @@ import {
   type MatchThatMatters,
   type SportColumn,
   type SportFixture,
+  type SportGroup,
   type SportPayload,
   type SportStanding,
   type SportTier,
@@ -70,6 +71,10 @@ function tierPhrase(tiers: SportTier[]) {
   return labels.length > 1 ? `${labels.slice(0, -1).join(', ')} & ${labels[labels.length - 1]}` : labels[0] ?? 'Season';
 }
 
+function headline(payload: SportPayload) {
+  return payload.league.headline ?? `${payload.league.name} ${tierPhrase(payload.league.tiers)} Odds`;
+}
+
 function sportSeo(payload: SportPayload) {
   const { name, seasonLabel, tiers } = payload.league;
   const phrase = tierPhrase(tiers);
@@ -77,6 +82,12 @@ function sportSeo(payload: SportPayload) {
     return {
       title: `${name} ${seasonLabel} Final Table & Results | Playoff Pulse`,
       description: `The final ${name} ${seasonLabel} table with every result, plus how the season's ${phrase.toLowerCase()} races finished.`,
+    };
+  }
+  if (payload.league.headline) {
+    return {
+      title: `${payload.league.headline} ${seasonLabel} | Playoff Pulse`,
+      description: `Daily ${name} ${phrase.toLowerCase()} probabilities from ${payload.analysis.simulations.toLocaleString()} simulated seasons, with the standings, game predictions and the games that matter most.`,
     };
   }
   return {
@@ -94,7 +105,7 @@ function tierHighlight(payload: SportPayload, tier: SportTier, short: (key: stri
     const atRisk = ranked.slice(0, Math.min(tier.size ?? 3, 3));
     return { label: `${tier.label} risk`, value: atRisk.map((item) => `${short(item.key)} ${formatChance(item.value)}`).join(' · ') };
   }
-  if (tier.size === 1) {
+  if (tier.size === 1 || tier.kind === 'champion' || tier.kind === 'best-record') {
     const favourite = ranked[0];
     return { label: `${tier.label} favourite`, value: favourite ? `${short(favourite.key)} ${formatChance(favourite.value)}` : '–' };
   }
@@ -115,6 +126,30 @@ function zoneFor(payload: SportPayload, rank: number) {
   const tops = payload.league.tiers.filter((tier) => tier.kind === 'top' && tier.size).sort((a, b) => (a.size ?? 0) - (b.size ?? 0));
   const index = tops.findIndex((tier) => rank <= (tier.size ?? 0));
   return index === 0 ? 'zone-first' : index > 0 ? 'zone-top' : '';
+}
+
+/** Rows above a group's first cut line (playoff places), and between the first and second (play-in). */
+function groupZone(group: SportGroup, position: number) {
+  const [first, second] = group.cutoffs ?? [];
+  if (!first) {
+    return position === 0 ? 'zone-first' : '';
+  }
+  if (position < first.after) {
+    return 'zone-top';
+  }
+  return second && position < second.after ? 'zone-mid' : '';
+}
+
+// Columns from payloads published before columns carried their own `optional` flag.
+const LEGACY_OPTIONAL = new Set(['wins', 'draws', 'losses', 'goalsFor', 'goalsAgainst']);
+const isOptional = (column: SportColumn) => column.optional ?? LEGACY_OPTIONAL.has(column.key);
+
+/** Tiers settled before the season's end (regular-season places once the playoffs start). */
+const isSettled = (payload: SportPayload, tier: SportTier) => isSeasonComplete(payload) || Boolean(tier.settled);
+
+/** The title race first, then the league's other tiers. */
+function heroTiers(tiers: SportTier[]) {
+  return [...tiers].sort((a, b) => Number(b.kind === 'champion') - Number(a.kind === 'champion')).slice(0, 3);
 }
 
 function heatStyle(value: number, tier: SportTier) {
@@ -243,7 +278,11 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
   const selected = payload.standings.find((row) => row.teamKey === selectedKey) ?? payload.standings[0];
   const groups = payload.league.groups ?? [];
   const group = groups.find((item) => item.key === groupKey);
-  const rows = group ? payload.standings.filter((row) => group.teams.includes(row.teamKey)) : payload.standings;
+  const byKey = new Map(payload.standings.map((row) => [row.teamKey, row]));
+  const rows = group
+    ? group.teams.map((key) => byKey.get(key)).filter((row): row is SportStanding => Boolean(row))
+    : payload.standings;
+  const columnCount = 3 + payload.league.columns.length + payload.league.tiers.length;
 
   const selectTeam = (key: string) => {
     setSelectedKey(key);
@@ -263,14 +302,14 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
               {payload.league.shortName} · {payload.league.seasonLabel}
             </span>
             <h1 id="page-title">
-              {complete
-                ? `${payload.league.name} ${payload.league.seasonLabel} Final Table`
-                : `${payload.league.name} ${tierPhrase(payload.league.tiers)} Odds`}
+              {complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Table` : headline(payload)}
             </h1>
             <p>
               {complete
                 ? 'The season is over: final table, last results and how each race finished.'
-                : `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons`}
+                : started
+                  ? `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons`
+                  : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons`}
             </p>
             <nav className="quick-links" aria-label="Page sections">
               <a href="#table">Table</a>
@@ -282,14 +321,14 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
           </div>
 
           <div className="hero-facts" aria-label="Season snapshot">
-            {payload.league.tiers.slice(0, 3).map((tier) => {
+            {heroTiers(payload.league.tiers).map((tier) => {
               const highlight = complete
                 ? { label: tier.label, value: payload.standings.filter((row) => chance(payload, row.teamKey, tier.key) >= 50).map((row) => row.shortName).join(', ') || '–' }
                 : tierHighlight(payload, tier, short);
               return (
                 <div key={tier.key}>
                   <span>{highlight.label}</span>
-                  <strong>{started || complete ? highlight.value : 'Season not started'}</strong>
+                  <strong>{highlight.value}</strong>
                 </div>
               );
             })}
@@ -343,7 +382,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                       scope="col"
                       key={column.key}
                       title={column.title}
-                      className={['wins', 'draws', 'losses', 'goalsFor', 'goalsAgainst'].includes(column.key) ? 'col-optional' : undefined}
+                      className={isOptional(column) ? 'col-optional' : undefined}
                     >
                       {column.label}
                     </th>
@@ -369,9 +408,14 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
               </thead>
               <tbody>
                 {rows.map((row, position) => (
+                  <Fragment key={row.teamKey}>
+                  {group?.cutoffs?.some((cutoff) => cutoff.after === position) && (
+                    <tr className="cutline" aria-hidden="true">
+                      <td colSpan={columnCount}>{group.cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
+                    </tr>
+                  )}
                   <tr
-                    className={`${group ? '' : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
-                    key={row.teamKey}
+                    className={`${group ? groupZone(group, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
                     onClick={() => selectTeam(row.teamKey)}
                   >
                     <td className="col-rank">{group ? position + 1 : row.rank}</td>
@@ -385,7 +429,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                     {payload.league.columns.map((column) => (
                       <td
                         key={column.key}
-                        className={`${column.strong ? 'is-strong' : ''} ${['wins', 'draws', 'losses', 'goalsFor', 'goalsAgainst'].includes(column.key) ? 'col-optional' : ''}`}
+                        className={`${column.strong ? 'is-strong' : ''} ${isOptional(column) ? 'col-optional' : ''}`}
                       >
                         {formatCell(row, column)}
                       </td>
@@ -395,7 +439,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                     </td>
                     {payload.league.tiers.map((tier) => {
                       const value = chance(payload, row.teamKey, tier.key);
-                      return complete ? (
+                      return isSettled(payload, tier) ? (
                         <td className={`col-tier ${value >= 50 ? 'is-achieved' : 'is-missed'}`} key={tier.key}>
                           {value >= 50 ? '✓' : '–'}
                         </td>
@@ -406,6 +450,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                       );
                     })}
                   </tr>
+                  </Fragment>
                 ))}
               </tbody>
             </table>
@@ -673,6 +718,15 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
   const bottomSize = payload.league.tiers.find((tier) => tier.kind === 'bottom')?.size ?? 0;
   const topSize = Math.max(0, ...payload.league.tiers.filter((tier) => tier.kind === 'top').map((tier) => tier.size ?? 0));
   const positionLabel = payload.league.positionLabel ?? 'Finishing position';
+  const zones = payload.league.positionZones;
+  const placeZone = (place: number) => {
+    if (zones) {
+      return `zone-${zones.find((zone) => place <= zone.to)?.kind ?? 'none'}`;
+    }
+    return place > count - bottomSize ? 'zone-bottom' : place <= topSize ? 'zone-top' : '';
+  };
+  const record = typeof row.record === 'string' ? row.record : null;
+  const seed = typeof row.seed === 'number' ? row.seed : null;
 
   return (
     <aside className="probability-panel sport-team-panel" id="team" aria-labelledby="team-title">
@@ -688,9 +742,18 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
         <div>
           <dt>Now</dt>
           <dd>
-            {row.rank}
-            <small>{ordinalSuffix(row.rank)}</small>
-            {row.points !== undefined ? ` · ${row.points} pts` : ` · ${row.wins}-${row.losses}`}
+            {record && seed !== null ? (
+              <>
+                {record} · {seed}
+                <small>{ordinalSuffix(seed)}</small> {String(row.conference ?? '')}
+              </>
+            ) : (
+              <>
+                {row.rank}
+                <small>{ordinalSuffix(row.rank)}</small>
+                {row.points !== undefined ? ` · ${row.points} pts` : ` · ${row.wins}-${row.losses}`}
+              </>
+            )}
           </dd>
         </div>
         {!complete && expected && (
@@ -699,13 +762,20 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
             <dd>
               {expected.points !== undefined ? `${expected.points.toFixed(0)} pts` : `${expected.wins?.toFixed(0)} wins`}
               {expected.position !== undefined ? ` · avg ${expected.position.toFixed(1)}` : ''}
+              {expected.seed !== undefined ? ` · avg seed ${expected.seed.toFixed(1)}` : ''}
             </dd>
           </div>
         )}
         {payload.league.tiers.map((tier) => (
           <div key={tier.key}>
             <dt>{tier.label}</dt>
-            <dd>{complete ? (chance(payload, row.teamKey, tier.key) >= 50 ? 'Yes' : 'No') : formatChance(chance(payload, row.teamKey, tier.key))}</dd>
+            <dd>
+              {isSettled(payload, tier)
+                ? chance(payload, row.teamKey, tier.key) >= 50
+                  ? 'Yes'
+                  : 'No'
+                : formatChance(chance(payload, row.teamKey, tier.key))}
+            </dd>
           </div>
         ))}
       </dl>
@@ -716,7 +786,7 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
           <div className="position-bars">
             {positions.map((value, index) => {
               const place = index + 1;
-              const zone = place > count - bottomSize ? 'zone-bottom' : place <= topSize ? 'zone-top' : '';
+              const zone = placeZone(place);
               return (
                 <span className={`position-bar ${zone}`} key={place} title={`${place}${ordinalSuffix(place)}: ${formatChance(value)}`}>
                   <span style={{ height: `${Math.max((value / peak) * 100, value > 0 ? 3 : 0)}%` }} />

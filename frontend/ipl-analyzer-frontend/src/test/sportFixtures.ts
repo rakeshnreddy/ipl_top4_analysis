@@ -152,3 +152,63 @@ export const multiSportIndex: LeagueIndex = {
     ...leagueIndex.leagues,
   ],
 };
+
+/** Four NFL-style teams in two conferences, with conference seeds and a playoff line after one team. */
+export const conferencePayload: SportPayload = {
+  ...footballPayload,
+  league: {
+    ...footballPayload.league,
+    id: 'nfl-2026',
+    configId: 'nfl',
+    sport: 'american-football',
+    name: 'NFL',
+    shortName: 'NFL',
+    headline: 'NFL Playoff & Super Bowl Odds',
+    season: '2026',
+    seasonLabel: '2026',
+    tiers: [
+      { key: 'playoffs', label: 'Playoffs', kind: 'playoffs' },
+      { key: 'title', label: 'Super Bowl', kind: 'champion', shortLabel: 'SB' },
+    ],
+    columns: [
+      { key: 'wins', label: 'W' },
+      { key: 'losses', label: 'L' },
+      { key: 'pct', label: 'PCT', format: 'pct', strong: true },
+      { key: 'streak', label: 'STRK', optional: true },
+    ],
+    outcomes: ['home', 'away'],
+    groups: [
+      { key: 'AFC', label: 'AFC', teams: ['Chelsea', 'Arsenal'], cutoffs: [{ after: 1, label: 'Playoff line' }] },
+      { key: 'NFC', label: 'NFC', teams: ['Liverpool', 'Spurs'], cutoffs: [{ after: 1, label: 'Playoff line' }] },
+    ],
+    rankLabel: 'League',
+    positionLabel: 'Conference seed',
+    positionZones: [{ to: 1, kind: 'top' }],
+  },
+  standings: footballPayload.standings.map((row) => ({
+    ...row,
+    record: `${row.wins}-${row.losses}`,
+    pct: row.wins / Math.max(row.played, 1),
+    streak: 'W1',
+    conference: ['Arsenal', 'Chelsea'].includes(row.teamKey) ? 'AFC' : 'NFC',
+    seed: row.teamKey === 'Chelsea' || row.teamKey === 'Liverpool' ? 1 : 2,
+  })),
+  analysis: {
+    ...footballPayload.analysis,
+    probabilities: {
+      Arsenal: { playoffs: 40, title: 20 },
+      Chelsea: { playoffs: 60, title: 30 },
+      Liverpool: { playoffs: 70, title: 35 },
+      Spurs: { playoffs: 30, title: 15 },
+    },
+    positions: { Arsenal: [40, 60], Chelsea: [60, 40], Liverpool: [70, 30], Spurs: [30, 70] },
+    expected: {
+      Arsenal: { wins: 9.1, seed: 1.6 },
+      Chelsea: { wins: 9.8, seed: 1.4 },
+      Liverpool: { wins: 10.2, seed: 1.3 },
+      Spurs: { wins: 8.4, seed: 1.7 },
+    },
+  },
+  matchesThatMatter: [],
+  movement: null,
+};

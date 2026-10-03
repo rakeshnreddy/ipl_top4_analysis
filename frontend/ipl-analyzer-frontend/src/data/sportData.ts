@@ -5,6 +5,8 @@ export interface SportTier {
   label: string;
   /** Narrow-screen table header, e.g. "Drop" for "Relegation". */
   shortLabel?: string;
+  /** Decided already (regular-season tiers once the playoffs start): shown as ticks, not odds. */
+  settled?: boolean;
   /** "top" and "bottom" tiers are table positions; others (division titles, playoff spots) are sport-specific. */
   kind?: 'top' | 'bottom' | string;
   size?: number;
@@ -17,6 +19,8 @@ export interface SportColumn {
   signed?: boolean;
   strong?: boolean;
   format?: 'pct' | 'decimal';
+  /** Hidden on phones. */
+  optional?: boolean;
 }
 
 export interface SportTeam {
@@ -30,7 +34,10 @@ export interface SportTeam {
 export interface SportGroup {
   key: string;
   label: string;
+  /** Members in table order (conference seed or division rank). */
   teams: string[];
+  /** Lines drawn under a table position, e.g. the playoff line after the 7th seed. */
+  cutoffs?: { after: number; label: string }[];
 }
 
 export interface SportStanding {
@@ -115,6 +122,10 @@ export interface SportPayload {
     /** What the table's rank means when groups exist, e.g. "League" or "Overall". */
     rankLabel?: string;
     positionLabel?: string;
+    /** Colours for the finishing-position chart: positions up to `to` are in the zone. */
+    positionZones?: { to: number; kind: 'top' | 'mid' | 'bottom' | string }[];
+    /** Page heading, e.g. "NFL Playoff & Super Bowl Odds"; built from the tiers when absent. */
+    headline?: string;
   };
   standings: SportStanding[];
   fixtures: SportFixture[];
