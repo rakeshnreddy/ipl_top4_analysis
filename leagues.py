@@ -53,12 +53,14 @@ class League:
     season_label: str
     priority: int
     matches_per_team: int
+    season_start: datetime | None
     season_end: datetime
     qualification: tuple[QualificationTier, ...]
     playoff_stages: tuple[str, ...]
     second_chance_stages: tuple[str, ...]
     cricsheet_competition: str | None
     cricketdata_series_names: tuple[str, ...]
+    cricketdata_series_id: str | None
     extra_results: tuple[ExtraResult, ...]
     teams: tuple[TeamMeta, ...]
 
@@ -113,6 +115,8 @@ def parse_league(raw: dict[str, Any]) -> League:
     qualification = tuple(QualificationTier(size=item["size"], label=item["label"]) for item in raw["qualification"])
     playoffs = raw.get("playoffs", {})
     sources = raw.get("sources", {})
+    cricketdata = sources.get("cricketdata") or {}
+    start = datetime.fromisoformat(raw["seasonStart"]).replace(tzinfo=timezone.utc) if raw.get("seasonStart") else None
     end = datetime.fromisoformat(raw["seasonEnd"]).replace(hour=23, minute=59, tzinfo=timezone.utc)
 
     league = League(
@@ -123,12 +127,14 @@ def parse_league(raw: dict[str, Any]) -> League:
         season_label=raw.get("seasonLabel", raw["season"]),
         priority=raw.get("priority", 100),
         matches_per_team=raw["matchesPerTeam"],
+        season_start=start,
         season_end=end,
         qualification=qualification,
         playoff_stages=tuple(playoffs.get("stages", ())),
         second_chance_stages=tuple(playoffs.get("secondChance", ())),
         cricsheet_competition=sources.get("cricsheet"),
-        cricketdata_series_names=tuple((sources.get("cricketdata") or {}).get("seriesNames", ())),
+        cricketdata_series_names=tuple(cricketdata.get("seriesNames", ())),
+        cricketdata_series_id=cricketdata.get("seriesId"),
         extra_results=tuple(
             ExtraResult(date=item["date"], teams=(item["teams"][0], item["teams"][1]), note=item.get("note", ""))
             for item in raw.get("extraResults", ())
@@ -146,6 +152,8 @@ def validate_league(league: League) -> None:
         raise ValueError(f"{league.id}: team keys and short names must be unique")
     if len(league.teams) * league.matches_per_team % 2:
         raise ValueError(f"{league.id}: teams x matchesPerTeam must be even")
+    if league.season_start and league.season_start > league.season_end:
+        raise ValueError(f"{league.id}: seasonStart must be on or before seasonEnd")
     sizes = league.qualification_sizes
     if not sizes or sizes != sorted(sizes, reverse=True) or sizes[0] > len(league.teams):
         raise ValueError(f"{league.id}: qualification sizes must be descending and fit the team count")

@@ -6,6 +6,7 @@ import unittest
 from unittest import mock
 
 import extract_table
+from leagues import DEFAULT_LEAGUE_ID, load_league
 
 
 _DEFAULT_NRR = object()
@@ -416,6 +417,38 @@ class ExtractTableTests(unittest.TestCase):
 
         # All ten teams finish level on points and wins, so four slots are shared ten ways.
         self.assertEqual({value["top4"] for value in analysis["overallProbabilities"].values()}, {40.0})
+
+    def test_season_with_no_results_yet_starts_every_team_level(self) -> None:
+        extract_table.use_league(load_league("wpl-2027"))
+        self.addCleanup(extract_table.use_league, load_league(DEFAULT_LEAGUE_ID))
+        names = [meta.full_name for meta in extract_table.TEAM_META.values()]
+        unplayed = [
+            {"id": f"m{number}", "name": f"{a} vs {b}, {number}th Match", "teams": [a, b],
+             "dateTimeGMT": f"2027-01-{14 + number // 2:02d}T14:00:00", "matchStarted": False, "matchEnded": False}
+            for number, (a, b) in enumerate(
+                [(x, y) for _ in range(2) for i, x in enumerate(names) for y in names[i + 1:]], start=1
+            )
+        ]
+
+        def fake_json(session, endpoint, api_key, params=None):
+            if endpoint != "series_info":
+                raise AssertionError(f"{endpoint} should not be called before the first result")
+            return {"status": "success", "data": {"matchList": unplayed}}
+
+        now = datetime(2027, 1, 13, 20, tzinfo=timezone.utc)
+        with mock.patch.dict(extract_table.os.environ, {"CRICDATA_API_KEY": "key"}, clear=True), mock.patch.object(
+            extract_table, "find_cricdata_series_id", return_value="wpl-2027"
+        ), mock.patch.object(extract_table, "fetch_cricdata_json", side_effect=fake_json), mock.patch.object(
+            extract_table, "utc_now", return_value=now
+        ):
+            payload = extract_table.build_payload()
+
+        odds = payload["analysis"]["overallProbabilities"]
+        self.assertEqual(payload["metadata"]["warnings"], [])
+        self.assertEqual({row["matches"] for row in payload["standings"]}, {0})
+        self.assertEqual(len(payload["fixtures"]), 20)
+        self.assertEqual({value["top3"] for value in odds.values()}, {60.0})
+        self.assertEqual({value["top1"] for value in odds.values()}, {20.0})
 
     def test_simulation_rank_tolerates_missing_nrr(self) -> None:
         table = {
