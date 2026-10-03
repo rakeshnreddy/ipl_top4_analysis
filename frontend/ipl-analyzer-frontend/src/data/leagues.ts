@@ -7,14 +7,23 @@ export interface LeagueSummary {
   seasonLabel: string;
   status: 'league_stage' | 'playoffs' | 'complete' | string;
   champion: string | null;
+  /** Headline numbers for the home page, e.g. "Title favourite: MCI 50%". */
+  facts?: { label: string; value: string }[];
+  /** False before the first game: the odds are pre-season projections. */
+  started?: boolean;
   generatedAt: string;
   path: string;
 }
 
 export interface LeagueIndex {
+  /** A league id, or "hub" for the all-sports home page. */
   default: string;
+  /** The newest IPL season, for the share kit. */
+  ipl?: string;
   leagues: LeagueSummary[];
 }
+
+export const HUB_ID = 'hub';
 
 export const leagueIndexUrl = `${import.meta.env.BASE_URL}data/leagues.json`;
 
@@ -28,6 +37,29 @@ export function leagueIdFromLocation(search: string = window.location.search): s
 
 export function leagueHref(leagueId: string, defaultId: string) {
   return leagueId === defaultId ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?league=${leagueId}`;
+}
+
+/** The all-sports home page: the site root, unless the root currently shows a league. */
+export function hubHref(defaultId: string) {
+  return defaultId === HUB_ID ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?view=hub`;
+}
+
+export function hubRequested(search: string = window.location.search) {
+  return new URLSearchParams(search).get('view') === HUB_ID;
+}
+
+export function isLive(league: Pick<LeagueSummary, 'status'>) {
+  return league.status !== 'complete';
+}
+
+export function statusLabel(league: Pick<LeagueSummary, 'status' | 'started'>) {
+  if (league.status === 'complete') {
+    return 'Final';
+  }
+  if (league.status === 'postseason' || league.status === 'playoffs') {
+    return 'Playoffs';
+  }
+  return league.started === false ? 'Pre-season' : 'Live';
 }
 
 /** Switcher rows: the four North American leagues share one row. */

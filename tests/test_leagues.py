@@ -80,7 +80,11 @@ class LeagueConfigTests(unittest.TestCase):
 
         self.assertEqual(payload["league"]["shortName"], "WPL")
         self.assertEqual(payload["standings"][0]["teamKey"], "RCB")
-        self.assertEqual(index["default"], "ipl-2026")
+        # No IPL season is on, so the home page is the all-sports hub.
+        self.assertEqual(index["default"], "hub")
+        self.assertEqual(index["ipl"], "ipl-2026")
+        # The synthetic season has no playoff matches: the league stage is over, the playoffs are not.
+        self.assertEqual(index["leagues"][0]["facts"], [{"label": "In the playoffs", "value": "RCB, GG, DC"}])
         self.assertEqual([entry["id"] for entry in index["leagues"]], ["wpl-2026"])
         self.assertEqual(index["leagues"][0]["path"], "data/wpl-2026.json")
 
@@ -228,6 +232,26 @@ class LiveSeasonTests(unittest.TestCase):
         extract_table.write_league_index()
 
         self.assertEqual(json.loads((self.data_dir / "leagues.json").read_text())["default"], "ipl-2027")
+
+    def test_football_cards_show_the_title_favourite_and_relegation_risk(self) -> None:
+        payload = {
+            "metadata": {"season_status": "in_progress"},
+            "league": {
+                "sport": "football",
+                "tiers": [
+                    {"key": "title", "label": "Title", "kind": "top", "size": 1},
+                    {"key": "relegation", "label": "Relegation", "kind": "bottom", "size": 1},
+                ],
+            },
+            "standings": [{"teamKey": "Arsenal", "shortName": "ARS"}, {"teamKey": "Spurs", "shortName": "TOT"}],
+            "analysis": {"probabilities": {"Arsenal": {"title": 99.97, "relegation": 0.0}, "Spurs": {"title": 0.03, "relegation": 64.4}}},
+        }
+
+        self.assertEqual(
+            extract_table.league_facts(payload, None),
+            [{"label": "Title favourite", "value": "ARS >99.9%"}, {"label": "Relegation risk", "value": "TOT 64%"}],
+        )
+        self.assertEqual(extract_table.league_facts({"league": {}}, None), [])
 
     def test_series_id_env_var_only_applies_to_the_default_league(self) -> None:
         bbl = leagues.load_league("bbl-2026-27")

@@ -6,7 +6,9 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 ## What The Site Shows
 
-During the league stage:
+The home page is an all-sports hub while no IPL season is on: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. During the IPL season the home page is the IPL; the hub stays at `/?view=hub`. Every league page links back to it.
+
+Cricket pages, during the league stage:
 
 - Qualification probabilities in each league's own format (Top 4 and Top 2 for the IPL, Top 3 and Top 1 for the WPL).
 - Current standings, remaining fixtures (in the reader's time zone), and selected-team paths.
