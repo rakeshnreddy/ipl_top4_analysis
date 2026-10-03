@@ -59,7 +59,7 @@ SPORT_MODULES = {
     "ice-hockey": "us_sports",
     "baseball": "us_sports",
 }
-LIVE_STATUSES = {"league_stage", "playoffs", "in_progress"}
+LIVE_STATUSES = {"league_stage", "playoffs", "in_progress", "postseason"}
 
 REQUEST_TIMEOUT_SECONDS = 20
 DEFAULT_MONTE_CARLO_SIMULATIONS = int(os.getenv("IPL_MONTE_CARLO_SIMULATIONS", "40000"))
@@ -1433,7 +1433,8 @@ def index_entry(payload: dict[str, Any]) -> dict[str, Any]:
     metadata = payload["metadata"]
     complete = metadata.get("season_status") == "complete"
     champion_key = (payload.get("playoffs") or {}).get("champion")
-    if not champion_key and complete and league.get("sport", "cricket") != "cricket" and payload["standings"]:
+    if not champion_key and complete and league.get("sport") == "football" and payload["standings"]:
+        # A football league's champion tops the table; other sports name theirs in "playoffs".
         champion_key = payload["standings"][0]["teamKey"]
     champion = next((row["shortName"] for row in payload["standings"] if row["teamKey"] == champion_key), None)
     return {

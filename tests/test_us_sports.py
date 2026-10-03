@@ -216,6 +216,84 @@ class PayloadTests(unittest.TestCase):
         self.assertEqual([len(group["teams"]) for group in conference_groups], [15, 15])
 
 
+class PostseasonTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.cfg = config("mlb")
+        self.structure = us_sports.league_structure(self.cfg)
+        teams = self.structure.teams
+        # Records that make the 2026 field: seeds follow the order of these lists in each league.
+        wins = {team: 70 for team in teams}
+        for order in (
+            ["Tampa Bay Rays", "Cleveland Guardians", "Houston Astros", "New York Yankees", "Boston Red Sox", "Chicago White Sox"],
+            ["Milwaukee Brewers", "Los Angeles Dodgers", "Atlanta Braves", "San Diego Padres", "Chicago Cubs", "Philadelphia Phillies"],
+        ):
+            for place, team in enumerate(order):
+                wins[team] = 100 - 2 * place
+        # Division winners must lead their divisions; wild cards trail a division winner.
+        records = {team: {**dict.fromkeys(("played", "losses", "ties", "otLosses", "divisionWins", "divisionLosses", "divisionTies", "conferenceWins", "conferenceLosses", "conferenceTies", "scored", "allowed", "homeWins", "homeLosses", "awayWins", "awayLosses"), 0), "wins": wins[team], "regulationWins": wins[team], "results": []} for team in teams}
+        for team in teams:
+            records[team]["losses"] = 162 - wins[team]
+        self.seeding = us_sports.current_seeding(self.cfg, self.structure, records, "baseball", dict.fromkeys(teams, 0.0))
+        self.ratings = us_sports.Ratings(home=0.1, sigma=2.4, rating=dict.fromkeys(teams, 0.0))
+
+    def game(self, stage: str, home: str, away: str, home_score: int | None, away_score: int | None) -> us_sports.PlayoffGame:
+        return us_sports.PlayoffGame(stage, START, home, away, home_score, away_score)
+
+    def series(self, stage: str, winner: str, loser: str, wins: int, losses: int = 0) -> list[us_sports.PlayoffGame]:
+        return [self.game(stage, winner, loser, 5, 2) for _ in range(wins)] + [self.game(stage, winner, loser, 1, 3) for _ in range(losses)]
+
+    def wild_cards(self) -> list[us_sports.PlayoffGame]:
+        return (
+            self.series("F", "Chicago White Sox", "Houston Astros", 2)
+            + self.series("F", "New York Yankees", "Boston Red Sox", 2)
+            + self.series("F", "Atlanta Braves", "Philadelphia Phillies", 2, 1)
+            + self.series("F", "San Diego Padres", "Chicago Cubs", 2)
+        )
+
+    def test_finished_series_fix_their_winners(self) -> None:
+        result = us_sports.simulate_postseason(self.cfg, self.structure, self.seeding, self.ratings, self.wild_cards(), simulations=2000)
+
+        title = result["title"]
+        self.assertAlmostEqual(sum(title.values()), 100, delta=0.01)
+        for eliminated in ("Houston Astros", "Boston Red Sox", "Philadelphia Phillies", "Chicago Cubs"):
+            self.assertEqual(title[eliminated], 0.0)
+        first_round = result["rounds"][0]["series"]
+        self.assertEqual({item["winner"] for item in first_round}, {"Chicago White Sox", "New York Yankees", "Atlanta Braves", "San Diego Padres"})
+        division_series = result["rounds"][1]["series"]
+        self.assertEqual(
+            {frozenset((item["top"], item["bottom"])) for item in division_series},
+            {
+                frozenset(("Tampa Bay Rays", "New York Yankees")),
+                frozenset(("Cleveland Guardians", "Chicago White Sox")),
+                frozenset(("Milwaukee Brewers", "San Diego Padres")),
+                frozenset(("Los Angeles Dodgers", "Atlanta Braves")),
+            },
+        )
+        self.assertIsNone(result["champion"])
+
+    def test_a_real_bracket_unlike_our_seeds_pauses_title_odds(self) -> None:
+        games = self.series("F", "Houston Astros", "Boston Red Sox", 1)
+
+        self.assertIsNone(us_sports.simulate_postseason(self.cfg, self.structure, self.seeding, self.ratings, games, simulations=200))
+
+    def test_a_finished_world_series_names_the_champion(self) -> None:
+        games = (
+            self.wild_cards()
+            + self.series("D", "New York Yankees", "Tampa Bay Rays", 3)
+            + self.series("D", "Cleveland Guardians", "Chicago White Sox", 3, 1)
+            + self.series("D", "Milwaukee Brewers", "San Diego Padres", 3)
+            + self.series("D", "Los Angeles Dodgers", "Atlanta Braves", 3, 2)
+            + self.series("L", "Cleveland Guardians", "New York Yankees", 4, 2)
+            + self.series("L", "Milwaukee Brewers", "Los Angeles Dodgers", 4, 3)
+            + self.series("W", "Milwaukee Brewers", "Cleveland Guardians", 4, 1)
+        )
+
+        result = us_sports.simulate_postseason(self.cfg, self.structure, self.seeding, self.ratings, games, simulations=500)
+
+        self.assertEqual(result["champion"], "Milwaukee Brewers")
+        self.assertEqual(result["title"]["Milwaukee Brewers"], 100.0)
+
+
 class NhlFeedTests(unittest.TestCase):
     def test_games_come_with_overtime_and_shootout_notes_in_utc(self) -> None:
         teams = {"data": [{"id": 6, "fullName": "Boston Bruins"}, {"id": 7, "fullName": "Buffalo Sabres"}]}
