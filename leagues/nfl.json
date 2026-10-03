@@ -1,0 +1,293 @@
+{
+  "id": "nfl",
+  "sport": "american-football",
+  "name": "NFL",
+  "shortName": "NFL",
+  "headline": "NFL Playoff & Super Bowl Odds",
+  "priority": 30,
+  "season": {
+    "startMonth": 9,
+    "endMonth": 2,
+    "label": "{year}",
+    "feed": "nfl-{year}"
+  },
+  "regularSeasonRounds": 18,
+  "playoffs": {
+    "format": "nfl",
+    "teamsPerConference": 7
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "division",
+      "label": "Division",
+      "kind": "division",
+      "shortLabel": "Div"
+    },
+    {
+      "key": "bye",
+      "label": "No. 1 seed",
+      "kind": "seed",
+      "size": 1,
+      "shortLabel": "1 seed"
+    },
+    {
+      "key": "title",
+      "label": "Super Bowl",
+      "kind": "champion",
+      "shortLabel": "SB"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "AFC",
+      "label": "AFC",
+      "divisions": [
+        "AFC East",
+        "AFC North",
+        "AFC South",
+        "AFC West"
+      ]
+    },
+    {
+      "key": "NFC",
+      "label": "NFC",
+      "divisions": [
+        "NFC East",
+        "NFC North",
+        "NFC South",
+        "NFC West"
+      ]
+    }
+  ],
+  "teams": {
+    "Buffalo Bills": {
+      "shortName": "BUF",
+      "color": "#00338D",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC East"
+    },
+    "Miami Dolphins": {
+      "shortName": "MIA",
+      "color": "#008E97",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC East"
+    },
+    "New England Patriots": {
+      "shortName": "NE",
+      "color": "#C60C30",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC East"
+    },
+    "New York Jets": {
+      "shortName": "NYJ",
+      "color": "#125740",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC East"
+    },
+    "Baltimore Ravens": {
+      "shortName": "BAL",
+      "color": "#241773",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC North"
+    },
+    "Cincinnati Bengals": {
+      "shortName": "CIN",
+      "color": "#FB4F14",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC North"
+    },
+    "Cleveland Browns": {
+      "shortName": "CLE",
+      "color": "#FF3C00",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC North"
+    },
+    "Pittsburgh Steelers": {
+      "shortName": "PIT",
+      "color": "#FFB612",
+      "textColor": "#000000",
+      "conference": "AFC",
+      "division": "AFC North"
+    },
+    "Houston Texans": {
+      "shortName": "HOU",
+      "color": "#A71930",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC South"
+    },
+    "Indianapolis Colts": {
+      "shortName": "IND",
+      "color": "#002C5F",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC South"
+    },
+    "Jacksonville Jaguars": {
+      "shortName": "JAX",
+      "color": "#006778",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC South"
+    },
+    "Tennessee Titans": {
+      "shortName": "TEN",
+      "color": "#4B92DB",
+      "textColor": "#000000",
+      "conference": "AFC",
+      "division": "AFC South"
+    },
+    "Denver Broncos": {
+      "shortName": "DEN",
+      "color": "#FB4F14",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC West"
+    },
+    "Kansas City Chiefs": {
+      "shortName": "KC",
+      "color": "#E31837",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC West"
+    },
+    "Las Vegas Raiders": {
+      "shortName": "LV",
+      "color": "#A5ACAF",
+      "textColor": "#000000",
+      "conference": "AFC",
+      "division": "AFC West"
+    },
+    "Los Angeles Chargers": {
+      "shortName": "LAC",
+      "color": "#0080C6",
+      "textColor": "#FFFFFF",
+      "conference": "AFC",
+      "division": "AFC West"
+    },
+    "Dallas Cowboys": {
+      "shortName": "DAL",
+      "color": "#003594",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC East"
+    },
+    "New York Giants": {
+      "shortName": "NYG",
+      "color": "#0B2265",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC East"
+    },
+    "Philadelphia Eagles": {
+      "shortName": "PHI",
+      "color": "#004C54",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC East"
+    },
+    "Washington Commanders": {
+      "shortName": "WAS",
+      "color": "#5A1414",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC East"
+    },
+    "Chicago Bears": {
+      "shortName": "CHI",
+      "color": "#C83803",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC North"
+    },
+    "Detroit Lions": {
+      "shortName": "DET",
+      "color": "#0076B6",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC North"
+    },
+    "Green Bay Packers": {
+      "shortName": "GB",
+      "color": "#203731",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC North"
+    },
+    "Minnesota Vikings": {
+      "shortName": "MIN",
+      "color": "#4F2683",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC North"
+    },
+    "Atlanta Falcons": {
+      "shortName": "ATL",
+      "color": "#A71930",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC South"
+    },
+    "Carolina Panthers": {
+      "shortName": "CAR",
+      "color": "#0085CA",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC South"
+    },
+    "New Orleans Saints": {
+      "shortName": "NO",
+      "color": "#D3BC8D",
+      "textColor": "#000000",
+      "conference": "NFC",
+      "division": "NFC South"
+    },
+    "Tampa Bay Buccaneers": {
+      "shortName": "TB",
+      "color": "#D50A0A",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC South"
+    },
+    "Arizona Cardinals": {
+      "shortName": "ARI",
+      "color": "#97233F",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC West"
+    },
+    "Los Angeles Rams": {
+      "shortName": "LAR",
+      "color": "#003594",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC West"
+    },
+    "San Francisco 49ers": {
+      "shortName": "SF",
+      "color": "#AA0000",
+      "textColor": "#FFFFFF",
+      "conference": "NFC",
+      "division": "NFC West"
+    },
+    "Seattle Seahawks": {
+      "shortName": "SEA",
+      "color": "#69BE28",
+      "textColor": "#000000",
+      "conference": "NFC",
+      "division": "NFC West"
+    }
+  }
+}

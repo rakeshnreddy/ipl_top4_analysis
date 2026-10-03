@@ -1,0 +1,294 @@
+{
+  "id": "nhl",
+  "sport": "ice-hockey",
+  "name": "NHL",
+  "shortName": "NHL",
+  "headline": "NHL Playoff & Stanley Cup Odds",
+  "priority": 32,
+  "season": {
+    "startMonth": 10,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "nhl-{year}"
+  },
+  "sources": {
+    "provider": "nhl"
+  },
+  "playoffs": {
+    "format": "nhl",
+    "teamsPerConference": 8
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "division",
+      "label": "Division",
+      "kind": "division",
+      "shortLabel": "Div"
+    },
+    {
+      "key": "presidents",
+      "label": "Presidents' Trophy",
+      "kind": "best-record",
+      "shortLabel": "Pres."
+    },
+    {
+      "key": "title",
+      "label": "Stanley Cup",
+      "kind": "champion",
+      "shortLabel": "Cup"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "East",
+      "label": "Eastern",
+      "divisions": [
+        "Atlantic",
+        "Metropolitan"
+      ]
+    },
+    {
+      "key": "West",
+      "label": "Western",
+      "divisions": [
+        "Central",
+        "Pacific"
+      ]
+    }
+  ],
+  "teams": {
+    "Boston Bruins": {
+      "shortName": "BOS",
+      "color": "#FFB81C",
+      "textColor": "#000000",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Buffalo Sabres": {
+      "shortName": "BUF",
+      "color": "#003087",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Detroit Red Wings": {
+      "shortName": "DET",
+      "color": "#CE1126",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Florida Panthers": {
+      "shortName": "FLA",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Montréal Canadiens": {
+      "shortName": "MTL",
+      "color": "#AF1E2D",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Ottawa Senators": {
+      "shortName": "OTT",
+      "color": "#C52032",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Tampa Bay Lightning": {
+      "shortName": "TBL",
+      "color": "#002868",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Toronto Maple Leafs": {
+      "shortName": "TOR",
+      "color": "#00205B",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Carolina Hurricanes": {
+      "shortName": "CAR",
+      "color": "#CE1126",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "Columbus Blue Jackets": {
+      "shortName": "CBJ",
+      "color": "#002654",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "New Jersey Devils": {
+      "shortName": "NJD",
+      "color": "#CE1126",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "New York Islanders": {
+      "shortName": "NYI",
+      "color": "#00539B",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "New York Rangers": {
+      "shortName": "NYR",
+      "color": "#0038A8",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "Philadelphia Flyers": {
+      "shortName": "PHI",
+      "color": "#F74902",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "Pittsburgh Penguins": {
+      "shortName": "PIT",
+      "color": "#FCB514",
+      "textColor": "#000000",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "Washington Capitals": {
+      "shortName": "WSH",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Metropolitan"
+    },
+    "Chicago Blackhawks": {
+      "shortName": "CHI",
+      "color": "#CF0A2C",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Colorado Avalanche": {
+      "shortName": "COL",
+      "color": "#6F263D",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Dallas Stars": {
+      "shortName": "DAL",
+      "color": "#006847",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Minnesota Wild": {
+      "shortName": "MIN",
+      "color": "#154734",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Nashville Predators": {
+      "shortName": "NSH",
+      "color": "#FFB81C",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Central"
+    },
+    "St. Louis Blues": {
+      "shortName": "STL",
+      "color": "#002F87",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Utah Mammoth": {
+      "shortName": "UTA",
+      "color": "#69B3E7",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Winnipeg Jets": {
+      "shortName": "WPG",
+      "color": "#004C97",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Central"
+    },
+    "Anaheim Ducks": {
+      "shortName": "ANA",
+      "color": "#F47A38",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Calgary Flames": {
+      "shortName": "CGY",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Edmonton Oilers": {
+      "shortName": "EDM",
+      "color": "#FF4C00",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Los Angeles Kings": {
+      "shortName": "LAK",
+      "color": "#A2AAAD",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "San Jose Sharks": {
+      "shortName": "SJS",
+      "color": "#006D75",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Seattle Kraken": {
+      "shortName": "SEA",
+      "color": "#99D9D9",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Vancouver Canucks": {
+      "shortName": "VAN",
+      "color": "#00205B",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Vegas Golden Knights": {
+      "shortName": "VGK",
+      "color": "#B4975A",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Pacific"
+    }
+  },
+  "aliases": {
+    "Arizona Coyotes": "Utah Mammoth",
+    "Utah Hockey Club": "Utah Mammoth"
+  }
+}

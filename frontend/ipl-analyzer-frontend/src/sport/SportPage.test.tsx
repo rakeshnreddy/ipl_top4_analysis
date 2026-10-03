@@ -1,9 +1,9 @@
 /// <reference types="vitest/globals" />
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from '../Root';
 import { finalPayload, installFetch, mockManifest } from '../test/fixtures';
-import { footballPayload, multiSportIndex } from '../test/sportFixtures';
+import { conferencePayload, footballPayload, multiSportIndex } from '../test/sportFixtures';
 import { formatChance } from './format';
 
 function openLeague(path: string, payload = footballPayload) {
@@ -90,6 +90,37 @@ describe('SportPage', () => {
     expect(within(nav).getByText('Cricket')).toBeInTheDocument();
     expect(within(nav).getByRole('link', { name: /Premier League 2026-27/ })).toHaveAttribute('aria-current', 'page');
     expect(within(nav).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/');
+  });
+});
+
+describe('SportPage for leagues with conferences', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  });
+
+  it('shows a conference in seed order with its playoff line', async () => {
+    openLeague('/?league=epl-2026-27', conferencePayload);
+
+    expect(await screen.findByRole('heading', { name: 'NFL Playoff & Super Bowl Odds' })).toBeInTheDocument();
+    await waitFor(() => expect(document.title).toBe('NFL Playoff & Super Bowl Odds 2026 | Playoff Pulse'));
+    fireEvent.click(screen.getByRole('button', { name: 'AFC' }));
+
+    // The cut line is decorative (aria-hidden), so read the rows from the DOM.
+    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr')).map((row) => row.textContent);
+    expect(rows[0]).toContain('CHE');
+    expect(rows[1]).toBe('Playoff line');
+    expect(rows[2]).toContain('ARS');
+    expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
+  });
+
+  it('describes a team by its record and conference seed', async () => {
+    openLeague('/?league=epl-2026-27#team=LIV', conferencePayload);
+
+    const panel = (await screen.findByRole('heading', { name: 'Liverpool' })).closest('aside')!;
+    expect(within(panel).getByText(/2-1 · 1/)).toHaveTextContent('2-1 · 1st NFC');
+    expect(within(panel).getByText(/10 wins/)).toHaveTextContent('avg seed 1.3');
+    expect(within(panel).getByRole('img', { name: 'Conference seed chances for LIV' })).toBeInTheDocument();
   });
 });
 

@@ -1,0 +1,278 @@
+{
+  "id": "mlb",
+  "sport": "baseball",
+  "name": "MLB",
+  "shortName": "MLB",
+  "headline": "MLB Playoff & World Series Odds",
+  "priority": 33,
+  "season": {
+    "startMonth": 3,
+    "endMonth": 11,
+    "label": "{year}",
+    "feed": "mlb-{year}"
+  },
+  "playoffs": {
+    "format": "mlb",
+    "teamsPerConference": 6
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "division",
+      "label": "Division",
+      "kind": "division",
+      "shortLabel": "Div"
+    },
+    {
+      "key": "bye",
+      "label": "Bye",
+      "kind": "seed",
+      "size": 2
+    },
+    {
+      "key": "title",
+      "label": "World Series",
+      "kind": "champion",
+      "shortLabel": "WS"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "AL",
+      "label": "American League",
+      "divisions": [
+        "AL East",
+        "AL Central",
+        "AL West"
+      ]
+    },
+    {
+      "key": "NL",
+      "label": "National League",
+      "divisions": [
+        "NL East",
+        "NL Central",
+        "NL West"
+      ]
+    }
+  ],
+  "teams": {
+    "Baltimore Orioles": {
+      "shortName": "BAL",
+      "color": "#DF4601",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL East"
+    },
+    "Boston Red Sox": {
+      "shortName": "BOS",
+      "color": "#BD3039",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL East"
+    },
+    "New York Yankees": {
+      "shortName": "NYY",
+      "color": "#0C2340",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL East"
+    },
+    "Tampa Bay Rays": {
+      "shortName": "TB",
+      "color": "#092C5C",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL East"
+    },
+    "Toronto Blue Jays": {
+      "shortName": "TOR",
+      "color": "#134A8E",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL East"
+    },
+    "Chicago White Sox": {
+      "shortName": "CWS",
+      "color": "#C4CED4",
+      "textColor": "#000000",
+      "conference": "AL",
+      "division": "AL Central"
+    },
+    "Cleveland Guardians": {
+      "shortName": "CLE",
+      "color": "#E31937",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL Central"
+    },
+    "Detroit Tigers": {
+      "shortName": "DET",
+      "color": "#FA4616",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL Central"
+    },
+    "Kansas City Royals": {
+      "shortName": "KC",
+      "color": "#004687",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL Central"
+    },
+    "Minnesota Twins": {
+      "shortName": "MIN",
+      "color": "#D31145",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL Central"
+    },
+    "Athletics": {
+      "shortName": "ATH",
+      "color": "#EFB21E",
+      "textColor": "#000000",
+      "conference": "AL",
+      "division": "AL West"
+    },
+    "Houston Astros": {
+      "shortName": "HOU",
+      "color": "#EB6E1F",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL West"
+    },
+    "Los Angeles Angels": {
+      "shortName": "LAA",
+      "color": "#BA0021",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL West"
+    },
+    "Seattle Mariners": {
+      "shortName": "SEA",
+      "color": "#005C5C",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL West"
+    },
+    "Texas Rangers": {
+      "shortName": "TEX",
+      "color": "#003278",
+      "textColor": "#FFFFFF",
+      "conference": "AL",
+      "division": "AL West"
+    },
+    "Atlanta Braves": {
+      "shortName": "ATL",
+      "color": "#CE1141",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL East"
+    },
+    "Miami Marlins": {
+      "shortName": "MIA",
+      "color": "#00A3E0",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL East"
+    },
+    "New York Mets": {
+      "shortName": "NYM",
+      "color": "#FF5910",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL East"
+    },
+    "Philadelphia Phillies": {
+      "shortName": "PHI",
+      "color": "#E81828",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL East"
+    },
+    "Washington Nationals": {
+      "shortName": "WSH",
+      "color": "#AB0003",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL East"
+    },
+    "Chicago Cubs": {
+      "shortName": "CHC",
+      "color": "#0E3386",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL Central"
+    },
+    "Cincinnati Reds": {
+      "shortName": "CIN",
+      "color": "#C6011F",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL Central"
+    },
+    "Milwaukee Brewers": {
+      "shortName": "MIL",
+      "color": "#FFC52F",
+      "textColor": "#000000",
+      "conference": "NL",
+      "division": "NL Central"
+    },
+    "Pittsburgh Pirates": {
+      "shortName": "PIT",
+      "color": "#FDB827",
+      "textColor": "#000000",
+      "conference": "NL",
+      "division": "NL Central"
+    },
+    "St. Louis Cardinals": {
+      "shortName": "STL",
+      "color": "#C41E3A",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL Central"
+    },
+    "Arizona Diamondbacks": {
+      "shortName": "ARI",
+      "color": "#A71930",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL West"
+    },
+    "Colorado Rockies": {
+      "shortName": "COL",
+      "color": "#33006F",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL West"
+    },
+    "Los Angeles Dodgers": {
+      "shortName": "LAD",
+      "color": "#005A9C",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL West"
+    },
+    "San Diego Padres": {
+      "shortName": "SD",
+      "color": "#FFC425",
+      "textColor": "#000000",
+      "conference": "NL",
+      "division": "NL West"
+    },
+    "San Francisco Giants": {
+      "shortName": "SF",
+      "color": "#FD5A1E",
+      "textColor": "#FFFFFF",
+      "conference": "NL",
+      "division": "NL West"
+    }
+  },
+  "aliases": {
+    "Oakland Athletics": "Athletics"
+  }
+}

@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first) and Europe's top five football leagues. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), Europe's top five football leagues, and the NFL, NBA, NHL and MLB. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -93,6 +93,16 @@ The Premier League, La Liga, Bundesliga, Serie A and Ligue 1 use rolling configs
 
 To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed name, tiers and any team colours (teams without one get a generated colour), then run `venv/bin/python extract_table.py --league <id>`.
 
+## NFL, NBA, NHL And MLB
+
+`leagues/nfl.json`, `nba.json`, `nhl.json` and `mlb.json` are rolling configs too, with conferences, divisions, team colours and the playoff format. `us_sports.py` builds them:
+
+- Data, no keys: FixtureDownload for the NFL, NBA and MLB; the NHL stats API (`api.nhle.com`) for the NHL, because it records overtime and shootout results (overtime losses are worth a point). Playoff rounds, "to be announced" placeholders and the NBA Cup final are left out of the regular season; games not yet on the NBA schedule are simulated against an average opponent; games never played when a schedule ends (MLB rainouts) are dropped.
+- Tables: wins, losses, ties (NFL), overtime losses and points (NHL), win percentage, games behind, differential, last ten and streak, with league, conference and division views. Conference views are in seed order with the playoff line (and the NBA play-in line).
+- Seeding: NFL division winners take seeds 1-4 and three wild cards follow; the NBA seeds 1-6 directly and simulates the play-in for 7 and 8; the NHL takes three teams per division plus two wild cards; MLB division winners take seeds 1-3, the top two get byes, and three wild cards follow. Tiebreakers are simplified (win percentage, then division or conference record; points, games played and regulation wins in the NHL).
+- Model: ratings from capped score margins with home advantage and a time decay, fitted on this and last season. The regular season is simulated 20,000 times with season-long strength drift, then the playoff bracket (single games in the NFL, best-of-3/5/7 series elsewhere) for title odds. Settings were chosen by backtesting the 2023-24 to 2025-26 seasons: week-ahead game predictions for the half-life, ridge and spread, and playoff odds at 25%, 50% and 75% of each season for the drift.
+- Tiers: playoffs, division title, a top seed (NFL and NBA No. 1 seed, NBA top 6, MLB bye, NHL Presidents' Trophy) and the title. When a regular season ends the title column is dropped, since the bracket results are not tracked.
+
 ## Setup
 
 ```bash
@@ -121,7 +131,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football needs no key.
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key.
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 

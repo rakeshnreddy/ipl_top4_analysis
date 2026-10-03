@@ -1,0 +1,5522 @@
+{
+  "metadata": {
+    "season": "2026",
+    "generated_at": "2026-10-03T17:37:21Z",
+    "source": "FixtureDownload",
+    "source_url": "https://fixturedownload.com/",
+    "data_freshness_status": "fresh",
+    "season_status": "in_progress",
+    "warnings": []
+  },
+  "league": {
+    "id": "nfl-2026",
+    "configId": "nfl",
+    "sport": "american-football",
+    "name": "NFL",
+    "shortName": "NFL",
+    "headline": "NFL Playoff & Super Bowl Odds",
+    "season": "2026",
+    "seasonLabel": "2026",
+    "priority": 30,
+    "tiers": [
+      {
+        "key": "playoffs",
+        "label": "Playoffs",
+        "kind": "playoffs"
+      },
+      {
+        "key": "division",
+        "label": "Division",
+        "kind": "division",
+        "shortLabel": "Div"
+      },
+      {
+        "key": "bye",
+        "label": "No. 1 seed",
+        "kind": "seed",
+        "size": 1,
+        "shortLabel": "1 seed"
+      },
+      {
+        "key": "title",
+        "label": "Super Bowl",
+        "kind": "champion",
+        "shortLabel": "SB"
+      }
+    ],
+    "columns": [
+      {
+        "key": "wins",
+        "label": "W"
+      },
+      {
+        "key": "losses",
+        "label": "L"
+      },
+      {
+        "key": "ties",
+        "label": "T",
+        "optional": true
+      },
+      {
+        "key": "pct",
+        "label": "PCT",
+        "format": "pct",
+        "strong": true
+      },
+      {
+        "key": "pointDifferential",
+        "label": "DIFF",
+        "signed": true,
+        "optional": true
+      },
+      {
+        "key": "divisionRecord",
+        "label": "DIV",
+        "optional": true
+      },
+      {
+        "key": "streak",
+        "label": "STRK",
+        "optional": true
+      }
+    ],
+    "outcomes": [
+      "home",
+      "away"
+    ],
+    "teams": [
+      {
+        "key": "Arizona Cardinals",
+        "shortName": "ARI",
+        "fullName": "Arizona Cardinals",
+        "color": "#97233F",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Atlanta Falcons",
+        "shortName": "ATL",
+        "fullName": "Atlanta Falcons",
+        "color": "#A71930",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Baltimore Ravens",
+        "shortName": "BAL",
+        "fullName": "Baltimore Ravens",
+        "color": "#241773",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Buffalo Bills",
+        "shortName": "BUF",
+        "fullName": "Buffalo Bills",
+        "color": "#00338D",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Carolina Panthers",
+        "shortName": "CAR",
+        "fullName": "Carolina Panthers",
+        "color": "#0085CA",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Chicago Bears",
+        "shortName": "CHI",
+        "fullName": "Chicago Bears",
+        "color": "#C83803",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Cincinnati Bengals",
+        "shortName": "CIN",
+        "fullName": "Cincinnati Bengals",
+        "color": "#FB4F14",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Cleveland Browns",
+        "shortName": "CLE",
+        "fullName": "Cleveland Browns",
+        "color": "#FF3C00",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Dallas Cowboys",
+        "shortName": "DAL",
+        "fullName": "Dallas Cowboys",
+        "color": "#003594",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Denver Broncos",
+        "shortName": "DEN",
+        "fullName": "Denver Broncos",
+        "color": "#FB4F14",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Detroit Lions",
+        "shortName": "DET",
+        "fullName": "Detroit Lions",
+        "color": "#0076B6",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Green Bay Packers",
+        "shortName": "GB",
+        "fullName": "Green Bay Packers",
+        "color": "#203731",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Houston Texans",
+        "shortName": "HOU",
+        "fullName": "Houston Texans",
+        "color": "#A71930",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Indianapolis Colts",
+        "shortName": "IND",
+        "fullName": "Indianapolis Colts",
+        "color": "#002C5F",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Jacksonville Jaguars",
+        "shortName": "JAX",
+        "fullName": "Jacksonville Jaguars",
+        "color": "#006778",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Kansas City Chiefs",
+        "shortName": "KC",
+        "fullName": "Kansas City Chiefs",
+        "color": "#E31837",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Las Vegas Raiders",
+        "shortName": "LV",
+        "fullName": "Las Vegas Raiders",
+        "color": "#A5ACAF",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Los Angeles Chargers",
+        "shortName": "LAC",
+        "fullName": "Los Angeles Chargers",
+        "color": "#0080C6",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Los Angeles Rams",
+        "shortName": "LAR",
+        "fullName": "Los Angeles Rams",
+        "color": "#003594",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Miami Dolphins",
+        "shortName": "MIA",
+        "fullName": "Miami Dolphins",
+        "color": "#008E97",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Minnesota Vikings",
+        "shortName": "MIN",
+        "fullName": "Minnesota Vikings",
+        "color": "#4F2683",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "New England Patriots",
+        "shortName": "NE",
+        "fullName": "New England Patriots",
+        "color": "#C60C30",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "New Orleans Saints",
+        "shortName": "NO",
+        "fullName": "New Orleans Saints",
+        "color": "#D3BC8D",
+        "textColor": "#000000"
+      },
+      {
+        "key": "New York Giants",
+        "shortName": "NYG",
+        "fullName": "New York Giants",
+        "color": "#0B2265",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "New York Jets",
+        "shortName": "NYJ",
+        "fullName": "New York Jets",
+        "color": "#125740",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Philadelphia Eagles",
+        "shortName": "PHI",
+        "fullName": "Philadelphia Eagles",
+        "color": "#004C54",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Pittsburgh Steelers",
+        "shortName": "PIT",
+        "fullName": "Pittsburgh Steelers",
+        "color": "#FFB612",
+        "textColor": "#000000"
+      },
+      {
+        "key": "San Francisco 49ers",
+        "shortName": "SF",
+        "fullName": "San Francisco 49ers",
+        "color": "#AA0000",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Seattle Seahawks",
+        "shortName": "SEA",
+        "fullName": "Seattle Seahawks",
+        "color": "#69BE28",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Tampa Bay Buccaneers",
+        "shortName": "TB",
+        "fullName": "Tampa Bay Buccaneers",
+        "color": "#D50A0A",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Tennessee Titans",
+        "shortName": "TEN",
+        "fullName": "Tennessee Titans",
+        "color": "#4B92DB",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Washington Commanders",
+        "shortName": "WAS",
+        "fullName": "Washington Commanders",
+        "color": "#5A1414",
+        "textColor": "#FFFFFF"
+      }
+    ],
+    "groups": [
+      {
+        "key": "AFC",
+        "label": "AFC",
+        "teams": [
+          "Buffalo Bills",
+          "Kansas City Chiefs",
+          "Cleveland Browns",
+          "Jacksonville Jaguars",
+          "Las Vegas Raiders",
+          "Baltimore Ravens",
+          "Cincinnati Bengals",
+          "Denver Broncos",
+          "Pittsburgh Steelers",
+          "New York Jets",
+          "New England Patriots",
+          "Indianapolis Colts",
+          "Houston Texans",
+          "Los Angeles Chargers",
+          "Miami Dolphins",
+          "Tennessee Titans"
+        ],
+        "cutoffs": [
+          {
+            "after": 7,
+            "label": "Playoff line"
+          }
+        ]
+      },
+      {
+        "key": "NFC",
+        "label": "NFC",
+        "teams": [
+          "Minnesota Vikings",
+          "San Francisco 49ers",
+          "Philadelphia Eagles",
+          "Carolina Panthers",
+          "Detroit Lions",
+          "Chicago Bears",
+          "Seattle Seahawks",
+          "New York Giants",
+          "Los Angeles Rams",
+          "Dallas Cowboys",
+          "Atlanta Falcons",
+          "Washington Commanders",
+          "New Orleans Saints",
+          "Arizona Cardinals",
+          "Green Bay Packers",
+          "Tampa Bay Buccaneers"
+        ],
+        "cutoffs": [
+          {
+            "after": 7,
+            "label": "Playoff line"
+          }
+        ]
+      },
+      {
+        "key": "AFC East",
+        "label": "AFC East",
+        "teams": [
+          "Buffalo Bills",
+          "New York Jets",
+          "New England Patriots",
+          "Miami Dolphins"
+        ]
+      },
+      {
+        "key": "AFC North",
+        "label": "AFC North",
+        "teams": [
+          "Cleveland Browns",
+          "Baltimore Ravens",
+          "Cincinnati Bengals",
+          "Pittsburgh Steelers"
+        ]
+      },
+      {
+        "key": "AFC South",
+        "label": "AFC South",
+        "teams": [
+          "Jacksonville Jaguars",
+          "Indianapolis Colts",
+          "Houston Texans",
+          "Tennessee Titans"
+        ]
+      },
+      {
+        "key": "AFC West",
+        "label": "AFC West",
+        "teams": [
+          "Kansas City Chiefs",
+          "Las Vegas Raiders",
+          "Denver Broncos",
+          "Los Angeles Chargers"
+        ]
+      },
+      {
+        "key": "NFC East",
+        "label": "NFC East",
+        "teams": [
+          "Philadelphia Eagles",
+          "New York Giants",
+          "Dallas Cowboys",
+          "Washington Commanders"
+        ]
+      },
+      {
+        "key": "NFC North",
+        "label": "NFC North",
+        "teams": [
+          "Minnesota Vikings",
+          "Detroit Lions",
+          "Chicago Bears",
+          "Green Bay Packers"
+        ]
+      },
+      {
+        "key": "NFC South",
+        "label": "NFC South",
+        "teams": [
+          "Carolina Panthers",
+          "Atlanta Falcons",
+          "New Orleans Saints",
+          "Tampa Bay Buccaneers"
+        ]
+      },
+      {
+        "key": "NFC West",
+        "label": "NFC West",
+        "teams": [
+          "San Francisco 49ers",
+          "Seattle Seahawks",
+          "Los Angeles Rams",
+          "Arizona Cardinals"
+        ]
+      }
+    ],
+    "rankLabel": "League",
+    "positionLabel": "Conference seed",
+    "positionZones": [
+      {
+        "to": 7,
+        "kind": "top"
+      }
+    ]
+  },
+  "standings": [
+    {
+      "teamKey": "San Francisco 49ers",
+      "shortName": "SF",
+      "fullName": "San Francisco 49ers",
+      "rank": 1,
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "record": "3-0",
+      "pct": 1.0,
+      "pointDifferential": 48,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC West",
+      "seed": 2,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "3-0",
+      "streak": "W3",
+      "divisionRecord": "2-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Buffalo Bills",
+      "shortName": "BUF",
+      "fullName": "Buffalo Bills",
+      "rank": 2,
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "record": "3-0",
+      "pct": 1.0,
+      "pointDifferential": 23,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC East",
+      "seed": 1,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "3-0",
+      "streak": "W3",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Minnesota Vikings",
+      "shortName": "MIN",
+      "fullName": "Minnesota Vikings",
+      "rank": 3,
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "record": "3-0",
+      "pct": 1.0,
+      "pointDifferential": 30,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC North",
+      "seed": 1,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "3-0",
+      "streak": "W3",
+      "divisionRecord": "2-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Kansas City Chiefs",
+      "shortName": "KC",
+      "fullName": "Kansas City Chiefs",
+      "rank": 4,
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "record": "3-0",
+      "pct": 1.0,
+      "pointDifferential": 38,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC West",
+      "seed": 2,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "3-0",
+      "streak": "W3",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Las Vegas Raiders",
+      "shortName": "LV",
+      "fullName": "Las Vegas Raiders",
+      "rank": 5,
+      "played": 3,
+      "wins": 3,
+      "losses": 0,
+      "record": "3-0",
+      "pct": 1.0,
+      "pointDifferential": 34,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC West",
+      "seed": 5,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "3-0",
+      "streak": "W3",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Cleveland Browns",
+      "shortName": "CLE",
+      "fullName": "Cleveland Browns",
+      "rank": 6,
+      "played": 4,
+      "wins": 3,
+      "losses": 1,
+      "record": "3-1",
+      "pct": 0.75,
+      "pointDifferential": -14,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC North",
+      "seed": 3,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "lastTen": "3-1",
+      "streak": "W3",
+      "divisionRecord": "1-0",
+      "remaining": 13,
+      "ties": 0
+    },
+    {
+      "teamKey": "Baltimore Ravens",
+      "shortName": "BAL",
+      "fullName": "Baltimore Ravens",
+      "rank": 7,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": 14,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC North",
+      "seed": 6,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "W1",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Detroit Lions",
+      "shortName": "DET",
+      "fullName": "Detroit Lions",
+      "rank": 8,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": -2,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC North",
+      "seed": 5,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "W1",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Jacksonville Jaguars",
+      "shortName": "JAX",
+      "fullName": "Jacksonville Jaguars",
+      "rank": 9,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": 46,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC South",
+      "seed": 4,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "W1",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Chicago Bears",
+      "shortName": "CHI",
+      "fullName": "Chicago Bears",
+      "rank": 10,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": 36,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC North",
+      "seed": 6,
+      "divisionRank": 3,
+      "form": [
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "W1",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Seattle Seahawks",
+      "shortName": "SEA",
+      "fullName": "Seattle Seahawks",
+      "rank": 11,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": 25,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC West",
+      "seed": 7,
+      "divisionRank": 2,
+      "form": [
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "L1",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Cincinnati Bengals",
+      "shortName": "CIN",
+      "fullName": "Cincinnati Bengals",
+      "rank": 12,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": 17,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC North",
+      "seed": 7,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "L1",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Denver Broncos",
+      "shortName": "DEN",
+      "fullName": "Denver Broncos",
+      "rank": 13,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": -10,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC West",
+      "seed": 8,
+      "divisionRank": 3,
+      "form": [
+        "W",
+        "W",
+        "L"
+      ],
+      "lastTen": "2-1",
+      "streak": "W2",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Philadelphia Eagles",
+      "shortName": "PHI",
+      "fullName": "Philadelphia Eagles",
+      "rank": 14,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": -14,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC East",
+      "seed": 3,
+      "divisionRank": 1,
+      "form": [
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "L1",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "New York Giants",
+      "shortName": "NYG",
+      "fullName": "New York Giants",
+      "rank": 15,
+      "played": 3,
+      "wins": 2,
+      "losses": 1,
+      "record": "2-1",
+      "pct": 0.667,
+      "pointDifferential": -9,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC East",
+      "seed": 8,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-1",
+      "streak": "W1",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Pittsburgh Steelers",
+      "shortName": "PIT",
+      "fullName": "Pittsburgh Steelers",
+      "rank": 16,
+      "played": 4,
+      "wins": 2,
+      "losses": 2,
+      "record": "2-2",
+      "pct": 0.5,
+      "pointDifferential": -10,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC North",
+      "seed": 9,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "2-2",
+      "streak": "L1",
+      "divisionRecord": "1-1",
+      "remaining": 13,
+      "ties": 0
+    },
+    {
+      "teamKey": "New York Jets",
+      "shortName": "NYJ",
+      "fullName": "New York Jets",
+      "rank": 17,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": 3,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC East",
+      "seed": 10,
+      "divisionRank": 2,
+      "form": [
+        "L",
+        "L",
+        "W"
+      ],
+      "lastTen": "1-2",
+      "streak": "L2",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Los Angeles Rams",
+      "shortName": "LAR",
+      "fullName": "Los Angeles Rams",
+      "rank": 18,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -2,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC West",
+      "seed": 9,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "New England Patriots",
+      "shortName": "NE",
+      "fullName": "New England Patriots",
+      "rank": 19,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -15,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC East",
+      "seed": 11,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Dallas Cowboys",
+      "shortName": "DAL",
+      "fullName": "Dallas Cowboys",
+      "rank": 20,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": 6,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC East",
+      "seed": 10,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "1-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Carolina Panthers",
+      "shortName": "CAR",
+      "fullName": "Carolina Panthers",
+      "rank": 21,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": 6,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC South",
+      "seed": 4,
+      "divisionRank": 1,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Atlanta Falcons",
+      "shortName": "ATL",
+      "fullName": "Atlanta Falcons",
+      "rank": 22,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -17,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC South",
+      "seed": 11,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "W1",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Indianapolis Colts",
+      "shortName": "IND",
+      "fullName": "Indianapolis Colts",
+      "rank": 23,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -19,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC South",
+      "seed": 12,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "W1",
+      "divisionRecord": "1-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Washington Commanders",
+      "shortName": "WAS",
+      "fullName": "Washington Commanders",
+      "rank": 24,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -17,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC East",
+      "seed": 12,
+      "divisionRank": 4,
+      "form": [
+        "W",
+        "L",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "W1",
+      "divisionRecord": "0-2",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "New Orleans Saints",
+      "shortName": "NO",
+      "fullName": "New Orleans Saints",
+      "rank": 25,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -2,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC South",
+      "seed": 13,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Arizona Cardinals",
+      "shortName": "ARI",
+      "fullName": "Arizona Cardinals",
+      "rank": 26,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -18,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC West",
+      "seed": 14,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "W"
+      ],
+      "lastTen": "1-2",
+      "streak": "L2",
+      "divisionRecord": "0-2",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Green Bay Packers",
+      "shortName": "GB",
+      "fullName": "Green Bay Packers",
+      "rank": 27,
+      "played": 3,
+      "wins": 1,
+      "losses": 2,
+      "record": "1-2",
+      "pct": 0.333,
+      "pointDifferential": -35,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC North",
+      "seed": 15,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "W",
+        "L"
+      ],
+      "lastTen": "1-2",
+      "streak": "L1",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Houston Texans",
+      "shortName": "HOU",
+      "fullName": "Houston Texans",
+      "rank": 28,
+      "played": 3,
+      "wins": 0,
+      "losses": 3,
+      "record": "0-3",
+      "pct": 0.0,
+      "pointDifferential": -21,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC South",
+      "seed": 13,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "0-3",
+      "streak": "L3",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Tampa Bay Buccaneers",
+      "shortName": "TB",
+      "fullName": "Tampa Bay Buccaneers",
+      "rank": 29,
+      "played": 3,
+      "wins": 0,
+      "losses": 3,
+      "record": "0-3",
+      "pct": 0.0,
+      "pointDifferential": -17,
+      "conference": "NFC",
+      "conferenceLabel": "NFC",
+      "division": "NFC South",
+      "seed": 16,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "0-3",
+      "streak": "L3",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Los Angeles Chargers",
+      "shortName": "LAC",
+      "fullName": "Los Angeles Chargers",
+      "rank": 30,
+      "played": 3,
+      "wins": 0,
+      "losses": 3,
+      "record": "0-3",
+      "pct": 0.0,
+      "pointDifferential": -32,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC West",
+      "seed": 14,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "0-3",
+      "streak": "L3",
+      "divisionRecord": "0-1",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Miami Dolphins",
+      "shortName": "MIA",
+      "fullName": "Miami Dolphins",
+      "rank": 31,
+      "played": 3,
+      "wins": 0,
+      "losses": 3,
+      "record": "0-3",
+      "pct": 0.0,
+      "pointDifferential": -50,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC East",
+      "seed": 15,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "0-3",
+      "streak": "L3",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    },
+    {
+      "teamKey": "Tennessee Titans",
+      "shortName": "TEN",
+      "fullName": "Tennessee Titans",
+      "rank": 32,
+      "played": 3,
+      "wins": 0,
+      "losses": 3,
+      "record": "0-3",
+      "pct": 0.0,
+      "pointDifferential": -22,
+      "conference": "AFC",
+      "conferenceLabel": "AFC",
+      "division": "AFC South",
+      "seed": 16,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "0-3",
+      "streak": "L3",
+      "divisionRecord": "0-0",
+      "remaining": 14,
+      "ties": 0
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "50",
+      "round": 4,
+      "date": "2026-10-04T13:30:00Z",
+      "home": "Washington Commanders",
+      "away": "Indianapolis Colts",
+      "venue": "Tottenham Hotspur Stadium",
+      "probabilities": {
+        "home": 0.473,
+        "away": 0.527
+      }
+    },
+    {
+      "id": "51",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Tennessee Titans",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.772,
+        "away": 0.228
+      }
+    },
+    {
+      "id": "52",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "New England Patriots",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.561,
+        "away": 0.439
+      }
+    },
+    {
+      "id": "53",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Chicago Bears",
+      "away": "New York Jets",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.788,
+        "away": 0.212
+      }
+    },
+    {
+      "id": "54",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Jacksonville Jaguars",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.352,
+        "away": 0.648
+      }
+    },
+    {
+      "id": "55",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Houston Texans",
+      "away": "Dallas Cowboys",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.559,
+        "away": 0.441
+      }
+    },
+    {
+      "id": "56",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "New York Giants",
+      "away": "Arizona Cardinals",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.562,
+        "away": 0.438
+      }
+    },
+    {
+      "id": "57",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Los Angeles Rams",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.384,
+        "away": 0.616
+      }
+    },
+    {
+      "id": "58",
+      "round": 4,
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Green Bay Packers",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.573,
+        "away": 0.427
+      }
+    },
+    {
+      "id": "59",
+      "round": 4,
+      "date": "2026-10-04T20:05:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Miami Dolphins",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.799,
+        "away": 0.201
+      }
+    },
+    {
+      "id": "60",
+      "round": 4,
+      "date": "2026-10-04T20:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Kansas City Chiefs",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.413,
+        "away": 0.587
+      }
+    },
+    {
+      "id": "61",
+      "round": 4,
+      "date": "2026-10-04T20:25:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Los Angeles Chargers",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.788,
+        "away": 0.212
+      }
+    },
+    {
+      "id": "62",
+      "round": 4,
+      "date": "2026-10-04T20:25:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Denver Broncos",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.669,
+        "away": 0.331
+      }
+    },
+    {
+      "id": "63",
+      "round": 4,
+      "date": "2026-10-05T00:20:00Z",
+      "home": "Carolina Panthers",
+      "away": "Detroit Lions",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.479,
+        "away": 0.521
+      }
+    },
+    {
+      "id": "64",
+      "round": 4,
+      "date": "2026-10-06T00:15:00Z",
+      "home": "New Orleans Saints",
+      "away": "Atlanta Falcons",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.559,
+        "away": 0.441
+      }
+    },
+    {
+      "id": "65",
+      "round": 5,
+      "date": "2026-10-09T00:15:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.582,
+        "away": 0.418
+      }
+    },
+    {
+      "id": "66",
+      "round": 5,
+      "date": "2026-10-11T13:30:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Philadelphia Eagles",
+      "venue": "Tottenham Hotspur Stadium",
+      "probabilities": {
+        "home": 0.766,
+        "away": 0.234
+      }
+    },
+    {
+      "id": "67",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Cincinnati Bengals",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.318,
+        "away": 0.682
+      }
+    },
+    {
+      "id": "68",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "New England Patriots",
+      "away": "Las Vegas Raiders",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.628,
+        "away": 0.372
+      }
+    },
+    {
+      "id": "69",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Minnesota Vikings",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.392,
+        "away": 0.608
+      }
+    },
+    {
+      "id": "70",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "New York Jets",
+      "away": "Cleveland Browns",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.468,
+        "away": 0.532
+      }
+    },
+    {
+      "id": "71",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Indianapolis Colts",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.547,
+        "away": 0.453
+      }
+    },
+    {
+      "id": "72",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Houston Texans",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.345,
+        "away": 0.655
+      }
+    },
+    {
+      "id": "73",
+      "round": 5,
+      "date": "2026-10-11T17:00:00Z",
+      "home": "Washington Commanders",
+      "away": "New York Giants",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.503,
+        "away": 0.497
+      }
+    },
+    {
+      "id": "74",
+      "round": 5,
+      "date": "2026-10-11T20:05:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "Denver Broncos",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.375,
+        "away": 0.625
+      }
+    },
+    {
+      "id": "75",
+      "round": 5,
+      "date": "2026-10-11T20:25:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Detroit Lions",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.417,
+        "away": 0.583
+      }
+    },
+    {
+      "id": "76",
+      "round": 5,
+      "date": "2026-10-11T20:25:00Z",
+      "home": "Green Bay Packers",
+      "away": "Chicago Bears",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.274,
+        "away": 0.726
+      }
+    },
+    {
+      "id": "77",
+      "round": 5,
+      "date": "2026-10-11T20:25:00Z",
+      "home": "Seattle Seahawks",
+      "away": "San Francisco 49ers",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.517,
+        "away": 0.483
+      }
+    },
+    {
+      "id": "78",
+      "round": 5,
+      "date": "2026-10-12T00:20:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Baltimore Ravens",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.407,
+        "away": 0.593
+      }
+    },
+    {
+      "id": "79",
+      "round": 5,
+      "date": "2026-10-13T00:15:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Buffalo Bills",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.517,
+        "away": 0.483
+      }
+    },
+    {
+      "id": "80",
+      "round": 6,
+      "date": "2026-10-16T00:15:00Z",
+      "home": "Denver Broncos",
+      "away": "Seattle Seahawks",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.407,
+        "away": 0.593
+      }
+    },
+    {
+      "id": "81",
+      "round": 6,
+      "date": "2026-10-18T13:30:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Houston Texans",
+      "venue": "Wembley Stadium",
+      "probabilities": {
+        "home": 0.735,
+        "away": 0.265
+      }
+    },
+    {
+      "id": "82",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Chicago Bears",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.329,
+        "away": 0.671
+      }
+    },
+    {
+      "id": "83",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Baltimore Ravens",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.395,
+        "away": 0.605
+      }
+    },
+    {
+      "id": "84",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Tennessee Titans",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.68,
+        "away": 0.32
+      }
+    },
+    {
+      "id": "85",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "New England Patriots",
+      "away": "New York Jets",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.744,
+        "away": 0.256
+      }
+    },
+    {
+      "id": "86",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "New York Giants",
+      "away": "New Orleans Saints",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.492,
+        "away": 0.508
+      }
+    },
+    {
+      "id": "87",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Carolina Panthers",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.53,
+        "away": 0.47
+      }
+    },
+    {
+      "id": "88",
+      "round": 6,
+      "date": "2026-10-18T17:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Pittsburgh Steelers",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.48,
+        "away": 0.52
+      }
+    },
+    {
+      "id": "89",
+      "round": 6,
+      "date": "2026-10-18T20:05:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Arizona Cardinals",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.728,
+        "away": 0.272
+      }
+    },
+    {
+      "id": "90",
+      "round": 6,
+      "date": "2026-10-18T20:25:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "Los Angeles Chargers",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.737,
+        "away": 0.263
+      }
+    },
+    {
+      "id": "91",
+      "round": 6,
+      "date": "2026-10-18T20:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Buffalo Bills",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.407,
+        "away": 0.593
+      }
+    },
+    {
+      "id": "92",
+      "round": 6,
+      "date": "2026-10-19T00:20:00Z",
+      "home": "Green Bay Packers",
+      "away": "Dallas Cowboys",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.442,
+        "away": 0.558
+      }
+    },
+    {
+      "id": "93",
+      "round": 6,
+      "date": "2026-10-20T00:15:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Washington Commanders",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.798,
+        "away": 0.202
+      }
+    },
+    {
+      "id": "94",
+      "round": 7,
+      "date": "2026-10-23T00:15:00Z",
+      "home": "Chicago Bears",
+      "away": "New England Patriots",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.589,
+        "away": 0.411
+      }
+    },
+    {
+      "id": "95",
+      "round": 7,
+      "date": "2026-10-25T13:30:00Z",
+      "home": "New Orleans Saints",
+      "away": "Pittsburgh Steelers",
+      "venue": "Stade de France",
+      "probabilities": {
+        "home": 0.529,
+        "away": 0.471
+      }
+    },
+    {
+      "id": "100",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Indianapolis Colts",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.679,
+        "away": 0.321
+      }
+    },
+    {
+      "id": "101",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "New York Jets",
+      "away": "Miami Dolphins",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.588,
+        "away": 0.412
+      }
+    },
+    {
+      "id": "102",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Cleveland Browns",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.408,
+        "away": 0.592
+      }
+    },
+    {
+      "id": "96",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "San Francisco 49ers",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.288,
+        "away": 0.712
+      }
+    },
+    {
+      "id": "97",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Cincinnati Bengals",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.571,
+        "away": 0.429
+      }
+    },
+    {
+      "id": "98",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.573,
+        "away": 0.427
+      }
+    },
+    {
+      "id": "99",
+      "round": 7,
+      "date": "2026-10-25T17:00:00Z",
+      "home": "Houston Texans",
+      "away": "New York Giants",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.6,
+        "away": 0.4
+      }
+    },
+    {
+      "id": "103",
+      "round": 7,
+      "date": "2026-10-25T20:05:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Denver Broncos",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.377,
+        "away": 0.623
+      }
+    },
+    {
+      "id": "104",
+      "round": 7,
+      "date": "2026-10-25T20:25:00Z",
+      "home": "Detroit Lions",
+      "away": "Green Bay Packers",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.663,
+        "away": 0.337
+      }
+    },
+    {
+      "id": "105",
+      "round": 7,
+      "date": "2026-10-25T20:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Los Angeles Rams",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.422,
+        "away": 0.578
+      }
+    },
+    {
+      "id": "106",
+      "round": 7,
+      "date": "2026-10-26T00:20:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Kansas City Chiefs",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.597,
+        "away": 0.403
+      }
+    },
+    {
+      "id": "107",
+      "round": 7,
+      "date": "2026-10-27T00:15:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Dallas Cowboys",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.521,
+        "away": 0.479
+      }
+    },
+    {
+      "id": "108",
+      "round": 8,
+      "date": "2026-10-30T00:15:00Z",
+      "home": "Green Bay Packers",
+      "away": "Carolina Panthers",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.451,
+        "away": 0.549
+      }
+    },
+    {
+      "id": "109",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "Baltimore Ravens",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.586,
+        "away": 0.414
+      }
+    },
+    {
+      "id": "110",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Tennessee Titans",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.742,
+        "away": 0.258
+      }
+    },
+    {
+      "id": "111",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Arizona Cardinals",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.602,
+        "away": 0.398
+      }
+    },
+    {
+      "id": "112",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Detroit Lions",
+      "away": "Minnesota Vikings",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.436,
+        "away": 0.564
+      }
+    },
+    {
+      "id": "113",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Indianapolis Colts",
+      "venue": "EverBank Stadium",
+      "probabilities": {
+        "home": 0.766,
+        "away": 0.234
+      }
+    },
+    {
+      "id": "114",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "New York Jets",
+      "away": "Las Vegas Raiders",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.402,
+        "away": 0.598
+      }
+    },
+    {
+      "id": "115",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Cleveland Browns",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.575,
+        "away": 0.425
+      }
+    },
+    {
+      "id": "116",
+      "round": 8,
+      "date": "2026-11-01T18:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Atlanta Falcons",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.51,
+        "away": 0.49
+      }
+    },
+    {
+      "id": "117",
+      "round": 8,
+      "date": "2026-11-01T21:05:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Los Angeles Chargers",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.73,
+        "away": 0.27
+      }
+    },
+    {
+      "id": "118",
+      "round": 8,
+      "date": "2026-11-01T21:25:00Z",
+      "home": "Denver Broncos",
+      "away": "Kansas City Chiefs",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.472,
+        "away": 0.528
+      }
+    },
+    {
+      "id": "119",
+      "round": 8,
+      "date": "2026-11-01T21:25:00Z",
+      "home": "Miami Dolphins",
+      "away": "New England Patriots",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.263,
+        "away": 0.737
+      }
+    },
+    {
+      "id": "120",
+      "round": 8,
+      "date": "2026-11-02T01:20:00Z",
+      "home": "Washington Commanders",
+      "away": "Philadelphia Eagles",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.473,
+        "away": 0.527
+      }
+    },
+    {
+      "id": "121",
+      "round": 8,
+      "date": "2026-11-03T01:15:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Chicago Bears",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.563,
+        "away": 0.437
+      }
+    },
+    {
+      "id": "122",
+      "round": 9,
+      "date": "2026-11-06T01:15:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Jacksonville Jaguars",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.389,
+        "away": 0.611
+      }
+    },
+    {
+      "id": "123",
+      "round": 9,
+      "date": "2026-11-08T14:30:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Cincinnati Bengals",
+      "venue": "Bernabeu",
+      "probabilities": {
+        "home": 0.445,
+        "away": 0.555
+      }
+    },
+    {
+      "id": "124",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Denver Broncos",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.437,
+        "away": 0.563
+      }
+    },
+    {
+      "id": "125",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Dallas Cowboys",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.521,
+        "away": 0.479
+      }
+    },
+    {
+      "id": "126",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "New York Jets",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.762,
+        "away": 0.238
+      }
+    },
+    {
+      "id": "127",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Detroit Lions",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.332,
+        "away": 0.668
+      }
+    },
+    {
+      "id": "128",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Cleveland Browns",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.571,
+        "away": 0.429
+      }
+    },
+    {
+      "id": "129",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "New York Giants",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.563,
+        "away": 0.437
+      }
+    },
+    {
+      "id": "130",
+      "round": 9,
+      "date": "2026-11-08T18:00:00Z",
+      "home": "Washington Commanders",
+      "away": "Los Angeles Rams",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.328,
+        "away": 0.672
+      }
+    },
+    {
+      "id": "131",
+      "round": 9,
+      "date": "2026-11-08T21:05:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "Houston Texans",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.433,
+        "away": 0.567
+      }
+    },
+    {
+      "id": "132",
+      "round": 9,
+      "date": "2026-11-08T21:05:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Las Vegas Raiders",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.721,
+        "away": 0.279
+      }
+    },
+    {
+      "id": "133",
+      "round": 9,
+      "date": "2026-11-08T21:25:00Z",
+      "home": "New England Patriots",
+      "away": "Green Bay Packers",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.733,
+        "away": 0.267
+      }
+    },
+    {
+      "id": "134",
+      "round": 9,
+      "date": "2026-11-08T21:25:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Arizona Cardinals",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.786,
+        "away": 0.214
+      }
+    },
+    {
+      "id": "135",
+      "round": 9,
+      "date": "2026-11-09T01:20:00Z",
+      "home": "Chicago Bears",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.746,
+        "away": 0.254
+      }
+    },
+    {
+      "id": "136",
+      "round": 9,
+      "date": "2026-11-10T01:15:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Buffalo Bills",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.52,
+        "away": 0.48
+      }
+    },
+    {
+      "id": "137",
+      "round": 10,
+      "date": "2026-11-13T01:15:00Z",
+      "home": "New York Giants",
+      "away": "Washington Commanders",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.562,
+        "away": 0.438
+      }
+    },
+    {
+      "id": "138",
+      "round": 10,
+      "date": "2026-11-15T14:30:00Z",
+      "home": "Detroit Lions",
+      "away": "New England Patriots",
+      "venue": "FC Bayern Munich Stadium",
+      "probabilities": {
+        "home": 0.453,
+        "away": 0.547
+      }
+    },
+    {
+      "id": "139",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Kansas City Chiefs",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.361,
+        "away": 0.639
+      }
+    },
+    {
+      "id": "140",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Houston Texans",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.466,
+        "away": 0.534
+      }
+    },
+    {
+      "id": "141",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "Green Bay Packers",
+      "away": "Minnesota Vikings",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.309,
+        "away": 0.691
+      }
+    },
+    {
+      "id": "142",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Miami Dolphins",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.676,
+        "away": 0.324
+      }
+    },
+    {
+      "id": "143",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Carolina Panthers",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.541,
+        "away": 0.459
+      }
+    },
+    {
+      "id": "144",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "New York Jets",
+      "away": "Buffalo Bills",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.286,
+        "away": 0.714
+      }
+    },
+    {
+      "id": "145",
+      "round": 10,
+      "date": "2026-11-15T18:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Jacksonville Jaguars",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.172,
+        "away": 0.828
+      }
+    },
+    {
+      "id": "146",
+      "round": 10,
+      "date": "2026-11-15T21:05:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Los Angeles Rams",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.329,
+        "away": 0.671
+      }
+    },
+    {
+      "id": "147",
+      "round": 10,
+      "date": "2026-11-15T21:05:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Seattle Seahawks",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.351,
+        "away": 0.649
+      }
+    },
+    {
+      "id": "148",
+      "round": 10,
+      "date": "2026-11-15T21:25:00Z",
+      "home": "Dallas Cowboys",
+      "away": "San Francisco 49ers",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.312,
+        "away": 0.688
+      }
+    },
+    {
+      "id": "149",
+      "round": 10,
+      "date": "2026-11-16T01:20:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Pittsburgh Steelers",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.59,
+        "away": 0.41
+      }
+    },
+    {
+      "id": "150",
+      "round": 10,
+      "date": "2026-11-17T01:15:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Los Angeles Chargers",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.697,
+        "away": 0.303
+      }
+    },
+    {
+      "id": "151",
+      "round": 11,
+      "date": "2026-11-20T01:15:00Z",
+      "home": "Houston Texans",
+      "away": "Indianapolis Colts",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.57,
+        "away": 0.43
+      }
+    },
+    {
+      "id": "152",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "Miami Dolphins",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.808,
+        "away": 0.192
+      }
+    },
+    {
+      "id": "153",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Baltimore Ravens",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.424,
+        "away": 0.576
+      }
+    },
+    {
+      "id": "154",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Chicago Bears",
+      "away": "New Orleans Saints",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.705,
+        "away": 0.295
+      }
+    },
+    {
+      "id": "155",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Tennessee Titans",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.69,
+        "away": 0.31
+      }
+    },
+    {
+      "id": "156",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Detroit Lions",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.626,
+        "away": 0.374
+      }
+    },
+    {
+      "id": "157",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "Arizona Cardinals",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.736,
+        "away": 0.264
+      }
+    },
+    {
+      "id": "158",
+      "round": 11,
+      "date": "2026-11-22T18:00:00Z",
+      "home": "New York Giants",
+      "away": "Jacksonville Jaguars",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.262,
+        "away": 0.738
+      }
+    },
+    {
+      "id": "159",
+      "round": 11,
+      "date": "2026-11-22T21:05:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "New York Jets",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.563,
+        "away": 0.437
+      }
+    },
+    {
+      "id": "160",
+      "round": 11,
+      "date": "2026-11-22T21:25:00Z",
+      "home": "Denver Broncos",
+      "away": "Las Vegas Raiders",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.591,
+        "away": 0.409
+      }
+    },
+    {
+      "id": "161",
+      "round": 11,
+      "date": "2026-11-22T21:25:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Pittsburgh Steelers",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.519,
+        "away": 0.481
+      }
+    },
+    {
+      "id": "162",
+      "round": 11,
+      "date": "2026-11-23T01:20:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Minnesota Vikings",
+      "venue": "Estadio Banorte",
+      "probabilities": {
+        "home": 0.618,
+        "away": 0.382
+      }
+    },
+    {
+      "id": "163",
+      "round": 11,
+      "date": "2026-11-24T01:15:00Z",
+      "home": "Washington Commanders",
+      "away": "Cincinnati Bengals",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.401,
+        "away": 0.599
+      }
+    },
+    {
+      "id": "164",
+      "round": 12,
+      "date": "2026-11-26T01:00:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Green Bay Packers",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.744,
+        "away": 0.256
+      }
+    },
+    {
+      "id": "165",
+      "round": 12,
+      "date": "2026-11-26T18:00:00Z",
+      "home": "Detroit Lions",
+      "away": "Chicago Bears",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.397,
+        "away": 0.603
+      }
+    },
+    {
+      "id": "166",
+      "round": 12,
+      "date": "2026-11-26T21:30:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Philadelphia Eagles",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.544,
+        "away": 0.456
+      }
+    },
+    {
+      "id": "167",
+      "round": 12,
+      "date": "2026-11-27T01:20:00Z",
+      "home": "Buffalo Bills",
+      "away": "Kansas City Chiefs",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.539,
+        "away": 0.461
+      }
+    },
+    {
+      "id": "168",
+      "round": 12,
+      "date": "2026-11-27T20:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Denver Broncos",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.449,
+        "away": 0.551
+      }
+    },
+    {
+      "id": "169",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "New Orleans Saints",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.594,
+        "away": 0.406
+      }
+    },
+    {
+      "id": "170",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Las Vegas Raiders",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.466,
+        "away": 0.534
+      }
+    },
+    {
+      "id": "171",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Houston Texans",
+      "away": "Baltimore Ravens",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.459,
+        "away": 0.541
+      }
+    },
+    {
+      "id": "172",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "New York Giants",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.563,
+        "away": 0.437
+      }
+    },
+    {
+      "id": "173",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "New York Jets",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.476,
+        "away": 0.524
+      }
+    },
+    {
+      "id": "174",
+      "round": 12,
+      "date": "2026-11-29T18:00:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Atlanta Falcons",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.693,
+        "away": 0.307
+      }
+    },
+    {
+      "id": "175",
+      "round": 12,
+      "date": "2026-11-29T21:05:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Tennessee Titans",
+      "venue": "EverBank Stadium",
+      "probabilities": {
+        "home": 0.866,
+        "away": 0.134
+      }
+    },
+    {
+      "id": "176",
+      "round": 12,
+      "date": "2026-11-29T21:25:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Washington Commanders",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.533,
+        "away": 0.467
+      }
+    },
+    {
+      "id": "177",
+      "round": 12,
+      "date": "2026-11-29T21:25:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Seattle Seahawks",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.548,
+        "away": 0.452
+      }
+    },
+    {
+      "id": "178",
+      "round": 12,
+      "date": "2026-11-30T01:20:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "New England Patriots",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.339,
+        "away": 0.661
+      }
+    },
+    {
+      "id": "179",
+      "round": 12,
+      "date": "2026-12-01T01:15:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Carolina Panthers",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.491,
+        "away": 0.509
+      }
+    },
+    {
+      "id": "180",
+      "round": 13,
+      "date": "2026-12-04T01:15:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Kansas City Chiefs",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.524,
+        "away": 0.476
+      }
+    },
+    {
+      "id": "181",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Detroit Lions",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.461,
+        "away": 0.539
+      }
+    },
+    {
+      "id": "182",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "Chicago Bears",
+      "away": "Jacksonville Jaguars",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.47,
+        "away": 0.53
+      }
+    },
+    {
+      "id": "183",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Cincinnati Bengals",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.432,
+        "away": 0.568
+      }
+    },
+    {
+      "id": "184",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Green Bay Packers",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.621,
+        "away": 0.379
+      }
+    },
+    {
+      "id": "185",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "New York Giants",
+      "away": "San Francisco 49ers",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.276,
+        "away": 0.724
+      }
+    },
+    {
+      "id": "186",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Los Angeles Chargers",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.556,
+        "away": 0.444
+      }
+    },
+    {
+      "id": "187",
+      "round": 13,
+      "date": "2026-12-06T18:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Washington Commanders",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.439,
+        "away": 0.561
+      }
+    },
+    {
+      "id": "188",
+      "round": 13,
+      "date": "2026-12-06T21:05:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Philadelphia Eagles",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.473,
+        "away": 0.527
+      }
+    },
+    {
+      "id": "189",
+      "round": 13,
+      "date": "2026-12-06T21:05:00Z",
+      "home": "Denver Broncos",
+      "away": "Miami Dolphins",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.759,
+        "away": 0.241
+      }
+    },
+    {
+      "id": "190",
+      "round": 13,
+      "date": "2026-12-06T21:25:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Carolina Panthers",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.677,
+        "away": 0.323
+      }
+    },
+    {
+      "id": "191",
+      "round": 13,
+      "date": "2026-12-06T21:25:00Z",
+      "home": "New England Patriots",
+      "away": "Buffalo Bills",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.504,
+        "away": 0.496
+      }
+    },
+    {
+      "id": "192",
+      "round": 13,
+      "date": "2026-12-07T01:20:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Houston Texans",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.509,
+        "away": 0.491
+      }
+    },
+    {
+      "id": "193",
+      "round": 13,
+      "date": "2026-12-08T01:15:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Dallas Cowboys",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.731,
+        "away": 0.269
+      }
+    },
+    {
+      "id": "194",
+      "round": 14,
+      "date": "2026-12-11T01:15:00Z",
+      "home": "New England Patriots",
+      "away": "Minnesota Vikings",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.516,
+        "away": 0.484
+      }
+    },
+    {
+      "id": "195",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.676,
+        "away": 0.324
+      }
+    },
+    {
+      "id": "196",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "New Orleans Saints",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.525,
+        "away": 0.475
+      }
+    },
+    {
+      "id": "197",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Atlanta Falcons",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.52,
+        "away": 0.48
+      }
+    },
+    {
+      "id": "198",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Detroit Lions",
+      "away": "Tennessee Titans",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.729,
+        "away": 0.271
+      }
+    },
+    {
+      "id": "199",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Chicago Bears",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.219,
+        "away": 0.781
+      }
+    },
+    {
+      "id": "200",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "New York Jets",
+      "away": "Denver Broncos",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.346,
+        "away": 0.654
+      }
+    },
+    {
+      "id": "201",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Indianapolis Colts",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.533,
+        "away": 0.467
+      }
+    },
+    {
+      "id": "202",
+      "round": 14,
+      "date": "2026-12-13T18:00:00Z",
+      "home": "Washington Commanders",
+      "away": "Houston Texans",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.435,
+        "away": 0.565
+      }
+    },
+    {
+      "id": "203",
+      "round": 14,
+      "date": "2026-12-13T21:05:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Los Angeles Chargers",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.631,
+        "away": 0.369
+      }
+    },
+    {
+      "id": "204",
+      "round": 14,
+      "date": "2026-12-13T21:25:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Kansas City Chiefs",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.446,
+        "away": 0.554
+      }
+    },
+    {
+      "id": "205",
+      "round": 14,
+      "date": "2026-12-13T21:25:00Z",
+      "home": "Seattle Seahawks",
+      "away": "New York Giants",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.764,
+        "away": 0.236
+      }
+    },
+    {
+      "id": "206",
+      "round": 14,
+      "date": "2026-12-13T21:25:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Los Angeles Rams",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.621,
+        "away": 0.379
+      }
+    },
+    {
+      "id": "207",
+      "round": 14,
+      "date": "2026-12-14T01:20:00Z",
+      "home": "Green Bay Packers",
+      "away": "Buffalo Bills",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.298,
+        "away": 0.702
+      }
+    },
+    {
+      "id": "208",
+      "round": 14,
+      "date": "2026-12-15T01:15:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Pittsburgh Steelers",
+      "venue": "EverBank Stadium",
+      "probabilities": {
+        "home": 0.755,
+        "away": 0.245
+      }
+    },
+    {
+      "id": "209",
+      "round": 15,
+      "date": "2026-12-18T01:15:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "San Francisco 49ers",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.25,
+        "away": 0.75
+      }
+    },
+    {
+      "id": "210",
+      "round": 15,
+      "date": "2026-12-19T22:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Seattle Seahawks",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.316,
+        "away": 0.684
+      }
+    },
+    {
+      "id": "211",
+      "round": 15,
+      "date": "2026-12-20T01:20:00Z",
+      "home": "Buffalo Bills",
+      "away": "Chicago Bears",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.504,
+        "away": 0.496
+      }
+    },
+    {
+      "id": "212",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Cincinnati Bengals",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.463,
+        "away": 0.537
+      }
+    },
+    {
+      "id": "213",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Green Bay Packers",
+      "away": "Miami Dolphins",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.602,
+        "away": 0.398
+      }
+    },
+    {
+      "id": "214",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Houston Texans",
+      "away": "Jacksonville Jaguars",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.321,
+        "away": 0.679
+      }
+    },
+    {
+      "id": "215",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "New York Giants",
+      "away": "Cleveland Browns",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.53,
+        "away": 0.47
+      }
+    },
+    {
+      "id": "216",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Baltimore Ravens",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.436,
+        "away": 0.564
+      }
+    },
+    {
+      "id": "217",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "New Orleans Saints",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.483,
+        "away": 0.517
+      }
+    },
+    {
+      "id": "218",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Indianapolis Colts",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.381,
+        "away": 0.619
+      }
+    },
+    {
+      "id": "219",
+      "round": 15,
+      "date": "2026-12-20T18:00:00Z",
+      "home": "Washington Commanders",
+      "away": "Atlanta Falcons",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.488,
+        "away": 0.512
+      }
+    },
+    {
+      "id": "220",
+      "round": 15,
+      "date": "2026-12-20T21:05:00Z",
+      "home": "Arizona Cardinals",
+      "away": "New York Jets",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.565,
+        "away": 0.435
+      }
+    },
+    {
+      "id": "221",
+      "round": 15,
+      "date": "2026-12-20T21:25:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Dallas Cowboys",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.666,
+        "away": 0.334
+      }
+    },
+    {
+      "id": "222",
+      "round": 15,
+      "date": "2026-12-20T21:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Denver Broncos",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.473,
+        "away": 0.527
+      }
+    },
+    {
+      "id": "223",
+      "round": 15,
+      "date": "2026-12-21T01:20:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Detroit Lions",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.627,
+        "away": 0.373
+      }
+    },
+    {
+      "id": "224",
+      "round": 15,
+      "date": "2026-12-22T01:15:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "New England Patriots",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.555,
+        "away": 0.445
+      }
+    },
+    {
+      "id": "225",
+      "round": 16,
+      "date": "2026-12-25T01:15:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Houston Texans",
+      "venue": "Lincoln Financial Field",
+      "probabilities": {
+        "home": 0.495,
+        "away": 0.505
+      }
+    },
+    {
+      "id": "226",
+      "round": 16,
+      "date": "2026-12-25T18:00:00Z",
+      "home": "Chicago Bears",
+      "away": "Green Bay Packers",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.778,
+        "away": 0.222
+      }
+    },
+    {
+      "id": "227",
+      "round": 16,
+      "date": "2026-12-25T21:30:00Z",
+      "home": "Denver Broncos",
+      "away": "Buffalo Bills",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.466,
+        "away": 0.534
+      }
+    },
+    {
+      "id": "228",
+      "round": 16,
+      "date": "2026-12-26T01:15:00Z",
+      "home": "Seattle Seahawks",
+      "away": "Los Angeles Rams",
+      "venue": "Lumen Field",
+      "probabilities": {
+        "home": 0.606,
+        "away": 0.394
+      }
+    },
+    {
+      "id": "229",
+      "round": 16,
+      "date": "2026-12-27T18:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Cleveland Browns",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.667,
+        "away": 0.333
+      }
+    },
+    {
+      "id": "230",
+      "round": 16,
+      "date": "2026-12-27T18:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Los Angeles Chargers",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.446,
+        "away": 0.554
+      }
+    },
+    {
+      "id": "231",
+      "round": 16,
+      "date": "2026-12-27T18:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Arizona Cardinals",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.602,
+        "away": 0.398
+      }
+    },
+    {
+      "id": "232",
+      "round": 16,
+      "date": "2026-12-27T18:00:00Z",
+      "home": "New York Jets",
+      "away": "New England Patriots",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.311,
+        "away": 0.689
+      }
+    },
+    {
+      "id": "233",
+      "round": 16,
+      "date": "2026-12-27T21:05:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Tennessee Titans",
+      "venue": "Allegiant Stadium",
+      "probabilities": {
+        "home": 0.714,
+        "away": 0.286
+      }
+    },
+    {
+      "id": "234",
+      "round": 16,
+      "date": "2026-12-27T21:25:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "San Francisco 49ers",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.452,
+        "away": 0.548
+      }
+    },
+    {
+      "id": "235",
+      "round": 16,
+      "date": "2026-12-28T01:20:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Jacksonville Jaguars",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.297,
+        "away": 0.703
+      }
+    },
+    {
+      "id": "237",
+      "round": 16,
+      "date": "2026-12-29T00:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.555,
+        "away": 0.445
+      }
+    },
+    {
+      "id": "238",
+      "round": 16,
+      "date": "2026-12-29T00:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Cincinnati Bengals",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.46,
+        "away": 0.54
+      }
+    },
+    {
+      "id": "239",
+      "round": 16,
+      "date": "2026-12-29T00:00:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Washington Commanders",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.731,
+        "away": 0.269
+      }
+    },
+    {
+      "id": "240",
+      "round": 16,
+      "date": "2026-12-29T00:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Carolina Panthers",
+      "venue": "Acrisure Stadium",
+      "probabilities": {
+        "home": 0.544,
+        "away": 0.456
+      }
+    },
+    {
+      "id": "236",
+      "round": 16,
+      "date": "2026-12-29T01:15:00Z",
+      "home": "Detroit Lions",
+      "away": "New York Giants",
+      "venue": "Ford Field",
+      "probabilities": {
+        "home": 0.618,
+        "away": 0.382
+      }
+    },
+    {
+      "id": "241",
+      "round": 17,
+      "date": "2027-01-01T01:15:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Baltimore Ravens",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.494,
+        "away": 0.506
+      }
+    },
+    {
+      "id": "242",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "New Orleans Saints",
+      "venue": "Mercedes-Benz Stadium",
+      "probabilities": {
+        "home": 0.506,
+        "away": 0.494
+      }
+    },
+    {
+      "id": "243",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Seattle Seahawks",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.318,
+        "away": 0.682
+      }
+    },
+    {
+      "id": "244",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Indianapolis Colts",
+      "venue": "Huntington Bank Field",
+      "probabilities": {
+        "home": 0.505,
+        "away": 0.495
+      }
+    },
+    {
+      "id": "245",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Dallas Cowboys",
+      "away": "New York Giants",
+      "venue": "AT&T Stadium",
+      "probabilities": {
+        "home": 0.574,
+        "away": 0.426
+      }
+    },
+    {
+      "id": "246",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Buffalo Bills",
+      "venue": "Hard Rock Stadium",
+      "probabilities": {
+        "home": 0.24,
+        "away": 0.76
+      }
+    },
+    {
+      "id": "247",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "New York Jets",
+      "away": "Minnesota Vikings",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.297,
+        "away": 0.703
+      }
+    },
+    {
+      "id": "248",
+      "round": 17,
+      "date": "2027-01-03T18:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Pittsburgh Steelers",
+      "venue": "Nissan Stadium",
+      "probabilities": {
+        "home": 0.367,
+        "away": 0.633
+      }
+    },
+    {
+      "id": "249",
+      "round": 17,
+      "date": "2027-01-03T21:05:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Las Vegas Raiders",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.435,
+        "away": 0.565
+      }
+    },
+    {
+      "id": "250",
+      "round": 17,
+      "date": "2027-01-03T21:25:00Z",
+      "home": "Chicago Bears",
+      "away": "Detroit Lions",
+      "venue": "Soldier Field",
+      "probabilities": {
+        "home": 0.665,
+        "away": 0.335
+      }
+    },
+    {
+      "id": "251",
+      "round": 17,
+      "date": "2027-01-04T01:20:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Philadelphia Eagles",
+      "venue": "Levi's\u00ae Stadium",
+      "probabilities": {
+        "home": 0.753,
+        "away": 0.247
+      }
+    },
+    {
+      "id": "253",
+      "round": 17,
+      "date": "2027-01-05T00:00:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Washington Commanders",
+      "venue": "EverBank Stadium",
+      "probabilities": {
+        "home": 0.809,
+        "away": 0.191
+      }
+    },
+    {
+      "id": "254",
+      "round": 17,
+      "date": "2027-01-05T00:00:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "Kansas City Chiefs",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.318,
+        "away": 0.682
+      }
+    },
+    {
+      "id": "255",
+      "round": 17,
+      "date": "2027-01-05T00:00:00Z",
+      "home": "New England Patriots",
+      "away": "Denver Broncos",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.571,
+        "away": 0.429
+      }
+    },
+    {
+      "id": "256",
+      "round": 17,
+      "date": "2027-01-05T00:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Los Angeles Rams",
+      "venue": "Raymond James Stadium",
+      "probabilities": {
+        "home": 0.348,
+        "away": 0.652
+      }
+    },
+    {
+      "id": "252",
+      "round": 17,
+      "date": "2027-01-05T01:15:00Z",
+      "home": "Green Bay Packers",
+      "away": "Houston Texans",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.416,
+        "away": 0.584
+      }
+    },
+    {
+      "id": "257",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Arizona Cardinals",
+      "away": "San Francisco 49ers",
+      "venue": "State Farm Stadium",
+      "probabilities": {
+        "home": 0.252,
+        "away": 0.748
+      }
+    },
+    {
+      "id": "258",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Pittsburgh Steelers",
+      "venue": "M&T Bank Stadium",
+      "probabilities": {
+        "home": 0.627,
+        "away": 0.373
+      }
+    },
+    {
+      "id": "259",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "New York Jets",
+      "venue": "Highmark Stadium",
+      "probabilities": {
+        "home": 0.767,
+        "away": 0.233
+      }
+    },
+    {
+      "id": "260",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Atlanta Falcons",
+      "venue": "Bank of America Stadium",
+      "probabilities": {
+        "home": 0.551,
+        "away": 0.449
+      }
+    },
+    {
+      "id": "261",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Cleveland Browns",
+      "venue": "Paycor Stadium",
+      "probabilities": {
+        "home": 0.631,
+        "away": 0.369
+      }
+    },
+    {
+      "id": "262",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Denver Broncos",
+      "away": "Los Angeles Chargers",
+      "venue": "Empower Field at Mile High",
+      "probabilities": {
+        "home": 0.685,
+        "away": 0.315
+      }
+    },
+    {
+      "id": "263",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Green Bay Packers",
+      "away": "Detroit Lions",
+      "venue": "Lambeau Field",
+      "probabilities": {
+        "home": 0.398,
+        "away": 0.602
+      }
+    },
+    {
+      "id": "264",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Houston Texans",
+      "away": "Tennessee Titans",
+      "venue": "Reliant Stadium",
+      "probabilities": {
+        "home": 0.713,
+        "away": 0.287
+      }
+    },
+    {
+      "id": "265",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Jacksonville Jaguars",
+      "venue": "Lucas Oil Stadium",
+      "probabilities": {
+        "home": 0.287,
+        "away": 0.713
+      }
+    },
+    {
+      "id": "266",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "Las Vegas Raiders",
+      "venue": "Arrowhead Stadium",
+      "probabilities": {
+        "home": 0.649,
+        "away": 0.351
+      }
+    },
+    {
+      "id": "267",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Los Angeles Rams",
+      "away": "Seattle Seahawks",
+      "venue": "SoFi Stadium",
+      "probabilities": {
+        "home": 0.458,
+        "away": 0.542
+      }
+    },
+    {
+      "id": "268",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Chicago Bears",
+      "venue": "U.S. Bank Stadium",
+      "probabilities": {
+        "home": 0.492,
+        "away": 0.508
+      }
+    },
+    {
+      "id": "269",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "New England Patriots",
+      "away": "Miami Dolphins",
+      "venue": "Gillette Stadium",
+      "probabilities": {
+        "home": 0.788,
+        "away": 0.212
+      }
+    },
+    {
+      "id": "270",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "New Orleans Saints",
+      "away": "Tampa Bay Buccaneers",
+      "venue": "Caesars Superdome",
+      "probabilities": {
+        "home": 0.581,
+        "away": 0.419
+      }
+    },
+    {
+      "id": "271",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "New York Giants",
+      "away": "Philadelphia Eagles",
+      "venue": "MetLife Stadium",
+      "probabilities": {
+        "home": 0.502,
+        "away": 0.498
+      }
+    },
+    {
+      "id": "272",
+      "round": 18,
+      "date": "2027-01-10T00:00:00Z",
+      "home": "Washington Commanders",
+      "away": "Dallas Cowboys",
+      "venue": "Northwest Stadium",
+      "probabilities": {
+        "home": 0.461,
+        "away": 0.539
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "49",
+      "round": 4,
+      "date": "2026-10-02T00:15:00Z",
+      "home": "Cleveland Browns",
+      "away": "Pittsburgh Steelers",
+      "homeScore": 27,
+      "awayScore": 24
+    },
+    {
+      "id": "48",
+      "round": 3,
+      "date": "2026-09-29T00:15:00Z",
+      "home": "Chicago Bears",
+      "away": "Philadelphia Eagles",
+      "homeScore": 27,
+      "awayScore": 7
+    },
+    {
+      "id": "47",
+      "round": 3,
+      "date": "2026-09-28T00:20:00Z",
+      "home": "Denver Broncos",
+      "away": "Los Angeles Rams",
+      "homeScore": 30,
+      "awayScore": 26
+    },
+    {
+      "id": "46",
+      "round": 3,
+      "date": "2026-09-27T20:25:00Z",
+      "home": "New Orleans Saints",
+      "away": "Las Vegas Raiders",
+      "homeScore": 27,
+      "awayScore": 35
+    },
+    {
+      "id": "45",
+      "round": 3,
+      "date": "2026-09-27T20:25:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Baltimore Ravens",
+      "homeScore": 31,
+      "awayScore": 34
+    },
+    {
+      "id": "44",
+      "round": 3,
+      "date": "2026-09-27T20:05:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Minnesota Vikings",
+      "homeScore": 16,
+      "awayScore": 23
+    },
+    {
+      "id": "43",
+      "round": 3,
+      "date": "2026-09-27T20:05:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Arizona Cardinals",
+      "homeScore": 36,
+      "awayScore": 30
+    },
+    {
+      "id": "42",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Washington Commanders",
+      "away": "Seattle Seahawks",
+      "homeScore": 33,
+      "awayScore": 31
+    },
+    {
+      "id": "41",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Cincinnati Bengals",
+      "homeScore": 30,
+      "awayScore": 27
+    },
+    {
+      "id": "40",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "New York Giants",
+      "away": "Tennessee Titans",
+      "homeScore": 12,
+      "awayScore": 7
+    },
+    {
+      "id": "39",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Miami Dolphins",
+      "away": "Kansas City Chiefs",
+      "homeScore": 10,
+      "awayScore": 24
+    },
+    {
+      "id": "38",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "New England Patriots",
+      "homeScore": 35,
+      "awayScore": 6
+    },
+    {
+      "id": "37",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Houston Texans",
+      "homeScore": 19,
+      "awayScore": 17
+    },
+    {
+      "id": "36",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Detroit Lions",
+      "away": "New York Jets",
+      "homeScore": 31,
+      "awayScore": 24
+    },
+    {
+      "id": "35",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Cleveland Browns",
+      "away": "Carolina Panthers",
+      "homeScore": 21,
+      "awayScore": 18
+    },
+    {
+      "id": "34",
+      "round": 3,
+      "date": "2026-09-27T17:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "Los Angeles Chargers",
+      "homeScore": 24,
+      "awayScore": 16
+    },
+    {
+      "id": "33",
+      "round": 3,
+      "date": "2026-09-25T00:15:00Z",
+      "home": "Green Bay Packers",
+      "away": "Atlanta Falcons",
+      "homeScore": 14,
+      "awayScore": 35
+    },
+    {
+      "id": "32",
+      "round": 2,
+      "date": "2026-09-22T00:15:00Z",
+      "home": "Los Angeles Rams",
+      "away": "New York Giants",
+      "homeScore": 28,
+      "awayScore": 6
+    },
+    {
+      "id": "31",
+      "round": 2,
+      "date": "2026-09-21T00:20:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "Indianapolis Colts",
+      "homeScore": 33,
+      "awayScore": 30
+    },
+    {
+      "id": "30",
+      "round": 2,
+      "date": "2026-09-20T20:25:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Miami Dolphins",
+      "homeScore": 35,
+      "awayScore": 13
+    },
+    {
+      "id": "29",
+      "round": 2,
+      "date": "2026-09-20T20:25:00Z",
+      "home": "Dallas Cowboys",
+      "away": "Washington Commanders",
+      "homeScore": 37,
+      "awayScore": 20
+    },
+    {
+      "id": "28",
+      "round": 2,
+      "date": "2026-09-20T20:25:00Z",
+      "home": "Arizona Cardinals",
+      "away": "Seattle Seahawks",
+      "homeScore": 7,
+      "awayScore": 31
+    },
+    {
+      "id": "27",
+      "round": 2,
+      "date": "2026-09-20T20:05:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "Las Vegas Raiders",
+      "homeScore": 14,
+      "awayScore": 26
+    },
+    {
+      "id": "26",
+      "round": 2,
+      "date": "2026-09-20T20:05:00Z",
+      "home": "Denver Broncos",
+      "away": "Jacksonville Jaguars",
+      "homeScore": 20,
+      "awayScore": 13
+    },
+    {
+      "id": "25",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "Philadelphia Eagles",
+      "homeScore": 20,
+      "awayScore": 24
+    },
+    {
+      "id": "24",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Tampa Bay Buccaneers",
+      "away": "Cleveland Browns",
+      "homeScore": 19,
+      "awayScore": 23
+    },
+    {
+      "id": "23",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "New York Jets",
+      "away": "Green Bay Packers",
+      "homeScore": 17,
+      "awayScore": 20
+    },
+    {
+      "id": "22",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "New England Patriots",
+      "away": "Pittsburgh Steelers",
+      "homeScore": 20,
+      "awayScore": 3
+    },
+    {
+      "id": "21",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Houston Texans",
+      "away": "Cincinnati Bengals",
+      "homeScore": 6,
+      "awayScore": 20
+    },
+    {
+      "id": "20",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Chicago Bears",
+      "away": "Minnesota Vikings",
+      "homeScore": 3,
+      "awayScore": 9
+    },
+    {
+      "id": "19",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "New Orleans Saints",
+      "homeScore": 17,
+      "awayScore": 24
+    },
+    {
+      "id": "18",
+      "round": 2,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Atlanta Falcons",
+      "away": "Carolina Panthers",
+      "homeScore": 3,
+      "awayScore": 34
+    },
+    {
+      "id": "17",
+      "round": 2,
+      "date": "2026-09-18T00:15:00Z",
+      "home": "Buffalo Bills",
+      "away": "Detroit Lions",
+      "homeScore": 41,
+      "awayScore": 31
+    },
+    {
+      "id": "16",
+      "round": 1,
+      "date": "2026-09-15T00:15:00Z",
+      "home": "Kansas City Chiefs",
+      "away": "Denver Broncos",
+      "homeScore": 31,
+      "awayScore": 10
+    },
+    {
+      "id": "15",
+      "round": 1,
+      "date": "2026-09-14T00:20:00Z",
+      "home": "New York Giants",
+      "away": "Dallas Cowboys",
+      "homeScore": 28,
+      "awayScore": 20
+    },
+    {
+      "id": "14",
+      "round": 1,
+      "date": "2026-09-13T20:25:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Washington Commanders",
+      "homeScore": 24,
+      "awayScore": 22
+    },
+    {
+      "id": "13",
+      "round": 1,
+      "date": "2026-09-13T20:25:00Z",
+      "home": "Minnesota Vikings",
+      "away": "Green Bay Packers",
+      "homeScore": 39,
+      "awayScore": 22
+    },
+    {
+      "id": "12",
+      "round": 1,
+      "date": "2026-09-13T20:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Miami Dolphins",
+      "homeScore": 27,
+      "awayScore": 13
+    },
+    {
+      "id": "11",
+      "round": 1,
+      "date": "2026-09-13T20:25:00Z",
+      "home": "Los Angeles Chargers",
+      "away": "Arizona Cardinals",
+      "homeScore": 14,
+      "awayScore": 26
+    },
+    {
+      "id": "9",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Pittsburgh Steelers",
+      "away": "Atlanta Falcons",
+      "homeScore": 20,
+      "awayScore": 13
+    },
+    {
+      "id": "8",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Jacksonville Jaguars",
+      "away": "Cleveland Browns",
+      "homeScore": 34,
+      "awayScore": 10
+    },
+    {
+      "id": "7",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Indianapolis Colts",
+      "away": "Baltimore Ravens",
+      "homeScore": 23,
+      "awayScore": 41
+    },
+    {
+      "id": "6",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Houston Texans",
+      "away": "Buffalo Bills",
+      "homeScore": 31,
+      "awayScore": 36
+    },
+    {
+      "id": "5",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Detroit Lions",
+      "away": "New Orleans Saints",
+      "homeScore": 31,
+      "awayScore": 30
+    },
+    {
+      "id": "4",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Tampa Bay Buccaneers",
+      "homeScore": 33,
+      "awayScore": 27
+    },
+    {
+      "id": "3",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Carolina Panthers",
+      "away": "Chicago Bears",
+      "homeScore": 37,
+      "awayScore": 59
+    },
+    {
+      "id": "10",
+      "round": 1,
+      "date": "2026-09-13T17:00:00Z",
+      "home": "Tennessee Titans",
+      "away": "New York Jets",
+      "homeScore": 10,
+      "awayScore": 23
+    },
+    {
+      "id": "2",
+      "round": 1,
+      "date": "2026-09-11T00:35:00Z",
+      "home": "Los Angeles Rams",
+      "away": "San Francisco 49ers",
+      "homeScore": 7,
+      "awayScore": 27
+    },
+    {
+      "id": "1",
+      "round": 1,
+      "date": "2026-09-10T00:20:00Z",
+      "home": "Seattle Seahawks",
+      "away": "New England Patriots",
+      "homeScore": 13,
+      "awayScore": 10
+    }
+  ],
+  "analysis": {
+    "method": "Monte Carlo",
+    "simulations": 20000,
+    "model": "Margin ratings model",
+    "modelNotes": [
+      "Team ratings come from score margins (capped at 21) with home advantage, fitted on this and last season with a 120-day half-life; last season counts 1x as much on top.",
+      "The rest of the regular season is simulated 20,000 times, letting team strength drift (more when more of the season is left), then the playoffs are simulated from each simulated table for title odds.",
+      "Tiebreakers are simplified: win percentage, then division or conference record; head-to-head and common-games rules are not modelled."
+    ],
+    "probabilities": {
+      "Arizona Cardinals": {
+        "playoffs": 12.99,
+        "division": 1.59,
+        "bye": 0.34,
+        "title": 0.4
+      },
+      "Atlanta Falcons": {
+        "playoffs": 28.59,
+        "division": 21.41,
+        "bye": 0.98,
+        "title": 0.97
+      },
+      "Baltimore Ravens": {
+        "playoffs": 63.85,
+        "division": 37.66,
+        "bye": 9.03,
+        "title": 4.08
+      },
+      "Buffalo Bills": {
+        "playoffs": 81.56,
+        "division": 63.66,
+        "bye": 20.79,
+        "title": 7.19
+      },
+      "Carolina Panthers": {
+        "playoffs": 35.8,
+        "division": 29.34,
+        "bye": 1.37,
+        "title": 1.23
+      },
+      "Chicago Bears": {
+        "playoffs": 73.17,
+        "division": 31.11,
+        "bye": 12.5,
+        "title": 7.54
+      },
+      "Cincinnati Bengals": {
+        "playoffs": 56.62,
+        "division": 28.79,
+        "bye": 6.26,
+        "title": 2.87
+      },
+      "Cleveland Browns": {
+        "playoffs": 44.23,
+        "division": 20.76,
+        "bye": 3.04,
+        "title": 1.14
+      },
+      "Dallas Cowboys": {
+        "playoffs": 33.87,
+        "division": 24.0,
+        "bye": 1.35,
+        "title": 1.08
+      },
+      "Denver Broncos": {
+        "playoffs": 56.73,
+        "division": 23.51,
+        "bye": 6.02,
+        "title": 3.2
+      },
+      "Detroit Lions": {
+        "playoffs": 52.69,
+        "division": 18.86,
+        "bye": 6.54,
+        "title": 2.56
+      },
+      "Green Bay Packers": {
+        "playoffs": 11.61,
+        "division": 2.24,
+        "bye": 0.33,
+        "title": 0.33
+      },
+      "Houston Texans": {
+        "playoffs": 23.0,
+        "division": 9.09,
+        "bye": 0.41,
+        "title": 1.19
+      },
+      "Indianapolis Colts": {
+        "playoffs": 29.25,
+        "division": 12.23,
+        "bye": 0.88,
+        "title": 1.05
+      },
+      "Jacksonville Jaguars": {
+        "playoffs": 88.01,
+        "division": 76.97,
+        "bye": 22.2,
+        "title": 12.89
+      },
+      "Kansas City Chiefs": {
+        "playoffs": 78.95,
+        "division": 49.41,
+        "bye": 17.96,
+        "title": 6.52
+      },
+      "Las Vegas Raiders": {
+        "playoffs": 55.82,
+        "division": 25.11,
+        "bye": 6.72,
+        "title": 2.15
+      },
+      "Los Angeles Chargers": {
+        "playoffs": 7.69,
+        "division": 1.97,
+        "bye": 0.08,
+        "title": 0.24
+      },
+      "Los Angeles Rams": {
+        "playoffs": 51.3,
+        "division": 12.1,
+        "bye": 4.11,
+        "title": 4.23
+      },
+      "Miami Dolphins": {
+        "playoffs": 4.55,
+        "division": 1.77,
+        "bye": 0.03,
+        "title": 0.1
+      },
+      "Minnesota Vikings": {
+        "playoffs": 81.72,
+        "division": 47.8,
+        "bye": 22.64,
+        "title": 7.05
+      },
+      "New England Patriots": {
+        "playoffs": 55.99,
+        "division": 29.06,
+        "bye": 4.88,
+        "title": 4.23
+      },
+      "New Orleans Saints": {
+        "playoffs": 40.61,
+        "division": 33.98,
+        "bye": 1.59,
+        "title": 1.25
+      },
+      "New York Giants": {
+        "playoffs": 37.65,
+        "division": 29.05,
+        "bye": 1.85,
+        "title": 0.97
+      },
+      "New York Jets": {
+        "playoffs": 15.2,
+        "division": 5.5,
+        "bye": 0.4,
+        "title": 0.38
+      },
+      "Philadelphia Eagles": {
+        "playoffs": 42.85,
+        "division": 34.24,
+        "bye": 2.27,
+        "title": 1.46
+      },
+      "Pittsburgh Steelers": {
+        "playoffs": 33.59,
+        "division": 12.8,
+        "bye": 1.26,
+        "title": 1.23
+      },
+      "San Francisco 49ers": {
+        "playoffs": 86.18,
+        "division": 55.1,
+        "bye": 30.03,
+        "title": 12.31
+      },
+      "Seattle Seahawks": {
+        "playoffs": 71.44,
+        "division": 31.21,
+        "bye": 13.37,
+        "title": 8.96
+      },
+      "Tampa Bay Buccaneers": {
+        "playoffs": 19.69,
+        "division": 15.25,
+        "bye": 0.3,
+        "title": 0.61
+      },
+      "Tennessee Titans": {
+        "playoffs": 4.96,
+        "division": 1.71,
+        "bye": 0.03,
+        "title": 0.11
+      },
+      "Washington Commanders": {
+        "playoffs": 19.84,
+        "division": 12.7,
+        "bye": 0.43,
+        "title": 0.53
+      }
+    },
+    "positions": {
+      "Arizona Cardinals": [
+        0.34,
+        0.64,
+        0.42,
+        0.18,
+        2.51,
+        3.87,
+        5.02,
+        6.08,
+        6.54,
+        7.38,
+        8.33,
+        8.8,
+        10.17,
+        11.49,
+        13.32,
+        14.9
+      ],
+      "Atlanta Falcons": [
+        0.98,
+        2.5,
+        7.03,
+        10.9,
+        1.1,
+        2.16,
+        3.9,
+        5.25,
+        6.49,
+        7.02,
+        8.09,
+        8.57,
+        9.26,
+        9.01,
+        9.0,
+        8.74
+      ],
+      "Baltimore Ravens": [
+        9.02,
+        10.08,
+        9.63,
+        8.92,
+        9.06,
+        8.98,
+        8.16,
+        7.56,
+        6.81,
+        5.78,
+        4.69,
+        4.19,
+        3.21,
+        2.22,
+        1.21,
+        0.47
+      ],
+      "Buffalo Bills": [
+        20.8,
+        15.3,
+        14.22,
+        13.35,
+        6.72,
+        5.82,
+        5.36,
+        4.82,
+        3.81,
+        3.4,
+        2.43,
+        1.8,
+        1.15,
+        0.72,
+        0.25,
+        0.07
+      ],
+      "Carolina Panthers": [
+        1.37,
+        3.88,
+        10.24,
+        13.86,
+        0.88,
+        2.09,
+        3.5,
+        4.93,
+        6.2,
+        7.05,
+        7.74,
+        8.13,
+        7.89,
+        7.78,
+        7.41,
+        7.06
+      ],
+      "Chicago Bears": [
+        12.5,
+        12.58,
+        4.64,
+        1.38,
+        17.84,
+        13.68,
+        10.54,
+        7.66,
+        5.38,
+        4.0,
+        3.12,
+        2.37,
+        1.86,
+        1.28,
+        0.84,
+        0.32
+      ],
+      "Cincinnati Bengals": [
+        6.26,
+        7.67,
+        7.66,
+        7.2,
+        9.08,
+        9.5,
+        9.26,
+        8.54,
+        7.69,
+        6.81,
+        5.95,
+        5.27,
+        3.88,
+        2.86,
+        1.7,
+        0.68
+      ],
+      "Cleveland Browns": [
+        3.04,
+        5.04,
+        6.27,
+        6.4,
+        6.76,
+        8.31,
+        8.4,
+        8.26,
+        8.83,
+        8.62,
+        8.32,
+        7.52,
+        6.27,
+        4.44,
+        2.6,
+        0.92
+      ],
+      "Dallas Cowboys": [
+        1.36,
+        3.74,
+        9.32,
+        9.59,
+        1.5,
+        3.17,
+        5.2,
+        6.7,
+        7.76,
+        8.14,
+        8.12,
+        7.88,
+        7.62,
+        7.44,
+        6.65,
+        5.82
+      ],
+      "Denver Broncos": [
+        6.02,
+        6.3,
+        6.1,
+        5.08,
+        13.48,
+        10.48,
+        9.26,
+        8.43,
+        7.64,
+        6.83,
+        6.04,
+        5.03,
+        3.66,
+        3.07,
+        1.74,
+        0.84
+      ],
+      "Detroit Lions": [
+        6.54,
+        7.75,
+        3.28,
+        1.3,
+        10.7,
+        11.78,
+        11.35,
+        9.77,
+        7.86,
+        7.0,
+        5.79,
+        5.16,
+        3.94,
+        3.43,
+        2.64,
+        1.71
+      ],
+      "Green Bay Packers": [
+        0.32,
+        0.95,
+        0.61,
+        0.36,
+        1.61,
+        3.22,
+        4.54,
+        5.34,
+        6.22,
+        6.48,
+        7.73,
+        8.77,
+        10.36,
+        12.13,
+        14.3,
+        17.05
+      ],
+      "Houston Texans": [
+        0.41,
+        1.54,
+        2.64,
+        4.49,
+        2.78,
+        4.84,
+        6.3,
+        6.98,
+        7.82,
+        9.13,
+        9.62,
+        9.83,
+        10.16,
+        9.43,
+        8.14,
+        5.9
+      ],
+      "Indianapolis Colts": [
+        0.88,
+        2.34,
+        3.74,
+        5.28,
+        4.11,
+        6.06,
+        6.86,
+        8.28,
+        8.67,
+        9.01,
+        9.24,
+        9.22,
+        8.77,
+        8.01,
+        5.94,
+        3.62
+      ],
+      "Jacksonville Jaguars": [
+        22.2,
+        20.88,
+        17.9,
+        16.0,
+        3.36,
+        3.8,
+        3.88,
+        2.94,
+        2.84,
+        2.1,
+        1.58,
+        1.1,
+        0.73,
+        0.46,
+        0.18,
+        0.04
+      ],
+      "Kansas City Chiefs": [
+        17.96,
+        13.08,
+        10.7,
+        7.68,
+        13.08,
+        9.25,
+        7.21,
+        5.48,
+        4.5,
+        3.85,
+        2.84,
+        1.96,
+        1.31,
+        0.69,
+        0.39,
+        0.03
+      ],
+      "Las Vegas Raiders": [
+        6.72,
+        6.77,
+        6.35,
+        5.28,
+        11.54,
+        10.02,
+        9.14,
+        8.8,
+        8.02,
+        7.42,
+        6.26,
+        5.13,
+        4.14,
+        2.66,
+        1.41,
+        0.34
+      ],
+      "Los Angeles Chargers": [
+        0.08,
+        0.32,
+        0.6,
+        0.97,
+        1.27,
+        2.01,
+        2.44,
+        3.45,
+        4.66,
+        5.48,
+        6.9,
+        9.65,
+        11.74,
+        14.77,
+        16.94,
+        18.72
+      ],
+      "Los Angeles Rams": [
+        4.11,
+        5.08,
+        2.18,
+        0.73,
+        13.38,
+        13.69,
+        12.14,
+        10.22,
+        8.25,
+        6.82,
+        5.9,
+        4.86,
+        4.3,
+        3.44,
+        2.92,
+        1.98
+      ],
+      "Miami Dolphins": [
+        0.03,
+        0.13,
+        0.49,
+        1.12,
+        0.42,
+        0.96,
+        1.4,
+        2.11,
+        2.86,
+        4.03,
+        5.76,
+        7.52,
+        10.32,
+        14.38,
+        19.93,
+        28.54
+      ],
+      "Minnesota Vikings": [
+        22.64,
+        16.96,
+        6.0,
+        2.19,
+        14.04,
+        11.6,
+        8.28,
+        5.98,
+        3.91,
+        2.72,
+        2.07,
+        1.5,
+        1.01,
+        0.62,
+        0.36,
+        0.12
+      ],
+      "New England Patriots": [
+        4.88,
+        6.67,
+        7.75,
+        9.76,
+        10.06,
+        8.54,
+        8.33,
+        8.32,
+        7.56,
+        6.62,
+        6.25,
+        5.1,
+        4.08,
+        3.08,
+        1.98,
+        1.04
+      ],
+      "New Orleans Saints": [
+        1.6,
+        4.44,
+        11.66,
+        16.3,
+        0.9,
+        2.28,
+        3.45,
+        4.7,
+        6.28,
+        7.17,
+        6.97,
+        7.4,
+        7.34,
+        6.98,
+        6.3,
+        6.27
+      ],
+      "New York Giants": [
+        1.85,
+        4.31,
+        11.11,
+        11.79,
+        1.48,
+        2.78,
+        4.33,
+        5.98,
+        7.06,
+        7.79,
+        8.02,
+        7.84,
+        7.6,
+        7.25,
+        6.24,
+        4.56
+      ],
+      "New York Jets": [
+        0.4,
+        0.94,
+        1.46,
+        2.7,
+        2.34,
+        3.1,
+        4.25,
+        5.18,
+        6.59,
+        7.5,
+        9.22,
+        10.4,
+        12.45,
+        12.76,
+        11.63,
+        9.1
+      ],
+      "Philadelphia Eagles": [
+        2.26,
+        5.68,
+        13.16,
+        13.15,
+        1.38,
+        3.01,
+        4.23,
+        6.1,
+        7.11,
+        7.61,
+        7.52,
+        7.28,
+        6.58,
+        6.13,
+        5.31,
+        3.5
+      ],
+      "Pittsburgh Steelers": [
+        1.26,
+        2.7,
+        4.1,
+        4.74,
+        5.42,
+        7.25,
+        8.12,
+        8.72,
+        8.81,
+        9.35,
+        9.64,
+        8.95,
+        8.22,
+        6.37,
+        4.35,
+        2.0
+      ],
+      "San Francisco 49ers": [
+        30.03,
+        17.11,
+        6.1,
+        1.86,
+        14.64,
+        9.8,
+        6.64,
+        4.44,
+        3.0,
+        2.2,
+        1.64,
+        0.97,
+        0.76,
+        0.48,
+        0.25,
+        0.08
+      ],
+      "Seattle Seahawks": [
+        13.37,
+        11.62,
+        4.65,
+        1.57,
+        16.46,
+        13.0,
+        10.76,
+        7.56,
+        5.83,
+        4.41,
+        3.41,
+        2.62,
+        2.03,
+        1.4,
+        0.88,
+        0.43
+      ],
+      "Tampa Bay Buccaneers": [
+        0.3,
+        1.29,
+        4.84,
+        8.82,
+        0.44,
+        1.59,
+        2.4,
+        3.78,
+        5.18,
+        6.36,
+        7.36,
+        8.38,
+        9.39,
+        10.42,
+        12.53,
+        16.9
+      ],
+      "Tennessee Titans": [
+        0.03,
+        0.24,
+        0.41,
+        1.03,
+        0.52,
+        1.1,
+        1.64,
+        2.14,
+        2.9,
+        4.06,
+        5.27,
+        7.34,
+        9.9,
+        14.1,
+        21.6,
+        27.72
+      ],
+      "Washington Commanders": [
+        0.43,
+        1.47,
+        4.77,
+        6.03,
+        1.14,
+        2.28,
+        3.72,
+        5.48,
+        6.92,
+        7.86,
+        8.21,
+        9.47,
+        9.87,
+        10.74,
+        11.06,
+        10.56
+      ]
+    },
+    "expected": {
+      "Arizona Cardinals": {
+        "wins": 6.5,
+        "seed": 11.8
+      },
+      "Atlanta Falcons": {
+        "wins": 7.1,
+        "seed": 10.0
+      },
+      "Baltimore Ravens": {
+        "wins": 10.0,
+        "seed": 6.3
+      },
+      "Buffalo Bills": {
+        "wins": 11.4,
+        "seed": 4.4
+      },
+      "Carolina Panthers": {
+        "wins": 7.6,
+        "seed": 9.2
+      },
+      "Chicago Bears": {
+        "wins": 10.7,
+        "seed": 5.7
+      },
+      "Cincinnati Bengals": {
+        "wins": 9.7,
+        "seed": 7.0
+      },
+      "Cleveland Browns": {
+        "wins": 9.0,
+        "seed": 8.1
+      },
+      "Dallas Cowboys": {
+        "wins": 7.7,
+        "seed": 9.2
+      },
+      "Denver Broncos": {
+        "wins": 9.6,
+        "seed": 7.1
+      },
+      "Detroit Lions": {
+        "wins": 9.5,
+        "seed": 7.5
+      },
+      "Green Bay Packers": {
+        "wins": 6.3,
+        "seed": 12.1
+      },
+      "Houston Texans": {
+        "wins": 7.3,
+        "seed": 10.4
+      },
+      "Indianapolis Colts": {
+        "wins": 7.7,
+        "seed": 9.6
+      },
+      "Jacksonville Jaguars": {
+        "wins": 11.8,
+        "seed": 3.7
+      },
+      "Kansas City Chiefs": {
+        "wins": 11.0,
+        "seed": 4.9
+      },
+      "Las Vegas Raiders": {
+        "wins": 9.6,
+        "seed": 7.1
+      },
+      "Los Angeles Chargers": {
+        "wins": 5.2,
+        "seed": 12.7
+      },
+      "Los Angeles Rams": {
+        "wins": 9.2,
+        "seed": 7.8
+      },
+      "Miami Dolphins": {
+        "wins": 4.5,
+        "seed": 13.5
+      },
+      "Minnesota Vikings": {
+        "wins": 11.4,
+        "seed": 4.6
+      },
+      "New England Patriots": {
+        "wins": 9.2,
+        "seed": 7.1
+      },
+      "New Orleans Saints": {
+        "wins": 8.0,
+        "seed": 8.7
+      },
+      "New York Giants": {
+        "wins": 8.1,
+        "seed": 8.8
+      },
+      "New York Jets": {
+        "wins": 6.2,
+        "seed": 11.4
+      },
+      "Philadelphia Eagles": {
+        "wins": 8.4,
+        "seed": 8.3
+      },
+      "Pittsburgh Steelers": {
+        "wins": 8.2,
+        "seed": 9.1
+      },
+      "San Francisco 49ers": {
+        "wins": 12.1,
+        "seed": 4.0
+      },
+      "Seattle Seahawks": {
+        "wins": 10.7,
+        "seed": 5.8
+      },
+      "Tampa Bay Buccaneers": {
+        "wins": 6.2,
+        "seed": 11.3
+      },
+      "Tennessee Titans": {
+        "wins": 4.5,
+        "seed": 13.5
+      },
+      "Washington Commanders": {
+        "wins": 6.8,
+        "seed": 10.9
+      }
+    },
+    "ratings": {
+      "Arizona Cardinals": -3.02,
+      "Atlanta Falcons": -1.72,
+      "Baltimore Ravens": 2.03,
+      "Buffalo Bills": 3.63,
+      "Carolina Panthers": -1.18,
+      "Chicago Bears": 4.46,
+      "Cincinnati Bengals": 0.88,
+      "Cleveland Browns": -2.09,
+      "Dallas Cowboys": -0.92,
+      "Denver Broncos": 1.64,
+      "Detroit Lions": 0.41,
+      "Green Bay Packers": -3.6,
+      "Houston Texans": -0.13,
+      "Indianapolis Colts": -1.26,
+      "Jacksonville Jaguars": 6.32,
+      "Kansas City Chiefs": 3.44,
+      "Las Vegas Raiders": -0.11,
+      "Los Angeles Chargers": -3.09,
+      "Los Angeles Rams": 3.18,
+      "Miami Dolphins": -5.67,
+      "Minnesota Vikings": 3.26,
+      "New England Patriots": 2.78,
+      "New Orleans Saints": -0.94,
+      "New York Giants": -2.16,
+      "New York Jets": -4.0,
+      "Philadelphia Eagles": -1.26,
+      "Pittsburgh Steelers": -0.84,
+      "San Francisco 49ers": 5.83,
+      "Seattle Seahawks": 5.37,
+      "Tampa Bay Buccaneers": -2.4,
+      "Tennessee Titans": -5.8,
+      "Washington Commanders": -3.03
+    },
+    "homeAdvantage": 0.97,
+    "sigma": 11.8,
+    "gamesPerTeam": 17.0
+  },
+  "matchesThatMatter": [
+    {
+      "fixtureId": "52",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Buffalo Bills",
+      "away": "New England Patriots",
+      "tier": "division",
+      "tierLabel": "Division",
+      "team": "Buffalo Bills",
+      "swing": 40.2,
+      "ifHome": 81.7,
+      "ifAway": 41.6
+    },
+    {
+      "fixtureId": "60",
+      "date": "2026-10-04T20:25:00Z",
+      "home": "Las Vegas Raiders",
+      "away": "Kansas City Chiefs",
+      "tier": "division",
+      "tierLabel": "Division",
+      "team": "Kansas City Chiefs",
+      "swing": 38.3,
+      "ifHome": 27.4,
+      "ifAway": 65.7
+    },
+    {
+      "fixtureId": "64",
+      "date": "2026-10-06T00:15:00Z",
+      "home": "New Orleans Saints",
+      "away": "Atlanta Falcons",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "New Orleans Saints",
+      "swing": 31.6,
+      "ifHome": 55.0,
+      "ifAway": 23.4
+    },
+    {
+      "fixtureId": "57",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Philadelphia Eagles",
+      "away": "Los Angeles Rams",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Los Angeles Rams",
+      "swing": 30.4,
+      "ifHome": 33.1,
+      "ifAway": 63.5
+    },
+    {
+      "fixtureId": "51",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Baltimore Ravens",
+      "away": "Tennessee Titans",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Baltimore Ravens",
+      "swing": 29.8,
+      "ifHome": 71.4,
+      "ifAway": 41.7
+    },
+    {
+      "fixtureId": "63",
+      "date": "2026-10-05T00:20:00Z",
+      "home": "Carolina Panthers",
+      "away": "Detroit Lions",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Detroit Lions",
+      "swing": 29.8,
+      "ifHome": 37.3,
+      "ifAway": 67.0
+    },
+    {
+      "fixtureId": "54",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Cincinnati Bengals",
+      "away": "Jacksonville Jaguars",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Cincinnati Bengals",
+      "swing": 28.1,
+      "ifHome": 74.4,
+      "ifAway": 46.3
+    },
+    {
+      "fixtureId": "56",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "New York Giants",
+      "away": "Arizona Cardinals",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "New York Giants",
+      "swing": 25.8,
+      "ifHome": 49.3,
+      "ifAway": 23.5
+    },
+    {
+      "fixtureId": "62",
+      "date": "2026-10-04T20:25:00Z",
+      "home": "San Francisco 49ers",
+      "away": "Denver Broncos",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Denver Broncos",
+      "swing": 24.9,
+      "ifHome": 47.7,
+      "ifAway": 72.6
+    },
+    {
+      "fixtureId": "53",
+      "date": "2026-10-04T17:00:00Z",
+      "home": "Chicago Bears",
+      "away": "New York Jets",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Chicago Bears",
+      "swing": 24.3,
+      "ifHome": 79.2,
+      "ifAway": 54.9
+    }
+  ],
+  "movement": null
+}

@@ -1,0 +1,296 @@
+{
+  "id": "nba",
+  "sport": "basketball",
+  "name": "NBA",
+  "shortName": "NBA",
+  "headline": "NBA Playoff & Title Odds",
+  "priority": 31,
+  "season": {
+    "startMonth": 10,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "nba-{year}"
+  },
+  "gamesPerTeam": 82,
+  "playoffs": {
+    "format": "nba",
+    "teamsPerConference": 6,
+    "cutoffs": [
+      {
+        "after": 6,
+        "label": "Play-in"
+      },
+      {
+        "after": 10,
+        "label": "Out"
+      }
+    ],
+    "zones": [
+      {
+        "to": 6,
+        "kind": "top"
+      },
+      {
+        "to": 10,
+        "kind": "mid"
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top6",
+      "label": "Top 6",
+      "kind": "seed",
+      "size": 6
+    },
+    {
+      "key": "top1",
+      "label": "No. 1 seed",
+      "kind": "seed",
+      "size": 1,
+      "shortLabel": "1 seed"
+    },
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "champion"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "East",
+      "label": "East",
+      "divisions": [
+        "Atlantic",
+        "Central",
+        "Southeast"
+      ]
+    },
+    {
+      "key": "West",
+      "label": "West",
+      "divisions": [
+        "Northwest",
+        "Pacific",
+        "Southwest"
+      ]
+    }
+  ],
+  "teams": {
+    "Boston Celtics": {
+      "shortName": "BOS",
+      "color": "#007A33",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Brooklyn Nets": {
+      "shortName": "BKN",
+      "color": "#FFFFFF",
+      "textColor": "#000000",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "New York Knicks": {
+      "shortName": "NYK",
+      "color": "#006BB6",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Philadelphia 76ers": {
+      "shortName": "PHI",
+      "color": "#ED174C",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Toronto Raptors": {
+      "shortName": "TOR",
+      "color": "#CE1141",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Atlantic"
+    },
+    "Chicago Bulls": {
+      "shortName": "CHI",
+      "color": "#CE1141",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Central"
+    },
+    "Cleveland Cavaliers": {
+      "shortName": "CLE",
+      "color": "#860038",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Central"
+    },
+    "Detroit Pistons": {
+      "shortName": "DET",
+      "color": "#1D42BA",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Central"
+    },
+    "Indiana Pacers": {
+      "shortName": "IND",
+      "color": "#FDBB30",
+      "textColor": "#000000",
+      "conference": "East",
+      "division": "Central"
+    },
+    "Milwaukee Bucks": {
+      "shortName": "MIL",
+      "color": "#00471B",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Central"
+    },
+    "Atlanta Hawks": {
+      "shortName": "ATL",
+      "color": "#E03A3E",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Southeast"
+    },
+    "Charlotte Hornets": {
+      "shortName": "CHA",
+      "color": "#00788C",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Southeast"
+    },
+    "Miami Heat": {
+      "shortName": "MIA",
+      "color": "#98002E",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Southeast"
+    },
+    "Orlando Magic": {
+      "shortName": "ORL",
+      "color": "#0077C0",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Southeast"
+    },
+    "Washington Wizards": {
+      "shortName": "WAS",
+      "color": "#E31837",
+      "textColor": "#FFFFFF",
+      "conference": "East",
+      "division": "Southeast"
+    },
+    "Denver Nuggets": {
+      "shortName": "DEN",
+      "color": "#FEC524",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Northwest"
+    },
+    "Minnesota Timberwolves": {
+      "shortName": "MIN",
+      "color": "#78BE20",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Northwest"
+    },
+    "Oklahoma City Thunder": {
+      "shortName": "OKC",
+      "color": "#007AC1",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Northwest"
+    },
+    "Portland Trail Blazers": {
+      "shortName": "POR",
+      "color": "#E03A3E",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Northwest"
+    },
+    "Utah Jazz": {
+      "shortName": "UTA",
+      "color": "#753BBD",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Northwest"
+    },
+    "Golden State Warriors": {
+      "shortName": "GSW",
+      "color": "#1D428A",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "LA Clippers": {
+      "shortName": "LAC",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Los Angeles Lakers": {
+      "shortName": "LAL",
+      "color": "#552583",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Phoenix Suns": {
+      "shortName": "PHX",
+      "color": "#E56020",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Sacramento Kings": {
+      "shortName": "SAC",
+      "color": "#5A2D81",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Pacific"
+    },
+    "Dallas Mavericks": {
+      "shortName": "DAL",
+      "color": "#00538C",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Southwest"
+    },
+    "Houston Rockets": {
+      "shortName": "HOU",
+      "color": "#CE1141",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Southwest"
+    },
+    "Memphis Grizzlies": {
+      "shortName": "MEM",
+      "color": "#5D76A9",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Southwest"
+    },
+    "New Orleans Pelicans": {
+      "shortName": "NOP",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "West",
+      "division": "Southwest"
+    },
+    "San Antonio Spurs": {
+      "shortName": "SAS",
+      "color": "#C4CED4",
+      "textColor": "#000000",
+      "conference": "West",
+      "division": "Southwest"
+    }
+  }
+}

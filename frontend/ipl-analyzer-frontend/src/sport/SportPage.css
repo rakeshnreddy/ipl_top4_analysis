@@ -84,6 +84,26 @@
   box-shadow: inset 3px 0 0 #fb7185;
 }
 
+.sport-table tr.zone-mid td:first-child {
+  box-shadow: inset 3px 0 0 #fbbf24;
+}
+
+.sport-table tr.cutline {
+  background: none;
+  cursor: default;
+}
+
+.sport-table tr.cutline td {
+  border-top: 1px dashed rgba(251, 191, 36, 0.6);
+  color: #fbbf24;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  padding: 1px 7px 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
 .sport-table .col-rank {
   color: #cbd5e1;
   font-weight: 900;
@@ -174,7 +194,8 @@
   background: #34d399;
 }
 
-.form-d {
+.form-d,
+.form-t {
   background: #cbd5e1;
 }
 
@@ -256,6 +277,14 @@
 
 .position-bar.zone-bottom > span {
   background: #fb7185;
+}
+
+.position-bar.zone-mid > span {
+  background: #fbbf24;
+}
+
+.position-bar.zone-none > span {
+  background: #64748b;
 }
 
 .position-bar small {
@@ -453,11 +482,15 @@
 
   .sport-table th,
   .sport-table td {
-    padding: 6px 5px;
+    padding: 6px 4px;
+  }
+
+  .sport-table .col-rank {
+    width: 22px;
   }
 
   .sport-table .col-tier {
-    min-width: 48px;
+    min-width: 42px;
   }
 
   .sport-table .label-full {
