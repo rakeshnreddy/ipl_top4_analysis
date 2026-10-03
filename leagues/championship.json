@@ -1,0 +1,171 @@
+{
+  "id": "championship",
+  "sport": "football",
+  "name": "EFL Championship",
+  "shortName": "Championship",
+  "priority": 25,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "championship-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "promotion",
+      "label": "Promotion",
+      "kind": "top",
+      "size": 2,
+      "shortLabel": "Top 2"
+    },
+    {
+      "key": "playoffs",
+      "label": "Top 6",
+      "kind": "top",
+      "size": 6
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "championship-{year}",
+    "espn": "eng.2"
+  },
+  "teams": {
+    "Birmingham City": {
+      "shortName": "BIR",
+      "color": "#1C39BB",
+      "textColor": "#FFFFFF"
+    },
+    "Blackburn Rovers": {
+      "shortName": "BLB",
+      "color": "#009EE0",
+      "textColor": "#FFFFFF"
+    },
+    "Bolton Wanderers": {
+      "shortName": "BOL",
+      "color": "#263C7E",
+      "textColor": "#FFFFFF"
+    },
+    "Bristol City": {
+      "shortName": "BRC",
+      "color": "#E21A23",
+      "textColor": "#FFFFFF"
+    },
+    "Burnley": {
+      "shortName": "BUR",
+      "color": "#6C1D45",
+      "textColor": "#FFFFFF"
+    },
+    "Cardiff City": {
+      "shortName": "CAR",
+      "color": "#0070B5",
+      "textColor": "#FFFFFF"
+    },
+    "Charlton Athletic": {
+      "shortName": "CHA",
+      "color": "#D4021D",
+      "textColor": "#FFFFFF"
+    },
+    "Derby County": {
+      "shortName": "DER",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    },
+    "Lincoln City": {
+      "shortName": "LIN",
+      "color": "#E4002B",
+      "textColor": "#FFFFFF"
+    },
+    "Middlesbrough": {
+      "shortName": "MID",
+      "color": "#E11B22",
+      "textColor": "#FFFFFF"
+    },
+    "Millwall": {
+      "shortName": "MIL",
+      "color": "#001D5E",
+      "textColor": "#FFFFFF"
+    },
+    "Norwich City": {
+      "shortName": "NOR",
+      "color": "#FFF200",
+      "textColor": "#000000"
+    },
+    "Portsmouth": {
+      "shortName": "POR",
+      "color": "#001489",
+      "textColor": "#FFFFFF"
+    },
+    "Preston North End": {
+      "shortName": "PNE",
+      "color": "#001F5B",
+      "textColor": "#FFFFFF"
+    },
+    "Queens Park Rangers": {
+      "shortName": "QPR",
+      "color": "#1D5BA4",
+      "textColor": "#FFFFFF"
+    },
+    "Sheffield United": {
+      "shortName": "SHU",
+      "color": "#EE2737",
+      "textColor": "#FFFFFF"
+    },
+    "Southampton": {
+      "shortName": "SOU",
+      "color": "#D71920",
+      "textColor": "#FFFFFF"
+    },
+    "Stoke City": {
+      "shortName": "STK",
+      "color": "#E03A3E",
+      "textColor": "#FFFFFF"
+    },
+    "Swansea City": {
+      "shortName": "SWA",
+      "color": "#FFFFFF",
+      "textColor": "#000000"
+    },
+    "Watford": {
+      "shortName": "WAT",
+      "color": "#FBEE23",
+      "textColor": "#000000"
+    },
+    "West Bromwich Albion": {
+      "shortName": "WBA",
+      "color": "#122F67",
+      "textColor": "#FFFFFF"
+    },
+    "West Ham United": {
+      "shortName": "WHU",
+      "color": "#7A263A",
+      "textColor": "#FFFFFF"
+    },
+    "Wolverhampton Wanderers": {
+      "shortName": "WOL",
+      "color": "#FDB913",
+      "textColor": "#000000"
+    },
+    "Wrexham": {
+      "shortName": "WRE",
+      "color": "#D71920",
+      "textColor": "#FFFFFF"
+    }
+  }
+}

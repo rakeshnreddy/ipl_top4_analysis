@@ -61,9 +61,95 @@ def standings(games: list[Game], teams: list[str], win: int = 3, draw: int = 1) 
     return rows
 
 
-def ranked(rows: dict[str, dict[str, int]]) -> list[str]:
-    """Points, then goal difference, then goals scored."""
-    return sorted(rows, key=lambda team: (-rows[team]["points"], -rows[team]["goalDifference"], -rows[team]["goalsFor"], team))
+def ranked(rows: dict[str, dict[str, int]], games: list[Game] | None = None, rule: str | None = None) -> list[str]:
+    """Points, then goal difference, then goals scored.
+
+    `rule` "head-to-head" (Portugal) ranks teams level on points by the points and goal
+    difference from games between them first; "head-to-head-complete" (Spain, Italy) does
+    so only once those teams have played each other home and away.
+    """
+    mini: dict[str, tuple[int, int]] = {}
+    if rule in ("head-to-head", "head-to-head-complete") and games:
+        by_points: dict[int, list[str]] = {}
+        for team in rows:
+            by_points.setdefault(rows[team]["points"], []).append(team)
+        for group in by_points.values():
+            if len(group) < 2:
+                continue
+            members = set(group)
+            between = [game for game in games if game.played and game.home in members and game.away in members]
+            if rule == "head-to-head-complete" and len(between) < len(group) * (len(group) - 1):
+                continue
+            among = standings(between, group)
+            for team in group:
+                mini[team] = (among[team]["points"], among[team]["goalDifference"])
+    return sorted(
+        rows,
+        key=lambda team: (
+            -rows[team]["points"],
+            *(-value for value in mini.get(team, (0, 0))),
+            -rows[team]["goalDifference"],
+            -rows[team]["goalsFor"],
+            team,
+        ),
+    )
+
+
+def official_adjustments(table: dict[str, dict[str, int]], official: list[dict[str, int]]) -> dict[str, int]:
+    """Points deductions, found by matching each team to the official row with the same record.
+
+    Records (played, wins, draws, losses, goals for and against) almost always identify a
+    team, so no name matching is needed; ambiguous or missing records are skipped.
+    """
+    fields = ("played", "wins", "draws", "losses", "goalsFor", "goalsAgainst")
+    by_record: dict[tuple[int, ...], list[dict[str, int]]] = {}
+    for row in official:
+        by_record.setdefault(tuple(row[field] for field in fields), []).append(row)
+    ours: dict[tuple[int, ...], list[str]] = {}
+    for team, row in table.items():
+        ours.setdefault(tuple(row[field] for field in fields), []).append(team)
+    adjustments = {}
+    for record, teams in ours.items():
+        matches = by_record.get(record, [])
+        if len(teams) == 1 and len(matches) == 1:
+            difference = matches[0]["points"] - table[teams[0]]["points"]
+            if difference and abs(difference) <= 30:
+                adjustments[teams[0]] = difference
+    return adjustments
+
+
+ESPN_STANDINGS_URL = "https://site.api.espn.com/apis/v2/sports/soccer/{code}/standings"
+
+
+def espn_table(code: str, cache_dir: Path) -> list[dict[str, int]]:
+    """The official table as published by ESPN (unofficial API, used only to detect deductions)."""
+    import json
+    import time
+
+    path = cache_dir / f"espn-{code}.json"
+    if not (path.exists() and time.time() - path.stat().st_mtime < 3 * 3600):
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(team_sports.get_json(ESPN_STANDINGS_URL.format(code=code))), encoding="utf-8")
+        except Exception as exc:  # noqa: BLE001 - deductions are optional; keep the last copy if any
+            if not path.exists():
+                raise team_sports.FeedError(f"ESPN standings {code}: {exc}") from exc
+    data = json.loads(path.read_text(encoding="utf-8"))
+    rows = []
+    for entry in data["children"][0]["standings"]["entries"]:
+        stats = {item["name"]: item.get("value") for item in entry["stats"]}
+        rows.append(
+            {
+                "played": int(stats["gamesPlayed"]),
+                "wins": int(stats["wins"]),
+                "draws": int(stats["ties"]),
+                "losses": int(stats["losses"]),
+                "goalsFor": int(stats["pointsFor"]),
+                "goalsAgainst": int(stats["pointsAgainst"]),
+                "points": int(stats["points"]),
+            }
+        )
+    return rows
 
 
 @dataclass(frozen=True)
@@ -283,7 +369,18 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     previous_teams = {game.home for game in previous_games} | {game.away for game in previous_games}
     points = {"win": config.get("points", {}).get("win", 3), "draw": config.get("points", {}).get("draw", 1)}
     table = standings(games, teams, **points)
-    order = ranked(table)
+    # Points deductions (financial or disciplinary) only show in the official table.
+    adjustments: dict[str, int] = {}
+    official_code = config.get("sources", {}).get("espn")
+    if official_code:
+        try:
+            adjustments = official_adjustments(table, espn_table(official_code, cache_dir))
+        except (team_sports.FeedError, KeyError, IndexError, ValueError, TypeError) as exc:
+            print(f"{season.payload_id}: deductions not checked ({exc})")
+    for team, change in adjustments.items():
+        table[team]["points"] += change
+        table[team]["adjustment"] = change
+    order = ranked(table, games, config.get("tiebreak"))
     meta = team_sports.team_meta(config, teams)
 
     model_teams = sorted(set(teams) | previous_teams)
@@ -387,7 +484,21 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 f"defence ratings plus home advantage, fitted on this and last season with a {HALF_LIFE_DAYS}-day half-life.",
                 "Every simulated season also lets team strength drift (more when more of the season is left), because "
                 "form, injuries and transfers change teams; without it, early-season odds were overconfident in backtests.",
-                "Teams level on points are separated by goal difference, then goals scored; head-to-head rules are not modelled.",
+                (
+                    "The table ranks teams level on points by their head-to-head points and goal difference, then overall goal "
+                    "difference; simulated seasons separate them by goal difference, then goals scored."
+                    if config.get("tiebreak", "").startswith("head-to-head")
+                    else "Teams level on points are separated by goal difference, then goals scored."
+                ),
+                *(
+                    [
+                        "Points deductions in the official table: "
+                        + ", ".join(f"{meta[team]['fullName']} {change:+d}" for team, change in sorted(adjustments.items()))
+                        + "."
+                    ]
+                    if adjustments
+                    else []
+                ),
                 "Backtested on 2025-26 in five leagues: match predictions score 0.20-0.21 (ranked probability score) "
                 "against 0.22-0.23 for home/draw/away base rates; season odds were calibrated on 18 league-seasons since 2022-23.",
             ],
