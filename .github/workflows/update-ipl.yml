@@ -1,9 +1,13 @@
 name: Update IPL Data and Deploy
 
 on:
-  schedule:
-    # 01:00 IST, safely after the IPL night match has usually finished.
-    - cron: '30 19 * * *'
+  # Nightly schedule paused: the IPL 2026 season is over, and since 2026-05-25 the
+  # "Generate canonical IPL payload" step fails with "Could not discover CricketData
+  # IPL 2026 series id" (no CRICDATA_SERIES_ID secret, series no longer listed).
+  # Restore once the next season's series id is configured.
+  # schedule:
+  #   # 01:00 IST, safely after the IPL night match has usually finished.
+  #   - cron: '30 19 * * *'
   workflow_dispatch:
 
 permissions:
@@ -64,10 +68,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis_results.json current_standings.json remaining_fixtures.json
-          git add frontend/ipl-analyzer-frontend/public/analysis_results.json
-          git add frontend/ipl-analyzer-frontend/public/current_standings.json
-          git add frontend/ipl-analyzer-frontend/public/remaining_fixtures.json
           git add frontend/ipl-analyzer-frontend/public/data/ipl-2026.json
           git add frontend/ipl-analyzer-frontend/public/social/instagram-carousel
           if git diff --cached --quiet; then

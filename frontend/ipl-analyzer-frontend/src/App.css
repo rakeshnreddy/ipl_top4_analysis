@@ -253,6 +253,7 @@
   margin-bottom: 8px;
 }
 
+.section-heading h1,
 .section-heading h2 {
   color: #f8fafc;
   font-size: 1.12rem;
@@ -397,6 +398,23 @@
 .prob-mini {
   font-weight: 900;
   font-size: 0.78rem;
+}
+
+.prob-mini.is-achieved {
+  color: #34d399;
+}
+
+.prob-mini.is-missed {
+  color: #64748b;
+}
+
+.playoff-list li.is-final {
+  border-color: rgba(250, 204, 21, 0.55);
+}
+
+.playoff-list strong {
+  color: #ffffff;
+  font-size: 0.82rem;
 }
 
 .team-nrr.positive {

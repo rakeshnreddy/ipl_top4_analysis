@@ -6,17 +6,27 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 ## What The Site Shows
 
+During the league stage:
+
 - IPL Top 4 and Top 2 qualification probabilities.
 - Current standings, remaining fixtures, and selected-team paths.
-- Reels-ready carousel slides and captions.
-- Hash deep links for `#team=RCB`, `#team=CSK`, `#standings`, `#top4`, `#reels`, and `#deep-dive`.
+
+Once the league stage is complete (no fixtures left and every team has played 14):
+
+- Final standings ranked by points, then NRR.
+- Playoff results, champion and a season recap.
+- Each team's season outcome and playoff journey.
+
+Hash deep links: `#team=RCB`, `#standings`, `#top4`, `#playoffs`, and `#deep-dive`.
+
+Social posting tools live on a separate page, `/share.html` (Share kit): the latest Reels slides, copy-ready captions, and a race PNG export. Old `#reels` links redirect there. The page is `noindex`.
 
 ## Data Rules
 
-- Probabilities use exact all-combinations over remaining fixtures.
-- NRR is display-only when CricketData provides it.
-- NRR is not used in probability math.
-- Production automation uses CricketData.
+- Probabilities use exact all-combinations over remaining league fixtures. Playoff fixtures in the feed are ignored.
+- In-season data comes from CricketData (`--source cricketdata`, the default). NRR is display-only when CricketData provides it and is not used in probability math.
+- Completed seasons are rebuilt from Cricsheet (`--source cricsheet`): results, playoffs, and NRR computed from ball-by-ball data.
+- Cricsheet data is licensed ODC-By 1.0. Keep the source and licence credit visible on the site.
 - Do not add Cricbuzz or scraping fallback paths to production automation.
 
 Canonical generated files:
@@ -24,7 +34,7 @@ Canonical generated files:
 - `frontend/ipl-analyzer-frontend/public/data/ipl-2026.json`
 - `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/manifest.json`
 - `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/latest-overview.png`
-- `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/<YYYY-MM-DD>/slide-*.png`
+- `frontend/ipl-analyzer-frontend/public/social/instagram-carousel/<YYYY-MM-DD>/slide-*.png` (only the newest dated folder is kept)
 
 ## Setup
 
@@ -48,6 +58,16 @@ venv/bin/python extract_table.py
 ```
 
 `CRICDATA_SERIES_ID` is recommended. If it is absent, the generator discovers the IPL 2026 series id through CricketData before calling `series_info` and `series_points`.
+
+The nightly schedule in `.github/workflows/update-ipl.yml` is paused between seasons; the workflow can still be run manually.
+
+Rebuild a completed season from Cricsheet (no API key needed):
+
+```bash
+venv/bin/python extract_table.py --source cricsheet
+```
+
+This downloads `ipl_json.zip` from Cricsheet into `.cache/cricsheet/` and reuses it for six hours. Pass `--cricsheet-archive path/to/ipl_json.zip` to use a local copy. When the archive is cached, the test suite also checks the computed 2026 NRR against the official table.
 
 Generate the latest carousel images and manifest:
 
@@ -134,13 +154,14 @@ npm run build:github
 Cloudflare Pages should serve these files directly from the static build:
 
 - `/`
+- `/share.html`
 - `/data/ipl-2026.json`
 - `/social/instagram-carousel/manifest.json`
 - `/social/instagram-carousel/latest-overview.png`
 - `/social/instagram-carousel/<latest-date>/slide-*.png`
 - `/robots.txt`
 
-The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#team=CSK`, `#standings`, `#top4`, `#reels`, or `#deep-dive`.
+The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#standings`, `#top4`, `#playoffs`, or `#deep-dive`.
 
 `public/_headers` keeps hashed Vite assets cacheable while giving canonical JSON and latest social assets short freshness windows.
 

@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
-"""Generate canonical IPL 2026 data and legacy JSON files.
+"""Generate the canonical IPL 2026 season payload.
 
-The deployed site is static, so this script does all data fetching, validation,
-projection, and JSON compatibility output ahead of the frontend build.
+The deployed site is static, so this script does all data fetching, validation
+and projection ahead of the frontend build. Two sources are supported:
+
+* ``cricketdata`` (default): live standings and upcoming fixtures during the season.
+* ``cricsheet``: completed seasons rebuilt from Cricsheet ball-by-ball data,
+  including exact NRR and playoff results.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import random
@@ -17,37 +22,25 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from bs4 import BeautifulSoup
 import numpy as np
+
+import cricsheet
 
 
 SEASON = 2026
 LEAGUE_MATCHES_PER_TEAM = 14
 SEASON_END_UTC = datetime(SEASON, 5, 31, 23, 59, tzinfo=timezone.utc)
-CRICBUZZ_TABLE_URL = (
-    "https://www.cricbuzz.com/cricket-series/9241/"
-    "indian-premier-league-2026/points-table"
-)
-CRICBUZZ_MATCHES_URL = (
-    "https://www.cricbuzz.com/cricket-series/9241/"
-    "indian-premier-league-2026/matches"
-)
 CRICDATA_API_BASE = "https://api.cricapi.com/v1"
 CRICDATA_SERIES_LIST_URL = f"{CRICDATA_API_BASE}/series"
 CRICDATA_SERIES_INFO_URL = f"{CRICDATA_API_BASE}/series_info"
 CRICDATA_SERIES_POINTS_URL = f"{CRICDATA_API_BASE}/series_points"
 CRICDATA_SOURCE_URL = "https://cricketdata.org/"
+CRICSHEET_COMPETITION = "ipl"
 
 ROOT_DIR = Path(__file__).resolve().parent
 FRONTEND_PUBLIC_DIR = ROOT_DIR / "frontend" / "ipl-analyzer-frontend" / "public"
 CANONICAL_OUTPUT = FRONTEND_PUBLIC_DIR / "data" / "ipl-2026.json"
-ROOT_CANONICAL_OUTPUT = ROOT_DIR / "ipl-2026.json"
-ROOT_STANDINGS_OUTPUT = ROOT_DIR / "current_standings.json"
-ROOT_FIXTURES_OUTPUT = ROOT_DIR / "remaining_fixtures.json"
-ROOT_ANALYSIS_OUTPUT = ROOT_DIR / "analysis_results.json"
-PUBLIC_STANDINGS_OUTPUT = FRONTEND_PUBLIC_DIR / "current_standings.json"
-PUBLIC_FIXTURES_OUTPUT = FRONTEND_PUBLIC_DIR / "remaining_fixtures.json"
-PUBLIC_ANALYSIS_OUTPUT = FRONTEND_PUBLIC_DIR / "analysis_results.json"
+CRICSHEET_CACHE_DIR = Path(os.getenv("CRICSHEET_CACHE_DIR", ROOT_DIR / ".cache" / "cricsheet"))
 
 REQUEST_TIMEOUT_SECONDS = 20
 DEFAULT_MONTE_CARLO_SIMULATIONS = int(os.getenv("IPL_MONTE_CARLO_SIMULATIONS", "40000"))
@@ -75,6 +68,7 @@ TEAM_META: dict[str, TeamMeta] = {
     "Bangalore": TeamMeta("Bangalore", "RCB", "Royal Challengers Bengaluru"),
     "Hyderabad": TeamMeta("Hyderabad", "SRH", "Sunrisers Hyderabad"),
 }
+LEAGUE_MATCH_COUNT = len(TEAM_META) * LEAGUE_MATCHES_PER_TEAM // 2
 
 
 TEAM_ALIASES: dict[str, str] = {}
@@ -136,71 +130,6 @@ def parse_float(value: str) -> float:
     return float(clean_text(value).replace("+", ""))
 
 
-def text_tokens(html: str) -> list[str]:
-    soup = BeautifulSoup(html, "html.parser")
-    return [clean_text(t) for t in soup.stripped_strings if clean_text(t)]
-
-
-def parse_cricbuzz_standings(html: str) -> list[dict[str, Any]]:
-    """Parse Cricbuzz's accessible text table.
-
-    Expected row shape after the header:
-    rank, team, P, W, L, NR, Pts, NRR
-    """
-    tokens = text_tokens(html)
-    try:
-        start = next(
-            idx
-            for idx in range(len(tokens) - 5)
-            if tokens[idx : idx + 6] == ["Teams", "P", "W", "L", "NR", "Pts"]
-        )
-    except StopIteration as exc:
-        raise SourceValidationError("Could not find Cricbuzz points table header") from exc
-
-    idx = start + 7
-    standings: list[dict[str, Any]] = []
-
-    while idx < len(tokens) - 6 and len(standings) < len(TEAM_META):
-        if not tokens[idx].isdigit():
-            idx += 1
-            continue
-
-        rank = parse_int(tokens[idx])
-        mapped_key = team_key(tokens[idx + 1])
-        stat_tokens = tokens[idx + 2 : idx + 8]
-        if not mapped_key or len(stat_tokens) < 6 or not all(
-            numeric_token(token) for token in stat_tokens[:5]
-        ):
-            idx += 1
-            continue
-
-        played = parse_int(stat_tokens[0])
-        wins = parse_int(stat_tokens[1])
-        losses = parse_int(stat_tokens[2])
-        no_result = parse_int(stat_tokens[3])
-        points = parse_int(stat_tokens[4])
-        nrr = parse_float(stat_tokens[5])
-        meta = TEAM_META[mapped_key]
-        standings.append(
-            {
-                "teamKey": meta.key,
-                "shortName": meta.short_name,
-                "fullName": meta.full_name,
-                "matches": played,
-                "wins": wins,
-                "losses": losses,
-                "noResult": no_result,
-                "points": points,
-                "nrr": nrr,
-                "rank": rank,
-                "remainingMatches": max(0, LEAGUE_MATCHES_PER_TEAM - played),
-            }
-        )
-        idx += 8
-
-    return sorted(standings, key=lambda row: row["rank"])
-
-
 def parse_match_number(text: str) -> int | None:
     match = re.search(r"\b(\d+)(?:st|nd|rd|th)\s+Match\b", text, re.IGNORECASE)
     return int(match.group(1)) if match else None
@@ -220,91 +149,6 @@ def parse_fixture_teams(text: str) -> tuple[str, str] | None:
     if not left or not right or left == right:
         return None
     return left, right
-
-
-def parse_cricbuzz_fixtures(html: str, source_url: str) -> list[dict[str, Any]]:
-    soup = BeautifulSoup(html, "html.parser")
-    fixtures_by_pair: dict[tuple[str, str], dict[str, Any]] = {}
-
-    for anchor in soup.find_all("a", href=True):
-        href = str(anchor.get("href", ""))
-        label = clean_text(anchor.get_text(" "))
-        if "live-cricket" not in href and "/cricket-match-facts/" not in href:
-            continue
-        if not label or " vs " not in label.lower():
-            continue
-        status_text = label.lower()
-        if any(word in status_text for word in [" won", " live", " result", " abandoned"]):
-            continue
-        teams = parse_fixture_teams(label)
-        if not teams:
-            continue
-        match_no = parse_match_number(label)
-        pair_key = (teams[0], teams[1])
-        existing = fixtures_by_pair.get(pair_key)
-        if existing and (existing["matchNo"] is not None or match_no is None):
-            continue
-        path = href if href.startswith("http") else f"https://www.cricbuzz.com{href}"
-        fixtures_by_pair[pair_key] = {
-            "id": f"cricbuzz-{match_no or len(fixtures_by_pair) + 1}",
-            "matchNo": match_no,
-            "teamA": teams[0],
-            "teamB": teams[1],
-            "dateTimeGMT": None,
-            "dateTimeLocal": None,
-            "venue": None,
-            "status": "scheduled",
-            "sourceUrl": path or source_url,
-        }
-
-    fixtures = list(fixtures_by_pair.values())
-    fixtures.sort(key=lambda item: (item["matchNo"] or 999, item["teamA"], item["teamB"]))
-    return fixtures
-
-
-def enrich_fixture_from_match_page(fixture: dict[str, Any], html: str) -> dict[str, Any]:
-    tokens = text_tokens(html)
-    joined = " ".join(tokens)
-    lower_joined = joined.lower()
-
-    if "match starts at" not in lower_joined and re.search(r"\b[a-z]{2,5}\s+won\b|\bwon by\b", lower_joined):
-        fixture["status"] = "completed"
-        return fixture
-
-    starts = re.search(r"Match starts at ([A-Za-z]{3} \d{2}, \d{2}:\d{2}) GMT", joined)
-    if starts:
-        try:
-            dt = datetime.strptime(f"{starts.group(1)} {SEASON}", "%b %d, %H:%M %Y").replace(
-                tzinfo=timezone.utc
-            )
-            fixture["dateTimeGMT"] = iso_utc(dt)
-        except ValueError:
-            pass
-
-    for idx, token in enumerate(tokens):
-        if token == "Venue" and idx + 1 < len(tokens):
-            fixture["venue"] = tokens[idx + 1]
-            break
-        if token.startswith("Venue:"):
-            inline = clean_text(token.replace("Venue:", ""))
-            fixture["venue"] = inline or (tokens[idx + 1] if idx + 1 < len(tokens) else None)
-            break
-
-    date_time = re.search(
-        r"Date & Time:\s*([^•]+?)(?:Info|Live|Scorecard|Squads|Start Time|$)",
-        joined,
-        re.IGNORECASE,
-    )
-    if date_time:
-        fixture["dateTimeLocal"] = clean_text(date_time.group(1))
-
-    return fixture
-
-
-def fetch_url(session: requests.Session, url: str) -> str:
-    response = session.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
-    response.raise_for_status()
-    return response.text
 
 
 def first_present(mapping: dict[str, Any], keys: tuple[str, ...], default: Any = None) -> Any:
@@ -563,7 +407,7 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
         if not teams:
             continue
         match_no = cricdata_match_number(item)
-        if match_no is not None and match_no > 70:
+        if match_no is not None and match_no > LEAGUE_MATCH_COUNT:
             continue
 
         status = clean_text(str(first_present(item, ("status", "matchStatus", "state"), "")))
@@ -704,44 +548,6 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
     return standings, fixtures, warnings
 
 
-def fetch_cricbuzz_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
-    warnings: list[str] = []
-    session = requests.Session()
-    session.headers.update(
-        {
-            "User-Agent": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
-            )
-        }
-    )
-
-    table_html = fetch_url(session, CRICBUZZ_TABLE_URL)
-    standings = parse_cricbuzz_standings(table_html)
-    fixtures = parse_cricbuzz_fixtures(table_html, CRICBUZZ_TABLE_URL)
-
-    try:
-        matches_html = fetch_url(session, CRICBUZZ_MATCHES_URL)
-        by_key = {
-            (item["teamA"], item["teamB"], item["matchNo"]): item for item in fixtures
-        }
-        for item in parse_cricbuzz_fixtures(matches_html, CRICBUZZ_MATCHES_URL):
-            by_key.setdefault((item["teamA"], item["teamB"], item["matchNo"]), item)
-        fixtures = list(by_key.values())
-    except Exception as exc:
-        warnings.append(f"Cricbuzz fixtures page could not be parsed: {exc}")
-
-    for fixture in fixtures[:8]:
-        try:
-            direct_html = fetch_url(session, fixture["sourceUrl"])
-            enrich_fixture_from_match_page(fixture, direct_html)
-        except Exception as exc:
-            warnings.append(f"Could not enrich {fixture['teamA']} vs {fixture['teamB']}: {exc}")
-
-    fixtures = [fixture for fixture in fixtures if fixture.get("status") == "scheduled"]
-    return standings, fixtures, warnings
-
-
 def expected_remaining_fixture_count(standings: list[dict[str, Any]]) -> int:
     return sum(row["remainingMatches"] for row in standings) // 2
 
@@ -851,7 +657,7 @@ def simulation_rank(table: dict[str, dict[str, Any]]) -> list[str]:
     rows.sort(
         key=lambda item: (
             -item[1]["points"],
-            -item[1].get("nrr", 0.0),
+            -(item[1].get("nrr") or 0.0),
             -item[1]["wins"],
             TEAM_META[item[0]].full_name,
         )
@@ -1184,12 +990,73 @@ def run_exact_dp_analysis(
     }
 
 
+def final_table_analysis(standings_rows: list[dict[str, Any]], now: datetime) -> dict[str, Any]:
+    """Qualification once the league stage is over: decided by the final ranked table."""
+    overall: dict[str, dict[str, float]] = {}
+    team_analysis: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
+    qualification_path: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
+    scenario_breakdown: dict[str, dict[str, Any]] = {"4": {}, "2": {}}
+
+    for row in standings_rows:
+        key = row["teamKey"]
+        top4 = 100.0 if row["rank"] <= 4 else 0.0
+        top2 = 100.0 if row["rank"] <= 2 else 0.0
+        overall[key] = {
+            "top4": top4,
+            "top2": top2,
+            "top4Clear": top4,
+            "top2Clear": top2,
+            "top4Possible": top4,
+            "top2Possible": top2,
+        }
+        for target, value in (("4", top4), ("2", top2)):
+            settled = 0 if value else None
+            team_analysis[target][key] = {"percentage": value, "results_df": {}}
+            qualification_path[target][key] = {
+                "possible": settled,
+                "likely": settled,
+                "guaranteed": settled,
+                "target_matches": 0,
+                "method": "Final standings",
+                "ownWinBuckets": [],
+                "fixtureImpacts": [],
+                "nextFixtureImpacts": [],
+                "impactFixtureWindow": 0,
+            }
+            scenario_breakdown[target][key] = {
+                "clearRate": value,
+                "possibleRate": value,
+                "sharedTieAdjustedRate": value,
+                "ownWinBuckets": [],
+                "fixtureImpacts": [],
+            }
+
+    return {
+        "method": "Final standings",
+        "simulationCount": 1,
+        "generatedAt": iso_utc(now),
+        "stateCount": 1,
+        "modelNotes": [
+            "The league stage is complete, so qualification is decided by the final table: points, then net run rate.",
+        ],
+        "overallProbabilities": overall,
+        "teamAnalysis": team_analysis,
+        "qualificationPath": qualification_path,
+        "scenarioBreakdown": scenario_breakdown,
+    }
+
+
 def run_analysis(
     standings_rows: list[dict[str, Any]],
     fixtures: list[dict[str, Any]],
     now: datetime,
 ) -> dict[str, Any]:
-    if fixtures and len(fixtures) <= EXACT_MAX_FIXTURES:
+    league_complete = all(row["remainingMatches"] == 0 for row in standings_rows)
+    has_nrr = all(isinstance(row.get("nrr"), float) for row in standings_rows)
+    if not fixtures and league_complete and has_nrr:
+        return final_table_analysis(standings_rows, now)
+    # Without NRR, teams level on points and wins keep sharing slots fractionally.
+    if len(fixtures) <= EXACT_MAX_FIXTURES:
         return run_exact_dp_analysis(standings_rows, fixtures, now)
 
     team_keys = [row["teamKey"] for row in standings_rows]
@@ -1205,23 +1072,14 @@ def run_analysis(
     fixture_pairs = [(item["teamA"], item["teamB"]) for item in fixtures]
     fixture_labels = [f"{left} vs {right}" for left, right in fixture_pairs]
 
-    exhaustive = len(fixture_pairs) <= 20
-    if not fixture_pairs:
-        scenario_iterable: list[tuple[int, ...]] = [tuple()]
-        method = "Exact"
-        simulation_count = 1
-    elif exhaustive:
-        scenario_iterable = list(_binary_scenarios(len(fixture_pairs)))
-        method = "Exhaustive"
-        simulation_count = len(scenario_iterable)
-    else:
-        random.seed(RANDOM_SEED)
-        simulation_count = DEFAULT_MONTE_CARLO_SIMULATIONS
-        scenario_iterable = [
-            tuple(random.randint(0, 1) for _ in fixture_pairs)
-            for _ in range(simulation_count)
-        ]
-        method = "Monte Carlo"
+    # Too many fixtures for the exact solver: sample outcomes instead.
+    random.seed(RANDOM_SEED)
+    simulation_count = DEFAULT_MONTE_CARLO_SIMULATIONS
+    scenario_iterable = [
+        tuple(random.randint(0, 1) for _ in fixture_pairs)
+        for _ in range(simulation_count)
+    ]
+    method = "Monte Carlo"
 
     top_counts = {key: {"top4": 0, "top2": 0} for key in team_keys}
     team_analysis_counts: dict[str, dict[str, dict[str, list[int]]]] = {
@@ -1324,63 +1182,34 @@ def run_analysis(
     }
 
 
-def _binary_scenarios(width: int):
-    for number in range(2**width):
-        yield tuple((number >> idx) & 1 for idx in range(width))
+def league_stage_fixtures(
+    fixtures: list[dict[str, Any]],
+    standings: list[dict[str, Any]],
+    warnings: list[str],
+) -> list[dict[str, Any]]:
+    """Drop fixtures that cannot be league matches, such as playoffs.
 
-
-def legacy_outputs(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    standings = {
-        row["teamKey"]: {
-            "Matches": row["matches"],
-            "Wins": row["wins"],
-            "Losses": row["losses"],
-            "NR": row["noResult"],
-            "Points": row["points"],
-            "NRR": row["nrr"],
-        }
-        for row in payload["standings"]
-    }
-    fixtures = [[item["teamA"], item["teamB"]] for item in payload["fixtures"]]
-    analysis = payload["analysis"]
-
-    legacy_analysis_data = {
-        "overall_probabilities": {
-            team: {
-                "Top 4 Probability": values["top4"],
-                "Top 2 Probability": values["top2"],
-            }
-            for team, values in analysis["overallProbabilities"].items()
-        },
-        "team_analysis": analysis["teamAnalysis"],
-        "qualification_path": analysis["qualificationPath"],
-    }
-
-    last_updated = payload["metadata"]["generated_at"]
-    source = payload["metadata"]["source"]
-    return (
-        {
-            "last_updated": last_updated,
-            "source": source,
-            "standings": standings,
-        },
-        {
-            "last_updated": last_updated,
-            "source": source,
-            "fixtures": fixtures,
-        },
-        {
-            "metadata": {
-                "precomputed_at": analysis["generatedAt"],
-                "num_fixtures": len(payload["fixtures"]),
-                "last_data_update": last_updated,
-                "data_source": source,
-                "method_used": analysis["method"],
-                "simulation_count": analysis["simulationCount"],
-            },
-            "analysis_data": legacy_analysis_data,
-        },
-    )
+    Feeds list playoff games next to league games; simulating them as league
+    fixtures awards points the playoffs never give.
+    """
+    remaining = {row["teamKey"]: row["remainingMatches"] for row in standings}
+    kept = [
+        fixture
+        for fixture in fixtures
+        if remaining.get(fixture["teamA"], 0) > 0
+        and remaining.get(fixture["teamB"], 0) > 0
+        and (fixture.get("matchNo") is None or fixture["matchNo"] <= LEAGUE_MATCH_COUNT)
+    ]
+    if len(kept) < len(fixtures):
+        warnings.append(
+            f"Ignored {len(fixtures) - len(kept)} non-league fixture(s), such as playoffs, from the fixture feed."
+        )
+    expected = expected_remaining_fixture_count(standings)
+    if len(kept) > expected:
+        raise SourceValidationError(
+            f"Fixture feed lists {len(kept)} league match(es), but standings imply only {expected} remain."
+        )
+    return kept
 
 
 def build_payload() -> dict[str, Any]:
@@ -1394,8 +1223,10 @@ def build_payload() -> dict[str, Any]:
         strict_zero_fixtures=True,
         strict_partial_fixtures=True,
     )
+    fixtures = league_stage_fixtures(fixtures, standings, warnings)
+    league_complete = expected_remaining_fixture_count(standings) == 0
 
-    if not fixtures and now < SEASON_END_UTC:
+    if not fixtures and not league_complete and now < SEASON_END_UTC:
         warnings.append("No future fixtures were found; probabilities are current-table only.")
 
     analysis = run_analysis(standings, fixtures, now)
@@ -1408,11 +1239,117 @@ def build_payload() -> dict[str, Any]:
             "source": "CricketData",
             "source_url": CRICDATA_SOURCE_URL,
             "data_freshness_status": freshness,
+            "season_status": "playoffs" if league_complete else "league_stage",
             "warnings": warnings,
         },
         "standings": standings,
         "fixtures": fixtures,
         "analysis": analysis,
+    }
+
+
+def describe_result(match: cricsheet.Match, winner: str | None) -> str:
+    if winner is None:
+        return "No result"
+    short_name = TEAM_META[winner].short_name
+    if match.super_over:
+        return f"{short_name} won the Super Over"
+    if "runs" in match.margin:
+        runs = match.margin["runs"]
+        text = f"{short_name} won by {runs} run{'' if runs == 1 else 's'}"
+    elif "wickets" in match.margin:
+        wickets = match.margin["wickets"]
+        text = f"{short_name} won by {wickets} wicket{'' if wickets == 1 else 's'}"
+    else:
+        text = f"{short_name} won"
+    return f"{text} ({match.method})" if match.method else text
+
+
+def build_playoffs(matches: list[cricsheet.Match]) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    champion = None
+    runner_up = None
+    for match in matches:
+        if match.is_league:
+            continue
+        team_a, team_b = (team_key(name) for name in match.teams)
+        if not team_a or not team_b:
+            raise SourceValidationError(f"Unknown team in Cricsheet playoff match {match.match_id}")
+        winner = team_key(match.winner) if match.winner else None
+        rows.append(
+            {
+                "id": match.match_id,
+                "stage": match.stage,
+                "date": match.date,
+                "teamA": team_a,
+                "teamB": team_b,
+                "winner": winner,
+                "result": describe_result(match, winner),
+                "venue": match.venue,
+            }
+        )
+        if match.stage == "Final" and winner:
+            champion = winner
+            runner_up = team_b if winner == team_a else team_a
+    return {"matches": rows, "champion": champion, "runnerUp": runner_up}
+
+
+def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
+    """Rebuild a season from Cricsheet: final table with exact NRR, plus playoffs."""
+    now = utc_now()
+    archive = archive or cricsheet.fetch_archive(CRICSHEET_COMPETITION, CRICSHEET_CACHE_DIR)
+    matches = cricsheet.load_season(archive, str(SEASON))
+    if not matches:
+        raise SourceValidationError(f"Cricsheet archive has no IPL {SEASON} matches")
+
+    try:
+        table = cricsheet.league_table(matches, team_key)
+    except ValueError as exc:
+        raise SourceValidationError(str(exc)) from exc
+
+    standings = []
+    for key, meta in TEAM_META.items():
+        row = table.get(key, cricsheet.TableRow())
+        standings.append(
+            {
+                "teamKey": key,
+                "shortName": meta.short_name,
+                "fullName": meta.full_name,
+                "matches": row.matches,
+                "wins": row.wins,
+                "losses": row.losses,
+                "noResult": row.no_result,
+                "points": row.points,
+                "nrr": row.nrr,
+                "rank": 0,
+                "remainingMatches": max(0, LEAGUE_MATCHES_PER_TEAM - row.matches),
+            }
+        )
+    validate_source_data(standings, [], now, strict_zero_fixtures=False)
+    if expected_remaining_fixture_count(standings):
+        raise SourceValidationError(
+            "Cricsheet only publishes completed matches and the league stage is still in progress; "
+            "use --source cricketdata for live fixtures."
+        )
+
+    standings = ranked_standings(standings)
+    playoffs = build_playoffs(matches)
+    return {
+        "metadata": {
+            "season": SEASON,
+            "generated_at": iso_utc(now),
+            "source": "Cricsheet",
+            "source_url": cricsheet.CRICSHEET_URL,
+            "source_license": cricsheet.CRICSHEET_LICENSE,
+            "source_license_url": cricsheet.CRICSHEET_LICENSE_URL,
+            "data_freshness_status": "fresh",
+            "season_status": "complete" if playoffs["champion"] else "playoffs",
+            "warnings": [],
+        },
+        "standings": standings,
+        "fixtures": [],
+        "playoffs": playoffs,
+        "analysis": run_analysis(standings, [], now),
     }
 
 
@@ -1422,17 +1359,29 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     print(f"Wrote {path}")
 
 
-def main() -> None:
-    payload = build_payload()
-    standings, fixtures, analysis = legacy_outputs(payload)
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate the canonical IPL season payload.")
+    parser.add_argument(
+        "--source",
+        choices=("cricketdata", "cricsheet"),
+        default="cricketdata",
+        help="cricketdata for live in-season data; cricsheet to rebuild a completed season.",
+    )
+    parser.add_argument(
+        "--cricsheet-archive",
+        type=Path,
+        help="Use a local Cricsheet JSON zip instead of downloading it.",
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = parse_args(argv)
+    if args.source == "cricsheet":
+        payload = build_cricsheet_payload(args.cricsheet_archive)
+    else:
+        payload = build_payload()
     write_json(CANONICAL_OUTPUT, payload)
-    write_json(ROOT_CANONICAL_OUTPUT, payload)
-    write_json(ROOT_STANDINGS_OUTPUT, standings)
-    write_json(ROOT_FIXTURES_OUTPUT, fixtures)
-    write_json(ROOT_ANALYSIS_OUTPUT, analysis)
-    write_json(PUBLIC_STANDINGS_OUTPUT, standings)
-    write_json(PUBLIC_FIXTURES_OUTPUT, fixtures)
-    write_json(PUBLIC_ANALYSIS_OUTPUT, analysis)
 
 
 if __name__ == "__main__":

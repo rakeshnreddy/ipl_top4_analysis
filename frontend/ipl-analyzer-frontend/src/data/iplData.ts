@@ -4,6 +4,9 @@ export interface IplMetadata {
   source: string;
   source_url: string;
   data_freshness_status: 'fresh' | 'warning' | 'stale' | string;
+  season_status?: 'league_stage' | 'playoffs' | 'complete' | string;
+  source_license?: string;
+  source_license_url?: string;
   warnings: string[];
 }
 
@@ -85,12 +88,34 @@ export interface IplAnalysis {
   scenarioBreakdown?: Record<'4' | '2', Record<string, unknown>>;
 }
 
+export interface IplPlayoffMatch {
+  id: string;
+  stage: string;
+  date: string;
+  teamA: string;
+  teamB: string;
+  winner: string | null;
+  result: string;
+  venue: string | null;
+}
+
+export interface IplPlayoffs {
+  matches: IplPlayoffMatch[];
+  champion: string | null;
+  runnerUp: string | null;
+}
+
 export interface IplSeasonPayload {
   metadata: IplMetadata;
   standings: IplStanding[];
   fixtures: IplFixture[];
+  playoffs?: IplPlayoffs;
   analysis: IplAnalysis;
 }
+
+/** The league stage is over once no fixtures remain and every team has played its full schedule. */
+export const isLeagueComplete = (payload: IplSeasonPayload) =>
+  payload.fixtures.length === 0 && payload.standings.every((team) => team.remainingMatches === 0);
 
 export const canonicalDataUrl = `${import.meta.env.BASE_URL}data/ipl-2026.json`;
 

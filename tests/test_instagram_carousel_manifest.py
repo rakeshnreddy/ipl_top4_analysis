@@ -26,6 +26,18 @@ class InstagramCarouselManifestTests(unittest.TestCase):
 
             self.assertEqual(latest, output_root / "2026-05-04")
 
+    def test_pruning_keeps_only_the_newest_dated_folder(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_root = Path(tmp)
+            for name in ("2026-05-02", "2026-05-03", "2026-05-04", "not-a-date"):
+                write_png(output_root / name / "slide-01-overview.png")
+
+            removed = carousel.prune_old_carousels(output_root)
+
+            self.assertEqual([path.name for path in removed], ["2026-05-02", "2026-05-03"])
+            self.assertEqual(carousel.carousel_dates(output_root), ["2026-05-04"])
+            self.assertTrue((output_root / "not-a-date").exists())
+
     def test_manifest_generation_lists_latest_slides_and_source(self) -> None:
         payload = {
             "metadata": {
