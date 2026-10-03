@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Flame } from 'lucide-react';
 import App from './App';
+import { LoadingState } from './components/PageState';
 import { DEFAULT_LEAGUE_ID } from './data/iplData';
 import { HUB_ID, hubRequested, leagueIdFromLocation, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
 import HubPage from './hub/HubPage';
@@ -34,14 +34,7 @@ function Root() {
   }, []);
 
   if (!settled) {
-    return (
-      <main className="pulse-app pulse-center">
-        <div className="loading-panel" role="status" aria-live="polite">
-          <Flame aria-hidden="true" />
-          <span>Loading Playoff Pulse...</span>
-        </div>
-      </main>
-    );
+    return <LoadingState />;
   }
 
   // The home page shows the list's default: the IPL while it is on, otherwise the all-sports hub.
