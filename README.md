@@ -101,7 +101,8 @@ To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed 
 - Tables: wins, losses, ties (NFL), overtime losses and points (NHL), win percentage, games behind, differential, last ten and streak, with league, conference and division views. Conference views are in seed order with the playoff line (and the NBA play-in line).
 - Seeding: NFL division winners take seeds 1-4 and three wild cards follow; the NBA seeds 1-6 directly and simulates the play-in for 7 and 8; the NHL takes three teams per division plus two wild cards; MLB division winners take seeds 1-3, the top two get byes, and three wild cards follow. Tiebreakers are simplified (win percentage, then division or conference record; points, games played and regulation wins in the NHL).
 - Model: ratings from capped score margins with home advantage and a time decay, fitted on this and last season. The regular season is simulated 20,000 times with season-long strength drift, then the playoff bracket (single games in the NFL, best-of-3/5/7 series elsewhere) for title odds. Settings were chosen by backtesting the 2023-24 to 2025-26 seasons: week-ahead game predictions for the half-life, ridge and spread, and playoff odds at 25%, 50% and 75% of each season for the drift.
-- Tiers: playoffs, division title, a top seed (NFL and NBA No. 1 seed, NBA top 6, MLB bye, NHL Presidents' Trophy) and the title. When a regular season ends the title column is dropped, since the bracket results are not tracked.
+- Tiers: playoffs, division title, a top seed (NFL and NBA No. 1 seed, NBA top 6, MLB bye, NHL Presidents' Trophy) and the title.
+- Playoffs: once a regular season ends, results come from the MLB Stats API, the NHL stats API, ESPN's public scoreboard (NBA; the NBA's own feed blocks automated requests) or the NFL feed's playoff rounds. Settled places show as ticks, finished series fix their winners, series under way start from their real score, and the rest of the bracket is simulated for title odds. Real tiebreakers only reorder teams level on record, so the seeding is matched to the real bracket by trying the orders of tied teams; if none matches, the title column is left out with a warning. This reproduces the 2025-26 playoffs of all four leagues exactly.
 
 ## Setup
 
@@ -131,7 +132,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key.
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use) and ESPN's public scoreboard (unofficial; only the NBA playoffs use it, and the page falls back to no title odds if it changes).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 

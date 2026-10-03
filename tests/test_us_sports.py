@@ -253,7 +253,7 @@ class PostseasonTests(unittest.TestCase):
     def test_finished_series_fix_their_winners(self) -> None:
         result = us_sports.simulate_postseason(self.cfg, self.structure, self.seeding, self.ratings, self.wild_cards(), simulations=2000)
 
-        title = result["title"]
+        title = {team: values["title"] for team, values in result["probabilities"].items()}
         self.assertAlmostEqual(sum(title.values()), 100, delta=0.01)
         for eliminated in ("Houston Astros", "Boston Red Sox", "Philadelphia Phillies", "Chicago Cubs"):
             self.assertEqual(title[eliminated], 0.0)
@@ -291,7 +291,27 @@ class PostseasonTests(unittest.TestCase):
         result = us_sports.simulate_postseason(self.cfg, self.structure, self.seeding, self.ratings, games, simulations=500)
 
         self.assertEqual(result["champion"], "Milwaukee Brewers")
-        self.assertEqual(result["title"]["Milwaukee Brewers"], 100.0)
+        self.assertEqual(result["probabilities"]["Milwaukee Brewers"]["title"], 100.0)
+        self.assertEqual(result["probabilities"]["Tampa Bay Rays"]["bye"], 100.0)
+
+    def test_a_tie_for_the_last_place_is_settled_by_the_real_bracket(self) -> None:
+        # Detroit and the White Sox finish level; our order gives Chicago the 6th seed, the league gave it to Detroit.
+        teams = self.structure.teams
+        records = {team: {**dict.fromkeys(("played", "ties", "otLosses", "divisionWins", "divisionLosses", "divisionTies", "conferenceWins", "conferenceLosses", "conferenceTies", "scored", "allowed", "homeWins", "homeLosses", "awayWins", "awayLosses"), 0), "results": []} for team in teams}
+        wins = {team: 70 for team in teams}
+        wins.update({"Tampa Bay Rays": 100, "Cleveland Guardians": 98, "Houston Astros": 96, "New York Yankees": 94, "Boston Red Sox": 92, "Chicago White Sox": 90, "Detroit Tigers": 90})
+        wins.update({"Milwaukee Brewers": 100, "Los Angeles Dodgers": 98, "Atlanta Braves": 96, "San Diego Padres": 94, "Chicago Cubs": 92, "Philadelphia Phillies": 90})
+        for team in teams:
+            records[team].update(wins=wins[team], regulationWins=wins[team], losses=162 - wins[team])
+        seeding = us_sports.current_seeding(self.cfg, self.structure, records, "baseball", dict.fromkeys(teams, 0.0))
+        games = self.series("F", "Detroit Tigers", "Houston Astros", 1)
+
+        result = us_sports.simulate_postseason(self.cfg, self.structure, seeding, self.ratings, games, simulations=200, records=records)
+
+        self.assertIsNotNone(result)
+        seed = {team: int(result["seeding"]["seed"][0, i]) for i, team in enumerate(teams)}
+        self.assertEqual(seed["Detroit Tigers"], 6)
+        self.assertEqual(result["probabilities"]["Chicago White Sox"]["playoffs"], 0.0)
 
 
 class NhlFeedTests(unittest.TestCase):
