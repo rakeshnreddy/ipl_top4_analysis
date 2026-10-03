@@ -165,7 +165,7 @@ describe('App with several leagues', () => {
     render(<Root />);
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load nope-2026 data (404).');
-    expect(screen.getByRole('link', { name: 'Go to the IPL page' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'Go to the home page' })).toHaveAttribute('href', '/');
   });
 });
 
