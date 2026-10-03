@@ -124,6 +124,63 @@ describe('SportPage for leagues with conferences', () => {
   });
 });
 
+describe('SportPage during the playoffs', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  });
+
+  it('ticks settled places, keeps title odds live and shows the bracket', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...conferencePayload,
+      metadata: { ...conferencePayload.metadata, season_status: 'postseason' },
+      league: {
+        ...conferencePayload.league,
+        tiers: [
+          { key: 'playoffs', label: 'Playoffs', kind: 'playoffs', settled: true },
+          { key: 'title', label: 'Super Bowl', kind: 'champion' },
+        ],
+      },
+      analysis: {
+        ...conferencePayload.analysis,
+        probabilities: {
+          Arsenal: { playoffs: 0, title: 0 },
+          Chelsea: { playoffs: 100, title: 41.5 },
+          Liverpool: { playoffs: 100, title: 58.5 },
+          Spurs: { playoffs: 0, title: 0 },
+        },
+      },
+      bracket: {
+        champion: null,
+        rounds: [
+          {
+            key: 'CONF',
+            label: 'Conference Championship',
+            series: [
+              { stage: 'CONF', conference: 'AFC', top: 'Chelsea', bottom: 'Arsenal', topSeed: 1, bottomSeed: 2, topWins: 1, bottomWins: 0, bestOf: 1, winner: 'Chelsea' },
+            ],
+          },
+          {
+            key: 'SB',
+            label: 'Super Bowl',
+            series: [{ stage: 'SB', conference: null, top: null, bottom: null, topSeed: null, bottomSeed: null, topWins: 0, bottomWins: 0, bestOf: 1, winner: null }],
+          },
+        ],
+      },
+    });
+
+    const bracket = (await screen.findByRole('heading', { name: 'Playoff Bracket' })).closest('section')!;
+    expect(within(bracket).getByText('1–0')).toBeInTheDocument();
+    expect(within(bracket).getByText('1 CHE')).toHaveClass('is-winner');
+    expect(within(bracket).getAllByText('To be decided')).toHaveLength(2);
+
+    const chelsea = within(screen.getByRole('table')).getAllByRole('row').find((row) => row.textContent?.includes('CHE'))!;
+    expect(within(chelsea).getByText('✓')).toBeInTheDocument();
+    expect(within(chelsea).getByText('42%')).toBeInTheDocument();
+    expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
+  });
+});
+
 describe('formatChance', () => {
   it('never rounds a Monte Carlo estimate to a certainty', () => {
     expect(formatChance(99.96)).toBe('>99.9%');
