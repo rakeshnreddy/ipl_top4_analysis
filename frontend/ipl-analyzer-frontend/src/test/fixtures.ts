@@ -275,3 +275,80 @@ export const leagueIndex: LeagueIndex = {
     { id: 'wpl-2026', name: "Women's Premier League", shortName: 'WPL', seasonLabel: '2026', status: 'complete', champion: 'RCB', generatedAt: '2026-10-01T09:00:00Z', path: 'data/wpl-2026.json' },
   ],
 };
+
+const livePairs: Array<[string, string]> = [
+  ['RCB', 'GG'], ['DC', 'MI'], ['UPW', 'RCB'], ['GG', 'DC'], ['MI', 'UPW'],
+  ['RCB', 'DC'], ['GG', 'MI'], ['UPW', 'DC'], ['MI', 'RCB'], ['GG', 'UPW'],
+];
+
+/** WPL 2027 during the league stage: four games each played, or none yet. */
+export function wplLivePayload(played: boolean): IplSeasonPayload {
+  const records: Array<[string, number, number, number | null, number, number]> = played
+    ? [
+        ['RCB', 4, 0, 1.2, 98.5, 71.2],
+        ['GG', 3, 1, 0.4, 85, 20],
+        ['DC', 2, 2, 0.1, 70, 7],
+        ['MI', 1, 3, -0.5, 35, 1.5],
+        ['UPW', 0, 4, -1.1, 11.5, 0.3],
+      ]
+    : wplTeams.map((team) => [team.key, 0, 0, null, 60, 20] as [string, number, number, number | null, number, number]);
+  const pairs = played ? livePairs : [...livePairs, ...livePairs.map(([a, b]) => [b, a] as [string, string])];
+  const path = (remaining: number) => ({ possible: 0, likely: 1, guaranteed: 3, target_matches: remaining, method: 'Exact all-combinations' });
+
+  return {
+    ...wplFinalPayload,
+    metadata: {
+      season: '2027',
+      generated_at: '2027-01-22T19:30:00Z',
+      source: 'CricketData',
+      source_url: 'https://cricketdata.org/',
+      data_freshness_status: 'fresh',
+      season_status: 'league_stage',
+      warnings: [],
+    },
+    league: { ...wplFinalPayload.league!, id: 'wpl-2027', season: '2026/27', seasonLabel: '2027' },
+    standings: records.map(([teamKey, wins, losses, nrr], index) => {
+      const team = wplTeams.find((item) => item.key === teamKey)!;
+      return {
+        teamKey,
+        shortName: team.shortName,
+        fullName: team.fullName,
+        matches: wins + losses,
+        wins,
+        losses,
+        noResult: 0,
+        points: wins * 2,
+        nrr,
+        rank: index + 1,
+        remainingMatches: 8 - wins - losses,
+      };
+    }),
+    fixtures: pairs.map(([teamA, teamB], index) => ({
+      id: `wpl-2027-${index + 1}`,
+      matchNo: (played ? 11 : 1) + index,
+      teamA,
+      teamB,
+      dateTimeGMT: `2027-01-${String(14 + index).padStart(2, '0')}T14:00:00Z`,
+      dateTimeLocal: null,
+      venue: 'Kotambi Stadium, Vadodara',
+      status: 'scheduled',
+      sourceUrl: 'https://api.cricapi.com/v1/series_info',
+    })),
+    playoffs: undefined,
+    movement: played
+      ? { since: '2027-01-21T19:30:00Z', tier: 'top3', changes: { RCB: 2.1, GG: 12.5, DC: -3.2, MI: -0.6, UPW: -8 } }
+      : null,
+    analysis: {
+      method: played ? 'Exact all-combinations' : 'Exact all-combinations',
+      simulationCount: 2 ** pairs.length,
+      generatedAt: '2027-01-22T19:30:00Z',
+      overallProbabilities: Object.fromEntries(records.map(([key, , , , top3, top1]) => [key, { top3, top1 }])),
+      teamAnalysis: { '3': {}, '1': {} },
+      qualificationPath: {
+        '3': Object.fromEntries(records.map(([key, wins, losses]) => [key, path(8 - wins - losses)])),
+        '1': Object.fromEntries(records.map(([key, wins, losses]) => [key, path(8 - wins - losses)])),
+      },
+    },
+  };
+}
+

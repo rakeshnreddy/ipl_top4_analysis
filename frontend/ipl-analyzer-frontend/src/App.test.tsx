@@ -1,8 +1,8 @@
 /// <reference types="vitest/globals" />
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
-import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload } from './test/fixtures';
+import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
 
 describe('App', () => {
   beforeEach(() => {
@@ -164,6 +164,44 @@ describe('App with several leagues', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load nope-2026 data (404).');
     expect(screen.getByRole('link', { name: 'Go to the IPL page' })).toHaveAttribute('href', '/');
+  });
+});
+
+describe('App during another league\'s season', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  });
+
+  it('shows live odds in the league\'s own qualification format', async () => {
+    installFetch(finalPayload, mockManifest, { '/data/wpl-2027.json': wplLivePayload(true) });
+    window.history.replaceState(null, '', '/?league=wpl-2027');
+
+    const { container } = render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'WPL Top 3 Qualification Probabilities' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Top 3 Odds' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Top 3' })).toHaveClass('active');
+    expect(screen.getByRole('button', { name: 'Top 1' })).toBeInTheDocument();
+    expect(screen.getByText('GG +12.5')).toBeInTheDocument();
+    expect(screen.getByText('UPW -8.0')).toBeInTheDocument();
+    expect(container.querySelector('.standing-row .top4-prob')).toHaveTextContent('98.5%');
+    expect(screen.queryByRole('link', { name: 'Share kit' })).not.toBeInTheDocument();
+    expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse');
+  });
+
+  it('shows the opening match instead of a race before the first result', async () => {
+    installFetch(finalPayload, mockManifest, { '/data/wpl-2027.json': wplLivePayload(false) });
+    window.history.replaceState(null, '', '/?league=wpl-2027');
+
+    render(<App />);
+
+    const heroFacts = await screen.findByLabelText('Race snapshot');
+    expect(within(heroFacts).getByText('Opening match')).toBeInTheDocument();
+    expect(within(heroFacts).getByText('RCB vs GG')).toBeInTheDocument();
+    expect(within(heroFacts).getByText('3 of 5 teams')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: "Today's Race Summary" })).not.toBeInTheDocument();
+    expect(screen.getByText('Every team starts level; the odds move as results come in.')).toBeInTheDocument();
   });
 });
 

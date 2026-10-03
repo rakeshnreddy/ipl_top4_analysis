@@ -6,19 +6,19 @@ import {
   rankingSort,
   raceSnapshot,
   teamColor,
-  top4Probability,
+  tierProbability,
 } from '../lib/standings';
 
 export type ShareKind = 'instagram' | 'x' | 'whatsapp';
 
 export function shareTexts(payload: IplSeasonPayload): Record<ShareKind, string> {
   const snapshot = raceSnapshot(payload);
-  const topFour = snapshot.currentTopFour.map((team) => team.shortName).join(', ');
+  const topFour = snapshot.currentTop.map((team) => team.shortName).join(', ');
   const cutline = snapshot.cutlineTeam
-    ? `${snapshot.cutlineTeam.shortName} (${formatPercent(top4Probability(payload, snapshot.cutlineTeam.teamKey))})`
+    ? `${snapshot.cutlineTeam.shortName} (${formatPercent(tierProbability(payload, snapshot.cutlineTeam.teamKey, 4))})`
     : 'Unavailable';
   const challenger = snapshot.nearestChallenger
-    ? `${snapshot.nearestChallenger.shortName} (${formatPercent(top4Probability(payload, snapshot.nearestChallenger.teamKey))})`
+    ? `${snapshot.nearestChallenger.shortName} (${formatPercent(tierProbability(payload, snapshot.nearestChallenger.teamKey, 4))})`
     : 'Unavailable';
   const date = formatGeneratedDate(payload.metadata.generated_at);
 

@@ -36,33 +36,27 @@ export function rankingSort(a: IplStanding, b: IplStanding) {
   return b.points - a.points || nrrSort || a.rank - b.rank || b.wins - a.wins || a.fullName.localeCompare(b.fullName);
 }
 
-export function top4Probability(payload: IplSeasonPayload, teamKey: string) {
-  return payload.analysis.overallProbabilities[teamKey]?.top4 ?? 0;
+/** A team's chance of finishing in the top `size`; payloads store it as `top{size}`. */
+export function tierProbability(payload: IplSeasonPayload, teamKey: string, size: number) {
+  return payload.analysis.overallProbabilities[teamKey]?.[`top${size}`] ?? 0;
 }
 
-export function top2Probability(payload: IplSeasonPayload, teamKey: string) {
-  return payload.analysis.overallProbabilities[teamKey]?.top2 ?? 0;
-}
-
-export function raceSnapshot(payload: IplSeasonPayload) {
+/** Who holds the playoff places right now and who is chasing them. */
+export function raceSnapshot(payload: IplSeasonPayload, playoffSize = 4) {
+  const chance = (team: IplStanding) => tierProbability(payload, team.teamKey, playoffSize);
   const ordered = [...payload.standings].sort(rankingSort);
-  const currentTopFour = ordered.slice(0, 4);
-  const cutlineTeam = currentTopFour[3] || null;
-  const nearestChallenger =
-    [...ordered.slice(4)].sort((a, b) => top4Probability(payload, b.teamKey) - top4Probability(payload, a.teamKey))[0] ||
-    ordered[4] ||
-    null;
-  const inDanger = [...currentTopFour]
-    .sort((a, b) => top4Probability(payload, a.teamKey) - top4Probability(payload, b.teamKey))
-    .slice(0, 2);
-  const almostSafeByThreshold = ordered.filter((team) => top4Probability(payload, team.teamKey) >= 90);
+  const currentTop = ordered.slice(0, playoffSize);
+  const cutlineTeam = currentTop[playoffSize - 1] || null;
+  const nearestChallenger = [...ordered.slice(playoffSize)].sort((a, b) => chance(b) - chance(a))[0] || null;
+  const inDanger = [...currentTop].sort((a, b) => chance(a) - chance(b)).slice(0, 2);
+  const almostSafeByThreshold = ordered.filter((team) => chance(team) >= 90);
   const almostSafe = almostSafeByThreshold.length > 0
     ? almostSafeByThreshold
-    : [...ordered].sort((a, b) => top4Probability(payload, b.teamKey) - top4Probability(payload, a.teamKey)).slice(0, 2);
+    : [...ordered].sort((a, b) => chance(b) - chance(a)).slice(0, 2);
 
   return {
     ordered,
-    currentTopFour,
+    currentTop,
     cutlineTeam,
     nearestChallenger,
     inDanger,
