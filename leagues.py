@@ -9,14 +9,19 @@ ball was bowled have no Cricsheet file).
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 
 LEAGUES_DIR = Path(__file__).resolve().parent / "leagues"
 DEFAULT_LEAGUE_ID = "ipl-2026"
+# Cricket season ids end in their year: ipl-2027, bbl-2026-27, hundred-men-2026.
+SEASON_ID = re.compile(r"^(?P<family>[a-z0-9-]+?)-(?P<year>\d{4})(?:-(?P<yy>\d{2}))?$")
+# How far past the newest config a competition is rolled forward.
+MAX_ROLL_YEARS = 5
 
 
 @dataclass(frozen=True)
@@ -186,12 +191,96 @@ def validate_league(league: League) -> None:
         raise ValueError(f"{league.id}: qualification sizes must be descending and fit the team count")
 
 
+def _shift_season(text: str) -> str:
+    """'2026/27' -> '2027/28', '2026-27' -> '2027-28', '2026' -> '2027'."""
+    text = re.sub(r"\d{4}", lambda match: str(int(match.group()) + 1), text)
+    return re.sub(r"(?<=[/-])\d{2}\b", lambda match: f"{(int(match.group()) + 1) % 100:02d}", text)
+
+
+def _next_year(value: str) -> str:
+    day = date.fromisoformat(value)
+    try:
+        return day.replace(year=day.year + 1).isoformat()
+    except ValueError:  # 29 February
+        return day.replace(year=day.year + 1, day=28).isoformat()
+
+
+def _neighbour_id(league_id: str, step: int) -> str | None:
+    match = SEASON_ID.match(league_id)
+    if not match:
+        return None
+    suffix = f"-{(int(match['yy']) + step) % 100:02d}" if match["yy"] else ""
+    return f"{match['family']}-{int(match['year']) + step}{suffix}"
+
+
+def successor_config(config: dict[str, Any]) -> dict[str, Any]:
+    """Next season of a cricket competition, assumed to keep its teams and rules.
+
+    Dates move a year and are marked tentative; season-specific details (a fixed
+    CricketData series id, abandoned matches) are dropped. If teams change, the
+    first build reports it and a real config for that season is needed.
+    """
+    successor = json.loads(json.dumps(config))
+    successor["id"] = _neighbour_id(config["id"], 1)
+    successor["season"] = _shift_season(config["season"])
+    successor["seasonLabel"] = _shift_season(config["seasonLabel"])
+    for key in ("seasonStart", "seasonEnd"):
+        if config.get(key):
+            successor[key] = _next_year(config[key])
+    successor.pop("extraResults", None)
+    (successor.get("sources", {}).get("cricketdata") or {}).pop("seriesId", None)
+    successor["tentative"] = True
+    return successor
+
+
+def _rolled_config(league_id: str, directory: Path, depth: int = 0) -> dict[str, Any] | None:
+    previous_id = _neighbour_id(league_id, -1)
+    if previous_id is None or depth >= MAX_ROLL_YEARS:
+        return None
+    path = directory / f"{previous_id}.json"
+    previous = json.loads(path.read_text(encoding="utf-8")) if path.exists() else _rolled_config(previous_id, directory, depth + 1)
+    if previous is None or not is_cricket(previous):
+        return None
+    return successor_config(previous)
+
+
 def read_config(league_id: str, directory: Path = LEAGUES_DIR) -> dict[str, Any]:
+    """A league's config, or a cricket season rolled forward from the newest one on disk."""
     path = directory / f"{league_id}.json"
-    if not path.exists():
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    rolled = _rolled_config(league_id, directory)
+    if rolled is None:
         available = ", ".join(available_league_ids(directory)) or "none"
         raise ValueError(f"Unknown league '{league_id}'. Available: {available}")
-    return json.loads(path.read_text(encoding="utf-8"))
+    return rolled
+
+
+def rolled_league_ids(now: datetime, finalize_days: int, directory: Path = LEAGUES_DIR) -> list[str]:
+    """Cricket seasons after each competition's newest config, once that season is over.
+
+    Seasons are added until one has not finished (including its finalizing days), so the
+    planner always has the current or next season of every competition.
+    """
+    newest: dict[str, dict[str, Any]] = {}
+    for path in directory.glob("*.json"):
+        config = json.loads(path.read_text(encoding="utf-8"))
+        match = SEASON_ID.match(config.get("id", ""))
+        if not is_cricket(config) or not match or not config.get("seasonEnd"):
+            continue
+        family = match["family"]
+        if family not in newest or config["seasonEnd"] > newest[family]["seasonEnd"]:
+            newest[family] = config
+    ids = []
+    for config in newest.values():
+        current = config
+        for _ in range(MAX_ROLL_YEARS):
+            end = datetime.fromisoformat(current["seasonEnd"]).replace(tzinfo=timezone.utc) + timedelta(days=1)
+            if end + timedelta(days=finalize_days) >= now:
+                break
+            current = successor_config(current)
+            ids.append(current["id"])
+    return sorted(ids)
 
 
 def is_cricket(config: dict[str, Any]) -> bool:

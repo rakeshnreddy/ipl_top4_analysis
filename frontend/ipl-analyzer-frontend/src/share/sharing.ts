@@ -11,8 +11,12 @@ import {
 
 export type ShareKind = 'instagram' | 'x' | 'whatsapp';
 
+/** "IPL 2027" and "#IPL2027" for the season on screen. */
+const seasonOf = (payload: IplSeasonPayload) => payload.league?.seasonLabel ?? String(payload.metadata.season);
+
 export function shareTexts(payload: IplSeasonPayload): Record<ShareKind, string> {
   const snapshot = raceSnapshot(payload);
+  const season = seasonOf(payload);
   const topFour = snapshot.currentTop.map((team) => team.shortName).join(', ');
   const cutline = snapshot.cutlineTeam
     ? `${snapshot.cutlineTeam.shortName} (${formatPercent(tierProbability(payload, snapshot.cutlineTeam.teamKey, 4))})`
@@ -23,7 +27,7 @@ export function shareTexts(payload: IplSeasonPayload): Record<ShareKind, string>
   const date = formatGeneratedDate(payload.metadata.generated_at);
 
   return {
-    instagram: `IPL Top 4 Qualification Probabilities - ${date}\n\nCurrent Top 4: ${topFour}\nCutline: ${cutline}\nNearest challenger: ${challenger}\n\nProbabilities exclude NRR simulation.\n#IPL2026 #IPLPlayoffs`,
+    instagram: `IPL Top 4 Qualification Probabilities - ${date}\n\nCurrent Top 4: ${topFour}\nCutline: ${cutline}\nNearest challenger: ${challenger}\n\nProbabilities exclude NRR simulation.\n#IPL${season} #IPLPlayoffs`,
     x: `IPL Top 4 chances today: ${topFour}. Cutline: ${cutline}. Nearest challenger: ${challenger}. Updated ${date}. Probabilities exclude NRR simulation.`,
     whatsapp: `IPL Playoff Pulse (${date})\nTop 4: ${topFour}\nCutline: ${cutline}\nNearest challenger: ${challenger}\nProbabilities exclude NRR simulation.`,
   };
@@ -47,7 +51,8 @@ export function raceCaption(payload: IplSeasonPayload) {
   const topFour = ordered.slice(0, 4).map((team) => team.shortName).join(', ');
   const chase = ordered.slice(4, 7).map((team) => team.shortName).join(', ');
 
-  return `IPL 2026 Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. Exact all-combinations model, NRR shown when available. #IPL2026 #IPLPlayoffs`;
+  const season = seasonOf(payload);
+  return `IPL ${season} Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. Exact all-combinations model, NRR shown when available. #IPL${season} #IPLPlayoffs`;
 }
 
 export function drawRoundedRect(
