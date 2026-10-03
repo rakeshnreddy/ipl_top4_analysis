@@ -1,0 +1,163 @@
+{
+  "id": "serie-a",
+  "sport": "football",
+  "name": "Serie A",
+  "shortName": "Serie A",
+  "priority": 23,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "serie-a-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "top",
+      "size": 4
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "serie-a-{year}"
+  },
+  "teams": {
+    "Atalanta": {
+      "shortName": "ATA",
+      "color": "#1E71B8",
+      "textColor": "#FFFFFF"
+    },
+    "Bologna": {
+      "shortName": "BOL",
+      "color": "#1A2F48",
+      "textColor": "#FFFFFF"
+    },
+    "Cagliari": {
+      "shortName": "CAG",
+      "color": "#A71930",
+      "textColor": "#FFFFFF"
+    },
+    "Como": {
+      "shortName": "COM",
+      "color": "#003DA5",
+      "textColor": "#FFFFFF"
+    },
+    "Cremonese": {
+      "shortName": "CRE",
+      "color": "#E2001A",
+      "textColor": "#FFFFFF"
+    },
+    "Empoli": {
+      "shortName": "EMP",
+      "color": "#00579C",
+      "textColor": "#FFFFFF"
+    },
+    "Fiorentina": {
+      "shortName": "FIO",
+      "color": "#482E92",
+      "textColor": "#FFFFFF"
+    },
+    "Frosinone": {
+      "shortName": "FRO",
+      "color": "#FFD200",
+      "textColor": "#000000"
+    },
+    "Genoa": {
+      "shortName": "GEN",
+      "color": "#A51D2D",
+      "textColor": "#FFFFFF"
+    },
+    "Internazionale": {
+      "shortName": "INT",
+      "color": "#010E80",
+      "textColor": "#FFFFFF"
+    },
+    "Juventus": {
+      "shortName": "JUV",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "Lazio": {
+      "shortName": "LAZ",
+      "color": "#87D8F7",
+      "textColor": "#000000"
+    },
+    "Lecce": {
+      "shortName": "LEC",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "Milan": {
+      "shortName": "MIL",
+      "color": "#FB090B",
+      "textColor": "#FFFFFF"
+    },
+    "Monza": {
+      "shortName": "MON",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Napoli": {
+      "shortName": "NAP",
+      "color": "#12A0D7",
+      "textColor": "#FFFFFF"
+    },
+    "Parma": {
+      "shortName": "PAR",
+      "color": "#FFD200",
+      "textColor": "#000000"
+    },
+    "Pisa": {
+      "shortName": "PIS",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "Roma": {
+      "shortName": "ROM",
+      "color": "#8E1F2F",
+      "textColor": "#FFFFFF"
+    },
+    "Sassuolo": {
+      "shortName": "SAS",
+      "color": "#00A752",
+      "textColor": "#FFFFFF"
+    },
+    "Torino": {
+      "shortName": "TOR",
+      "color": "#8B1E22",
+      "textColor": "#FFFFFF"
+    },
+    "Udinese": {
+      "shortName": "UDI",
+      "color": "#2B2B2B",
+      "textColor": "#FFFFFF"
+    },
+    "Venezia": {
+      "shortName": "VEN",
+      "color": "#F39200",
+      "textColor": "#000000"
+    },
+    "Hellas Verona": {
+      "shortName": "VER",
+      "color": "#003C82",
+      "textColor": "#FFFFFF"
+    }
+  }
+}

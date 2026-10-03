@@ -12,9 +12,11 @@ and projection ahead of the frontend build. Two sources are supported:
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 import os
 import random
+import traceback
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -24,7 +26,17 @@ import requests
 import numpy as np
 
 import cricsheet
-from leagues import DEFAULT_LEAGUE_ID, League, TeamMeta, available_league_ids, load_league
+import team_sports
+from leagues import (
+    DEFAULT_LEAGUE_ID,
+    League,
+    TeamMeta,
+    available_league_ids,
+    is_cricket,
+    load_league,
+    parse_league,
+    read_config,
+)
 
 
 CRICDATA_API_BASE = "https://api.cricapi.com/v1"
@@ -38,6 +50,10 @@ FRONTEND_PUBLIC_DIR = ROOT_DIR / "frontend" / "ipl-analyzer-frontend" / "public"
 DATA_DIR = FRONTEND_PUBLIC_DIR / "data"
 LEAGUE_INDEX_OUTPUT = DATA_DIR / "leagues.json"
 CRICSHEET_CACHE_DIR = Path(os.getenv("CRICSHEET_CACHE_DIR", ROOT_DIR / ".cache" / "cricsheet"))
+FIXTURES_CACHE_DIR = Path(os.getenv("FIXTURES_CACHE_DIR", ROOT_DIR / ".cache" / "fixtures"))
+# Module that builds each non-cricket sport's payload from a rolling config.
+SPORT_MODULES = {"football": "football"}
+LIVE_STATUSES = {"league_stage", "playoffs", "in_progress"}
 
 REQUEST_TIMEOUT_SECONDS = 20
 DEFAULT_MONTE_CARLO_SIMULATIONS = int(os.getenv("IPL_MONTE_CARLO_SIMULATIONS", "40000"))
@@ -1406,46 +1422,59 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
     }
 
 
+def index_entry(payload: dict[str, Any]) -> dict[str, Any]:
+    league = payload["league"]
+    metadata = payload["metadata"]
+    complete = metadata.get("season_status") == "complete"
+    champion_key = (payload.get("playoffs") or {}).get("champion")
+    if not champion_key and complete and league.get("sport", "cricket") != "cricket" and payload["standings"]:
+        champion_key = payload["standings"][0]["teamKey"]
+    champion = next((row["shortName"] for row in payload["standings"] if row["teamKey"] == champion_key), None)
+    return {
+        "id": league["id"],
+        "sport": league.get("sport", "cricket"),
+        "name": league.get("name", league["id"]),
+        "shortName": league.get("shortName", league["id"].upper()),
+        "seasonLabel": league.get("seasonLabel", str(metadata.get("season", ""))),
+        "status": metadata.get("season_status", "league_stage"),
+        "champion": champion,
+        "generatedAt": metadata["generated_at"],
+        "path": f"data/{league['id']}.json",
+    }
+
+
 def write_league_index() -> None:
-    """List every published league payload so the site can offer a league switcher."""
-    entries = []
-    sort_keys = {}
-    for league_id in available_league_ids():
-        path = DATA_DIR / f"{league_id}.json"
-        if not path.exists():
+    """List every published payload so the site can offer a league switcher."""
+    found = []
+    for path in sorted(DATA_DIR.glob("*.json")):
+        if path.name == LEAGUE_INDEX_OUTPUT.name:
             continue
-        config = load_league(league_id)
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        league = payload.get("league") or {}
-        metadata = payload["metadata"]
-        champion_key = (payload.get("playoffs") or {}).get("champion")
-        champion = next((row["shortName"] for row in payload["standings"] if row["teamKey"] == champion_key), None)
-        entries.append(
-            {
-                "id": league_id,
-                "name": league.get("name", league_id),
-                "shortName": league.get("shortName", league_id.upper()),
-                "seasonLabel": league.get("seasonLabel", str(metadata.get("season", ""))),
-                "status": metadata.get("season_status", "league_stage"),
-                "champion": champion,
-                "generatedAt": metadata["generated_at"],
-                "path": f"data/{league_id}.json",
-            }
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            continue
+        if "id" not in (payload.get("league") or {}):
+            continue
+        found.append(payload)
+
+    # In-season leagues first, then by priority, then the newest season first.
+    found.sort(key=lambda item: str(item["league"].get("season", "")), reverse=True)
+    found.sort(
+        key=lambda item: (
+            0 if item["metadata"].get("season_status") in LIVE_STATUSES else 1,
+            item["league"].get("priority", 100),
         )
-        live = metadata.get("season_status") in ("league_stage", "playoffs")
-        start = config.season_start.timestamp() if config.season_start else 0
-        sort_keys[league_id] = (0 if live else 1, config.priority, -start)
-    entries.sort(key=lambda entry: sort_keys[entry["id"]])
+    )
+    entries = [index_entry(payload) for payload in found]
     write_json(LEAGUE_INDEX_OUTPUT, {"default": default_league_id(entries), "leagues": entries})
 
 
 def default_league_id(entries: list[dict[str, Any]]) -> str:
     """The site's home page shows the newest published IPL season."""
-    ipl = [load_league(entry["id"]) for entry in entries if entry["shortName"] == "IPL"]
+    ipl = [entry for entry in entries if entry["sport"] == "cricket" and entry["shortName"] == "IPL"]
     if not ipl:
         return DEFAULT_LEAGUE_ID
-    newest = max(ipl, key=lambda league: league.season_start.timestamp() if league.season_start else 0)
-    return newest.id
+    return max(ipl, key=lambda entry: entry["seasonLabel"])["id"]
 
 
 def published_payload(league_id: str) -> dict[str, Any] | None:
@@ -1484,10 +1513,15 @@ def probability_movement(previous: dict[str, Any] | None, payload: dict[str, Any
 
 
 def league_plan(now: datetime) -> list[tuple[str, str]]:
-    """Leagues to build now: in-season ones live, recently finished ones from Cricsheet."""
+    """Leagues to build now: in-season ones live, recently finished cricket from Cricsheet."""
     plan = []
     for league_id in available_league_ids():
-        league = load_league(league_id)
+        config = read_config(league_id)
+        if not is_cricket(config):
+            if team_sports.resolve_season(config, now).contains(now):
+                plan.append((league_id, "feed"))
+            continue
+        league = parse_league(config)
         if league.season_start and league.season_start <= now <= league.season_end:
             if league.cricketdata_series_names:
                 plan.append((league_id, "cricketdata"))
@@ -1495,6 +1529,23 @@ def league_plan(now: datetime) -> list[tuple[str, str]]:
             if published_status(league_id) != "complete":
                 plan.append((league_id, "cricsheet"))
     return plan
+
+
+VOLATILE_FIELDS = (("metadata", "generated_at"), ("analysis", "generatedAt"))
+
+
+def same_content(previous: dict[str, Any] | None, payload: dict[str, Any]) -> bool:
+    """True when only timestamps differ, so a day without games writes nothing."""
+    if previous is None:
+        return False
+
+    def stripped(data: dict[str, Any]) -> dict[str, Any]:
+        copy = json.loads(json.dumps(data))
+        for section, field in VOLATILE_FIELDS:
+            (copy.get(section) or {}).pop(field, None)
+        return copy
+
+    return stripped(previous) == stripped(payload)
 
 
 def write_json(path: Path, data: dict[str, Any]) -> None:
@@ -1529,7 +1580,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def build_league(league: League, source: str, archive: Path | None = None) -> dict[str, Any]:
+def build_league(league_id: str, source: str, archive: Path | None = None) -> dict[str, Any]:
+    config = read_config(league_id)
+    if not is_cricket(config):
+        module = importlib.import_module(SPORT_MODULES[config["sport"]])
+        return module.build_payload(config, utc_now(), FIXTURES_CACHE_DIR)
+    league = parse_league(config)
     use_league(league)
     if source == "auto":
         source = "cricketdata" if league.cricketdata_series_names else "cricsheet"
@@ -1554,24 +1610,43 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit("--cricsheet-archive works with a single --league")
 
     failures = []
+    succeeded = 0
     for league_id, source in builds:
         try:
-            payload = build_league(load_league(league_id), source, args.cricsheet_archive)
-        except SourceValidationError as exc:
+            payload = build_league(league_id, source, args.cricsheet_archive)
+        except (SourceValidationError, team_sports.FeedError) as exc:
             if active and source == "cricsheet":
                 # Cricsheet lags a few days; keep the live payload and retry tomorrow.
                 print(f"{league_id}: final rebuild not possible yet ({exc})")
                 continue
+            # One broken source should not stop the other leagues; GitHub shows this as an annotation.
+            print(f"::warning::{league_id}: {exc}")
             failures.append(f"{league_id}: {exc}")
             continue
+        except Exception as exc:  # noqa: BLE001
+            # Neither should a source changing its format or a bug in one sport's code.
+            traceback.print_exc()
+            print(f"::warning::{league_id}: unexpected {type(exc).__name__}: {exc}")
+            failures.append(f"{league_id}: unexpected {type(exc).__name__}: {exc}")
+            continue
+        succeeded += 1
         if active and source == "cricsheet" and payload["metadata"].get("season_status") != "complete":
             print(f"{league_id}: Cricsheet does not have the final yet; retrying on the next run")
             continue
+        payload_id = payload["league"]["id"]
+        previous = published_payload(payload_id)
         if payload["metadata"].get("season_status") != "complete":
-            payload["movement"] = probability_movement(published_payload(league_id), payload)
-        write_json(CANONICAL_OUTPUT, payload)
+            if payload["league"].get("sport", "cricket") == "cricket":
+                payload["movement"] = probability_movement(previous, payload)
+            else:
+                payload["movement"] = team_sports.probability_movement(previous, payload)
+        if same_content(previous, payload):
+            print(f"{payload_id}: unchanged")
+            continue
+        write_json(DATA_DIR / f"{payload_id}.json", payload)
     write_league_index()
-    if failures:
+    # A nightly run fails only when nothing could be built; single-league problems stay warnings.
+    if failures and (not active or not succeeded):
         raise SystemExit("Some leagues failed:\n" + "\n".join(failures))
 
 

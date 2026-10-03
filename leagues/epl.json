@@ -1,0 +1,168 @@
+{
+  "id": "epl",
+  "sport": "football",
+  "name": "Premier League",
+  "shortName": "Premier League",
+  "priority": 20,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "epl-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "top",
+      "size": 4
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "epl-{year}"
+  },
+  "teams": {
+    "Arsenal": {
+      "shortName": "ARS",
+      "color": "#EF0107",
+      "textColor": "#FFFFFF"
+    },
+    "Aston Villa": {
+      "shortName": "AVL",
+      "color": "#670E36",
+      "textColor": "#FFFFFF"
+    },
+    "Bournemouth": {
+      "shortName": "BOU",
+      "color": "#DA291C",
+      "textColor": "#FFFFFF"
+    },
+    "Brentford": {
+      "shortName": "BRE",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Brighton": {
+      "shortName": "BHA",
+      "color": "#0057B8",
+      "textColor": "#FFFFFF"
+    },
+    "Burnley": {
+      "shortName": "BUR",
+      "color": "#6C1D45",
+      "textColor": "#FFFFFF"
+    },
+    "Chelsea": {
+      "shortName": "CHE",
+      "color": "#034694",
+      "textColor": "#FFFFFF"
+    },
+    "Coventry": {
+      "shortName": "COV",
+      "color": "#59CBE8",
+      "textColor": "#000000"
+    },
+    "Crystal Palace": {
+      "shortName": "CRY",
+      "color": "#1B458F",
+      "textColor": "#FFFFFF"
+    },
+    "Everton": {
+      "shortName": "EVE",
+      "color": "#003399",
+      "textColor": "#FFFFFF"
+    },
+    "Fulham": {
+      "shortName": "FUL",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "Hull": {
+      "shortName": "HUL",
+      "color": "#F5A12D",
+      "textColor": "#000000"
+    },
+    "Ipswich": {
+      "shortName": "IPS",
+      "color": "#3A64A3",
+      "textColor": "#FFFFFF"
+    },
+    "Leeds": {
+      "shortName": "LEE",
+      "color": "#FFCD00",
+      "textColor": "#000000"
+    },
+    "Leicester": {
+      "shortName": "LEI",
+      "color": "#003090",
+      "textColor": "#FFFFFF"
+    },
+    "Liverpool": {
+      "shortName": "LIV",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "Man City": {
+      "shortName": "MCI",
+      "color": "#6CABDD",
+      "textColor": "#000000"
+    },
+    "Man Utd": {
+      "shortName": "MUN",
+      "color": "#DA291C",
+      "textColor": "#FFFFFF"
+    },
+    "Newcastle": {
+      "shortName": "NEW",
+      "color": "#241F20",
+      "textColor": "#FFFFFF"
+    },
+    "Nott'm Forest": {
+      "shortName": "NFO",
+      "color": "#DD0000",
+      "textColor": "#FFFFFF"
+    },
+    "Southampton": {
+      "shortName": "SOU",
+      "color": "#D71920",
+      "textColor": "#FFFFFF"
+    },
+    "Spurs": {
+      "shortName": "TOT",
+      "color": "#132257",
+      "textColor": "#FFFFFF"
+    },
+    "Sunderland": {
+      "shortName": "SUN",
+      "color": "#EB172B",
+      "textColor": "#FFFFFF"
+    },
+    "West Ham": {
+      "shortName": "WHU",
+      "color": "#7A263A",
+      "textColor": "#FFFFFF"
+    },
+    "Wolves": {
+      "shortName": "WOL",
+      "color": "#FDB913",
+      "textColor": "#000000"
+    }
+  }
+}

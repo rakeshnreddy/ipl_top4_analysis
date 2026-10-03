@@ -91,6 +91,8 @@ class League:
         """League details the frontend needs to render any league."""
         return {
             "id": self.id,
+            "sport": "cricket",
+            "priority": self.priority,
             "name": self.name,
             "shortName": self.short_name,
             "season": self.season,
@@ -184,14 +186,26 @@ def validate_league(league: League) -> None:
         raise ValueError(f"{league.id}: qualification sizes must be descending and fit the team count")
 
 
-def load_league(league_id: str, directory: Path = LEAGUES_DIR) -> League:
+def read_config(league_id: str, directory: Path = LEAGUES_DIR) -> dict[str, Any]:
     path = directory / f"{league_id}.json"
     if not path.exists():
         available = ", ".join(available_league_ids(directory)) or "none"
         raise ValueError(f"Unknown league '{league_id}'. Available: {available}")
-    return parse_league(json.loads(path.read_text(encoding="utf-8")))
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def is_cricket(config: dict[str, Any]) -> bool:
+    return config.get("sport", "cricket") == "cricket"
+
+
+def load_league(league_id: str, directory: Path = LEAGUES_DIR) -> League:
+    """A cricket season config; other sports use rolling configs read with read_config."""
+    config = read_config(league_id, directory)
+    if not is_cricket(config):
+        raise ValueError(f"{league_id} is a {config['sport']} config, not a cricket season")
+    return parse_league(config)
 
 
 def available_league_ids(directory: Path = LEAGUES_DIR) -> list[str]:
-    leagues = [parse_league(json.loads(path.read_text(encoding="utf-8"))) for path in directory.glob("*.json")]
-    return [league.id for league in sorted(leagues, key=lambda item: (item.priority, item.id))]
+    configs = [json.loads(path.read_text(encoding="utf-8")) for path in directory.glob("*.json")]
+    return [config["id"] for config in sorted(configs, key=lambda item: (item.get("priority", 100), item["id"]))]

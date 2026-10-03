@@ -21,7 +21,9 @@ import {
   type QualificationPathResult,
   type QualificationTier,
 } from './data/iplData';
-import { leagueHref, leagueIdFromLocation, loadLeagueIndex, type LeagueIndex } from './data/leagues';
+import { leagueHref, type LeagueIndex } from './data/leagues';
+import LeagueSwitcher from './components/LeagueSwitcher';
+import { appBaseHref, setJsonLd, setPageMeta } from './lib/seo';
 import {
   formatGeneratedAt,
   formatNrr,
@@ -270,41 +272,9 @@ function practicalTakeaway(payload: IplSeasonPayload, team: IplStanding, path: Q
   return `${team.shortName} need wins and rival results immediately.`;
 }
 
-function appBaseHref() {
-  return new URL(import.meta.env.BASE_URL, window.location.origin).href;
-}
-
-function setMetaTag(attribute: 'name' | 'property', key: string, content: string) {
-  let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
-  if (!element) {
-    element = document.createElement('meta');
-    element.setAttribute(attribute, key);
-    document.head.appendChild(element);
-  }
-  element.content = content;
-}
-
-function setCanonical(href: string) {
-  let element = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!element) {
-    element = document.createElement('link');
-    element.rel = 'canonical';
-    document.head.appendChild(element);
-  }
-  element.href = href;
-}
-
-function setJsonLd(payload: IplSeasonPayload, pageHref: string, title: string, description: string) {
+function setLeagueJsonLd(payload: IplSeasonPayload, pageHref: string, title: string, description: string) {
   const baseHref = appBaseHref();
-  let script = document.head.querySelector<HTMLScriptElement>('script[data-ipl-jsonld="true"]');
-  if (!script) {
-    script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.dataset.iplJsonld = 'true';
-    document.head.appendChild(script);
-  }
-
-  script.text = JSON.stringify({
+  setJsonLd({
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -336,14 +306,10 @@ function setJsonLd(payload: IplSeasonPayload, pageHref: string, title: string, d
   });
 }
 
-function App() {
-  const requestedLeague = useMemo(() => leagueIdFromLocation(), []);
+/** One cricket season's page; Root picks the league and loads the league list. */
+function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueIndex | null }) {
   const [payload, setPayload] = useState<IplSeasonPayload | null>(null);
-  const [leagueIndex, setLeagueIndex] = useState<LeagueIndex | null>(null);
-  const [indexSettled, setIndexSettled] = useState(false);
-  // The home page shows the index's default league (the newest IPL season); ?league= picks another.
   const homeLeagueId = leagueIndex?.default ?? DEFAULT_LEAGUE_ID;
-  const leagueId = requestedLeague ?? (indexSettled ? homeLeagueId : null);
   const [selectedTeamKey, setSelectedTeamKey] = useState<string>('');
   // Empty until the reader picks a tier; the league's playoff tier is the default.
   const [targetGoal, setTargetGoal] = useState('');
@@ -351,9 +317,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!leagueId) {
-      return undefined;
-    }
     let active = true;
     setLoading(true);
 
@@ -383,32 +346,6 @@ function App() {
       active = false;
     };
   }, [leagueId]);
-
-  useEffect(() => {
-    let active = true;
-
-    // The league switcher is optional; the page still works without the list.
-    loadLeagueIndex()
-      .then((index) => {
-        if (active) {
-          setLeagueIndex(index);
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setLeagueIndex(null);
-        }
-      })
-      .finally(() => {
-        if (active) {
-          setIndexSettled(true);
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
 
   useEffect(() => {
     if (!payload) {
@@ -453,19 +390,10 @@ function App() {
     const { title, description } = isLeagueComplete(payload)
       ? finalSeo(payload)
       : liveSeo(payload);
-    const pageHref = new URL(leagueHref(payload.league?.id ?? leagueId ?? homeLeagueId, homeLeagueId), window.location.origin).href;
+    const pageHref = new URL(leagueHref(payload.league?.id ?? leagueId, homeLeagueId), window.location.origin).href;
 
-    document.title = title;
-    setCanonical(pageHref);
-    setMetaTag('name', 'description', description);
-    setMetaTag('property', 'og:title', title);
-    setMetaTag('property', 'og:description', description);
-    setMetaTag('property', 'og:type', 'website');
-    setMetaTag('property', 'og:url', pageHref);
-    setMetaTag('name', 'twitter:card', 'summary');
-    setMetaTag('name', 'twitter:title', title);
-    setMetaTag('name', 'twitter:description', description);
-    setJsonLd(payload, pageHref, title, description);
+    setPageMeta(title, description, pageHref);
+    setLeagueJsonLd(payload, pageHref, title, description);
   }, [payload, leagueId, homeLeagueId]);
 
   const sortedStandings = useMemo(() => [...(payload?.standings || [])].sort(rankingSort), [payload]);
@@ -521,7 +449,7 @@ function App() {
 
   return (
     <main className="pulse-app" data-testid="app-loaded">
-      <LeagueSwitcher currentId={payload.league?.id ?? leagueId ?? homeLeagueId} index={leagueIndex} />
+      <LeagueSwitcher currentId={payload.league?.id ?? leagueId} index={leagueIndex} />
 
       {isFinal ? (
         <FinalHero payload={payload} />
@@ -871,28 +799,6 @@ const TodayRaceSummary = ({
         </article>
       </div>
     </section>
-  );
-};
-
-const LeagueSwitcher = ({ currentId, index }: { currentId: string; index: LeagueIndex | null }) => {
-  if (!index || index.leagues.length < 2) {
-    return null;
-  }
-
-  return (
-    <nav className="league-switcher" aria-label="Leagues">
-      {index.leagues.map((league) => (
-        <a
-          aria-current={league.id === currentId ? 'page' : undefined}
-          href={leagueHref(league.id, index.default)}
-          key={league.id}
-          title={league.name}
-        >
-          {league.shortName} {league.seasonLabel}
-          {league.status !== 'complete' && <small>Live</small>}
-        </a>
-      ))}
-    </nav>
   );
 };
 
