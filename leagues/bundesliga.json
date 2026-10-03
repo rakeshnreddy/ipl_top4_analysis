@@ -1,0 +1,148 @@
+{
+  "id": "bundesliga",
+  "sport": "football",
+  "name": "Bundesliga",
+  "shortName": "Bundesliga",
+  "priority": 22,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "bundesliga-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "top",
+      "size": 4
+    },
+    {
+      "key": "relegation",
+      "label": "Bottom 3",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Bot 3"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "bundesliga-{year}"
+  },
+  "teams": {
+    "1. FC Köln": {
+      "shortName": "KOE",
+      "color": "#ED1C24",
+      "textColor": "#FFFFFF"
+    },
+    "1. FC Union Berlin": {
+      "shortName": "FCU",
+      "color": "#EB1923",
+      "textColor": "#FFFFFF"
+    },
+    "1. FSV Mainz 05": {
+      "shortName": "M05",
+      "color": "#C3141E",
+      "textColor": "#FFFFFF"
+    },
+    "Bayer 04 Leverkusen": {
+      "shortName": "B04",
+      "color": "#E32221",
+      "textColor": "#FFFFFF"
+    },
+    "Borussia Dortmund": {
+      "shortName": "BVB",
+      "color": "#FDE100",
+      "textColor": "#000000"
+    },
+    "Borussia Mönchengladbach": {
+      "shortName": "BMG",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "Eintracht Frankfurt": {
+      "shortName": "SGE",
+      "color": "#E1000F",
+      "textColor": "#FFFFFF"
+    },
+    "FC Augsburg": {
+      "shortName": "FCA",
+      "color": "#BA3733",
+      "textColor": "#FFFFFF"
+    },
+    "FC Bayern München": {
+      "shortName": "FCB",
+      "color": "#DC052D",
+      "textColor": "#FFFFFF"
+    },
+    "FC Schalke 04": {
+      "shortName": "S04",
+      "color": "#004D9D",
+      "textColor": "#FFFFFF"
+    },
+    "FC St. Pauli": {
+      "shortName": "STP",
+      "color": "#5C3A21",
+      "textColor": "#FFFFFF"
+    },
+    "Hamburger SV": {
+      "shortName": "HSV",
+      "color": "#0A3F86",
+      "textColor": "#FFFFFF"
+    },
+    "RB Leipzig": {
+      "shortName": "RBL",
+      "color": "#DD0741",
+      "textColor": "#FFFFFF"
+    },
+    "SC Paderborn 07": {
+      "shortName": "SCP",
+      "color": "#005CA9",
+      "textColor": "#FFFFFF"
+    },
+    "SV Elversberg": {
+      "shortName": "SVE",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "SV Werder Bremen": {
+      "shortName": "SVW",
+      "color": "#1D9053",
+      "textColor": "#FFFFFF"
+    },
+    "Sport-Club Freiburg": {
+      "shortName": "SCF",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "TSG Hoffenheim": {
+      "shortName": "TSG",
+      "color": "#1C63B7",
+      "textColor": "#FFFFFF"
+    },
+    "VfB Stuttgart": {
+      "shortName": "VFB",
+      "color": "#E32219",
+      "textColor": "#FFFFFF"
+    },
+    "VfL Wolfsburg": {
+      "shortName": "WOB",
+      "color": "#65B32E",
+      "textColor": "#FFFFFF"
+    },
+    "1. FC Heidenheim 1846": {
+      "shortName": "HDH",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    }
+  }
+}

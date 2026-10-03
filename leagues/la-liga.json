@@ -1,0 +1,158 @@
+{
+  "id": "la-liga",
+  "sport": "football",
+  "name": "La Liga",
+  "shortName": "La Liga",
+  "priority": 21,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "la-liga-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "top",
+      "size": 4
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "la-liga-{year}"
+  },
+  "teams": {
+    "Athletic Club": {
+      "shortName": "ATH",
+      "color": "#EE2523",
+      "textColor": "#FFFFFF"
+    },
+    "Atlético de Madrid": {
+      "shortName": "ATM",
+      "color": "#CB3524",
+      "textColor": "#FFFFFF"
+    },
+    "CA Osasuna": {
+      "shortName": "OSA",
+      "color": "#D91A21",
+      "textColor": "#FFFFFF"
+    },
+    "Celta": {
+      "shortName": "CEL",
+      "color": "#8AC3EE",
+      "textColor": "#000000"
+    },
+    "Deportivo Alavés": {
+      "shortName": "ALA",
+      "color": "#0761AF",
+      "textColor": "#FFFFFF"
+    },
+    "Elche CF": {
+      "shortName": "ELC",
+      "color": "#05642C",
+      "textColor": "#FFFFFF"
+    },
+    "FC Barcelona": {
+      "shortName": "BAR",
+      "color": "#A50044",
+      "textColor": "#FFFFFF"
+    },
+    "Getafe CF": {
+      "shortName": "GET",
+      "color": "#005999",
+      "textColor": "#FFFFFF"
+    },
+    "Girona FC": {
+      "shortName": "GIR",
+      "color": "#CD2534",
+      "textColor": "#FFFFFF"
+    },
+    "Levante UD": {
+      "shortName": "LEV",
+      "color": "#B4053F",
+      "textColor": "#FFFFFF"
+    },
+    "Málaga CF": {
+      "shortName": "MAL",
+      "color": "#0077C8",
+      "textColor": "#FFFFFF"
+    },
+    "R. Racing Club": {
+      "shortName": "RAC",
+      "color": "#00A650",
+      "textColor": "#FFFFFF"
+    },
+    "RC Deportivo": {
+      "shortName": "DEP",
+      "color": "#0067B1",
+      "textColor": "#FFFFFF"
+    },
+    "RCD Espanyol de Barcelona": {
+      "shortName": "ESP",
+      "color": "#007FC8",
+      "textColor": "#FFFFFF"
+    },
+    "RCD Mallorca": {
+      "shortName": "MLL",
+      "color": "#E20613",
+      "textColor": "#FFFFFF"
+    },
+    "Rayo Vallecano": {
+      "shortName": "RAY",
+      "color": "#E53027",
+      "textColor": "#FFFFFF"
+    },
+    "Real Betis": {
+      "shortName": "BET",
+      "color": "#00954C",
+      "textColor": "#FFFFFF"
+    },
+    "Real Madrid": {
+      "shortName": "RMA",
+      "color": "#FEBE10",
+      "textColor": "#000000"
+    },
+    "Real Oviedo": {
+      "shortName": "OVI",
+      "color": "#0052A5",
+      "textColor": "#FFFFFF"
+    },
+    "Real Sociedad": {
+      "shortName": "RSO",
+      "color": "#0067B1",
+      "textColor": "#FFFFFF"
+    },
+    "Sevilla FC": {
+      "shortName": "SEV",
+      "color": "#D71920",
+      "textColor": "#FFFFFF"
+    },
+    "Valencia CF": {
+      "shortName": "VAL",
+      "color": "#EE3524",
+      "textColor": "#FFFFFF"
+    },
+    "Villarreal CF": {
+      "shortName": "VIL",
+      "color": "#FFE667",
+      "textColor": "#000000"
+    }
+  }
+}

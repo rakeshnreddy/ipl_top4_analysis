@@ -10,6 +10,7 @@ from unittest import mock
 
 import extract_table
 import leagues
+import team_sports
 from test_cricsheet import round_robin_season, write_archive
 
 
@@ -22,10 +23,19 @@ class LeagueConfigTests(unittest.TestCase):
 
         self.assertEqual(ids[0], leagues.DEFAULT_LEAGUE_ID)
         for league_id in ids:
+            config = leagues.read_config(league_id)
+            self.assertEqual(config["id"], league_id)
+            if not leagues.is_cricket(config):
+                self.assertIn(config["sport"], extract_table.SPORT_MODULES)
+                team_sports.validate_config(config)
+                continue
             league = leagues.load_league(league_id)
-            self.assertEqual(league.id, league_id)
             self.assertEqual(league.league_match_count * 2, len(league.teams) * league.matches_per_team)
             self.assertTrue(league.cricsheet_competition, f"{league_id} needs a Cricsheet source")
+
+    def test_rolling_configs_are_not_loaded_as_cricket_seasons(self) -> None:
+        with self.assertRaisesRegex(ValueError, "football"):
+            leagues.load_league("epl")
 
     def test_unknown_league_lists_the_available_ones(self) -> None:
         with self.assertRaisesRegex(ValueError, "ipl-2026"):
@@ -83,10 +93,13 @@ def write_payload(data_dir: Path, league_id: str, status: str) -> None:
     data_dir.mkdir(parents=True, exist_ok=True)
     payload = {
         "metadata": {"generated_at": "2026-10-01T00:00:00Z", "season_status": status},
-        "league": {"shortName": league_id.split("-")[0].upper(), "seasonLabel": league_id.split("-", 1)[1]},
+        "league": leagues.load_league(league_id).payload_block(),
         "standings": [],
     }
     (data_dir / f"{league_id}.json").write_text(json.dumps(payload))
+
+
+CRICKET_IDS = [league_id for league_id in leagues.available_league_ids() if leagues.is_cricket(leagues.read_config(league_id))]
 
 
 class LiveSeasonTests(unittest.TestCase):
@@ -106,8 +119,11 @@ class LiveSeasonTests(unittest.TestCase):
         self.tmp.cleanup()
         extract_table.use_league(leagues.load_league(leagues.DEFAULT_LEAGUE_ID))
 
+    def cricket_plan(self, now: datetime) -> list[tuple[str, str]]:
+        return [item for item in extract_table.league_plan(now) if item[1] != "feed"]
+
     def test_plan_builds_live_leagues_from_cricketdata(self) -> None:
-        plan = extract_table.league_plan(datetime(2026, 12, 20, 19, 30, tzinfo=timezone.utc))
+        plan = self.cricket_plan(datetime(2026, 12, 20, 19, 30, tzinfo=timezone.utc))
 
         self.assertEqual(plan, [("bbl-2026-27", "cricketdata"), ("ilt-2026-27", "cricketdata")])
 
@@ -115,21 +131,65 @@ class LiveSeasonTests(unittest.TestCase):
         now = datetime(2027, 2, 1, 19, 30, tzinfo=timezone.utc)
 
         self.assertEqual(
-            extract_table.league_plan(now),
+            self.cricket_plan(now),
             [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet"), ("sa20-2026-27", "cricketdata")],
         )
         write_payload(self.data_dir, "bbl-2026-27", "complete")
         self.assertEqual(
-            extract_table.league_plan(now),
+            self.cricket_plan(now),
             [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata")],
         )
 
+    def test_plan_builds_rolling_leagues_only_in_season(self) -> None:
+        in_season = extract_table.league_plan(datetime(2026, 12, 20, tzinfo=timezone.utc))
+        summer = extract_table.league_plan(datetime(2027, 7, 15, tzinfo=timezone.utc))
+
+        self.assertIn(("epl", "feed"), in_season)
+        self.assertIn(("ligue-1", "feed"), in_season)
+        self.assertNotIn(("epl", "feed"), summer)
+
     def test_active_build_off_season_writes_nothing(self) -> None:
         # Between CPL's finalize window (to 11 Oct) and ILT20's start (22 Nov).
-        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 1, tzinfo=timezone.utc)):
+        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 1, tzinfo=timezone.utc)), mock.patch.object(
+            extract_table, "available_league_ids", return_value=CRICKET_IDS
+        ):
             extract_table.main(["--league", "active"])
 
         self.assertFalse(self.data_dir.exists())
+
+    def test_one_failing_league_is_a_warning_when_others_build(self) -> None:
+        good = {"metadata": {"generated_at": "2026-10-03T19:30:00Z", "season_status": "complete"}, "league": {"id": "wpl-2026"}, "standings": []}
+
+        def build(league_id: str, source: str, archive: object = None) -> dict[str, object]:
+            if league_id == "epl":
+                raise team_sports.FeedError("epl-2026: offline")
+            return good
+
+        with mock.patch.object(
+            extract_table, "league_plan", return_value=[("epl", "feed"), ("wpl-2026", "cricketdata")]
+        ), mock.patch.object(extract_table, "build_league", side_effect=build):
+            extract_table.main(["--league", "active"])
+
+        self.assertTrue((self.data_dir / "wpl-2026.json").exists())
+
+    def test_a_night_where_every_league_fails_fails_the_run(self) -> None:
+        with mock.patch.object(extract_table, "league_plan", return_value=[("epl", "feed")]), mock.patch.object(
+            extract_table, "build_league", side_effect=team_sports.FeedError("epl-2026: offline")
+        ):
+            with self.assertRaises(SystemExit):
+                extract_table.main(["--league", "active"])
+
+    def test_a_payload_that_only_differs_in_its_timestamp_is_not_rewritten(self) -> None:
+        first = {"metadata": {"generated_at": "2026-10-02T19:30:00Z", "season_status": "complete"}, "league": {"id": "wpl-2026"}, "standings": []}
+        second = json.loads(json.dumps(first))
+        second["metadata"]["generated_at"] = "2026-10-03T19:30:00Z"
+
+        for payload in (first, second):
+            with mock.patch.object(extract_table, "build_league", return_value=payload):
+                extract_table.main(["--league", "wpl-2026"])
+
+        published = json.loads((self.data_dir / "wpl-2026.json").read_text())
+        self.assertEqual(published["metadata"]["generated_at"], "2026-10-02T19:30:00Z")
 
     def test_index_lists_live_leagues_first(self) -> None:
         for league_id in ("ipl-2026", "wpl-2026", "bbl-2025-26"):

@@ -1,0 +1,143 @@
+{
+  "id": "ligue-1",
+  "sport": "football",
+  "name": "Ligue 1",
+  "shortName": "Ligue 1",
+  "priority": 24,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "ligue-1-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "top",
+      "size": 4
+    },
+    {
+      "key": "relegation",
+      "label": "Bottom 3",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Bot 3"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "ligue-1-{year}"
+  },
+  "teams": {
+    "AJ Auxerre": {
+      "shortName": "AUX",
+      "color": "#005BA9",
+      "textColor": "#FFFFFF"
+    },
+    "AS Monaco": {
+      "shortName": "ASM",
+      "color": "#E51B22",
+      "textColor": "#FFFFFF"
+    },
+    "Angers SCO": {
+      "shortName": "ANG",
+      "color": "#1D1D1B",
+      "textColor": "#FFFFFF"
+    },
+    "Estac Troyes": {
+      "shortName": "TRO",
+      "color": "#003C7E",
+      "textColor": "#FFFFFF"
+    },
+    "FC Lorient": {
+      "shortName": "LOR",
+      "color": "#F58113",
+      "textColor": "#000000"
+    },
+    "FC Metz": {
+      "shortName": "MET",
+      "color": "#7B1F35",
+      "textColor": "#FFFFFF"
+    },
+    "FC Nantes": {
+      "shortName": "NAN",
+      "color": "#FCD405",
+      "textColor": "#000000"
+    },
+    "Havre Athletic Club": {
+      "shortName": "HAC",
+      "color": "#5BB0E1",
+      "textColor": "#000000"
+    },
+    "LOSC Lille": {
+      "shortName": "LIL",
+      "color": "#E01E13",
+      "textColor": "#FFFFFF"
+    },
+    "Le Mans FC": {
+      "shortName": "LMA",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "OGC Nice": {
+      "shortName": "NIC",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "Olympique Lyonnais": {
+      "shortName": "OL",
+      "color": "#1B3F8B",
+      "textColor": "#FFFFFF"
+    },
+    "Olympique de Marseille": {
+      "shortName": "OM",
+      "color": "#2FAEE0",
+      "textColor": "#000000"
+    },
+    "Paris FC": {
+      "shortName": "PFC",
+      "color": "#1D3557",
+      "textColor": "#FFFFFF"
+    },
+    "Paris Saint-Germain": {
+      "shortName": "PSG",
+      "color": "#004170",
+      "textColor": "#FFFFFF"
+    },
+    "RC Lens": {
+      "shortName": "RCL",
+      "color": "#FFD700",
+      "textColor": "#000000"
+    },
+    "RC Strasbourg Alsace": {
+      "shortName": "STR",
+      "color": "#009FE3",
+      "textColor": "#FFFFFF"
+    },
+    "Stade Brestois 29": {
+      "shortName": "BRE",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Stade Rennais FC": {
+      "shortName": "REN",
+      "color": "#E13327",
+      "textColor": "#FFFFFF"
+    },
+    "Toulouse FC": {
+      "shortName": "TFC",
+      "color": "#5B2A86",
+      "textColor": "#FFFFFF"
+    }
+  }
+}
