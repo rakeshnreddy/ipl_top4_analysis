@@ -1,4 +1,4 @@
-import type { IplSeasonPayload, IplStanding } from '../data/iplData';
+import type { IplSeasonPayload, IplStanding, LeagueTeam } from '../data/iplData';
 import { team_styles } from '../teamStyles';
 
 export const formatPercent = (value: number) =>
@@ -20,8 +20,16 @@ export const formatGeneratedDate = (value: string) =>
     dateStyle: 'medium',
   }).format(new Date(value));
 
-export const teamColor = (teamKey: string) => team_styles[teamKey]?.bg || '#2d405f';
-export const teamTextColor = (teamKey: string) => team_styles[teamKey]?.text || '#ffffff';
+// Colours for the league on screen; a page only ever shows one league.
+let palette: Record<string, { color: string; textColor: string }> = {};
+
+export function setTeamPalette(teams: LeagueTeam[] | undefined) {
+  palette = Object.fromEntries((teams || []).map((team) => [team.key, { color: team.color, textColor: team.textColor }]));
+}
+
+export const teamColor = (teamKey: string) => palette[teamKey]?.color || team_styles[teamKey]?.bg || '#2d405f';
+export const teamTextColor = (teamKey: string) =>
+  palette[teamKey]?.textColor || team_styles[teamKey]?.text || '#ffffff';
 
 export function rankingSort(a: IplStanding, b: IplStanding) {
   const nrrSort = hasNrr(a.nrr) && hasNrr(b.nrr) ? b.nrr - a.nrr : 0;

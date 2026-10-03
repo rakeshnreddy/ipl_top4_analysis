@@ -1,5 +1,5 @@
 export interface IplMetadata {
-  season: number;
+  season: number | string;
   generated_at: string;
   source: string;
   source_url: string;
@@ -8,6 +8,7 @@ export interface IplMetadata {
   source_license?: string;
   source_license_url?: string;
   warnings: string[];
+  notes?: string[];
 }
 
 export interface IplStanding {
@@ -105,8 +106,35 @@ export interface IplPlayoffs {
   runnerUp: string | null;
 }
 
+export interface QualificationTier {
+  size: number;
+  label: string;
+}
+
+export interface LeagueTeam {
+  key: string;
+  shortName: string;
+  fullName: string;
+  color: string;
+  textColor: string;
+}
+
+/** League details written by the pipeline; older IPL payloads omit it. */
+export interface IplLeague {
+  id: string;
+  name: string;
+  shortName: string;
+  season: string;
+  seasonLabel: string;
+  matchesPerTeam: number;
+  qualification: QualificationTier[];
+  secondChanceStages: string[];
+  teams: LeagueTeam[];
+}
+
 export interface IplSeasonPayload {
   metadata: IplMetadata;
+  league?: IplLeague;
   standings: IplStanding[];
   fixtures: IplFixture[];
   playoffs?: IplPlayoffs;
@@ -117,7 +145,9 @@ export interface IplSeasonPayload {
 export const isLeagueComplete = (payload: IplSeasonPayload) =>
   payload.fixtures.length === 0 && payload.standings.every((team) => team.remainingMatches === 0);
 
-export const canonicalDataUrl = `${import.meta.env.BASE_URL}data/ipl-2026.json`;
+export const DEFAULT_LEAGUE_ID = 'ipl-2026';
+
+export const leagueDataUrl = (leagueId: string) => `${import.meta.env.BASE_URL}data/${leagueId}.json`;
 
 const isNumber = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value);
@@ -142,8 +172,10 @@ function assertPayload(payload: unknown): asserts payload is IplSeasonPayload {
     throw new Error('IPL metadata is missing generated_at or source.');
   }
 
-  if (candidate.standings.length !== 10) {
-    throw new Error(`Expected 10 IPL teams, found ${candidate.standings.length}.`);
+  const expectedTeams = candidate.league?.teams?.length ?? 10;
+  if (candidate.standings.length !== expectedTeams) {
+    const leagueName = candidate.league?.shortName ?? 'IPL';
+    throw new Error(`Expected ${expectedTeams} ${leagueName} teams, found ${candidate.standings.length}.`);
   }
 
   candidate.standings.forEach((team) => {
@@ -156,10 +188,13 @@ function assertPayload(payload: unknown): asserts payload is IplSeasonPayload {
   });
 }
 
-export async function loadIplData(fetchImpl: typeof fetch = fetch): Promise<IplSeasonPayload> {
-  const response = await fetchImpl(canonicalDataUrl, { cache: 'no-cache' });
+export async function loadIplData(
+  fetchImpl: typeof fetch = fetch,
+  leagueId: string = DEFAULT_LEAGUE_ID,
+): Promise<IplSeasonPayload> {
+  const response = await fetchImpl(leagueDataUrl(leagueId), { cache: 'no-cache' });
   if (!response.ok) {
-    throw new Error(`Unable to load IPL data (${response.status}).`);
+    throw new Error(`Unable to load ${leagueId} data (${response.status}).`);
   }
 
   const payload = await response.json();

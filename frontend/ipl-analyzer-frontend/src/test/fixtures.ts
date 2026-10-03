@@ -1,5 +1,6 @@
 import { vi } from 'vitest';
 import type { IplSeasonPayload } from '../data/iplData';
+import type { LeagueIndex } from '../data/leagues';
 import type { ReelsManifest } from '../data/reelsManifest';
 
 export const standings: IplSeasonPayload['standings'] = [
@@ -87,9 +88,21 @@ export const mockManifest: ReelsManifest = {
   latestPreviewPath: 'social/instagram-carousel/latest-overview.png',
 };
 
-export function installFetch(payload: IplSeasonPayload = mockPayload, manifest: ReelsManifest = mockManifest) {
+/** Stub fetch for the IPL payload and Reels manifest, plus any extra `routes` keyed by URL suffix. */
+export function installFetch(
+  payload: IplSeasonPayload = mockPayload,
+  manifest: ReelsManifest = mockManifest,
+  routes: Record<string, unknown> = {},
+) {
   globalThis.fetch = vi.fn((input: RequestInfo | URL) => {
     const url = String(input);
+    const route = Object.keys(routes).find((suffix) => url.endsWith(suffix));
+    if (route) {
+      return Promise.resolve({
+        ok: true,
+        json: async () => routes[route],
+      } as Response);
+    }
     if (url.endsWith('/data/ipl-2026.json')) {
       return Promise.resolve({
         ok: true,
@@ -174,4 +187,91 @@ export const finalPayload: IplSeasonPayload = {
     teamAnalysis: { '4': {}, '2': {} },
     qualificationPath: { '4': {}, '2': {} },
   },
+};
+
+const wplTeams = [
+  { key: 'RCB', shortName: 'RCB', fullName: 'Royal Challengers Bengaluru', color: '#EC1C24', textColor: '#FFFFFF' },
+  { key: 'GG', shortName: 'GG', fullName: 'Gujarat Giants', color: '#E8601C', textColor: '#FFFFFF' },
+  { key: 'DC', shortName: 'DC', fullName: 'Delhi Capitals', color: '#2561AE', textColor: '#FFFFFF' },
+  { key: 'MI', shortName: 'MI', fullName: 'Mumbai Indians', color: '#004B8D', textColor: '#FFFFFF' },
+  { key: 'UPW', shortName: 'UPW', fullName: 'UP Warriorz', color: '#5B2C83', textColor: '#FFFFFF' },
+];
+
+const wplRecords: Array<[string, number, number, number]> = [
+  ['RCB', 6, 2, 1.247],
+  ['GG', 5, 3, -0.168],
+  ['DC', 4, 4, -0.055],
+  ['MI', 3, 5, 0.059],
+  ['UPW', 2, 6, -1.076],
+];
+
+export const wplFinalPayload: IplSeasonPayload = {
+  metadata: {
+    season: '2026',
+    generated_at: '2026-10-01T09:00:00Z',
+    source: 'Cricsheet',
+    source_url: 'https://cricsheet.org/',
+    source_license: 'ODC-By 1.0',
+    source_license_url: 'https://opendatacommons.org/licenses/by/1-0/',
+    data_freshness_status: 'fresh',
+    season_status: 'complete',
+    warnings: [],
+  },
+  league: {
+    id: 'wpl-2026',
+    name: "Women's Premier League",
+    shortName: 'WPL',
+    season: '2025/26',
+    seasonLabel: '2026',
+    matchesPerTeam: 8,
+    qualification: [
+      { size: 3, label: 'Top 3' },
+      { size: 1, label: 'Top 1' },
+    ],
+    secondChanceStages: [],
+    teams: wplTeams,
+  },
+  standings: wplRecords.map(([teamKey, wins, losses, nrr], index) => {
+    const team = wplTeams.find((item) => item.key === teamKey)!;
+    return {
+      teamKey,
+      shortName: team.shortName,
+      fullName: team.fullName,
+      matches: 8,
+      wins,
+      losses,
+      noResult: 0,
+      points: wins * 2,
+      nrr,
+      rank: index + 1,
+      remainingMatches: 0,
+    };
+  }),
+  fixtures: [],
+  playoffs: {
+    matches: [
+      { id: 'el', stage: 'Eliminator', date: '2026-02-03', teamA: 'GG', teamB: 'DC', winner: 'DC', result: 'DC won by 7 wickets', venue: null },
+      { id: 'fi', stage: 'Final', date: '2026-02-05', teamA: 'DC', teamB: 'RCB', winner: 'RCB', result: 'RCB won by 6 wickets', venue: null },
+    ],
+    champion: 'RCB',
+    runnerUp: 'DC',
+  },
+  analysis: {
+    method: 'Final standings',
+    simulationCount: 1,
+    generatedAt: '2026-10-01T09:00:00Z',
+    overallProbabilities: Object.fromEntries(
+      wplRecords.map(([teamKey], index) => [teamKey, { top4: 0, top2: 0, top3: index < 3 ? 100 : 0, top1: index < 1 ? 100 : 0 }]),
+    ),
+    teamAnalysis: { '4': {}, '2': {} },
+    qualificationPath: { '4': {}, '2': {} },
+  },
+};
+
+export const leagueIndex: LeagueIndex = {
+  default: 'ipl-2026',
+  leagues: [
+    { id: 'ipl-2026', name: 'Indian Premier League', shortName: 'IPL', seasonLabel: '2026', status: 'complete', champion: 'RCB', generatedAt: '2026-10-01T09:00:00Z', path: 'data/ipl-2026.json' },
+    { id: 'wpl-2026', name: "Women's Premier League", shortName: 'WPL', seasonLabel: '2026', status: 'complete', champion: 'RCB', generatedAt: '2026-10-01T09:00:00Z', path: 'data/wpl-2026.json' },
+  ],
 };

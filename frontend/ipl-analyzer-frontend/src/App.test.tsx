@@ -2,7 +2,7 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
-import { finalPayload, installFetch } from './test/fixtures';
+import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload } from './test/fixtures';
 
 describe('App', () => {
   beforeEach(() => {
@@ -106,3 +106,64 @@ describe('App after the season ends', () => {
     expect(screen.getByText('Eliminator: RR vs SRH')).toBeInTheDocument();
   });
 });
+
+describe('App with several leagues', () => {
+  const routes = { '/data/leagues.json': leagueIndex, '/data/wpl-2026.json': wplFinalPayload };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+    installFetch(finalPayload, mockManifest, routes);
+  });
+
+  it('loads the league named in ?league= and uses its playoff format', async () => {
+    window.history.replaceState(null, '', '/?league=wpl-2026');
+
+    const { container } = render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
+    expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
+    expect(screen.getByText('Top 3 after 20 league matches.')).toBeInTheDocument();
+    expect(screen.getByText('Top 1 finish')).toBeInTheDocument();
+    expect(screen.getByText('4th on 6 pts, 2 pts behind DC.')).toBeInTheDocument();
+    expect(screen.getByTestId('playoffs-panel')).toHaveTextContent('Royal Challengers Bengaluru won the WPL 2026 title.');
+
+    const stripe = container.querySelector<HTMLElement>('.standing-row .team-stripe');
+    expect(stripe?.style.backgroundColor).toBe('rgb(236, 28, 36)');
+    expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse');
+    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'http://localhost:3000/?league=wpl-2026',
+    );
+  });
+
+  it('switches leagues with plain links that mark the current one', async () => {
+    window.history.replaceState(null, '', '/?league=wpl-2026');
+
+    render(<App />);
+
+    const switcher = await screen.findByRole('navigation', { name: 'Leagues' });
+    expect(switcher.querySelector('a[aria-current="page"]')).toHaveTextContent('WPL 2026');
+    expect(screen.getByRole('link', { name: 'IPL 2026' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'WPL 2026' })).toHaveAttribute('href', '/?league=wpl-2026');
+  });
+
+  it('treats an Eliminator loss as an exit when the league gives no second chance', async () => {
+    window.history.replaceState(null, '', '/?league=wpl-2026#team=GG');
+
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: 'Gujarat Giants' })).toBeInTheDocument();
+    expect(screen.getByText('Knocked out in Eliminator')).toBeInTheDocument();
+  });
+
+  it('offers a way back when the requested league does not exist', async () => {
+    window.history.replaceState(null, '', '/?league=nope-2026');
+
+    render(<App />);
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load nope-2026 data (404).');
+    expect(screen.getByRole('link', { name: 'Go to the IPL page' })).toHaveAttribute('href', '/');
+  });
+});
+
