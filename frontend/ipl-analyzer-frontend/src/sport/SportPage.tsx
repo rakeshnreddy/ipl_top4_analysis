@@ -7,6 +7,7 @@ import { leagueHref, type LeagueIndex } from '../data/leagues';
 import {
   isSeasonComplete,
   loadSportData,
+  type Bracket,
   type MatchThatMatters,
   type SportColumn,
   type SportFixture,
@@ -313,6 +314,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
             </p>
             <nav className="quick-links" aria-label="Page sections">
               <a href="#table">Table</a>
+              {payload.bracket && <a href="#bracket">Bracket</a>}
               {!complete && <a href="#fixtures">Fixtures</a>}
               {payload.matchesThatMatter.length > 0 && <a href="#matters">Matches that matter</a>}
               <a href="#team">Team view</a>
@@ -322,7 +324,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
 
           <div className="hero-facts" aria-label="Season snapshot">
             {heroTiers(payload.league.tiers).map((tier) => {
-              const highlight = complete
+              const highlight = isSettled(payload, tier)
                 ? { label: tier.label, value: payload.standings.filter((row) => chance(payload, row.teamKey, tier.key) >= 50).map((row) => row.shortName).join(', ') || '–' }
                 : tierHighlight(payload, tier, short);
               return (
@@ -465,6 +467,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
         <TeamPanel payload={payload} row={selected} short={short} team={team} />
       </section>
 
+      {payload.bracket && <BracketPanel bracket={payload.bracket} short={short} />}
       {!complete && <FixturesPanel payload={payload} short={short} team={team} />}
       {payload.matchesThatMatter.length > 0 && <MattersPanel payload={payload} short={short} />}
       <ResultsPanel payload={payload} short={short} />
@@ -619,7 +622,10 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
       <ol className="sport-fixtures">
         {upcoming.map((fixture) => (
           <li key={fixture.id}>
-            <span className="fixture-when">{formatKickoff(fixture.date)}</span>
+            <span className="fixture-when">
+              {fixture.stage ? `${fixture.stage} · ` : ''}
+              {formatKickoff(fixture.date)}
+            </span>
             <span className="fixture-teams">
               <strong>{short(fixture.home)}</strong> vs <strong>{short(fixture.away)}</strong>
             </span>
@@ -633,6 +639,46 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
     </section>
   );
 };
+
+/** Playoff rounds with series scores; series whose teams are not known yet show as to be decided. */
+const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }) => (
+  <section className="race-summary-panel" id="bracket" aria-labelledby="bracket-title">
+    <div className="section-heading">
+      <div>
+        <span className="panel-kicker">{bracket.champion ? 'Champion' : 'Playoffs'}</span>
+        <h2 id="bracket-title">{bracket.champion ? `${short(bracket.champion)} Won the Title` : 'Playoff Bracket'}</h2>
+      </div>
+      <ListOrdered aria-hidden="true" />
+    </div>
+    <div className="bracket-rounds">
+      {bracket.rounds.map((round) => (
+        <div className="bracket-round" key={round.key}>
+          <h3>{round.label}</h3>
+          <ul>
+            {round.series.map((series, index) => {
+              const label = (team: string | null, seed: number | null) =>
+                team ? `${seed ? `${seed} ` : ''}${short(team)}` : 'To be decided';
+              return (
+                <li className={series.winner ? 'is-decided' : ''} key={`${round.key}-${index}`}>
+                  {series.conference && <small>{series.conference}</small>}
+                  <span className={series.winner && series.winner === series.top ? 'is-winner' : ''}>
+                    {label(series.top, series.topSeed)}
+                  </span>
+                  <strong>
+                    {series.top ? `${series.topWins}–${series.bottomWins}` : `Best of ${series.bestOf}`}
+                  </strong>
+                  <span className={series.winner && series.winner === series.bottom ? 'is-winner' : ''}>
+                    {label(series.bottom, series.bottomSeed)}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+);
 
 const MattersPanel = ({ payload, short }: { payload: SportPayload; short: ShortName }) => (
   <section className="race-summary-panel" id="matters" aria-labelledby="matters-title">

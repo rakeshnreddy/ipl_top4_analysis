@@ -62,7 +62,28 @@ export interface SportFixture {
   home: string;
   away: string;
   venue: string | null;
+  /** Playoff round name, e.g. "Division Series". */
+  stage?: string;
   probabilities: Record<string, number>;
+}
+
+export interface BracketSeries {
+  stage: string;
+  conference: string | null;
+  /** Unknown until the earlier rounds are decided. */
+  top: string | null;
+  bottom: string | null;
+  topSeed: number | null;
+  bottomSeed: number | null;
+  topWins: number;
+  bottomWins: number;
+  bestOf: number;
+  winner: string | null;
+}
+
+export interface Bracket {
+  rounds: { key: string; label: string; series: BracketSeries[] }[];
+  champion: string | null;
 }
 
 export interface SportResult {
@@ -141,6 +162,7 @@ export interface SportPayload {
   };
   matchesThatMatter: MatchThatMatters[];
   movement?: SportMovement | null;
+  bracket?: Bracket;
 }
 
 export const sportDataUrl = (leagueId: string) => `${import.meta.env.BASE_URL}data/${leagueId}.json`;

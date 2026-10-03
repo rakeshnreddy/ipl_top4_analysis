@@ -445,6 +445,64 @@
   margin: 0;
 }
 
+.bracket-rounds {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.bracket-round h3 {
+  color: #cbd5e1;
+  font-size: 0.7rem;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.bracket-round ul {
+  display: grid;
+  gap: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bracket-round li {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.14);
+  border-radius: 7px;
+  display: grid;
+  font-size: 0.8rem;
+  gap: 2px 8px;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  padding: 6px 9px;
+}
+
+.bracket-round li small {
+  color: #9fb2cc;
+  font-size: 0.6rem;
+  font-weight: 900;
+  grid-column: 1 / -1;
+  text-transform: uppercase;
+}
+
+.bracket-round li span:last-child {
+  text-align: right;
+}
+
+.bracket-round li strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.bracket-round li.is-decided {
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+.bracket-round .is-winner {
+  color: #34d399;
+  font-weight: 900;
+}
+
 .sport-method ul {
   color: #dbeafe;
   display: grid;

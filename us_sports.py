@@ -14,6 +14,7 @@ and common-games rules are not modelled.
 from __future__ import annotations
 
 import dataclasses
+import itertools
 import math
 from collections import defaultdict
 from dataclasses import dataclass
@@ -38,6 +39,25 @@ NHL_GAMES_URL = "https://api.nhle.com/stats/rest/en/game?cayenneExp=season={code
 NHL_TEAMS_URL = "https://api.nhle.com/stats/rest/en/team"
 NHL_SOURCE = "NHL"
 NHL_SOURCE_URL = "https://www.nhl.com/"
+NHL_PLAYOFF_GAMES_URL = "https://api.nhle.com/stats/rest/en/game?cayenneExp=season={code}%20and%20gameType=3"
+MLB_POSTSEASON_URL = "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season={year}&gameType=F,D,L,W"
+# ESPN's public scoreboard: every NBA game in a calendar year; the playoffs fall in the season's second year.
+ESPN_NBA_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={year}&limit=1000"
+ESPN_NBA_ROUNDS = (("1st Round", "R1"), ("Semifinals", "R2"), ("NBA Finals", "F"), ("Finals", "CF"))
+
+# Playoff rounds per format: stage code, name on the page.
+STAGES = {
+    "nfl": [("WC", "Wild Card"), ("DIV", "Divisional Round"), ("CONF", "Conference Championship"), ("SB", "Super Bowl")],
+    "nba": [("PI", "Play-In"), ("R1", "First Round"), ("R2", "Conference Semifinals"), ("CF", "Conference Finals"), ("F", "NBA Finals")],
+    "nhl": [("R1", "First Round"), ("R2", "Second Round"), ("CF", "Conference Final"), ("F", "Stanley Cup Final")],
+    "mlb": [("F", "Wild Card Series"), ("D", "Division Series"), ("L", "Championship Series"), ("W", "World Series")],
+}
+# NHL playoff game ids encode the round in their eighth digit: 2025030111 is round 1.
+NHL_ROUND_STAGES = {"1": "R1", "2": "R2", "3": "CF", "4": "F"}
+# Most tie orders tried when matching our seeds to the real bracket.
+MAX_TIE_ORDERS = 20_000
+# Lowest conference seed that reaches each format's bracket (NBA: the play-in).
+BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6}
 
 
 @dataclass(frozen=True)
@@ -124,6 +144,137 @@ def fetch_nhl_games(year: int, cache_dir: Path, max_age_hours: float = 3) -> lis
     if not games:
         raise team_sports.FeedError(f"NHL API: no games for {nhl_season_code(year)}")
     return sorted(games, key=lambda game: (game.date, game.id))
+
+
+@dataclass(frozen=True)
+class PlayoffGame:
+    stage: str
+    date: datetime
+    home: str
+    away: str
+    home_score: int | None
+    away_score: int | None
+
+    @property
+    def played(self) -> bool:
+        return self.home_score is not None and self.away_score is not None
+
+    @property
+    def winner(self) -> str | None:
+        if not self.played or self.home_score == self.away_score:
+            return None
+        return self.home if self.home_score > self.away_score else self.away
+
+
+def _cached_json(url: str, path: Path, max_age_hours: float) -> Any:
+    import json
+    import time
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not (path.exists() and time.time() - path.stat().st_mtime < max_age_hours * 3600):
+        try:
+            data = team_sports.get_json(url)
+            path.write_text(json.dumps(data), encoding="utf-8")
+        except Exception as exc:  # noqa: BLE001 - fall back to the last good copy
+            if not path.exists():
+                raise team_sports.FeedError(f"{url}: {exc}") from exc
+            print(f"{url}: using the cached copy ({exc})")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def fetch_mlb_postseason(year: int, cache_dir: Path) -> list[PlayoffGame]:
+    data = _cached_json(MLB_POSTSEASON_URL.format(year=year), cache_dir / f"mlb-postseason-{year}.json", 3)
+    games = []
+    for day in data.get("dates", []):
+        for item in day.get("games", []):
+            status = item.get("status", {})
+            if status.get("codedGameState") == "C" or "cancel" in status.get("detailedState", "").lower():
+                continue
+            final = status.get("abstractGameState") == "Final"
+            home, away = item["teams"]["home"], item["teams"]["away"]
+            games.append(
+                PlayoffGame(
+                    stage=item["gameType"],
+                    date=datetime.fromisoformat(item["gameDate"].replace("Z", "+00:00")),
+                    home=home["team"]["name"],
+                    away=away["team"]["name"],
+                    home_score=home.get("score") if final else None,
+                    away_score=away.get("score") if final else None,
+                )
+            )
+    return games
+
+
+def fetch_nhl_playoffs(year: int, cache_dir: Path) -> list[PlayoffGame]:
+    import json
+
+    teams_path = cache_dir / "nhl-teams.json"
+    if not teams_path.exists():
+        fetch_nhl_games(year, cache_dir)
+    names = {item["id"]: item["fullName"] for item in json.loads(teams_path.read_text(encoding="utf-8"))["data"]}
+    data = _cached_json(NHL_PLAYOFF_GAMES_URL.format(code=nhl_season_code(year)), cache_dir / f"nhl-playoffs-{year}.json", 3)
+    eastern = ZoneInfo("America/New_York")
+    games = []
+    for item in data.get("data", []):
+        final = item.get("gameStateId") in (6, 7)
+        games.append(
+            PlayoffGame(
+                stage=NHL_ROUND_STAGES.get(str(item["id"])[7], "R1"),
+                date=datetime.fromisoformat(item["easternStartTime"]).replace(tzinfo=eastern).astimezone(timezone.utc),
+                home=names.get(item["homeTeamId"], str(item["homeTeamId"])),
+                away=names.get(item["visitingTeamId"], str(item["visitingTeamId"])),
+                home_score=item["homeScore"] if final else None,
+                away_score=item["visitingScore"] if final else None,
+            )
+        )
+    return games
+
+
+def fetch_espn_nba_playoffs(year: int, cache_dir: Path) -> list[PlayoffGame]:
+    data = _cached_json(ESPN_NBA_URL.format(year=year + 1), cache_dir / f"nba-espn-{year + 1}.json", 3)
+    games = []
+    for event in data.get("events", []):
+        kind = event.get("season", {}).get("type")
+        if kind not in (3, 5):  # 3 playoffs, 5 play-in
+            continue
+        competition = event["competitions"][0]
+        headline = next((note.get("headline", "") for note in competition.get("notes", [])), "")
+        stage = "PI" if kind == 5 else next((code for words, code in ESPN_NBA_ROUNDS if words in headline), None)
+        sides = {item["homeAway"]: item for item in competition["competitors"]}
+        if stage is None or set(sides) != {"home", "away"}:
+            continue
+        final = competition.get("status", {}).get("type", {}).get("completed", False)
+        games.append(
+            PlayoffGame(
+                stage=stage,
+                date=datetime.fromisoformat(event["date"].replace("Z", "+00:00")),
+                home=sides["home"]["team"]["displayName"],
+                away=sides["away"]["team"]["displayName"],
+                home_score=int(sides["home"]["score"]) if final else None,
+                away_score=int(sides["away"]["score"]) if final else None,
+            )
+        )
+    return games
+
+
+def playoff_games(config: dict[str, Any], season: team_sports.Season, cache_dir: Path, feed_games: list[Game]) -> list[PlayoffGame] | None:
+    """Playoff games so far and scheduled, or None when the league has no playoff source."""
+    source = config.get("postseason", {})
+    kind = source.get("provider")
+    if kind == "mlb":
+        return fetch_mlb_postseason(season.year, cache_dir)
+    if kind == "nhl":
+        return fetch_nhl_playoffs(season.year, cache_dir)
+    if kind == "espn-nba":
+        return fetch_espn_nba_playoffs(season.year, cache_dir)
+    if kind == "feed-rounds":
+        rounds = {int(number): stage for number, stage in source["rounds"].items()}
+        return [
+            PlayoffGame(rounds[game.round], game.date, game.home, game.away, game.home_score, game.away_score)
+            for game in feed_games
+            if game.round in rounds
+        ]
+    return None
 
 
 def season_games(config: dict[str, Any], season: team_sports.Season, cache_dir: Path, previous: bool = False) -> list[Game]:
@@ -376,17 +527,26 @@ SERIES_PATTERNS = {
 MLB_SEVEN = [True, True, False, False, False, True, True]
 
 
-def play_series(rng, strength, top, bottom, home_edge, sigma, games, pattern=None, neutral=False):
-    """Winner of a series between `top` (home advantage) and `bottom`, per simulation."""
+def play_series(rng, strength, top, bottom, home_edge, sigma, games, pattern=None, neutral=False, top_wins=0, bottom_wins=0):
+    """Winner of a series between `top` (home advantage) and `bottom`, per simulation.
+
+    `top_wins` and `bottom_wins` are games already won in a series under way.
+    """
     pattern = pattern or SERIES_PATTERNS[games]
+    need = len(pattern) // 2 + 1
     rows = np.arange(len(top))
     gap = strength[rows, top] - strength[rows, bottom]
-    wins = np.zeros(len(top), dtype=np.int16)
-    for top_at_home in pattern:
+    top_count = np.full(len(top), top_wins, dtype=np.int16)
+    bottom_count = np.full(len(top), bottom_wins, dtype=np.int16)
+    for game, top_at_home in enumerate(pattern):
+        if game < top_wins + bottom_wins:
+            continue
         edge = 0.0 if neutral else (home_edge if top_at_home else -home_edge)
-        p = _ndtr((gap + edge) / sigma)
-        wins += rng.random(len(top)) < p
-    return np.where(wins > len(pattern) // 2, top, bottom)
+        won = rng.random(len(top)) < _ndtr((gap + edge) / sigma)
+        live = (top_count < need) & (bottom_count < need)
+        top_count += live & won
+        bottom_count += live & ~won
+    return np.where(top_count >= need, top, bottom)
 
 
 def higher_seed_first(a, b, seed_of):
@@ -407,38 +567,72 @@ def team_at_seed(seed: np.ndarray, members: np.ndarray, wanted: int) -> np.ndarr
     return members[np.argmax(hits, axis=1)]
 
 
-def simulate_playoffs(config, structure, rng, strength, seeding, record, ratings: Ratings) -> np.ndarray:
-    """Champion (team index) per simulation."""
+def simulate_playoffs(config, structure, rng, strength, seeding, record, ratings: Ratings, results=None, recorded=None) -> np.ndarray:
+    """Champion (team index) per simulation.
+
+    During the playoffs `results` maps (stage, team pair) to games won so far, and the
+    known series are appended to `recorded` for the bracket on the page.
+    """
     fmt = config["playoffs"]["format"]
     seed = seeding["seed"].copy()
     sims = seed.shape[0]
     home, sigma = ratings.home, ratings.sigma
+    teams = structure.teams
     finalists = []
+
+    def play(stage, top, bottom, games, pattern=None, neutral=False, conference=None, seeds=None):
+        pattern = pattern or SERIES_PATTERNS[games]
+        shown = seed if seeds is None else seeds
+        known = bool(np.all(top == top[0]) and np.all(bottom == bottom[0]))
+        top_wins = bottom_wins = 0
+        if results is not None and known:
+            won = results.get((stage, frozenset((teams[top[0]], teams[bottom[0]]))), {})
+            top_wins, bottom_wins = won.get(teams[top[0]], 0), won.get(teams[bottom[0]], 0)
+        winner = play_series(rng, strength, top, bottom, home, sigma, games, pattern, neutral, top_wins, bottom_wins)
+        if recorded is not None:
+            need = len(pattern) // 2 + 1
+            recorded.append(
+                {
+                    "stage": stage,
+                    "conference": conference,
+                    "top": teams[top[0]] if known else None,
+                    "bottom": teams[bottom[0]] if known else None,
+                    "topSeed": int(shown[0, top[0]]) if known else None,
+                    "bottomSeed": int(shown[0, bottom[0]]) if known else None,
+                    "topWins": top_wins,
+                    "bottomWins": bottom_wins,
+                    "bestOf": len(pattern),
+                    "winner": (teams[top[0]] if top_wins >= need else teams[bottom[0]] if bottom_wins >= need else None),
+                }
+            )
+        return winner
+
     for c in range(len(structure.conferences)):
         members = np.flatnonzero(structure.conference == c)
+        label = structure.conferences[c]
         at = lambda n: team_at_seed(seed, members, n)  # noqa: E731
         if fmt == "nfl":
-            wild = [play_series(rng, strength, at(a), at(b), home, sigma, 1) for a, b in ((2, 7), (3, 6), (4, 5))]
+            wild = [play("WC", at(a), at(b), 1, conference=label) for a, b in ((2, 7), (3, 6), (4, 5))]
             remaining = np.stack([at(1)] + wild, axis=1)
             order = np.argsort(seed[np.arange(sims)[:, None], remaining], axis=1)
             ranked = np.take_along_axis(remaining, order, axis=1)
-            semi_a = play_series(rng, strength, ranked[:, 0], ranked[:, 3], home, sigma, 1)
-            semi_b = play_series(rng, strength, ranked[:, 1], ranked[:, 2], home, sigma, 1)
-            top, bottom = higher_seed_first(semi_a, semi_b, seed)
-            finalists.append(play_series(rng, strength, top, bottom, home, sigma, 1))
+            semi_a = play("DIV", ranked[:, 0], ranked[:, 3], 1, conference=label)
+            semi_b = play("DIV", ranked[:, 1], ranked[:, 2], 1, conference=label)
+            finalists.append(play("CONF", *higher_seed_first(semi_a, semi_b, seed), 1, conference=label))
         elif fmt == "nba":
             # Play-in: 7 v 8 for the 7 seed; the loser hosts the 9 v 10 winner for the 8 seed.
             seven, eight, nine, ten = at(7), at(8), at(9), at(10)
-            first = play_series(rng, strength, seven, eight, home, sigma, 1)
+            first = play("PI", seven, eight, 1, conference=label)
             loser = np.where(first == seven, eight, seven)
-            second = play_series(rng, strength, nine, ten, home, sigma, 1)
-            last = play_series(rng, strength, loser, second, home, sigma, 1)
+            second = play("PI", nine, ten, 1, conference=label)
+            last = play("PI", loser, second, 1, conference=label)
             bracket = {n: at(n) for n in range(1, 7)}
             bracket[7], bracket[8] = first, last
-            r1 = {pair: play_series(rng, strength, bracket[pair[0]], bracket[pair[1]], home, sigma, 7) for pair in ((1, 8), (4, 5), (3, 6), (2, 7))}
-            semi_a = play_series(rng, strength, *higher_seed_first(r1[(1, 8)], r1[(4, 5)], playoff_seed(seed, bracket)), home, sigma, 7)
-            semi_b = play_series(rng, strength, *higher_seed_first(r1[(2, 7)], r1[(3, 6)], playoff_seed(seed, bracket)), home, sigma, 7)
-            finalists.append(play_series(rng, strength, *higher_seed_first(semi_a, semi_b, playoff_seed(seed, bracket)), home, sigma, 7))
+            seeds = playoff_seed(seed, bracket)
+            r1 = {pair: play("R1", bracket[pair[0]], bracket[pair[1]], 7, conference=label, seeds=seeds) for pair in ((1, 8), (4, 5), (3, 6), (2, 7))}
+            semi_a = play("R2", *higher_seed_first(r1[(1, 8)], r1[(4, 5)], seeds), 7, conference=label, seeds=seeds)
+            semi_b = play("R2", *higher_seed_first(r1[(2, 7)], r1[(3, 6)], seeds), 7, conference=label, seeds=seeds)
+            finalists.append(play("CF", *higher_seed_first(semi_a, semi_b, seeds), 7, conference=label, seeds=seeds))
             seeding["playoff"][np.arange(sims), last] = True
             seeding["playoff"][np.arange(sims), first] = True
         elif fmt == "nhl":
@@ -449,30 +643,31 @@ def simulate_playoffs(config, structure, rng, strength, seeding, record, ratings
                 ranks = seeding["division_rank"][:, div_members]
                 leaders.append([div_members[np.argmax(ranks == k, axis=1)] for k in range(3)])
             wild_one, wild_two = at(7), at(8)
-            first_leader, second_leader = better_record_first(leaders[0][0], leaders[1][0], record)
+            first_leader, _ = better_record_first(leaders[0][0], leaders[1][0], record)
             first_is_a = first_leader == leaders[0][0]
             a_opponent = np.where(first_is_a, wild_two, wild_one)
             b_opponent = np.where(first_is_a, wild_one, wild_two)
-            series = []
+            division_winners = []
             for leader_set, opponent in ((leaders[0], a_opponent), (leaders[1], b_opponent)):
-                first_round = play_series(rng, strength, leader_set[0], opponent, home, sigma, 7)
-                second_round = play_series(rng, strength, *better_record_first(leader_set[1], leader_set[2], record), home, sigma, 7)
-                series.append(play_series(rng, strength, *better_record_first(first_round, second_round, record), home, sigma, 7))
-            finalists.append(play_series(rng, strength, *better_record_first(series[0], series[1], record), home, sigma, 7))
+                first_round = play("R1", leader_set[0], opponent, 7, conference=label)
+                second_round = play("R1", *better_record_first(leader_set[1], leader_set[2], record), 7, conference=label)
+                division_winners.append(play("R2", *better_record_first(first_round, second_round, record), 7, conference=label))
+            finalists.append(play("CF", *better_record_first(division_winners[0], division_winners[1], record), 7, conference=label))
         elif fmt == "mlb":
-            wc_a = play_series(rng, strength, at(3), at(6), home, sigma, 3)
-            wc_b = play_series(rng, strength, at(4), at(5), home, sigma, 3)
-            ds_a = play_series(rng, strength, at(1), wc_b, home, sigma, 5)
-            ds_b = play_series(rng, strength, at(2), wc_a, home, sigma, 5)
-            top, bottom = higher_seed_first(ds_a, ds_b, seed)
-            finalists.append(play_series(rng, strength, top, bottom, home, sigma, 7, pattern=MLB_SEVEN))
+            wc_a = play("F", at(3), at(6), 3, conference=label)
+            wc_b = play("F", at(4), at(5), 3, conference=label)
+            ds_a = play("D", at(1), wc_b, 5, conference=label)
+            ds_b = play("D", at(2), wc_a, 5, conference=label)
+            finalists.append(play("L", *higher_seed_first(ds_a, ds_b, seed), 7, pattern=MLB_SEVEN, conference=label))
         else:
             raise ValueError(f"Unknown playoff format {fmt}")
 
     top, bottom = better_record_first(finalists[0], finalists[1], record)
     if fmt == "nfl":
-        return play_series(rng, strength, top, bottom, home, sigma, 1, neutral=True)
-    return play_series(rng, strength, top, bottom, home, sigma, 7, pattern=MLB_SEVEN if fmt == "mlb" else None)
+        return play("SB", top, bottom, 1, neutral=True)
+    if fmt == "mlb":
+        return play("W", top, bottom, 7, pattern=MLB_SEVEN)
+    return play("F", top, bottom, 7)
 
 
 def playoff_seed(seed: np.ndarray, bracket: dict[int, np.ndarray]) -> np.ndarray:
@@ -618,6 +813,125 @@ def simulate(
     return {"simulations": simulations, "probabilities": probabilities, "positions": positions, "expected": expected, "matchesThatMatter": matter}
 
 
+def bracket_pairs(config, structure, seeding_now, ratings, results) -> dict[str, set[frozenset[str]]]:
+    """Series pairings per stage that a seeding produces, given the results so far."""
+    seeding = {key: value.copy() for key, value in seeding_now.items()}
+    recorded: list[dict[str, Any]] = []
+    strength = np.array([[ratings.rating[team] for team in structure.teams]])
+    simulate_playoffs(config, structure, np.random.default_rng(0), strength, seeding, seeding["conference_key"], ratings, results=results, recorded=recorded)
+    pairs: dict[str, set[frozenset[str]]] = defaultdict(set)
+    for item in recorded:
+        if item["top"]:
+            pairs[item["stage"]].add(frozenset((item["top"], item["bottom"])))
+    return pairs
+
+
+def matches_bracket(pairs: dict[str, set[frozenset[str]]], actual: dict[str, set[frozenset[str]]], teams: set[str] | None = None) -> bool:
+    """Every real series (optionally only those between `teams`) appears in our bracket."""
+    for stage, real in actual.items():
+        wanted = {pair for pair in real if teams is None or pair <= teams}
+        if not wanted <= pairs.get(stage, set()):
+            return False
+    return True
+
+
+def reconcile_seeding(config, structure, records, sport, seeding_now, ratings, results, actual):
+    """Seeds consistent with the real bracket, reordering only teams level on record.
+
+    Real tiebreakers (head-to-head, common games) only reorder teams with the same record,
+    so trying the orders of each tied group finds the real seeding without coding every rule.
+    """
+    if matches_bracket(bracket_pairs(config, structure, seeding_now, ratings, results), actual):
+        return seeding_now
+    teams = structure.teams
+    base = {team: float(len(teams) - int(seeding_now["seed"][0, i])) / 1000 for i, team in enumerate(teams)}
+    chosen = dict(base)
+    for c in range(len(structure.conferences)):
+        members = [team for i, team in enumerate(teams) if structure.conference[i] == c]
+        tied: dict[float, list[str]] = defaultdict(list)
+        for team in members:
+            tied[primary_record(sport, records[team])].append(team)
+        # Only ties that reach the bracket can change it.
+        cutoff = BRACKET_SEEDS[config["playoffs"]["format"]]
+        groups = [
+            group
+            for group in tied.values()
+            if len(group) > 1 and min(int(seeding_now["seed"][0, teams.index(team)]) for team in group) <= cutoff
+        ]
+        if math.prod(math.factorial(len(group)) for group in groups) > MAX_TIE_ORDERS:
+            return None
+        found = False
+        for orders in itertools.product(*(itertools.permutations(group) for group in groups)):
+            trial = dict(chosen)
+            for order in orders:
+                for place, team in enumerate(order):
+                    trial[team] = (len(order) - place) / 1000
+            seeding = ordered_seeding(config, structure, records, sport, trial)
+            if matches_bracket(bracket_pairs(config, structure, seeding, ratings, results), actual, set(members)):
+                chosen, found = trial, True
+                break
+        if not found:
+            return None
+    seeding = ordered_seeding(config, structure, records, sport, chosen)
+    return seeding if matches_bracket(bracket_pairs(config, structure, seeding, ratings, results), actual) else None
+
+
+def simulate_postseason(
+    config: dict[str, Any],
+    structure: Structure,
+    seeding_now: dict[str, np.ndarray],
+    ratings: Ratings,
+    games: list[PlayoffGame],
+    simulations: int = SIMULATIONS,
+    records: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any] | None:
+    """Title odds from the playoff results so far, or None if no seeding matches the real bracket."""
+    fmt = config["playoffs"]["format"]
+    teams = structure.teams
+    known = set(teams)
+    results: dict[tuple[str, frozenset[str]], dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    actual: dict[str, set[frozenset[str]]] = defaultdict(set)
+    for game in games:
+        if game.home in known and game.away in known:
+            actual[game.stage].add(frozenset((game.home, game.away)))
+            if game.winner:
+                results[(game.stage, frozenset((game.home, game.away)))][game.winner] += 1
+    if records is not None:
+        seeding_now = reconcile_seeding(config, structure, records, config["sport"], seeding_now, ratings, results, actual)
+    elif not matches_bracket(bracket_pairs(config, structure, seeding_now, ratings, results), actual):
+        seeding_now = None
+    if seeding_now is None:
+        return None
+    seeding = {key: np.repeat(value, simulations, axis=0) for key, value in seeding_now.items()}
+    strength = np.repeat(np.array([ratings.rating[team] for team in teams])[None, :], simulations, axis=0)
+    recorded: list[dict[str, Any]] = []
+    rng = np.random.default_rng(SEED)
+    champion = simulate_playoffs(config, structure, rng, strength, seeding, seeding["conference_key"], ratings, results=results, recorded=recorded)
+
+    final = next((item for item in recorded if item["stage"] == STAGES[fmt][-1][0]), None)
+    won = np.zeros((simulations, len(teams)), dtype=bool)
+    won[np.arange(simulations), champion] = True
+    best = np.zeros((simulations, len(teams)), dtype=bool)
+    best[np.arange(simulations), np.argmax(seeding["conference_key"], axis=1)] = True
+    flags = {
+        "playoffs": seeding["playoff"],
+        "division": seeding["division_winner"],
+        "best-record": best,
+        "champion": won,
+    }
+    probabilities = {team: {} for team in teams}
+    for tier in config["tiers"]:
+        flag = seeding["seed"] <= tier["size"] if tier["kind"] == "seed" else flags[tier["kind"]]
+        for i, team in enumerate(teams):
+            probabilities[team][tier["key"]] = round(float(flag[:, i].mean()) * 100, 2)
+    return {
+        "probabilities": probabilities,
+        "seeding": seeding_now,
+        "rounds": [{"key": code, "label": label, "series": [item for item in recorded if item["stage"] == code]} for code, label in STAGES[fmt]],
+        "champion": final["winner"] if final else None,
+    }
+
+
 def matter_window(remaining: list[Game]) -> list[int]:
     """Indexes of the remaining games played within a few days of the next one."""
     if not remaining:
@@ -729,6 +1043,22 @@ def last_ten(results: list[str], otl_results: list[bool] | None = None) -> str:
     return f"{wins}-{losses}-{ties}" if ties else f"{wins}-{losses}"
 
 
+def primary_record(sport: str, row: dict[str, Any]) -> float:
+    """What the standings rank by before any tiebreaker: points in the NHL, win percentage elsewhere."""
+    if sport == "ice-hockey":
+        return float(2 * row["wins"] + row["otLosses"])
+    return round(pct(row["wins"], row["losses"], row["ties"]), 6)
+
+
+def ordered_seeding(config: dict[str, Any], structure: Structure, records: dict[str, dict[str, Any]], sport: str, order: dict[str, float]) -> dict[str, np.ndarray]:
+    """Seeds where teams level on their primary record are ranked by `order` (higher first)."""
+    teams = structure.teams
+    key = np.array([[primary_record(sport, records[team]) * 1e6 + order.get(team, 0.0) for team in teams]])
+    seeding = seed_conferences(config, structure, key, key)
+    seeding["conference_key"] = key
+    return seeding
+
+
 def current_seeding(
     config: dict[str, Any], structure: Structure, records: dict[str, dict[str, Any]], sport: str, projected: dict[str, float]
 ) -> dict[str, np.ndarray]:
@@ -751,7 +1081,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     model = SPORT_MODELS[sport]
     structure = league_structure(config)
     season = team_sports.resolve_season(config, now)
-    games = regular_season(config, season_games(config, season, cache_dir))
+    feed_games = season_games(config, season, cache_dir)
+    games = regular_season(config, feed_games)
     warnings: list[str] = []
     try:
         previous = regular_season(config, season_games(config, team_sports.resolve_season(config, now, offset=-1), cache_dir, previous=True))
@@ -784,8 +1115,28 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     records = team_records(games, structure, sport)
     projected = {team: simulation["expected"][team]["wins"] for team in teams}
     seeding = current_seeding(config, structure, records, sport, projected)
-    meta = team_sports.team_meta(config, teams)
     index = {team: i for i, team in enumerate(teams)}
+
+    # After the regular season, title odds come from the playoff results so far; without a
+    # playoff source (or when no seeding matches the real bracket) the title column goes.
+    postseason = None
+    playoff_list: list[PlayoffGame] = []
+    if not remaining:
+        try:
+            found = playoff_games(config, season, cache_dir, feed_games)
+        except team_sports.FeedError as exc:
+            found = None
+            warnings.append(f"Playoff results unavailable ({exc}); title odds are left out.")
+        if found is not None:
+            aliases = config.get("aliases", {})
+            found = [dataclasses.replace(game, home=aliases.get(game.home, game.home), away=aliases.get(game.away, game.away)) for game in found]
+            playoff_list = [game for game in found if game.home in index and game.away in index]
+            postseason = simulate_postseason(config, structure, seeding, ratings, playoff_list, records=records)
+            if postseason is None:
+                warnings.append("The real playoff bracket does not match any seeding of these records, so title odds are left out.")
+            else:
+                seeding = postseason["seeding"]
+    meta = team_sports.team_meta(config, teams)
     conference_names = {item["key"]: item["label"] for item in config["conferences"]}
 
     def win_pct(team: str) -> float:
@@ -793,7 +1144,6 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         return pct(row["wins"], row["losses"] + row["otLosses"], row["ties"])
 
     league_order = sorted(teams, key=lambda team: -seeding["conference_key"][0, index[team]])
-    leaders_pct: dict[str, float] = {}
     standings = []
     for rank, team in enumerate(league_order, start=1):
         row = records[team]
@@ -887,9 +1237,60 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         for game in reversed(played)
     ]
 
-    # Once the regular season is over the bracket is set; title odds would need playoff results.
-    tiers = [tier for tier in config["tiers"] if remaining or tier["kind"] != "champion"]
-    tier_keys = {tier["key"] for tier in tiers}
+    if remaining:
+        tiers = config["tiers"]
+        probabilities = simulation["probabilities"]
+    elif postseason:
+        probabilities = postseason["probabilities"]
+        # A tier is settled once every team is in or out (NBA playoff places wait for the play-in).
+        tiers = [
+            dict(tier, settled=True) if all(values[tier["key"]] in (0.0, 100.0) for values in probabilities.values()) else tier
+            for tier in config["tiers"]
+        ]
+    else:
+        tiers = [tier for tier in config["tiers"] if tier["kind"] != "champion"]
+        keys = {tier["key"] for tier in tiers}
+        probabilities = {team: {key: value for key, value in values.items() if key in keys} for team, values in simulation["probabilities"].items()}
+    if postseason:
+        stage_names = {code: label for code, label in STAGES[config["playoffs"]["format"]]}
+        # "If necessary" games of a finished series will not be played.
+        decided = {
+            (item["stage"], frozenset((item["top"], item["bottom"])))
+            for stage in postseason["rounds"]
+            for item in stage["series"]
+            if item["winner"]
+        }
+        upcoming = sorted(
+            (game for game in playoff_list if not game.played and (game.stage, frozenset((game.home, game.away))) not in decided),
+            key=lambda game: game.date,
+        )
+        fixtures = [
+            {
+                "id": f"playoff-{i}",
+                "round": None,
+                "date": iso(game.date),
+                "home": game.home,
+                "away": game.away,
+                "venue": None,
+                "stage": stage_names.get(game.stage, game.stage),
+                "probabilities": {"home": round(ratings.win_probability(game.home, game.away), 3), "away": round(1 - ratings.win_probability(game.home, game.away), 3)},
+            }
+            for i, game in enumerate(upcoming)
+        ]
+        played_playoffs = sorted((game for game in playoff_list if game.played), key=lambda game: game.date, reverse=True)
+        results = [
+            {
+                "id": f"playoff-result-{i}",
+                "round": None,
+                "date": iso(game.date),
+                "home": game.home,
+                "away": game.away,
+                "homeScore": game.home_score,
+                "awayScore": game.away_score,
+                "note": stage_names.get(game.stage, game.stage),
+            }
+            for i, game in enumerate(played_playoffs)
+        ] + results
     source = config.get("sources", {}).get("provider")
     started = bool(played)
     name = TEAM_SPORT_NAMES[sport]
@@ -908,6 +1309,23 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         notes.append("Games not yet on the published schedule are simulated against an average opponent.")
     if cancelled:
         notes.append(f"{len(cancelled)} scheduled game{'s were' if len(cancelled) > 1 else ' was'} never played and {'are' if len(cancelled) > 1 else 'is'} left out.")
+    if postseason:
+        notes.append(
+            f"Playoffs: series still to play are simulated {SIMULATIONS:,} times from the regular-season ratings, "
+            "starting from the real series scores."
+        )
+    if remaining:
+        status = "in_progress"
+    elif postseason and not postseason["champion"]:
+        status = "postseason"
+    else:
+        status = "complete"
+    credits = []
+    provider = config.get("postseason", {}).get("provider")
+    if postseason and provider == "mlb":
+        credits.append({"name": "MLB Stats API", "url": "https://statsapi.mlb.com/", "note": "Playoff results: MLB Stats API"})
+    if postseason and provider == "espn-nba":
+        credits.append({"name": "ESPN", "url": "https://www.espn.com/nba/", "note": "Playoff results: ESPN"})
 
     return {
         "metadata": {
@@ -916,8 +1334,9 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "source": NHL_SOURCE if source == "nhl" else team_sports.FEED_SOURCE,
             "source_url": NHL_SOURCE_URL if source == "nhl" else team_sports.FEED_SOURCE_URL,
             "data_freshness_status": "warning" if warnings else "fresh",
-            "season_status": "complete" if not remaining else "in_progress",
+            "season_status": status,
             "warnings": warnings,
+            **({"credits": credits} if credits else {}),
         },
         "league": {
             "id": season.payload_id,
@@ -946,10 +1365,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "simulations": simulation["simulations"],
             "model": "Margin ratings model",
             "modelNotes": notes,
-            "probabilities": {
-                team: {key: value for key, value in values.items() if key in tier_keys}
-                for team, values in simulation["probabilities"].items()
-            },
+            "probabilities": probabilities,
             "positions": simulation["positions"],
             "expected": simulation["expected"],
             "ratings": {team: round(ratings.rating[team], 2) for team in teams},
@@ -957,5 +1373,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "sigma": round(ratings.sigma, 2),
             "gamesPerTeam": per_team,
         },
-        "matchesThatMatter": simulation["matchesThatMatter"],
+        "matchesThatMatter": simulation["matchesThatMatter"] if remaining else [],
+        **({"bracket": {"rounds": postseason["rounds"], "champion": postseason["champion"]}} if postseason else {}),
+        **({"playoffs": {"champion": postseason["champion"]}} if postseason and postseason["champion"] else {}),
     }
