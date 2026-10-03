@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from '../Root';
 import type { LeagueIndex } from '../data/leagues';
@@ -63,7 +63,8 @@ describe('HubPage', () => {
   it('links league pages back to the hub', async () => {
     open('/?league=ipl-2026');
 
-    const nav = await screen.findByRole('navigation', { name: 'Leagues' });
+    fireEvent.click(await screen.findByRole('button', { name: /^Leagues/ }));
+    const nav = screen.getByRole('navigation', { name: 'Leagues' });
     expect(within(nav).getByRole('link', { name: 'All live races' })).toHaveAttribute('href', '/');
   });
 });

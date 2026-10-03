@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { AlertTriangle, ArrowLeft, Check, Clipboard, Download, Flame } from 'lucide-react';
+import { ArrowLeft, Check, Clipboard, Download } from 'lucide-react';
 import '../App.css';
+import PageHeader from '../components/PageHeader';
+import { ErrorState, LoadingState } from '../components/PageState';
+import SiteHeader from '../components/SiteHeader';
 import { DEFAULT_LEAGUE_ID, isLeagueComplete, loadIplData, type IplSeasonPayload } from '../data/iplData';
-import { HUB_ID, loadLeagueIndex } from '../data/leagues';
+import { HUB_ID, loadLeagueIndex, type LeagueIndex } from '../data/leagues';
 import { loadReelsManifest, publicAssetUrl, type ReelsManifest, type ReelsSlide } from '../data/reelsManifest';
 import { formatGeneratedAt, setTeamPalette } from '../lib/standings';
 import { copyToClipboard, exportRacePng, raceCaption, shareTexts, type ShareKind } from './sharing';
@@ -17,6 +20,7 @@ const SHARE_LABELS: Record<ShareKind, string> = {
 
 function SharePage() {
   const [payload, setPayload] = useState<IplSeasonPayload | null>(null);
+  const [index, setIndex] = useState<LeagueIndex | null>(null);
   const [manifest, setManifest] = useState<ReelsManifest | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [manifestError, setManifestError] = useState<string | null>(null);
@@ -29,7 +33,12 @@ function SharePage() {
 
     // Slides are for the newest IPL season.
     loadLeagueIndex()
-      .then((index) => index.ipl ?? (index.default !== HUB_ID ? index.default : DEFAULT_LEAGUE_ID))
+      .then((loaded) => {
+        if (active) {
+          setIndex(loaded);
+        }
+        return loaded.ipl ?? (loaded.default !== HUB_ID ? loaded.default : DEFAULT_LEAGUE_ID);
+      })
       .catch(() => DEFAULT_LEAGUE_ID)
       .then((leagueId) => loadIplData(fetch, leagueId))
       .then((data) => {
@@ -63,24 +72,19 @@ function SharePage() {
 
   if (error) {
     return (
-      <main className="pulse-app pulse-center">
-        <section className="error-panel" role="alert">
-          <AlertTriangle aria-hidden="true" />
-          <h1>Share kit could not load</h1>
-          <p>{error}</p>
-        </section>
-      </main>
+      <>
+        <SiteHeader index={index} />
+        <ErrorState homeHref={import.meta.env.BASE_URL} message={error} title="Share kit could not load" />
+      </>
     );
   }
 
   if (!payload) {
     return (
-      <main className="pulse-app pulse-center">
-        <div className="loading-panel" role="status" aria-live="polite">
-          <Flame aria-hidden="true" />
-          <span>Loading share kit...</span>
-        </div>
-      </main>
+      <>
+        <SiteHeader index={index} />
+        <LoadingState />
+      </>
     );
   }
 
@@ -103,53 +107,68 @@ function SharePage() {
   };
 
   return (
-    <main className="pulse-app" data-testid="share-kit">
-      <section className="reels-panel" aria-labelledby="share-title">
-        <div className="section-heading reels-heading">
-          <div>
-            <span className="panel-kicker">IPL Playoff Pulse</span>
-            <h1 id="share-title">Share Kit</h1>
-          </div>
-          <a className="latest-pack-link" href={import.meta.env.BASE_URL}>
-            <ArrowLeft size={12} aria-hidden="true" />
-            Back to standings
-          </a>
-        </div>
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader currentLabel="Share kit" index={index} />
+      <main className="pulse-app" data-testid="share-kit" id="main">
+        <PageHeader
+          crumb={`Cricket · IPL ${payload.metadata.season}`}
+          strap={
+            <>
+              Post text, a race graphic and the latest Reels slides, all from the {formatGeneratedAt(payload.metadata.generated_at)}{' '}
+              update.{' '}
+              <a href={import.meta.env.BASE_URL}>
+                <ArrowLeft size={14} aria-hidden="true" /> Back to standings
+              </a>
+            </>
+          }
+          title="Share Kit"
+        />
 
-        {leagueOver ? (
-          <p className="reels-warning">
-            The IPL {payload.metadata.season} league stage is over. These slides are from the last league-stage update and
-            do not show the final table.
-          </p>
-        ) : (
-          <div className="reels-toolbar">
-            <div>
-              <span className="mini-label">Post text</span>
-              <strong>Today&apos;s race</strong>
-              <small>Data updated {formatGeneratedAt(payload.metadata.generated_at)}</small>
-            </div>
-            <div className="caption-actions" aria-label="Copy post text">
-              <button onClick={() => handleCopy('caption', raceCaption(payload))} type="button">
-                {copied === 'caption' ? <Check size={13} aria-hidden="true" /> : <Clipboard size={13} aria-hidden="true" />}
-                {copied === 'caption' ? 'Copied' : 'Race caption'}
-              </button>
-              {(Object.keys(SHARE_LABELS) as ShareKind[]).map((kind) => (
-                <button key={kind} onClick={() => handleCopy(kind, texts[kind])} type="button">
-                  {copied === kind ? <Check size={13} aria-hidden="true" /> : <Clipboard size={13} aria-hidden="true" />}
-                  {SHARE_LABELS[kind]}
+        <section className="reels-panel" aria-labelledby="post-title">
+          <div className="section-heading">
+            <h2 id="post-title">Today&apos;s Race</h2>
+            <p>{leagueOver ? 'Post tools return when the next season starts' : 'Copy a ready-made post or download the race graphic'}</p>
+          </div>
+
+          {leagueOver ? (
+            <p className="reels-warning">
+              The IPL {payload.metadata.season} league stage is over. These slides are from the last league-stage update and
+              do not show the final table.
+            </p>
+          ) : (
+            <div className="reels-toolbar">
+              <div className="caption-actions" role="group" aria-label="Copy post text">
+                <button onClick={() => handleCopy('caption', raceCaption(payload))} type="button">
+                  {copied === 'caption' ? <Check size={16} aria-hidden="true" /> : <Clipboard size={16} aria-hidden="true" />}
+                  {copied === 'caption' ? 'Copied' : 'Race caption'}
                 </button>
-              ))}
-              <button disabled={exporting} onClick={handleExport} type="button">
-                <Download size={13} aria-hidden="true" />
-                {exporting ? 'Making PNG' : 'Race PNG'}
-              </button>
+                {(Object.keys(SHARE_LABELS) as ShareKind[]).map((kind) => (
+                  <button key={kind} onClick={() => handleCopy(kind, texts[kind])} type="button">
+                    {copied === kind ? <Check size={16} aria-hidden="true" /> : <Clipboard size={16} aria-hidden="true" />}
+                    {SHARE_LABELS[kind]}
+                  </button>
+                ))}
+                <button disabled={exporting} onClick={handleExport} type="button">
+                  <Download size={16} aria-hidden="true" />
+                  {exporting ? 'Making PNG' : 'Race PNG'}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </section>
 
-        <ReelsGallery error={manifestError} manifest={manifest} />
-      </section>
-    </main>
+        <section className="reels-panel" aria-labelledby="reels-title">
+          <div className="section-heading">
+            <h2 id="reels-title">Reels Slides</h2>
+            <p>The newest slide pack, ready to download</p>
+          </div>
+          <ReelsGallery error={manifestError} manifest={manifest} />
+        </section>
+      </main>
+    </>
   );
 }
 
@@ -166,7 +185,7 @@ const ReelsGallery = ({ error, manifest }: { error: string | null; manifest: Ree
     <>
       <div className="reels-toolbar">
         <div>
-          <span className="mini-label">Latest Reels folder</span>
+          <span className="mini-label">Latest pack</span>
           <strong>{manifest.latestDate || 'Unavailable'}</strong>
           <small>
             {manifest.slides.length} slide{manifest.slides.length === 1 ? '' : 's'} · {manifest.imageWidth}×
@@ -206,7 +225,7 @@ const ReelSlideCard = ({ index, slide }: { index: number; slide: ReelsSlide }) =
       <div>
         <span>Slide {String(index + 1).padStart(2, '0')}</span>
         <a href={href} download={slide.downloadName}>
-          <Download size={13} aria-hidden="true" />
+          <Download size={16} aria-hidden="true" />
           Download
         </a>
       </div>

@@ -1,9 +1,11 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, CalendarClock, ExternalLink, Flame, ListOrdered, ShieldCheck, Swords, Zap } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import '../App.css';
 import './SportPage.css';
-import LeagueSwitcher from '../components/LeagueSwitcher';
-import { leagueHref, type LeagueIndex } from '../data/leagues';
+import PageHeader, { type StatusTone } from '../components/PageHeader';
+import { ErrorState, LoadingState } from '../components/PageState';
+import SiteHeader from '../components/SiteHeader';
+import { leagueHref, sportName, type LeagueIndex } from '../data/leagues';
 import {
   isSeasonComplete,
   loadSportData,
@@ -18,6 +20,7 @@ import {
 } from '../data/sportData';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { heatStyle, ordinalSuffix, readableOn, scrollToSection } from '../lib/ui';
 import { formatChance } from './format';
 
 const UPCOMING_LIMIT = 10;
@@ -153,11 +156,28 @@ function heroTiers(tiers: SportTier[]) {
   return [...tiers].sort((a, b) => Number(b.kind === 'champion') - Number(a.kind === 'champion')).slice(0, 3);
 }
 
-function heatStyle(value: number, tier: SportTier) {
-  const alpha = Math.min(0.75, (value / 100) * 0.75);
-  const rgb = tier.kind === 'bottom' ? '244, 63, 94' : '52, 211, 153';
-  return value > 0 ? { backgroundColor: `rgba(${rgb}, ${alpha.toFixed(3)})` } : undefined;
+const tierTone = (tier: SportTier) => (tier.kind === 'bottom' ? 'bad' : 'good');
+
+/** Where the season is, for the status pill: playoffs once a bracket exists and is undecided. */
+function seasonStatus(payload: SportPayload, started: boolean): { label: string; tone: StatusTone } {
+  if (isSeasonComplete(payload)) {
+    return { label: 'Final', tone: 'final' };
+  }
+  if (payload.bracket || payload.metadata.season_status === 'postseason' || payload.metadata.season_status === 'playoffs') {
+    return { label: 'Playoffs', tone: 'playoffs' };
+  }
+  return started ? { label: 'Live', tone: 'live' } : { label: 'Pre-season', tone: 'pre-season' };
 }
+
+/** ✓ or – for a race that is over, with words for screen readers. */
+const SettledMark = ({ achieved, label }: { achieved: boolean; label: string }) => (
+  <>
+    <span aria-hidden="true" className={achieved ? 'mark-yes' : 'mark-no'}>
+      {achieved ? '✓' : '–'}
+    </span>
+    <span className="visually-hidden">{achieved ? `${label}: yes` : `${label}: no`}</span>
+  </>
+);
 
 function teamKeyFromHash(payload: SportPayload) {
   const match = window.location.hash.match(/^#team=(.+)$/);
@@ -166,10 +186,6 @@ function teamKeyFromHash(payload: SportPayload) {
   }
   const wanted = decodeURIComponent(match[1]).toLowerCase();
   return payload.standings.find((team) => team.shortName.toLowerCase() === wanted || team.teamKey.toLowerCase() === wanted)?.teamKey ?? null;
-}
-
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueIndex | null }) => {
@@ -251,25 +267,19 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
 
   if (error) {
     return (
-      <main className="pulse-app pulse-center">
-        <section className="error-panel" role="alert">
-          <AlertTriangle aria-hidden="true" />
-          <h1>This league could not load</h1>
-          <p>{error}</p>
-          <a href={import.meta.env.BASE_URL}>Go to the home page</a>
-        </section>
-      </main>
+      <>
+        <SiteHeader currentId={leagueId} index={leagueIndex} />
+        <ErrorState homeHref={import.meta.env.BASE_URL} message={error} title="This league could not load" />
+      </>
     );
   }
 
   if (!payload || !team) {
     return (
-      <main className="pulse-app pulse-center">
-        <div className="loading-panel" role="status" aria-live="polite">
-          <Flame aria-hidden="true" />
-          <span>Loading Playoff Pulse...</span>
-        </div>
-      </main>
+      <>
+        <SiteHeader currentId={leagueId} index={leagueIndex} />
+        <LoadingState />
+      </>
     );
   }
 
@@ -291,204 +301,201 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
     scrollToSection('team');
   };
 
+  const status = seasonStatus(payload, started);
+  const facts = [
+    ...heroTiers(payload.league.tiers).map((tier) =>
+      isSettled(payload, tier)
+        ? {
+            label: tier.label,
+            value: payload.standings.filter((row) => chance(payload, row.teamKey, tier.key) >= 50).map((row) => row.shortName).join(', ') || '–',
+          }
+        : tierHighlight(payload, tier, short),
+    ),
+    { label: 'Latest update', value: formatGeneratedAt(payload.metadata.generated_at), testId: 'latest-update' },
+  ];
+  const sections = [
+    ...(payload.bracket ? [{ href: '#bracket', label: 'Bracket' }] : []),
+    { href: '#table', label: 'Table' },
+    ...(!complete && payload.fixtures.length > 0 ? [{ href: '#fixtures', label: 'Fixtures' }] : []),
+    ...(payload.matchesThatMatter.length > 0 ? [{ href: '#matters', label: 'Matches that matter' }] : []),
+    { href: '#team', label: 'Team view' },
+    { href: '#method', label: 'How it works' },
+  ];
+
   return (
-    <main className="pulse-app sport-page" data-testid="sport-page">
-      <LeagueSwitcher currentId={payload.league.id} index={leagueIndex} />
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader
+        currentId={payload.league.id}
+        currentLabel={`${payload.league.shortName} ${payload.league.seasonLabel}`}
+        index={leagueIndex}
+      />
+      <main className="pulse-app sport-page" data-testid="sport-page" id="main">
+        <PageHeader
+          crumb={`${sportName(payload.league.sport)} · ${payload.league.shortName} ${payload.league.seasonLabel}`}
+          facts={facts}
+          factsLabel="Season snapshot"
+          sections={sections}
+          status={status}
+          strap={
+            complete
+              ? 'The season is over: final table, last results and how each race finished.'
+              : started
+                ? `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
+                : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
+          }
+          title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Table` : headline(payload)}
+        />
 
-      <section className="hero-band compact-hero" aria-labelledby="page-title">
-        <div className="hero-copy">
-          <div className="hero-main">
-            <span className="eyebrow">
-              <Zap size={14} aria-hidden="true" />
-              {payload.league.shortName} · {payload.league.seasonLabel}
-            </span>
-            <h1 id="page-title">
-              {complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Table` : headline(payload)}
-            </h1>
-            <p>
-              {complete
-                ? 'The season is over: final table, last results and how each race finished.'
-                : started
-                  ? `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons`
-                  : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons`}
-            </p>
-            <nav className="quick-links" aria-label="Page sections">
-              <a href="#table">Table</a>
-              {payload.bracket && <a href="#bracket">Bracket</a>}
-              {!complete && <a href="#fixtures">Fixtures</a>}
-              {payload.matchesThatMatter.length > 0 && <a href="#matters">Matches that matter</a>}
-              <a href="#team">Team view</a>
-              <a href="#method">How it works</a>
-            </nav>
-          </div>
+        {payload.bracket && <BracketPanel bracket={payload.bracket} short={short} />}
 
-          <div className="hero-facts" aria-label="Season snapshot">
-            {heroTiers(payload.league.tiers).map((tier) => {
-              const highlight = isSettled(payload, tier)
-                ? { label: tier.label, value: payload.standings.filter((row) => chance(payload, row.teamKey, tier.key) >= 50).map((row) => row.shortName).join(', ') || '–' }
-                : tierHighlight(payload, tier, short);
-              return (
-                <div key={tier.key}>
-                  <span>{highlight.label}</span>
-                  <strong>{highlight.value}</strong>
-                </div>
-              );
-            })}
-            <div>
-              <span>Latest update</span>
-              <strong data-testid="latest-update">{formatGeneratedAt(payload.metadata.generated_at)}</strong>
+        <div className="sport-grid">
+          <section className="panel sport-table-panel" id="table" aria-labelledby="table-title">
+            <div className="section-heading">
+              <h2 id="table-title">{complete ? 'Final Table' : 'Table & Season Odds'}</h2>
+              <p>{complete ? 'Ticks mark the races each team finished in.' : 'Chance of each finish, from every remaining fixture.'}</p>
             </div>
-          </div>
 
-          <div className="hero-meta">
-            <span>Source: {payload.metadata.source}</span>
-            <span>{payload.analysis.model}</span>
-            {!complete && <span>{payload.analysis.method}</span>}
-          </div>
-        </div>
-      </section>
-
-      {!complete && payload.movement && <MovementPanel payload={payload} short={short} />}
-
-      <section className="sport-grid">
-        <div className="ladder-panel sport-table-panel" id="table">
-          <div className="section-heading">
-            <div>
-              <span className="panel-kicker">{complete ? 'Final' : 'Live'} table</span>
-              <h2>{complete ? 'Final Table' : 'Table & Season Odds'}</h2>
-            </div>
-            <ListOrdered aria-hidden="true" />
-          </div>
-
-          {groups.length > 0 && (
-            <div className="goal-tabs sport-group-tabs" role="group" aria-label="Table view">
-              <button className={!group ? 'active' : ''} onClick={() => setGroupKey('')} type="button">
-                {payload.league.rankLabel ?? 'All'}
-              </button>
-              {groups.map((item) => (
-                <button className={group?.key === item.key ? 'active' : ''} key={item.key} onClick={() => setGroupKey(item.key)} type="button">
-                  {item.label}
+            {groups.length > 0 && (
+              <div className="goal-tabs sport-group-tabs" role="group" aria-label="Table view">
+                <button aria-pressed={!group} onClick={() => setGroupKey('')} type="button">
+                  {payload.league.rankLabel ?? 'All'}
                 </button>
-              ))}
-            </div>
-          )}
+                {groups.map((item) => (
+                  <button aria-pressed={group?.key === item.key} key={item.key} onClick={() => setGroupKey(item.key)} type="button">
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
 
-          <div className="table-scroll">
-            <table className="sport-table">
-              <thead>
-                <tr>
-                  <th scope="col" className="col-rank">#</th>
-                  <th scope="col" className="col-team">Team</th>
-                  {payload.league.columns.map((column) => (
-                    <th
-                      scope="col"
-                      key={column.key}
-                      title={column.title}
-                      className={isOptional(column) ? 'col-optional' : undefined}
-                    >
-                      {column.label}
+            <div className="table-scroll">
+              <table className="data-table sport-table">
+                <caption className="visually-hidden">
+                  {group ? `${group.label} table` : `${payload.league.name} table`}
+                  {complete ? '' : ' with season odds'}
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col" className="col-rank">
+                      <abbr title="Position">#</abbr>
                     </th>
-                  ))}
-                  <th scope="col" className="col-form" title="Last five results, latest on the right">
-                    Form
-                  </th>
-                  {payload.league.tiers.map((tier) => (
-                    <th scope="col" className="col-tier" key={tier.key} title={tier.label}>
-                      {tier.shortLabel ? (
-                        <>
-                          <span className="label-full">{tier.label}</span>
-                          <span className="label-short" aria-hidden="true">
-                            {tier.shortLabel}
-                          </span>
-                        </>
-                      ) : (
-                        tier.label
-                      )}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row, position) => (
-                  <Fragment key={row.teamKey}>
-                  {group?.cutoffs?.some((cutoff) => cutoff.after === position) && (
-                    <tr className="cutline" aria-hidden="true">
-                      <td colSpan={columnCount}>{group.cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
-                    </tr>
-                  )}
-                  <tr
-                    className={`${group ? groupZone(group, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
-                    onClick={() => selectTeam(row.teamKey)}
-                  >
-                    <td className="col-rank">{group ? position + 1 : row.rank}</td>
-                    <th scope="row" className="col-team">
-                      <button type="button" onClick={(event) => { event.stopPropagation(); selectTeam(row.teamKey); }}>
-                        <span className="team-chip" style={{ backgroundColor: team(row.teamKey).color }} aria-hidden="true" />
-                        <strong>{row.shortName}</strong>
-                        <small>{row.fullName}</small>
-                      </button>
+                    <th scope="col" className="col-team">
+                      Team
                     </th>
                     {payload.league.columns.map((column) => (
-                      <td
-                        key={column.key}
-                        className={`${column.strong ? 'is-strong' : ''} ${isOptional(column) ? 'col-optional' : ''}`}
-                      >
-                        {formatCell(row, column)}
-                      </td>
+                      <th scope="col" key={column.key} title={column.title} className={isOptional(column) ? 'col-optional' : undefined}>
+                        {column.title && column.title !== column.label ? <abbr title={column.title}>{column.label}</abbr> : column.label}
+                      </th>
                     ))}
-                    <td className="col-form">
-                      <FormStrip form={row.form} />
-                    </td>
-                    {payload.league.tiers.map((tier) => {
-                      const value = chance(payload, row.teamKey, tier.key);
-                      return isSettled(payload, tier) ? (
-                        <td className={`col-tier ${value >= 50 ? 'is-achieved' : 'is-missed'}`} key={tier.key}>
-                          {value >= 50 ? '✓' : '–'}
-                        </td>
-                      ) : (
-                        <td className="col-tier" key={tier.key} style={heatStyle(value, tier)}>
-                          {formatChance(value)}
-                        </td>
-                      );
-                    })}
+                    <th scope="col" className="col-form" title="Last five results, latest on the right">
+                      Form
+                    </th>
+                    {payload.league.tiers.map((tier) => (
+                      <th scope="col" className="col-tier" key={tier.key} title={tier.label}>
+                        {tier.shortLabel ? (
+                          <>
+                            <span className="label-full">{tier.label}</span>
+                            <span className="label-short" aria-hidden="true">
+                              {tier.shortLabel}
+                            </span>
+                          </>
+                        ) : (
+                          tier.label
+                        )}
+                      </th>
+                    ))}
                   </tr>
-                  </Fragment>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="probability-note">
-            {complete
-              ? 'Final positions; ties are broken by the league rules shown in How it works.'
-              : 'Season odds count every remaining fixture. Tap a team for its finishing-position chances and next games.'}
-          </p>
+                </thead>
+                <tbody>
+                  {rows.map((row, position) => (
+                    <Fragment key={row.teamKey}>
+                      {group?.cutoffs?.some((cutoff) => cutoff.after === position) && (
+                        <tr className="cutline" aria-hidden="true">
+                          <td colSpan={columnCount}>{group.cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
+                        </tr>
+                      )}
+                      <tr
+                        className={`${group ? groupZone(group, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
+                        onClick={() => selectTeam(row.teamKey)}
+                      >
+                        <td className="col-rank">{group ? position + 1 : row.rank}</td>
+                        <th scope="row" className="col-team">
+                          <button
+                            aria-pressed={row.teamKey === selected.teamKey}
+                            className="team-button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              selectTeam(row.teamKey);
+                            }}
+                            type="button"
+                          >
+                            <span className="team-chip" style={{ backgroundColor: team(row.teamKey).color }} aria-hidden="true" />
+                            <strong>{row.shortName}</strong>
+                            <small>{row.fullName}</small>
+                          </button>
+                        </th>
+                        {payload.league.columns.map((column) => (
+                          <td key={column.key} className={`${column.strong ? 'is-strong' : ''} ${isOptional(column) ? 'col-optional' : ''}`}>
+                            {formatCell(row, column)}
+                          </td>
+                        ))}
+                        <td className="col-form">
+                          <FormStrip form={row.form} />
+                        </td>
+                        {payload.league.tiers.map((tier) => {
+                          const value = chance(payload, row.teamKey, tier.key);
+                          return isSettled(payload, tier) ? (
+                            <td className="col-tier" key={tier.key}>
+                              <SettledMark achieved={value >= 50} label={tier.label} />
+                            </td>
+                          ) : (
+                            <td className="col-tier" key={tier.key} style={heatStyle(value, tierTone(tier))}>
+                              {formatChance(value)}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    </Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="probability-note">
+              {complete
+                ? 'Final positions; ties are broken by the league rules shown in How it works.'
+                : 'Tap a team for its finishing-position chances and next games.'}
+            </p>
+          </section>
+
+          <TeamPanel payload={payload} row={selected} short={short} team={team} />
         </div>
 
-        <TeamPanel payload={payload} row={selected} short={short} team={team} />
-      </section>
+        {!complete && payload.movement && <MovementPanel payload={payload} short={short} />}
+        {!complete && <FixturesPanel payload={payload} short={short} team={team} />}
+        {payload.matchesThatMatter.length > 0 && <MattersPanel payload={payload} short={short} />}
+        <ResultsPanel payload={payload} short={short} />
 
-      {payload.bracket && <BracketPanel bracket={payload.bracket} short={short} />}
-      {!complete && <FixturesPanel payload={payload} short={short} team={team} />}
-      {payload.matchesThatMatter.length > 0 && <MattersPanel payload={payload} short={short} />}
-      <ResultsPanel payload={payload} short={short} />
-
-      <section className="race-summary-panel sport-method" id="method" aria-labelledby="method-title">
-        <div className="section-heading">
-          <div>
-            <span className="panel-kicker">Method</span>
+        <section className="panel sport-method" id="method" aria-labelledby="method-title">
+          <div className="section-heading">
             <h2 id="method-title">How These Odds Work</h2>
           </div>
-          <ShieldCheck aria-hidden="true" />
-        </div>
-        <ul>
-          {payload.analysis.modelNotes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-          <li>These are model estimates for fans, not betting advice.</li>
-        </ul>
-      </section>
+          <ul>
+            {payload.analysis.modelNotes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+            <li>
+              Model: {payload.analysis.model}
+              {!complete && <> · {payload.analysis.method}</>}
+            </li>
+          </ul>
+        </section>
+      </main>
 
       <footer className="pulse-footer">
+        <span>Model estimates for fans, not betting advice.</span>
         <span>
           Updated {formatGeneratedAt(payload.metadata.generated_at)} · {payload.analysis.model}
           {!complete && <> · {payload.analysis.simulations.toLocaleString()} simulations</>}
@@ -509,7 +516,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
           </span>
         )}
       </footer>
-    </main>
+    </>
   );
 };
 
@@ -554,13 +561,10 @@ const MovementPanel = ({ payload, short }: { payload: SportPayload; short: Short
     entry ? `${short(entry[0])} ${entry[1] > 0 ? '+' : ''}${entry[1].toFixed(1)}` : 'No big change';
 
   return (
-    <section className="race-summary-panel" aria-labelledby="movement-title">
+    <section className="panel" aria-labelledby="movement-title">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Since {formatGeneratedAt(movement.since)}</span>
-          <h2 id="movement-title">Biggest Moves</h2>
-        </div>
-        <Zap aria-hidden="true" />
+        <h2 id="movement-title">Biggest Moves</h2>
+        <p>Since {formatGeneratedAt(movement.since)}</p>
       </div>
       <div className="race-summary-grid sport-movement-grid">
         {moves.map(({ tier, up, down }) => (
@@ -593,7 +597,7 @@ const OutcomeBar = ({ fixture, team }: { fixture: SportFixture; team: TeamLookup
           style={{
             width: `${Math.max(value * 100, 6)}%`,
             backgroundColor: key === 'home' ? home.color : key === 'away' ? away.color : undefined,
-            color: key === 'home' ? home.textColor : key === 'away' ? away.textColor : undefined,
+            color: key === 'home' ? readableOn(home.color) : key === 'away' ? readableOn(away.color) : undefined,
           }}
         >
           {Math.round(value * 100)}%
@@ -611,13 +615,10 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
   }
   const hasDraw = payload.league.outcomes.includes('draw');
   return (
-    <section className="race-summary-panel" id="fixtures" aria-labelledby="fixtures-title">
+    <section className="panel" id="fixtures" aria-labelledby="fixtures-title">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Next up</span>
-          <h2 id="fixtures-title">Fixture Predictions</h2>
-        </div>
-        <CalendarClock aria-hidden="true" />
+        <h2 id="fixtures-title">Fixture Predictions</h2>
+        <p>{hasDraw ? 'Home win, draw and away win chances from the goals model.' : 'Home and away win chances from the ratings model.'}</p>
       </div>
       <ol className="sport-fixtures">
         {upcoming.map((fixture) => (
@@ -633,22 +634,16 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
           </li>
         ))}
       </ol>
-      <p className="probability-note">
-        {hasDraw ? 'Home win, draw and away win chances from the goals model.' : 'Home and away win chances from the ratings model.'}
-      </p>
     </section>
   );
 };
 
 /** Playoff rounds with series scores; series whose teams are not known yet show as to be decided. */
 const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }) => (
-  <section className="race-summary-panel" id="bracket" aria-labelledby="bracket-title">
+  <section className="panel" id="bracket" aria-labelledby="bracket-title">
     <div className="section-heading">
-      <div>
-        <span className="panel-kicker">{bracket.champion ? 'Champion' : 'Playoffs'}</span>
-        <h2 id="bracket-title">{bracket.champion ? `${short(bracket.champion)} Won the Title` : 'Playoff Bracket'}</h2>
-      </div>
-      <ListOrdered aria-hidden="true" />
+      <h2 id="bracket-title">{bracket.champion ? `${short(bracket.champion)} Won the Title` : 'Playoff Bracket'}</h2>
+      <p>{bracket.champion ? 'Final bracket' : 'Series scores update daily'}</p>
     </div>
     <div className="bracket-rounds">
       {bracket.rounds.map((round) => (
@@ -681,13 +676,10 @@ const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }
 );
 
 const MattersPanel = ({ payload, short }: { payload: SportPayload; short: ShortName }) => (
-  <section className="race-summary-panel" id="matters" aria-labelledby="matters-title">
+  <section className="panel" id="matters" aria-labelledby="matters-title">
     <div className="section-heading">
-      <div>
-        <span className="panel-kicker">Swing games</span>
-        <h2 id="matters-title">Matches That Matter</h2>
-      </div>
-      <Swords aria-hidden="true" />
+      <h2 id="matters-title">Matches That Matter</h2>
+      <p>The upcoming games that move a race the most</p>
     </div>
     <div className="matters-grid">
       {payload.matchesThatMatter.map((match: MatchThatMatters) => (
@@ -728,12 +720,9 @@ const ResultsPanel = ({ payload, short }: { payload: SportPayload; short: ShortN
     return null;
   }
   return (
-    <section className="race-summary-panel" aria-labelledby="results-title">
+    <section className="panel" aria-labelledby="results-title">
       <div className="section-heading">
-        <div>
-          <span className="panel-kicker">Latest</span>
-          <h2 id="results-title">Recent Results</h2>
-        </div>
+        <h2 id="results-title">Recent Results</h2>
       </div>
       <ol className="sport-results">
         {payload.results.slice(0, RESULTS_LIMIT).map((result) => (
@@ -775,13 +764,12 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
   const seed = typeof row.seed === 'number' ? row.seed : null;
 
   return (
-    <aside className="probability-panel sport-team-panel" id="team" aria-labelledby="team-title">
+    <aside className="panel sport-team-panel" id="team" aria-labelledby="team-title">
       <div className="spotlight-title">
-        <span style={{ backgroundColor: meta.color, color: meta.textColor }}>{row.shortName}</span>
-        <div>
-          <span className="panel-kicker">Team view</span>
-          <h2 id="team-title">{row.fullName}</h2>
-        </div>
+        <span aria-hidden="true" className="team-badge" style={{ backgroundColor: meta.color, color: readableOn(meta.color, meta.textColor) }}>
+          {row.shortName}
+        </span>
+        <h2 id="team-title">{row.fullName}</h2>
       </div>
 
       <dl className="team-facts">
@@ -827,9 +815,12 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
       </dl>
 
       {!complete && positions.length > 0 && (
-        <div className="position-chart" role="img" aria-label={`${positionLabel} chances for ${row.shortName}`}>
-          <h3>{positionLabel}</h3>
-          <div className="position-bars">
+        <figure className="position-chart" aria-labelledby="position-title">
+          <h3 id="position-title">
+            {positionLabel}
+            <span className="visually-hidden"> chances for {row.shortName}</span>
+          </h3>
+          <div className="position-bars" aria-hidden="true">
             {positions.map((value, index) => {
               const place = index + 1;
               const zone = placeZone(place);
@@ -841,7 +832,17 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
               );
             })}
           </div>
-        </div>
+          <ul className="visually-hidden">
+            {positions.map((value, index) =>
+              value > 0 ? (
+                <li key={index}>
+                  {index + 1}
+                  {ordinalSuffix(index + 1)}: {formatChance(value)}
+                </li>
+              ) : null,
+            )}
+          </ul>
+        </figure>
       )}
 
       {next.length > 0 && (
@@ -894,11 +895,5 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
     </aside>
   );
 };
-
-function ordinalSuffix(value: number) {
-  const suffixes = ['th', 'st', 'nd', 'rd'];
-  const lastTwo = value % 100;
-  return suffixes[(lastTwo - 20) % 10] || suffixes[lastTwo] || suffixes[0];
-}
 
 export default SportPage;
