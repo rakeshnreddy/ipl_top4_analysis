@@ -120,16 +120,20 @@ jobs:
         working-directory: frontend/ipl-analyzer-frontend
         run: npm test -- --run
 
+      - name: Configure Pages
+        id: pages
+        if: steps.persist.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
       - name: Build frontend
         if: steps.persist.outputs.changed == 'true'
         working-directory: frontend/ipl-analyzer-frontend
+        env:
+          # The deployed address, for sitemap.xml.
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
         run: |
           npm run build:github
           touch dist/.nojekyll
-
-      - name: Configure Pages
-        if: steps.persist.outputs.changed == 'true'
-        uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         if: steps.persist.outputs.changed == 'true'

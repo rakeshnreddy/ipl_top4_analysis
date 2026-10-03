@@ -241,6 +241,7 @@ Cloudflare Pages should serve these files directly from the static build:
 - `/social/instagram-carousel/latest-overview.png`
 - `/social/instagram-carousel/<latest-date>/slide-*.png`
 - `/robots.txt`
+- `/sitemap.xml`: the home page and every published league page, written at build time when `SITE_URL` is set (the GitHub Pages workflows take it from the Pages configuration; set it for a Cloudflare or custom-domain build too)
 
 The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#standings`, `#top4`, `#playoffs`, or `#deep-dive`.
 
