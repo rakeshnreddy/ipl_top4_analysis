@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from './Root';
 import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
@@ -71,7 +71,7 @@ describe('App after the season ends', () => {
     const { container } = render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'IPL 2026 Final Standings' })).toBeInTheDocument();
-    expect(screen.getByText('Season complete · Royal Challengers Bengaluru are champions')).toBeInTheDocument();
+    expect(screen.getByText('Royal Challengers Bengaluru are champions. Final: RCB won by 5 wickets.')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Season Summary' })).toBeInTheDocument();
     expect(screen.getByText('SRH also reached 18 pts but had a lower NRR.')).toBeInTheDocument();
     expect(screen.getByText('5th on 15 pts, 1 pt behind RR.')).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe('App with several leagues', () => {
     expect(screen.getByText('4th on 6 pts, 2 pts behind DC.')).toBeInTheDocument();
     expect(screen.getByTestId('playoffs-panel')).toHaveTextContent('Royal Challengers Bengaluru won the WPL 2026 title.');
 
-    const stripe = container.querySelector<HTMLElement>('.standing-row .team-stripe');
+    const stripe = container.querySelector<HTMLElement>('.standing-row .team-chip');
     expect(stripe?.style.backgroundColor).toBe('rgb(236, 28, 36)');
     await waitFor(() => expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse'));
     await waitFor(() =>
@@ -144,10 +144,18 @@ describe('App with several leagues', () => {
 
     render(<Root />);
 
-    const switcher = await screen.findByRole('navigation', { name: 'Leagues' });
+    const menu = await screen.findByRole('button', { name: 'Leagues: WPL 2026' });
+    expect(menu).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(menu);
+    expect(menu).toHaveAttribute('aria-expanded', 'true');
+
+    const switcher = screen.getByRole('navigation', { name: 'Leagues' });
     expect(switcher.querySelector('a[aria-current="page"]')).toHaveTextContent('WPL 2026');
-    expect(screen.getByRole('link', { name: 'IPL 2026' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: 'WPL 2026' })).toHaveAttribute('href', '/?league=wpl-2026');
+    expect(within(switcher).getByRole('link', { name: /^IPL 2026/ })).toHaveAttribute('href', '/');
+    expect(within(switcher).getByRole('link', { name: /^WPL 2026/ })).toHaveAttribute('href', '/?league=wpl-2026');
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(menu).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('treats an Eliminator loss as an exit when the league gives no second chance', async () => {
@@ -187,7 +195,7 @@ describe('App during another league\'s season', () => {
     expect(screen.getByRole('button', { name: 'Top 1' })).toBeInTheDocument();
     expect(screen.getByText('GG +12.5')).toBeInTheDocument();
     expect(screen.getByText('UPW -8.0')).toBeInTheDocument();
-    expect(container.querySelector('.standing-row .top4-prob')).toHaveTextContent('98.5%');
+    expect(container.querySelector('.standing-row td.col-tier')).toHaveTextContent('98.5%');
     expect(screen.queryByRole('link', { name: 'Share kit' })).not.toBeInTheDocument();
     await waitFor(() => expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse'));
   });
