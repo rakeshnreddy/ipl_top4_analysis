@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import App from './App';
+import Root from './Root';
 import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
 
 describe('App', () => {
@@ -13,7 +13,7 @@ describe('App', () => {
   });
 
   it('loads the canonical payload and renders the playoff pulse surface', async () => {
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'IPL Top 4 Qualification Probabilities' })).toBeInTheDocument();
     expect(screen.getByText('Updated daily after the night match')).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('App', () => {
   });
 
   it('sorts the standings by points, then NRR, then wins', async () => {
-    const { container } = render(<App />);
+    const { container } = render(<Root />);
     await screen.findByTestId('standings-ladder');
 
     const rows = Array.from(container.querySelectorAll('.standing-row')).map((row) => row.textContent || '');
@@ -44,14 +44,14 @@ describe('App', () => {
   it('selects a team from a deep link hash', async () => {
     window.history.replaceState(null, '', '/#team=CSK');
 
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'Chennai Super Kings' })).toBeInTheDocument();
     expect(screen.getByText(/CSK need wins and rival results immediately/)).toBeInTheDocument();
   });
 
   it('renders metadata and update dates in small trust surfaces', async () => {
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByTestId('latest-update')).toHaveTextContent('2026');
     expect(screen.getAllByText(/Source: CricketData/).length).toBeGreaterThan(0);
@@ -68,7 +68,7 @@ describe('App after the season ends', () => {
   });
 
   it('shows the champion, final table and playoff results instead of live odds', async () => {
-    const { container } = render(<App />);
+    const { container } = render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'IPL 2026 Final Standings' })).toBeInTheDocument();
     expect(screen.getByText('Season complete · Royal Challengers Bengaluru are champions')).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('App after the season ends', () => {
   it('shows a team season outcome from a deep link', async () => {
     window.history.replaceState(null, '', '/#team=RR');
 
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'Rajasthan Royals' })).toBeInTheDocument();
     expect(screen.getByText('Knocked out in Qualifier 2')).toBeInTheDocument();
@@ -119,7 +119,7 @@ describe('App with several leagues', () => {
   it('loads the league named in ?league= and uses its playoff format', async () => {
     window.history.replaceState(null, '', '/?league=wpl-2026');
 
-    const { container } = render(<App />);
+    const { container } = render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
     expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
@@ -142,7 +142,7 @@ describe('App with several leagues', () => {
   it('switches leagues with plain links that mark the current one', async () => {
     window.history.replaceState(null, '', '/?league=wpl-2026');
 
-    render(<App />);
+    render(<Root />);
 
     const switcher = await screen.findByRole('navigation', { name: 'Leagues' });
     expect(switcher.querySelector('a[aria-current="page"]')).toHaveTextContent('WPL 2026');
@@ -153,7 +153,7 @@ describe('App with several leagues', () => {
   it('treats an Eliminator loss as an exit when the league gives no second chance', async () => {
     window.history.replaceState(null, '', '/?league=wpl-2026#team=GG');
 
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'Gujarat Giants' })).toBeInTheDocument();
     expect(screen.getByText('Knocked out in Eliminator')).toBeInTheDocument();
@@ -162,7 +162,7 @@ describe('App with several leagues', () => {
   it('offers a way back when the requested league does not exist', async () => {
     window.history.replaceState(null, '', '/?league=nope-2026');
 
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Unable to load nope-2026 data (404).');
     expect(screen.getByRole('link', { name: 'Go to the IPL page' })).toHaveAttribute('href', '/');
@@ -179,7 +179,7 @@ describe('App during another league\'s season', () => {
     installFetch(finalPayload, mockManifest, { '/data/wpl-2027.json': wplLivePayload(true) });
     window.history.replaceState(null, '', '/?league=wpl-2027');
 
-    const { container } = render(<App />);
+    const { container } = render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'WPL Top 3 Qualification Probabilities' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Top 3 Odds' })).toBeInTheDocument();
@@ -196,7 +196,7 @@ describe('App during another league\'s season', () => {
     installFetch(finalPayload, mockManifest, { '/data/wpl-2027.json': wplLivePayload(false) });
     window.history.replaceState(null, '', '/?league=wpl-2027');
 
-    render(<App />);
+    render(<Root />);
 
     const heroFacts = await screen.findByLabelText('Race snapshot');
     expect(within(heroFacts).getByText('Opening match')).toBeInTheDocument();
@@ -220,7 +220,7 @@ describe('App home page', () => {
       '/data/wpl-2026.json': wplFinalPayload,
     });
 
-    render(<App />);
+    render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
     expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
@@ -234,7 +234,7 @@ describe('App home page', () => {
     installFetch({ ...finalPayload, standings });
     window.history.replaceState(null, '', '/#team=PBKS');
 
-    const { container } = render(<App />);
+    const { container } = render(<Root />);
 
     await screen.findByRole('heading', { name: 'Punjab Kings' });
     expect(container.querySelector('.deep-dive-grid')).toHaveTextContent('6W-6L-1T-0NR');

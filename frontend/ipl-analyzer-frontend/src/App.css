@@ -99,10 +99,29 @@
 
 .league-switcher {
   display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 auto 10px;
+  max-width: 1440px;
+  width: 100%;
+}
+
+.league-group {
+  align-items: center;
+  display: flex;
   gap: 6px;
   overflow-x: auto;
   padding-bottom: 2px;
   scrollbar-width: none;
+}
+
+.league-group-label {
+  color: #9fb2cc;
+  flex: 0 0 74px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .league-switcher a {

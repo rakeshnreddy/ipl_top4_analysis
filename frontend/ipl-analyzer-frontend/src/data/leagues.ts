@@ -1,5 +1,7 @@
 export interface LeagueSummary {
   id: string;
+  /** Older league lists predate other sports; a missing sport means cricket. */
+  sport?: string;
   name: string;
   shortName: string;
   seasonLabel: string;
@@ -26,6 +28,27 @@ export function leagueIdFromLocation(search: string = window.location.search): s
 
 export function leagueHref(leagueId: string, defaultId: string) {
   return leagueId === defaultId ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?league=${leagueId}`;
+}
+
+export const SPORT_LABELS: Record<string, string> = {
+  cricket: 'Cricket',
+  football: 'Football',
+  'american-football': 'NFL',
+  basketball: 'NBA',
+  'ice-hockey': 'NHL',
+  baseball: 'MLB',
+};
+
+export const sportOf = (league: Pick<LeagueSummary, 'sport'>) => league.sport ?? 'cricket';
+
+/** Leagues grouped by sport, keeping the list's order (live leagues first) within each sport. */
+export function leaguesBySport(index: LeagueIndex) {
+  const groups = new Map<string, LeagueSummary[]>();
+  index.leagues.forEach((league) => {
+    const sport = sportOf(league);
+    groups.set(sport, [...(groups.get(sport) ?? []), league]);
+  });
+  return [...groups.entries()].map(([sport, leagues]) => ({ sport, label: SPORT_LABELS[sport] ?? sport, leagues }));
 }
 
 export async function loadLeagueIndex(fetchImpl: typeof fetch = fetch): Promise<LeagueIndex> {
