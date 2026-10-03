@@ -31,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+    env:
+      # Secrets cannot be tested in `if:`; this makes the Cloudflare steps conditional.
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
     steps:
       - name: Checkout repo
@@ -146,3 +149,25 @@ jobs:
       - name: Deploy Pages
         if: steps.persist.outputs.changed == 'true'
         uses: actions/deploy-pages@v4
+
+      # Mirror at https://ipl-playoff-pulse.pages.dev (served from the site root, so it needs
+      # its own build; dist is free again once GitHub Pages has its artifact). Runs once the
+      # CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets exist; a Cloudflare problem
+      # shows as a warning and never fails the run.
+      - name: Build for Cloudflare Pages
+        id: cloudflare_build
+        if: steps.persist.outputs.changed == 'true' && env.CLOUDFLARE_API_TOKEN != ''
+        continue-on-error: true
+        working-directory: frontend/ipl-analyzer-frontend
+        env:
+          SITE_URL: https://ipl-playoff-pulse.pages.dev/
+        run: npx vite build --base=/
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.cloudflare_build.outcome == 'success' && steps.persist.outputs.changed == 'true' && env.CLOUDFLARE_API_TOKEN != ''
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy frontend/ipl-analyzer-frontend/dist --project-name ipl-playoff-pulse --branch main
