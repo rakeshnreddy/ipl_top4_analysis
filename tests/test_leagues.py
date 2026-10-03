@@ -137,12 +137,18 @@ class LiveSeasonTests(unittest.TestCase):
         # BPL 2026-27 has no config: it is rolled forward from 2025-26 and finalized from Cricsheet too.
         self.assertEqual(
             self.cricket_plan(now),
-            [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet"), ("sa20-2026-27", "cricketdata"), ("bpl-2026-27", "cricsheet")],
+            [
+                ("wpl-2027", "cricketdata"),
+                ("bbl-2026-27", "cricsheet"),
+                ("sa20-2026-27", "cricketdata"),
+                ("ilt-2026-27", "cricsheet"),
+                ("bpl-2026-27", "cricsheet"),
+            ],
         )
         write_payload(self.data_dir, "bbl-2026-27", "complete")
         self.assertEqual(
             self.cricket_plan(now),
-            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata"), ("bpl-2026-27", "cricsheet")],
+            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata"), ("ilt-2026-27", "cricsheet"), ("bpl-2026-27", "cricsheet")],
         )
 
     def test_plan_builds_rolling_leagues_only_in_season(self) -> None:
@@ -154,8 +160,8 @@ class LiveSeasonTests(unittest.TestCase):
         self.assertNotIn(("epl", "feed"), summer)
 
     def test_active_build_off_season_writes_nothing(self) -> None:
-        # Between CPL's finalize window (to 11 Oct) and ILT20's start (22 Nov).
-        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 1, tzinfo=timezone.utc)), mock.patch.object(
+        # Between CPL's finalize window (to 4 Nov) and ILT20's start (22 Nov).
+        with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 10, tzinfo=timezone.utc)), mock.patch.object(
             extract_table, "available_league_ids", return_value=CRICKET_IDS
         ):
             extract_table.main(["--league", "active"])
@@ -209,16 +215,25 @@ class LiveSeasonTests(unittest.TestCase):
             ["bbl-2026-27", "ipl-2026", "wpl-2026", "bbl-2025-26"],
         )
 
-    def test_finalize_run_publishes_only_a_finished_season(self) -> None:
-        playoffs_only = {"metadata": {"season_status": "playoffs"}}
+    def test_finalize_run_publishes_a_partial_season_once_then_waits_for_the_final(self) -> None:
+        def partial(generated: str) -> dict[str, object]:
+            return {
+                "metadata": {"generated_at": generated, "season_status": "playoffs"},
+                "league": leagues.load_league("cpl-2026").payload_block(),
+                "standings": [],
+                "analysis": {"overallProbabilities": {}},
+            }
+
         now = datetime(2026, 10, 3, 19, 30, tzinfo=timezone.utc)
+        for generated in ("2026-10-03T19:30:00Z", "2026-10-04T19:30:00Z"):
+            with mock.patch.object(extract_table, "utc_now", return_value=now), mock.patch.object(
+                extract_table, "league_plan", return_value=[("cpl-2026", "cricsheet")]
+            ), mock.patch.object(extract_table, "build_league", return_value=partial(generated)):
+                extract_table.main(["--league", "active"])
 
-        with mock.patch.object(extract_table, "utc_now", return_value=now), mock.patch.object(
-            extract_table, "league_plan", return_value=[("cpl-2026", "cricsheet")]
-        ), mock.patch.object(extract_table, "build_league", return_value=playoffs_only):
-            extract_table.main(["--league", "active"])
-
-        self.assertFalse((self.data_dir / "cpl-2026.json").exists())
+        published = json.loads((self.data_dir / "cpl-2026.json").read_text())
+        # The first partial page stays until a complete rebuild replaces it.
+        self.assertEqual(published["metadata"]["generated_at"], "2026-10-03T19:30:00Z")
 
     def test_index_default_is_the_newest_published_ipl_season(self) -> None:
         for league_id in ("ipl-2026", "ipl-2027", "wpl-2027"):

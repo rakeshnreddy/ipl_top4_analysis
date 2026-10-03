@@ -10,8 +10,10 @@ permissions:
   id-token: write
 
 concurrency:
+  # Shared with the other Pages workflow; queue rather than cancel, so a code deploy
+  # never kills a data run halfway (or the other way round).
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:

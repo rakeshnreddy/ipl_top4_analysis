@@ -130,7 +130,7 @@ export CRICDATA_API_KEY="..."
 venv/bin/python extract_table.py --league active
 ```
 
-`--league active` builds every cricket league inside its `seasonStart`-`seasonEnd` window from CricketData and every football league in season. For 21 days after a cricket season ends it retries the Cricsheet rebuild until the final is published. A payload that differs from the published one only in its timestamp is not rewritten, so the workflow commits, builds and deploys only when something changed. It can also be run manually with a league id, `all`, or `active`.
+`--league active` builds every cricket league inside its `seasonStart`-`seasonEnd` window from CricketData and every football league in season. For 45 days after a cricket season ends it retries the Cricsheet rebuild until the final is published; if nothing has been published for that season yet, the league table and playoff results so far are published in the meantime. A payload that differs from the published one only in its timestamp is not rewritten, so the workflow commits, builds and deploys only when something changed. It can also be run manually with a league id, `all`, or `active`.
 
 Built to run unattended:
 

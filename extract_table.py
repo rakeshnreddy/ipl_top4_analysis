@@ -68,7 +68,9 @@ RANDOM_SEED = int(os.getenv("IPL_RANDOM_SEED", "20260501"))
 EXACT_MAX_FIXTURES = int(os.getenv("IPL_EXACT_MAX_FIXTURES", "27"))
 IMPACT_FIXTURE_WINDOW = int(os.getenv("IPL_IMPACT_FIXTURE_WINDOW", "1"))
 # After a season ends, keep retrying the Cricsheet rebuild until its final is published.
-FINALIZE_DAYS = 21
+# Days after a cricket season ends that the Cricsheet rebuild is retried; Cricsheet can
+# take weeks to add the playoffs of smaller leagues.
+FINALIZE_DAYS = 45
 
 # The active league. use_league() swaps these so one run can build several leagues.
 LEAGUE: League
@@ -1718,11 +1720,15 @@ def main(argv: list[str] | None = None) -> None:
             failures.append(f"{league_id}: unexpected {type(exc).__name__}: {exc}")
             continue
         succeeded += 1
-        if active and source == "cricsheet" and payload["metadata"].get("season_status") != "complete":
-            print(f"{league_id}: Cricsheet does not have the final yet; retrying on the next run")
-            continue
         payload_id = payload["league"]["id"]
         previous = published_payload(payload_id)
+        if active and source == "cricsheet" and payload["metadata"].get("season_status") != "complete":
+            if previous is not None:
+                # Keep the published page (often the live one) until Cricsheet has the final.
+                print(f"{league_id}: Cricsheet does not have the final yet; retrying on the next run")
+                continue
+            # Nothing published yet: the league table and playoff results so far beat no page.
+            print(f"{league_id}: publishing the season so far; Cricsheet does not have the final yet")
         if payload["metadata"].get("season_status") != "complete":
             if payload["league"].get("sport", "cricket") == "cricket":
                 payload["movement"] = probability_movement(previous, payload)
