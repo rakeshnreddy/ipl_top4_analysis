@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
@@ -93,7 +93,7 @@ describe('App after the season ends', () => {
       'href',
       'https://opendatacommons.org/licenses/by/1-0/',
     );
-    expect(document.title).toBe('IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse');
+    await waitFor(() => expect(document.title).toBe('IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse'));
   });
 
   it('shows a team season outcome from a deep link', async () => {
@@ -130,10 +130,12 @@ describe('App with several leagues', () => {
 
     const stripe = container.querySelector<HTMLElement>('.standing-row .team-stripe');
     expect(stripe?.style.backgroundColor).toBe('rgb(236, 28, 36)');
-    expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse');
-    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
-      'href',
-      'http://localhost:3000/?league=wpl-2026',
+    await waitFor(() => expect(document.title).toBe('WPL 2026 Final Standings, NRR & Playoff Results | WPL Playoff Pulse'));
+    await waitFor(() =>
+      expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
+        'href',
+        'http://localhost:3000/?league=wpl-2026',
+      ),
     );
   });
 
@@ -187,7 +189,7 @@ describe('App during another league\'s season', () => {
     expect(screen.getByText('UPW -8.0')).toBeInTheDocument();
     expect(container.querySelector('.standing-row .top4-prob')).toHaveTextContent('98.5%');
     expect(screen.queryByRole('link', { name: 'Share kit' })).not.toBeInTheDocument();
-    expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse');
+    await waitFor(() => expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse'));
   });
 
   it('shows the opening match instead of a race before the first result', async () => {
