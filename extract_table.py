@@ -36,6 +36,7 @@ from leagues import (
     load_league,
     parse_league,
     read_config,
+    rolled_league_ids,
 )
 
 
@@ -179,10 +180,10 @@ def cricdata_api_key() -> str | None:
 
 
 def cricdata_series_id() -> str | None:
-    """A fixed series id: the league config first, then the env var, which applies to IPL seasons only."""
+    """A fixed series id: the league config first, then the env var, which only means the default season."""
     if LEAGUE.cricketdata_series_id:
         return LEAGUE.cricketdata_series_id
-    if LEAGUE.short_name == "IPL":
+    if LEAGUE.id == DEFAULT_LEAGUE_ID:
         return os.getenv("CRICDATA_SERIES_ID") or os.getenv("CRICAPI_SERIES_ID")
     return None
 
@@ -1522,7 +1523,8 @@ def probability_movement(previous: dict[str, Any] | None, payload: dict[str, Any
 def league_plan(now: datetime) -> list[tuple[str, str]]:
     """Leagues to build now: in-season ones live, recently finished cricket from Cricsheet."""
     plan = []
-    for league_id in available_league_ids():
+    # Cricket competitions roll forward a season at a time once their newest config is over.
+    for league_id in available_league_ids() + rolled_league_ids(now, FINALIZE_DAYS):
         config = read_config(league_id)
         if not is_cricket(config):
             if team_sports.resolve_season(config, now).contains(now):

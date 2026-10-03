@@ -74,6 +74,8 @@ venv/bin/python extract_table.py --league all --source cricsheet
 
 `--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. The site shows the default league (IPL) at `/` and any other at `/?league=<id>`.
 
+Seasons roll forward on their own: once a competition's newest configured season is over, the next one is created from it in memory (same teams and rules, dates a year later and marked tentative, no fixed CricketData series id), so `--league active` keeps building new seasons without new files. CricketData finds the new series by name and season label. When a season changes teams, format or dates, add a real config for it; the first build of a rolled season reports a team mismatch as a warning.
+
 To add a league season:
 
 1. Copy a similar config in `leagues/` and update teams, games per team, qualification tiers, and playoff stages.

@@ -79,6 +79,16 @@ class InstagramCarouselManifestTests(unittest.TestCase):
 
             self.assertFalse(output_root.exists())
 
+    def test_the_pack_follows_the_newest_ipl_season(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            data_dir = Path(tmp)
+            (data_dir / "leagues.json").write_text('{"default": "ipl-2027", "leagues": []}')
+
+            with mock.patch.object(carousel, "DATA_DIR", data_dir):
+                self.assertEqual(carousel.current_ipl_payload_path(), data_dir / "ipl-2027.json")
+                (data_dir / "leagues.json").write_text("not json")
+                self.assertEqual(carousel.current_ipl_payload_path(), data_dir / "ipl-2026.json")
+
     def test_png_dimension_validation_reports_wrong_size(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             good = Path(tmp) / "slide-01-overview.png"

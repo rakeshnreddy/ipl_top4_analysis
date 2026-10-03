@@ -130,14 +130,15 @@ class LiveSeasonTests(unittest.TestCase):
     def test_plan_rebuilds_a_finished_league_from_cricsheet_until_it_is_complete(self) -> None:
         now = datetime(2027, 2, 1, 19, 30, tzinfo=timezone.utc)
 
+        # BPL 2026-27 has no config: it is rolled forward from 2025-26 and finalized from Cricsheet too.
         self.assertEqual(
             self.cricket_plan(now),
-            [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet"), ("sa20-2026-27", "cricketdata")],
+            [("wpl-2027", "cricketdata"), ("bbl-2026-27", "cricsheet"), ("sa20-2026-27", "cricketdata"), ("bpl-2026-27", "cricsheet")],
         )
         write_payload(self.data_dir, "bbl-2026-27", "complete")
         self.assertEqual(
             self.cricket_plan(now),
-            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata")],
+            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata"), ("bpl-2026-27", "cricsheet")],
         )
 
     def test_plan_builds_rolling_leagues_only_in_season(self) -> None:
@@ -234,6 +235,11 @@ class LiveSeasonTests(unittest.TestCase):
         with mock.patch.dict(extract_table.os.environ, {"CRICDATA_SERIES_ID": "ipl-series"}, clear=True):
             extract_table.use_league(bbl)
             self.assertIsNone(extract_table.cricdata_series_id())
+            # A later IPL season must not inherit the 2026 series.
+            extract_table.use_league(leagues.load_league("ipl-2027"))
+            self.assertIsNone(extract_table.cricdata_series_id())
+            extract_table.use_league(leagues.load_league("ipl-2026"))
+            self.assertEqual(extract_table.cricdata_series_id(), "ipl-series")
             extract_table.use_league(dataclasses.replace(bbl, cricketdata_series_id="bbl-series"))
             self.assertEqual(extract_table.cricdata_series_id(), "bbl-series")
 
@@ -291,6 +297,44 @@ class ProbabilityMovementTests(unittest.TestCase):
 
         self.assertIsNone(extract_table.probability_movement(None, live_payload(3, {"RCB": 60.0})))
         self.assertIsNone(extract_table.probability_movement(other_league, live_payload(3, {"RCB": 60.0})))
+
+
+class RolloverTests(unittest.TestCase):
+    def test_a_season_rolls_forward_with_its_teams_and_rules(self) -> None:
+        bbl = leagues.read_config("bbl-2027-28")
+
+        self.assertEqual((bbl["id"], bbl["season"], bbl["seasonLabel"]), ("bbl-2027-28", "2027/28", "2027-28"))
+        self.assertEqual((bbl["seasonStart"], bbl["seasonEnd"]), ("2027-12-12", "2028-01-26"))
+        self.assertTrue(bbl["tentative"])
+        self.assertEqual(bbl["teams"], leagues.read_config("bbl-2026-27")["teams"])
+        self.assertEqual(leagues.load_league("ipl-2029").season_label, "2029")
+
+    def test_season_specific_details_are_not_carried_over(self) -> None:
+        sa20 = leagues.read_config("sa20-2027-28")
+
+        self.assertEqual(sa20["seasonLabel"], "2028")
+        self.assertNotIn("extraResults", sa20)
+        self.assertNotIn("seriesId", sa20["sources"].get("cricketdata", {}))
+        self.assertEqual(sa20["points"], leagues.read_config("sa20-2026-27")["points"])
+
+    def test_competitions_roll_forward_only_once_their_newest_season_is_over(self) -> None:
+        october = leagues.rolled_league_ids(datetime(2026, 10, 3, tzinfo=timezone.utc), 21)
+        next_summer = leagues.rolled_league_ids(datetime(2027, 7, 1, tzinfo=timezone.utc), 21)
+
+        self.assertNotIn("ipl-2028", october)
+        self.assertIn("ipl-2028", next_summer)
+        self.assertIn("cpl-2027", next_summer)
+        self.assertNotIn("epl-2027", next_summer)
+
+    def test_the_planner_builds_a_rolled_season_live(self) -> None:
+        plan = extract_table.league_plan(datetime(2028, 3, 20, tzinfo=timezone.utc))
+
+        self.assertIn(("ipl-2028", "cricketdata"), plan)
+
+    def test_rolling_sports_and_unknown_ids_are_not_rolled(self) -> None:
+        for league_id in ("epl-2027", "nope-2027", "nfl-2027"):
+            with self.subTest(league_id), self.assertRaises(ValueError):
+                leagues.read_config(league_id)
 
 
 if __name__ == "__main__":

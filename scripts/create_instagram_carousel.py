@@ -15,7 +15,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "frontend/ipl-analyzer-frontend/public/data/ipl-2026.json"
+DATA_DIR = ROOT / "frontend/ipl-analyzer-frontend/public/data"
+# The share kit follows the newest IPL season: the league list's default.
+DATA_PATH: Path | None = None
 OUTPUT_ROOT = ROOT / "frontend/ipl-analyzer-frontend/public/social/instagram-carousel"
 WIDTH = 1080
 HEIGHT = 1920
@@ -551,8 +553,18 @@ def draw_contact_sheet(paths: list[Path], output_dir: Path) -> Path:
     return output
 
 
+def current_ipl_payload_path() -> Path:
+    if DATA_PATH is not None:
+        return DATA_PATH
+    try:
+        default = json.loads((DATA_DIR / "leagues.json").read_text(encoding="utf-8"))["default"]
+    except (OSError, ValueError, KeyError):
+        default = "ipl-2026"
+    return DATA_DIR / f"{default}.json"
+
+
 def main() -> None:
-    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    payload = json.loads(current_ipl_payload_path().read_text(encoding="utf-8"))
     if payload["metadata"].get("season_status") == "complete":
         # Slides show the live race; once the season is over the latest pack stays as it is.
         print("IPL season is complete; Reels pack left unchanged.")
