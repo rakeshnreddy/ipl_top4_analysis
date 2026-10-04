@@ -180,6 +180,33 @@ describe('SportPage during the playoffs', () => {
     expect(within(chelsea).getByText('42%')).toBeInTheDocument();
     expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
   });
+
+  it('shows aggregate scores and shoot-outs for two-legged knockout ties', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...footballPayload,
+      metadata: { ...footballPayload.metadata, season_status: 'playoffs' },
+      bracket: {
+        champion: null,
+        rounds: [
+          {
+            key: 'ROUND_OF_16',
+            label: 'Round of 16',
+            series: [
+              { stage: 'Round of 16', conference: null, top: 'Arsenal', bottom: 'Spurs', topSeed: 1, bottomSeed: 16, topWins: 0, bottomWins: 0, bestOf: 2, winner: 'Spurs', aggregate: { top: 2, bottom: 2 }, note: '3-4 on penalties' },
+              { stage: 'Round of 16', conference: null, top: 'Liverpool', bottom: 'Chelsea', topSeed: 2, bottomSeed: 15, topWins: 0, bottomWins: 0, bestOf: 2, winner: null, aggregate: null },
+            ],
+          },
+        ],
+      },
+    });
+
+    const bracket = (await screen.findByRole('heading', { name: 'Knockout Bracket' })).closest('section')!;
+    expect(within(bracket).getByText('2–2')).toBeInTheDocument();
+    expect(within(bracket).getByText('3-4 on penalties')).toBeInTheDocument();
+    expect(within(bracket).getByText('16 TOT')).toHaveClass('is-winner');
+    expect(within(bracket).getByText('vs')).toBeInTheDocument();
+    expect(within(bracket).queryByText(/Best of/)).not.toBeInTheDocument();
+  });
 });
 
 describe('formatChance', () => {
