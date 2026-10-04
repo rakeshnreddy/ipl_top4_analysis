@@ -1,0 +1,147 @@
+{
+  "id": "super-lig",
+  "sport": "football",
+  "name": "Süper Lig",
+  "shortName": "Süper Lig",
+  "priority": 27,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "super-lig-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "2026-27: 18 clubs play a double round robin (34 rounds, 14 August 2026 to 23 May 2027); 16th, 17th and 18th go down to the TFF 1. Lig. Teams level on points are ranked by the games between them: points, then goal difference (away goals do not count), then goals for three or more teams, then overall goal difference and goals scored. The TFF's own table applies head-to-head only once the teams level have played each other home and away (its 2026-27 table after six rounds ranks every tie by goal difference; its 2025-26 final table ranks Kocaelispor above Alanyaspor and Gaziantep, and Kayserispor above Fatih Karagümrük, by head-to-head).",
+    "sources": [
+      "https://www.tff.org/Resources/TFF/Documents/STATULER/2026-2027/2026-2027-sezonu-super-lig-musabakalari-statusu.pdf",
+      "https://www.tff.org/Resources/TFF/Documents/TALIMATLAR/Futbol-Musabaka-Talimati.pdf",
+      "https://www.tff.org/default.aspx?pageID=198",
+      "https://www.tff.org/default.aspx?pageID=1768"
+    ]
+  },
+  "notes": [
+    "Backtested on the Süper Lig's 2023-24 to 2025-26 seasons (1,024 matches): week-ahead predictions score 0.197 (ranked probability score) against 0.226 for home/draw/away base rates."
+  ],
+  "tiebreak": ["head-to-head-goals-complete", "goal-difference", "goals"],
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top2",
+      "label": "Top 2",
+      "kind": "top",
+      "size": 2
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Drop"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "super-lig-{year}",
+    "espn": "tur.1"
+  },
+  "teams": {
+    "Alanyaspor": {
+      "shortName": "ALA",
+      "color": "#F58220",
+      "textColor": "#000000"
+    },
+    "Amedspor": {
+      "shortName": "AMD"
+    },
+    "Besiktas": {
+      "shortName": "BJK",
+      "fullName": "Beşiktaş",
+      "color": "#000000",
+      "textColor": "#FFFFFF"
+    },
+    "Erzurumspor": {
+      "shortName": "ERZ"
+    },
+    "Eyüpspor": {
+      "shortName": "EYP",
+      "color": "#5C2D91",
+      "textColor": "#FFFFFF"
+    },
+    "Fenerbahçe": {
+      "shortName": "FB",
+      "color": "#002A5C",
+      "textColor": "#FFFFFF"
+    },
+    "Galatasaray": {
+      "shortName": "GS",
+      "color": "#A90432",
+      "textColor": "#FFFFFF"
+    },
+    "Gaziantep": {
+      "shortName": "GFK",
+      "fullName": "Gaziantep FK",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "Gençlerbirligi": {
+      "shortName": "GEN",
+      "fullName": "Gençlerbirliği",
+      "color": "#E30A17",
+      "textColor": "#FFFFFF"
+    },
+    "Göztepe": {
+      "shortName": "GOZ",
+      "color": "#FFCC00",
+      "textColor": "#000000"
+    },
+    "Istanbul Basaksehir": {
+      "shortName": "IBF",
+      "fullName": "İstanbul Başakşehir",
+      "color": "#F37021",
+      "textColor": "#000000"
+    },
+    "Kasimpasa": {
+      "shortName": "KAS",
+      "fullName": "Kasımpaşa",
+      "color": "#1B2A5C",
+      "textColor": "#FFFFFF"
+    },
+    "Kocaelispor": {
+      "shortName": "KOC",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "Konyaspor": {
+      "shortName": "KON",
+      "color": "#007A33",
+      "textColor": "#FFFFFF"
+    },
+    "Samsunspor": {
+      "shortName": "SAM",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "Trabzonspor": {
+      "shortName": "TS",
+      "color": "#7A1E3A",
+      "textColor": "#FFFFFF"
+    },
+    "Çaykur Rizespor": {
+      "shortName": "RIZ",
+      "color": "#00A651",
+      "textColor": "#FFFFFF"
+    },
+    "Çorum": {
+      "shortName": "COR",
+      "fullName": "Çorum FK"
+    }
+  }
+}
