@@ -216,6 +216,28 @@ class ModelTests(unittest.TestCase):
         # Unknown teams are average, and a neutral venue removes home advantage.
         self.assertEqual(model.rates("X", "Y", neutral=True)[0], model.rates("Y", "X", neutral=True)[0])
 
+    def test_a_club_with_few_games_stays_near_its_compatriots(self) -> None:
+        day = datetime(2026, 1, 1, tzinfo=timezone.utc)
+        results = []
+        # Two English clubs beat two Greek clubs again and again...
+        for _ in range(10):
+            for strong in ("E1", "E2"):
+                for weak in ("G1", "G2"):
+                    results += [european_cups.Result(strong, weak, 2, 0, day), european_cups.Result(weak, strong, 0, 1, day)]
+        # ...and a new Greek club wins its only three games without conceding.
+        results += [european_cups.Result("NEW", "G1", 3, 0, day), european_cups.Result("G2", "NEW", 0, 2, day), european_cups.Result("NEW", "E1", 2, 0, day)]
+        countries = {"E1": "ENG", "E2": "ENG", "G1": "GRE", "G2": "GRE", "NEW": "GRE"}
+
+        def overall(model: european_cups.CupModel, team: str) -> float:
+            return sum(model.strength(team))
+
+        model = european_cups.fit_model(results, day, countries)
+        self.assertLess(overall(model, "NEW"), overall(model, "E1"))
+        self.assertGreater(overall(model, "NEW"), overall(model, "G1"))
+        # A club not in the data yet takes its country's level.
+        unseen = european_cups.CupModel(model.mu, model.home, model.attack, model.defence, model.country_attack, model.country_defence, {"X": "ENG"})
+        self.assertGreater(overall(unseen, "X"), overall(unseen, "G1"))
+
     def test_domestic_names_link_to_uefa_clubs_without_guessing(self) -> None:
         teams = {
             "1": uefa.Team("1", "Paris", "PSG", "FRA"),

@@ -111,8 +111,10 @@ The UEFA Champions League (`leagues/champions-league.json`) is a rolling footbal
 
 - **Data** comes from the public JSON services behind uefa.com (`uefa.py`). No key is needed, but they are unofficial for third parties, like ESPN's, so every download is cached and a failed refresh falls back to the last good copy. Match data covers every qualifying and main-draw match, with 90-minute, extra-time and shoot-out scores and the winner of each tie. The official league-phase table is also used.
 - **Table:** the 36-club league phase is ranked by UEFA's criteria: points, goal difference, goals, away goals, wins, away wins, then the opponents' combined points, goal difference and goals. UEFA's published order is used when it agrees with the results on every club's record. The 2025-26 tables of all three competitions are reproduced exactly (`tests/test_european_cups.py`).
-- **Model:** a Poisson goals model (attack, defence, home advantage; a 730-day half-life) fitted on every UEFA club match from this season and the three before, qualifiers included. Domestic league games from FixtureDownload are added at half weight. They come from England, Spain, Germany, Italy, France, the Netherlands, Portugal, Scotland and Turkey, and are linked to UEFA clubs by name only when the match is unambiguous.
-- **Backtest:** week-ahead predictions of the 1,062 main-draw matches of 2024-25 and 2025-26 in the three competitions score 0.2065 (ranked probability score). That compares with 0.2082 without domestic games and 0.2323 for home/draw/away base rates. Season-long strength drift (0.1) was chosen by scoring top-8, top-24, round-reached and title odds at five checkpoints of those six competitions.
+- **Model:** a Poisson goals model (attack, defence, home advantage; a 730-day half-life) fitted on every UEFA club match from this season and the three before, qualifiers included.
+  - Domestic league games from FixtureDownload are added at a quarter weight. They come from England, Spain, Germany, Italy, France, the Netherlands, Portugal, Scotland and Turkey, and are linked to UEFA clubs by name only when the match is unambiguous.
+  - Each club is rated as its country's level plus its own difference from it, shrunk hard. A club with three European games and no domestic results then sits near its compatriots instead of being rated on three scores.
+- **Backtest:** week-ahead predictions of the 1,062 main-draw matches of 2024-25 and 2025-26 in the three competitions score 0.2033 (ranked probability score). That compares with 0.2065 without country levels, 0.2082 also without domestic games, and 0.2323 for home/draw/away base rates. Season-long strength drift (0.1) was chosen by scoring top-8, top-24, round-reached and title odds at five checkpoints of those six competitions.
 - **Simulation:** the rest of the league phase and the knockouts are simulated 20,000 times:
   - The knockout play-offs pair places 9/10 v 23/24, 11/12 v 21/22, 13/14 v 19/20 and 15/16 v 17/18.
   - The top eight meet the play-off winners of the matching pair.
@@ -120,6 +122,7 @@ The UEFA Champions League (`leagues/champions-league.json`) is a rolling footbal
   - Two-legged ties go to extra time and then penalties (a coin flip).
   - Real draws and results replace the simulated ones as they happen.
 - **Page:** the table with Top 8, Top 24, Quarter-final and Title odds, fixture predictions, the matches that matter, and, from the knockout play-offs on, a bracket with aggregate scores.
+- **Known limitation:** a club from a strong country with no domestic results in the data (a second-division cup winner, say) starts at its country's average until its European results move it.
 
 ## NFL, NBA, NHL And MLB
 

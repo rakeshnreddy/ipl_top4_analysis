@@ -15,6 +15,7 @@ extra time and penalties, which gives the odds of each round and the title.
 
 from __future__ import annotations
 
+import dataclasses
 import math
 import re
 import unicodedata
@@ -36,14 +37,18 @@ from team_sports import Game
 SIMULATIONS = 20_000
 SEED = 20260908
 # Chosen by week-ahead backtests of 2024-25 and 2025-26 main-draw matches in all
-# three competitions (1,062 games): ranked probability score 0.2065 against 0.2323
-# for home/draw/away base rates (0.2082 without domestic results).
+# three competitions (1,062 games): ranked probability score 0.2033 against 0.2323
+# for home/draw/away base rates. A club's strength is its country's level plus its
+# own difference from it, shrunk hard (TEAM_RIDGE): a club with three European games
+# and no domestic results then sits near its compatriots instead of being rated on
+# three scores (0.2065 with one flat ridge, 0.2082 also without domestic results).
 HISTORY_SEASONS = 4
 HALF_LIFE_DAYS = 730
-RIDGE = 1.0
+TEAM_RIDGE = 20.0
+COUNTRY_RIDGE = 0.5
 # Domestic league results (FixtureDownload) sharpen ratings within a country; the
-# European matches tie the countries together. Half weight scored best.
-DOMESTIC_WEIGHT = 0.5
+# European matches tie the countries together. A quarter weight scored best.
+DOMESTIC_WEIGHT = 0.25
 DOMESTIC_FEEDS = {
     "ENG": ("epl-{year}", "championship-{year}"),
     "ESP": ("la-liga-{year}",),
@@ -111,7 +116,8 @@ EXTRA_TIME_SHARE = 1 / 3
 # Main-draw knockout matches after the league phase: 8 + 8 + 4 + 2 two-legged ties and a final.
 KNOCKOUT_MATCHES = 45
 # Season-long strength drift, as in football.py. Season odds at five checkpoints of the six
-# 2024-25 and 2025-26 competitions scored best (log loss) between 0 and 0.1.
+# 2024-25 and 2025-26 competitions scored within 0.2% (log loss) at 0 and 0.1, and worse at
+# 0.2; 0.1 is kept as a guard against early-season overconfidence.
 STRENGTH_DRIFT = 0.1
 
 ROUND_LABELS = {
@@ -129,13 +135,25 @@ ROUND_ORDER = ("LEAGUE", *uefa.KNOCKOUT_ROUNDS, "CHAMPION")
 class CupModel:
     mu: float
     home: float
+    # Country level plus the club's own difference, for every club in the data.
     attack: dict[str, float]
     defence: dict[str, float]
+    # Country levels, for clubs with no matches in the data yet.
+    country_attack: dict[str, float] = dataclasses.field(default_factory=dict)
+    country_defence: dict[str, float] = dataclasses.field(default_factory=dict)
+    country_of: dict[str, str] = dataclasses.field(default_factory=dict)
+
+    def strength(self, team: str) -> tuple[float, float]:
+        if team in self.attack:
+            return self.attack[team], self.defence[team]
+        country = self.country_of.get(team)
+        return self.country_attack.get(country, 0.0), self.country_defence.get(country, 0.0)
 
     def rates(self, home: str, away: str, neutral: bool = False) -> tuple[float, float]:
-        attack, defence = self.attack.get, self.defence.get
-        home_rate = math.exp(self.mu + (0.0 if neutral else self.home) + attack(home, 0.0) - defence(away, 0.0))
-        away_rate = math.exp(self.mu + attack(away, 0.0) - defence(home, 0.0))
+        home_attack, home_defence = self.strength(home)
+        away_attack, away_defence = self.strength(away)
+        home_rate = math.exp(self.mu + (0.0 if neutral else self.home) + home_attack - away_defence)
+        away_rate = math.exp(self.mu + away_attack - home_defence)
         return home_rate, away_rate
 
     def outcome(self, home: str, away: str, neutral: bool = False) -> tuple[float, float, float]:
@@ -161,36 +179,52 @@ class Result:
     weight: float = 1.0
 
 
-def fit_model(results: list[Result], now: datetime) -> CupModel:
+def fit_model(results: list[Result], now: datetime, country_of: dict[str, str] | None = None) -> CupModel:
     """Penalised, time-weighted Poisson regression, fitted with Newton steps.
 
-    Every observation touches four parameters (mu, home, one attack, one defence), so the
-    gradient and Hessian are accumulated from those cells instead of a dense design matrix.
+    log(goals) = mu + home advantage + attack(country) + attack(club) - defence(country) - defence(club),
+    with ridge penalties pulling clubs toward their country (TEAM_RIDGE) and countries toward
+    the average (COUNTRY_RIDGE). Every observation touches six parameters, so the gradient and
+    Hessian are accumulated from those cells instead of a dense design matrix.
     """
+    country_of = country_of or {}
     used = [result for result in results if result.date <= now]
     teams = sorted({result.home for result in used} | {result.away for result in used})
+    countries = sorted({country_of.get(team, "") for team in teams})
     index = {team: i for i, team in enumerate(teams)}
-    count = len(teams)
-    size = 2 + 2 * count  # mu, home, attack[count], defence[count]
+    country_index = {country: i for i, country in enumerate(countries)}
+    count, nations = len(teams), len(countries)
+    # Layout: mu, home, country attack, country defence, club attack, club defence.
+    country_attack, country_defence = 2, 2 + nations
+    club_attack, club_defence = 2 + 2 * nations, 2 + 2 * nations + count
+    size = 2 + 2 * nations + 2 * count
     theta = np.zeros(size)
     theta[0] = math.log(1.3)
     if used:
         home = np.array([index[result.home] for result in used])
         away = np.array([index[result.away] for result in used])
+        home_country = np.array([country_index[country_of.get(result.home, "")] for result in used])
+        away_country = np.array([country_index[country_of.get(result.away, "")] for result in used])
         edge = np.array([0.0 if result.neutral else 1.0 for result in used])
         ages = np.array([max(0.0, (now - result.date).total_seconds() / 86400) for result in used])
         weight = np.array([result.weight for result in used]) * 0.5 ** (ages / HALF_LIFE_DAYS)
         ones, zeros = np.ones(len(used)), np.zeros(len(used))
         columns = np.concatenate(
-            [np.stack([zeros, ones, 2 + home, 2 + count + away], axis=1), np.stack([zeros, ones, 2 + away, 2 + count + home], axis=1)]
+            [
+                np.stack([zeros, ones, country_attack + home_country, country_defence + away_country, club_attack + home, club_defence + away], axis=1),
+                np.stack([zeros, ones, country_attack + away_country, country_defence + home_country, club_attack + away, club_defence + home], axis=1),
+            ]
         ).astype(int)
-        values = np.concatenate([np.stack([ones, edge, ones, -ones], axis=1), np.stack([ones, zeros, ones, -ones], axis=1)])
+        values = np.concatenate(
+            [np.stack([ones, edge, ones, -ones, ones, -ones], axis=1), np.stack([ones, zeros, ones, -ones, ones, -ones], axis=1)]
+        )
         observed = np.array([result.home_score for result in used] + [result.away_score for result in used], dtype=float)
         weights = np.concatenate([weight, weight])
         penalty = np.zeros(size)
-        penalty[2:] = RIDGE
+        penalty[country_attack:club_attack] = COUNTRY_RIDGE
+        penalty[club_attack:] = TEAM_RIDGE
         pairs = (columns[:, :, None] * size + columns[:, None, :]).ravel()
-        for _ in range(50):
+        for _ in range(60):
             rate = np.exp((theta[columns] * values).sum(axis=1))
             gradient = np.bincount(columns.ravel(), (values * (weights * (observed - rate))[:, None]).ravel(), minlength=size) - penalty * theta
             curvature = (values[:, :, None] * values[:, None, :] * (weights * rate)[:, None, None]).ravel()
@@ -199,11 +233,18 @@ def fit_model(results: list[Result], now: datetime) -> CupModel:
             theta += step
             if np.abs(step).max() < 1e-7:
                 break
+
+    def level(team: str, offset: int) -> float:
+        return float(theta[offset + country_index[country_of.get(team, "")]])
+
     return CupModel(
         mu=float(theta[0]),
         home=float(theta[1]),
-        attack={team: float(theta[2 + i]) for team, i in index.items()},
-        defence={team: float(theta[2 + count + i]) for team, i in index.items()},
+        attack={team: level(team, country_attack) + float(theta[club_attack + i]) for team, i in index.items()},
+        defence={team: level(team, country_defence) + float(theta[club_defence + i]) for team, i in index.items()},
+        country_attack={country: float(theta[country_attack + i]) for country, i in country_index.items() if country},
+        country_defence={country: float(theta[country_defence + i]) for country, i in country_index.items() if country},
+        country_of=dict(country_of),
     )
 
 
@@ -651,8 +692,9 @@ def simulate(
 
     # Strength per simulation: the fitted rating plus a season-long drift.
     scale = STRENGTH_DRIFT * math.sqrt(min(max(season_left, 0.0), 1.0))
-    attack = np.array([model.attack.get(team, 0.0) for team in teams])[None, :] + rng.normal(0.0, scale, (simulations, count))
-    defence = np.array([model.defence.get(team, 0.0) for team in teams])[None, :] + rng.normal(0.0, scale, (simulations, count))
+    strengths = [model.strength(team) for team in teams]
+    attack = np.array([value[0] for value in strengths])[None, :] + rng.normal(0.0, scale, (simulations, count))
+    defence = np.array([value[1] for value in strengths])[None, :] + rng.normal(0.0, scale, (simulations, count))
 
     fields = ("points", "goalsFor", "goalsAgainst", "awayGoalsFor", "wins", "awayWins")
     totals = {field: np.tile(np.array([table[team][field] for team in teams], dtype=np.float64), (simulations, 1)) for field in fields}
@@ -731,8 +773,11 @@ def iso(value: datetime) -> str:
     return value.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def model_results(competition: int, year: int, current: list[uefa.Match], info: dict[str, uefa.Team], cache_dir: Path, warnings: list[str]) -> list[Result]:
-    """Every UEFA club match of this season and the previous ones, plus domestic league games."""
+def model_results(
+    competition: int, year: int, current: list[uefa.Match], info: dict[str, uefa.Team], cache_dir: Path, warnings: list[str]
+) -> tuple[list[Result], dict[str, str]]:
+    """Every UEFA club match of this season and the previous ones, plus domestic league games,
+    and each club's country (domestic-only clubs are keyed "ENG:Name")."""
     found = list(current)
     teams = dict(info)
     for offset in range(HISTORY_SEASONS):
@@ -746,7 +791,13 @@ def model_results(competition: int, year: int, current: list[uefa.Match], info: 
                 continue
             found += matches
             teams.update(more)
-    return uefa_results(found) + domestic_results(year, teams, cache_dir)
+    results = uefa_results(found) + domestic_results(year, teams, cache_dir)
+    country_of = {team.id: team.country for team in teams.values()}
+    for result in results:
+        for key in (result.home, result.away):
+            if key not in country_of and ":" in key:
+                country_of[key] = key.split(":", 1)[0]
+    return results, country_of
 
 
 def team_meta(config: dict[str, Any], info: dict[str, uefa.Team], teams: list[str]) -> dict[str, dict[str, str]]:
@@ -887,10 +938,10 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         print(f"{season.payload_id}: official table unavailable ({exc})")
     positions = {team: rank for rank, team in enumerate(order)}
 
-    history = model_results(competition, year, matches, info, cache_dir, warnings)
+    history, country_of = model_results(competition, year, matches, info, cache_dir, warnings)
     latest = max((result.date for result in history), default=now)
     # Weights decay from the latest result rather than from today, so ratings only change when results do.
-    model = fit_model(history, min(latest, now))
+    model = fit_model(history, min(latest, now), country_of)
 
     ties = knockout_ties(matches)
     remaining = [match for match in league_matches if not match.played]
@@ -978,7 +1029,10 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     games = len(league_matches) * 2 // len(teams)
     notes = [
         f"Team strength comes from a Poisson goals model (attack, defence, home advantage) fitted on every UEFA club "
-        f"match from this season and the two before, qualifiers included, with a {HALF_LIFE_DAYS}-day half-life.",
+        f"match from this season and the {HISTORY_SEASONS - 1} before, qualifiers included, plus domestic league games "
+        f"from nine countries at a quarter weight, with a {HALF_LIFE_DAYS}-day half-life.",
+        "Each club is rated as its country's level plus its own difference from it, so a club with only a few "
+        "European games sits near its compatriots until its results say otherwise.",
         f"The rest of the league phase and every knockout round are simulated {SIMULATIONS:,} times, letting team "
         "strength drift (more when more of the season is left).",
         "League-phase ties follow UEFA's order: points, goal difference, goals scored, away goals scored, wins, away wins, "
@@ -987,7 +1041,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         "15/16 v 17/18), the top eight meet the play-off winners from the matching pair, and the top eight pairs are split "
         "between the halves of the bracket. Ties level after two legs go to extra time, then penalties (a coin flip).",
         "Backtested on 2024-25 and 2025-26 (1,062 main-draw matches in the three competitions): week-ahead predictions score "
-        "0.208 (ranked probability score) against 0.232 for home/draw/away base rates.",
+        "0.203 (ranked probability score) against 0.232 for home/draw/away base rates.",
     ]
     if games:
         notes.insert(0, f"{len(teams)} clubs play {games} league-phase games each.")
@@ -1039,7 +1093,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "probabilities": probabilities,
             "positions": simulation["positions"],
             "expected": simulation["expected"],
-            "ratings": {team: {"attack": round(model.attack.get(team, 0.0), 3), "defence": round(model.defence.get(team, 0.0), 3)} for team in teams},
+            "ratings": {team: {"attack": round(model.strength(team)[0], 3), "defence": round(model.strength(team)[1], 3)} for team in teams},
         },
         "matchesThatMatter": simulation["matchesThatMatter"],
         **({"bracket": knockout} if knockout else {}),
