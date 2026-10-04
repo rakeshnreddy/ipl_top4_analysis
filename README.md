@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), eight European football leagues, the Champions League and Europa League, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), eight European football leagues, the Champions League, Europa League and Conference League, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -111,7 +111,7 @@ To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed 
 
 ## European Cups
 
-The UEFA Champions League and Europa League (`leagues/champions-league.json`, `europa-league.json`) are rolling football configs with `"engine": "european_cups"`, built by `european_cups.py`; they differ only in the UEFA competition id (`sources.uefa`: 1 and 14). The season runs September to June, and the payload id carries the season, for example `champions-league-2026-27`.
+The UEFA Champions League, Europa League and Conference League (`leagues/champions-league.json`, `europa-league.json`, `conference-league.json`) are rolling football configs with `"engine": "european_cups"`, built by `european_cups.py`; they differ only in the UEFA competition id (`sources.uefa`: 1, 14 and 2019). The Conference League's league phase is six games per club instead of eight; the knockout format is the same. The season runs September to June, and the payload id carries the season, for example `champions-league-2026-27`.
 
 - **Data** comes from the public JSON services behind uefa.com (`uefa.py`). No key is needed, but they are unofficial for third parties, like ESPN's, so every download is cached and a failed refresh falls back to the last good copy. Match data covers every qualifying and main-draw match, with 90-minute, extra-time and shoot-out scores and the winner of each tie. The official league-phase table is also used.
 - **Table:** the 36-club league phase is ranked by UEFA's criteria: points, goal difference, goals, away goals, wins, away wins, then the opponents' combined points, goal difference and goals. UEFA's published order is used when it agrees with the results on every club's record. The 2025-26 tables of all three competitions are reproduced exactly (`tests/test_european_cups.py`).
