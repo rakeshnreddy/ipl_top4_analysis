@@ -652,7 +652,10 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
   );
 };
 
-/** Series wins, or aggregate goals for two-legged ties (European cups); "Best of N" before a series starts. */
+/**
+ * Series wins, or goals: aggregate goals for two-legged ties (European cups) and the score of a
+ * single match (MLS); "Best of N" before a series starts.
+ */
 function seriesScore(series: BracketSeries) {
   if (series.aggregate !== undefined) {
     return series.aggregate ? `${series.aggregate.top}–${series.aggregate.bottom}` : 'vs';
@@ -660,8 +663,9 @@ function seriesScore(series: BracketSeries) {
   return series.top ? `${series.topWins}–${series.bottomWins}` : `Best of ${series.bestOf}`;
 }
 
+/** Two-legged ties make a knockout bracket; a single match with its score does not. */
 const isKnockout = (bracket: Bracket) =>
-  bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined));
+  bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined && series.bestOf > 1));
 
 /** Playoff rounds with series scores; series whose teams are not known yet show as to be decided. */
 const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }) => (
@@ -679,7 +683,9 @@ const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }
           ? 'Final bracket'
           : isKnockout(bracket)
             ? 'Aggregate scores over both legs, updated daily'
-            : 'Series scores update daily'}
+            : bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined))
+              ? 'Series and match scores update daily'
+              : 'Series scores update daily'}
       </p>
     </div>
     <div className="bracket-rounds">
