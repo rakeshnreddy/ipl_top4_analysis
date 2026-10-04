@@ -308,6 +308,18 @@ class PayloadTests(unittest.TestCase):
 
 
 class ConfigTests(unittest.TestCase):
+    def test_every_cup_config_points_at_a_uefa_competition(self) -> None:
+        configs = [leagues.read_config(league_id) for league_id in leagues.available_league_ids()]
+        cups = [config for config in configs if config.get("engine") == "european_cups"]
+        self.assertGreaterEqual(len(cups), 1)
+        for config in cups:
+            with self.subTest(config=config["id"]):
+                team_sports.validate_config(config)
+                self.assertIn(config["sources"]["uefa"], uefa.COMPETITIONS.values())
+                self.assertEqual([tier["key"] for tier in config["tiers"]], ["top8", "top24", "quarterFinals", "title"])
+                season = team_sports.resolve_season(config, datetime(2026, 10, 3, tzinfo=timezone.utc))
+                self.assertEqual(season.feed, "2027")
+
     def test_cup_configs_are_valid_and_build_with_the_cup_engine(self) -> None:
         team_sports.validate_config(UCL_CONFIG)
         self.assertEqual(UCL_CONFIG["engine"], "european_cups")

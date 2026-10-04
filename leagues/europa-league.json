@@ -1,0 +1,45 @@
+{
+  "id": "europa-league",
+  "sport": "football",
+  "engine": "european_cups",
+  "name": "UEFA Europa League",
+  "shortName": "Europa League",
+  "headline": "Europa League Top 8, Knockout & Title Odds",
+  "priority": 28,
+  "season": {
+    "startMonth": 9,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "{next}"
+  },
+  "tiers": [
+    {
+      "key": "top8",
+      "label": "Top 8",
+      "kind": "top",
+      "size": 8
+    },
+    {
+      "key": "top24",
+      "label": "Top 24",
+      "kind": "top",
+      "size": 24
+    },
+    {
+      "key": "quarterFinals",
+      "label": "Quarter-finals",
+      "shortLabel": "QF",
+      "kind": "round",
+      "round": "QUARTER_FINALS"
+    },
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "champion"
+    }
+  ],
+  "sources": {
+    "uefa": 14
+  },
+  "teams": {}
+}
