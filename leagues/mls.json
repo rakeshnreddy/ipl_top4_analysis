@@ -1,0 +1,457 @@
+{
+  "id": "mls",
+  "sport": "football",
+  "engine": "football_playoffs",
+  "name": "Major League Soccer",
+  "shortName": "MLS",
+  "headline": "MLS Playoff & MLS Cup Odds",
+  "priority": 37,
+  "timezone": "America/New_York",
+  "season": {
+    "startMonth": 2,
+    "endMonth": 12,
+    "label": "{year}",
+    "feed": "mls-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "30 clubs in two conferences of 15, 34 games each, 3 points a win and 1 a tie. Teams level on points are separated by total wins, goal difference, goals scored, head-to-head points and goal difference (same conference only, from 2026), fewest disciplinary points, away goal difference, away goals, home goal difference and home goals. The top nine in each conference reach the Audi MLS Cup Playoffs: 8 v 9 in a one-off Wild Card match at the 8th seed, straight to penalties if level after 90 minutes; seeds 1-7 go straight to Round One. Round One is best of three (1 v Wild Card winner, 4 v 5, 2 v 7, 3 v 6), the higher seed hosting games 1 and 3, and every level game goes straight to penalties. The Conference Semifinals (1/8/9 v 4/5 and 2/7 v 3/6, no reseeding), Conference Finals and MLS Cup are single matches with extra time and penalties, hosted by the higher seed; MLS Cup is hosted by the finalist higher in the Supporters' Shield standings. The Supporters' Shield goes to the best regular-season record.",
+    "sources": [
+      "https://www.mlssoccer.com/news/2026-mls-competition-guidelines",
+      "https://www.mlssoccer.com/news/major-league-soccer-announces-audi-2026-mls-cup-playoffs-schedule",
+      "https://www.mlssoccer.com/news/2025-mls-competition-guidelines",
+      "https://www.mlssoccer.com/standings/2026/conference",
+      "https://www.mlssoccer.com/standings/2025/conference"
+    ]
+  },
+  "notes": [
+    "Playoffs: the top nine in each conference qualify. Seeds 8 and 9 meet in a Wild Card match and 1-7 go straight to a best-of-three Round One; Wild Card and Round One games that are level after 90 minutes go straight to penalties. The rest are single matches with extra time, hosted by the higher seed, and MLS Cup by the finalist with the better regular-season record.",
+    "MLS's fifth tiebreaker, fewest disciplinary points, is not in the data; ESPN's published order (which matches mlssoccer.com) is used whenever its records agree with the results.",
+    "Backtested on the 2024 and 2025 seasons: week-ahead match predictions score 0.224 (ranked probability score) against 0.232 for home/draw/away base rates, and playoff odds at a quarter, half and three quarters of each season were scored to set the strength drift."
+  ],
+  "model": {
+    "drift": 0.2
+  },
+  "tiebreakers": [
+    "wins",
+    "goal-difference",
+    "goals-for",
+    "head-to-head",
+    "away-goal-difference",
+    "away-goals",
+    "home-goal-difference",
+    "home-goals"
+  ],
+  "conferences": [
+    {
+      "key": "East",
+      "label": "Eastern Conference",
+      "shortLabel": "East"
+    },
+    {
+      "key": "West",
+      "label": "Western Conference",
+      "shortLabel": "West"
+    }
+  ],
+  "playoffs": {
+    "rankLabel": "Overall",
+    "positionLabel": "Conference position",
+    "cutoffs": [
+      {
+        "after": 7,
+        "label": "Wild Card"
+      },
+      {
+        "after": 9,
+        "label": "Out"
+      }
+    ],
+    "zones": [
+      {
+        "to": 7,
+        "kind": "top"
+      },
+      {
+        "to": 9,
+        "kind": "mid"
+      }
+    ],
+    "rounds": [
+      {
+        "key": "WC",
+        "label": "Wild Card",
+        "match": "single",
+        "decider": "penalties",
+        "pairs": [
+          [
+            8,
+            9
+          ]
+        ]
+      },
+      {
+        "key": "R1",
+        "label": "Round One",
+        "match": "series",
+        "bestOf": 3,
+        "hosts": "1-1-1",
+        "decider": "penalties",
+        "pairs": [
+          [
+            1,
+            "WC.1"
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      },
+      {
+        "key": "CSF",
+        "label": "Conference Semifinals",
+        "match": "single",
+        "pairs": [
+          [
+            "R1.1",
+            "R1.2"
+          ],
+          [
+            "R1.3",
+            "R1.4"
+          ]
+        ]
+      },
+      {
+        "key": "CF",
+        "label": "Conference Final",
+        "match": "single",
+        "pairs": [
+          [
+            "CSF.1",
+            "CSF.2"
+          ]
+        ]
+      },
+      {
+        "key": "F",
+        "label": "MLS Cup",
+        "match": "single",
+        "across": true,
+        "pairs": [
+          [
+            "East:CF.1",
+            "West:CF.1"
+          ]
+        ]
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top7",
+      "label": "Top 7",
+      "kind": "seed",
+      "size": 7
+    },
+    {
+      "key": "shield",
+      "label": "Supporters' Shield",
+      "kind": "top",
+      "size": 1,
+      "shortLabel": "Shield"
+    },
+    {
+      "key": "cup",
+      "label": "MLS Cup",
+      "kind": "champion",
+      "shortLabel": "Cup"
+    }
+  ],
+  "columns": [
+    {
+      "key": "played",
+      "label": "P"
+    },
+    {
+      "key": "wins",
+      "label": "W"
+    },
+    {
+      "key": "losses",
+      "label": "L"
+    },
+    {
+      "key": "draws",
+      "label": "T",
+      "title": "Ties"
+    },
+    {
+      "key": "goalsFor",
+      "label": "GF",
+      "title": "Goals for"
+    },
+    {
+      "key": "goalDifference",
+      "label": "GD",
+      "signed": true
+    },
+    {
+      "key": "points",
+      "label": "Pts",
+      "strong": true
+    }
+  ],
+  "sources": {
+    "fixturedownload": "mls-{year}",
+    "espn": "usa.1"
+  },
+  "teams": {
+    "Atlanta United": {
+      "shortName": "ATL",
+      "fullName": "Atlanta United",
+      "color": "#80000A",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Austin FC": {
+      "shortName": "ATX",
+      "color": "#00B140",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "CF Montréal": {
+      "shortName": "MTL",
+      "color": "#0033A1",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Charlotte FC": {
+      "shortName": "CLT",
+      "color": "#1A85C8",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Chicago Fire FC": {
+      "shortName": "CHI",
+      "fullName": "Chicago Fire",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Colorado Rapids": {
+      "shortName": "COL",
+      "color": "#960A2C",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Columbus Crew": {
+      "shortName": "CLB",
+      "color": "#FEDD00",
+      "textColor": "#000000",
+      "conference": "East"
+    },
+    "D.C. United": {
+      "shortName": "DC",
+      "color": "#231F20",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "FC Cincinnati": {
+      "shortName": "CIN",
+      "color": "#FE5000",
+      "textColor": "#000000",
+      "conference": "East"
+    },
+    "FC Dallas": {
+      "shortName": "DAL",
+      "color": "#E81F3E",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Houston Dynamo FC": {
+      "shortName": "HOU",
+      "fullName": "Houston Dynamo",
+      "color": "#FF6B00",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "Inter Miami CF": {
+      "shortName": "MIA",
+      "fullName": "Inter Miami",
+      "color": "#F7B5CD",
+      "textColor": "#000000",
+      "conference": "East"
+    },
+    "LA Galaxy": {
+      "shortName": "LA",
+      "color": "#00245D",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Los Angeles Football Club": {
+      "shortName": "LAFC",
+      "fullName": "LAFC",
+      "color": "#C39E6D",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "Minnesota United FC": {
+      "shortName": "MIN",
+      "fullName": "Minnesota United",
+      "color": "#8CD2F4",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "Nashville SC": {
+      "shortName": "NSH",
+      "color": "#ECE83A",
+      "textColor": "#000000",
+      "conference": "East"
+    },
+    "New England Revolution": {
+      "shortName": "NE",
+      "color": "#0A2240",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "New York City Football Club": {
+      "shortName": "NYC",
+      "fullName": "New York City FC",
+      "color": "#6CACE4",
+      "textColor": "#000000",
+      "conference": "East"
+    },
+    "Orlando City": {
+      "shortName": "ORL",
+      "color": "#633492",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Philadelphia Union": {
+      "shortName": "PHI",
+      "color": "#071B2C",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Portland Timbers": {
+      "shortName": "POR",
+      "color": "#004812",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Real Salt Lake": {
+      "shortName": "RSL",
+      "color": "#B30838",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Red Bull New York": {
+      "shortName": "RBNY",
+      "color": "#ED1E36",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "San Diego FC": {
+      "shortName": "SD",
+      "color": "#0E2C5E",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "San Jose Earthquakes": {
+      "shortName": "SJ",
+      "color": "#0067B1",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Seattle Sounders FC": {
+      "shortName": "SEA",
+      "fullName": "Seattle Sounders",
+      "color": "#5D9741",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "Sporting Kansas City": {
+      "shortName": "SKC",
+      "color": "#93B1D7",
+      "textColor": "#000000",
+      "conference": "West"
+    },
+    "St. Louis CITY SC": {
+      "shortName": "STL",
+      "fullName": "St. Louis City SC",
+      "color": "#DD004A",
+      "textColor": "#FFFFFF",
+      "conference": "West"
+    },
+    "Toronto FC": {
+      "shortName": "TOR",
+      "color": "#B81137",
+      "textColor": "#FFFFFF",
+      "conference": "East"
+    },
+    "Vancouver Whitecaps FC": {
+      "shortName": "VAN",
+      "fullName": "Vancouver Whitecaps",
+      "color": "#9DC2EA",
+      "textColor": "#000000",
+      "conference": "West"
+    }
+  },
+  "aliases": {
+    "Atlanta": "Atlanta United",
+    "Atlanta United FC": "Atlanta United",
+    "Austin": "Austin FC",
+    "Charlotte": "Charlotte FC",
+    "Chicago": "Chicago Fire FC",
+    "Cincinnati": "FC Cincinnati",
+    "Colorado": "Colorado Rapids",
+    "Columbus": "Columbus Crew",
+    "D.C.": "D.C. United",
+    "Dallas": "FC Dallas",
+    "Houston": "Houston Dynamo FC",
+    "Kansas City": "Sporting Kansas City",
+    "LA": "LA Galaxy",
+    "LAFC": "Los Angeles Football Club",
+    "Miami": "Inter Miami CF",
+    "Minnesota": "Minnesota United FC",
+    "Montréal": "CF Montréal",
+    "CF Montreal": "CF Montréal",
+    "Nashville": "Nashville SC",
+    "New England": "New England Revolution",
+    "New York": "Red Bull New York",
+    "New York Red Bulls": "Red Bull New York",
+    "New York City": "New York City Football Club",
+    "New York City FC": "New York City Football Club",
+    "Orlando": "Orlando City",
+    "Orlando City SC": "Orlando City",
+    "Philadelphia": "Philadelphia Union",
+    "Portland": "Portland Timbers",
+    "Salt Lake": "Real Salt Lake",
+    "San Diego": "San Diego FC",
+    "San Jose": "San Jose Earthquakes",
+    "Seattle": "Seattle Sounders FC",
+    "St. Louis": "St. Louis CITY SC",
+    "St. Louis City SC": "St. Louis CITY SC",
+    "Toronto": "Toronto FC",
+    "Vancouver": "Vancouver Whitecaps FC",
+    "Vancouver Whitecaps": "Vancouver Whitecaps FC"
+  }
+}

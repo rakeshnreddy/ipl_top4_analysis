@@ -248,6 +248,42 @@ describe('SportPage during the playoffs', () => {
     expect(within(bracket).getByText('vs')).toBeInTheDocument();
     expect(within(bracket).queryByText(/Best of/)).not.toBeInTheDocument();
   });
+
+  it('shows best-of-three series and single-match scores in a football playoff bracket', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...footballPayload,
+      metadata: { ...footballPayload.metadata, season_status: 'postseason' },
+      bracket: {
+        champion: null,
+        rounds: [
+          {
+            key: 'R1',
+            label: 'Round One',
+            series: [
+              { stage: 'Round One', conference: 'East', top: 'Arsenal', bottom: 'Spurs', topSeed: 1, bottomSeed: 8, topWins: 2, bottomWins: 1, bestOf: 3, winner: 'Arsenal', note: '0-0 (3-2 pens), 2-4, 3-3 (7-6 pens)' },
+            ],
+          },
+          {
+            key: 'CSF',
+            label: 'Conference Semifinals',
+            series: [
+              { stage: 'Conference Semifinals', conference: 'East', top: 'Arsenal', bottom: 'Chelsea', topSeed: 1, bottomSeed: 4, topWins: 0, bottomWins: 1, bestOf: 1, winner: 'Chelsea', aggregate: { top: 2, bottom: 2 }, note: '3-4 on penalties' },
+              { stage: 'Conference Semifinals', conference: 'East', top: 'Liverpool', bottom: null, topSeed: 2, bottomSeed: null, topWins: 0, bottomWins: 0, bestOf: 1, winner: null, aggregate: null },
+            ],
+          },
+        ],
+      },
+    });
+
+    const bracket = (await screen.findByRole('heading', { name: 'Playoff Bracket' })).closest('section')!;
+    expect(within(bracket).getByText('Series and match scores update daily')).toBeInTheDocument();
+    expect(within(bracket).getByText('2–1')).toBeInTheDocument();
+    expect(within(bracket).getByText('2–2')).toBeInTheDocument();
+    expect(within(bracket).getByText('3-4 on penalties')).toBeInTheDocument();
+    expect(within(bracket).getByText('4 CHE')).toHaveClass('is-winner');
+    expect(within(bracket).getByText('vs')).toBeInTheDocument();
+    expect(within(bracket).getByText('To be decided')).toBeInTheDocument();
+  });
 });
 
 describe('formatChance', () => {

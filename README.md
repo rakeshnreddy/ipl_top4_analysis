@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -149,6 +149,55 @@ The UEFA Champions League, Europa League and Conference League (`leagues/champio
 - **Page:** the table with Top 8, Top 24, Quarter-final and Title odds, fixture predictions, the matches that matter, and, from the knockout play-offs on, a bracket with aggregate scores.
 - **Known limitation:** a club from a strong country with no domestic results in the data (a second-division cup winner, say) starts at its country's average until its European results move it.
 
+## MLS And Football Playoffs
+
+Major League Soccer (`leagues/mls.json`) is a rolling football config with `"engine": "football_playoffs"`, built by `football_playoffs.py`: football.py's table and goals model plus conference tables, seeding and a playoff bracket. The season runs February to December, and the payload id carries the year (`mls-2026`).
+
+**Data**
+
+- The regular season comes from FixtureDownload (`mls-{year}`).
+- ESPN's public scoreboard (`usa.1`) supplies the playoff results and cross-checks every FixtureDownload score; where they differ, ESPN's score is used and the page lists the change. The 2026 feed had three wrong: LA Galaxy 1-3 St. Louis and LAFC 3-1 Real Salt Lake (22 July) were reversed, and Orlando City 1-2 Chicago (19 August) was 1-0. ESPN's scores agree with [mlssoccer.com](https://www.mlssoccer.com/standings/2026/conference).
+- ESPN's table supplies the order of teams our tiebreakers cannot separate (it matches mlssoccer.com) and any points deductions. It is used only when every club's record agrees with the results.
+- Both ESPN downloads are cached in compact form; if ESPN fails or changes its format, the last good copy is used with a warning, and with no copy at all the page leaves out title odds after the regular season.
+- FixtureDownload names teams differently from season to season (2025's "New York" is 2026's "Red Bull New York") and from ESPN, so `aliases` maps every spelling to one name.
+
+**Rules** ([2026 Competition Guidelines](https://www.mlssoccer.com/news/2026-mls-competition-guidelines), [2026 playoff schedule](https://www.mlssoccer.com/news/major-league-soccer-announces-audi-2026-mls-cup-playoffs-schedule))
+
+- 30 clubs in two conferences of 15, 34 games each; 3 points a win, 1 a tie.
+- Ties on points: total wins, goal difference, goals scored, head-to-head points then goal difference (same conference only; new in 2026, [2025 guidelines](https://www.mlssoccer.com/news/2025-mls-competition-guidelines)), fewest disciplinary points (not in any keyless data, so ESPN's order settles it), away goal difference, away goals, home goal difference, home goals.
+- The top nine in each conference reach the Audi MLS Cup Playoffs:
+  - Seeds 8 and 9 meet in a Wild Card match at the 8th seed. A level game goes straight to penalties.
+  - Seeds 1-7 go straight to Round One, best of three: 1 v the Wild Card winner, 4 v 5, 2 v 7, 3 v 6. The higher seed hosts games 1 and 3, and every level game goes straight to penalties.
+  - The Conference Semifinals (1/8/9 v 4/5, 2/7 v 3/6, no reseeding), Conference Finals and MLS Cup are single matches with extra time and penalties, hosted by the higher seed. MLS Cup is hosted by the finalist higher in the Supporters' Shield standings.
+- The Supporters' Shield goes to the best regular-season record.
+
+**Checks** (`tests/test_football_playoffs.py`, offline fixtures in `tests/fixtures/mls-2025.json` and `mls-2026.json`)
+
+- The 2026 conference tables on 3 October 2026 (404 of 510 games) match [mlssoccer.com](https://www.mlssoccer.com/standings/2026/conference) for all 30 clubs: played, wins, losses, ties, goals, points and order. Level teams are split by wins before goal difference (New England above Miami, Red Bull New York above New York City and Cincinnati).
+- The final 2025 tables match [mlssoccer.com](https://www.mlssoccer.com/standings/2025/conference).
+- The 2025 playoffs are rebuilt from the final table and ESPN's games: every Wild Card, Round One series, semifinal, final and MLS Cup score, with Inter Miami as champion ([results](https://www.mlssoccer.com/playoffs/2025/news/who-s-left-audi-2025-mls-cup-playoffs-teams-matchups-results), [MLS Cup](https://www.mlssoccer.com/playoffs/2025/news/champions-inter-miami-lionel-messi-win-mls-cup-over-vancouver-whitecaps)).
+- A mid-playoff state (4 November 2025) checks that series under way start from their real score and that title odds go only to teams still in.
+
+**Model:** football.py's goals model and settings: a 240-day half-life, ridge 2, strength drift 0.2, and expansion sides starting below average. `scripts/backtest_football_playoffs.py --league mls` backtested them on 2024 and 2025:
+
+- Week-ahead predictions of all 1,003 games score 0.2237 (ranked probability score) against 0.2315 for home/draw/away base rates (2024: 0.2267 v 0.2325; 2025: 0.2207 v 0.2306). The best half-life and ridge tried (120 days, ridge 4) scored 0.2229, too close to change. MLS is harder to predict than Europe's leagues (0.20-0.21).
+- Season odds at 25%, 50% and 75% of both seasons scored a mean Brier of 0.0707-0.0709 for every drift from 0.1 to 0.25 (0.0712 at 0, 0.0711 at 0.3), so the European drift of 0.2 stays. Playoff-place odds by bin, predicted v observed (teams): 0.04 v 0.04 (27), 0.22 v 0.12 (17), 0.41 v 0.33 (21), 0.59 v 0.68 (28), 0.83 v 0.84 (25), 0.97 v 0.98 (59); the middle bins are small.
+- With 2023 added (no 2022 feed, so early 2023 odds rest on that season alone), drift 0.3 scored best, which is why the drift is kept in the config (`model.drift`).
+
+**Page:** one table per conference with the Wild Card and playoff lines, an overall table (the Supporters' Shield race), Playoffs, Top 7 (straight to Round One), Supporters' Shield and MLS Cup odds, conference-position chances, and, once the regular season ends, the bracket with series scores and match scores (penalties noted).
+
+**The engine** (`football_playoffs.py`) is for any football league that ends in playoffs:
+
+- `conferences` (each team has a `conference`), or none for one table.
+- `tiebreakers`, in order: `wins`, `goal-difference`, `goals-for`, `head-to-head`, `away-goal-difference`, `away-goals`, `home-goal-difference`, `home-goals`.
+- `playoffs.rounds`, played in each conference, or once across them with `"across": true`:
+  - `match`: `single`, `series` (`bestOf`, `hosts` such as `1-1-1`) or `two-legged` (aggregate goals; the lower seed hosts the first leg).
+  - `decider` for a level match or tie: `extra-time` (then penalties), `penalties` or `higher-seed`.
+  - `pairs` fix the bracket, from seeds (`8`), winners (`"WC.1"`), losers (`"Q.1.loser"`) and, across conferences, `"East:CF.1"`. `teams` with no pairs reseeds the round, best seed left against the worst. Teams that enter later have a bye.
+  - The better seed hosts unless the round is `neutral`; across conferences, the better overall record does.
+- Tiers: `playoffs`, `seed` (top N of a conference), `top`/`bottom` (league table places), `best-record`, `champion` and `round` (reaching a round).
+- Penalties are a coin flip and extra time is a third of a match. Real results from ESPN replace simulated ones (series start from their real score, a played first leg counts), and a real game that does not fit the bracket leaves title odds out with a warning.
+
 ## NFL, NBA, WNBA, NHL, MLB, NBL And WNBL
 
 `leagues/nfl.json`, `nba.json`, `wnba.json`, `nhl.json`, `mlb.json`, `nbl.json` and `wnbl.json` are rolling configs too, with conferences, divisions, team colours and the playoff format. `us_sports.py` builds them:
@@ -198,7 +247,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard (unofficial; only the NBA, WNBA and NBL playoffs use it, and the page falls back to no title odds if it changes) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL and MLS playoffs, MLS score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. A men's league skips series named "Women's ..." (so the BBL never picks up the WBBL); a league is a women's one when its config sets `"gender": "female"` or names a women's series. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 
