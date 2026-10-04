@@ -400,12 +400,14 @@ def cricdata_winner(item: dict[str, Any], teams: tuple[str, str], status: str) -
         if winner in teams:
             return winner
 
-    lower_status = status.lower()
+    lower_status = normalize_name(status)
     if "won" not in lower_status:
         return None
     for team in teams:
         meta = TEAM_META[team]
-        candidates = (team.lower(), meta.short_name.lower(), meta.full_name.lower())
+        # Aliases too, without punctuation: CricketData writes "Central Districts won" for the
+        # Central Stags and "Durbans Super Giants won" for Durban's Super Giants.
+        candidates = {normalize_name(name) for name in (team, meta.short_name, meta.full_name, *meta.aliases)} - {""}
         # Whole words only: short names such as "CK" or "OV" hide in "wickets" and "Super Over".
         if any(re.search(rf"\b{re.escape(candidate)}\b", lower_status) for candidate in candidates):
             return team

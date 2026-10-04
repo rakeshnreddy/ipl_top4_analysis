@@ -51,18 +51,18 @@ Configured seasons, each checked against its official table:
 | Id | League | Source |
 | --- | --- | --- |
 | `ipl-2026` | Indian Premier League 2026 | CricketData in season, Cricsheet once complete |
-| `ipl-2027` | Indian Premier League 2027 (tentative 10 Mar - 30 May 2027) | CricketData in season, Cricsheet once complete |
+| `ipl-2027` | Indian Premier League 2027 (tentative 10 Mar - 30 May 2027: the BCCI is weighing 10 Mar - 15 May against the earlier 14 Mar - 30 May plan; 74 matches) | CricketData in season, Cricsheet once complete |
 | `wpl-2026` | Women's Premier League 2026 | Cricsheet |
-| `wpl-2027` | Women's Premier League 2027 (14 Jan - 7 Feb 2027) | CricketData in season, Cricsheet once complete |
+| `wpl-2027` | Women's Premier League 2027 (14 Jan - 7 Feb 2027, announced by the BCCI) | CricketData in season, Cricsheet once complete |
 | `psl-2026` | Pakistan Super League 2026 | Cricsheet, plus one abandoned match in `extraResults` |
-| `psl-2027` | Pakistan Super League 2027 (tentative 19 Mar - 2 May 2027) | CricketData in season, Cricsheet once complete |
+| `psl-2027` | Pakistan Super League 2027 (tentative 19 Mar - 2 May 2027, reported but not yet announced by the PCB) | CricketData in season, Cricsheet once complete |
 | `bbl-2025-26` | Big Bash League 2025-26 | Cricsheet |
 | `bbl-2026-27` | Big Bash League 2026-27 (12 Dec 2026 - 26 Jan 2027) | CricketData in season, Cricsheet once complete |
 | `mlc-2026` | Major League Cricket 2026 | Cricsheet |
 | `sa20-2025-26` | SA20 2026 (4 points a win, bonus point at 1.25x the loser's run rate) | Cricsheet, plus three abandoned matches |
 | `sa20-2026-27` | SA20 2027 (17 Jan - 21 Feb 2027) | CricketData in season, Cricsheet once complete |
 | `ilt-2025-26` | International League T20 2025-26 | Cricsheet |
-| `ilt-2026-27` | International League T20 2026-27 (22 Nov - 20 Dec 2026) | CricketData in season, Cricsheet once complete |
+| `ilt-2026-27` | International League T20 season 5 (22 Nov - 20 Dec 2026; labelled 2026) | CricketData in season, Cricsheet once complete |
 | `hundred-men-2026` | The Hundred 2026, men (4 points a win, NRR per 5-ball set) | Cricsheet, filtered by gender |
 | `hundred-women-2026` | The Hundred 2026, women | Cricsheet, plus one abandoned match |
 | `cpl-2026` | Caribbean Premier League 2026 | Cricsheet; published once Cricsheet adds the playoffs |
@@ -70,10 +70,10 @@ Configured seasons, each checked against its official table:
 | `lpl-2026` | Lanka Premier League 2026 | Cricsheet |
 | `bpl-2025-26` | Bangladesh Premier League 2025-26 | Cricsheet |
 | `wbbl-2025-26` | Women's Big Bash League 2025-26 (Top 4; first goes straight to the final, third plays fourth in the Knockout) | Cricsheet, plus one abandoned match |
-| `wbbl-2026-27` | Women's Big Bash League 2026-27 (29 Oct - 5 Dec 2026) | CricketData in season, Cricsheet once complete |
+| `wbbl-2026-27` | Women's Big Bash League 2026-27 (29 Oct - 5 Dec 2026; labelled 2026) | CricketData in season (fixed series id), Cricsheet once complete |
 | `super-smash-men-2025-26` | Super Smash 2025-26, men (4 points a win, 2 a tie or no result; Top 3, first goes straight to the final) | Cricsheet, filtered by gender, plus three abandoned matches |
 | `super-smash-women-2025-26` | Super Smash 2025-26, women (bonus point for 150 runs or a fast chase, win or lose) | Cricsheet, filtered by gender, plus one abandoned match |
-| `super-smash-men-2026-27` | Super Smash 2026-27, men (tentative 26 Dec 2026 - 31 Jan 2027; NZC has not published the schedule yet) | CricketData in season, Cricsheet once complete |
+| `super-smash-men-2026-27` | Super Smash 2026-27, men (tentative 26 Dec 2026 - 31 Jan 2027: NZC said the schedule would come in late September, but had not published it by 3 Oct 2026) | CricketData in season, Cricsheet once complete |
 | `super-smash-women-2026-27` | Super Smash 2026-27, women (same tentative dates) | CricketData in season, Cricsheet once complete |
 | `t20-blast-2026` | T20 Blast 2026, men: three groups of six; the top two in each and the two best thirds reach the quarter-finals (4 points a win) | Cricsheet, plus the targets of two shortened matches and Sussex's 2-point deduction; 2027 is rolled forward from it |
 
@@ -87,6 +87,8 @@ venv/bin/python extract_table.py --league all --source cricsheet
 `--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. The site shows the default league (IPL) at `/` and any other at `/?league=<id>`.
 
 Seasons roll forward on their own: once a competition's newest configured season is over, the next one is created from it in memory (same teams and rules, dates a year later and marked tentative, no fixed CricketData series id), so `--league active` keeps building new seasons without new files. CricketData finds the new series by name and season label. When a season changes teams, format or dates, add a real config for it; the first build of a rolled season reports a team mismatch as a warning.
+
+CricketData names a season inside one calendar year by that year ("SA20, 2025", "Womens Big Bash League 2026") and one that spans New Year by both ("Big Bash League 2025-26", "SA20, 2025-26"). Discovery needs the season label in the series name, so the WBBL and ILT20, played between October and December, are labelled by their year (a year label also matches a "2026-27" name). Once CricketData lists a series, its id can be fixed in `sources.cricketdata.seriesId`, as for WBBL 2026. Winners are read from CricketData's result text by team name or alias, ignoring punctuation, so aliases cover the names CricketData uses, such as the Super Smash's associations ("Northern Knights", "Central Districts"), and "Durbans Super Giants won" counts for Durban's Super Giants.
 
 To add a league season:
 
