@@ -115,6 +115,20 @@ describe('SportPage for leagues with conferences', () => {
     expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
   });
 
+  it('draws the playoff line on the league table of a league seeded as one table', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...conferencePayload,
+      league: { ...conferencePayload.league, groups: [], cutoffs: [{ after: 2, label: 'Playoff line' }] },
+    });
+
+    expect(await screen.findByRole('heading', { name: 'NFL Playoff & Super Bowl Odds' })).toBeInTheDocument();
+    expect(screen.queryByRole('group', { name: 'Table view' })).not.toBeInTheDocument();
+    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr'));
+    expect(rows.map((row) => row.textContent)[2]).toBe('Playoff line');
+    expect(rows[1]).toHaveClass('zone-top');
+    expect(rows[3]).not.toHaveClass('zone-top');
+  });
+
   it('describes a team by its record and conference seed', async () => {
     openLeague('/?league=epl-2026-27#team=LIV', conferencePayload);
 

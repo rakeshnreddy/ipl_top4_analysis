@@ -1,0 +1,201 @@
+{
+  "id": "wnba",
+  "sport": "basketball",
+  "name": "WNBA",
+  "shortName": "WNBA",
+  "headline": "WNBA Playoff & Title Odds",
+  "priority": 34,
+  "season": {
+    "startMonth": 5,
+    "endMonth": 11,
+    "label": "{year}",
+    "feed": "wnba-{year}"
+  },
+  "gamesPerTeam": 44,
+  "rules": {
+    "summary": "15 teams, 44 games each. The top eight teams regardless of conference make the playoffs, seeded 1-8 by record with no reseeding: a best-of-three First Round (1-1-1), best-of-five Semifinals (2-2-1) and a best-of-seven Finals (2-2-1-1-1). The Commissioner's Cup final does not count in the standings.",
+    "sources": [
+      "https://www.wnba.com/news/2026-wnba-postseason-faq",
+      "https://www.wnba.com/news/wnba-finals-format-expansion-2025",
+      "https://www.wnba.com/news/wnba-approves-new-playoff-format",
+      "https://www.wnba.com/standings",
+      "https://www.wnba.com/commissioners-cup/2026/about-the-cup"
+    ]
+  },
+  "notes": [
+    "The Commissioner's Cup final does not count in the standings and is left out; the Cup's group games do count."
+  ],
+  "playoffs": {
+    "format": "wnba",
+    "teamsPerConference": 8,
+    "series": {
+      "R1": "1-1-1",
+      "SF": "2-2-1",
+      "F": "2-2-1-1-1"
+    },
+    "tiebreakers": [
+      "head-to-head",
+      "vs-winning-teams",
+      "head-to-head-differential",
+      "differential"
+    ],
+    "positionLabel": "Seed",
+    "cutoffs": [
+      {
+        "after": 8,
+        "label": "Playoff line"
+      }
+    ],
+    "zones": [
+      {
+        "to": 8,
+        "kind": "top"
+      }
+    ]
+  },
+  "postseason": {
+    "provider": "espn-wnba"
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "seed",
+      "size": 4
+    },
+    {
+      "key": "top1",
+      "label": "No. 1 seed",
+      "kind": "seed",
+      "size": 1,
+      "shortLabel": "1 seed"
+    },
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "champion"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "overall",
+      "label": "League",
+      "divisions": [
+        "East",
+        "West"
+      ]
+    }
+  ],
+  "teams": {
+    "Atlanta Dream": {
+      "shortName": "ATL",
+      "color": "#E31837",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Chicago Sky": {
+      "shortName": "CHI",
+      "color": "#418FDE",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Connecticut Sun": {
+      "shortName": "CON",
+      "color": "#F05023",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Indiana Fever": {
+      "shortName": "IND",
+      "color": "#002D62",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "East"
+    },
+    "New York Liberty": {
+      "shortName": "NYL",
+      "color": "#6ECEB2",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Toronto Tempo": {
+      "shortName": "TOR",
+      "color": "#7A1F3D",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Washington Mystics": {
+      "shortName": "WAS",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "East"
+    },
+    "Dallas Wings": {
+      "shortName": "DAL",
+      "color": "#C4D600",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Golden State Valkyries": {
+      "shortName": "GSV",
+      "color": "#6F2DA8",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Las Vegas Aces": {
+      "shortName": "LVA",
+      "color": "#000000",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Los Angeles Sparks": {
+      "shortName": "LAS",
+      "color": "#552583",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Minnesota Lynx": {
+      "shortName": "MIN",
+      "color": "#266092",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Phoenix Mercury": {
+      "shortName": "PHX",
+      "color": "#CB6015",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Portland Fire": {
+      "shortName": "PDX",
+      "color": "#B5121B",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    },
+    "Seattle Storm": {
+      "shortName": "SEA",
+      "color": "#2C5235",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "West"
+    }
+  }
+}

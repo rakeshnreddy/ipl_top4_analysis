@@ -1,0 +1,4445 @@
+{
+  "metadata": {
+    "season": "2026",
+    "generated_at": "2026-10-04T01:57:39Z",
+    "source": "FixtureDownload",
+    "source_url": "https://fixturedownload.com/",
+    "data_freshness_status": "fresh",
+    "season_status": "postseason",
+    "warnings": [],
+    "credits": [
+      {
+        "name": "ESPN",
+        "url": "https://www.espn.com/wnba/",
+        "note": "Playoff results: ESPN"
+      }
+    ]
+  },
+  "league": {
+    "id": "wnba-2026",
+    "configId": "wnba",
+    "sport": "basketball",
+    "name": "WNBA",
+    "shortName": "WNBA",
+    "headline": "WNBA Playoff & Title Odds",
+    "season": "2026",
+    "seasonLabel": "2026",
+    "priority": 34,
+    "tiers": [
+      {
+        "key": "playoffs",
+        "label": "Playoffs",
+        "kind": "playoffs",
+        "settled": true
+      },
+      {
+        "key": "top4",
+        "label": "Top 4",
+        "kind": "seed",
+        "size": 4,
+        "settled": true
+      },
+      {
+        "key": "top1",
+        "label": "No. 1 seed",
+        "kind": "seed",
+        "size": 1,
+        "shortLabel": "1 seed",
+        "settled": true
+      },
+      {
+        "key": "title",
+        "label": "Title",
+        "kind": "champion"
+      }
+    ],
+    "columns": [
+      {
+        "key": "wins",
+        "label": "W"
+      },
+      {
+        "key": "losses",
+        "label": "L"
+      },
+      {
+        "key": "pct",
+        "label": "PCT",
+        "format": "pct",
+        "strong": true
+      },
+      {
+        "key": "gamesBack",
+        "label": "GB",
+        "title": "Games behind the conference leader",
+        "format": "decimal",
+        "optional": true
+      },
+      {
+        "key": "pointDifferential",
+        "label": "DIFF",
+        "title": "Average points margin",
+        "signed": true,
+        "format": "decimal",
+        "optional": true
+      },
+      {
+        "key": "lastTen",
+        "label": "L10",
+        "optional": true
+      },
+      {
+        "key": "streak",
+        "label": "STRK",
+        "optional": true
+      }
+    ],
+    "outcomes": [
+      "home",
+      "away"
+    ],
+    "teams": [
+      {
+        "key": "Atlanta Dream",
+        "shortName": "ATL",
+        "fullName": "Atlanta Dream",
+        "color": "#E31837",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Chicago Sky",
+        "shortName": "CHI",
+        "fullName": "Chicago Sky",
+        "color": "#418FDE",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Connecticut Sun",
+        "shortName": "CON",
+        "fullName": "Connecticut Sun",
+        "color": "#F05023",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Dallas Wings",
+        "shortName": "DAL",
+        "fullName": "Dallas Wings",
+        "color": "#C4D600",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Golden State Valkyries",
+        "shortName": "GSV",
+        "fullName": "Golden State Valkyries",
+        "color": "#6F2DA8",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Indiana Fever",
+        "shortName": "IND",
+        "fullName": "Indiana Fever",
+        "color": "#002D62",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Las Vegas Aces",
+        "shortName": "LVA",
+        "fullName": "Las Vegas Aces",
+        "color": "#000000",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Los Angeles Sparks",
+        "shortName": "LAS",
+        "fullName": "Los Angeles Sparks",
+        "color": "#552583",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Minnesota Lynx",
+        "shortName": "MIN",
+        "fullName": "Minnesota Lynx",
+        "color": "#266092",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "New York Liberty",
+        "shortName": "NYL",
+        "fullName": "New York Liberty",
+        "color": "#6ECEB2",
+        "textColor": "#000000"
+      },
+      {
+        "key": "Phoenix Mercury",
+        "shortName": "PHX",
+        "fullName": "Phoenix Mercury",
+        "color": "#CB6015",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Portland Fire",
+        "shortName": "PDX",
+        "fullName": "Portland Fire",
+        "color": "#B5121B",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Seattle Storm",
+        "shortName": "SEA",
+        "fullName": "Seattle Storm",
+        "color": "#2C5235",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Toronto Tempo",
+        "shortName": "TOR",
+        "fullName": "Toronto Tempo",
+        "color": "#7A1F3D",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "Washington Mystics",
+        "shortName": "WAS",
+        "fullName": "Washington Mystics",
+        "color": "#C8102E",
+        "textColor": "#FFFFFF"
+      }
+    ],
+    "groups": [
+      {
+        "key": "East",
+        "label": "East",
+        "teams": [
+          "Atlanta Dream",
+          "Washington Mystics",
+          "Indiana Fever",
+          "New York Liberty",
+          "Chicago Sky",
+          "Toronto Tempo",
+          "Connecticut Sun"
+        ]
+      },
+      {
+        "key": "West",
+        "label": "West",
+        "teams": [
+          "Minnesota Lynx",
+          "Golden State Valkyries",
+          "Las Vegas Aces",
+          "Dallas Wings",
+          "Portland Fire",
+          "Phoenix Mercury",
+          "Los Angeles Sparks",
+          "Seattle Storm"
+        ]
+      }
+    ],
+    "cutoffs": [
+      {
+        "after": 8,
+        "label": "Playoff line"
+      }
+    ],
+    "rankLabel": "League",
+    "positionLabel": "Seed",
+    "positionZones": [
+      {
+        "to": 8,
+        "kind": "top"
+      }
+    ]
+  },
+  "standings": [
+    {
+      "teamKey": "Minnesota Lynx",
+      "shortName": "MIN",
+      "fullName": "Minnesota Lynx",
+      "rank": 1,
+      "played": 44,
+      "wins": 33,
+      "losses": 11,
+      "record": "33-11",
+      "pct": 0.75,
+      "pointDifferential": 7.2,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 1,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "L",
+        "W",
+        "L",
+        "L"
+      ],
+      "lastTen": "6-4",
+      "streak": "W1",
+      "divisionRecord": "20-3",
+      "remaining": 0,
+      "gamesBack": 0.0
+    },
+    {
+      "teamKey": "Golden State Valkyries",
+      "shortName": "GSV",
+      "fullName": "Golden State Valkyries",
+      "rank": 2,
+      "played": 44,
+      "wins": 32,
+      "losses": 12,
+      "record": "32-12",
+      "pct": 0.727,
+      "pointDifferential": 7.0,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 2,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "7-3",
+      "streak": "W1",
+      "divisionRecord": "15-8",
+      "remaining": 0,
+      "gamesBack": 1.0
+    },
+    {
+      "teamKey": "Las Vegas Aces",
+      "shortName": "LVA",
+      "fullName": "Las Vegas Aces",
+      "rank": 3,
+      "played": 44,
+      "wins": 31,
+      "losses": 13,
+      "record": "31-13",
+      "pct": 0.705,
+      "pointDifferential": 5.7,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 3,
+      "divisionRank": 3,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "8-2",
+      "streak": "W7",
+      "divisionRecord": "17-6",
+      "remaining": 0,
+      "gamesBack": 2.0
+    },
+    {
+      "teamKey": "Atlanta Dream",
+      "shortName": "ATL",
+      "fullName": "Atlanta Dream",
+      "rank": 4,
+      "played": 44,
+      "wins": 30,
+      "losses": 14,
+      "record": "30-14",
+      "pct": 0.682,
+      "pointDifferential": 6.9,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 4,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "9-1",
+      "streak": "W5",
+      "divisionRecord": "15-5",
+      "remaining": 0,
+      "gamesBack": 3.0
+    },
+    {
+      "teamKey": "Washington Mystics",
+      "shortName": "WAS",
+      "fullName": "Washington Mystics",
+      "rank": 5,
+      "played": 44,
+      "wins": 28,
+      "losses": 16,
+      "record": "28-16",
+      "pct": 0.636,
+      "pointDifferential": 1.3,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 5,
+      "divisionRank": 2,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "W",
+        "L"
+      ],
+      "lastTen": "8-2",
+      "streak": "W4",
+      "divisionRecord": "15-5",
+      "remaining": 0,
+      "gamesBack": 5.0
+    },
+    {
+      "teamKey": "Indiana Fever",
+      "shortName": "IND",
+      "fullName": "Indiana Fever",
+      "rank": 6,
+      "played": 44,
+      "wins": 28,
+      "losses": 16,
+      "record": "28-16",
+      "pct": 0.636,
+      "pointDifferential": 5.5,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 6,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "6-4",
+      "streak": "L1",
+      "divisionRecord": "14-6",
+      "remaining": 0,
+      "gamesBack": 5.0
+    },
+    {
+      "teamKey": "Dallas Wings",
+      "shortName": "DAL",
+      "fullName": "Dallas Wings",
+      "rank": 7,
+      "played": 44,
+      "wins": 27,
+      "losses": 17,
+      "record": "27-17",
+      "pct": 0.614,
+      "pointDifferential": 4.1,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 7,
+      "divisionRank": 4,
+      "form": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "7-3",
+      "streak": "W1",
+      "divisionRecord": "13-10",
+      "remaining": 0,
+      "gamesBack": 6.0
+    },
+    {
+      "teamKey": "New York Liberty",
+      "shortName": "NYL",
+      "fullName": "New York Liberty",
+      "rank": 8,
+      "played": 44,
+      "wins": 26,
+      "losses": 18,
+      "record": "26-18",
+      "pct": 0.591,
+      "pointDifferential": 3.4,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 8,
+      "divisionRank": 4,
+      "form": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "6-4",
+      "streak": "L2",
+      "divisionRecord": "13-7",
+      "remaining": 0,
+      "gamesBack": 7.0
+    },
+    {
+      "teamKey": "Portland Fire",
+      "shortName": "PDX",
+      "fullName": "Portland Fire",
+      "rank": 9,
+      "played": 44,
+      "wins": 17,
+      "losses": 27,
+      "record": "17-27",
+      "pct": 0.386,
+      "pointDifferential": -4.8,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 9,
+      "divisionRank": 5,
+      "form": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "3-7",
+      "streak": "W1",
+      "divisionRecord": "7-16",
+      "remaining": 0,
+      "gamesBack": 16.0
+    },
+    {
+      "teamKey": "Phoenix Mercury",
+      "shortName": "PHX",
+      "fullName": "Phoenix Mercury",
+      "rank": 10,
+      "played": 44,
+      "wins": 16,
+      "losses": 28,
+      "record": "16-28",
+      "pct": 0.364,
+      "pointDifferential": -3.2,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 10,
+      "divisionRank": 6,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "4-6",
+      "streak": "L1",
+      "divisionRecord": "10-13",
+      "remaining": 0,
+      "gamesBack": 17.0
+    },
+    {
+      "teamKey": "Chicago Sky",
+      "shortName": "CHI",
+      "fullName": "Chicago Sky",
+      "rank": 11,
+      "played": 44,
+      "wins": 16,
+      "losses": 28,
+      "record": "16-28",
+      "pct": 0.364,
+      "pointDifferential": -3.9,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 11,
+      "divisionRank": 5,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "4-6",
+      "streak": "L1",
+      "divisionRecord": "4-16",
+      "remaining": 0,
+      "gamesBack": 17.0
+    },
+    {
+      "teamKey": "Los Angeles Sparks",
+      "shortName": "LAS",
+      "fullName": "Los Angeles Sparks",
+      "rank": 12,
+      "played": 44,
+      "wins": 16,
+      "losses": 28,
+      "record": "16-28",
+      "pct": 0.364,
+      "pointDifferential": -4.3,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 12,
+      "divisionRank": 7,
+      "form": [
+        "L",
+        "L",
+        "W",
+        "L",
+        "W"
+      ],
+      "lastTen": "4-6",
+      "streak": "L2",
+      "divisionRecord": "9-14",
+      "remaining": 0,
+      "gamesBack": 17.0
+    },
+    {
+      "teamKey": "Toronto Tempo",
+      "shortName": "TOR",
+      "fullName": "Toronto Tempo",
+      "rank": 13,
+      "played": 44,
+      "wins": 11,
+      "losses": 33,
+      "record": "11-33",
+      "pct": 0.25,
+      "pointDifferential": -8.7,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 13,
+      "divisionRank": 6,
+      "form": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "1-9",
+      "streak": "L8",
+      "divisionRecord": "5-15",
+      "remaining": 0,
+      "gamesBack": 22.0
+    },
+    {
+      "teamKey": "Connecticut Sun",
+      "shortName": "CON",
+      "fullName": "Connecticut Sun",
+      "rank": 14,
+      "played": 44,
+      "wins": 11,
+      "losses": 33,
+      "record": "11-33",
+      "pct": 0.25,
+      "pointDifferential": -9.4,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "East",
+      "seed": 14,
+      "divisionRank": 7,
+      "form": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "2-8",
+      "streak": "W1",
+      "divisionRecord": "4-16",
+      "remaining": 0,
+      "gamesBack": 22.0
+    },
+    {
+      "teamKey": "Seattle Storm",
+      "shortName": "SEA",
+      "fullName": "Seattle Storm",
+      "rank": 15,
+      "played": 44,
+      "wins": 8,
+      "losses": 36,
+      "record": "8-36",
+      "pct": 0.182,
+      "pointDifferential": -6.8,
+      "conference": "overall",
+      "conferenceLabel": "League",
+      "division": "West",
+      "seed": 15,
+      "divisionRank": 8,
+      "form": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "L"
+      ],
+      "lastTen": "2-8",
+      "streak": "L5",
+      "divisionRecord": "1-22",
+      "remaining": 0,
+      "gamesBack": 25.0
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "playoff-0",
+      "round": null,
+      "date": "2026-10-04T18:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "New York Liberty",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.667,
+        "away": 0.333
+      }
+    },
+    {
+      "id": "playoff-1",
+      "round": null,
+      "date": "2026-10-04T20:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Las Vegas Aces",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.59,
+        "away": 0.41
+      }
+    },
+    {
+      "id": "playoff-2",
+      "round": null,
+      "date": "2026-10-07T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "New York Liberty",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.667,
+        "away": 0.333
+      }
+    },
+    {
+      "id": "playoff-3",
+      "round": null,
+      "date": "2026-10-08T01:30:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Las Vegas Aces",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.59,
+        "away": 0.41
+      }
+    },
+    {
+      "id": "playoff-4",
+      "round": null,
+      "date": "2026-10-09T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Atlanta Dream",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.447,
+        "away": 0.553
+      }
+    },
+    {
+      "id": "playoff-5",
+      "round": null,
+      "date": "2026-10-10T01:30:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Golden State Valkyries",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.528,
+        "away": 0.472
+      }
+    },
+    {
+      "id": "playoff-6",
+      "round": null,
+      "date": "2026-10-11T04:00:00Z",
+      "home": "New York Liberty",
+      "away": "Atlanta Dream",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.447,
+        "away": 0.553
+      }
+    },
+    {
+      "id": "playoff-7",
+      "round": null,
+      "date": "2026-10-11T04:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Golden State Valkyries",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.528,
+        "away": 0.472
+      }
+    },
+    {
+      "id": "playoff-8",
+      "round": null,
+      "date": "2026-10-14T04:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "New York Liberty",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.667,
+        "away": 0.333
+      }
+    },
+    {
+      "id": "playoff-9",
+      "round": null,
+      "date": "2026-10-14T04:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Las Vegas Aces",
+      "venue": null,
+      "stage": "Semifinals",
+      "probabilities": {
+        "home": 0.59,
+        "away": 0.41
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "playoff-result-0",
+      "round": null,
+      "date": "2026-10-03T01:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Dallas Wings",
+      "homeScore": 77,
+      "awayScore": 73,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-1",
+      "round": null,
+      "date": "2026-10-02T01:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Indiana Fever",
+      "homeScore": 94,
+      "awayScore": 83,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-2",
+      "round": null,
+      "date": "2026-10-01T01:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Golden State Valkyries",
+      "homeScore": 108,
+      "awayScore": 100,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-3",
+      "round": null,
+      "date": "2026-09-30T23:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Atlanta Dream",
+      "homeScore": 75,
+      "awayScore": 93,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-4",
+      "round": null,
+      "date": "2026-09-30T00:30:00Z",
+      "home": "New York Liberty",
+      "away": "Minnesota Lynx",
+      "homeScore": 87,
+      "awayScore": 71,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-5",
+      "round": null,
+      "date": "2026-09-29T22:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Las Vegas Aces",
+      "homeScore": 99,
+      "awayScore": 89,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-6",
+      "round": null,
+      "date": "2026-09-28T01:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Dallas Wings",
+      "homeScore": 104,
+      "awayScore": 80,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-7",
+      "round": null,
+      "date": "2026-09-27T23:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Washington Mystics",
+      "homeScore": 92,
+      "awayScore": 77,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-8",
+      "round": null,
+      "date": "2026-09-27T20:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Indiana Fever",
+      "homeScore": 102,
+      "awayScore": 85,
+      "note": "First Round"
+    },
+    {
+      "id": "playoff-result-9",
+      "round": null,
+      "date": "2026-09-27T18:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "New York Liberty",
+      "homeScore": 75,
+      "awayScore": 91,
+      "note": "First Round"
+    },
+    {
+      "id": "330",
+      "round": 17,
+      "date": "2026-09-25T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Las Vegas Aces",
+      "homeScore": 82,
+      "awayScore": 100
+    },
+    {
+      "id": "329",
+      "round": 17,
+      "date": "2026-09-25T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Golden State Valkyries",
+      "homeScore": 75,
+      "awayScore": 76
+    },
+    {
+      "id": "328",
+      "round": 17,
+      "date": "2026-09-25T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Indiana Fever",
+      "homeScore": 86,
+      "awayScore": 66
+    },
+    {
+      "id": "327",
+      "round": 17,
+      "date": "2026-09-24T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Chicago Sky",
+      "homeScore": 101,
+      "awayScore": 93
+    },
+    {
+      "id": "326",
+      "round": 17,
+      "date": "2026-09-24T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Toronto Tempo",
+      "homeScore": 95,
+      "awayScore": 81
+    },
+    {
+      "id": "325",
+      "round": 17,
+      "date": "2026-09-24T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Dallas Wings",
+      "homeScore": 91,
+      "awayScore": 103
+    },
+    {
+      "id": "324",
+      "round": 17,
+      "date": "2026-09-24T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Atlanta Dream",
+      "homeScore": 65,
+      "awayScore": 83
+    },
+    {
+      "id": "323",
+      "round": 17,
+      "date": "2026-09-23T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Golden State Valkyries",
+      "homeScore": 90,
+      "awayScore": 82
+    },
+    {
+      "id": "322",
+      "round": 17,
+      "date": "2026-09-23T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Los Angeles Sparks",
+      "homeScore": 89,
+      "awayScore": 79
+    },
+    {
+      "id": "321",
+      "round": 17,
+      "date": "2026-09-23T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Toronto Tempo",
+      "homeScore": 97,
+      "awayScore": 85
+    },
+    {
+      "id": "320",
+      "round": 17,
+      "date": "2026-09-23T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Minnesota Lynx",
+      "homeScore": 96,
+      "awayScore": 77
+    },
+    {
+      "id": "319",
+      "round": 17,
+      "date": "2026-09-22T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Connecticut Sun",
+      "homeScore": 79,
+      "awayScore": 69
+    },
+    {
+      "id": "318",
+      "round": 17,
+      "date": "2026-09-22T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Dallas Wings",
+      "homeScore": 87,
+      "awayScore": 86
+    },
+    {
+      "id": "317",
+      "round": 17,
+      "date": "2026-09-22T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Atlanta Dream",
+      "homeScore": 84,
+      "awayScore": 95
+    },
+    {
+      "id": "316",
+      "round": 17,
+      "date": "2026-09-21T01:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Seattle Storm",
+      "homeScore": 98,
+      "awayScore": 77
+    },
+    {
+      "id": "315",
+      "round": 17,
+      "date": "2026-09-20T23:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Portland Fire",
+      "homeScore": 105,
+      "awayScore": 84
+    },
+    {
+      "id": "314",
+      "round": 17,
+      "date": "2026-09-20T20:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Washington Mystics",
+      "homeScore": 77,
+      "awayScore": 93
+    },
+    {
+      "id": "313",
+      "round": 17,
+      "date": "2026-09-20T19:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "New York Liberty",
+      "homeScore": 69,
+      "awayScore": 106
+    },
+    {
+      "id": "312",
+      "round": 17,
+      "date": "2026-09-20T17:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Minnesota Lynx",
+      "homeScore": 89,
+      "awayScore": 101
+    },
+    {
+      "id": "311",
+      "round": 17,
+      "date": "2026-09-20T01:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Seattle Storm",
+      "homeScore": 70,
+      "awayScore": 57
+    },
+    {
+      "id": "310",
+      "round": 17,
+      "date": "2026-09-19T23:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Chicago Sky",
+      "homeScore": 106,
+      "awayScore": 81
+    },
+    {
+      "id": "309",
+      "round": 17,
+      "date": "2026-09-19T17:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Phoenix Mercury",
+      "homeScore": 87,
+      "awayScore": 82
+    },
+    {
+      "id": "308",
+      "round": 17,
+      "date": "2026-09-19T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Portland Fire",
+      "homeScore": 82,
+      "awayScore": 66
+    },
+    {
+      "id": "307",
+      "round": 17,
+      "date": "2026-09-18T23:30:00Z",
+      "home": "Minnesota Lynx",
+      "away": "New York Liberty",
+      "homeScore": 81,
+      "awayScore": 93
+    },
+    {
+      "id": "306",
+      "round": 17,
+      "date": "2026-09-18T23:30:00Z",
+      "home": "Toronto Tempo",
+      "away": "Indiana Fever",
+      "homeScore": 85,
+      "awayScore": 103
+    },
+    {
+      "id": "305",
+      "round": 17,
+      "date": "2026-09-18T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Las Vegas Aces",
+      "homeScore": 77,
+      "awayScore": 114
+    },
+    {
+      "id": "304",
+      "round": 17,
+      "date": "2026-09-18T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Phoenix Mercury",
+      "homeScore": 91,
+      "awayScore": 94
+    },
+    {
+      "id": "303",
+      "round": 17,
+      "date": "2026-09-18T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Los Angeles Sparks",
+      "homeScore": 97,
+      "awayScore": 77
+    },
+    {
+      "id": "302",
+      "round": 17,
+      "date": "2026-09-18T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Washington Mystics",
+      "homeScore": 80,
+      "awayScore": 110
+    },
+    {
+      "id": "301",
+      "round": 17,
+      "date": "2026-09-17T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Connecticut Sun",
+      "homeScore": 103,
+      "awayScore": 59
+    },
+    {
+      "id": "300",
+      "round": 16,
+      "date": "2026-08-31T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Connecticut Sun",
+      "homeScore": 97,
+      "awayScore": 71
+    },
+    {
+      "id": "299",
+      "round": 16,
+      "date": "2026-08-30T23:00:00Z",
+      "home": "Portland Fire",
+      "away": "Golden State Valkyries",
+      "homeScore": 69,
+      "awayScore": 86
+    },
+    {
+      "id": "298",
+      "round": 16,
+      "date": "2026-08-30T21:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Los Angeles Sparks",
+      "homeScore": 74,
+      "awayScore": 90
+    },
+    {
+      "id": "297",
+      "round": 16,
+      "date": "2026-08-30T19:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Minnesota Lynx",
+      "homeScore": 89,
+      "awayScore": 81
+    },
+    {
+      "id": "296",
+      "round": 16,
+      "date": "2026-08-30T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Toronto Tempo",
+      "homeScore": 101,
+      "awayScore": 69
+    },
+    {
+      "id": "295",
+      "round": 16,
+      "date": "2026-08-29T17:00:00Z",
+      "home": "New York Liberty",
+      "away": "Chicago Sky",
+      "homeScore": 85,
+      "awayScore": 66
+    },
+    {
+      "id": "294",
+      "round": 16,
+      "date": "2026-08-29T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Washington Mystics",
+      "homeScore": 88,
+      "awayScore": 82
+    },
+    {
+      "id": "293",
+      "round": 16,
+      "date": "2026-08-29T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Toronto Tempo",
+      "homeScore": 93,
+      "awayScore": 73
+    },
+    {
+      "id": "292",
+      "round": 16,
+      "date": "2026-08-28T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Connecticut Sun",
+      "homeScore": 111,
+      "awayScore": 91
+    },
+    {
+      "id": "291",
+      "round": 16,
+      "date": "2026-08-28T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Portland Fire",
+      "homeScore": 83,
+      "awayScore": 101
+    },
+    {
+      "id": "290",
+      "round": 16,
+      "date": "2026-08-28T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Washington Mystics",
+      "homeScore": 73,
+      "awayScore": 80
+    },
+    {
+      "id": "289",
+      "round": 16,
+      "date": "2026-08-28T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Golden State Valkyries",
+      "homeScore": 60,
+      "awayScore": 79
+    },
+    {
+      "id": "288",
+      "round": 16,
+      "date": "2026-08-27T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Toronto Tempo",
+      "homeScore": 90,
+      "awayScore": 78
+    },
+    {
+      "id": "287",
+      "round": 16,
+      "date": "2026-08-26T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Golden State Valkyries",
+      "homeScore": 64,
+      "awayScore": 89
+    },
+    {
+      "id": "286",
+      "round": 16,
+      "date": "2026-08-26T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Washington Mystics",
+      "homeScore": 84,
+      "awayScore": 94
+    },
+    {
+      "id": "285",
+      "round": 16,
+      "date": "2026-08-26T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Portland Fire",
+      "homeScore": 96,
+      "awayScore": 78
+    },
+    {
+      "id": "284",
+      "round": 16,
+      "date": "2026-08-25T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Chicago Sky",
+      "homeScore": 87,
+      "awayScore": 81
+    },
+    {
+      "id": "283",
+      "round": 16,
+      "date": "2026-08-25T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Atlanta Dream",
+      "homeScore": 71,
+      "awayScore": 78
+    },
+    {
+      "id": "282",
+      "round": 16,
+      "date": "2026-08-25T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Golden State Valkyries",
+      "homeScore": 66,
+      "awayScore": 80
+    },
+    {
+      "id": "281",
+      "round": 15,
+      "date": "2026-08-23T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Las Vegas Aces",
+      "homeScore": 78,
+      "awayScore": 88
+    },
+    {
+      "id": "280",
+      "round": 15,
+      "date": "2026-08-23T23:00:00Z",
+      "home": "Portland Fire",
+      "away": "Washington Mystics",
+      "homeScore": 100,
+      "awayScore": 105
+    },
+    {
+      "id": "279",
+      "round": 15,
+      "date": "2026-08-23T23:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Indiana Fever",
+      "homeScore": 90,
+      "awayScore": 113
+    },
+    {
+      "id": "278",
+      "round": 15,
+      "date": "2026-08-23T20:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Seattle Storm",
+      "homeScore": 92,
+      "awayScore": 70
+    },
+    {
+      "id": "277",
+      "round": 15,
+      "date": "2026-08-23T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Atlanta Dream",
+      "homeScore": 89,
+      "awayScore": 99
+    },
+    {
+      "id": "276",
+      "round": 15,
+      "date": "2026-08-23T01:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Connecticut Sun",
+      "homeScore": 77,
+      "awayScore": 68
+    },
+    {
+      "id": "275",
+      "round": 15,
+      "date": "2026-08-22T23:00:00Z",
+      "home": "New York Liberty",
+      "away": "Indiana Fever",
+      "homeScore": 109,
+      "awayScore": 102
+    },
+    {
+      "id": "274",
+      "round": 15,
+      "date": "2026-08-22T02:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Portland Fire",
+      "homeScore": 82,
+      "awayScore": 79
+    },
+    {
+      "id": "273",
+      "round": 15,
+      "date": "2026-08-21T23:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Golden State Valkyries",
+      "homeScore": 73,
+      "awayScore": 70
+    },
+    {
+      "id": "272",
+      "round": 15,
+      "date": "2026-08-21T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Minnesota Lynx",
+      "homeScore": 84,
+      "awayScore": 94
+    },
+    {
+      "id": "271",
+      "round": 15,
+      "date": "2026-08-21T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Atlanta Dream",
+      "homeScore": 88,
+      "awayScore": 124
+    },
+    {
+      "id": "270",
+      "round": 15,
+      "date": "2026-08-21T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Connecticut Sun",
+      "homeScore": 101,
+      "awayScore": 78
+    },
+    {
+      "id": "269",
+      "round": 15,
+      "date": "2026-08-21T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Indiana Fever",
+      "homeScore": 91,
+      "awayScore": 85
+    },
+    {
+      "id": "268",
+      "round": 15,
+      "date": "2026-08-20T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Minnesota Lynx",
+      "homeScore": 66,
+      "awayScore": 77
+    },
+    {
+      "id": "267",
+      "round": 15,
+      "date": "2026-08-19T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Toronto Tempo",
+      "homeScore": 93,
+      "awayScore": 82
+    },
+    {
+      "id": "266",
+      "round": 15,
+      "date": "2026-08-19T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Atlanta Dream",
+      "homeScore": 82,
+      "awayScore": 97
+    },
+    {
+      "id": "265",
+      "round": 15,
+      "date": "2026-08-19T01:00:00Z",
+      "home": "Chicago Sky",
+      "away": "New York Liberty",
+      "homeScore": 93,
+      "awayScore": 86
+    },
+    {
+      "id": "264",
+      "round": 15,
+      "date": "2026-08-18T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Indiana Fever",
+      "homeScore": 95,
+      "awayScore": 101
+    },
+    {
+      "id": "263",
+      "round": 15,
+      "date": "2026-08-18T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Los Angeles Sparks",
+      "homeScore": 85,
+      "awayScore": 77
+    },
+    {
+      "id": "262",
+      "round": 15,
+      "date": "2026-08-18T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Dallas Wings",
+      "homeScore": 78,
+      "awayScore": 70
+    },
+    {
+      "id": "260",
+      "round": 14,
+      "date": "2026-08-16T23:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Portland Fire",
+      "homeScore": 85,
+      "awayScore": 88
+    },
+    {
+      "id": "261",
+      "round": 14,
+      "date": "2026-08-16T21:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Indiana Fever",
+      "homeScore": 91,
+      "awayScore": 95
+    },
+    {
+      "id": "259",
+      "round": 14,
+      "date": "2026-08-16T21:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Chicago Sky",
+      "homeScore": 80,
+      "awayScore": 82
+    },
+    {
+      "id": "258",
+      "round": 14,
+      "date": "2026-08-16T00:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Minnesota Lynx",
+      "homeScore": 87,
+      "awayScore": 92
+    },
+    {
+      "id": "257",
+      "round": 14,
+      "date": "2026-08-15T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Los Angeles Sparks",
+      "homeScore": 80,
+      "awayScore": 70
+    },
+    {
+      "id": "256",
+      "round": 14,
+      "date": "2026-08-15T17:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "New York Liberty",
+      "homeScore": 75,
+      "awayScore": 92
+    },
+    {
+      "id": "255",
+      "round": 14,
+      "date": "2026-08-15T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Portland Fire",
+      "homeScore": 82,
+      "awayScore": 84
+    },
+    {
+      "id": "254",
+      "round": 14,
+      "date": "2026-08-14T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Dallas Wings",
+      "homeScore": 98,
+      "awayScore": 87
+    },
+    {
+      "id": "253",
+      "round": 14,
+      "date": "2026-08-14T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Washington Mystics",
+      "homeScore": 83,
+      "awayScore": 76
+    },
+    {
+      "id": "252",
+      "round": 14,
+      "date": "2026-08-14T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Los Angeles Sparks",
+      "homeScore": 85,
+      "awayScore": 81
+    },
+    {
+      "id": "251",
+      "round": 14,
+      "date": "2026-08-13T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Atlanta Dream",
+      "homeScore": 69,
+      "awayScore": 104
+    },
+    {
+      "id": "250",
+      "round": 14,
+      "date": "2026-08-13T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Minnesota Lynx",
+      "homeScore": 81,
+      "awayScore": 85
+    },
+    {
+      "id": "249",
+      "round": 14,
+      "date": "2026-08-13T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Chicago Sky",
+      "homeScore": 91,
+      "awayScore": 71
+    },
+    {
+      "id": "248",
+      "round": 14,
+      "date": "2026-08-13T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Toronto Tempo",
+      "homeScore": 94,
+      "awayScore": 88
+    },
+    {
+      "id": "247",
+      "round": 14,
+      "date": "2026-08-12T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Phoenix Mercury",
+      "homeScore": 87,
+      "awayScore": 94
+    },
+    {
+      "id": "246",
+      "round": 14,
+      "date": "2026-08-12T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Washington Mystics",
+      "homeScore": 86,
+      "awayScore": 76
+    },
+    {
+      "id": "245",
+      "round": 14,
+      "date": "2026-08-11T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "New York Liberty",
+      "homeScore": 106,
+      "awayScore": 92
+    },
+    {
+      "id": "244",
+      "round": 14,
+      "date": "2026-08-11T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Chicago Sky",
+      "homeScore": 97,
+      "awayScore": 88
+    },
+    {
+      "id": "243",
+      "round": 14,
+      "date": "2026-08-11T00:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Toronto Tempo",
+      "homeScore": 107,
+      "awayScore": 95
+    },
+    {
+      "id": "242",
+      "round": 13,
+      "date": "2026-08-09T23:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Golden State Valkyries",
+      "homeScore": 78,
+      "awayScore": 84
+    },
+    {
+      "id": "241",
+      "round": 13,
+      "date": "2026-08-09T19:30:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Dallas Wings",
+      "homeScore": 103,
+      "awayScore": 90
+    },
+    {
+      "id": "240",
+      "round": 13,
+      "date": "2026-08-09T19:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Phoenix Mercury",
+      "homeScore": 95,
+      "awayScore": 75
+    },
+    {
+      "id": "239",
+      "round": 13,
+      "date": "2026-08-09T16:30:00Z",
+      "home": "New York Liberty",
+      "away": "Las Vegas Aces",
+      "homeScore": 111,
+      "awayScore": 71
+    },
+    {
+      "id": "238",
+      "round": 13,
+      "date": "2026-08-09T00:30:00Z",
+      "home": "Portland Fire",
+      "away": "Seattle Storm",
+      "homeScore": 100,
+      "awayScore": 93
+    },
+    {
+      "id": "237",
+      "round": 13,
+      "date": "2026-08-08T19:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Indiana Fever",
+      "homeScore": 86,
+      "awayScore": 90
+    },
+    {
+      "id": "236",
+      "round": 13,
+      "date": "2026-08-08T17:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Las Vegas Aces",
+      "homeScore": 98,
+      "awayScore": 87
+    },
+    {
+      "id": "235",
+      "round": 13,
+      "date": "2026-08-08T01:30:00Z",
+      "home": "Dallas Wings",
+      "away": "Golden State Valkyries",
+      "homeScore": 76,
+      "awayScore": 94
+    },
+    {
+      "id": "234",
+      "round": 13,
+      "date": "2026-08-07T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Atlanta Dream",
+      "homeScore": 79,
+      "awayScore": 74
+    },
+    {
+      "id": "233",
+      "round": 13,
+      "date": "2026-08-07T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Phoenix Mercury",
+      "homeScore": 75,
+      "awayScore": 72
+    },
+    {
+      "id": "232",
+      "round": 13,
+      "date": "2026-08-07T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Toronto Tempo",
+      "homeScore": 97,
+      "awayScore": 83
+    },
+    {
+      "id": "231",
+      "round": 13,
+      "date": "2026-08-07T01:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Los Angeles Sparks",
+      "homeScore": 82,
+      "awayScore": 89
+    },
+    {
+      "id": "230",
+      "round": 13,
+      "date": "2026-08-06T23:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Las Vegas Aces",
+      "homeScore": 84,
+      "awayScore": 86
+    },
+    {
+      "id": "229",
+      "round": 13,
+      "date": "2026-08-06T01:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Los Angeles Sparks",
+      "homeScore": 95,
+      "awayScore": 88
+    },
+    {
+      "id": "228",
+      "round": 13,
+      "date": "2026-08-05T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Dallas Wings",
+      "homeScore": 96,
+      "awayScore": 92
+    },
+    {
+      "id": "227",
+      "round": 13,
+      "date": "2026-08-05T23:00:00Z",
+      "home": "New York Liberty",
+      "away": "Seattle Storm",
+      "homeScore": 92,
+      "awayScore": 86
+    },
+    {
+      "id": "226",
+      "round": 13,
+      "date": "2026-08-05T23:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Phoenix Mercury",
+      "homeScore": 96,
+      "awayScore": 82
+    },
+    {
+      "id": "225",
+      "round": 13,
+      "date": "2026-08-05T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Toronto Tempo",
+      "homeScore": 92,
+      "awayScore": 81
+    },
+    {
+      "id": "224",
+      "round": 13,
+      "date": "2026-08-04T01:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Phoenix Mercury",
+      "homeScore": 101,
+      "awayScore": 106
+    },
+    {
+      "id": "222",
+      "round": 13,
+      "date": "2026-08-03T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Las Vegas Aces",
+      "homeScore": 87,
+      "awayScore": 109
+    },
+    {
+      "id": "223",
+      "round": 13,
+      "date": "2026-08-03T23:00:00Z",
+      "home": "New York Liberty",
+      "away": "Seattle Storm",
+      "homeScore": 95,
+      "awayScore": 83
+    },
+    {
+      "id": "221",
+      "round": 12,
+      "date": "2026-08-03T00:30:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Toronto Tempo",
+      "homeScore": 96,
+      "awayScore": 79
+    },
+    {
+      "id": "220",
+      "round": 12,
+      "date": "2026-08-02T23:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Connecticut Sun",
+      "homeScore": 83,
+      "awayScore": 63
+    },
+    {
+      "id": "219",
+      "round": 12,
+      "date": "2026-08-02T19:30:00Z",
+      "home": "Portland Fire",
+      "away": "Los Angeles Sparks",
+      "homeScore": 101,
+      "awayScore": 106
+    },
+    {
+      "id": "218",
+      "round": 12,
+      "date": "2026-08-02T17:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Indiana Fever",
+      "homeScore": 108,
+      "awayScore": 100
+    },
+    {
+      "id": "217",
+      "round": 12,
+      "date": "2026-08-01T19:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "New York Liberty",
+      "homeScore": 92,
+      "awayScore": 94
+    },
+    {
+      "id": "216",
+      "round": 12,
+      "date": "2026-08-01T17:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Las Vegas Aces",
+      "homeScore": 84,
+      "awayScore": 83
+    },
+    {
+      "id": "215",
+      "round": 12,
+      "date": "2026-08-01T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Indiana Fever",
+      "homeScore": 98,
+      "awayScore": 112
+    },
+    {
+      "id": "214",
+      "round": 12,
+      "date": "2026-07-31T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Dallas Wings",
+      "homeScore": 81,
+      "awayScore": 75
+    },
+    {
+      "id": "213",
+      "round": 12,
+      "date": "2026-07-31T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Seattle Storm",
+      "homeScore": 98,
+      "awayScore": 89
+    },
+    {
+      "id": "212",
+      "round": 12,
+      "date": "2026-07-31T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "New York Liberty",
+      "homeScore": 104,
+      "awayScore": 99
+    },
+    {
+      "id": "211",
+      "round": 12,
+      "date": "2026-07-31T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Connecticut Sun",
+      "homeScore": 94,
+      "awayScore": 88
+    },
+    {
+      "id": "210",
+      "round": 12,
+      "date": "2026-07-30T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Minnesota Lynx",
+      "homeScore": 72,
+      "awayScore": 104
+    },
+    {
+      "id": "209",
+      "round": 12,
+      "date": "2026-07-30T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Golden State Valkyries",
+      "homeScore": 91,
+      "awayScore": 89
+    },
+    {
+      "id": "208",
+      "round": 12,
+      "date": "2026-07-30T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Atlanta Dream",
+      "homeScore": 81,
+      "awayScore": 82
+    },
+    {
+      "id": "207",
+      "round": 12,
+      "date": "2026-07-29T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "New York Liberty",
+      "homeScore": 109,
+      "awayScore": 113
+    },
+    {
+      "id": "206",
+      "round": 12,
+      "date": "2026-07-29T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Portland Fire",
+      "homeScore": 98,
+      "awayScore": 83
+    },
+    {
+      "id": "205",
+      "round": 12,
+      "date": "2026-07-29T01:30:00Z",
+      "home": "Seattle Storm",
+      "away": "Indiana Fever",
+      "homeScore": 95,
+      "awayScore": 105
+    },
+    {
+      "id": "204",
+      "round": 12,
+      "date": "2026-07-29T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Toronto Tempo",
+      "homeScore": 100,
+      "awayScore": 93
+    },
+    {
+      "id": "203",
+      "round": 12,
+      "date": "2026-07-28T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Connecticut Sun",
+      "homeScore": 92,
+      "awayScore": 84
+    },
+    {
+      "id": "202",
+      "round": 11,
+      "date": "2026-07-23T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Dallas Wings",
+      "homeScore": 97,
+      "awayScore": 101
+    },
+    {
+      "id": "201",
+      "round": 11,
+      "date": "2026-07-23T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Connecticut Sun",
+      "homeScore": 123,
+      "awayScore": 88
+    },
+    {
+      "id": "200",
+      "round": 11,
+      "date": "2026-07-22T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Las Vegas Aces",
+      "homeScore": 100,
+      "awayScore": 99
+    },
+    {
+      "id": "199",
+      "round": 11,
+      "date": "2026-07-22T23:00:00Z",
+      "home": "New York Liberty",
+      "away": "Chicago Sky",
+      "homeScore": 95,
+      "awayScore": 94
+    },
+    {
+      "id": "198",
+      "round": 11,
+      "date": "2026-07-22T19:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Minnesota Lynx",
+      "homeScore": 76,
+      "awayScore": 86
+    },
+    {
+      "id": "197",
+      "round": 11,
+      "date": "2026-07-22T19:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Phoenix Mercury",
+      "homeScore": 82,
+      "awayScore": 86
+    },
+    {
+      "id": "196",
+      "round": 11,
+      "date": "2026-07-21T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Minnesota Lynx",
+      "homeScore": 102,
+      "awayScore": 105
+    },
+    {
+      "id": "195",
+      "round": 11,
+      "date": "2026-07-21T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Washington Mystics",
+      "homeScore": 82,
+      "awayScore": 90
+    },
+    {
+      "id": "194",
+      "round": 11,
+      "date": "2026-07-21T00:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Las Vegas Aces",
+      "homeScore": 83,
+      "awayScore": 109
+    },
+    {
+      "id": "193",
+      "round": 11,
+      "date": "2026-07-19T23:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Connecticut Sun",
+      "homeScore": 72,
+      "awayScore": 63
+    },
+    {
+      "id": "192",
+      "round": 11,
+      "date": "2026-07-19T20:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Chicago Sky",
+      "homeScore": 93,
+      "awayScore": 91
+    },
+    {
+      "id": "191",
+      "round": 11,
+      "date": "2026-07-19T17:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Los Angeles Sparks",
+      "homeScore": 90,
+      "awayScore": 82
+    },
+    {
+      "id": "190",
+      "round": 11,
+      "date": "2026-07-19T00:30:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Washington Mystics",
+      "homeScore": 74,
+      "awayScore": 69
+    },
+    {
+      "id": "189",
+      "round": 11,
+      "date": "2026-07-19T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Portland Fire",
+      "homeScore": 101,
+      "awayScore": 93
+    },
+    {
+      "id": "188",
+      "round": 11,
+      "date": "2026-07-19T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "New York Liberty",
+      "homeScore": 108,
+      "awayScore": 88
+    },
+    {
+      "id": "187",
+      "round": 11,
+      "date": "2026-07-18T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Connecticut Sun",
+      "homeScore": 83,
+      "awayScore": 96
+    },
+    {
+      "id": "186",
+      "round": 11,
+      "date": "2026-07-17T23:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Los Angeles Sparks",
+      "homeScore": 96,
+      "awayScore": 82
+    },
+    {
+      "id": "185",
+      "round": 11,
+      "date": "2026-07-17T23:30:00Z",
+      "home": "Toronto Tempo",
+      "away": "Atlanta Dream",
+      "homeScore": 92,
+      "awayScore": 111
+    },
+    {
+      "id": "184",
+      "round": 11,
+      "date": "2026-07-17T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Seattle Storm",
+      "homeScore": 110,
+      "awayScore": 107
+    },
+    {
+      "id": "183",
+      "round": 10,
+      "date": "2026-07-17T01:00:00Z",
+      "home": "Dallas Wings",
+      "away": "New York Liberty",
+      "homeScore": 98,
+      "awayScore": 99
+    },
+    {
+      "id": "182",
+      "round": 10,
+      "date": "2026-07-16T23:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Portland Fire",
+      "homeScore": 56,
+      "awayScore": 75
+    },
+    {
+      "id": "181",
+      "round": 10,
+      "date": "2026-07-16T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Golden State Valkyries",
+      "homeScore": 75,
+      "awayScore": 88
+    },
+    {
+      "id": "180",
+      "round": 10,
+      "date": "2026-07-15T17:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Los Angeles Sparks",
+      "homeScore": 96,
+      "awayScore": 87
+    },
+    {
+      "id": "179",
+      "round": 10,
+      "date": "2026-07-15T16:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Seattle Storm",
+      "homeScore": 95,
+      "awayScore": 90
+    },
+    {
+      "id": "178",
+      "round": 10,
+      "date": "2026-07-14T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Washington Mystics",
+      "homeScore": 62,
+      "awayScore": 79
+    },
+    {
+      "id": "177",
+      "round": 10,
+      "date": "2026-07-14T15:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Portland Fire",
+      "homeScore": 90,
+      "awayScore": 87
+    },
+    {
+      "id": "176",
+      "round": 10,
+      "date": "2026-07-14T01:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Phoenix Mercury",
+      "homeScore": 104,
+      "awayScore": 100
+    },
+    {
+      "id": "175",
+      "round": 10,
+      "date": "2026-07-13T23:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Los Angeles Sparks",
+      "homeScore": 101,
+      "awayScore": 92
+    },
+    {
+      "id": "174",
+      "round": 10,
+      "date": "2026-07-13T01:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Indiana Fever",
+      "homeScore": 75,
+      "awayScore": 109
+    },
+    {
+      "id": "173",
+      "round": 10,
+      "date": "2026-07-12T23:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Chicago Sky",
+      "homeScore": 96,
+      "awayScore": 91
+    },
+    {
+      "id": "172",
+      "round": 10,
+      "date": "2026-07-12T19:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Seattle Storm",
+      "homeScore": 84,
+      "awayScore": 79
+    },
+    {
+      "id": "171",
+      "round": 10,
+      "date": "2026-07-12T19:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "New York Liberty",
+      "homeScore": 93,
+      "awayScore": 91
+    },
+    {
+      "id": "169",
+      "round": 10,
+      "date": "2026-07-11T22:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Phoenix Mercury",
+      "homeScore": 106,
+      "awayScore": 58
+    },
+    {
+      "id": "170",
+      "round": 10,
+      "date": "2026-07-11T20:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Portland Fire",
+      "homeScore": 92,
+      "awayScore": 102
+    },
+    {
+      "id": "168",
+      "round": 10,
+      "date": "2026-07-11T17:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "New York Liberty",
+      "homeScore": 90,
+      "awayScore": 85
+    },
+    {
+      "id": "167",
+      "round": 10,
+      "date": "2026-07-11T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Chicago Sky",
+      "homeScore": 102,
+      "awayScore": 87
+    },
+    {
+      "id": "166",
+      "round": 10,
+      "date": "2026-07-10T23:30:00Z",
+      "home": "Toronto Tempo",
+      "away": "Dallas Wings",
+      "homeScore": 95,
+      "awayScore": 108
+    },
+    {
+      "id": "165",
+      "round": 10,
+      "date": "2026-07-10T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Golden State Valkyries",
+      "homeScore": 64,
+      "awayScore": 79
+    },
+    {
+      "id": "164",
+      "round": 9,
+      "date": "2026-07-10T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Las Vegas Aces",
+      "homeScore": 80,
+      "awayScore": 88
+    },
+    {
+      "id": "163",
+      "round": 9,
+      "date": "2026-07-10T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Indiana Fever",
+      "homeScore": 89,
+      "awayScore": 92
+    },
+    {
+      "id": "162",
+      "round": 9,
+      "date": "2026-07-10T00:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Seattle Storm",
+      "homeScore": 89,
+      "awayScore": 78
+    },
+    {
+      "id": "161",
+      "round": 9,
+      "date": "2026-07-09T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Indiana Fever",
+      "homeScore": 106,
+      "awayScore": 92
+    },
+    {
+      "id": "160",
+      "round": 9,
+      "date": "2026-07-08T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Minnesota Lynx",
+      "homeScore": 80,
+      "awayScore": 86
+    },
+    {
+      "id": "159",
+      "round": 9,
+      "date": "2026-07-08T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Golden State Valkyries",
+      "homeScore": 75,
+      "awayScore": 83
+    },
+    {
+      "id": "158",
+      "round": 9,
+      "date": "2026-07-08T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Chicago Sky",
+      "homeScore": 66,
+      "awayScore": 77
+    },
+    {
+      "id": "157",
+      "round": 9,
+      "date": "2026-07-08T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Dallas Wings",
+      "homeScore": 77,
+      "awayScore": 88
+    },
+    {
+      "id": "156",
+      "round": 9,
+      "date": "2026-07-07T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Seattle Storm",
+      "homeScore": 64,
+      "awayScore": 82
+    },
+    {
+      "id": "155",
+      "round": 9,
+      "date": "2026-07-07T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Connecticut Sun",
+      "homeScore": 89,
+      "awayScore": 90
+    },
+    {
+      "id": "154",
+      "round": 9,
+      "date": "2026-07-06T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Golden State Valkyries",
+      "homeScore": 49,
+      "awayScore": 62
+    },
+    {
+      "id": "153",
+      "round": 9,
+      "date": "2026-07-05T23:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Indiana Fever",
+      "homeScore": 68,
+      "awayScore": 84
+    },
+    {
+      "id": "152",
+      "round": 9,
+      "date": "2026-07-05T19:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Dallas Wings",
+      "homeScore": 76,
+      "awayScore": 89
+    },
+    {
+      "id": "151",
+      "round": 9,
+      "date": "2026-07-05T01:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Portland Fire",
+      "homeScore": 72,
+      "awayScore": 77
+    },
+    {
+      "id": "150",
+      "round": 9,
+      "date": "2026-07-04T17:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Golden State Valkyries",
+      "homeScore": 83,
+      "awayScore": 88
+    },
+    {
+      "id": "149",
+      "round": 9,
+      "date": "2026-07-04T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Chicago Sky",
+      "homeScore": 98,
+      "awayScore": 90
+    },
+    {
+      "id": "148",
+      "round": 9,
+      "date": "2026-07-03T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Minnesota Lynx",
+      "homeScore": 99,
+      "awayScore": 86
+    },
+    {
+      "id": "147",
+      "round": 9,
+      "date": "2026-07-03T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Seattle Storm",
+      "homeScore": 90,
+      "awayScore": 67
+    },
+    {
+      "id": "146",
+      "round": 9,
+      "date": "2026-07-03T00:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Dallas Wings",
+      "homeScore": 83,
+      "awayScore": 86
+    },
+    {
+      "id": "145",
+      "round": 9,
+      "date": "2026-07-02T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Atlanta Dream",
+      "homeScore": 81,
+      "awayScore": 76
+    },
+    {
+      "id": "144",
+      "round": 8,
+      "date": "2026-06-28T23:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "New York Liberty",
+      "homeScore": 76,
+      "awayScore": 67
+    },
+    {
+      "id": "143",
+      "round": 8,
+      "date": "2026-06-28T20:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Las Vegas Aces",
+      "homeScore": 99,
+      "awayScore": 107
+    },
+    {
+      "id": "142",
+      "round": 8,
+      "date": "2026-06-28T19:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Portland Fire",
+      "homeScore": 124,
+      "awayScore": 123
+    },
+    {
+      "id": "141",
+      "round": 8,
+      "date": "2026-06-28T18:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Minnesota Lynx",
+      "homeScore": 77,
+      "awayScore": 85
+    },
+    {
+      "id": "140",
+      "round": 8,
+      "date": "2026-06-28T01:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Atlanta Dream",
+      "homeScore": 105,
+      "awayScore": 90
+    },
+    {
+      "id": "139",
+      "round": 8,
+      "date": "2026-06-28T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Los Angeles Sparks",
+      "homeScore": 111,
+      "awayScore": 87
+    },
+    {
+      "id": "138",
+      "round": 8,
+      "date": "2026-06-27T18:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Phoenix Mercury",
+      "homeScore": 80,
+      "awayScore": 89
+    },
+    {
+      "id": "137",
+      "round": 8,
+      "date": "2026-06-27T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Atlanta Dream",
+      "homeScore": 78,
+      "awayScore": 75
+    },
+    {
+      "id": "136",
+      "round": 8,
+      "date": "2026-06-26T23:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Portland Fire",
+      "homeScore": 124,
+      "awayScore": 94
+    },
+    {
+      "id": "135",
+      "round": 8,
+      "date": "2026-06-26T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Washington Mystics",
+      "homeScore": 68,
+      "awayScore": 57
+    },
+    {
+      "id": "134",
+      "round": 8,
+      "date": "2026-06-26T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "New York Liberty",
+      "homeScore": 99,
+      "awayScore": 88
+    },
+    {
+      "id": "133",
+      "round": 8,
+      "date": "2026-06-26T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Dallas Wings",
+      "homeScore": 99,
+      "awayScore": 84
+    },
+    {
+      "id": "132",
+      "round": 8,
+      "date": "2026-06-25T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Los Angeles Sparks",
+      "homeScore": 125,
+      "awayScore": 97
+    },
+    {
+      "id": "131",
+      "round": 8,
+      "date": "2026-06-25T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Atlanta Dream",
+      "homeScore": 77,
+      "awayScore": 66
+    },
+    {
+      "id": "130",
+      "round": 8,
+      "date": "2026-06-25T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Portland Fire",
+      "homeScore": 101,
+      "awayScore": 78
+    },
+    {
+      "id": "129",
+      "round": 8,
+      "date": "2026-06-24T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Minnesota Lynx",
+      "homeScore": 76,
+      "awayScore": 78
+    },
+    {
+      "id": "128",
+      "round": 8,
+      "date": "2026-06-24T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Phoenix Mercury",
+      "homeScore": 109,
+      "awayScore": 111
+    },
+    {
+      "id": "127",
+      "round": 7,
+      "date": "2026-06-24T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "New York Liberty",
+      "homeScore": 76,
+      "awayScore": 87
+    },
+    {
+      "id": "126",
+      "round": 7,
+      "date": "2026-06-23T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Dallas Wings",
+      "homeScore": 110,
+      "awayScore": 112
+    },
+    {
+      "id": "125",
+      "round": 7,
+      "date": "2026-06-23T00:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Phoenix Mercury",
+      "homeScore": 86,
+      "awayScore": 77
+    },
+    {
+      "id": "124",
+      "round": 7,
+      "date": "2026-06-22T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Toronto Tempo",
+      "homeScore": 94,
+      "awayScore": 87
+    },
+    {
+      "id": "123",
+      "round": 7,
+      "date": "2026-06-22T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Chicago Sky",
+      "homeScore": 92,
+      "awayScore": 63
+    },
+    {
+      "id": "122",
+      "round": 7,
+      "date": "2026-06-22T00:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "New York Liberty",
+      "homeScore": 98,
+      "awayScore": 97
+    },
+    {
+      "id": "121",
+      "round": 7,
+      "date": "2026-06-21T22:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Washington Mystics",
+      "homeScore": 79,
+      "awayScore": 84
+    },
+    {
+      "id": "120",
+      "round": 7,
+      "date": "2026-06-21T20:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Golden State Valkyries",
+      "homeScore": 92,
+      "awayScore": 73
+    },
+    {
+      "id": "119",
+      "round": 7,
+      "date": "2026-06-21T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Chicago Sky",
+      "homeScore": 93,
+      "awayScore": 92
+    },
+    {
+      "id": "118",
+      "round": 7,
+      "date": "2026-06-20T19:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Seattle Storm",
+      "homeScore": 93,
+      "awayScore": 73
+    },
+    {
+      "id": "117",
+      "round": 7,
+      "date": "2026-06-20T17:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Indiana Fever",
+      "homeScore": 113,
+      "awayScore": 96
+    },
+    {
+      "id": "116",
+      "round": 7,
+      "date": "2026-06-20T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Minnesota Lynx",
+      "homeScore": 75,
+      "awayScore": 81
+    },
+    {
+      "id": "115",
+      "round": 7,
+      "date": "2026-06-19T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Washington Mystics",
+      "homeScore": 83,
+      "awayScore": 86
+    },
+    {
+      "id": "114",
+      "round": 7,
+      "date": "2026-06-19T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Toronto Tempo",
+      "homeScore": 97,
+      "awayScore": 101
+    },
+    {
+      "id": "113",
+      "round": 7,
+      "date": "2026-06-18T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Atlanta Dream",
+      "homeScore": 101,
+      "awayScore": 108
+    },
+    {
+      "id": "112",
+      "round": 7,
+      "date": "2026-06-18T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Seattle Storm",
+      "homeScore": 94,
+      "awayScore": 89
+    },
+    {
+      "id": "111",
+      "round": 7,
+      "date": "2026-06-18T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Las Vegas Aces",
+      "homeScore": 76,
+      "awayScore": 86
+    },
+    {
+      "id": "110",
+      "round": 7,
+      "date": "2026-06-18T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Minnesota Lynx",
+      "homeScore": 83,
+      "awayScore": 99
+    },
+    {
+      "id": "109",
+      "round": 7,
+      "date": "2026-06-18T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Dallas Wings",
+      "homeScore": 91,
+      "awayScore": 80
+    },
+    {
+      "id": "108",
+      "round": 7,
+      "date": "2026-06-18T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "New York Liberty",
+      "homeScore": 95,
+      "awayScore": 96
+    },
+    {
+      "id": "107",
+      "round": 7,
+      "date": "2026-06-17T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Washington Mystics",
+      "homeScore": 81,
+      "awayScore": 88
+    },
+    {
+      "id": "106",
+      "round": 6,
+      "date": "2026-06-16T23:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Toronto Tempo",
+      "homeScore": 113,
+      "awayScore": 91
+    },
+    {
+      "id": "105",
+      "round": 6,
+      "date": "2026-06-16T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Los Angeles Sparks",
+      "homeScore": 78,
+      "awayScore": 58
+    },
+    {
+      "id": "104",
+      "round": 6,
+      "date": "2026-06-16T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Portland Fire",
+      "homeScore": 107,
+      "awayScore": 74
+    },
+    {
+      "id": "103",
+      "round": 6,
+      "date": "2026-06-16T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Las Vegas Aces",
+      "homeScore": 96,
+      "awayScore": 66
+    },
+    {
+      "id": "102",
+      "round": 6,
+      "date": "2026-06-14T19:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Atlanta Dream",
+      "homeScore": 77,
+      "awayScore": 102
+    },
+    {
+      "id": "101",
+      "round": 6,
+      "date": "2026-06-14T19:00:00Z",
+      "home": "New York Liberty",
+      "away": "Washington Mystics",
+      "homeScore": 86,
+      "awayScore": 64
+    },
+    {
+      "id": "100",
+      "round": 6,
+      "date": "2026-06-14T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Los Angeles Sparks",
+      "homeScore": 102,
+      "awayScore": 111
+    },
+    {
+      "id": "99",
+      "round": 6,
+      "date": "2026-06-14T00:30:00Z",
+      "home": "Portland Fire",
+      "away": "Dallas Wings",
+      "homeScore": 84,
+      "awayScore": 83
+    },
+    {
+      "id": "98",
+      "round": 6,
+      "date": "2026-06-14T00:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Minnesota Lynx",
+      "homeScore": 100,
+      "awayScore": 97
+    },
+    {
+      "id": "97",
+      "round": 6,
+      "date": "2026-06-13T22:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Indiana Fever",
+      "homeScore": 75,
+      "awayScore": 85
+    },
+    {
+      "id": "96",
+      "round": 6,
+      "date": "2026-06-13T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Golden State Valkyries",
+      "homeScore": 72,
+      "awayScore": 76
+    },
+    {
+      "id": "95",
+      "round": 6,
+      "date": "2026-06-12T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Toronto Tempo",
+      "homeScore": 86,
+      "awayScore": 85
+    },
+    {
+      "id": "94",
+      "round": 6,
+      "date": "2026-06-12T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Las Vegas Aces",
+      "homeScore": 89,
+      "awayScore": 105
+    },
+    {
+      "id": "93",
+      "round": 6,
+      "date": "2026-06-12T01:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Phoenix Mercury",
+      "homeScore": 85,
+      "awayScore": 70
+    },
+    {
+      "id": "92",
+      "round": 6,
+      "date": "2026-06-11T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "New York Liberty",
+      "homeScore": 90,
+      "awayScore": 104
+    },
+    {
+      "id": "91",
+      "round": 6,
+      "date": "2026-06-11T23:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Chicago Sky",
+      "homeScore": 114,
+      "awayScore": 106
+    },
+    {
+      "id": "90",
+      "round": 6,
+      "date": "2026-06-11T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Los Angeles Sparks",
+      "homeScore": 83,
+      "awayScore": 88
+    },
+    {
+      "id": "89",
+      "round": 6,
+      "date": "2026-06-10T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Connecticut Sun",
+      "homeScore": 106,
+      "awayScore": 102
+    },
+    {
+      "id": "88",
+      "round": 5,
+      "date": "2026-06-10T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Phoenix Mercury",
+      "homeScore": 87,
+      "awayScore": 81
+    },
+    {
+      "id": "87",
+      "round": 5,
+      "date": "2026-06-10T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Dallas Wings",
+      "homeScore": 100,
+      "awayScore": 76
+    },
+    {
+      "id": "86",
+      "round": 5,
+      "date": "2026-06-09T23:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Atlanta Dream",
+      "homeScore": 75,
+      "awayScore": 82
+    },
+    {
+      "id": "85",
+      "round": 5,
+      "date": "2026-06-09T02:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Seattle Storm",
+      "homeScore": 101,
+      "awayScore": 91
+    },
+    {
+      "id": "84",
+      "round": 5,
+      "date": "2026-06-08T23:00:00Z",
+      "home": "Washington Mystics",
+      "away": "Indiana Fever",
+      "homeScore": 76,
+      "awayScore": 78
+    },
+    {
+      "id": "83",
+      "round": 5,
+      "date": "2026-06-08T23:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "New York Liberty",
+      "homeScore": 80,
+      "awayScore": 89
+    },
+    {
+      "id": "82",
+      "round": 5,
+      "date": "2026-06-07T23:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Portland Fire",
+      "homeScore": 89,
+      "awayScore": 72
+    },
+    {
+      "id": "81",
+      "round": 5,
+      "date": "2026-06-07T19:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Chicago Sky",
+      "homeScore": 85,
+      "awayScore": 68
+    },
+    {
+      "id": "80",
+      "round": 5,
+      "date": "2026-06-07T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Indiana Fever",
+      "homeScore": 83,
+      "awayScore": 75
+    },
+    {
+      "id": "79",
+      "round": 5,
+      "date": "2026-06-06T22:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Washington Mystics",
+      "homeScore": 109,
+      "awayScore": 77
+    },
+    {
+      "id": "78",
+      "round": 5,
+      "date": "2026-06-06T19:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Golden State Valkyries",
+      "homeScore": 84,
+      "awayScore": 79
+    },
+    {
+      "id": "77",
+      "round": 5,
+      "date": "2026-06-06T17:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Seattle Storm",
+      "homeScore": 88,
+      "awayScore": 68
+    },
+    {
+      "id": "76",
+      "round": 5,
+      "date": "2026-06-06T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Phoenix Mercury",
+      "homeScore": 72,
+      "awayScore": 78
+    },
+    {
+      "id": "75",
+      "round": 5,
+      "date": "2026-06-06T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Dallas Wings",
+      "homeScore": 96,
+      "awayScore": 104
+    },
+    {
+      "id": "74",
+      "round": 5,
+      "date": "2026-06-05T23:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Connecticut Sun",
+      "homeScore": 85,
+      "awayScore": 80
+    },
+    {
+      "id": "73",
+      "round": 5,
+      "date": "2026-06-05T01:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Golden State Valkyries",
+      "homeScore": 87,
+      "awayScore": 84
+    },
+    {
+      "id": "72",
+      "round": 5,
+      "date": "2026-06-04T23:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Atlanta Dream",
+      "homeScore": 83,
+      "awayScore": 71
+    },
+    {
+      "id": "71",
+      "round": 5,
+      "date": "2026-06-04T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Phoenix Mercury",
+      "homeScore": 68,
+      "awayScore": 72
+    },
+    {
+      "id": "70",
+      "round": 5,
+      "date": "2026-06-03T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Toronto Tempo",
+      "homeScore": 97,
+      "awayScore": 82
+    },
+    {
+      "id": "69",
+      "round": 4,
+      "date": "2026-06-03T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Las Vegas Aces",
+      "homeScore": 69,
+      "awayScore": 79
+    },
+    {
+      "id": "68",
+      "round": 4,
+      "date": "2026-06-03T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Portland Fire",
+      "homeScore": 95,
+      "awayScore": 77
+    },
+    {
+      "id": "67",
+      "round": 4,
+      "date": "2026-06-02T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Chicago Sky",
+      "homeScore": 90,
+      "awayScore": 72
+    },
+    {
+      "id": "66",
+      "round": 4,
+      "date": "2026-06-02T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Connecticut Sun",
+      "homeScore": 91,
+      "awayScore": 75
+    },
+    {
+      "id": "65",
+      "round": 4,
+      "date": "2026-06-02T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Minnesota Lynx",
+      "homeScore": 77,
+      "awayScore": 111
+    },
+    {
+      "id": "64",
+      "round": 4,
+      "date": "2026-06-02T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Seattle Storm",
+      "homeScore": 79,
+      "awayScore": 56
+    },
+    {
+      "id": "63",
+      "round": 4,
+      "date": "2026-05-31T19:30:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Las Vegas Aces",
+      "homeScore": 81,
+      "awayScore": 91
+    },
+    {
+      "id": "62",
+      "round": 4,
+      "date": "2026-05-31T00:00:00Z",
+      "home": "Portland Fire",
+      "away": "Indiana Fever",
+      "homeScore": 100,
+      "awayScore": 84
+    },
+    {
+      "id": "61",
+      "round": 4,
+      "date": "2026-05-30T22:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Los Angeles Sparks",
+      "homeScore": 84,
+      "awayScore": 81
+    },
+    {
+      "id": "60",
+      "round": 4,
+      "date": "2026-05-30T17:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Seattle Storm",
+      "homeScore": 93,
+      "awayScore": 72
+    },
+    {
+      "id": "59",
+      "round": 4,
+      "date": "2026-05-30T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Atlanta Dream",
+      "homeScore": 66,
+      "awayScore": 86
+    },
+    {
+      "id": "58",
+      "round": 4,
+      "date": "2026-05-29T23:30:00Z",
+      "home": "Chicago Sky",
+      "away": "Minnesota Lynx",
+      "homeScore": 58,
+      "awayScore": 79
+    },
+    {
+      "id": "57",
+      "round": 4,
+      "date": "2026-05-29T23:30:00Z",
+      "home": "Washington Mystics",
+      "away": "Los Angeles Sparks",
+      "homeScore": 87,
+      "awayScore": 92
+    },
+    {
+      "id": "56",
+      "round": 4,
+      "date": "2026-05-29T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Phoenix Mercury",
+      "homeScore": 75,
+      "awayScore": 68
+    },
+    {
+      "id": "55",
+      "round": 4,
+      "date": "2026-05-29T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Indiana Fever",
+      "homeScore": 90,
+      "awayScore": 88
+    },
+    {
+      "id": "54",
+      "round": 4,
+      "date": "2026-05-29T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Las Vegas Aces",
+      "homeScore": 95,
+      "awayScore": 87
+    },
+    {
+      "id": "53",
+      "round": 4,
+      "date": "2026-05-28T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Washington Mystics",
+      "homeScore": 64,
+      "awayScore": 78
+    },
+    {
+      "id": "52",
+      "round": 4,
+      "date": "2026-05-28T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Connecticut Sun",
+      "homeScore": 71,
+      "awayScore": 61
+    },
+    {
+      "id": "51",
+      "round": 4,
+      "date": "2026-05-28T01:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Atlanta Dream",
+      "homeScore": 96,
+      "awayScore": 81
+    },
+    {
+      "id": "50",
+      "round": 4,
+      "date": "2026-05-28T00:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Toronto Tempo",
+      "homeScore": 104,
+      "awayScore": 111
+    },
+    {
+      "id": "49",
+      "round": 4,
+      "date": "2026-05-27T23:00:00Z",
+      "home": "New York Liberty",
+      "away": "Phoenix Mercury",
+      "homeScore": 84,
+      "awayScore": 74
+    },
+    {
+      "id": "48",
+      "round": 3,
+      "date": "2026-05-26T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Connecticut Sun",
+      "homeScore": 97,
+      "awayScore": 70
+    },
+    {
+      "id": "47",
+      "round": 3,
+      "date": "2026-05-26T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Portland Fire",
+      "homeScore": 74,
+      "awayScore": 81
+    },
+    {
+      "id": "46",
+      "round": 3,
+      "date": "2026-05-24T22:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Washington Mystics",
+      "homeScore": 97,
+      "awayScore": 85
+    },
+    {
+      "id": "45",
+      "round": 3,
+      "date": "2026-05-24T19:30:00Z",
+      "home": "New York Liberty",
+      "away": "Dallas Wings",
+      "homeScore": 76,
+      "awayScore": 91
+    },
+    {
+      "id": "44",
+      "round": 3,
+      "date": "2026-05-24T19:00:00Z",
+      "home": "Atlanta Dream",
+      "away": "Phoenix Mercury",
+      "homeScore": 82,
+      "awayScore": 80
+    },
+    {
+      "id": "43",
+      "round": 3,
+      "date": "2026-05-24T00:00:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Los Angeles Sparks",
+      "homeScore": 95,
+      "awayScore": 101
+    },
+    {
+      "id": "42",
+      "round": 3,
+      "date": "2026-05-23T22:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Portland Fire",
+      "homeScore": 80,
+      "awayScore": 99
+    },
+    {
+      "id": "41",
+      "round": 3,
+      "date": "2026-05-23T17:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Minnesota Lynx",
+      "homeScore": 75,
+      "awayScore": 85
+    },
+    {
+      "id": "40",
+      "round": 3,
+      "date": "2026-05-23T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Connecticut Sun",
+      "homeScore": 77,
+      "awayScore": 59
+    },
+    {
+      "id": "39",
+      "round": 3,
+      "date": "2026-05-22T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Golden State Valkyries",
+      "homeScore": 90,
+      "awayScore": 82
+    },
+    {
+      "id": "38",
+      "round": 3,
+      "date": "2026-05-22T23:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Dallas Wings",
+      "homeScore": 86,
+      "awayScore": 69
+    },
+    {
+      "id": "37",
+      "round": 3,
+      "date": "2026-05-22T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Los Angeles Sparks",
+      "homeScore": 88,
+      "awayScore": 97
+    },
+    {
+      "id": "36",
+      "round": 3,
+      "date": "2026-05-22T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Toronto Tempo",
+      "homeScore": 100,
+      "awayScore": 72
+    },
+    {
+      "id": "35",
+      "round": 3,
+      "date": "2026-05-22T00:00:00Z",
+      "home": "New York Liberty",
+      "away": "Golden State Valkyries",
+      "homeScore": 70,
+      "awayScore": 87
+    },
+    {
+      "id": "34",
+      "round": 3,
+      "date": "2026-05-21T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Connecticut Sun",
+      "homeScore": 78,
+      "awayScore": 80
+    },
+    {
+      "id": "33",
+      "round": 3,
+      "date": "2026-05-21T01:00:00Z",
+      "home": "Chicago Sky",
+      "away": "Dallas Wings",
+      "homeScore": 89,
+      "awayScore": 99
+    },
+    {
+      "id": "32",
+      "round": 3,
+      "date": "2026-05-20T23:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Portland Fire",
+      "homeScore": 90,
+      "awayScore": 73
+    },
+    {
+      "id": "31",
+      "round": 2,
+      "date": "2026-05-20T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Toronto Tempo",
+      "homeScore": 90,
+      "awayScore": 98
+    },
+    {
+      "id": "30",
+      "round": 2,
+      "date": "2026-05-19T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "Connecticut Sun",
+      "homeScore": 83,
+      "awayScore": 82
+    },
+    {
+      "id": "29",
+      "round": 2,
+      "date": "2026-05-19T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Washington Mystics",
+      "homeScore": 92,
+      "awayScore": 69
+    },
+    {
+      "id": "28",
+      "round": 2,
+      "date": "2026-05-17T23:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Toronto Tempo",
+      "homeScore": 96,
+      "awayScore": 106
+    },
+    {
+      "id": "25",
+      "round": 2,
+      "date": "2026-05-17T23:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Chicago Sky",
+      "homeScore": 79,
+      "awayScore": 86
+    },
+    {
+      "id": "27",
+      "round": 2,
+      "date": "2026-05-17T22:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Seattle Storm",
+      "homeScore": 89,
+      "awayScore": 78
+    },
+    {
+      "id": "26",
+      "round": 2,
+      "date": "2026-05-17T17:30:00Z",
+      "home": "Atlanta Dream",
+      "away": "Las Vegas Aces",
+      "homeScore": 84,
+      "awayScore": 85
+    },
+    {
+      "id": "24",
+      "round": 2,
+      "date": "2026-05-16T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Chicago Sky",
+      "homeScore": 91,
+      "awayScore": 83
+    },
+    {
+      "id": "23",
+      "round": 2,
+      "date": "2026-05-16T02:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Toronto Tempo",
+      "homeScore": 99,
+      "awayScore": 95
+    },
+    {
+      "id": "22",
+      "round": 2,
+      "date": "2026-05-15T23:30:00Z",
+      "home": "Indiana Fever",
+      "away": "Washington Mystics",
+      "homeScore": 102,
+      "awayScore": 104
+    },
+    {
+      "id": "21",
+      "round": 2,
+      "date": "2026-05-15T23:30:00Z",
+      "home": "Connecticut Sun",
+      "away": "Las Vegas Aces",
+      "homeScore": 94,
+      "awayScore": 101
+    },
+    {
+      "id": "20",
+      "round": 2,
+      "date": "2026-05-15T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "New York Liberty",
+      "homeScore": 82,
+      "awayScore": 100
+    },
+    {
+      "id": "19",
+      "round": 2,
+      "date": "2026-05-15T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Minnesota Lynx",
+      "homeScore": 86,
+      "awayScore": 90
+    },
+    {
+      "id": "18",
+      "round": 2,
+      "date": "2026-05-14T02:30:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Indiana Fever",
+      "homeScore": 78,
+      "awayScore": 87
+    },
+    {
+      "id": "17",
+      "round": 2,
+      "date": "2026-05-14T02:00:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Chicago Sky",
+      "homeScore": 63,
+      "awayScore": 69
+    },
+    {
+      "id": "16",
+      "round": 2,
+      "date": "2026-05-14T00:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Las Vegas Aces",
+      "homeScore": 69,
+      "awayScore": 98
+    },
+    {
+      "id": "15",
+      "round": 2,
+      "date": "2026-05-13T23:00:00Z",
+      "home": "Toronto Tempo",
+      "away": "Seattle Storm",
+      "homeScore": 86,
+      "awayScore": 73
+    },
+    {
+      "id": "14",
+      "round": 1,
+      "date": "2026-05-13T02:00:00Z",
+      "home": "Portland Fire",
+      "away": "New York Liberty",
+      "homeScore": 98,
+      "awayScore": 96
+    },
+    {
+      "id": "13",
+      "round": 1,
+      "date": "2026-05-13T02:00:00Z",
+      "home": "Phoenix Mercury",
+      "away": "Minnesota Lynx",
+      "homeScore": 84,
+      "awayScore": 88
+    },
+    {
+      "id": "12",
+      "round": 1,
+      "date": "2026-05-13T00:00:00Z",
+      "home": "Dallas Wings",
+      "away": "Atlanta Dream",
+      "homeScore": 72,
+      "awayScore": 77
+    },
+    {
+      "id": "11",
+      "round": 1,
+      "date": "2026-05-11T00:30:00Z",
+      "home": "Golden State Valkyries",
+      "away": "Phoenix Mercury",
+      "homeScore": 95,
+      "awayScore": 79
+    },
+    {
+      "id": "9",
+      "round": 1,
+      "date": "2026-05-10T22:00:00Z",
+      "home": "Los Angeles Sparks",
+      "away": "Las Vegas Aces",
+      "homeScore": 78,
+      "awayScore": 105
+    },
+    {
+      "id": "8",
+      "round": 1,
+      "date": "2026-05-10T19:00:00Z",
+      "home": "Washington Mystics",
+      "away": "New York Liberty",
+      "homeScore": 93,
+      "awayScore": 98
+    },
+    {
+      "id": "7",
+      "round": 1,
+      "date": "2026-05-10T17:00:00Z",
+      "home": "Connecticut Sun",
+      "away": "Seattle Storm",
+      "homeScore": 82,
+      "awayScore": 89
+    },
+    {
+      "id": "6",
+      "round": 1,
+      "date": "2026-05-10T01:00:00Z",
+      "home": "Portland Fire",
+      "away": "Chicago Sky",
+      "homeScore": 83,
+      "awayScore": 98
+    },
+    {
+      "id": "10",
+      "round": 1,
+      "date": "2026-05-10T00:00:00Z",
+      "home": "Minnesota Lynx",
+      "away": "Atlanta Dream",
+      "homeScore": 90,
+      "awayScore": 91
+    },
+    {
+      "id": "5",
+      "round": 1,
+      "date": "2026-05-09T19:30:00Z",
+      "home": "Las Vegas Aces",
+      "away": "Phoenix Mercury",
+      "homeScore": 66,
+      "awayScore": 99
+    },
+    {
+      "id": "4",
+      "round": 1,
+      "date": "2026-05-09T17:00:00Z",
+      "home": "Indiana Fever",
+      "away": "Dallas Wings",
+      "homeScore": 104,
+      "awayScore": 107
+    },
+    {
+      "id": "3",
+      "round": 1,
+      "date": "2026-05-09T02:00:00Z",
+      "home": "Seattle Storm",
+      "away": "Golden State Valkyries",
+      "homeScore": 80,
+      "awayScore": 91
+    },
+    {
+      "id": "2",
+      "round": 1,
+      "date": "2026-05-08T23:30:00Z",
+      "home": "Toronto Tempo",
+      "away": "Washington Mystics",
+      "homeScore": 65,
+      "awayScore": 68
+    },
+    {
+      "id": "1",
+      "round": 1,
+      "date": "2026-05-08T23:30:00Z",
+      "home": "New York Liberty",
+      "away": "Connecticut Sun",
+      "homeScore": 106,
+      "awayScore": 75
+    }
+  ],
+  "analysis": {
+    "method": "Monte Carlo",
+    "simulations": 20000,
+    "model": "Margin ratings model",
+    "modelNotes": [
+      "Team ratings come from score margins (capped at 25) with home advantage, fitted on this and last season with a 120-day half-life; last season counts 0.5x as much on top.",
+      "The rest of the regular season is simulated 20,000 times, letting team strength drift (more when more of the season is left), then the playoffs are simulated from each simulated table for title odds.",
+      "The table breaks ties on win percentage with the league's rules: head-to-head record, then record against teams at .500 or better, then head-to-head points difference, then points difference. Simulated seasons break ties at random.",
+      "The Commissioner's Cup final does not count in the standings and is left out; the Cup's group games do count.",
+      "Playoffs: series still to play are simulated 20,000 times from the regular-season ratings, starting from the real series scores."
+    ],
+    "probabilities": {
+      "Atlanta Dream": {
+        "playoffs": 100.0,
+        "top4": 100.0,
+        "top1": 0.0,
+        "title": 34.28
+      },
+      "Chicago Sky": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Connecticut Sun": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Dallas Wings": {
+        "playoffs": 100.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Golden State Valkyries": {
+        "playoffs": 100.0,
+        "top4": 100.0,
+        "top1": 0.0,
+        "title": 35.66
+      },
+      "Indiana Fever": {
+        "playoffs": 100.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Las Vegas Aces": {
+        "playoffs": 100.0,
+        "top4": 100.0,
+        "top1": 0.0,
+        "title": 23.21
+      },
+      "Los Angeles Sparks": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Minnesota Lynx": {
+        "playoffs": 100.0,
+        "top4": 100.0,
+        "top1": 100.0,
+        "title": 0.0
+      },
+      "New York Liberty": {
+        "playoffs": 100.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 6.86
+      },
+      "Phoenix Mercury": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Portland Fire": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Seattle Storm": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Toronto Tempo": {
+        "playoffs": 0.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      },
+      "Washington Mystics": {
+        "playoffs": 100.0,
+        "top4": 0.0,
+        "top1": 0.0,
+        "title": 0.0
+      }
+    },
+    "positions": {
+      "Atlanta Dream": [
+        0.0,
+        0.0,
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Chicago Sky": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        33.28,
+        33.56,
+        33.15,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Connecticut Sun": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        49.94,
+        50.06,
+        0.0
+      ],
+      "Dallas Wings": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Golden State Valkyries": [
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Indiana Fever": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        50.45,
+        49.55,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Las Vegas Aces": [
+        0.0,
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Los Angeles Sparks": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        33.39,
+        33.04,
+        33.57,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Minnesota Lynx": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "New York Liberty": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Phoenix Mercury": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        33.32,
+        33.4,
+        33.28,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Portland Fire": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Seattle Storm": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        100.0
+      ],
+      "Toronto Tempo": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        50.06,
+        49.94,
+        0.0
+      ],
+      "Washington Mystics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        49.55,
+        50.45,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "expected": {
+      "Atlanta Dream": {
+        "wins": 30.0,
+        "seed": 4.0
+      },
+      "Chicago Sky": {
+        "wins": 16.0,
+        "seed": 11.0
+      },
+      "Connecticut Sun": {
+        "wins": 11.0,
+        "seed": 13.5
+      },
+      "Dallas Wings": {
+        "wins": 27.0,
+        "seed": 7.0
+      },
+      "Golden State Valkyries": {
+        "wins": 32.0,
+        "seed": 2.0
+      },
+      "Indiana Fever": {
+        "wins": 28.0,
+        "seed": 5.5
+      },
+      "Las Vegas Aces": {
+        "wins": 31.0,
+        "seed": 3.0
+      },
+      "Los Angeles Sparks": {
+        "wins": 16.0,
+        "seed": 11.0
+      },
+      "Minnesota Lynx": {
+        "wins": 33.0,
+        "seed": 1.0
+      },
+      "New York Liberty": {
+        "wins": 26.0,
+        "seed": 8.0
+      },
+      "Phoenix Mercury": {
+        "wins": 16.0,
+        "seed": 11.0
+      },
+      "Portland Fire": {
+        "wins": 17.0,
+        "seed": 9.0
+      },
+      "Seattle Storm": {
+        "wins": 8.0,
+        "seed": 15.0
+      },
+      "Toronto Tempo": {
+        "wins": 11.0,
+        "seed": 13.5
+      },
+      "Washington Mystics": {
+        "wins": 28.0,
+        "seed": 5.5
+      }
+    },
+    "ratings": {
+      "Atlanta Dream": 5.61,
+      "Chicago Sky": -4.08,
+      "Connecticut Sun": -7.42,
+      "Dallas Wings": 3.06,
+      "Golden State Valkyries": 6.06,
+      "Indiana Fever": 4.67,
+      "Las Vegas Aces": 5.15,
+      "Los Angeles Sparks": -2.98,
+      "Minnesota Lynx": 5.69,
+      "New York Liberty": 2.37,
+      "Phoenix Mercury": -2.27,
+      "Portland Fire": -3.74,
+      "Seattle Storm": -5.54,
+      "Toronto Tempo": -7.97,
+      "Washington Mystics": 1.4
+    },
+    "homeAdvantage": 1.72,
+    "sigma": 11.5,
+    "gamesPerTeam": 44
+  },
+  "matchesThatMatter": [],
+  "bracket": {
+    "rounds": [
+      {
+        "key": "R1",
+        "label": "First Round",
+        "series": [
+          {
+            "stage": "R1",
+            "conference": null,
+            "top": "Minnesota Lynx",
+            "bottom": "New York Liberty",
+            "topSeed": 1,
+            "bottomSeed": 8,
+            "topWins": 0,
+            "bottomWins": 2,
+            "bestOf": 3,
+            "winner": "New York Liberty"
+          },
+          {
+            "stage": "R1",
+            "conference": null,
+            "top": "Atlanta Dream",
+            "bottom": "Washington Mystics",
+            "topSeed": 4,
+            "bottomSeed": 5,
+            "topWins": 2,
+            "bottomWins": 0,
+            "bestOf": 3,
+            "winner": "Atlanta Dream"
+          },
+          {
+            "stage": "R1",
+            "conference": null,
+            "top": "Golden State Valkyries",
+            "bottom": "Dallas Wings",
+            "topSeed": 2,
+            "bottomSeed": 7,
+            "topWins": 2,
+            "bottomWins": 1,
+            "bestOf": 3,
+            "winner": "Golden State Valkyries"
+          },
+          {
+            "stage": "R1",
+            "conference": null,
+            "top": "Las Vegas Aces",
+            "bottom": "Indiana Fever",
+            "topSeed": 3,
+            "bottomSeed": 6,
+            "topWins": 2,
+            "bottomWins": 1,
+            "bestOf": 3,
+            "winner": "Las Vegas Aces"
+          }
+        ]
+      },
+      {
+        "key": "SF",
+        "label": "Semifinals",
+        "series": [
+          {
+            "stage": "SF",
+            "conference": null,
+            "top": "Atlanta Dream",
+            "bottom": "New York Liberty",
+            "topSeed": 4,
+            "bottomSeed": 8,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          },
+          {
+            "stage": "SF",
+            "conference": null,
+            "top": "Golden State Valkyries",
+            "bottom": "Las Vegas Aces",
+            "topSeed": 2,
+            "bottomSeed": 3,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 5,
+            "winner": null
+          }
+        ]
+      },
+      {
+        "key": "F",
+        "label": "WNBA Finals",
+        "series": [
+          {
+            "stage": "F",
+            "conference": null,
+            "top": null,
+            "bottom": null,
+            "topSeed": null,
+            "bottomSeed": null,
+            "topWins": 0,
+            "bottomWins": 0,
+            "bestOf": 7,
+            "winner": null
+          }
+        ]
+      }
+    ],
+    "champion": null
+  },
+  "movement": null
+}
