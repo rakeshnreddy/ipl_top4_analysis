@@ -1,4 +1,4 @@
-"""NFL, NBA, WNBA, NHL, MLB and NBL: regular-season tables, playoff races and title odds.
+"""NFL, NBA, WNBA, NHL, MLB, NBL and WNBL: regular-season tables, playoff races and title odds.
 
 Team ratings come from a margin model (score margins, capped so blowouts do not
 dominate, with home advantage and a time decay) fitted on this and last season.
@@ -9,7 +9,7 @@ the playoff bracket is simulated too, which gives title odds.
 Tiebreakers are simplified: win percentage (points in the NHL), then division or
 conference record (regulation wins in the NHL), then a coin flip. Head-to-head
 and common-games rules are not modelled, except in the current table of a league
-whose config lists its own tiebreakers (the WNBA and NBL).
+whose config lists its own tiebreakers (the WNBA, NBL and WNBL).
 """
 
 from __future__ import annotations
@@ -69,20 +69,22 @@ STAGES = {
     "mlb": [("F", "Wild Card Series"), ("D", "Division Series"), ("L", "Championship Series"), ("W", "World Series")],
     "wnba": [("R1", "First Round"), ("SF", "Semifinals"), ("F", "WNBA Finals")],
     "nbl": [("PI", "Play-In"), ("SF", "Semifinals"), ("F", "Championship Series")],
+    "wnbl": [("EF", "Eliminator"), ("SF", "Semi-Finals"), ("F", "Championship Series")],
 }
 # Formats seeded as one table across the league rather than by conference.
-SINGLE_TABLE_FORMATS = {"wnba", "nbl"}
+SINGLE_TABLE_FORMATS = {"wnba", "nbl", "wnbl"}
 # Default home pattern per round ("2-2-1": the higher seed hosts games 1, 2 and 5); configs can override.
 DEFAULT_SERIES = {
     "wnba": {"R1": "1-1-1", "SF": "2-2-1", "F": "2-2-1-1-1"},
     "nbl": {"PI": "1", "SF": "1-1-1", "F": "1-1-1-1-1"},
+    "wnbl": {"EF": "1", "SF": "1-1-1", "F": "1-1-1"},
 }
 # NHL playoff game ids encode the round in their eighth digit: 2025030111 is round 1.
 NHL_ROUND_STAGES = {"1": "R1", "2": "R2", "3": "CF", "4": "F"}
 # Most tie orders tried when matching our seeds to the real bracket.
 MAX_TIE_ORDERS = 20_000
 # Lowest conference seed that reaches each format's bracket (NBA: the play-in).
-BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6, "wnba": 8, "nbl": 6}
+BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6, "wnba": 8, "nbl": 6, "wnbl": 5}
 
 
 @dataclass(frozen=True)
@@ -114,10 +116,11 @@ SPORT_MODELS = {
 }
 
 # Leagues with settings of their own, backtested on their own seasons with
-# scripts/backtest_us_sports.py (WNBA: 2022 to 2026; NBL: 2021-22 to 2025-26).
+# scripts/backtest_us_sports.py (WNBA: 2022 to 2026; NBL and WNBL: 2021-22 to 2025-26).
 LEAGUE_MODELS = {
     "wnba": SportModel(margin_cap=25, half_life_days=120, previous_weight=0.5, ridge=2.0, drift=4.0, sigma=11.5),
     "nbl": SportModel(margin_cap=40, half_life_days=60, previous_weight=1.0, ridge=3.0, drift=7.0, sigma=15.75),
+    "wnbl": SportModel(margin_cap=35, half_life_days=90, previous_weight=1.0, ridge=0.5, drift=10.0, sigma=18.0),
 }
 
 
@@ -755,6 +758,12 @@ def single_table_playoffs(config, seed: np.ndarray, play) -> np.ndarray:
         last = series("PI", np.where(qualifier == third, fourth, third), play_in)
         semi_a = series("SF", at(1), last)
         semi_b = series("SF", at(2), qualifier)
+        return series("F", *higher_seed_first(semi_a, semi_b, seed))
+    if fmt == "wnbl":
+        # 4th hosts 5th in a one-off eliminator whose winner meets 1st; 2nd meets 3rd.
+        eliminator = series("EF", at(4), at(5))
+        semi_a = series("SF", at(1), eliminator)
+        semi_b = series("SF", at(2), at(3))
         return series("F", *higher_seed_first(semi_a, semi_b, seed))
     raise ValueError(f"Unknown playoff format {fmt}")
 

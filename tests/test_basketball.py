@@ -311,6 +311,81 @@ class NblBracketTests(unittest.TestCase):
         self.assertIsNone(games[0].stage)
 
 
+# WNBL26 final ladder: wins, losses and points percentage. The top four (Townsville, Perth,
+# Bendigo, Southside) are confirmed by https://www.wnbl.com.au/news/wnbl26-finals-series-confirmed;
+# the full ladder with percentages is from https://en.wikipedia.org/wiki/2025%E2%80%9326_WNBL_season
+# (wnbl.com.au/standings renders its table in the browser).
+WNBL26 = [
+    ("TSV", 19, 4, 118.3), ("PER", 18, 5, 113.2), ("BEN", 16, 7, 106.3), ("SSF", 11, 12, 101.2),
+    ("UCC", 9, 14, 92.4), ("GEE", 7, 16, 94.4), ("ADL", 6, 17, 89.9), ("SYD", 6, 17, 88.7),
+]
+
+
+class WnblTests(unittest.TestCase):
+    """WNBL27 before its first game (4 October 2026), and the WNBL26 ladder."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.cfg = leagues.read_config("wnbl")
+        # WNBL26 had eight clubs (the Tasmania Jewels joined for WNBL27) and 23 games each.
+        cls.wnbl26_cfg = dict(cls.cfg, gamesPerTeam=23, teams={name: team for name, team in cls.cfg["teams"].items() if name != "Tasmania Jewels"})
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            load_fixture(cache, "wnbl-2026")
+            load_fixture(cache, "wnbl-2025")
+            (cache / "wnbl-2024.json").write_text("[]", encoding="utf-8")
+            cls.live = us_sports.build_payload(cls.cfg, datetime(2026, 10, 4, 3, tzinfo=timezone.utc), cache)
+            cls.wnbl26 = us_sports.build_payload(cls.wnbl26_cfg, datetime(2026, 3, 10, tzinfo=timezone.utc), cache)
+
+    def test_pre_season_odds_fill_five_finals_places_and_one_title(self) -> None:
+        probabilities = self.live["analysis"]["probabilities"]
+        self.assertEqual(len(probabilities), 9)
+        self.assertAlmostEqual(sum(values["finals"] for values in probabilities.values()), 500, delta=0.1)
+        self.assertAlmostEqual(sum(values["top3"] for values in probabilities.values()), 300, delta=0.1)
+        self.assertAlmostEqual(sum(values["title"] for values in probabilities.values()), 100, delta=0.05)
+        self.assertIn("has not started", self.live["analysis"]["modelNotes"][0])
+        self.assertEqual(self.live["league"]["cutoffs"], [{"after": 3, "label": "Eliminator"}, {"after": 5, "label": "Out"}])
+        self.assertEqual(len(self.live["fixtures"]), 99)
+
+    def test_the_wnbl26_ladder_matches_the_official_one(self) -> None:
+        # Adelaide and Sydney finished 6-17; Adelaide's better percentage put them seventh.
+        rows = self.wnbl26["standings"]
+        self.assertEqual([(row["shortName"], row["wins"], row["losses"]) for row in rows], [item[:3] for item in WNBL26])
+        for row, official in zip(rows, WNBL26):
+            # Published to one decimal (Townsville: 1950 / 1649 = 118.25...).
+            self.assertAlmostEqual(row["pointsPercentage"], official[3], delta=0.051, msg=row["shortName"])
+
+    def test_without_a_finals_source_the_finished_season_drops_title_odds(self) -> None:
+        self.assertEqual(self.wnbl26["metadata"]["season_status"], "complete")
+        self.assertNotIn("title", {tier["key"] for tier in self.wnbl26["league"]["tiers"]})
+        self.assertNotIn("bracket", self.wnbl26)
+        finals = {row["shortName"] for row in self.wnbl26["standings"] if self.wnbl26["analysis"]["probabilities"][row["teamKey"]]["finals"] == 100.0}
+        self.assertEqual(finals, {"TSV", "PER", "BEN", "SSF", "UCC"})
+
+
+class WnblBracketTests(unittest.TestCase):
+    def test_the_eliminator_winner_meets_first_and_second_meets_third(self) -> None:
+        cfg = leagues.read_config("wnbl")
+        structure = us_sports.league_structure(cfg)
+        order = ["Townsville Fire", "Perth Lynx", "Bendigo Spirit", "Southside Melbourne Flyers", "UC Capitals",
+                 "Geelong Venom", "Adelaide Lightning", "Sydney Flames", "Tasmania Jewels"]
+        key = np.array([[float(len(order) - order.index(team)) for team in structure.teams]])
+        seeding = us_sports.seed_conferences(cfg, structure, key, key)
+        seeding["conference_key"] = key
+        ratings = us_sports.Ratings(home=2.0, sigma=18.0, rating=dict.fromkeys(structure.teams, 0.0))
+        results = {("EF", frozenset(("Southside Melbourne Flyers", "UC Capitals"))): {"UC Capitals": 1}}
+
+        recorded = us_sports.bracket_series(cfg, structure, seeding, ratings, results)
+
+        self.assertEqual([(item["stage"], item["top"], item["bottom"]) for item in recorded[:3]], [
+            ("EF", "Southside Melbourne Flyers", "UC Capitals"),
+            ("SF", "Townsville Fire", "UC Capitals"),
+            ("SF", "Perth Lynx", "Bendigo Spirit"),
+        ])
+        self.assertEqual([(item["stage"], item["bestOf"]) for item in recorded], [("EF", 1), ("SF", 3), ("SF", 3), ("F", 3)])
+        self.assertEqual([us_sports.series_pattern(cfg, stage) for stage in ("EF", "SF", "F")], [[True], [True, False, True], [True, False, True]])
+
+
 class SeriesTests(unittest.TestCase):
     def test_home_patterns(self) -> None:
         self.assertEqual(us_sports.home_pattern("1-1-1"), [True, False, True])

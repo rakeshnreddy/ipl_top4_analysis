@@ -198,7 +198,7 @@ def main() -> None:
         seasons[year] = (cfg, games, previous)
         print(f"{year}: {len(cfg['teams'])} teams, {len(games)} games, {cfg['gamesPerTeam']} each; previous season {len(previous)} games")
 
-    sigmas = [round(value, 2) for value in np.arange(6.0, 16.01, 0.25)]
+    sigmas = [round(value, 2) for value in np.arange(6.0, 20.01, 0.25)]
     rows, base, home_rate = game_level(config, seasons, args.caps, args.half_lives, args.previous_weights, args.ridges, sigmas)
     print(f"\nWeek-ahead games: {rows[0]['games']}; home teams won {home_rate:.3f}; base-rate log loss {base:.4f}")
     for row in rows[:10]:

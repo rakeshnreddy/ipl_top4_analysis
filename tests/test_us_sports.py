@@ -166,7 +166,7 @@ class SimulationTests(unittest.TestCase):
         return {"total": total, "result": result}
 
     def test_every_league_fills_its_playoff_field_and_crowns_one_champion(self) -> None:
-        for league_id, per_team, playoff_teams in (("nfl", 6, 14), ("nhl", 8, 16), ("mlb", 8, 12), ("nba", 8, 16), ("wnba", 8, 8), ("nbl", 8, 6)):
+        for league_id, per_team, playoff_teams in (("nfl", 6, 14), ("nhl", 8, 16), ("mlb", 8, 12), ("nba", 8, 16), ("wnba", 8, 8), ("nbl", 8, 6), ("wnbl", 8, 5)):
             with self.subTest(league_id):
                 cfg = config(league_id)
                 if "gamesPerTeam" in cfg:
@@ -338,7 +338,7 @@ class NhlFeedTests(unittest.TestCase):
         self.assertFalse(parsed[1].played)
 
     def test_every_rolling_config_validates(self) -> None:
-        for league_id in ("nfl", "nba", "nhl", "mlb", "wnba", "nbl"):
+        for league_id in ("nfl", "nba", "nhl", "mlb", "wnba", "nbl", "wnbl"):
             with self.subTest(league_id):
                 team_sports.validate_config(config(league_id))
 
