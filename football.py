@@ -25,6 +25,11 @@ SEED = 20260801
 # Chosen by backtesting 2025-26 in five leagues (ranked probability score).
 HALF_LIFE_DAYS = 240
 RIDGE = 2.0
+# A league's first season in the feed has no last season to anchor the ratings. Without it,
+# week-ahead predictions of 2023-24 to 2025-26 scored better with a ridge of 4 than 2 in all eight
+# leagues (ranked probability score 0.0005-0.0022 lower), and season odds at a fifth of the way
+# through were no worse (Brier 0.0582 against 0.0585).
+FIRST_SEASON_RIDGE = 4.0
 # Newly promoted sides score less and concede more than the league average.
 PROMOTED_PRIOR = -0.25
 MAX_GOALS = 10
@@ -228,7 +233,7 @@ class GoalModel:
         return float(np.tril(grid, -1).sum() / total), float(np.trace(grid) / total), float(np.triu(grid, 1).sum() / total)
 
 
-def fit_goal_model(games: list[Game], teams: list[str], promoted: set[str], now: datetime) -> GoalModel:
+def fit_goal_model(games: list[Game], teams: list[str], promoted: set[str], now: datetime, ridge: float | None = None) -> GoalModel:
     """Penalised, time-weighted Poisson regression fitted with Newton steps."""
     index = {team: i for i, team in enumerate(teams)}
     count = len(teams)
@@ -252,7 +257,7 @@ def fit_goal_model(games: list[Game], teams: list[str], promoted: set[str], now:
 
     prior = np.zeros(size)
     penalty = np.zeros(size)
-    penalty[2:] = RIDGE
+    penalty[2:] = RIDGE if ridge is None else ridge
     for team in promoted & set(index):
         prior[2 + index[team]] = PROMOTED_PRIOR
         prior[2 + count + index[team]] = PROMOTED_PRIOR
@@ -411,11 +416,14 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     games = team_sports.fetch_games(season.feed, cache_dir)
     warnings: list[str] = []
     previous_season = team_sports.resolve_season(config, now, offset=-1)
-    try:
-        previous_games = team_sports.fetch_games(previous_season.feed, cache_dir, max_age_hours=24 * 30)
-    except team_sports.FeedError as exc:
-        previous_games = []
-        warnings.append(f"Previous season unavailable ({exc}); ratings use this season only.")
+    # A league whose feed starts with this season ("firstYear") has no earlier results to fetch.
+    first_season = previous_season.year < config["season"].get("firstYear", previous_season.year)
+    previous_games = []
+    if not first_season:
+        try:
+            previous_games = team_sports.fetch_games(previous_season.feed, cache_dir, max_age_hours=24 * 30)
+        except team_sports.FeedError as exc:
+            warnings.append(f"Previous season unavailable ({exc}); ratings use this season only.")
 
     teams = sorted({game.home for game in games} | {game.away for game in games})
     previous_teams = {game.home for game in previous_games} | {game.away for game in previous_games}
@@ -439,7 +447,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     promoted = set(teams) - previous_teams if previous_teams else set()
     # Weights decay from the latest result rather than from today, so ratings only change when results do.
     latest = max((game.date for game in previous_games + games if game.played), default=now)
-    model = fit_goal_model(previous_games + games, model_teams, promoted, min(latest, now))
+    model = fit_goal_model(previous_games + games, model_teams, promoted, min(latest, now), FIRST_SEASON_RIDGE if first_season else None)
     remaining = [game for game in games if not game.played]
     # A past kick-off without a score is postponed or not yet updated at the source.
     pending = [game for game in remaining if game.date < now - timedelta(hours=6)]
@@ -533,7 +541,17 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "model": "Poisson goals model",
             "modelNotes": [
                 f"Each remaining match is simulated {SIMULATIONS:,} times from a Poisson goals model: team attack and "
-                f"defence ratings plus home advantage, fitted on this and last season with a {HALF_LIFE_DAYS}-day half-life.",
+                f"defence ratings plus home advantage, fitted on {'this season' if first_season else 'this and last season'} "
+                f"with a {HALF_LIFE_DAYS}-day half-life.",
+                *(
+                    [
+                        f"{team_sports.FEED_SOURCE} has no {config['name']} season before {season.label}, so every team, "
+                        "promoted or relegated, started this season from the same average rating, and ratings are held "
+                        "closer to it than usual (backtests without a previous season scored better that way)."
+                    ]
+                    if first_season
+                    else []
+                ),
                 "Every simulated season also lets team strength drift (more when more of the season is left), because "
                 "form, injuries and transfers change teams; without it, early-season odds were overconfident in backtests.",
                 tiebreak_note(config.get("tiebreak")),
