@@ -8,9 +8,9 @@ import { isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex, type
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
 
-const TITLE = 'Playoff Pulse: Live Title & Playoff Odds for Football, the Champions League, NFL, NBA, NHL, MLB & Cricket';
+const TITLE = 'Playoff Pulse: Live Title & Playoff Odds for Football, the Champions League, MLS, NFL, NBA, NHL, MLB & Cricket';
 const DESCRIPTION =
-  "Daily title, playoff and relegation odds for Europe's top football leagues and the Champions League, Europa League and Conference League, the NFL, NBA, WNBA, NHL and MLB, Australia's NBL, and T20 cricket leagues from the IPL to the Big Bash.";
+  "Daily title, playoff and relegation odds for European football from the Premier League to the Süper Lig, the WSL, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-Leagues, NBL and WNBL, and T20 cricket leagues from the IPL to the Big Bash.";
 
 const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueIndex }) => {
   const status = statusLabel(league);
@@ -78,7 +78,7 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
             ...(latest ? [{ label: 'Latest update', value: formatGeneratedAt(latest) }] : []),
           ]}
           factsLabel="Site snapshot"
-          strap="Title, playoff and relegation chances for football and the European cups, the NFL, NBA, WNBA, NHL, MLB and NBL, and T20 cricket, from thousands of simulated seasons and updated daily."
+          strap="Title, playoff and relegation chances for football in Europe, the Americas and Australia, the European cups, the NFL, NBA, WNBA, NHL, MLB and NBL, and T20 cricket, from thousands of simulated seasons and updated daily."
           title="Live Title & Playoff Odds"
         />
 
