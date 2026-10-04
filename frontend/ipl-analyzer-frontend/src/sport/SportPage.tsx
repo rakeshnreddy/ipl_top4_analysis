@@ -21,7 +21,7 @@ import {
 } from '../data/sportData';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
-import { heatStyle, ordinalSuffix, readableOn, scrollToSection } from '../lib/ui';
+import { heatStyle, ordinalSuffix, readableOn, samePageHref, scrollToSection } from '../lib/ui';
 import { formatChance } from './format';
 
 const UPCOMING_LIMIT = 10;
@@ -311,7 +311,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
 
   const selectTeam = (key: string) => {
     setSelectedKey(key);
-    window.history.replaceState(null, '', `#team=${encodeURIComponent(short(key))}`);
+    window.history.replaceState(null, '', samePageHref(`#team=${encodeURIComponent(short(key))}`));
     scrollToSection('team');
   };
 
@@ -338,7 +338,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
 
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a className="skip-link" href={samePageHref('#main')}>
         Skip to content
       </a>
       <SiteHeader

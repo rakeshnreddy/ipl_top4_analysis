@@ -7,6 +7,7 @@ import SiteHeader from '../components/SiteHeader';
 import { isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex, type LeagueSummary } from '../data/leagues';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { samePageHref } from '../lib/ui';
 
 const TITLE = 'Playoff Pulse: Live Title & Playoff Odds for Football, the Champions League, MLS, NFL, NBA, NHL, MLB & Cricket';
 const DESCRIPTION =
@@ -66,7 +67,7 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
 
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a className="skip-link" href={samePageHref('#main')}>
         Skip to content
       </a>
       <SiteHeader index={index} />

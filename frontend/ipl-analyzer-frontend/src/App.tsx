@@ -18,7 +18,7 @@ import PageHeader from './components/PageHeader';
 import { ErrorState, LoadingState } from './components/PageState';
 import SiteHeader from './components/SiteHeader';
 import { appBaseHref, setJsonLd, setPageMeta } from './lib/seo';
-import { heatStyle, readableOn, scrollToSection } from './lib/ui';
+import { heatStyle, readableOn, samePageHref, scrollToSection } from './lib/ui';
 import {
   formatGeneratedAt,
   formatNrr,
@@ -452,7 +452,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
 
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a className="skip-link" href={samePageHref('#main')}>
         Skip to content
       </a>
       <SiteHeader currentId={payload.league?.id ?? leagueId} currentLabel={`${shortName} ${seasonLabel}`} index={leagueIndex} />
