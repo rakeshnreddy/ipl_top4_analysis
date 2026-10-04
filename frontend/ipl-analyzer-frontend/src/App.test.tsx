@@ -151,7 +151,7 @@ describe('App with several leagues', () => {
 
     const switcher = screen.getByRole('navigation', { name: 'Leagues' });
     expect(switcher.querySelector('a[aria-current="page"]')).toHaveTextContent('WPL 2026');
-    expect(within(switcher).getByRole('link', { name: /^IPL 2026/ })).toHaveAttribute('href', '/');
+    expect(within(switcher).getByRole('link', { name: /^IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
     expect(within(switcher).getByRole('link', { name: /^WPL 2026/ })).toHaveAttribute('href', '/?league=wpl-2026');
 
     fireEvent.keyDown(document, { key: 'Escape' });
@@ -222,16 +222,17 @@ describe('App home page', () => {
     window.history.replaceState(null, '', '/');
   });
 
-  it('shows the league the index names as default', async () => {
+  it('shows the landing page at the root, even while a league is the index default', async () => {
     installFetch(finalPayload, mockManifest, {
       '/data/leagues.json': { ...leagueIndex, default: 'wpl-2026' },
       '/data/wpl-2026.json': wplFinalPayload,
     });
+    window.history.replaceState(null, '', '/');
 
     render(<Root />);
 
-    expect(await screen.findByRole('heading', { name: 'WPL 2026 Final Standings' })).toBeInTheDocument();
-    expect(globalThis.fetch).toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
+    expect(await screen.findByTestId('landing-page')).toBeInTheDocument();
+    expect(globalThis.fetch).not.toHaveBeenCalledWith('/data/wpl-2026.json', { cache: 'no-cache' });
     expect(globalThis.fetch).not.toHaveBeenCalledWith('/data/ipl-2026.json', { cache: 'no-cache' });
   });
 

@@ -9,7 +9,7 @@ import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
 import { samePageHref } from '../lib/ui';
 
-const TITLE = 'Playoff Pulse: Live Title & Playoff Odds for Football, the Champions League, MLS, NFL, NBA, NHL, MLB & Cricket';
+const TITLE = 'All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse';
 const DESCRIPTION =
   "Daily title, playoff and relegation odds for European football from the Premier League to the Süper Lig, the WSL, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-Leagues, NBL and WNBL, and T20 cricket leagues from the IPL to the Big Bash.";
 
@@ -46,7 +46,7 @@ const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueInd
 const HubPage = ({ index }: { index: LeagueIndex }) => {
   useEffect(() => {
     const href = appBaseHref();
-    setPageMeta(TITLE, DESCRIPTION, index.default === 'hub' ? href : `${href}?view=hub`);
+    setPageMeta(TITLE, DESCRIPTION, `${href}?view=hub`);
     setJsonLd({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
@@ -80,7 +80,7 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
           ]}
           factsLabel="Site snapshot"
           strap="Title, playoff and relegation chances for football in Europe, the Americas and Australia, the European cups, the NFL, NBA, WNBA, NHL, MLB and NBL, and T20 cricket, from thousands of simulated seasons and updated daily."
-          title="Live Title & Playoff Odds"
+          title="All Live Races"
         />
 
         {live.length > 0 && (

@@ -27,9 +27,12 @@
 .loading-panel,
 .error-panel {
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
   color: var(--text);
   display: flex;
   gap: var(--space-3);
@@ -65,9 +68,11 @@
 /* ---------- Site header ---------- */
 
 .site-header {
-  backdrop-filter: saturate(1.2) blur(8px);
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  background: var(--glass);
   border-bottom: 1px solid var(--border);
+  box-shadow: inset 0 -1px 0 var(--glass-highlight);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -108,6 +113,33 @@
   flex: 0 0 auto;
 }
 
+.site-header-actions {
+  align-items: center;
+  display: flex;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.theme-toggle {
+  align-items: center;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: var(--tap);
+  justify-content: center;
+  transition: border-color 120ms var(--ease-out), color 120ms var(--ease-out);
+  width: var(--tap);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .league-menu {
   min-width: 0;
   position: relative;
@@ -115,7 +147,7 @@
 
 .league-menu-button {
   align-items: center;
-  background: var(--surface);
+  background: var(--surface-raised);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
   color: var(--text);
@@ -152,9 +184,11 @@
 }
 
 .league-menu-panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   max-height: calc(100vh - var(--header-height) - var(--space-5));
   overflow-y: auto;
@@ -312,20 +346,25 @@
 
 /* Joined blocks use wrapping flex, not grid, so a short last row stretches
  * instead of leaving an empty cell. */
+/* One glass block; each fact draws its top and left dividers, and the block's
+ * edge clips the outermost ones (the -1px margins). */
 .key-facts {
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--border);
 }
 
 .key-facts div {
-  background: var(--surface);
+  box-shadow: inset 1px 0 0 var(--border), inset 0 1px 0 var(--border);
   flex: 1 1 160px;
+  margin: -1px 0 0 -1px;
   display: grid;
   gap: var(--space-1);
   padding: var(--space-3) var(--space-4);
@@ -397,10 +436,12 @@
 .race-summary-panel,
 .spotlight-card,
 .reels-panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
   color: var(--text);
   min-width: 0;
   padding: var(--space-4);
@@ -485,7 +526,7 @@
 .race-summary-grid article,
 .deep-dive-grid article,
 .stat {
-  background: var(--surface);
+  background: var(--surface-solid);
   flex: 1 1 170px;
   display: grid;
   gap: var(--space-1);
@@ -768,7 +809,7 @@
 
 .goal-tabs button.active,
 .goal-tabs button[aria-pressed='true'] {
-  background: var(--surface);
+  background: var(--surface-raised);
   box-shadow: var(--shadow-sm);
   color: var(--text);
 }
@@ -961,7 +1002,7 @@
 }
 
 .bucket-cell {
-  background: var(--surface);
+  background: var(--surface-solid);
   flex: 1 1 84px;
   display: grid;
   gap: 2px;

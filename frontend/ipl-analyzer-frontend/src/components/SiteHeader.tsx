@@ -1,6 +1,39 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Moon, Sun } from 'lucide-react';
 import { hubHref, isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex } from '../data/leagues';
+import { applyTheme, currentTheme, storedTheme, type Theme } from '../lib/theme';
+
+/** Switches between the light and dark themes; until the reader picks one, the page follows the system. */
+const ThemeToggle = () => {
+  const [theme, setTheme] = useState<Theme>(() => currentTheme());
+
+  useEffect(() => {
+    if (storedTheme() || typeof window.matchMedia !== 'function') {
+      return undefined;
+    }
+    // Follow system changes until the reader chooses.
+    const query = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = () => setTheme(currentTheme());
+    query.addEventListener?.('change', onChange);
+    return () => query.removeEventListener?.('change', onChange);
+  }, []);
+
+  const next: Theme = theme === 'dark' ? 'light' : 'dark';
+  return (
+    <button
+      aria-label={`Switch to the ${next} theme`}
+      className="theme-toggle"
+      onClick={() => {
+        applyTheme(next);
+        setTheme(next);
+      }}
+      title={`Switch to the ${next} theme`}
+      type="button"
+    >
+      {theme === 'dark' ? <Sun aria-hidden="true" size={18} /> : <Moon aria-hidden="true" size={18} />}
+    </button>
+  );
+};
 
 /** The brand mark: a single pulse line. */
 const PulseMark = () => (
@@ -24,7 +57,8 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
-  const home = hubHref(index?.default ?? 'hub');
+  const home = import.meta.env.BASE_URL;
+  const hub = hubHref(index?.default ?? 'hub');
   // Sports with the most live races first; the sort is stable, so ties keep the list's order.
   const groups = index
     ? leaguesBySport(index).sort((a, b) => b.leagues.filter(isLive).length - a.leagues.filter(isLive).length)
@@ -60,6 +94,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
           <span>Playoff Pulse</span>
         </a>
 
+        <div className="site-header-actions">
         {index && index.leagues.length > 0 && (
           <div className="league-menu" ref={menuRef}>
             <button
@@ -78,7 +113,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
 
             <div className="league-menu-panel" hidden={!open} id={panelId}>
               <nav aria-label="Leagues">
-                <a className="league-menu-home" href={home}>
+                <a className="league-menu-home" href={hub}>
                   All live races
                 </a>
                 <div className="league-menu-groups">
@@ -110,6 +145,8 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
             </div>
           </div>
         )}
+        <ThemeToggle />
+        </div>
       </div>
     </header>
   );
