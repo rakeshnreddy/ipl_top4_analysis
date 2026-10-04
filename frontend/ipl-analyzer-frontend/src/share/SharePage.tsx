@@ -9,6 +9,7 @@ import { HUB_ID, loadLeagueIndex, type LeagueIndex } from '../data/leagues';
 import { loadReelsManifest, publicAssetUrl, type ReelsManifest, type ReelsSlide } from '../data/reelsManifest';
 import { formatGeneratedAt, setTeamPalette } from '../lib/standings';
 import { copyToClipboard, exportRacePng, raceCaption, shareTexts, type ShareKind } from './sharing';
+import { samePageHref } from '../lib/ui';
 
 type CopyTarget = ShareKind | 'caption';
 
@@ -108,7 +109,7 @@ function SharePage() {
 
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a className="skip-link" href={samePageHref('#main')}>
         Skip to content
       </a>
       <SiteHeader currentLabel="Share kit" index={index} />

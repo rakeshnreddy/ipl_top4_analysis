@@ -51,6 +51,20 @@ describe('SportPage', () => {
     expect(within(moves).getByText('ARS +6.5')).toBeInTheDocument();
   });
 
+  it('keeps the league in section links, the skip link and team links', async () => {
+    openLeague('/?league=epl-2026-27');
+
+    const sections = await screen.findByRole('navigation', { name: 'Page sections' });
+    // The page has <base href="/">: a bare "#fixtures" would open the home page instead.
+    expect(within(sections).getByRole('link', { name: 'Fixtures' })).toHaveAttribute('href', '/?league=epl-2026-27#fixtures');
+    expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '/?league=epl-2026-27#main');
+
+    const table = screen.getByRole('table');
+    fireEvent.click(within(table).getAllByRole('button')[1]);
+    expect(window.location.search).toBe('?league=epl-2026-27');
+    expect(window.location.hash).toMatch(/^#team=/);
+  });
+
   it('opens a team from a deep link with its finishing-position chances', async () => {
     openLeague('/?league=epl-2026-27#team=TOT');
 

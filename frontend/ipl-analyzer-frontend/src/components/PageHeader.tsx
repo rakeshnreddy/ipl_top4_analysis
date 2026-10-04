@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { samePageHref } from '../lib/ui';
 
 export interface KeyFact {
   label: string;
@@ -55,7 +56,7 @@ const PageHeader = ({
     {sections.length > 0 && (
       <nav aria-label="Page sections" className="page-sections">
         {sections.map((section) => (
-          <a href={section.href} key={section.href}>
+          <a href={section.href.startsWith('#') ? samePageHref(section.href) : section.href} key={section.href}>
             {section.label}
           </a>
         ))}

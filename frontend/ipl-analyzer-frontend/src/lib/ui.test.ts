@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { heatStyle, ordinalSuffix, readableOn } from './ui';
+import { heatStyle, ordinalSuffix, readableOn, samePageHref } from './ui';
 
 describe('readableOn', () => {
   it('picks the text colour with more contrast on a team colour', () => {
@@ -24,5 +24,14 @@ describe('heatStyle', () => {
 describe('ordinalSuffix', () => {
   it('handles the teens', () => {
     expect([1, 2, 3, 4, 11, 12, 13, 21, 22, 23].map(ordinalSuffix)).toEqual(['st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'st', 'nd', 'rd']);
+  });
+});
+
+describe('samePageHref', () => {
+  it('keeps the current path and query, so a <base href> cannot send the link to the home page', () => {
+    window.history.replaceState(null, '', '/ipl_top4_analysis/?league=mls-2026');
+    expect(samePageHref('#fixtures')).toBe('/ipl_top4_analysis/?league=mls-2026#fixtures');
+    expect(samePageHref('team=NSH')).toBe('/ipl_top4_analysis/?league=mls-2026#team=NSH');
+    window.history.replaceState(null, '', '/');
   });
 });

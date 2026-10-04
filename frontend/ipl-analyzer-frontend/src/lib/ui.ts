@@ -3,6 +3,16 @@ import type { CSSProperties } from 'react';
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/**
+ * A link to part of the current page, e.g. "#fixtures". The page has a <base href> (the site
+ * root, for GitHub Pages' sub-path), and a bare "#fixtures" would resolve against it: it would
+ * drop "?league=..." and open the home page. So the current path and query are kept.
+ */
+export function samePageHref(hash: string) {
+  const fragment = hash.startsWith('#') ? hash : `#${hash}`;
+  return typeof window === 'undefined' ? fragment : `${window.location.pathname}${window.location.search}${fragment}`;
+}
+
 /** Scroll a section into view, without animation when the reader asked for reduced motion. */
 export function scrollToSection(sectionId: string) {
   window.setTimeout(() => {
