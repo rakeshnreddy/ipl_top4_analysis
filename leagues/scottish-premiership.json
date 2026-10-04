@@ -1,0 +1,142 @@
+{
+  "id": "scottish-premiership",
+  "sport": "football",
+  "name": "Scottish Premiership",
+  "shortName": "Scottish Premiership",
+  "headline": "Scottish Premiership Title, Top Six & Relegation Odds",
+  "priority": 27,
+  "season": {
+    "startMonth": 7,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "scottish-premiership-{year}",
+    "firstYear": 2026
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "tiebreak": "goals-then-head-to-head",
+  "split": {
+    "after": 33,
+    "size": 6
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "top3",
+      "label": "Top 3",
+      "kind": "top",
+      "size": 3
+    },
+    {
+      "key": "top6",
+      "label": "Top 6",
+      "kind": "top",
+      "size": 6
+    },
+    {
+      "key": "playoff",
+      "label": "Play-off",
+      "kind": "bottom",
+      "size": 1,
+      "skip": 1,
+      "shortLabel": "11th"
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 1,
+      "shortLabel": "Drop"
+    }
+  ],
+  "notes": [
+    "European places from the 2026-27 table: the champions enter the Champions League second qualifying round, and second and third the Conference League second qualifying round (UEFA's 2026 association ranking puts Scotland 18th). The Scottish Cup winners take a Europa League place, so if they finish in the top three, fourth qualifies too.",
+    "11th plays the winner of the Championship play-offs over two legs for a place in the Premiership; 12th is relegated.",
+    "Checked on four earlier Scottish seasons from ESPN's results (2021-22, 2022-23, 2024-25 and 2025-26): week-ahead predictions from the season so far score 0.204 (ranked probability score) against 0.231 for base rates, and season odds from round 7 to the split score 0.055 (Brier score) against 0.092 for the table at the time."
+  ],
+  "sources": {
+    "fixturedownload": "scottish-premiership-{year}",
+    "espn": "sco.1"
+  },
+  "teams": {
+    "Aberdeen": {
+      "shortName": "ABE",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "Celtic": {
+      "shortName": "CEL",
+      "color": "#018749",
+      "textColor": "#FFFFFF"
+    },
+    "Dundee": {
+      "shortName": "DUN",
+      "color": "#002855",
+      "textColor": "#FFFFFF"
+    },
+    "Dundee United": {
+      "shortName": "DDU",
+      "color": "#F47920",
+      "textColor": "#000000"
+    },
+    "Falkirk": {
+      "shortName": "FAL",
+      "color": "#001F5B",
+      "textColor": "#FFFFFF"
+    },
+    "Heart of Midlothian": {
+      "shortName": "HEA",
+      "color": "#8E003B",
+      "textColor": "#FFFFFF"
+    },
+    "Hibernian": {
+      "shortName": "HIB",
+      "color": "#00703C",
+      "textColor": "#FFFFFF"
+    },
+    "Kilmarnock": {
+      "shortName": "KIL",
+      "color": "#1D4C9C",
+      "textColor": "#FFFFFF"
+    },
+    "Livingston": {
+      "shortName": "LIV",
+      "color": "#F4B400",
+      "textColor": "#000000"
+    },
+    "Motherwell": {
+      "shortName": "MOT",
+      "color": "#F7AA25",
+      "textColor": "#000000"
+    },
+    "Rangers": {
+      "shortName": "RAN",
+      "color": "#1B458F",
+      "textColor": "#FFFFFF"
+    },
+    "Ross County": {
+      "shortName": "ROS",
+      "color": "#1D2951",
+      "textColor": "#FFFFFF"
+    },
+    "St. Johnstone": {
+      "shortName": "STJ",
+      "fullName": "St Johnstone",
+      "color": "#0057B8",
+      "textColor": "#FFFFFF"
+    },
+    "St. Mirren": {
+      "shortName": "STM",
+      "fullName": "St Mirren",
+      "color": "#111111",
+      "textColor": "#FFFFFF"
+    }
+  }
+}

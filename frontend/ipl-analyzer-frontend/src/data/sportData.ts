@@ -10,6 +10,8 @@ export interface SportTier {
   /** "top" and "bottom" tiers are table positions; others (division titles, playoff spots) are sport-specific. */
   kind?: 'top' | 'bottom' | string;
   size?: number;
+  /** Places left out at the tier's edge: a bottom tier of size 1 that skips 1 is 11th of 12 (a play-off place). */
+  skip?: number;
 }
 
 export interface SportColumn {
@@ -144,7 +146,7 @@ export interface SportPayload {
     outcomes: string[];
     teams: SportTeam[];
     groups?: SportGroup[];
-    /** Lines on the league table itself, for leagues seeded as one table (the WNBA's playoff line). */
+    /** Lines on the league table itself, for leagues seeded as one table (the WNBA's playoff line) or split in two (Scotland). */
     cutoffs?: SportGroup['cutoffs'];
     /** What the table's rank means when groups exist, e.g. "League" or "Overall". */
     rankLabel?: string;

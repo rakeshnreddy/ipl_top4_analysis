@@ -274,11 +274,18 @@ class LiveSeasonTests(unittest.TestCase):
                 "sport": "football",
                 "tiers": [
                     {"key": "title", "label": "Title", "kind": "top", "size": 1},
+                    # A play-off place above the drop (Scotland's 11th) is not the relegation risk.
+                    {"key": "playoff", "label": "Play-off", "kind": "bottom", "size": 1, "skip": 1},
                     {"key": "relegation", "label": "Relegation", "kind": "bottom", "size": 1},
                 ],
             },
             "standings": [{"teamKey": "Arsenal", "shortName": "ARS"}, {"teamKey": "Spurs", "shortName": "TOT"}],
-            "analysis": {"probabilities": {"Arsenal": {"title": 99.97, "relegation": 0.0}, "Spurs": {"title": 0.03, "relegation": 64.4}}},
+            "analysis": {
+                "probabilities": {
+                    "Arsenal": {"title": 99.97, "playoff": 0.0, "relegation": 0.0},
+                    "Spurs": {"title": 0.03, "playoff": 90.0, "relegation": 64.4},
+                }
+            },
         }
 
         self.assertEqual(

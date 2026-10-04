@@ -16,6 +16,7 @@ from typing import Any
 
 import numpy as np
 
+import football_split
 import team_sports
 from team_sports import Game
 
@@ -79,11 +80,13 @@ TIEBREAK_STEPS = {
     "head-to-head-complete": "head-to-head points, then head-to-head goal difference (once they have met home and away)",
     "head-to-head-goals-complete": "head-to-head points, goal difference and goals (once they have met home and away)",
 }
-# Shorthand "tiebreak" names: the default, Portugal, and Spain and Italy.
+# Shorthand "tiebreak" names: the default, Portugal, Spain and Italy, and Scotland (SPFL Rule C36:
+# goal difference, goals, then the games between the teams still level).
 TIEBREAK_RULES = {
     None: ["goal-difference", "goals"],
     "head-to-head": ["head-to-head", "goal-difference", "goals"],
     "head-to-head-complete": ["head-to-head-complete", "goal-difference", "goals"],
+    "goals-then-head-to-head": ["goal-difference", "goals", "head-to-head"],
 }
 
 
@@ -99,8 +102,9 @@ def ranked(rows: dict[str, dict[str, int]], games: list[Game] | None = None, rul
 
     `rule` is a config's "tiebreak": a list of TIEBREAK_STEPS, or "head-to-head" (Portugal),
     which ranks teams level on points by their games against each other first, or
-    "head-to-head-complete" (Spain, Italy), which does so once they have met home and away.
-    Teams level on every step are listed by name.
+    "head-to-head-complete" (Spain, Italy), which does so once they have met home and away, or
+    "goals-then-head-to-head" (Scotland), which uses those games last, for teams also level on
+    goal difference and goals. Teams level on every step are listed by name.
     """
     played = [game for game in games or [] if game.played]
     fields = {"points": "points", "goal-difference": "goalDifference", "goals": "goalsFor", "wins": "wins"}
@@ -133,7 +137,7 @@ def ranked(rows: dict[str, dict[str, int]], games: list[Game] | None = None, rul
 
 
 def tiebreak_note(rule: str | list[str] | None) -> str:
-    if isinstance(rule, list):
+    if isinstance(rule, list) or rule == "goals-then-head-to-head":
         phrases, after_head_to_head = [], False
         for step in tiebreak_steps(rule):
             overall = after_head_to_head and step in ("goal-difference", "goals")
@@ -291,6 +295,7 @@ def simulate(
     simulations: int = SIMULATIONS,
     seed: int = SEED,
     season_left: float = 1.0,
+    split: football_split.Split | None = None,
 ) -> dict[str, Any]:
     count = len(teams)
     index = {team: i for i, team in enumerate(teams)}
@@ -298,6 +303,10 @@ def simulate(
     base_for = np.array([table[team]["goalsFor"] for team in teams], dtype=np.float32)
     base_against = np.array([table[team]["goalsAgainst"] for team in teams], dtype=np.float32)
     rng = np.random.default_rng(seed)
+    # A league that splits in two also plays the post-split games that are not in the feed yet.
+    real = len(remaining)
+    remaining = remaining + (split.games if split else [])
+    sections = football_split.known_sections(split, teams)
 
     if remaining:
         log_rates = np.log(np.array([model.rates(game.home, game.away) for game in remaining]))
@@ -318,6 +327,10 @@ def simulate(
         win, draw = points["win"], points["draw"]
         home_points = np.where(home_goals > away_goals, win, np.where(home_goals == away_goals, draw, 0)).astype(np.float32)
         away_points = np.where(away_goals > home_goals, win, np.where(home_goals == away_goals, draw, 0)).astype(np.float32)
+        if split and sections is None:
+            sections = football_split.split_each_season(
+                split, teams, real, (base_points, base_for, base_against), (home_goals, away_goals), (home_points, away_points), (home_side, away_side), rng
+            )
         final_points = base_points + home_points @ home_side + away_points @ away_side
         goals_for = base_for + home_goals @ home_side + away_goals @ away_side
         goals_against = base_against + away_goals @ home_side + home_goals @ away_side
@@ -333,6 +346,9 @@ def simulate(
         + goals_for
         + rng.random(final_points.shape)
     )
+    if sections is not None:
+        # Nobody leaves their section: the top six take places 1-6 whatever their points.
+        keys -= sections * 1e9
     positions = team_sports.positions_from_keys(keys)
     flags = {tier["key"]: team_sports.tier_flags(positions, tier, count) for tier in tiers}
 
@@ -353,7 +369,7 @@ def simulate(
         "probabilities": probabilities,
         "positions": position_odds,
         "expected": expected,
-        "matchesThatMatter": matches_that_matter(remaining, home_goals, away_goals, flags, tiers, teams),
+        "matchesThatMatter": matches_that_matter(remaining[:real], home_goals, away_goals, flags, tiers, teams),
     }
 
 
@@ -441,6 +457,18 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         table[team]["points"] += change
         table[team]["adjustment"] = change
     order = ranked(table, games, config.get("tiebreak"))
+    split = None
+    if config.get("split"):
+
+        def split_order(subset: list[Game]) -> list[str]:
+            rows = standings(subset, teams, **points)
+            for team, change in adjustments.items():
+                rows[team]["points"] += change
+            return ranked(rows, subset, config.get("tiebreak"))
+
+        split = football_split.plan(config["split"], games, teams, split_order)
+        if split.sections is not None:
+            order.sort(key=split.sections.get)
     meta = team_sports.team_meta(config, teams)
 
     model_teams = sorted(set(teams) | previous_teams)
@@ -456,8 +484,12 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             f"{len(pending)} past fixture{'s have' if len(pending) > 1 else ' has'} no result yet "
             f"(postponed, or not yet updated at {team_sports.FEED_SOURCE}); they are simulated as still to play."
         )
-    tiers = config["tiers"]
-    simulation = simulate(model, teams, table, remaining, tiers, points, season_left=len(remaining) / len(games))
+    tiers = football_split.settled_tiers(config["tiers"], split)
+    # Post-split games not in the feed yet are still to play.
+    missing = split.missing if split else 0
+    simulation = simulate(
+        model, teams, table, remaining, tiers, points, season_left=(len(remaining) + missing) / (len(games) + missing), split=split
+    )
 
     standings_rows = []
     for rank, team in enumerate(order, start=1):
@@ -508,7 +540,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "source": team_sports.FEED_SOURCE,
             "source_url": team_sports.FEED_SOURCE_URL,
             "data_freshness_status": "warning" if warnings else "fresh",
-            "season_status": "complete" if not remaining else "in_progress",
+            "season_status": "complete" if not remaining and not missing else "in_progress",
             "warnings": warnings,
         },
         "league": {
@@ -531,6 +563,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             ],
             "outcomes": ["home", "draw", "away"],
             "teams": [meta[team] for team in teams],
+            **({"cutoffs": football_split.cutoffs(split, len(teams))} if split else {}),
+            **({"headline": config["headline"]} if config.get("headline") else {}),
         },
         "standings": standings_rows,
         "fixtures": fixtures,
@@ -555,6 +589,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 "Every simulated season also lets team strength drift (more when more of the season is left), because "
                 "form, injuries and transfers change teams; without it, early-season odds were overconfident in backtests.",
                 tiebreak_note(config.get("tiebreak")),
+                *(football_split.notes(config["split"], split) if split else []),
                 *(
                     [
                         "Points deductions in the official table: "

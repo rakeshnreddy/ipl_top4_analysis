@@ -121,12 +121,20 @@ function tierHighlight(payload: SportPayload, tier: SportTier, short: (key: stri
   };
 }
 
-/** Table rows inside a top tier (or the bottom one) by current position. */
+/** The bottom tier covering a table place; one that skips the last places (a play-off place) is a middle zone. */
+function bottomZone(tiers: SportTier[], count: number, place: number) {
+  const tier = tiers.find(
+    (item) => item.kind === 'bottom' && item.size && place > count - (item.skip ?? 0) - item.size && place <= count - (item.skip ?? 0),
+  );
+  return tier ? (tier.skip ? 'zone-mid' : 'zone-bottom') : '';
+}
+
+/** Table rows inside a top tier (or a bottom one) by current position. */
 function zoneFor(payload: SportPayload, rank: number) {
   const count = payload.standings.length;
-  const bottom = payload.league.tiers.find((tier) => tier.kind === 'bottom' && tier.size && rank > count - tier.size);
+  const bottom = bottomZone(payload.league.tiers, count, rank);
   if (bottom) {
-    return 'zone-bottom';
+    return bottom;
   }
   const tops = payload.league.tiers.filter((tier) => tier.kind === 'top' && tier.size).sort((a, b) => (a.size ?? 0) - (b.size ?? 0));
   const index = tops.findIndex((tier) => rank <= (tier.size ?? 0));
@@ -293,6 +301,9 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
   const byKey = new Map(payload.standings.map((row) => [row.teamKey, row]));
   // Lines under table positions: the selected group's, or the league's own when it is seeded as one table.
   const cutoffs = group ? group.cutoffs : payload.league.cutoffs;
+  // A football table keeps its tier colours under its lines (the Scottish split); elsewhere the lines set the zones.
+  const tableTiers = payload.league.tiers.some((tier) => tier.kind === 'top' || tier.kind === 'bottom');
+  const zonesFromLines = Boolean(group) || (Boolean(cutoffs) && !tableTiers);
   const rows = group
     ? group.teams.map((key) => byKey.get(key)).filter((row): row is SportStanding => Boolean(row))
     : payload.standings;
@@ -421,7 +432,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                         </tr>
                       )}
                       <tr
-                        className={`${group || cutoffs ? groupZone(cutoffs, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
+                        className={`${zonesFromLines ? groupZone(cutoffs, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
                         onClick={() => selectTeam(row.teamKey)}
                       >
                         <td className="col-rank">{group ? position + 1 : row.rank}</td>
@@ -775,7 +786,6 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
   const count = payload.standings.length;
   const next = payload.fixtures.filter((fixture) => fixture.home === row.teamKey || fixture.away === row.teamKey).slice(0, 5);
   const recent = payload.results.filter((result) => result.home === row.teamKey || result.away === row.teamKey).slice(0, 5);
-  const bottomSize = payload.league.tiers.find((tier) => tier.kind === 'bottom')?.size ?? 0;
   const topSize = Math.max(0, ...payload.league.tiers.filter((tier) => tier.kind === 'top').map((tier) => tier.size ?? 0));
   const positionLabel = payload.league.positionLabel ?? 'Finishing position';
   const zones = payload.league.positionZones;
@@ -783,7 +793,7 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
     if (zones) {
       return `zone-${zones.find((zone) => place <= zone.to)?.kind ?? 'none'}`;
     }
-    return place > count - bottomSize ? 'zone-bottom' : place <= topSize ? 'zone-top' : '';
+    return bottomZone(payload.league.tiers, count, place) || (place <= topSize ? 'zone-top' : '');
   };
   const record = typeof row.record === 'string' ? row.record : null;
   const seed = typeof row.seed === 'number' ? row.seed : null;

@@ -1571,7 +1571,8 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
     if favourite:
         team = max(probabilities, key=lambda key: probabilities[key].get(favourite["key"], 0.0))
         facts.append({"label": f"{favourite['label']} favourite", "value": f"{short.get(team, team)} {chance_text(probabilities[team][favourite['key']])}"})
-    risk = next((tier for tier in live if tier.get("kind") == "bottom"), None)
+    # The drop itself, not a play-off place above it (a tier that skips the last places).
+    risk = next((tier for tier in live if tier.get("kind") == "bottom" and not tier.get("skip")), None)
     if risk:
         team = max(probabilities, key=lambda key: probabilities[key].get(risk["key"], 0.0))
         facts.append({"label": f"{risk['label']} risk", "value": f"{short.get(team, team)} {chance_text(probabilities[team][risk['key']])}"})
