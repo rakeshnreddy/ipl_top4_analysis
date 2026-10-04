@@ -1,0 +1,137 @@
+{
+  "id": "wsl",
+  "sport": "football",
+  "name": "Women's Super League",
+  "shortName": "WSL",
+  "priority": 26,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "wsl-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "2026-27: 14 clubs for the first time (182 matches from 4 September 2026). The top three qualify for the UEFA Women's Champions League (1st and 2nd straight in, 3rd through qualifying). 14th is relegated, replaced by the BWSL2 champions; 13th plays The Play-Off (29/30 May 2027) against the winner of a pre-qualifier between BWSL2's 2nd and 3rd. Teams level on points are separated by goal difference, then goals scored, then wins, then head-to-head record, then a play-off.",
+    "sources": [
+      "https://www.wslfootball.com/news/the-2026-27-fixtures-are-out",
+      "https://www.wslfootball.com/standings/wsl",
+      "https://www.wslfootball.com/news/barclays-womens-super-league-explained"
+    ]
+  },
+  "notes": [
+    "Backtested on the WSL's 2024-25 and 2025-26 seasons (263 matches): week-ahead predictions score 0.175 (ranked probability score) against 0.242 for home/draw/away base rates."
+  ],
+  "tiebreak": ["goal-difference", "goals", "wins", "head-to-head"],
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "ucl",
+      "label": "Champions League",
+      "kind": "top",
+      "size": 3,
+      "shortLabel": "Top 3"
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 1,
+      "shortLabel": "Drop"
+    },
+    {
+      "key": "bottom2",
+      "label": "Bottom 2",
+      "kind": "bottom",
+      "size": 2,
+      "shortLabel": "Bot 2"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "wsl-{year}",
+    "espn": "eng.w.1"
+  },
+  "teams": {
+    "Arsenal": {
+      "shortName": "ARS",
+      "color": "#EF0107",
+      "textColor": "#000000"
+    },
+    "Aston Villa": {
+      "shortName": "AVL",
+      "color": "#670E36",
+      "textColor": "#FFFFFF"
+    },
+    "Birmingham City": {
+      "shortName": "BIR",
+      "color": "#1C39BB",
+      "textColor": "#FFFFFF"
+    },
+    "Brighton & Hove Albion": {
+      "shortName": "BHA",
+      "color": "#0057B8",
+      "textColor": "#FFFFFF"
+    },
+    "Charlton Athletic": {
+      "shortName": "CHA",
+      "color": "#D4021D",
+      "textColor": "#FFFFFF"
+    },
+    "Chelsea": {
+      "shortName": "CHE",
+      "color": "#034694",
+      "textColor": "#FFFFFF"
+    },
+    "Crystal Palace": {
+      "shortName": "CRY",
+      "color": "#1B458F",
+      "textColor": "#FFFFFF"
+    },
+    "Everton": {
+      "shortName": "EVE",
+      "color": "#003399",
+      "textColor": "#FFFFFF"
+    },
+    "Leicester City": {
+      "shortName": "LEI",
+      "color": "#003090",
+      "textColor": "#FFFFFF"
+    },
+    "Liverpool": {
+      "shortName": "LIV",
+      "color": "#C8102E",
+      "textColor": "#FFFFFF"
+    },
+    "London City Lionesses": {
+      "shortName": "LCL"
+    },
+    "Manchester City": {
+      "shortName": "MCI",
+      "color": "#6CABDD",
+      "textColor": "#000000"
+    },
+    "Manchester United": {
+      "shortName": "MNU",
+      "color": "#DA291C",
+      "textColor": "#FFFFFF"
+    },
+    "Tottenham Hotspur": {
+      "shortName": "TOT",
+      "color": "#132257",
+      "textColor": "#FFFFFF"
+    },
+    "West Ham United": {
+      "shortName": "WHU",
+      "color": "#7A263A",
+      "textColor": "#FFFFFF"
+    }
+  }
+}
