@@ -1,0 +1,1509 @@
+{
+  "metadata": {
+    "season": "2026",
+    "generated_at": "2026-10-04T21:57:00Z",
+    "source": "Jolpica F1 API",
+    "source_url": "https://github.com/jolpica/jolpica-f1",
+    "data_freshness_status": "fresh",
+    "season_status": "in_progress",
+    "warnings": [],
+    "notes": []
+  },
+  "league": {
+    "id": "f1-2026",
+    "configId": "f1",
+    "sport": "motorsport",
+    "name": "Formula 1 World Championship",
+    "shortName": "F1",
+    "headline": "F1 Title Odds: Drivers' & Constructors' Championships",
+    "season": "2026",
+    "seasonLabel": "2026",
+    "priority": 40,
+    "tiers": [
+      {
+        "key": "title",
+        "label": "Drivers' title",
+        "shortLabel": "Title",
+        "kind": "champion"
+      },
+      {
+        "key": "top3",
+        "label": "Top 3",
+        "kind": "top",
+        "size": 3
+      }
+    ],
+    "constructorTiers": [
+      {
+        "key": "title",
+        "label": "Constructors' title",
+        "shortLabel": "Title",
+        "kind": "champion"
+      }
+    ],
+    "teams": [
+      {
+        "key": "mercedes",
+        "shortName": "MER",
+        "fullName": "Mercedes",
+        "color": "#27F4D2",
+        "textColor": "#000000"
+      },
+      {
+        "key": "ferrari",
+        "shortName": "FER",
+        "fullName": "Ferrari",
+        "color": "#E8002D",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "mclaren",
+        "shortName": "MCL",
+        "fullName": "McLaren",
+        "color": "#FF8000",
+        "textColor": "#000000"
+      },
+      {
+        "key": "red_bull",
+        "shortName": "RBR",
+        "fullName": "Red Bull Racing",
+        "color": "#3671C6",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "rb",
+        "shortName": "RB",
+        "fullName": "Racing Bulls",
+        "color": "#6692FF",
+        "textColor": "#000000"
+      },
+      {
+        "key": "alpine",
+        "shortName": "ALP",
+        "fullName": "Alpine",
+        "color": "#00A1E8",
+        "textColor": "#000000"
+      },
+      {
+        "key": "haas",
+        "shortName": "HAA",
+        "fullName": "Haas F1 Team",
+        "color": "#DEE1E2",
+        "textColor": "#000000"
+      },
+      {
+        "key": "audi",
+        "shortName": "AUD",
+        "fullName": "Audi",
+        "color": "#FF2D00",
+        "textColor": "#000000"
+      },
+      {
+        "key": "williams",
+        "shortName": "WIL",
+        "fullName": "Williams",
+        "color": "#1868DB",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "aston_martin",
+        "shortName": "AMR",
+        "fullName": "Aston Martin",
+        "color": "#229971",
+        "textColor": "#000000"
+      },
+      {
+        "key": "cadillac",
+        "shortName": "CAD",
+        "fullName": "Cadillac",
+        "color": "#AAAAAD",
+        "textColor": "#000000"
+      }
+    ],
+    "rounds": 23,
+    "eventsLeft": 8,
+    "rules": {
+      "summary": "11 teams and 22 cars in 2026, with Cadillac new and Audi in place of Sauber. Grand Prix points 25-18-15-12-10-8-6-4-2-1 for the top ten, sprint points 8-7-6-5-4-3-2-1 for the top eight, and no fastest-lap point since 2025. Drivers or teams level on points are split by their race places: most wins, then most second places, and so on; sprint places do not count.",
+      "sources": [
+        {
+          "label": "FIA 2026 Formula 1 Regulations, Section A, Articles A2.1.4 and A2.2 (Issue 03, 25 June 2026)",
+          "url": "https://api.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_a_general_provisions_-_iss_03_-_2026-06-25.pdf"
+        },
+        {
+          "label": "Formula 1: 2026 driver line-ups confirmed in full (11 teams)",
+          "url": "https://www.formula1.com/en/latest/article/2026-line-ups-confirmed-in-full-who-is-on-the-grid-for-next-season.3TyLfOUjOwpBKOp3KX1PiS"
+        },
+        {
+          "label": "Formula 1: fastest lap point scrapped from 2025",
+          "url": "https://www.formula1.com/en/latest/article/fastest-lap-point-to-be-scrapped-in-2025-after-latest-fia-world-motor-sport.4pUjDzWnGRN7KVWENLc1BY"
+        },
+        {
+          "label": "Formula 1: the beginner's guide to the F1 Sprint (points 8 to 1)",
+          "url": "https://www.formula1.com/en/latest/article/the-beginners-guide-to-the-f1-sprint.55yJBEiF7vYkZEwSV9lZJ9"
+        }
+      ]
+    }
+  },
+  "standings": [
+    {
+      "teamKey": "antonelli",
+      "shortName": "ANT",
+      "fullName": "Andrea Kimi Antonelli",
+      "number": "12",
+      "team": "mercedes",
+      "teams": [
+        "mercedes"
+      ],
+      "rank": 1,
+      "points": 320,
+      "wins": 8,
+      "podiums": 13,
+      "sprintWins": 1,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "russell",
+      "shortName": "RUS",
+      "fullName": "George Russell",
+      "number": "63",
+      "team": "mercedes",
+      "teams": [
+        "mercedes"
+      ],
+      "rank": 2,
+      "points": 236,
+      "wins": 3,
+      "podiums": 8,
+      "sprintWins": 3,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "hamilton",
+      "shortName": "HAM",
+      "fullName": "Lewis Hamilton",
+      "number": "44",
+      "team": "ferrari",
+      "teams": [
+        "ferrari"
+      ],
+      "rank": 3,
+      "points": 214,
+      "wins": 1,
+      "podiums": 6,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "leclerc",
+      "shortName": "LEC",
+      "fullName": "Charles Leclerc",
+      "number": "16",
+      "team": "ferrari",
+      "teams": [
+        "ferrari"
+      ],
+      "rank": 4,
+      "points": 191,
+      "wins": 1,
+      "podiums": 4,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "norris",
+      "shortName": "NOR",
+      "fullName": "Lando Norris",
+      "number": "1",
+      "team": "mclaren",
+      "teams": [
+        "mclaren"
+      ],
+      "rank": 5,
+      "points": 188,
+      "wins": 2,
+      "podiums": 5,
+      "sprintWins": 1,
+      "played": 15,
+      "racing": true
+    },
+    {
+      "teamKey": "max_verstappen",
+      "shortName": "VER",
+      "fullName": "Max Verstappen",
+      "number": "3",
+      "team": "red_bull",
+      "teams": [
+        "red_bull"
+      ],
+      "rank": 6,
+      "points": 188,
+      "wins": 1,
+      "podiums": 8,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "piastri",
+      "shortName": "PIA",
+      "fullName": "Oscar Piastri",
+      "number": "81",
+      "team": "mclaren",
+      "teams": [
+        "mclaren"
+      ],
+      "rank": 7,
+      "points": 128,
+      "wins": 0,
+      "podiums": 2,
+      "sprintWins": 0,
+      "played": 14,
+      "racing": true
+    },
+    {
+      "teamKey": "hadjar",
+      "shortName": "HAD",
+      "fullName": "Isack Hadjar",
+      "number": "6",
+      "team": "red_bull",
+      "teams": [
+        "red_bull"
+      ],
+      "rank": 8,
+      "points": 96,
+      "wins": 0,
+      "podiums": 2,
+      "sprintWins": 0,
+      "played": 13,
+      "racing": true
+    },
+    {
+      "teamKey": "lawson",
+      "shortName": "LAW",
+      "fullName": "Liam Lawson",
+      "number": "30",
+      "team": "rb",
+      "teams": [
+        "rb",
+        "red_bull"
+      ],
+      "rank": 9,
+      "points": 65,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "gasly",
+      "shortName": "GAS",
+      "fullName": "Pierre Gasly",
+      "number": "10",
+      "team": "alpine",
+      "teams": [
+        "alpine"
+      ],
+      "rank": 10,
+      "points": 41,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "arvid_lindblad",
+      "shortName": "LIN",
+      "fullName": "Arvid Lindblad",
+      "number": "41",
+      "team": "rb",
+      "teams": [
+        "rb"
+      ],
+      "rank": 11,
+      "points": 38,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 15,
+      "racing": true
+    },
+    {
+      "teamKey": "colapinto",
+      "shortName": "COL",
+      "fullName": "Franco Colapinto",
+      "number": "43",
+      "team": "alpine",
+      "teams": [
+        "alpine"
+      ],
+      "rank": 12,
+      "points": 27,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "bearman",
+      "shortName": "BEA",
+      "fullName": "Oliver Bearman",
+      "number": "87",
+      "team": "haas",
+      "teams": [
+        "haas"
+      ],
+      "rank": 13,
+      "points": 20,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "bortoleto",
+      "shortName": "BOR",
+      "fullName": "Gabriel Bortoleto",
+      "number": "5",
+      "team": "audi",
+      "teams": [
+        "audi"
+      ],
+      "rank": 14,
+      "points": 10,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 15,
+      "racing": true
+    },
+    {
+      "teamKey": "hulkenberg",
+      "shortName": "HUL",
+      "fullName": "Nico H\u00fclkenberg",
+      "number": "27",
+      "team": "audi",
+      "teams": [
+        "audi"
+      ],
+      "rank": 15,
+      "points": 7,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 15,
+      "racing": true
+    },
+    {
+      "teamKey": "ocon",
+      "shortName": "OCO",
+      "fullName": "Esteban Ocon",
+      "number": "31",
+      "team": "haas",
+      "teams": [
+        "haas"
+      ],
+      "rank": 16,
+      "points": 7,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "alonso",
+      "shortName": "ALO",
+      "fullName": "Fernando Alonso",
+      "number": "14",
+      "team": "aston_martin",
+      "teams": [
+        "aston_martin"
+      ],
+      "rank": 17,
+      "points": 7,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "sainz",
+      "shortName": "SAI",
+      "fullName": "Carlos Sainz",
+      "number": "55",
+      "team": "williams",
+      "teams": [
+        "williams"
+      ],
+      "rank": 18,
+      "points": 7,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "albon",
+      "shortName": "ALB",
+      "fullName": "Alexander Albon",
+      "number": "23",
+      "team": "williams",
+      "teams": [
+        "williams"
+      ],
+      "rank": 19,
+      "points": 5,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 15,
+      "racing": true
+    },
+    {
+      "teamKey": "tsunoda",
+      "shortName": "TSU",
+      "fullName": "Yuki Tsunoda",
+      "number": "22",
+      "team": "rb",
+      "teams": [
+        "rb"
+      ],
+      "rank": 20,
+      "points": 1,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 3,
+      "racing": false
+    },
+    {
+      "teamKey": "stroll",
+      "shortName": "STR",
+      "fullName": "Lance Stroll",
+      "number": "18",
+      "team": "aston_martin",
+      "teams": [
+        "aston_martin"
+      ],
+      "rank": 21,
+      "points": 0,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "bottas",
+      "shortName": "BOT",
+      "fullName": "Valtteri Bottas",
+      "number": "77",
+      "team": "cadillac",
+      "teams": [
+        "cadillac"
+      ],
+      "rank": 22,
+      "points": 0,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "perez",
+      "shortName": "PER",
+      "fullName": "Sergio P\u00e9rez",
+      "number": "11",
+      "team": "cadillac",
+      "teams": [
+        "cadillac"
+      ],
+      "rank": 23,
+      "points": 0,
+      "wins": 0,
+      "podiums": 0,
+      "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    }
+  ],
+  "constructorStandings": [
+    {
+      "teamKey": "mercedes",
+      "shortName": "MER",
+      "fullName": "Mercedes",
+      "rank": 1,
+      "points": 556,
+      "wins": 11,
+      "podiums": 21,
+      "drivers": [
+        "antonelli",
+        "russell"
+      ]
+    },
+    {
+      "teamKey": "ferrari",
+      "shortName": "FER",
+      "fullName": "Ferrari",
+      "rank": 2,
+      "points": 405,
+      "wins": 2,
+      "podiums": 10,
+      "drivers": [
+        "hamilton",
+        "leclerc"
+      ]
+    },
+    {
+      "teamKey": "mclaren",
+      "shortName": "MCL",
+      "fullName": "McLaren",
+      "rank": 3,
+      "points": 316,
+      "wins": 2,
+      "podiums": 7,
+      "drivers": [
+        "norris",
+        "piastri"
+      ]
+    },
+    {
+      "teamKey": "red_bull",
+      "shortName": "RBR",
+      "fullName": "Red Bull Racing",
+      "rank": 4,
+      "points": 298,
+      "wins": 1,
+      "podiums": 10,
+      "drivers": [
+        "max_verstappen",
+        "hadjar"
+      ]
+    },
+    {
+      "teamKey": "rb",
+      "shortName": "RB",
+      "fullName": "Racing Bulls",
+      "rank": 5,
+      "points": 90,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "lawson",
+        "arvid_lindblad"
+      ]
+    },
+    {
+      "teamKey": "alpine",
+      "shortName": "ALP",
+      "fullName": "Alpine",
+      "rank": 6,
+      "points": 68,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "gasly",
+        "colapinto"
+      ]
+    },
+    {
+      "teamKey": "haas",
+      "shortName": "HAA",
+      "fullName": "Haas F1 Team",
+      "rank": 7,
+      "points": 27,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "bearman",
+        "ocon"
+      ]
+    },
+    {
+      "teamKey": "audi",
+      "shortName": "AUD",
+      "fullName": "Audi",
+      "rank": 8,
+      "points": 17,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "bortoleto",
+        "hulkenberg"
+      ]
+    },
+    {
+      "teamKey": "williams",
+      "shortName": "WIL",
+      "fullName": "Williams",
+      "rank": 9,
+      "points": 12,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "sainz",
+        "albon"
+      ]
+    },
+    {
+      "teamKey": "aston_martin",
+      "shortName": "AMR",
+      "fullName": "Aston Martin",
+      "rank": 10,
+      "points": 7,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "alonso",
+        "stroll"
+      ]
+    },
+    {
+      "teamKey": "cadillac",
+      "shortName": "CAD",
+      "fullName": "Cadillac",
+      "rank": 11,
+      "points": 0,
+      "wins": 0,
+      "podiums": 0,
+      "drivers": [
+        "bottas",
+        "perez"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "key": "2026-17-sprint",
+      "round": 17,
+      "kind": "sprint",
+      "name": "Singapore Grand Prix",
+      "date": "2026-10-10T09:00:00Z",
+      "circuit": "Marina Bay Street Circuit",
+      "locality": "Marina Bay",
+      "country": "Singapore",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 22.14,
+          "podium": 55.91
+        },
+        {
+          "driver": "russell",
+          "win": 13.05,
+          "podium": 38.8
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.49,
+          "podium": 37.67
+        },
+        {
+          "driver": "hamilton",
+          "win": 11.89,
+          "podium": 35.73
+        },
+        {
+          "driver": "antonelli",
+          "win": 11.59,
+          "podium": 35.72
+        },
+        {
+          "driver": "norris",
+          "win": 9.66,
+          "podium": 30.58
+        }
+      ]
+    },
+    {
+      "key": "2026-17-race",
+      "round": 17,
+      "kind": "race",
+      "name": "Singapore Grand Prix",
+      "date": "2026-10-11T12:00:00Z",
+      "circuit": "Marina Bay Street Circuit",
+      "locality": "Marina Bay",
+      "country": "Singapore",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 20.36,
+          "podium": 50.7
+        },
+        {
+          "driver": "russell",
+          "win": 12.86,
+          "podium": 37.71
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.63,
+          "podium": 36.73
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.23,
+          "podium": 37.64
+        },
+        {
+          "driver": "hamilton",
+          "win": 12.14,
+          "podium": 36.65
+        },
+        {
+          "driver": "norris",
+          "win": 9.48,
+          "podium": 29.93
+        }
+      ]
+    },
+    {
+      "key": "2026-18-race",
+      "round": 18,
+      "kind": "race",
+      "name": "United States Grand Prix",
+      "date": "2026-10-25T20:00:00Z",
+      "circuit": "Circuit of the Americas",
+      "locality": "Austin",
+      "country": "USA",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 20.6,
+          "podium": 50.52
+        },
+        {
+          "driver": "russell",
+          "win": 12.65,
+          "podium": 37.33
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.54,
+          "podium": 36.68
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.46,
+          "podium": 37.69
+        },
+        {
+          "driver": "hamilton",
+          "win": 12.03,
+          "podium": 36.56
+        },
+        {
+          "driver": "norris",
+          "win": 10.1,
+          "podium": 30.28
+        }
+      ]
+    },
+    {
+      "key": "2026-19-race",
+      "round": 19,
+      "kind": "race",
+      "name": "Mexico City Grand Prix",
+      "date": "2026-11-01T20:00:00Z",
+      "circuit": "Aut\u00f3dromo Hermanos Rodr\u00edguez",
+      "locality": "Mexico City",
+      "country": "Mexico",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 20.22,
+          "podium": 49.73
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.59,
+          "podium": 36.2
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.57,
+          "podium": 37.09
+        },
+        {
+          "driver": "russell",
+          "win": 12.38,
+          "podium": 37.01
+        },
+        {
+          "driver": "hamilton",
+          "win": 12.15,
+          "podium": 36.14
+        },
+        {
+          "driver": "norris",
+          "win": 9.99,
+          "podium": 30.26
+        }
+      ]
+    },
+    {
+      "key": "2026-20-race",
+      "round": 20,
+      "kind": "race",
+      "name": "Brazilian Grand Prix",
+      "date": "2026-11-08T17:00:00Z",
+      "circuit": "Aut\u00f3dromo Jos\u00e9 Carlos Pace",
+      "locality": "S\u00e3o Paulo",
+      "country": "Brazil",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 20.04,
+          "podium": 49.52
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.68,
+          "podium": 36.54
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.65,
+          "podium": 37.31
+        },
+        {
+          "driver": "russell",
+          "win": 12.12,
+          "podium": 36.55
+        },
+        {
+          "driver": "hamilton",
+          "win": 11.82,
+          "podium": 36.48
+        },
+        {
+          "driver": "norris",
+          "win": 9.83,
+          "podium": 29.68
+        }
+      ]
+    },
+    {
+      "key": "2026-21-race",
+      "round": 21,
+      "kind": "race",
+      "name": "Las Vegas Grand Prix",
+      "date": "2026-11-22T04:00:00Z",
+      "circuit": "Las Vegas Strip Street Circuit",
+      "locality": "Las Vegas",
+      "country": "USA",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 19.8,
+          "podium": 48.95
+        },
+        {
+          "driver": "russell",
+          "win": 12.54,
+          "podium": 36.25
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.39,
+          "podium": 38.06
+        },
+        {
+          "driver": "hamilton",
+          "win": 12.38,
+          "podium": 35.97
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.27,
+          "podium": 36.1
+        },
+        {
+          "driver": "norris",
+          "win": 9.59,
+          "podium": 29.45
+        }
+      ]
+    },
+    {
+      "key": "2026-22-race",
+      "round": 22,
+      "kind": "race",
+      "name": "Qatar Grand Prix",
+      "date": "2026-11-29T16:00:00Z",
+      "circuit": "Lusail International Circuit",
+      "locality": "Lusail",
+      "country": "Qatar",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 19.98,
+          "podium": 48.44
+        },
+        {
+          "driver": "russell",
+          "win": 12.37,
+          "podium": 36.48
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.31,
+          "podium": 37.23
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.11,
+          "podium": 35.67
+        },
+        {
+          "driver": "hamilton",
+          "win": 11.98,
+          "podium": 36.0
+        },
+        {
+          "driver": "norris",
+          "win": 10.03,
+          "podium": 29.56
+        }
+      ]
+    },
+    {
+      "key": "2026-23-race",
+      "round": 23,
+      "kind": "race",
+      "name": "Abu Dhabi Grand Prix",
+      "date": "2026-12-06T13:00:00Z",
+      "circuit": "Yas Marina Circuit",
+      "locality": "Abu Dhabi",
+      "country": "UAE",
+      "favourites": [
+        {
+          "driver": "max_verstappen",
+          "win": 19.91,
+          "podium": 47.73
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.67,
+          "podium": 36.7
+        },
+        {
+          "driver": "russell",
+          "win": 12.52,
+          "podium": 36.05
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.19,
+          "podium": 36.01
+        },
+        {
+          "driver": "hamilton",
+          "win": 11.77,
+          "podium": 35.66
+        },
+        {
+          "driver": "norris",
+          "win": 9.96,
+          "podium": 30.11
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "key": "2026-16-race",
+      "round": 16,
+      "kind": "race",
+      "name": "Bahrain Grand Prix in Malaysia",
+      "date": "2026-10-04T07:00:00Z",
+      "circuit": "Sepang International Circuit",
+      "locality": "Kuala Lumpur",
+      "country": "Malaysia",
+      "podium": [
+        "max_verstappen",
+        "antonelli",
+        "hamilton"
+      ]
+    },
+    {
+      "key": "2026-15-race",
+      "round": 15,
+      "kind": "race",
+      "name": "Azerbaijan Grand Prix",
+      "date": "2026-09-26T11:00:00Z",
+      "circuit": "Baku City Circuit",
+      "locality": "Baku",
+      "country": "Azerbaijan",
+      "podium": [
+        "russell",
+        "max_verstappen",
+        "hadjar"
+      ]
+    },
+    {
+      "key": "2026-14-race",
+      "round": 14,
+      "kind": "race",
+      "name": "Spanish Grand Prix",
+      "date": "2026-09-13T13:00:00Z",
+      "circuit": "Madring",
+      "locality": "Madrid",
+      "country": "Spain",
+      "podium": [
+        "antonelli",
+        "max_verstappen",
+        "norris"
+      ]
+    },
+    {
+      "key": "2026-13-race",
+      "round": 13,
+      "kind": "race",
+      "name": "Italian Grand Prix",
+      "date": "2026-09-06T13:00:00Z",
+      "circuit": "Autodromo Nazionale di Monza",
+      "locality": "Monza",
+      "country": "Italy",
+      "podium": [
+        "antonelli",
+        "russell",
+        "max_verstappen"
+      ]
+    },
+    {
+      "key": "2026-12-race",
+      "round": 12,
+      "kind": "race",
+      "name": "Dutch Grand Prix",
+      "date": "2026-08-23T13:00:00Z",
+      "circuit": "Circuit Park Zandvoort",
+      "locality": "Zandvoort",
+      "country": "Netherlands",
+      "podium": [
+        "norris",
+        "antonelli",
+        "russell"
+      ]
+    },
+    {
+      "key": "2026-12-sprint",
+      "round": 12,
+      "kind": "sprint",
+      "name": "Dutch Grand Prix",
+      "date": "2026-08-22T10:00:00Z",
+      "circuit": "Circuit Park Zandvoort",
+      "locality": "Zandvoort",
+      "country": "Netherlands",
+      "podium": [
+        "russell",
+        "leclerc",
+        "norris"
+      ]
+    },
+    {
+      "key": "2026-11-race",
+      "round": 11,
+      "kind": "race",
+      "name": "Hungarian Grand Prix",
+      "date": "2026-07-26T13:00:00Z",
+      "circuit": "Hungaroring",
+      "locality": "Budapest",
+      "country": "Hungary",
+      "podium": [
+        "norris",
+        "max_verstappen",
+        "antonelli"
+      ]
+    },
+    {
+      "key": "2026-10-race",
+      "round": 10,
+      "kind": "race",
+      "name": "Belgian Grand Prix",
+      "date": "2026-07-19T13:00:00Z",
+      "circuit": "Circuit de Spa-Francorchamps",
+      "locality": "Spa",
+      "country": "Belgium",
+      "podium": [
+        "antonelli",
+        "leclerc",
+        "max_verstappen"
+      ]
+    }
+  ],
+  "fixtures": [],
+  "analysis": {
+    "method": "Monte Carlo",
+    "simulations": 20000,
+    "model": "Plackett-Luce pace model",
+    "modelNotes": [
+      "Pace comes from a rank-ordered logit (Plackett-Luce) model of finishing orders: each driver's strength is their own skill plus their car's, rated per team and season, fitted on this season's and last season's races and sprints, with results losing half their weight every 120 days.",
+      "2026 brings new chassis and power-unit rules, so last season's car ratings carry over at only 15% (against 40% when the rules are stable), and the cars are rated mainly on this season's races. Drivers keep their skill from one season to the next, less the time decay.",
+      "A car that does not see the flag is left out of that event's order and counts as a retirement instead. Each driver's retirement chance blends their own, their team's and the field's rates (field: 18% of race starts, sprints 5%).",
+      "The remaining 7 races and 1 sprint are simulated 20,000 times. Car and driver ratings drift as the season goes on (development and form), more for the races furthest away.",
+      "Points: 25-18-15-12-10-8-6-4-2-1 in a Grand Prix and 8-7-6-5-4-3-2-1 in a sprint; no fastest-lap point since 2025. Ties are split by race places: most wins, then most second places, and so on (sprints do not count). Simulated ties use wins, second and third places.",
+      "Backtested on 2022-2025 (92 Grands Prix, each predicted from the results before it): race-winner log loss 1.49 against 1.89 for chances in proportion to championship points and 2.99 for equal chances. Drivers' title, top-three and constructors' title odds at 25%, 50% and 75% of each season scored a Brier score of 0.020 against 0.026 for the table at the time and 0.085 for base rates; the top-three odds alone (0.026) did slightly worse than the table at the time (0.024).",
+      "The tables are computed from the race and sprint results and match Jolpica F1 API's published standings (drivers and constructors) after round 16."
+    ],
+    "probabilities": {
+      "antonelli": {
+        "title": 99.67,
+        "top3": 100.0
+      },
+      "russell": {
+        "title": 0.17,
+        "top3": 81.48
+      },
+      "hamilton": {
+        "title": 0.1,
+        "top3": 54.47
+      },
+      "leclerc": {
+        "title": 0.0,
+        "top3": 16.36
+      },
+      "norris": {
+        "title": 0.01,
+        "top3": 10.82
+      },
+      "max_verstappen": {
+        "title": 0.05,
+        "top3": 36.86
+      },
+      "piastri": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "hadjar": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "lawson": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "gasly": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "arvid_lindblad": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "colapinto": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "bearman": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "bortoleto": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "hulkenberg": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "ocon": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "alonso": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "sainz": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "albon": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "tsunoda": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "stroll": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "bottas": {
+        "title": 0.0,
+        "top3": 0.0
+      },
+      "perez": {
+        "title": 0.0,
+        "top3": 0.0
+      }
+    },
+    "constructorProbabilities": {
+      "mercedes": {
+        "title": 99.41
+      },
+      "ferrari": {
+        "title": 0.59
+      },
+      "mclaren": {
+        "title": 0.0
+      },
+      "red_bull": {
+        "title": 0.0
+      },
+      "rb": {
+        "title": 0.0
+      },
+      "alpine": {
+        "title": 0.0
+      },
+      "haas": {
+        "title": 0.0
+      },
+      "audi": {
+        "title": 0.0
+      },
+      "williams": {
+        "title": 0.0
+      },
+      "aston_martin": {
+        "title": 0.0
+      },
+      "cadillac": {
+        "title": 0.0
+      }
+    },
+    "expected": {
+      "antonelli": {
+        "points": 402.9
+      },
+      "russell": {
+        "points": 315.0
+      },
+      "hamilton": {
+        "points": 294.6
+      },
+      "leclerc": {
+        "points": 269.3
+      },
+      "norris": {
+        "points": 257.9
+      },
+      "max_verstappen": {
+        "points": 282.6
+      },
+      "piastri": {
+        "points": 171.4
+      },
+      "hadjar": {
+        "points": 148.5
+      },
+      "lawson": {
+        "points": 95.2
+      },
+      "gasly": {
+        "points": 60.3
+      },
+      "arvid_lindblad": {
+        "points": 66.0
+      },
+      "colapinto": {
+        "points": 42.2
+      },
+      "bearman": {
+        "points": 29.4
+      },
+      "bortoleto": {
+        "points": 21.8
+      },
+      "hulkenberg": {
+        "points": 26.1
+      },
+      "ocon": {
+        "points": 16.2
+      },
+      "alonso": {
+        "points": 10.9
+      },
+      "sainz": {
+        "points": 13.5
+      },
+      "albon": {
+        "points": 9.3
+      },
+      "tsunoda": {
+        "points": 1.0
+      },
+      "stroll": {
+        "points": 2.0
+      },
+      "bottas": {
+        "points": 0.8
+      },
+      "perez": {
+        "points": 2.1
+      }
+    },
+    "constructorExpected": {
+      "mercedes": {
+        "points": 717.9
+      },
+      "ferrari": {
+        "points": 563.8
+      },
+      "mclaren": {
+        "points": 429.3
+      },
+      "red_bull": {
+        "points": 445.1
+      },
+      "rb": {
+        "points": 148.2
+      },
+      "alpine": {
+        "points": 102.6
+      },
+      "haas": {
+        "points": 45.6
+      },
+      "audi": {
+        "points": 47.9
+      },
+      "williams": {
+        "points": 22.8
+      },
+      "aston_martin": {
+        "points": 12.9
+      },
+      "cadillac": {
+        "points": 2.9
+      }
+    },
+    "ratings": {
+      "albon": {
+        "skill": -0.803,
+        "car": -0.667,
+        "retirement": 0.377
+      },
+      "alonso": {
+        "skill": -1.004,
+        "car": -0.611,
+        "retirement": 0.337
+      },
+      "antonelli": {
+        "skill": 1.502,
+        "car": 0.623,
+        "retirement": 0.078
+      },
+      "arvid_lindblad": {
+        "skill": -0.144,
+        "car": 0.321,
+        "retirement": 0.014
+      },
+      "bearman": {
+        "skill": -0.557,
+        "car": -0.34,
+        "retirement": 0.192
+      },
+      "bortoleto": {
+        "skill": -0.797,
+        "car": -0.001,
+        "retirement": 0.052
+      },
+      "bottas": {
+        "skill": -2.766,
+        "car": -0.242,
+        "retirement": 0.509
+      },
+      "colapinto": {
+        "skill": -0.948,
+        "car": 0.468,
+        "retirement": 0.089
+      },
+      "gasly": {
+        "skill": -0.616,
+        "car": 0.468,
+        "retirement": 0.121
+      },
+      "hadjar": {
+        "skill": 0.952,
+        "car": 0.333,
+        "retirement": 0.112
+      },
+      "hamilton": {
+        "skill": 1.567,
+        "car": 0.556,
+        "retirement": 0.105
+      },
+      "hulkenberg": {
+        "skill": -0.127,
+        "car": -0.001,
+        "retirement": 0.146
+      },
+      "lawson": {
+        "skill": 0.024,
+        "car": 0.321,
+        "retirement": 0.064
+      },
+      "leclerc": {
+        "skill": 1.688,
+        "car": 0.556,
+        "retirement": 0.171
+      },
+      "max_verstappen": {
+        "skill": 2.442,
+        "car": 0.333,
+        "retirement": 0.178
+      },
+      "norris": {
+        "skill": 2.404,
+        "car": -0.437,
+        "retirement": 0.172
+      },
+      "ocon": {
+        "skill": -0.704,
+        "car": -0.34,
+        "retirement": 0.085
+      },
+      "perez": {
+        "skill": -2.076,
+        "car": -0.242,
+        "retirement": 0.347
+      },
+      "piastri": {
+        "skill": 1.348,
+        "car": -0.437,
+        "retirement": 0.083
+      },
+      "russell": {
+        "skill": 1.635,
+        "car": 0.623,
+        "retirement": 0.166
+      },
+      "sainz": {
+        "skill": -0.609,
+        "car": -0.667,
+        "retirement": 0.212
+      },
+      "stroll": {
+        "skill": -1.316,
+        "car": -0.611,
+        "retirement": 0.554
+      }
+    }
+  },
+  "movement": null
+}

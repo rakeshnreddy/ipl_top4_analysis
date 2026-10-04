@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 import { describe, expect, it, vi } from 'vitest';
-import { hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, type LeagueSummary } from './leagues';
+import { hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, sportName, type LeagueSummary } from './leagues';
 
 describe('league helpers', () => {
   it('reads a well-formed league id from the query string', () => {
@@ -15,7 +15,7 @@ describe('league helpers', () => {
     expect(hubHref('hub')).toBe('/?view=hub');
   });
 
-  it('gives basketball its own row, away from the other North American leagues', () => {
+  it('gives basketball and motorsport their own rows, away from the other North American leagues', () => {
     const league = (id: string, sport: string): LeagueSummary => ({
       id,
       sport,
@@ -29,13 +29,21 @@ describe('league helpers', () => {
     });
     const rows = leaguesBySport({
       default: 'hub',
-      leagues: [league('nfl', 'american-football'), league('nba', 'basketball'), league('nbl', 'basketball'), league('nhl', 'ice-hockey')],
+      leagues: [
+        league('nfl', 'american-football'),
+        league('nba', 'basketball'),
+        league('nbl', 'basketball'),
+        league('nhl', 'ice-hockey'),
+        league('f1-2026', 'motorsport'),
+      ],
     });
 
     expect(rows.map((row) => [row.label, row.leagues.map((item) => item.id)])).toEqual([
       ['US sports', ['nfl', 'nhl']],
       ['Basketball', ['nba', 'nbl']],
+      ['Motorsport', ['f1-2026']],
     ]);
+    expect(sportName('motorsport')).toBe('Motorsport');
   });
 
   it('rejects a malformed league list', async () => {
