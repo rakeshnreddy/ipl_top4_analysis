@@ -421,8 +421,15 @@
   text-transform: uppercase;
 }
 
-.bracket-round li span:last-child {
+.bracket-round li span:last-of-type {
   text-align: right;
+}
+
+.bracket-round li small.bracket-note {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
 }
 
 .bracket-round li strong {

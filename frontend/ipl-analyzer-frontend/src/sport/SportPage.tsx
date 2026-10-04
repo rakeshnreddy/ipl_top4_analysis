@@ -10,6 +10,7 @@ import {
   isSeasonComplete,
   loadSportData,
   type Bracket,
+  type BracketSeries,
   type MatchThatMatters,
   type SportColumn,
   type SportFixture,
@@ -638,12 +639,35 @@ const FixturesPanel = ({ payload, short, team }: { payload: SportPayload; short:
   );
 };
 
+/** Series wins, or aggregate goals for two-legged ties (European cups); "Best of N" before a series starts. */
+function seriesScore(series: BracketSeries) {
+  if (series.aggregate !== undefined) {
+    return series.aggregate ? `${series.aggregate.top}–${series.aggregate.bottom}` : 'vs';
+  }
+  return series.top ? `${series.topWins}–${series.bottomWins}` : `Best of ${series.bestOf}`;
+}
+
+const isKnockout = (bracket: Bracket) =>
+  bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined));
+
 /** Playoff rounds with series scores; series whose teams are not known yet show as to be decided. */
 const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }) => (
   <section className="panel" id="bracket" aria-labelledby="bracket-title">
     <div className="section-heading">
-      <h2 id="bracket-title">{bracket.champion ? `${short(bracket.champion)} Won the Title` : 'Playoff Bracket'}</h2>
-      <p>{bracket.champion ? 'Final bracket' : 'Series scores update daily'}</p>
+      <h2 id="bracket-title">
+        {bracket.champion
+          ? `${short(bracket.champion)} Won the Title`
+          : isKnockout(bracket)
+            ? 'Knockout Bracket'
+            : 'Playoff Bracket'}
+      </h2>
+      <p>
+        {bracket.champion
+          ? 'Final bracket'
+          : isKnockout(bracket)
+            ? 'Aggregate scores over both legs, updated daily'
+            : 'Series scores update daily'}
+      </p>
     </div>
     <div className="bracket-rounds">
       {bracket.rounds.map((round) => (
@@ -659,12 +683,11 @@ const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }
                   <span className={series.winner && series.winner === series.top ? 'is-winner' : ''}>
                     {label(series.top, series.topSeed)}
                   </span>
-                  <strong>
-                    {series.top ? `${series.topWins}–${series.bottomWins}` : `Best of ${series.bestOf}`}
-                  </strong>
+                  <strong>{seriesScore(series)}</strong>
                   <span className={series.winner && series.winner === series.bottom ? 'is-winner' : ''}>
                     {label(series.bottom, series.bottomSeed)}
                   </span>
+                  {series.note && <small className="bracket-note">{series.note}</small>}
                 </li>
               );
             })}

@@ -89,8 +89,9 @@ def resolve_season(config: dict[str, Any], now: datetime, offset: int = 0) -> Se
     )
 
 
-# Table places from the top or bottom (football), or playoff outcomes (leagues with conferences).
-TIER_KINDS = {"top", "bottom", "playoffs", "division", "seed", "best-record", "champion"}
+# Table places from the top or bottom (football), playoff outcomes (leagues with conferences),
+# or reaching a knockout round (European cups).
+TIER_KINDS = {"top", "bottom", "playoffs", "division", "seed", "best-record", "champion", "round"}
 
 
 def validate_config(config: dict[str, Any]) -> None:
@@ -188,6 +189,13 @@ def hashed_colors(name: str) -> tuple[str, str]:
     color = "#{:02X}{:02X}{:02X}".format(int(red * 255), int(green * 255), int(blue * 255))
     luminance = 0.299 * red + 0.587 * green + 0.114 * blue
     return color, "#000000" if luminance > 0.6 else "#FFFFFF"
+
+
+def relative_luminance(color: str) -> float:
+    """WCAG relative luminance of a #RRGGBB colour (0 black, 1 white)."""
+    channels = [int(color[i : i + 2], 16) / 255 for i in (1, 3, 5)]
+    red, green, blue = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue
 
 
 def team_meta(config: dict[str, Any], names: list[str]) -> dict[str, dict[str, str]]:

@@ -79,6 +79,10 @@ export interface BracketSeries {
   bottomWins: number;
   bestOf: number;
   winner: string | null;
+  /** Two-legged ties (European cups): total goals over both legs instead of series wins. */
+  aggregate?: { top: number; bottom: number } | null;
+  /** How a level tie was settled, e.g. "4-3 on penalties". */
+  note?: string;
 }
 
 export interface Bracket {
