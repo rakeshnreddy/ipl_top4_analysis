@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -188,16 +188,37 @@ Major League Soccer (`leagues/mls.json`) is a rolling football config with `"eng
 
 **Page:** one table per conference with the Wild Card and playoff lines, an overall table (the Supporters' Shield race), Playoffs, Top 7 (straight to Round One), Supporters' Shield and MLS Cup odds, conference-position chances, and, once the regular season ends, the bracket with series scores and match scores (penalties noted).
 
+**NWSL** (`leagues/nwsl.json`) uses the same engine with one table. The season runs March to November, and the payload id carries the year (`nwsl-2026`).
+
+- **Data:** FixtureDownload (`nwsl-{year}`) and ESPN (`usa.nwsl`), as for MLS. FixtureDownload's NWSL feeds also list the playoffs (2025: 182 regular-season games and 7 playoff games). The engine cuts a feed to its regular season and takes the playoffs from ESPN, which has shoot-out scores: FixtureDownload lists Washington's 2024 semifinal win on penalties over Gotham as a draw. ESPN also corrects two 2025 FixtureDownload scores, swapped between two games on 14 June (Chicago 2-2 Seattle, Kansas City 4-2 Louisville), and supplies one that is missing (Seattle 1-0 Louisville, 16 September). The 2026 feed agrees with ESPN.
+- **Rules** ([2026 Competition Rules & Regulations](https://images.nwslsoccer.com/image/private/t_q-good/prd/hxoaampu8dszzp4ysbss.pdf), June 24 update, from [Rules & Policies](https://www.nwslsoccer.com/rules-and-policies)):
+  - 16 clubs in one table, 30 games each (15 home, 15 away); 3 points a win, 1 a draw.
+  - Ties on points: goal difference, most wins, most goals, head-to-head points, head-to-head goals, fewest disciplinary points (not in any keyless data, so ESPN's order settles it), then a coin flip or drawing of lots. Each step separates the teams it can and those still level go on to the next; the head-to-head steps count the games between the teams still level.
+  - The top eight reach the single-elimination playoffs. Quarterfinals are 1 v 8, 2 v 7, 3 v 6 and 4 v 5, and the semifinals 1/8 v 4/5 and 2/7 v 3/6 (no reseeding), both hosted by the higher seed unless its venue is unavailable. A level game has two 15-minute periods of extra time, then penalties. The [2025 playoffs page](https://www.nwslsoccer.com/playoffs) gives the same format and tiebreakers.
+  - The NWSL Championship is at a predetermined venue. The 2026 final is at [Audi Field](https://www.nwslsoccer.com/news/2026-nwsl-championship-presented-by-google-pixel-to-be-staged-at-audi-field-in-washington-d-c) on 21 November, the Washington Spirit's home, so the Spirit would play it at home and any other finalist on neutral ground. 2024's was at Kansas City's [CPKC Stadium](https://www.nwslsoccer.com/news/nwsl-announces-2024-championship-to-be-held-at-cpkc-stadium-in-kansas-city) and 2025's at Bay FC's [PayPal Park](https://www.nwslsoccer.com/news/2025-nwsl-championship-presented-by-google-pixel-to-be-staged-at-paypal-park-in-san-jose-california). Add each season's ground to `homeGround`. The [2026 competition calendar](https://images.nwslsoccer.com/image/private/t_q-good/prd/t44dgf8cncchutomw9no.pdf) has the quarterfinals on 6-8 November and the semifinals on 14-15 November.
+  - The NWSL Shield goes to the club that tops the table.
+- **Checks** (`tests/test_nwsl.py`, offline fixtures in `tests/fixtures/nwsl-2025.json` and `nwsl-2026.json`):
+  - The 2026 table on 4 October 2026 (213 of 240 games) matches [nwslsoccer.com](https://www.nwslsoccer.com/standings/index) for all 16 clubs: played, wins, losses, draws, goals, points and order. It does so with ESPN's table and without it. Goal difference comes before wins, which puts Angel City above North Carolina.
+  - The final 2025 table matches nwslsoccer.com's, without the feed's playoff games.
+  - The 2025 playoffs are rebuilt from the final table and ESPN's games, every score included. Gotham, the 8th seed, beat Kansas City after extra time, then Orlando, then Washington in the final; Washington's quarterfinal went to penalties (nwslsoccer.com's [playoffs](https://www.nwslsoccer.com/playoffs) and [final](https://www.nwslsoccer.com/news/mvp-rose-lavelle-leads-gotham-to-second-nwsl-championship-victory-over-washington-spirit)). Checked by hand, not in the tests: the 2024 table also matches nwslsoccer.com's, Angel City's 3-point deduction included, and the 2024 bracket ends with [Orlando's title](https://www.nwslsoccer.com/news/orlando-pride-lifts-first-nwsl-championship-trophy-2024-nwsl-championship-recap).
+  - A mid-playoff state (10 November 2025) checks the fixed semifinals and that title odds go only to the four teams left. A toy final checks that only the ground's own club gets home advantage.
+- **Model:** football.py's settings. `scripts/backtest_football_playoffs.py --league nwsl` backtested them on 2024 and 2025. FixtureDownload has no NWSL feed before 2024, so 2024 is rated on its own games.
+  - Week-ahead predictions of 364 games score 0.2201 (ranked probability score) against 0.2368 for home/draw/away base rates (2024: 0.2230 v 0.2411; 2025: 0.2172 v 0.2324).
+  - Ridge 4 scored 0.2184-0.2187 at every half-life, but most of that gain is in 2024, which has no previous season. In 2025 the gain is 0.0010 (0.2162 v 0.2172). Half-life moved the score by 0.0003 at most, so the shared settings stay.
+  - Season odds at 25%, 50% and 75% of both seasons (Playoffs, Top 4, NWSL Shield and Championship) scored a mean Brier of 0.0643 at drift 0.1, 0.0631 at 0.2, 0.0623 at 0.3 and 0.0626 at 0.4, against 0.145 for the share of clubs that make each. The 0.0008 between 0.2 and 0.3 rests on six checkpoints, so 0.2 stays.
+- **Page:** the table with lines after 4th (home quarterfinal) and 8th (playoffs), Playoffs, Top 4, NWSL Shield and Championship odds, position chances, and, from the quarterfinals, the bracket with match scores (extra time and penalties noted).
+
 **The engine** (`football_playoffs.py`) is for any football league that ends in playoffs:
 
 - `conferences` (each team has a `conference`), or none for one table.
-- `tiebreakers`, in order: `wins`, `goal-difference`, `goals-for`, `head-to-head`, `away-goal-difference`, `away-goals`, `home-goal-difference`, `home-goals`.
+- `tiebreakers`, in order: `wins`, `goal-difference`, `goals-for`, `head-to-head` (points, then goal difference), `head-to-head-points`, `head-to-head-goals`, `away-goal-difference`, `away-goals`, `home-goal-difference`, `home-goals`.
 - `playoffs.rounds`, played in each conference, or once across them with `"across": true`:
   - `match`: `single`, `series` (`bestOf`, `hosts` such as `1-1-1`) or `two-legged` (aggregate goals; the lower seed hosts the first leg).
   - `decider` for a level match or tie: `extra-time` (then penalties), `penalties` or `higher-seed`.
   - `pairs` fix the bracket, from seeds (`8`), winners (`"WC.1"`), losers (`"Q.1.loser"`) and, across conferences, `"East:CF.1"`. `teams` with no pairs reseeds the round, best seed left against the worst. Teams that enter later have a bye.
-  - The better seed hosts unless the round is `neutral`; across conferences, the better overall record does.
+  - The better seed hosts unless the round is `neutral`; across conferences, the better overall record does. A neutral round of single matches can name, per season, the club whose ground it is at (`"homeGround": {"2026": "Washington Spirit"}`): that club plays it at home, in the simulation and in the fixture's odds.
 - Tiers: `playoffs`, `seed` (top N of a conference), `top`/`bottom` (league table places), `best-record`, `champion` and `round` (reaching a round).
+- A feed that also lists the playoffs (the NWSL's) is cut to its regular season: the clubs that miss the playoffs play no more games, so a club's games beyond theirs are playoff games, as are games of placeholder sides.
 - Penalties are a coin flip and extra time is a third of a match. Real results from ESPN replace simulated ones (series start from their real score, a played first leg counts), and a real game that does not fit the bracket leaves title odds out with a warning.
 
 ## NFL, NBA, WNBA, NHL, MLB, NBL And WNBL
@@ -249,7 +270,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL and MLS playoffs, MLS score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, the NWSL, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL, MLS and NWSL playoffs, MLS and NWSL score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. A men's league skips series named "Women's ..." (so the BBL never picks up the WBBL); a league is a women's one when its config sets `"gender": "female"` or names a women's series. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 

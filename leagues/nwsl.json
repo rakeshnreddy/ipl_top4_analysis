@@ -1,0 +1,285 @@
+{
+  "id": "nwsl",
+  "sport": "football",
+  "engine": "football_playoffs",
+  "name": "National Women's Soccer League",
+  "shortName": "NWSL",
+  "headline": "NWSL Playoff & Championship Odds",
+  "priority": 38,
+  "timezone": "America/New_York",
+  "season": {
+    "startMonth": 3,
+    "endMonth": 12,
+    "label": "{year}",
+    "feed": "nwsl-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "16 clubs in one table, 30 games each (15 home, 15 away), 3 points a win and 1 a draw. Teams level on points are separated by goal difference, most wins, most goals scored, head-to-head points, head-to-head goals scored, fewest disciplinary points, then a coin flip or drawing of lots; each step fully separates the teams it can, and those still level go on to the next. The top eight reach the single-elimination playoffs: quarterfinals 1 v 8, 2 v 7, 3 v 6 and 4 v 5, semifinals 1/8 v 4/5 and 2/7 v 3/6 (no reseeding), hosted by the higher seed unless its venue is unavailable, then the NWSL Championship at a predetermined venue (Audi Field, the Washington Spirit's home, on 21 November 2026). A level playoff game has two 15-minute periods of extra time, then penalties. The NWSL Shield goes to the club that tops the regular-season table.",
+    "sources": [
+      "https://www.nwslsoccer.com/rules-and-policies",
+      "https://images.nwslsoccer.com/image/private/t_q-good/prd/hxoaampu8dszzp4ysbss.pdf",
+      "https://images.nwslsoccer.com/image/private/t_q-good/prd/t44dgf8cncchutomw9no.pdf",
+      "https://www.nwslsoccer.com/news/2026-nwsl-championship-presented-by-google-pixel-to-be-staged-at-audi-field-in-washington-d-c",
+      "https://www.nwslsoccer.com/news/2025-nwsl-championship-presented-by-google-pixel-to-be-staged-at-paypal-park-in-san-jose-california",
+      "https://www.nwslsoccer.com/news/nwsl-announces-2024-championship-to-be-held-at-cpkc-stadium-in-kansas-city",
+      "https://www.nwslsoccer.com/playoffs",
+      "https://www.nwslsoccer.com/standings/index"
+    ]
+  },
+  "notes": [
+    "Playoffs: the top eight qualify for single-match quarterfinals and semifinals hosted by the higher seed (1 v 8, 2 v 7, 3 v 6, 4 v 5, no reseeding); level games go to extra time, then penalties. The 2026 NWSL Championship is at Audi Field, so the Washington Spirit would play a final at home and anyone else on neutral ground.",
+    "The NWSL's sixth tiebreaker, fewest disciplinary points, is not in the data; ESPN's published order is used whenever its records agree with the results.",
+    "Backtested on the 2024 and 2025 seasons (FixtureDownload has no earlier NWSL feed): week-ahead match predictions score 0.220 (ranked probability score) against 0.237 for home/draw/away base rates, and playoff, top-four, Shield and title odds at a quarter, half and three quarters of each season were scored to check the strength drift."
+  ],
+  "tiebreakers": [
+    "goal-difference",
+    "wins",
+    "goals-for",
+    "head-to-head-points",
+    "head-to-head-goals"
+  ],
+  "playoffs": {
+    "rankLabel": "Overall",
+    "positionLabel": "Position",
+    "cutoffs": [
+      {
+        "after": 4,
+        "label": "Away quarterfinal"
+      },
+      {
+        "after": 8,
+        "label": "Out"
+      }
+    ],
+    "zones": [
+      {
+        "to": 4,
+        "kind": "top"
+      },
+      {
+        "to": 8,
+        "kind": "mid"
+      }
+    ],
+    "rounds": [
+      {
+        "key": "QF",
+        "label": "Quarterfinals",
+        "match": "single",
+        "pairs": [
+          [
+            1,
+            8
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      },
+      {
+        "key": "SF",
+        "label": "Semifinals",
+        "match": "single",
+        "pairs": [
+          [
+            "QF.1",
+            "QF.2"
+          ],
+          [
+            "QF.3",
+            "QF.4"
+          ]
+        ]
+      },
+      {
+        "key": "F",
+        "label": "NWSL Championship",
+        "match": "single",
+        "neutral": true,
+        "homeGround": {
+          "2024": "Kansas City Current",
+          "2025": "Bay FC",
+          "2026": "Washington Spirit"
+        },
+        "pairs": [
+          [
+            "SF.1",
+            "SF.2"
+          ]
+        ]
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "key": "playoffs",
+      "label": "Playoffs",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top4",
+      "label": "Top 4",
+      "kind": "seed",
+      "size": 4
+    },
+    {
+      "key": "shield",
+      "label": "NWSL Shield",
+      "kind": "best-record",
+      "shortLabel": "Shield"
+    },
+    {
+      "key": "title",
+      "label": "Championship",
+      "kind": "champion",
+      "shortLabel": "Title"
+    }
+  ],
+  "columns": [
+    {
+      "key": "played",
+      "label": "P"
+    },
+    {
+      "key": "wins",
+      "label": "W"
+    },
+    {
+      "key": "losses",
+      "label": "L"
+    },
+    {
+      "key": "draws",
+      "label": "D",
+      "title": "Draws"
+    },
+    {
+      "key": "goalsFor",
+      "label": "GF",
+      "title": "Goals for"
+    },
+    {
+      "key": "goalDifference",
+      "label": "GD",
+      "signed": true
+    },
+    {
+      "key": "points",
+      "label": "Pts",
+      "strong": true
+    }
+  ],
+  "sources": {
+    "fixturedownload": "nwsl-{year}",
+    "espn": "usa.nwsl"
+  },
+  "teams": {
+    "Angel City FC": {
+      "shortName": "LA",
+      "color": "#F2A7B8",
+      "textColor": "#000000"
+    },
+    "Bay FC": {
+      "shortName": "BAY",
+      "color": "#0D2032",
+      "textColor": "#FFFFFF"
+    },
+    "Boston Legacy FC": {
+      "shortName": "BOS",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    },
+    "Chicago Stars FC": {
+      "shortName": "CHI",
+      "color": "#3AB5E8",
+      "textColor": "#000000"
+    },
+    "Denver Summit FC": {
+      "shortName": "DEN",
+      "color": "#20604E",
+      "textColor": "#FFFFFF"
+    },
+    "Gotham FC": {
+      "shortName": "GFC",
+      "color": "#A9F1FD",
+      "textColor": "#000000"
+    },
+    "Houston Dash": {
+      "shortName": "HOU",
+      "color": "#FF6900",
+      "textColor": "#000000"
+    },
+    "Kansas City Current": {
+      "shortName": "KC",
+      "color": "#CF3339",
+      "textColor": "#FFFFFF"
+    },
+    "North Carolina Courage": {
+      "shortName": "NC",
+      "color": "#00416B",
+      "textColor": "#FFFFFF"
+    },
+    "Orlando Pride": {
+      "shortName": "ORL",
+      "color": "#633492",
+      "textColor": "#FFFFFF"
+    },
+    "Portland Thorns FC": {
+      "shortName": "POR",
+      "color": "#99242B",
+      "textColor": "#FFFFFF"
+    },
+    "Racing Louisville FC": {
+      "shortName": "LOU",
+      "color": "#C5B5F2",
+      "textColor": "#000000"
+    },
+    "San Diego Wave FC": {
+      "shortName": "SD",
+      "color": "#032E62",
+      "textColor": "#FFFFFF"
+    },
+    "Seattle Reign FC": {
+      "shortName": "SEA",
+      "color": "#2E407A",
+      "textColor": "#FFFFFF"
+    },
+    "Utah Royals FC": {
+      "shortName": "UTA",
+      "color": "#FDB71A",
+      "textColor": "#000000"
+    },
+    "Washington Spirit": {
+      "shortName": "WAS",
+      "color": "#000000",
+      "textColor": "#FFFFFF"
+    }
+  },
+  "aliases": {
+    "Angel City": "Angel City FC",
+    "Bay": "Bay FC",
+    "Boston Legacy": "Boston Legacy FC",
+    "Chicago Stars": "Chicago Stars FC",
+    "Chicago Red Stars": "Chicago Stars FC",
+    "Denver Summit": "Denver Summit FC",
+    "NJ/NY Gotham FC": "Gotham FC",
+    "Portland Thorns": "Portland Thorns FC",
+    "Racing Louisville": "Racing Louisville FC",
+    "San Diego Wave": "San Diego Wave FC",
+    "Seattle Reign": "Seattle Reign FC",
+    "Utah Royals": "Utah Royals FC"
+  }
+}

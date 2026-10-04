@@ -683,9 +683,11 @@ const BracketPanel = ({ bracket, short }: { bracket: Bracket; short: ShortName }
           ? 'Final bracket'
           : isKnockout(bracket)
             ? 'Aggregate scores over both legs, updated daily'
-            : bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined))
-              ? 'Series and match scores update daily'
-              : 'Series scores update daily'}
+            : bracket.rounds.every((round) => round.series.every((series) => series.aggregate !== undefined))
+              ? 'Match scores update daily'
+              : bracket.rounds.some((round) => round.series.some((series) => series.aggregate !== undefined))
+                ? 'Series and match scores update daily'
+                : 'Series scores update daily'}
       </p>
     </div>
     <div className="bracket-rounds">

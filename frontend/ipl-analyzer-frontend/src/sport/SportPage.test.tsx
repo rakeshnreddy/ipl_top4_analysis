@@ -284,6 +284,37 @@ describe('SportPage during the playoffs', () => {
     expect(within(bracket).getByText('vs')).toBeInTheDocument();
     expect(within(bracket).getByText('To be decided')).toBeInTheDocument();
   });
+
+  it('calls a bracket of single matches (the NWSL) match scores', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...footballPayload,
+      metadata: { ...footballPayload.metadata, season_status: 'postseason' },
+      bracket: {
+        champion: null,
+        rounds: [
+          {
+            key: 'QF',
+            label: 'Quarterfinals',
+            series: [
+              { stage: 'Quarterfinals', conference: null, top: 'Arsenal', bottom: 'Spurs', topSeed: 1, bottomSeed: 8, topWins: 0, bottomWins: 1, bestOf: 1, winner: 'Spurs', aggregate: { top: 1, bottom: 2 }, note: 'After extra time' },
+            ],
+          },
+          {
+            key: 'SF',
+            label: 'Semifinals',
+            series: [{ stage: 'Semifinals', conference: null, top: 'Chelsea', bottom: 'Spurs', topSeed: 4, bottomSeed: 8, topWins: 0, bottomWins: 0, bestOf: 1, winner: null, aggregate: null }],
+          },
+        ],
+      },
+    });
+
+    const bracket = (await screen.findByRole('heading', { name: 'Playoff Bracket' })).closest('section')!;
+    expect(within(bracket).getByText('Match scores update daily')).toBeInTheDocument();
+    expect(within(bracket).getByText('1–2')).toBeInTheDocument();
+    expect(within(bracket).getByText('After extra time')).toBeInTheDocument();
+    expect(within(bracket).getAllByText('8 TOT')[0]).toHaveClass('is-winner');
+    expect(within(bracket).getByText('vs')).toBeInTheDocument();
+  });
 });
 
 describe('formatChance', () => {

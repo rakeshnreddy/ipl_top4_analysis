@@ -6,13 +6,15 @@ score (RPS) of those home/draw/away predictions is compared with base rates (the
 and away shares of the games the model was fitted on) and across half-lives and ridges.
 
 Season level: at 25%, 50% and 75% of each season the rest of the regular season and the
-playoffs are simulated, and the Brier score and log loss of the playoff, top-seed, Supporters'
-Shield and title odds against what happened pick the strength drift.
+playoffs are simulated, and the Brier score and log loss of the playoff, top-seed, best-record
+(Supporters' Shield, NWSL Shield) and title odds against what happened pick the strength drift.
 
     venv/bin/python scripts/backtest_football_playoffs.py --league mls --seasons 2024 2025
+    venv/bin/python scripts/backtest_football_playoffs.py --league nwsl --seasons 2024 2025
 
-Scores are cross-checked with ESPN's scoreboard as in the published build, and the real
-champion comes from ESPN's playoff games.
+Scores are cross-checked with ESPN's scoreboard as in the published build, playoff games a
+feed lists (the NWSL's) are left out of the regular season, and the real champion comes from
+ESPN's playoff games.
 """
 
 from __future__ import annotations
@@ -43,7 +45,10 @@ def season_games(config: dict, year: int) -> tuple[list[Game], list[football_pla
     aliases = config.get("aliases", {})
     rule = config["season"]
     feed = rule["feed"].format(year=year, next=year + 1, yy=f"{(year + 1) % 100:02d}")
-    games = football_playoffs.rename(team_sports.fetch_games(feed, CACHE, max_age_hours=24 * 30), aliases)
+    rounds = football_playoffs.parse_rounds(config, year)
+    playoff_teams = football_playoffs.qualifiers(rounds) * len(football_playoffs.group_list(config))
+    feed_games = football_playoffs.rename(team_sports.fetch_games(feed, CACHE, max_age_hours=24 * 30), aliases)
+    games, _ = football_playoffs.split_postseason(feed_games, playoff_teams)
     espn: list[football_playoffs.EspnMatch] = []
     code = config.get("sources", {}).get("espn")
     if code:
@@ -154,17 +159,18 @@ def final_outcomes(config: dict, year: int, games: list[Game], espn, rounds) -> 
 
 def season_odds(config: dict, seasons: list[int], drifts: list[float], simulations: int) -> None:
     print("\nSeason odds at 25%, 50% and 75% of each season (Brier score and log loss, lower is better)")
-    rounds = football_playoffs.parse_rounds(config)
     points = {"win": config["points"]["win"], "draw": config["points"]["draw"]}
     steps = config["tiebreakers"]
     tiers = config["tiers"]
     collected: dict[float, dict[str, list[tuple[float, float]]]] = {drift: {} for drift in drifts}
     by_checkpoint: dict[float, dict[tuple[int, float], dict[str, float]]] = {drift: {} for drift in drifts}
     for year in seasons:
+        # Each season's bracket, with that season's neutral final ground.
+        rounds = football_playoffs.parse_rounds(config, year)
         games, espn = season_games(config, year)
         previous = previous_games(config, year)
         outcomes, facts = final_outcomes(config, year, games, espn, rounds)
-        print(f"  {year}: {len(games)} games, Supporters' Shield {facts['shield']}, MLS Cup {facts['champion']}")
+        print(f"  {year}: {len(games)} games, best record {facts['shield']}, champion {facts['champion']}")
         ordered = sorted(games, key=lambda game: game.date)
         teams = sorted({game.home for game in games} | {game.away for game in games})
         group_of = {team: football_playoffs.team_group(config, team) for team in teams}
