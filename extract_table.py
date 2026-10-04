@@ -1487,7 +1487,10 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
         team = max(probabilities, key=lambda key: probabilities[key].get(risk["key"], 0.0))
         facts.append({"label": f"{risk['label']} risk", "value": f"{short.get(team, team)} {chance_text(probabilities[team][risk['key']])}"})
     else:
-        race = next((tier for tier in live if tier.get("kind") == "playoffs"), None)
+        # A playoff race, or else the first table-place race wider than one place (the European cups' top 8).
+        race = next((tier for tier in live if tier.get("kind") == "playoffs"), None) or next(
+            (tier for tier in live if tier.get("kind") == "top" and tier.get("size", 0) > 1), None
+        )
         if race:
             team = min(probabilities, key=lambda key: abs(probabilities[key].get(race["key"], 0.0) - 50))
             if 1 < probabilities[team][race["key"]] < 99:
@@ -1673,7 +1676,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def build_league(league_id: str, source: str, archive: Path | None = None) -> dict[str, Any]:
     config = read_config(league_id)
     if not is_cricket(config):
-        module = importlib.import_module(SPORT_MODULES[config["sport"]])
+        # A config can name its own engine (European cups are football with a knockout bracket).
+        module = importlib.import_module(config.get("engine") or SPORT_MODULES[config["sport"]])
         return module.build_payload(config, utc_now(), FIXTURES_CACHE_DIR)
     league = parse_league(config)
     use_league(league)
