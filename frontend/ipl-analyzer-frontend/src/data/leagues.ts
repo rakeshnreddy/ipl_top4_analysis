@@ -35,13 +35,16 @@ export function leagueIdFromLocation(search: string = window.location.search): s
   return requested && LEAGUE_ID_PATTERN.test(requested) ? requested : null;
 }
 
-export function leagueHref(leagueId: string, defaultId: string) {
-  return leagueId === defaultId ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?league=${leagueId}`;
+/** A league's page. The site root is the landing page, so every league has its own address. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function leagueHref(leagueId: string, _defaultId?: string) {
+  return `${import.meta.env.BASE_URL}?league=${leagueId}`;
 }
 
-/** The all-sports home page: the site root, unless the root currently shows a league. */
-export function hubHref(defaultId: string) {
-  return defaultId === HUB_ID ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}?view=hub`;
+/** The all-sports hub of live races (the site root is the landing page). */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function hubHref(_defaultId?: string) {
+  return `${import.meta.env.BASE_URL}?view=hub`;
 }
 
 export function hubRequested(search: string = window.location.search) {

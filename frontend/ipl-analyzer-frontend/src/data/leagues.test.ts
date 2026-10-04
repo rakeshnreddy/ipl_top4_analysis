@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 import { describe, expect, it, vi } from 'vitest';
-import { leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, type LeagueSummary } from './leagues';
+import { hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, type LeagueSummary } from './leagues';
 
 describe('league helpers', () => {
   it('reads a well-formed league id from the query string', () => {
@@ -9,9 +9,10 @@ describe('league helpers', () => {
     expect(leagueIdFromLocation('')).toBeNull();
   });
 
-  it('links the default league to the site root', () => {
-    expect(leagueHref('ipl-2026', 'ipl-2026')).toBe('/');
-    expect(leagueHref('bbl-2025-26', 'ipl-2026')).toBe('/?league=bbl-2025-26');
+  it('gives every league and the hub an address of its own (the root is the landing page)', () => {
+    expect(leagueHref('ipl-2026', 'ipl-2026')).toBe('/?league=ipl-2026');
+    expect(leagueHref('bbl-2025-26')).toBe('/?league=bbl-2025-26');
+    expect(hubHref('hub')).toBe('/?view=hub');
   });
 
   it('gives basketball its own row, away from the other North American leagues', () => {

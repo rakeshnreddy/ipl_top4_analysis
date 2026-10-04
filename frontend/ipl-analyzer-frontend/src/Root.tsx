@@ -4,6 +4,7 @@ import { LoadingState } from './components/PageState';
 import { DEFAULT_LEAGUE_ID } from './data/iplData';
 import { HUB_ID, hubRequested, leagueIdFromLocation, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
 import HubPage from './hub/HubPage';
+import LandingPage from './landing/LandingPage';
 import SportPage from './sport/SportPage';
 
 /** Loads the league list, then shows the cricket page or the page for the league's sport. */
@@ -37,9 +38,9 @@ function Root() {
     return <LoadingState />;
   }
 
-  // The home page shows the list's default: the IPL while it is on, otherwise the all-sports hub.
-  if (index && !requestedLeague && (wantsHub || index.default === HUB_ID)) {
-    return <HubPage index={index} />;
+  // The root is the landing page; ?view=hub is the full list of live races.
+  if (index && !requestedLeague) {
+    return wantsHub ? <HubPage index={index} /> : <LandingPage index={index} />;
   }
   const fallback = index?.default && index.default !== HUB_ID ? index.default : DEFAULT_LEAGUE_ID;
   const leagueId = requestedLeague ?? fallback;

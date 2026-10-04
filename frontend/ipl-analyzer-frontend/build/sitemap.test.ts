@@ -15,13 +15,14 @@ describe('buildSitemap', () => {
     expect(xml).toContain('<loc>https://example.org/pulse/</loc><lastmod>2026-10-03</lastmod>');
     expect(xml).toContain('<loc>https://example.org/pulse/?league=epl-2026-27</loc><lastmod>2026-10-03</lastmod>');
     expect(xml).toContain('<loc>https://example.org/pulse/?league=ipl-2026</loc><lastmod>2026-06-01</lastmod>');
-    expect(xml).not.toContain('view=hub');
+    // The root is the landing page, so the hub has its own address.
+    expect(xml).toContain('<loc>https://example.org/pulse/?view=hub</loc>');
   });
 
-  it('adds the hub when the home page is a league', () => {
+  it('lists a live IPL under its own address too', () => {
     const xml = buildSitemap('https://example.org/', { default: 'ipl-2027', leagues: [{ id: 'ipl-2027' }] });
 
     expect(xml).toContain('<loc>https://example.org/?view=hub</loc>');
-    expect(xml).not.toContain('?league=ipl-2027');
+    expect(xml).toContain('<loc>https://example.org/?league=ipl-2027</loc>');
   });
 });

@@ -27,16 +27,19 @@
 }
 
 .hub-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
   color: var(--text);
   display: grid;
   gap: var(--space-2);
   grid-template-rows: auto auto 1fr auto;
   padding: var(--space-3) var(--space-4);
   text-decoration: none;
-  transition: border-color 120ms var(--ease-out), background-color 120ms var(--ease-out);
+  transition: border-color 160ms var(--ease-out), transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
 }
 
 .hub-card:visited {
@@ -45,6 +48,8 @@
 
 .hub-card:hover {
   border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .hub-card-top {

@@ -1,7 +1,12 @@
 /*
  * Design tokens. See DESIGN.md at the repo root.
- * Light and dark themes follow the reader's OS setting; every text/background
- * pair below is checked against WCAG AA (4.5:1 for text).
+ *
+ * "Floodlit pitch": a calm jade-and-amber field behind frosted-glass panels.
+ * Every colour is one light-dark() pair, so the light theme, the dark theme and
+ * "follow the system" all come from the same tokens: the system decides unless
+ * the reader picked a theme (html[data-theme], set before first paint in
+ * index.html and by the header's theme button). Text pairs are checked against
+ * WCAG AA (4.5:1) on the panels as they render over the background.
  */
 :root {
   color-scheme: light dark;
@@ -17,6 +22,7 @@
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
   --text-3xl: 2.5rem;
+  --text-4xl: 3.5rem;
 
   /* Spacing (4px base) */
   --space-1: 4px;
@@ -26,73 +32,77 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
+  --space-8: 72px;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  /* Radii: inner = outer - padding, so nested shapes stay concentric. */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-pill: 999px;
 
   --content-max: 1280px;
   --gutter: 16px;
-  --header-height: 56px;
+  --header-height: 60px;
   --tap: 44px;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  /* Light theme */
-  --bg: #f4f6f9;
-  --surface: #ffffff;
-  --surface-2: #f7f9fb;
-  --surface-3: #eaf0f6;
-  --border: #dde3ea;
-  --border-strong: #c3ccd7;
-  --text: #121a23;
-  --text-muted: #4b5867;
-  --text-subtle: #5d6b7b;
-  --accent: #1d64c8;
-  --accent-contrast: #ffffff;
-  --accent-soft: #e3eefb;
-  --gold: #8a5a00;
-  --gold-soft: #fbefcf;
-  --good: #11784e;
-  --good-soft: #d8f1e5;
-  --bad: #c0352f;
-  --bad-soft: #fbe0de;
-  --warn: #a25300;
-  --warn-soft: #fdeacd;
-  --heat-good: #19a568;
-  --heat-bad: #e0473f;
-  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --shadow-md: 0 4px 12px rgb(15 23 42 / 0.12);
-  --focus: #1d64c8;
+  /* Ground and the ambient field the glass blurs */
+  --bg: light-dark(#edf3f1, #061012);
+  --ambient-1: light-dark(rgb(45 212 191 / 0.24), rgb(20 184 166 / 0.27));
+  --ambient-2: light-dark(rgb(251 191 36 / 0.2), rgb(245 158 11 / 0.15));
+  --ambient-3: light-dark(rgb(96 165 250 / 0.16), rgb(37 99 235 / 0.2));
+
+  /* Glass: the page's containers. Strong glass is for layers that float over content. */
+  --glass: light-dark(rgb(255 255 255 / 0.64), rgb(17 33 36 / 0.58));
+  --glass-strong: light-dark(rgb(255 255 255 / 0.88), rgb(13 27 30 / 0.9));
+  --glass-border: light-dark(rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.09));
+  --glass-edge: light-dark(rgb(13 40 36 / 0.07), rgb(0 0 0 / 0.35));
+  --glass-highlight: light-dark(rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.05));
+  --glass-blur: 18px;
+
+  /* Surfaces inside the glass are tints, not new opaque layers. */
+  --surface: var(--glass);
+  --surface-raised: var(--glass-strong);
+  /* Tiles inside a panel (joined stat blocks): near-opaque, so their 1px gap dividers stay crisp. */
+  --surface-solid: light-dark(#f7fbfa, #0f1e20);
+  --surface-2: light-dark(rgb(13 40 36 / 0.035), rgb(255 255 255 / 0.035));
+  --surface-3: light-dark(rgb(13 40 36 / 0.07), rgb(255 255 255 / 0.07));
+  --border: light-dark(rgb(13 40 36 / 0.1), rgb(255 255 255 / 0.09));
+  --border-strong: light-dark(rgb(13 40 36 / 0.2), rgb(255 255 255 / 0.17));
+
+  --text: light-dark(#0d1f1c, #e6f0ee);
+  --text-muted: light-dark(#3f5552, #a9bcb8);
+  --text-subtle: light-dark(#4f6662, #93a8a4);
+
+  /* Jade: links, focus, selection and the brand mark. */
+  --accent: light-dark(#0b7a6a, #45d9bc);
+  --accent-contrast: light-dark(#ffffff, #04211b);
+  --accent-soft: light-dark(rgb(11 122 106 / 0.12), rgb(69 217 188 / 0.14));
+  /* Amber: champions and first place. */
+  --gold: light-dark(#8a5a00, #f4c35a);
+  --gold-soft: light-dark(rgb(245 166 35 / 0.2), rgb(244 195 90 / 0.15));
+  --good: light-dark(#0f7a4e, #52d49c);
+  --good-soft: light-dark(rgb(15 122 78 / 0.13), rgb(82 212 156 / 0.14));
+  --bad: light-dark(#bb322c, #ff847c);
+  --bad-soft: light-dark(rgb(187 50 44 / 0.12), rgb(255 132 124 / 0.14));
+  --warn: light-dark(#9c5000, #f7ab5e);
+  --warn-soft: light-dark(rgb(240 140 20 / 0.16), rgb(247 171 94 / 0.14));
+  --heat-good: light-dark(#14a88a, #22b993);
+  --heat-bad: light-dark(#ef5b53, #e5534b);
+
+  /* Depth has an offset: a soft drop plus a lit top edge. No zero-offset glow. */
+  --shadow-sm: 0 1px 2px var(--glass-edge);
+  --shadow-md: 0 18px 40px -18px light-dark(rgb(13 40 36 / 0.28), rgb(0 0 0 / 0.7));
+  --shadow-glass: inset 0 1px 0 var(--glass-highlight), 0 12px 32px -18px light-dark(rgb(13 40 36 / 0.25), rgb(0 0 0 / 0.65));
+  --focus: light-dark(#0b7a6a, #7de7d2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0c1117;
-    --surface: #131a22;
-    --surface-2: #19222c;
-    --surface-3: #222d39;
-    --border: #273342;
-    --border-strong: #37475a;
-    --text: #e7edf3;
-    --text-muted: #a9b5c3;
-    --text-subtle: #8f9cad;
-    --accent: #5aa2ff;
-    --accent-contrast: #061223;
-    --accent-soft: #15283f;
-    --gold: #f0c35b;
-    --gold-soft: #3a2f15;
-    --good: #4fd19a;
-    --good-soft: #143326;
-    --bad: #ff7f78;
-    --bad-soft: #3d1c1c;
-    --warn: #f6a85a;
-    --warn-soft: #3b2814;
-    --heat-good: #2fb87c;
-    --heat-bad: #e5534b;
-    --shadow-sm: none;
-    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.45);
-    --focus: #8bbcff;
-  }
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 @media (min-width: 960px) {
@@ -111,8 +121,21 @@ html {
   scroll-padding-top: calc(var(--header-height) + var(--space-3));
 }
 
+/* The ambient field: fixed, so the glass shows the same soft colour wherever you scroll. */
+body::before {
+  background:
+    radial-gradient(60vmax 50vmax at 0% 0%, var(--ambient-1), transparent 70%),
+    radial-gradient(50vmax 40vmax at 100% 10%, var(--ambient-2), transparent 70%),
+    radial-gradient(70vmax 50vmax at 60% 110%, var(--ambient-3), transparent 70%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
 body {
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--text-md);

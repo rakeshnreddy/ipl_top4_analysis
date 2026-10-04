@@ -1,0 +1,281 @@
+/* Landing page (the site root): a persuasion page made of the product's own data. */
+
+.landing {
+  display: grid;
+  gap: var(--space-7);
+  margin: 0 auto;
+  max-width: var(--content-max);
+  padding: var(--space-6) var(--gutter) var(--space-7);
+  width: 100%;
+}
+
+.landing > * {
+  min-width: 0;
+}
+
+/* ---------- Hero ---------- */
+
+.landing-hero {
+  align-items: center;
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr);
+  min-height: min(72vh, 640px);
+}
+
+.landing-hero-text {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+}
+
+.landing-hero h1 {
+  font-size: clamp(2.25rem, 1.4rem + 3.6vw, var(--text-4xl));
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.landing-lede {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  max-width: 36rem;
+}
+
+.landing-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.button-primary {
+  align-items: center;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 10px 24px -12px var(--accent);
+  color: var(--accent-contrast);
+  display: inline-flex;
+  font-weight: 600;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  text-decoration: none;
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+}
+
+.button-primary:visited {
+  color: var(--accent-contrast);
+}
+
+.button-primary:hover {
+  box-shadow: 0 14px 28px -12px var(--accent);
+  transform: translateY(-1px);
+}
+
+.landing-text-link {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 600;
+  min-height: var(--tap);
+}
+
+.landing-updated {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+}
+
+/* The live races, straight from the data: the product is the hero image. */
+.landing-races {
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.landing-races ol {
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-races li + li {
+  border-top: 1px solid var(--border);
+}
+
+.landing-races a {
+  align-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  display: grid;
+  gap: var(--space-1) var(--space-3);
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 60px;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+  transition: background-color 120ms var(--ease-out);
+}
+
+.landing-races a:visited {
+  color: var(--text);
+}
+
+.landing-races a:hover {
+  background: var(--surface-3);
+}
+
+.landing-race-name {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.landing-race-name strong {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.landing-race-fact {
+  display: grid;
+  justify-items: end;
+  text-align: right;
+}
+
+.landing-race-fact span {
+  color: var(--text-subtle);
+  font-size: var(--text-xs);
+}
+
+.landing-race-fact strong {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ---------- Sports ---------- */
+
+.landing-sports {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.landing-sport-grid {
+  align-items: start;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+.landing-sport-head {
+  align-items: baseline;
+  display: flex;
+  gap: var(--space-3);
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.landing-sport-head h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.landing-sport-head span {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.landing-sport ul {
+  display: grid;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-sport a {
+  align-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  display: flex;
+  gap: var(--space-2);
+  justify-content: space-between;
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  text-decoration: none;
+}
+
+.landing-sport a:visited {
+  color: var(--text);
+}
+
+.landing-sport a:hover {
+  background: var(--surface-3);
+}
+
+.landing-season {
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Method ---------- */
+
+.landing-method {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-5);
+}
+
+.landing-method-intro {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 34rem;
+}
+
+.landing-method-intro p {
+  color: var(--text-muted);
+}
+
+.landing-method-steps {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  margin: 0;
+}
+
+.landing-method-steps dt {
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.landing-method-steps dd {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (min-width: 960px) {
+  .landing {
+    padding-top: var(--space-7);
+  }
+
+  .landing-hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+
+  .landing-method {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    padding: var(--space-6);
+  }
+
+  .landing-method-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

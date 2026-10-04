@@ -6,7 +6,7 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 ## What The Site Shows
 
-The home page is an all-sports hub while no IPL season is on: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. During the IPL season the home page is the IPL; the hub stays at `/?view=hub`. Every league page links back to it.
+The site root is a landing page. It says what the site does, lists the biggest live races from the data, shows every league by sport and explains how the odds are made. The all-sports hub is at `/?view=hub`: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. Every league has its own address, `/?league=<id>`, and the header's Leagues menu links to all of them. Light and dark themes follow the system, and the header's theme button saves a choice; see DESIGN.md.
 
 Cricket pages, during the league stage:
 
@@ -84,7 +84,7 @@ venv/bin/python extract_table.py --league wpl-2026
 venv/bin/python extract_table.py --league all --source cricsheet
 ```
 
-`--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. The site shows the default league (IPL) at `/` and any other at `/?league=<id>`.
+`--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. Each league page is at `/?league=<id>`; the site root is the landing page.
 
 Seasons roll forward on their own: once a competition's newest configured season is over, the next one is created from it in memory (same teams and rules, dates a year later and marked tentative, no fixed CricketData series id), so `--league active` keeps building new seasons without new files. CricketData finds the new series by name and season label. When a season changes teams, format or dates, add a real config for it; the first build of a rolled season reports a team mismatch as a warning.
 

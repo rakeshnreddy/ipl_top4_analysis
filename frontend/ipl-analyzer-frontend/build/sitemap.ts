@@ -19,14 +19,13 @@ const escapeXml = (value: string) =>
 export function buildSitemap(siteUrl: string, list: LeagueList): string {
   const base = siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`;
   const newest = list.leagues.map((league) => league.generatedAt).filter(Boolean).sort().pop();
-  const urls: { loc: string; lastmod?: string }[] = [{ loc: base, lastmod: newest }];
-  if (list.default !== 'hub') {
-    urls.push({ loc: `${base}?view=hub`, lastmod: newest });
-  }
+  // The root is the landing page; the hub and every league have their own address.
+  const urls: { loc: string; lastmod?: string }[] = [
+    { loc: base, lastmod: newest },
+    { loc: `${base}?view=hub`, lastmod: newest },
+  ];
   for (const league of list.leagues) {
-    if (league.id !== list.default) {
-      urls.push({ loc: `${base}?league=${encodeURIComponent(league.id)}`, lastmod: league.generatedAt });
-    }
+    urls.push({ loc: `${base}?league=${encodeURIComponent(league.id)}`, lastmod: league.generatedAt });
   }
   const body = urls
     .map(
