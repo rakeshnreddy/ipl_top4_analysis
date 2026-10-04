@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, and Australia's NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, and Australia's A-League Men, NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -211,15 +211,49 @@ Major League Soccer (`leagues/mls.json`) is a rolling football config with `"eng
 **The engine** (`football_playoffs.py`) is for any football league that ends in playoffs:
 
 - `conferences` (each team has a `conference`), or none for one table.
-- `tiebreakers`, in order: `wins`, `goal-difference`, `goals-for`, `head-to-head` (points, then goal difference), `head-to-head-points`, `head-to-head-goals`, `away-goal-difference`, `away-goals`, `home-goal-difference`, `home-goals`.
+- `tiebreakers`, in order: `wins`, `goal-difference`, `goals-for`, `head-to-head` (points, then goal difference), `head-to-head-points`, `head-to-head-goals`, `away-goal-difference`, `away-goals`, `away-goals-per-game`, `home-goal-difference`, `home-goals`, `home-goals-per-game`.
 - `playoffs.rounds`, played in each conference, or once across them with `"across": true`:
-  - `match`: `single`, `series` (`bestOf`, `hosts` such as `1-1-1`) or `two-legged` (aggregate goals; the lower seed hosts the first leg).
+  - `match`: `single`, `series` (`bestOf`, `hosts` such as `1-1-1`) or `two-legged` (aggregate goals; the lower seed hosts the first leg, unless a real first leg was at the higher seed's ground, and extra time and penalties are played at the second leg).
   - `decider` for a level match or tie: `extra-time` (then penalties), `penalties` or `higher-seed`.
   - `pairs` fix the bracket, from seeds (`8`), winners (`"WC.1"`), losers (`"Q.1.loser"`) and, across conferences, `"East:CF.1"`. `teams` with no pairs reseeds the round, best seed left against the worst. Teams that enter later have a bye.
   - The better seed hosts unless the round is `neutral`; across conferences, the better overall record does. A neutral round of single matches can name, per season, the club whose ground it is at (`"homeGround": {"2026": "Washington Spirit"}`): that club plays it at home, in the simulation and in the fixture's odds.
 - Tiers: `playoffs`, `seed` (top N of a conference), `top`/`bottom` (league table places), `best-record`, `champion` and `round` (reaching a round).
-- A feed that also lists the playoffs (the NWSL's) is cut to its regular season: the clubs that miss the playoffs play no more games, so a club's games beyond theirs are playoff games, as are games of placeholder sides.
+- A feed that also lists the playoffs (the NWSL's and the A-Leagues') is cut to its regular season: the clubs that miss the playoffs play no more games, so a club's games beyond theirs are playoff games, as are games of placeholder sides ("To be announced"). ESPN's copies of the playoff games fill the bracket.
+- A season that crosses New Year (`season.endMonth` before `startMonth`) is read from ESPN's scoreboards for both calendar years, keeping the games ESPN files under that season. A league in one table shows place and points for each club instead of an MLS-style record and seed.
 - Penalties are a coin flip and extra time is a third of a match. Real results from ESPN replace simulated ones (series start from their real score, a played first leg counts), and a real game that does not fit the bracket leaves title odds out with a warning.
+
+## A-League Men
+
+The A-League Men (`leagues/a-league-men.json`) is a rolling football config with `"engine": "football_playoffs"`, seeded as one table. The season runs October to June (the 2026-27 Grand Final is on 3-6 June 2027), and the payload id carries it (`a-league-men-2026-27`). The page opens each October with pre-season odds.
+
+**Data**
+
+- FixtureDownload's `aleague-men-{year}` feed has the regular season and, once they are known, the finals, which are cut off as for the NWSL. For 2023-24, 2024-25 and 2025-26 the split gives 162, 169 and 156 regular-season games, as ESPN has, and the seven finals of each season; every FixtureDownload score of those seasons, finals included, agrees with ESPN's.
+- ESPN (`aus.1`) supplies the finals results, with shoot-outs, cross-checks every score, and supplies the official order and any deductions. Its scoreboard is by calendar year, so each season is read from two years. Feed names that differ from ESPN's ("Auckland" and "Auckland FC") are mapped in `aliases`.
+
+**Rules** ([Isuzu UTE A-League Men 25/26 Competition Rules Summary](https://aleagues.com.au/more/official-documents/); [2026-27 fixture](https://aleagues.com.au/news/aleague-men-2026-2027-fixture-list-revealed-key-dates-fixture-information/))
+
+- 12 clubs, Auckland FC and Wellington Phoenix from New Zealand among them (no special handling), 26 games each: home and away against everyone plus four third meetings, over 28 matchweeks. 3 points a win, 1 a draw.
+- Ties on points: goal difference, goals scored, wins, head-to-head points, head-to-head goal difference, fewest Fair Play points (not in any keyless data, so ESPN's order settles it), away goal difference, away goals per away game, home goal difference, home goals per home game, then a coin toss or lots. The best record wins the Premiers Plate.
+- Finals Series, top six:
+  - Elimination Finals: 3rd hosts 6th and 4th hosts 5th.
+  - Semi-Finals over two legs on aggregate, with no away goals: 1st plays the lower-ranked Elimination Final winner and 2nd the higher-ranked one. 1st and 2nd may choose which leg to host; in 2023-24 to 2025-26 they always took the second, which the simulation assumes until a real first leg says otherwise.
+  - The Grand Final is hosted by the higher-placed finalist.
+  - A level match, or a tie level on aggregate after the second leg, goes to extra time and then penalties.
+- The A-Leagues had not published 2026-27 competition rules by 3 October 2026, so these are 2025-26's; the 2026-27 fixture keeps 12 clubs and 26 games each.
+
+**Checks** (`tests/test_a_leagues.py`, offline fixtures in `tests/fixtures/a-league-men-2025.json` and `a-league-men-2026.json`)
+
+- The final 2025-26 ladder matches [aleagues.com.au](https://aleagues.com.au/ladders/a-league-men/2025-2026/) for all 12 clubs: played, won, drawn, lost, goals, points and order. The 2024-25 ladder (13 clubs, with Western United) also matches [aleagues.com.au](https://aleagues.com.au/ladders/a-league-men/2024-2025/) when built the same way.
+- The [2026 Finals Series](https://aleagues.com.au/isuzu-ute-a-league-men-finals-series-2026/) is rebuilt from the final ladder and ESPN's games: Auckland (3rd) beat Melbourne City 7-6 on penalties and Sydney (5th) won at Melbourne Victory; Sydney beat premiers Newcastle on penalties after 2-2 on aggregate and Auckland beat Adelaide 4-1; Auckland won the Grand Final 1-0 at home. The same build reproduces the 2025 (Melbourne City) and 2024 (Central Coast Mariners) finals.
+- A mid-finals state (10 May 2026) checks that semi-finals start from their first leg and that title odds go only to the four semi-finalists, and the 2026-27 pre-season build checks that the odds add up to the places on offer.
+
+**Model:** football.py's goals model and settings (240-day half-life, ridge 2, new clubs start below average), with a strength drift of 0.3 (`model.drift`). `scripts/backtest_football_playoffs.py --league a-league-men --seasons 2024 2025`:
+
+- Week-ahead predictions of 325 games score 0.2321 (ranked probability score) against 0.2353 for home/draw/away base rates: 0.2232 v 0.2362 in 2024-25, but 0.2417 v 0.2343 in 2025-26, when last season's ratings misled. The best half-life and ridge tried (120 days, ridge 4) scored 0.2309, too close to change.
+- Finals, top-two, premiership and title odds at 25%, 50% and 75% of both seasons scored a mean Brier of 0.0895 with no drift, 0.0865 at Europe's 0.2, 0.0848 at 0.3 and 0.0839 at 0.4. At 0.2, finals chances of 10-30% (0.21 on average) came true for 38% of those clubs, against 20% (0.20 predicted) at 0.3; the bins are small (13 and 15 club-checkpoints). With 2023-24 added (no earlier feed), the larger the drift the better, up to 0.6, the largest tried. The A-League uses 0.3: most of the gain, without leaning hard on two seasons.
+
+**Page:** the ladder with the Elimination Final and finals lines, Finals, Top 2 (a semi-final bye), Premiership and Championship odds, ladder-position chances, and, once the regular season ends, the bracket with match scores, semi-final aggregates and penalties.
 
 ## NFL, NBA, WNBA, NHL, MLB, NBL And WNBL
 
@@ -270,7 +304,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, the NWSL, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL, MLS and NWSL playoffs, MLS and NWSL score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, the NWSL, the A-Leagues, NFL, NBA, WNBA, NBL, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL, MLS, NWSL and A-League playoffs, MLS, NWSL and A-League score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. A men's league skips series named "Women's ..." (so the BBL never picks up the WBBL); a league is a women's one when its config sets `"gender": "female"` or names a women's series. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 
