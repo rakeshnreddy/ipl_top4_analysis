@@ -1,21 +1,25 @@
-"""Football leagues that end in playoffs (MLS): conference tables, seeding and a bracket.
+"""Football leagues that end in playoffs (MLS, NWSL): tables, seeding and a bracket.
 
 A config with ``"engine": "football_playoffs"`` is a rolling football config (see
 football.py) with four additions:
 
 * ``conferences``, and a ``conference`` for every team: the tables playoff seeds come
-  from. A league seeded as one table has a single conference.
+  from. A league seeded as one table (the NWSL) leaves them out.
 * ``tiebreakers``: the order that separates teams level on points (``wins``,
-  ``goal-difference``, ``goals-for``, ``head-to-head``, ``away-goal-difference``,
-  ``away-goals``, ``home-goal-difference``, ``home-goals``).
+  ``goal-difference``, ``goals-for``, ``head-to-head``, ``head-to-head-points``,
+  ``head-to-head-goals``, ``away-goal-difference``, ``away-goals``,
+  ``home-goal-difference``, ``home-goals``).
 * ``playoffs.rounds``: the bracket, round by round (see ``parse_rounds``). A round is
   single matches, best-of series or two-legged ties; it is played in every conference
   or once across them (a final); its pairs are fixed seeds and earlier winners (or
   losers), or its teams are reseeded highest against lowest. Teams that start in a
-  later round have a bye.
+  later round have a bye. A round at a neutral ground can name, per season, the club
+  whose home that ground is (``homeGround``).
 * ``sources.espn``: ESPN's league code. ESPN's public scoreboard supplies the playoff
   results and cross-checks FixtureDownload's scores; ESPN's table supplies the official
-  order of teams our tiebreakers cannot separate, and any points deductions.
+  order of teams our tiebreakers cannot separate, and any points deductions. A
+  FixtureDownload feed that also lists the playoffs (the NWSL's) is cut to its regular
+  season (``split_postseason``).
 
 The regular season is simulated with football.py's goals model, letting team strength
 drift; each simulated table is seeded and the bracket is played out on the same
@@ -29,6 +33,7 @@ import dataclasses
 import json
 import math
 import time
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -65,6 +70,8 @@ TIEBREAK_TEXT = {
     "goal-difference": "goal difference",
     "goals-for": "goals scored",
     "head-to-head": "head-to-head points and goal difference",
+    "head-to-head-points": "head-to-head points",
+    "head-to-head-goals": "head-to-head goals",
     "away-goal-difference": "away goal difference",
     "away-goals": "away goals",
     "home-goal-difference": "home goal difference",
@@ -122,6 +129,9 @@ class Round:
     # What settles a level match or tie: extra time then penalties, penalties at once, or the higher seed.
     decider: str
     neutral: bool
+    # A neutral round's ground can be one club's home (the 2026 NWSL Championship at the
+    # Washington Spirit's Audi Field): that club plays the round at home.
+    host: str | None = None
 
     @property
     def reseed(self) -> bool:
@@ -142,8 +152,11 @@ def host_pattern(pattern: str, best_of: int) -> tuple[bool, ...]:
     return tuple(hosts)
 
 
-def parse_rounds(config: dict[str, Any]) -> list[Round]:
-    """The bracket from ``playoffs.rounds``, checked so a bad config fails before its first run."""
+def parse_rounds(config: dict[str, Any], year: int | None = None) -> list[Round]:
+    """The bracket from ``playoffs.rounds``, checked so a bad config fails before its first run.
+
+    ``year`` picks each neutral round's ``homeGround`` for that season (none without it).
+    """
     name = config.get("id", "?")
     groups = {conference["key"] for conference in group_list(config)}
     rounds: list[Round] = []
@@ -163,6 +176,9 @@ def parse_rounds(config: dict[str, Any]) -> list[Round]:
         teams = tuple(parse_slot(slot) for slot in raw.get("teams", []))
         if len(teams) % 2:
             raise ValueError(f"{name}: round {raw.get('key')} needs an even number of teams")
+        grounds = raw.get("homeGround") or {}
+        if grounds and (not raw.get("neutral") or match != "single"):
+            raise ValueError(f"{name}: only a neutral round of single matches can name a homeGround")
         item = Round(
             key=raw["key"],
             label=raw["label"],
@@ -174,6 +190,7 @@ def parse_rounds(config: dict[str, Any]) -> list[Round]:
             hosts=host_pattern(raw.get("hosts", "-".join("1" * best_of)), best_of) if match == "series" else (),
             decider=decider,
             neutral=bool(raw.get("neutral")),
+            host=grounds.get(str(year)) if year is not None else None,
         )
         if item.key in seen:
             raise ValueError(f"{name}: round {item.key} appears twice")
@@ -227,6 +244,35 @@ def team_group(config: dict[str, Any], team: str) -> str:
 def rename(games: list[Game], aliases: dict[str, str]) -> list[Game]:
     """The same team is written differently by different feeds and seasons."""
     return [dataclasses.replace(game, home=aliases.get(game.home, game.home), away=aliases.get(game.away, game.away)) for game in games]
+
+
+def split_postseason(games: list[Game], playoff_teams: int) -> tuple[list[Game], list[Game]]:
+    """A feed's regular season, and the playoff games some feeds also list (the NWSL's do).
+
+    Every club plays the same number of regular-season games and those that miss the playoffs
+    play no more, so with the clubs ordered by their games in the feed, the one just below the
+    ``playoff_teams`` busiest has played exactly a season (a game missing from the feed leaves
+    two clubs a game short without changing that). A club's games beyond that many are playoff
+    games, and so is every game of a side with under half the busiest club's games (a
+    placeholder such as "To be announced"). A feed of only the regular season is unchanged.
+    """
+    counts = Counter(team for game in games for team in (game.home, game.away))
+    if not counts:
+        return list(games), []
+    busiest = max(counts.values())
+    clubs = {team for team, count in counts.items() if 2 * count >= busiest}
+    fewest_first = sorted(counts[team] for team in clubs)
+    length = fewest_first[max(len(fewest_first) - playoff_teams, 1) - 1]
+    played: Counter = Counter()
+    regular, postseason = [], []
+    for game in sorted(games, key=lambda item: (item.date, item.id)):
+        if game.home in clubs and game.away in clubs and played[game.home] < length and played[game.away] < length:
+            played[game.home] += 1
+            played[game.away] += 1
+            regular.append(game)
+        else:
+            postseason.append(game)
+    return regular, postseason
 
 
 @dataclass(frozen=True)
@@ -421,11 +467,12 @@ def rank_teams(
 ) -> list[str]:
     """Points, then the league's tiebreakers, applied in turn to the teams still level.
 
-    Head-to-head (points, then goal difference in games among the tied teams) applies only
-    when they are all in one conference, as in MLS. With ``fallback`` (each team's place in
-    its conference table), teams of one conference that are level keep their conference
-    order, so the league table never contradicts the conference tables; teams level on
-    everything else are ordered by name.
+    Head-to-head (points, then goal difference in games among the tied teams; or points and
+    goals as separate steps, as in the NWSL) applies only when they are all in one
+    conference, as in MLS. Each step is taken among the teams the previous one left level.
+    With ``fallback`` (each team's place in its conference table), teams of one conference
+    that are level keep their conference order, so the league table never contradicts the
+    conference tables; teams level on everything else are ordered by name.
     """
 
     def value(step: str, team: str, group: list[str]) -> tuple[int, ...]:
@@ -440,11 +487,15 @@ def rank_teams(
             return (row["homeGoalsFor"] - row["homeGoalsAgainst"],)
         if step == "home-goals":
             return (row["homeGoalsFor"],)
-        if step == "head-to-head":
+        if step in ("head-to-head", "head-to-head-points", "head-to-head-goals"):
             if len({group_of[other] for other in group}) > 1:
                 return (0,)
             members = set(group)
             among = football.standings([game for game in games if game.played and game.home in members and game.away in members], group)
+            if step == "head-to-head-points":
+                return (among[team]["points"],)
+            if step == "head-to-head-goals":
+                return (among[team]["goalsFor"],)
             return (among[team]["points"], among[team]["goalDifference"])
         raise ValueError(f"unknown tiebreaker {step}")
 
@@ -499,26 +550,29 @@ class Bracket:
     the higher seed hosts within a conference, and the better overall record across them.
     """
 
-    def __init__(self, rng, mu, home, attack, defence, seeds, position, overall, real=None):
+    def __init__(self, rng, mu, home, attack, defence, seeds, position, overall, real=None, hosts=None):
         self.rng, self.mu, self.home = rng, mu, home
         self.attack, self.defence = attack, defence
         self.seeds, self.position, self.overall = seeds, position, overall
         self.real = real or {}
+        # Round key -> index of the club whose home a neutral round is played at.
+        self.hosts = hosts or {}
         self.sims, self.count = position.shape
         self.rows = np.arange(self.sims)
 
-    def goals(self, home: np.ndarray, away: np.ndarray, share: float = 1.0, neutral: bool = False) -> tuple[np.ndarray, np.ndarray]:
-        advantage = 0.0 if neutral else self.home
+    def goals(self, home: np.ndarray, away: np.ndarray, share: float = 1.0, neutral: bool = False, advantage=None) -> tuple[np.ndarray, np.ndarray]:
+        if advantage is None:
+            advantage = 0.0 if neutral else self.home
         home_rate = np.exp(self.mu + advantage + self.attack[self.rows, home] - self.defence[self.rows, away]) * share
         away_rate = np.exp(self.mu + self.attack[self.rows, away] - self.defence[self.rows, home]) * share
         return self.rng.poisson(home_rate), self.rng.poisson(away_rate)
 
-    def settle(self, home_goals, away_goals, home, away, decider: str, neutral: bool, home_is_top: np.ndarray | bool) -> np.ndarray:
+    def settle(self, home_goals, away_goals, home, away, decider: str, neutral: bool, home_is_top: np.ndarray | bool, advantage=None) -> np.ndarray:
         """Whether the home side wins a level-or-not match after its decider."""
         home_wins = home_goals > away_goals
         level = home_goals == away_goals
         if decider == "extra-time":
-            extra_home, extra_away = self.goals(home, away, EXTRA_TIME_SHARE, neutral)
+            extra_home, extra_away = self.goals(home, away, EXTRA_TIME_SHARE, neutral, advantage)
             home_wins |= level & (extra_home > extra_away)
             level &= extra_home == extra_away
         elif decider == "higher-seed":
@@ -527,8 +581,17 @@ class Bracket:
         return home_wins | (level & (self.rng.random(self.sims) < 0.5))
 
     def single(self, item: Round, top: np.ndarray, bottom: np.ndarray) -> np.ndarray:
-        home_goals, away_goals = self.goals(top, bottom, neutral=item.neutral)
-        return self.settle(home_goals, away_goals, top, bottom, item.decider, item.neutral, True)
+        host = self.hosts.get(item.key)
+        if host is None:
+            home_goals, away_goals = self.goals(top, bottom, neutral=item.neutral)
+            return self.settle(home_goals, away_goals, top, bottom, item.decider, item.neutral, True)
+        # A neutral ground that is one side's home: that side plays at home, any other pair on neutral ground.
+        swap = bottom == host
+        home, away = np.where(swap, bottom, top), np.where(swap, top, bottom)
+        advantage = np.where(home == host, self.home, 0.0)
+        home_goals, away_goals = self.goals(home, away, advantage=advantage)
+        home_wins = self.settle(home_goals, away_goals, home, away, item.decider, item.neutral, ~swap, advantage)
+        return np.where(swap, ~home_wins, home_wins)
 
     def series(self, item: Round, top, bottom, top_wins, bottom_wins) -> np.ndarray:
         need = item.best_of // 2 + 1
@@ -758,7 +821,8 @@ def simulate(
             seeds[key] = member_index[np.argsort(local, axis=1)]
         overall_position = team_sports.positions_from_keys(keys)
 
-    bracket = Bracket(rng, model.mu, model.home, attack, defence, seeds, position, overall_position, real)
+    hosts = {item.key: index[item.host] for item in rounds if item.host in index}
+    bracket = Bracket(rng, model.mu, model.home, attack, defence, seeds, position, overall_position, real, hosts)
     reached, champion = bracket.run(rounds) if rounds else ({}, np.full(simulations, -1))
     places = qualifiers(rounds)
     flags = {}
@@ -848,6 +912,7 @@ def real_bracket(
     decided: dict[tuple[str | None, str, int], tuple[str, str] | None] = {}
     placed: set[int] = set()
     stage_of: dict[int, str] = {}
+    round_of: dict[int, Round] = {}
     payload_rounds = []
     champion = None
     for item in rounds:
@@ -880,6 +945,7 @@ def real_bracket(
                     for number_in_tie, game in enumerate(between.get(frozenset((top, bottom)), []), start=1):
                         (played if game.completed else upcoming).append(game)
                         placed.add(id(game))
+                        round_of[id(game)] = item
                         stage_of[id(game)] = (
                             f"{item.label}, game {number_in_tie}"
                             if item.match == "series"
@@ -912,7 +978,7 @@ def real_bracket(
                     champion = winner
         payload_rounds.append({"key": item.key, "label": item.label, "series": series_list})
     unplaced = [game for game in games if game.completed and id(game) not in placed]
-    return {"rounds": payload_rounds, "champion": champion, "unplaced": unplaced, "stages": stage_of, "decided": decided}
+    return {"rounds": payload_rounds, "champion": champion, "unplaced": unplaced, "stages": stage_of, "roundOf": round_of, "decided": decided}
 
 
 # ---------------------------------------------------------------------------
@@ -930,13 +996,17 @@ def record(row: dict[str, int]) -> str:
 def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dict[str, Any]:
     season = team_sports.resolve_season(config, now)
     aliases = config.get("aliases", {})
-    rounds = parse_rounds(config)
+    rounds = parse_rounds(config, season.year)
+    playoff_teams = qualifiers(rounds) * len(group_list(config))
     warnings: list[str] = []
     notes: list[str] = []
-    games = rename(team_sports.fetch_games(season.feed, cache_dir), aliases)
+    # Playoff results come from ESPN, which has shoot-out scores; a feed's own playoff games are left out.
+    games, _ = split_postseason(rename(team_sports.fetch_games(season.feed, cache_dir), aliases), playoff_teams)
     previous_season = team_sports.resolve_season(config, now, offset=-1)
     try:
-        previous_games = rename(team_sports.fetch_games(previous_season.feed, cache_dir, max_age_hours=24 * 30), aliases)
+        previous_games, _ = split_postseason(
+            rename(team_sports.fetch_games(previous_season.feed, cache_dir, max_age_hours=24 * 30), aliases), playoff_teams
+        )
     except team_sports.FeedError as exc:
         previous_games = []
         warnings.append(f"Previous season unavailable ({exc}); ratings use this season only.")
@@ -1122,6 +1192,16 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             for game in playoff_games
             if not game.completed and id(game) in bracket["stages"] and frozenset((game.home, game.away)) not in decided_pairs
         ]
+
+        def playoff_outcome(game: EspnMatch) -> tuple[float, float, float]:
+            """Home, draw and away chances; at a neutral ground only its own club has home advantage."""
+            item = bracket["roundOf"].get(id(game))
+            if item is None or not item.neutral or item.host == game.home:
+                return model.outcome(game.home, game.away)
+            if item.host == game.away:
+                return model.outcome(game.away, game.home)[::-1]
+            return dataclasses.replace(model, home=0.0).outcome(game.home, game.away)
+
         fixtures = [
             {
                 "id": f"playoff-{i}",
@@ -1131,7 +1211,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 "away": game.away,
                 "venue": None,
                 "stage": bracket["stages"].get(id(game)),
-                "probabilities": dict(zip(("home", "draw", "away"), (round(value, 3) for value in model.outcome(game.home, game.away)))),
+                "probabilities": dict(zip(("home", "draw", "away"), (round(value, 3) for value in playoff_outcome(game)))),
             }
             for i, game in enumerate(upcoming)
         ]
