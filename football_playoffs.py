@@ -1,4 +1,4 @@
-"""Football leagues that end in playoffs (MLS, NWSL): tables, seeding and a bracket.
+"""Football leagues that end in playoffs (MLS, the NWSL, the A-Leagues): tables, seeding and a bracket.
 
 A config with ``"engine": "football_playoffs"`` is a rolling football config (see
 football.py) with four additions:
@@ -8,7 +8,8 @@ football.py) with four additions:
 * ``tiebreakers``: the order that separates teams level on points (``wins``,
   ``goal-difference``, ``goals-for``, ``head-to-head``, ``head-to-head-points``,
   ``head-to-head-goals``, ``away-goal-difference``, ``away-goals``,
-  ``home-goal-difference``, ``home-goals``).
+  ``away-goals-per-game``, ``home-goal-difference``, ``home-goals``,
+  ``home-goals-per-game``).
 * ``playoffs.rounds``: the bracket, round by round (see ``parse_rounds``). A round is
   single matches, best-of series or two-legged ties; it is played in every conference
   or once across them (a final); its pairs are fixed seeds and earlier winners (or
@@ -18,8 +19,9 @@ football.py) with four additions:
 * ``sources.espn``: ESPN's league code. ESPN's public scoreboard supplies the playoff
   results and cross-checks FixtureDownload's scores; ESPN's table supplies the official
   order of teams our tiebreakers cannot separate, and any points deductions. A
-  FixtureDownload feed that also lists the playoffs (the NWSL's) is cut to its regular
-  season (``split_postseason``).
+  FixtureDownload feed that also lists the playoffs (the NWSL's and the A-Leagues') is
+  cut to its regular season (``split_postseason``). A season that runs into the next
+  calendar year is read from both years' scoreboards.
 
 The regular season is simulated with football.py's goals model, letting team strength
 drift; each simulated table is seeded and the bracket is played out on the same
@@ -74,8 +76,10 @@ TIEBREAK_TEXT = {
     "head-to-head-goals": "head-to-head goals",
     "away-goal-difference": "away goal difference",
     "away-goals": "away goals",
+    "away-goals-per-game": "away goals per away game",
     "home-goal-difference": "home goal difference",
     "home-goals": "home goals",
+    "home-goals-per-game": "home goals per home game",
 }
 
 
@@ -326,8 +330,9 @@ def parse_scoreboard(data: dict[str, Any]) -> list[dict[str, Any]]:
         rows.append(
             {
                 "date": event["date"],
-                "home": sides["home"]["team"]["displayName"],
-                "away": sides["away"]["team"]["displayName"],
+                # ESPN pads some names ("Sydney FC " in the A-League Women).
+                "home": sides["home"]["team"]["displayName"].strip(),
+                "away": sides["away"]["team"]["displayName"].strip(),
                 "homeScore": score("home"),
                 "awayScore": score("away"),
                 "homeShootout": score("home", "shootoutScore"),
@@ -336,6 +341,8 @@ def parse_scoreboard(data: dict[str, Any]) -> list[dict[str, Any]]:
                 "state": status.get("state", "pre"),
                 "extraTime": "AET" in status.get("name", "") or "PEN" in status.get("name", ""),
                 "season": (event.get("season") or {}).get("slug", ""),
+                # The year a season starts in: 2025 for the A-Leagues' 2025-26.
+                "seasonYear": (event.get("season") or {}).get("year"),
             }
         )
     if not rows and data["events"]:
@@ -360,10 +367,23 @@ def _cached(path: Path, url: str, parse, max_age_hours: float) -> tuple[Any, str
         return json.loads(path.read_text(encoding="utf-8")), f"ESPN could not be read ({type(exc).__name__}); using its copy from {saved}."
 
 
-def fetch_espn_matches(league: str, year: int, cache_dir: Path, aliases: dict[str, str], max_age_hours: float = 3) -> tuple[list[EspnMatch], str | None]:
-    rows, warning = _cached(
-        cache_dir / f"espn-{league}-scoreboard-{year}.json", ESPN_SCOREBOARD_URL.format(league=league, year=year), parse_scoreboard, max_age_hours
-    )
+def fetch_espn_matches(
+    league: str, year: int, cache_dir: Path, aliases: dict[str, str], max_age_hours: float = 3, span: int = 1
+) -> tuple[list[EspnMatch], str | None]:
+    """A season's games. ESPN's scoreboard is by calendar year, so a season that runs into the
+    next one (``span=2``: the A-Leagues, October to June) is read from both, keeping the games
+    ESPN files under that season."""
+    rows: list[dict[str, Any]] = []
+    warning = None
+    for calendar_year in range(year, year + span):
+        part, stale = _cached(
+            cache_dir / f"espn-{league}-scoreboard-{calendar_year}.json",
+            ESPN_SCOREBOARD_URL.format(league=league, year=calendar_year),
+            parse_scoreboard,
+            max_age_hours,
+        )
+        rows += [row for row in part if span == 1 or row.get("seasonYear") == year]
+        warning = warning or stale
     matches = [
         EspnMatch(
             date=datetime.fromisoformat(row["date"].replace("Z", "+00:00")),
@@ -390,7 +410,7 @@ def parse_standings(data: dict[str, Any]) -> list[dict[str, Any]]:
             stats = {item["name"]: item.get("value") for item in entry["stats"]}
             rows.append(
                 {
-                    "team": entry["team"]["displayName"],
+                    "team": entry["team"]["displayName"].strip(),
                     "group": child.get("abbreviation") or child.get("name"),
                     "rank": int(stats["rank"]),
                     "played": int(stats["gamesPlayed"]),
@@ -444,16 +464,18 @@ def local_day(value: datetime, config: dict[str, Any]) -> str:
 
 
 def table_rows(games: list[Game], teams: list[str], points: dict[str, int]) -> dict[str, dict[str, int]]:
-    """football.standings plus the home and away splits that MLS's late tiebreakers use."""
+    """football.standings plus the home and away splits that late tiebreakers (MLS, the A-Leagues) use."""
     rows = football.standings(games, teams, points["win"], points["draw"])
     for row in rows.values():
-        row.update(homeGoalsFor=0, homeGoalsAgainst=0, awayGoalsFor=0, awayGoalsAgainst=0)
+        row.update(homeGoalsFor=0, homeGoalsAgainst=0, awayGoalsFor=0, awayGoalsAgainst=0, homePlayed=0, awayPlayed=0)
     for game in games:
         if game.played and game.home in rows and game.away in rows:
             rows[game.home]["homeGoalsFor"] += game.home_score
             rows[game.home]["homeGoalsAgainst"] += game.away_score
+            rows[game.home]["homePlayed"] += 1
             rows[game.away]["awayGoalsFor"] += game.away_score
             rows[game.away]["awayGoalsAgainst"] += game.home_score
+            rows[game.away]["awayPlayed"] += 1
     return rows
 
 
@@ -483,10 +505,14 @@ def rank_teams(
             return (row["awayGoalsFor"] - row["awayGoalsAgainst"],)
         if step == "away-goals":
             return (row["awayGoalsFor"],)
+        if step == "away-goals-per-game":
+            return (row["awayGoalsFor"] / row["awayPlayed"] if row["awayPlayed"] else 0.0,)
         if step == "home-goal-difference":
             return (row["homeGoalsFor"] - row["homeGoalsAgainst"],)
         if step == "home-goals":
             return (row["homeGoalsFor"],)
+        if step == "home-goals-per-game":
+            return (row["homeGoalsFor"] / row["homePlayed"] if row["homePlayed"] else 0.0,)
         if step in ("head-to-head", "head-to-head-points", "head-to-head-goals"):
             if len({group_of[other] for other in group}) > 1:
                 return (0,)
@@ -609,22 +635,31 @@ class Bracket:
         return top_wins >= need
 
     def two_legged(self, item: Round, top, bottom, first_leg) -> np.ndarray:
-        """The lower seed hosts the first leg; ``first_leg`` holds real first-leg goals (top, bottom) or -1."""
+        """The lower seed hosts the first leg, unless a real one says otherwise.
+
+        ``first_leg`` holds a real first leg's goals (top, bottom) and whether the higher seed
+        hosted it (A-League semi-finalists may choose), or -1.
+        """
         first_bottom, first_top = self.goals(bottom, top, neutral=item.neutral)
         played = first_leg[0] >= 0
         first_top = np.where(played, first_leg[0], first_top)
         first_bottom = np.where(played, first_leg[1], first_bottom)
-        second_top, second_bottom = self.goals(top, bottom, neutral=item.neutral)
-        top_total, bottom_total = first_top + second_top, first_bottom + second_bottom
-        # The decider is played at the second leg, at the higher seed's ground.
-        return self.settle(top_total, bottom_total, top, bottom, item.decider, item.neutral, True)
+        top_hosts = ~(played & (first_leg[2] == 1))
+        home, away = np.where(top_hosts, top, bottom), np.where(top_hosts, bottom, top)
+        home_goals, away_goals = self.goals(home, away, neutral=item.neutral)
+        top_total = first_top + np.where(top_hosts, home_goals, away_goals)
+        bottom_total = first_bottom + np.where(top_hosts, away_goals, home_goals)
+        # The decider is played at the second leg's ground, normally the higher seed's.
+        home_total, away_total = np.where(top_hosts, top_total, bottom_total), np.where(top_hosts, bottom_total, top_total)
+        home_through = self.settle(home_total, away_total, home, away, item.decider, item.neutral, top_hosts)
+        return np.where(top_hosts, home_through, ~home_through)
 
     def play(self, item: Round, top: np.ndarray, bottom: np.ndarray) -> np.ndarray:
         """Whether the higher seed goes through, with real results in place of simulated ones."""
         fixed = np.full(self.sims, -1)
         top_wins = np.zeros(self.sims, dtype=np.int64)
         bottom_wins = np.zeros(self.sims, dtype=np.int64)
-        first_leg = np.full((2, self.sims), -1)
+        first_leg = np.full((3, self.sims), -1)
         if self.real:
             codes = top * self.count + bottom
             for code in np.unique(codes):
@@ -639,6 +674,7 @@ class Bracket:
                 top_wins[mask], bottom_wins[mask] = state["topWins"], state["bottomWins"]
                 if state["firstLeg"] is not None:
                     first_leg[0, mask], first_leg[1, mask] = state["firstLeg"]
+                    first_leg[2, mask] = int(state["firstLegAtTop"])
         if item.match == "series":
             simulated = self.series(item, top, bottom, top_wins, bottom_wins)
         elif item.match == "two-legged":
@@ -690,7 +726,7 @@ def real_state(item: Round, top: Any, bottom: Any, games: list[Any]) -> dict[str
     ``games`` are completed matches between the two teams, oldest first; teams are compared
     by whatever identifies them (names, or indices in the simulation).
     """
-    state: dict[str, Any] = {"winner": None, "topWins": 0, "bottomWins": 0, "firstLeg": None, "top": 0, "bottom": 0}
+    state: dict[str, Any] = {"winner": None, "topWins": 0, "bottomWins": 0, "firstLeg": None, "firstLegAtTop": False, "top": 0, "bottom": 0}
 
     def goals(game, team) -> int:
         return game.home_score if game.home == team else game.away_score
@@ -708,6 +744,7 @@ def real_state(item: Round, top: Any, bottom: Any, games: list[Any]) -> dict[str
     if item.match == "two-legged":
         if len(games) == 1:
             state["firstLeg"] = (goals(games[0], top), goals(games[0], bottom))
+            state["firstLegAtTop"] = games[0].home == top
         elif len(games) >= 2:
             # The aggregate decides, not who won the second leg; when it is level, the
             # second leg's shoot-out does (its score includes extra time).
@@ -1017,7 +1054,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     corrections: list[tuple[Game, Game]] = []
     if espn_code:
         try:
-            espn, stale = fetch_espn_matches(espn_code, season.year, cache_dir, aliases)
+            span = season.end.year - season.start.year + 1
+            espn, stale = fetch_espn_matches(espn_code, season.year, cache_dir, aliases, span=span)
         except team_sports.FeedError as exc:
             print(f"{season.payload_id}: ESPN scoreboard unavailable ({exc})")
     if espn:
@@ -1142,6 +1180,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         keys = {tier["key"] for tier in tiers}
         probabilities = {team: {key: value for key, value in values.items() if key in keys} for team, values in probabilities.items()}
 
+    single_table = len(group_list(config)) == 1
     standings_rows = []
     for rank, team in enumerate(overall, start=1):
         row = table[team]
@@ -1152,9 +1191,12 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 "fullName": meta[team]["fullName"],
                 "rank": rank,
                 **{key: value for key, value in row.items() if not key.startswith(("home", "away"))},
-                "record": record(row),
-                "conference": group_labels[group_of[team]],
-                "seed": conference_place[team] + 1,
+                # A league in one table (the A-Leagues) shows place and points instead of a record and seed.
+                **(
+                    {}
+                    if single_table
+                    else {"record": record(row), "conference": group_labels[group_of[team]], "seed": conference_place[team] + 1}
+                ),
                 "form": team_sports.form_strings(games, team),
                 "remaining": sum(1 for game in remaining if team in (game.home, game.away)),
             }
@@ -1254,7 +1296,6 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         model_notes.append(f"Playoffs: ties still to play are simulated {SIMULATIONS:,} times, starting from the real results.")
     credits = [{"name": "ESPN", "url": ESPN_SITE_URL, "note": "Playoff results and score checks: ESPN"}] if espn else []
     cutoffs = (config.get("playoffs") or {}).get("cutoffs", [{"after": qualifiers(rounds), "label": "Playoff line"}])
-    single_table = len(group_list(config)) == 1
     groups = [] if single_table else [
         {"key": key, "label": group_labels[key], "teams": order[key], "cutoffs": cutoffs} for key in members
     ]

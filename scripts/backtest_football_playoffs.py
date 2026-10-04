@@ -7,13 +7,15 @@ and away shares of the games the model was fitted on) and across half-lives and 
 
 Season level: at 25%, 50% and 75% of each season the rest of the regular season and the
 playoffs are simulated, and the Brier score and log loss of the playoff, top-seed, best-record
-(Supporters' Shield, NWSL Shield) and title odds against what happened pick the strength drift.
+(Supporters' Shield, NWSL Shield, Premiers Plate) and title odds against what happened pick the
+strength drift.
 
     venv/bin/python scripts/backtest_football_playoffs.py --league mls --seasons 2024 2025
     venv/bin/python scripts/backtest_football_playoffs.py --league nwsl --seasons 2024 2025
+    venv/bin/python scripts/backtest_football_playoffs.py --league a-league-men --seasons 2024 2025
 
 Scores are cross-checked with ESPN's scoreboard as in the published build, playoff games a
-feed lists (the NWSL's) are left out of the regular season, and the real champion comes from
+feed lists (the NWSL's and the A-Leagues') are left out of the regular season, and the real champion comes from
 ESPN's playoff games.
 """
 
@@ -53,7 +55,9 @@ def season_games(config: dict, year: int) -> tuple[list[Game], list[football_pla
     code = config.get("sources", {}).get("espn")
     if code:
         try:
-            espn, _ = football_playoffs.fetch_espn_matches(code, year, CACHE, aliases, max_age_hours=24 * 30)
+            # A season that runs into the next year (October to June) is on two years' scoreboards.
+            span = 2 if rule["endMonth"] < rule["startMonth"] else 1
+            espn, _ = football_playoffs.fetch_espn_matches(code, year, CACHE, aliases, max_age_hours=24 * 30, span=span)
         except team_sports.FeedError as exc:
             print(f"{year}: ESPN unavailable ({exc}); FixtureDownload scores are used as they are")
     if espn:
@@ -217,8 +221,9 @@ def season_odds(config: dict, seasons: list[int], drifts: list[float], simulatio
             for (year, share), values in by_checkpoint[drift].items()
         ))
     print("\nPlayoff-place calibration (predicted vs observed share, by bin)")
+    playoff_key = next(tier["key"] for tier in tiers if tier["kind"] == "playoffs")
     for drift in drifts:
-        pairs = collected[drift].get("playoffs-calibration", [])
+        pairs = collected[drift].get(f"{playoff_key}-calibration", [])
         bins = [(0, 0.1), (0.1, 0.3), (0.3, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.01)]
         cells = []
         for low, high in bins:
