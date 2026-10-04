@@ -1,4 +1,4 @@
-"""NFL, NBA, WNBA, NHL and MLB: regular-season tables, playoff races and title odds.
+"""NFL, NBA, WNBA, NHL, MLB and NBL: regular-season tables, playoff races and title odds.
 
 Team ratings come from a margin model (score margins, capped so blowouts do not
 dominate, with home advantage and a time decay) fitted on this and last season.
@@ -9,7 +9,7 @@ the playoff bracket is simulated too, which gives title odds.
 Tiebreakers are simplified: win percentage (points in the NHL), then division or
 conference record (regulation wins in the NHL), then a coin flip. Head-to-head
 and common-games rules are not modelled, except in the current table of a league
-whose config lists its own tiebreakers (the WNBA).
+whose config lists its own tiebreakers (the WNBA and NBL).
 """
 
 from __future__ import annotations
@@ -55,6 +55,10 @@ ESPN_PROVIDERS = {
         "rounds": (("First Round", "R1"), ("Semifinals", "SF"), ("WNBA Finals", "F")),
         "site": "https://www.espn.com/wnba/",
     },
+    # ESPN's NBL games carry no round names: label_stages() places them in the bracket. The
+    # Ignite Cup final is listed as a postseason game too; at a neutral venue it is skipped,
+    # otherwise it fits no series of the bracket and is dropped there.
+    "espn-nbl": {"league": "nbl", "yearOffset": 1, "rounds": (), "skipNeutral": True, "site": "https://www.espn.com/nbl/"},
 }
 
 # Playoff rounds per format: stage code, name on the page.
@@ -64,17 +68,21 @@ STAGES = {
     "nhl": [("R1", "First Round"), ("R2", "Second Round"), ("CF", "Conference Final"), ("F", "Stanley Cup Final")],
     "mlb": [("F", "Wild Card Series"), ("D", "Division Series"), ("L", "Championship Series"), ("W", "World Series")],
     "wnba": [("R1", "First Round"), ("SF", "Semifinals"), ("F", "WNBA Finals")],
+    "nbl": [("PI", "Play-In"), ("SF", "Semifinals"), ("F", "Championship Series")],
 }
 # Formats seeded as one table across the league rather than by conference.
-SINGLE_TABLE_FORMATS = {"wnba"}
+SINGLE_TABLE_FORMATS = {"wnba", "nbl"}
 # Default home pattern per round ("2-2-1": the higher seed hosts games 1, 2 and 5); configs can override.
-DEFAULT_SERIES = {"wnba": {"R1": "1-1-1", "SF": "2-2-1", "F": "2-2-1-1-1"}}
+DEFAULT_SERIES = {
+    "wnba": {"R1": "1-1-1", "SF": "2-2-1", "F": "2-2-1-1-1"},
+    "nbl": {"PI": "1", "SF": "1-1-1", "F": "1-1-1-1-1"},
+}
 # NHL playoff game ids encode the round in their eighth digit: 2025030111 is round 1.
 NHL_ROUND_STAGES = {"1": "R1", "2": "R2", "3": "CF", "4": "F"}
 # Most tie orders tried when matching our seeds to the real bracket.
 MAX_TIE_ORDERS = 20_000
 # Lowest conference seed that reaches each format's bracket (NBA: the play-in).
-BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6, "wnba": 8}
+BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6, "wnba": 8, "nbl": 6}
 
 
 @dataclass(frozen=True)
@@ -106,9 +114,10 @@ SPORT_MODELS = {
 }
 
 # Leagues with settings of their own, backtested on their own seasons with
-# scripts/backtest_us_sports.py (WNBA: 2022 to 2026).
+# scripts/backtest_us_sports.py (WNBA: 2022 to 2026; NBL: 2021-22 to 2025-26).
 LEAGUE_MODELS = {
     "wnba": SportModel(margin_cap=25, half_life_days=120, previous_weight=0.5, ridge=2.0, drift=4.0, sigma=11.5),
+    "nbl": SportModel(margin_cap=40, half_life_days=60, previous_weight=1.0, ridge=3.0, drift=7.0, sigma=15.75),
 }
 
 
@@ -173,7 +182,8 @@ def fetch_nhl_games(year: int, cache_dir: Path, max_age_hours: float = 3) -> lis
 
 @dataclass(frozen=True)
 class PlayoffGame:
-    stage: str
+    # None when the source names no round (ESPN's NBL games) until label_stages() places it.
+    stage: str | None
     date: datetime
     home: str
     away: str
@@ -270,7 +280,9 @@ def fetch_espn_playoffs(provider: str, year: int, cache_dir: Path) -> list[Playo
         # Notes vary in case ("WNBA FINALS - Game 3"); earlier names win ("Semifinals" before "Finals").
         stage = "PI" if kind == 5 else next((code for words, code in source["rounds"] if words.lower() in headline), None)
         sides = {item["homeAway"]: item for item in competition["competitors"]}
-        if stage is None or set(sides) != {"home", "away"}:
+        if (stage is None and source["rounds"]) or set(sides) != {"home", "away"}:
+            continue
+        if source.get("skipNeutral") and competition.get("neutralSite"):
             continue
         final = competition.get("status", {}).get("type", {}).get("completed", False)
         games.append(
@@ -734,6 +746,16 @@ def single_table_playoffs(config, seed: np.ndarray, play) -> np.ndarray:
         semi_a = series("SF", *higher_seed_first(first[(1, 8)], first[(4, 5)], seed))
         semi_b = series("SF", *higher_seed_first(first[(2, 7)], first[(3, 6)], seed))
         return series("F", *higher_seed_first(semi_a, semi_b, seed))
+    if fmt == "nbl":
+        # Play-in for places 3-6: the 3 v 4 winner meets 2nd; the loser hosts the 5 v 6 winner,
+        # and the winner of that game meets 1st. The higher ladder place hosts the final.
+        third, fourth = at(3), at(4)
+        qualifier = series("PI", third, fourth)
+        play_in = series("PI", at(5), at(6))
+        last = series("PI", np.where(qualifier == third, fourth, third), play_in)
+        semi_a = series("SF", at(1), last)
+        semi_b = series("SF", at(2), qualifier)
+        return series("F", *higher_seed_first(semi_a, semi_b, seed))
     raise ValueError(f"Unknown playoff format {fmt}")
 
 
@@ -880,17 +902,49 @@ def simulate(
     return {"simulations": simulations, "probabilities": probabilities, "positions": positions, "expected": expected, "matchesThatMatter": matter}
 
 
-def bracket_pairs(config, structure, seeding_now, ratings, results) -> dict[str, set[frozenset[str]]]:
-    """Series pairings per stage that a seeding produces, given the results so far."""
+def bracket_series(config, structure, seeding_now, ratings, results) -> list[dict[str, Any]]:
+    """Every series of the bracket a seeding produces, given the results so far (teams None if not known)."""
     seeding = {key: value.copy() for key, value in seeding_now.items()}
     recorded: list[dict[str, Any]] = []
     strength = np.array([[ratings.rating[team] for team in structure.teams]])
     simulate_playoffs(config, structure, np.random.default_rng(0), strength, seeding, seeding["conference_key"], ratings, results=results, recorded=recorded)
+    return recorded
+
+
+def bracket_pairs(config, structure, seeding_now, ratings, results) -> dict[str, set[frozenset[str]]]:
+    """Series pairings per stage that a seeding produces, given the results so far."""
     pairs: dict[str, set[frozenset[str]]] = defaultdict(set)
-    for item in recorded:
+    for item in bracket_series(config, structure, seeding_now, ratings, results):
         if item["top"]:
             pairs[item["stage"]].add(frozenset((item["top"], item["bottom"])))
     return pairs
+
+
+def label_stages(config, structure, seeding_now, ratings, games: list[PlayoffGame]) -> list[PlayoffGame]:
+    """Rounds for playoff games whose source names none, found by walking the bracket in date order.
+
+    Each game joins the unfinished series between its two teams that the results so far make
+    known (two teams can meet in the play-in and again in the final). Games that fit no series,
+    such as an in-season cup final, are left out.
+    """
+    results: dict[tuple[str, frozenset[str]], dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    labelled = []
+    for game in sorted(games, key=lambda item: item.date):
+        pair = frozenset((game.home, game.away))
+        series = next(
+            (
+                item
+                for item in bracket_series(config, structure, seeding_now, ratings, results)
+                if item["top"] and frozenset((item["top"], item["bottom"])) == pair and not item["winner"]
+            ),
+            None,
+        )
+        if series is None:
+            continue
+        labelled.append(dataclasses.replace(game, stage=series["stage"]))
+        if game.winner:
+            results[(series["stage"], pair)][game.winner] += 1
+    return labelled
 
 
 def matches_bracket(pairs: dict[str, set[frozenset[str]]], actual: dict[str, set[frozenset[str]]], teams: set[str] | None = None) -> bool:
@@ -1282,6 +1336,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             aliases = config.get("aliases", {})
             found = [dataclasses.replace(game, home=aliases.get(game.home, game.home), away=aliases.get(game.away, game.away)) for game in found]
             playoff_list = [game for game in found if game.home in index and game.away in index]
+            if any(game.stage is None for game in playoff_list):
+                playoff_list = label_stages(config, structure, seeding, ratings, playoff_list)
             postseason = simulate_postseason(config, structure, seeding, ratings, playoff_list, records=records)
             if postseason is None:
                 warnings.append("The real playoff bracket does not match any seeding of these records, so title odds are left out.")
@@ -1336,11 +1392,17 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             item["gamesBack"] = games_back
         if sport == "basketball" and row["played"]:
             item["pointDifferential"] = round((row["scored"] - row["allowed"]) / row["played"], 1)
+        if "percentage" in (tiebreakers or []):
+            item["pointsPercentage"] = round(100 * row["scored"] / row["allowed"], 2) if row["allowed"] else None
         standings.append(item)
 
     cutoffs = config["playoffs"].get("cutoffs", [{"after": config["playoffs"]["teamsPerConference"], "label": "Playoff line"}])
     # A league seeded as one table shows its playoff lines on the league table itself.
     single_table = len(config["conferences"]) == 1
+    columns = [dict(column, title="Games behind the leader") if single_table and column["key"] == "gamesBack" else column for column in COLUMNS[sport]]
+    if "percentage" in (tiebreakers or []):
+        # The ladder's tiebreaker, shown as the league's own ladder shows it.
+        columns.insert(3, {"key": "pointsPercentage", "label": "%", "title": "Points percentage: points scored over points conceded", "optional": True})
     groups = []
     for conference in [] if single_table else config["conferences"]:
         members = [team for team in teams if config["teams"][team]["conference"] == conference["key"]]
@@ -1513,7 +1575,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "seasonLabel": season.label,
             "priority": config.get("priority", 100),
             "tiers": tiers,
-            "columns": COLUMNS[sport],
+            "columns": columns,
             "outcomes": ["home", "away"],
             "teams": [meta[team] for team in teams],
             "groups": groups,

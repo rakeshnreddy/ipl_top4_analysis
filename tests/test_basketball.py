@@ -140,6 +140,177 @@ class WnbaTests(unittest.TestCase):
         self.assertEqual(self.past["metadata"]["season_status"], "complete")
 
 
+# NBL ladders: wins, losses and points percentage, in ladder order.
+OFFICIAL_NBL = {
+    # NBL27 after 20 games, from https://www.nbl.com.au/ladders on 4 October 2026.
+    "2026-27": [
+        ("SYD", 3, 0, 121.27), ("TAS", 3, 1, 103.01), ("PER", 3, 1, 96.83), ("NZB", 2, 2, 108.8),
+        ("ADL", 2, 2, 98.14), ("BRI", 2, 2, 96.34), ("CNS", 2, 3, 91.56), ("MEL", 1, 3, 102.58),
+        ("SEM", 1, 3, 96.32), ("ILL", 1, 3, 94.89),
+    ],
+}
+# NBL26 final order: https://www.nbl.com.au/news/the-run-home-each-teams-finals-chances (one round
+# to go) and the final win percentages of the top five in
+# https://www.basketball.com.au/news/nbl27-strength-of-schedule-sydney-kings-softest-draw-brisbane-bullets-hardest
+# (Sydney 72.7, Adelaide 69.7, South East Melbourne 66.7, Perth 63.6, Melbourne 60.6).
+NBL26_ORDER = ["SYD", "ADL", "SEM", "PER", "MEL", "TAS", "NZB", "ILL", "CNS", "BRI"]
+NBL26_TOP_FIVE = [("SYD", 24, 9), ("ADL", 23, 10), ("SEM", 22, 11), ("PER", 21, 12), ("MEL", 20, 13)]
+
+
+class NblTests(unittest.TestCase):
+    """NBL27 in progress (4 October 2026), and the finished NBL26 and NBL25 seasons."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.cfg = leagues.read_config("nbl")
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            load_fixture(cache, "nbl-2026")
+            load_fixture(cache, "nbl-2025", "nbl", 2026)
+            load_fixture(cache, "nbl-2024", "nbl", 2025)
+            (cache / "nbl-2023.json").write_text("[]", encoding="utf-8")
+            cls.live = us_sports.build_payload(cls.cfg, datetime(2026, 10, 4, 2, 30, tzinfo=timezone.utc), cache)
+            cls.nbl26 = us_sports.build_payload(cls.cfg, datetime(2026, 4, 10, tzinfo=timezone.utc), cache)
+            cls.nbl25 = us_sports.build_payload(cls.cfg, datetime(2025, 4, 1, tzinfo=timezone.utc), cache)
+
+    def test_the_live_ladder_matches_the_official_one(self) -> None:
+        # Win percentage first (Cairns have played five), then points percentage.
+        ladder = [(row["shortName"], row["wins"], row["losses"], row["pointsPercentage"]) for row in self.live["standings"]]
+        self.assertEqual(ladder, OFFICIAL_NBL["2026-27"])
+        self.assertIn("pointsPercentage", [column["key"] for column in self.live["league"]["columns"]])
+
+    def test_live_odds_fill_six_finals_places_and_one_title(self) -> None:
+        probabilities = self.live["analysis"]["probabilities"]
+        self.assertAlmostEqual(sum(values["finals"] for values in probabilities.values()), 600, delta=0.1)
+        self.assertAlmostEqual(sum(values["top2"] for values in probabilities.values()), 200, delta=0.1)
+        self.assertAlmostEqual(sum(values["title"] for values in probabilities.values()), 100, delta=0.05)
+        self.assertEqual(self.live["metadata"]["season_status"], "in_progress")
+        self.assertEqual(self.live["league"]["cutoffs"], [{"after": 2, "label": "Play-in"}, {"after": 6, "label": "Out"}])
+        self.assertEqual(self.live["league"]["groups"], [])
+        self.assertNotIn("bracket", self.live)
+
+    def test_the_nbl26_ladder_is_ordered_by_points_percentage(self) -> None:
+        # New Zealand and Illawarra finished 13-20; New Zealand's percentage put them seventh.
+        self.assertEqual([row["shortName"] for row in self.nbl26["standings"]], NBL26_ORDER)
+        self.assertEqual(table(self.nbl26)[:5], NBL26_TOP_FIVE)
+
+    def test_the_nbl26_finals_are_reproduced_without_the_ignite_cup_final(self) -> None:
+        rounds = {item["key"]: item["series"] for item in self.nbl26["bracket"]["rounds"]}
+        summary = {key: [(item["top"], item["bottom"], item["topWins"], item["bottomWins"]) for item in series] for key, series in rounds.items()}
+        self.assertEqual(
+            summary,
+            {
+                "PI": [
+                    ("South East Melbourne Phoenix", "Perth Wildcats", 1, 0),
+                    ("Melbourne United", "Tasmania JackJumpers", 1, 0),
+                    ("Perth Wildcats", "Melbourne United", 1, 0),
+                ],
+                "SF": [("Sydney Kings", "Perth Wildcats", 2, 0), ("Adelaide 36ers", "South East Melbourne Phoenix", 2, 1)],
+                "F": [("Sydney Kings", "Adelaide 36ers", 3, 2)],
+            },
+        )
+        self.assertEqual([item["bestOf"] for key in ("PI", "SF", "F") for item in rounds[key]], [1, 1, 1, 3, 3, 5])
+        self.assertEqual(self.nbl26["bracket"]["champion"], "Sydney Kings")
+        # The Ignite Cup final (New Zealand beat Adelaide on 22 February) is not a finals game.
+        self.assertFalse(any("New Zealand Breakers" in (result["home"], result["away"]) and result.get("note") for result in self.nbl26["results"][:20]))
+
+    def test_nbl25_ties_follow_percentage_not_head_to_head(self) -> None:
+        # South East Melbourne and Sydney finished 16-13 and Sydney won all three meetings, but
+        # South East Melbourne's better percentage made them fourth: they played the 3 v 4 game.
+        seeds = {row["shortName"]: row["seed"] for row in self.nbl25["standings"]}
+        self.assertEqual((seeds["SEM"], seeds["SYD"], seeds["ADL"], seeds["TAS"]), (4, 5, 6, 7))
+        play_in = self.nbl25["bracket"]["rounds"][0]["series"]
+        self.assertEqual([(item["topSeed"], item["bottomSeed"], item["winner"]) for item in play_in], [
+            (3, 4, "Perth Wildcats"),
+            (5, 6, "Adelaide 36ers"),
+            (4, 6, "South East Melbourne Phoenix"),
+        ])
+        self.assertEqual(self.nbl25["bracket"]["champion"], "Illawarra Hawks")
+
+
+class NblBracketTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.cfg = leagues.read_config("nbl")
+        self.structure = us_sports.league_structure(self.cfg)
+        teams = self.structure.teams
+        # Ladder order: Sydney 1st ... Brisbane 10th.
+        order = ["Sydney Kings", "Adelaide 36ers", "South East Melbourne Phoenix", "Perth Wildcats", "Melbourne United",
+                 "Tasmania JackJumpers", "New Zealand Breakers", "Illawarra Hawks", "Cairns Taipans", "Brisbane Bullets"]
+        key = np.array([[float(len(order) - order.index(team)) for team in teams]])
+        self.seeding = us_sports.seed_conferences(self.cfg, self.structure, key, key)
+        self.seeding["conference_key"] = key
+        self.ratings = us_sports.Ratings(home=2.0, sigma=15.0, rating=dict.fromkeys(teams, 0.0))
+
+    def series(self, results):
+        return us_sports.bracket_series(self.cfg, self.structure, self.seeding, self.ratings, results)
+
+    def test_the_play_in_decides_who_meets_first_and_second(self) -> None:
+        # 4th beats 3rd and meets 2nd; 3rd hosts the 5 v 6 winner (6th) and wins, then meets 1st.
+        results = {
+            ("PI", frozenset(("South East Melbourne Phoenix", "Perth Wildcats"))): {"Perth Wildcats": 1},
+            ("PI", frozenset(("Melbourne United", "Tasmania JackJumpers"))): {"Tasmania JackJumpers": 1},
+            ("PI", frozenset(("South East Melbourne Phoenix", "Tasmania JackJumpers"))): {"South East Melbourne Phoenix": 1},
+        }
+        recorded = self.series(results)
+        pairs = [(item["stage"], item["top"], item["bottom"]) for item in recorded]
+        self.assertEqual(pairs[:5], [
+            ("PI", "South East Melbourne Phoenix", "Perth Wildcats"),
+            ("PI", "Melbourne United", "Tasmania JackJumpers"),
+            ("PI", "South East Melbourne Phoenix", "Tasmania JackJumpers"),
+            ("SF", "Sydney Kings", "South East Melbourne Phoenix"),
+            ("SF", "Adelaide 36ers", "Perth Wildcats"),
+        ])
+        self.assertEqual([item["bestOf"] for item in recorded], [1, 1, 1, 3, 3, 5])
+
+    def test_series_formats(self) -> None:
+        self.assertEqual([us_sports.series_pattern(self.cfg, stage) for stage in ("PI", "SF", "F")], [
+            [True], [True, False, True], [True, False, True, False, True],
+        ])
+
+    def test_rounds_are_found_for_games_without_round_names(self) -> None:
+        start = datetime(2027, 2, 20, tzinfo=timezone.utc)
+        day = lambda n: start.replace(day=20 + n)  # noqa: E731
+        games = [
+            # An in-season cup final involving a team outside the finals.
+            us_sports.PlayoffGame(None, day(0), "Adelaide 36ers", "New Zealand Breakers", 90, 95),
+            us_sports.PlayoffGame(None, day(1), "South East Melbourne Phoenix", "Perth Wildcats", 90, 80),
+            us_sports.PlayoffGame(None, day(1), "Melbourne United", "Tasmania JackJumpers", 90, 80),
+            us_sports.PlayoffGame(None, day(2), "Perth Wildcats", "Melbourne United", 90, 80),
+            us_sports.PlayoffGame(None, day(3), "Adelaide 36ers", "South East Melbourne Phoenix", 90, 80),
+        ]
+
+        labelled = us_sports.label_stages(self.cfg, self.structure, self.seeding, self.ratings, games)
+
+        self.assertEqual([(game.stage, game.home) for game in labelled], [
+            ("PI", "South East Melbourne Phoenix"),
+            ("PI", "Melbourne United"),
+            ("PI", "Perth Wildcats"),
+            ("SF", "Adelaide 36ers"),
+        ])
+
+    def test_neutral_venue_games_are_skipped_for_the_nbl(self) -> None:
+        def event(neutral: bool) -> dict:
+            return {
+                "date": "2027-02-21T06:00Z",
+                "season": {"type": 3},
+                "competitions": [{
+                    "notes": [], "neutralSite": neutral, "status": {"type": {"completed": True}},
+                    "competitors": [
+                        {"homeAway": "home", "team": {"displayName": "Sydney Kings"}, "score": "90"},
+                        {"homeAway": "away", "team": {"displayName": "Perth Wildcats"}, "score": "80"},
+                    ],
+                }],
+            }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            (cache / "nbl-espn-2027.json").write_text(json.dumps({"events": [event(True), event(False)]}), encoding="utf-8")
+            games = us_sports.fetch_espn_playoffs("espn-nbl", 2026, cache)
+
+        self.assertEqual(len(games), 1)
+        self.assertIsNone(games[0].stage)
+
+
 class SeriesTests(unittest.TestCase):
     def test_home_patterns(self) -> None:
         self.assertEqual(us_sports.home_pattern("1-1-1"), [True, False, True])
