@@ -144,6 +144,8 @@ export interface SportPayload {
     outcomes: string[];
     teams: SportTeam[];
     groups?: SportGroup[];
+    /** Lines on the league table itself, for leagues seeded as one table (the WNBA's playoff line). */
+    cutoffs?: SportGroup['cutoffs'];
     /** What the table's rank means when groups exist, e.g. "League" or "Overall". */
     rankLabel?: string;
     positionLabel?: string;

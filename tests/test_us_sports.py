@@ -30,7 +30,8 @@ def schedule(cfg: dict[str, object], games_per_team: int, played: int, seed: int
     for round_number in range(games_per_team):
         order = teams[:]
         rng.shuffle(order)
-        for pair in range(0, len(order), 2):
+        # With an odd number of teams, one sits out each round.
+        for pair in range(0, len(order) - 1, 2):
             home, away = order[pair], order[pair + 1]
             number = len(games) + 1
             date = START + timedelta(days=round_number, minutes=pair)
@@ -165,7 +166,7 @@ class SimulationTests(unittest.TestCase):
         return {"total": total, "result": result}
 
     def test_every_league_fills_its_playoff_field_and_crowns_one_champion(self) -> None:
-        for league_id, per_team, playoff_teams in (("nfl", 6, 14), ("nhl", 8, 16), ("mlb", 8, 12), ("nba", 8, 16)):
+        for league_id, per_team, playoff_teams in (("nfl", 6, 14), ("nhl", 8, 16), ("mlb", 8, 12), ("nba", 8, 16), ("wnba", 8, 8)):
             with self.subTest(league_id):
                 cfg = config(league_id)
                 if "gamesPerTeam" in cfg:
@@ -336,7 +337,7 @@ class NhlFeedTests(unittest.TestCase):
         self.assertFalse(parsed[1].played)
 
     def test_every_rolling_config_validates(self) -> None:
-        for league_id in ("nfl", "nba", "nhl", "mlb"):
+        for league_id in ("nfl", "nba", "nhl", "mlb", "wnba"):
             with self.subTest(league_id):
                 team_sports.validate_config(config(league_id))
 

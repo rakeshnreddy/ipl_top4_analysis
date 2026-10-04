@@ -1,4 +1,4 @@
-"""NFL, NBA, NHL and MLB: regular-season tables, playoff races and title odds.
+"""NFL, NBA, WNBA, NHL and MLB: regular-season tables, playoff races and title odds.
 
 Team ratings come from a margin model (score margins, capped so blowouts do not
 dominate, with home advantage and a time decay) fitted on this and last season.
@@ -8,7 +8,8 @@ the playoff bracket is simulated too, which gives title odds.
 
 Tiebreakers are simplified: win percentage (points in the NHL), then division or
 conference record (regulation wins in the NHL), then a coin flip. Head-to-head
-and common-games rules are not modelled.
+and common-games rules are not modelled, except in the current table of a league
+whose config lists its own tiebreakers (the WNBA).
 """
 
 from __future__ import annotations
@@ -41,9 +42,20 @@ NHL_SOURCE = "NHL"
 NHL_SOURCE_URL = "https://www.nhl.com/"
 NHL_PLAYOFF_GAMES_URL = "https://api.nhle.com/stats/rest/en/game?cayenneExp=season={code}%20and%20gameType=3"
 MLB_POSTSEASON_URL = "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season={year}&gameType=F,D,L,W"
-# ESPN's public scoreboard: every NBA game in a calendar year; the playoffs fall in the season's second year.
-ESPN_NBA_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={year}&limit=1000"
+# ESPN's public scoreboard: every game of a league in a calendar year.
+ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/{league}/scoreboard?dates={year}&limit=1000"
 ESPN_NBA_ROUNDS = (("1st Round", "R1"), ("Semifinals", "R2"), ("NBA Finals", "F"), ("Finals", "CF"))
+# Playoff sources on ESPN: the league's path, the calendar year of the playoffs relative to the
+# season's first year, and the round named in each game's note.
+ESPN_PROVIDERS = {
+    "espn-nba": {"league": "nba", "yearOffset": 1, "rounds": ESPN_NBA_ROUNDS, "site": "https://www.espn.com/nba/"},
+    "espn-wnba": {
+        "league": "wnba",
+        "yearOffset": 0,
+        "rounds": (("First Round", "R1"), ("Semifinals", "SF"), ("WNBA Finals", "F")),
+        "site": "https://www.espn.com/wnba/",
+    },
+}
 
 # Playoff rounds per format: stage code, name on the page.
 STAGES = {
@@ -51,13 +63,18 @@ STAGES = {
     "nba": [("PI", "Play-In"), ("R1", "First Round"), ("R2", "Conference Semifinals"), ("CF", "Conference Finals"), ("F", "NBA Finals")],
     "nhl": [("R1", "First Round"), ("R2", "Second Round"), ("CF", "Conference Final"), ("F", "Stanley Cup Final")],
     "mlb": [("F", "Wild Card Series"), ("D", "Division Series"), ("L", "Championship Series"), ("W", "World Series")],
+    "wnba": [("R1", "First Round"), ("SF", "Semifinals"), ("F", "WNBA Finals")],
 }
+# Formats seeded as one table across the league rather than by conference.
+SINGLE_TABLE_FORMATS = {"wnba"}
+# Default home pattern per round ("2-2-1": the higher seed hosts games 1, 2 and 5); configs can override.
+DEFAULT_SERIES = {"wnba": {"R1": "1-1-1", "SF": "2-2-1", "F": "2-2-1-1-1"}}
 # NHL playoff game ids encode the round in their eighth digit: 2025030111 is round 1.
 NHL_ROUND_STAGES = {"1": "R1", "2": "R2", "3": "CF", "4": "F"}
 # Most tie orders tried when matching our seeds to the real bracket.
 MAX_TIE_ORDERS = 20_000
 # Lowest conference seed that reaches each format's bracket (NBA: the play-in).
-BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6}
+BRACKET_SEEDS = {"nfl": 7, "nba": 10, "nhl": 8, "mlb": 6, "wnba": 8}
 
 
 @dataclass(frozen=True)
@@ -88,7 +105,15 @@ SPORT_MODELS = {
     "baseball": SportModel(margin_cap=6, half_life_days=240, previous_weight=1.0, ridge=100.0, drift=0.75, sigma=2.41),
 }
 
-TEAM_SPORT_NAMES = {"american-football": "NFL", "basketball": "NBA", "ice-hockey": "NHL", "baseball": "MLB"}
+# Leagues with settings of their own, backtested on their own seasons with
+# scripts/backtest_us_sports.py (WNBA: 2022 to 2026).
+LEAGUE_MODELS = {
+    "wnba": SportModel(margin_cap=25, half_life_days=120, previous_weight=0.5, ridge=2.0, drift=4.0, sigma=11.5),
+}
+
+
+def model_for(config: dict[str, Any]) -> SportModel:
+    return LEAGUE_MODELS.get(config.get("id", ""), SPORT_MODELS[config["sport"]])
 
 
 # --------------------------------------------------------------------------- data
@@ -230,16 +255,20 @@ def fetch_nhl_playoffs(year: int, cache_dir: Path) -> list[PlayoffGame]:
     return games
 
 
-def fetch_espn_nba_playoffs(year: int, cache_dir: Path) -> list[PlayoffGame]:
-    data = _cached_json(ESPN_NBA_URL.format(year=year + 1), cache_dir / f"nba-espn-{year + 1}.json", 3)
+def fetch_espn_playoffs(provider: str, year: int, cache_dir: Path) -> list[PlayoffGame]:
+    """Playoff games from ESPN's scoreboard; the round comes from each game's note."""
+    source = ESPN_PROVIDERS[provider]
+    league, calendar_year = source["league"], year + source["yearOffset"]
+    data = _cached_json(ESPN_URL.format(league=league, year=calendar_year), cache_dir / f"{league}-espn-{calendar_year}.json", 3)
     games = []
     for event in data.get("events", []):
         kind = event.get("season", {}).get("type")
         if kind not in (3, 5):  # 3 playoffs, 5 play-in
             continue
         competition = event["competitions"][0]
-        headline = next((note.get("headline", "") for note in competition.get("notes", [])), "")
-        stage = "PI" if kind == 5 else next((code for words, code in ESPN_NBA_ROUNDS if words in headline), None)
+        headline = next((note.get("headline", "") for note in competition.get("notes", [])), "").lower()
+        # Notes vary in case ("WNBA FINALS - Game 3"); earlier names win ("Semifinals" before "Finals").
+        stage = "PI" if kind == 5 else next((code for words, code in source["rounds"] if words.lower() in headline), None)
         sides = {item["homeAway"]: item for item in competition["competitors"]}
         if stage is None or set(sides) != {"home", "away"}:
             continue
@@ -265,8 +294,8 @@ def playoff_games(config: dict[str, Any], season: team_sports.Season, cache_dir:
         return fetch_mlb_postseason(season.year, cache_dir)
     if kind == "nhl":
         return fetch_nhl_playoffs(season.year, cache_dir)
-    if kind == "espn-nba":
-        return fetch_espn_nba_playoffs(season.year, cache_dir)
+    if kind in ESPN_PROVIDERS:
+        return fetch_espn_playoffs(kind, season.year, cache_dir)
     if kind == "feed-rounds":
         rounds = {int(number): stage for number, stage in source["rounds"].items()}
         return [
@@ -527,6 +556,22 @@ SERIES_PATTERNS = {
 MLB_SEVEN = [True, True, False, False, False, True, True]
 
 
+def home_pattern(text: str) -> list[bool]:
+    """Home games of the higher seed from a format such as "2-2-1" (games 1, 2 and 5) or "1-1-1"."""
+    pattern, at_home = [], True
+    for block in text.split("-"):
+        pattern += [at_home] * int(block)
+        at_home = not at_home
+    if len(pattern) % 2 == 0:
+        raise ValueError(f"A series needs an odd number of games: {text}")
+    return pattern
+
+
+def series_pattern(config: dict[str, Any], stage: str) -> list[bool]:
+    fmt = config["playoffs"]["format"]
+    return home_pattern(config["playoffs"].get("series", {}).get(stage) or DEFAULT_SERIES[fmt][stage])
+
+
 def play_series(rng, strength, top, bottom, home_edge, sigma, games, pattern=None, neutral=False, top_wins=0, bottom_wins=0):
     """Winner of a series between `top` (home advantage) and `bottom`, per simulation.
 
@@ -607,6 +652,9 @@ def simulate_playoffs(config, structure, rng, strength, seeding, record, ratings
             )
         return winner
 
+    if fmt in SINGLE_TABLE_FORMATS:
+        return single_table_playoffs(config, seed, play)
+
     for c in range(len(structure.conferences)):
         members = np.flatnonzero(structure.conference == c)
         label = structure.conferences[c]
@@ -670,6 +718,25 @@ def simulate_playoffs(config, structure, rng, strength, seeding, record, ratings
     return play("F", top, bottom, 7)
 
 
+def single_table_playoffs(config, seed: np.ndarray, play) -> np.ndarray:
+    """Champion per simulation for leagues seeded as one table (seeds across the whole league)."""
+    fmt = config["playoffs"]["format"]
+    everyone = np.arange(seed.shape[1])
+    at = lambda n: team_at_seed(seed, everyone, n)  # noqa: E731
+
+    def series(stage, top, bottom):
+        pattern = series_pattern(config, stage)
+        return play(stage, top, bottom, len(pattern), pattern=pattern)
+
+    if fmt == "wnba":
+        # Eight teams seeded 1-8 by record, no reseeding: 1 v 8 and 4 v 5 meet in one semifinal.
+        first = {pair: series("R1", at(pair[0]), at(pair[1])) for pair in ((1, 8), (4, 5), (2, 7), (3, 6))}
+        semi_a = series("SF", *higher_seed_first(first[(1, 8)], first[(4, 5)], seed))
+        semi_b = series("SF", *higher_seed_first(first[(2, 7)], first[(3, 6)], seed))
+        return series("F", *higher_seed_first(semi_a, semi_b, seed))
+    raise ValueError(f"Unknown playoff format {fmt}")
+
+
 def playoff_seed(seed: np.ndarray, bracket: dict[int, np.ndarray]) -> np.ndarray:
     """Seeds after the NBA play-in: play-in winners take seeds 7 and 8."""
     adjusted = seed.copy()
@@ -692,7 +759,7 @@ def simulate(
     simulations: int = SIMULATIONS,
     seed: int = SEED,
 ) -> dict[str, Any]:
-    model = SPORT_MODELS[sport]
+    model = model_for(config)
     teams = structure.teams
     count = len(teams)
     index = {team: i for i, team in enumerate(teams)}
@@ -1076,9 +1143,89 @@ def current_seeding(
     return seeding
 
 
+# Tiebreak steps a config can list under playoffs.tiebreakers, as described on the page.
+TIEBREAK_STEPS = {
+    "head-to-head": "head-to-head record",
+    "vs-winning-teams": "record against teams at .500 or better",
+    "head-to-head-differential": "head-to-head points difference",
+    "differential": "points difference",
+    "percentage": "points percentage (points scored over points conceded)",
+}
+
+
+def tiebreak_order(steps: list[str], sport: str, games: list[Game], records: dict[str, dict[str, Any]], fallback: dict[str, float]) -> dict[str, float]:
+    """Order values (higher first) that rank teams level on record by the league's own tiebreakers.
+
+    At the first step that separates a tied group, the group splits by that step's value and
+    each part starts again from the first step, as the WNBA's rules describe. Teams
+    still level after every step are ordered by `fallback` (the model's projection).
+    """
+    from fractions import Fraction
+
+    played = [game for game in games if game.played]
+    winning = {team for team, row in records.items() if row["wins"] >= row["losses"] and row["wins"] + row["losses"] > 0}
+
+    def totals(team: str, opponents: set[str] | None) -> tuple[int, int, int, int]:
+        wins = losses = scored = allowed = 0
+        for game in played:
+            if team not in (game.home, game.away):
+                continue
+            other = game.away if game.home == team else game.home
+            if opponents is not None and other not in opponents:
+                continue
+            own, against = (game.home_score, game.away_score) if game.home == team else (game.away_score, game.home_score)
+            wins += own > against
+            losses += own < against
+            scored += own
+            allowed += against
+        return wins, losses, scored, allowed
+
+    def share(wins: int, losses: int) -> Fraction:
+        return Fraction(wins, wins + losses) if wins + losses else Fraction(1, 2)
+
+    def value(step: str, team: str, group: list[str]):
+        rivals = set(group) - {team}
+        if step == "head-to-head":
+            wins, losses, _, _ = totals(team, rivals)
+            return share(wins, losses)
+        if step == "vs-winning-teams":
+            wins, losses, _, _ = totals(team, winning - {team})
+            return share(wins, losses)
+        if step == "head-to-head-differential":
+            _, _, scored, allowed = totals(team, rivals)
+            return scored - allowed
+        if step == "differential":
+            _, _, scored, allowed = totals(team, None)
+            return scored - allowed
+        if step == "percentage":
+            _, _, scored, allowed = totals(team, None)
+            return Fraction(scored, allowed) if allowed else Fraction(0)
+        raise ValueError(f"Unknown tiebreak step {step}")
+
+    def rank(group: list[str]) -> list[str]:
+        if len(group) < 2:
+            return group
+        for step in steps:
+            values = {team: value(step, team, group) for team in group}
+            levels = sorted(set(values.values()), reverse=True)
+            if len(levels) > 1:
+                return [team for level in levels for team in rank([other for other in group if values[other] == level])]
+        return sorted(group, key=lambda team: -fallback.get(team, 0.0))
+
+    tied: dict[float, list[str]] = defaultdict(list)
+    for team in sorted(records):
+        tied[primary_record(sport, records[team])].append(team)
+    order = {}
+    for group in tied.values():
+        ranked = rank(group)
+        for place, team in enumerate(ranked):
+            order[team] = (len(ranked) - place) / (len(ranked) + 1)
+    return order
+
+
 def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dict[str, Any]:
     sport = config["sport"]
-    model = SPORT_MODELS[sport]
+    model = model_for(config)
     structure = league_structure(config)
     season = team_sports.resolve_season(config, now)
     feed_games = season_games(config, season, cache_dir)
@@ -1114,7 +1261,11 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
 
     records = team_records(games, structure, sport)
     projected = {team: simulation["expected"][team]["wins"] for team in teams}
-    seeding = current_seeding(config, structure, records, sport, projected)
+    tiebreakers = config["playoffs"].get("tiebreakers")
+    if tiebreakers:
+        seeding = ordered_seeding(config, structure, records, sport, tiebreak_order(tiebreakers, sport, games, records, projected))
+    else:
+        seeding = current_seeding(config, structure, records, sport, projected)
     index = {team: i for i, team in enumerate(teams)}
 
     # After the regular season, title odds come from the playoff results so far; without a
@@ -1187,19 +1338,22 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             item["pointDifferential"] = round((row["scored"] - row["allowed"]) / row["played"], 1)
         standings.append(item)
 
+    cutoffs = config["playoffs"].get("cutoffs", [{"after": config["playoffs"]["teamsPerConference"], "label": "Playoff line"}])
+    # A league seeded as one table shows its playoff lines on the league table itself.
+    single_table = len(config["conferences"]) == 1
     groups = []
-    for conference in config["conferences"]:
+    for conference in [] if single_table else config["conferences"]:
         members = [team for team in teams if config["teams"][team]["conference"] == conference["key"]]
         groups.append(
             {
                 "key": conference["key"],
                 "label": conference["label"],
                 "teams": sorted(members, key=lambda team: seeding["seed"][0, index[team]]),
-                "cutoffs": config["playoffs"].get("cutoffs", [{"after": config["playoffs"]["teamsPerConference"], "label": "Playoff line"}]),
+                "cutoffs": cutoffs,
             }
         )
     for conference in config["conferences"]:
-        for division in conference["divisions"]:
+        for division in conference["divisions"] if len(conference["divisions"]) > 1 else []:
             members = [team for team in teams if config["teams"][team]["division"] == division]
             groups.append(
                 {
@@ -1293,19 +1447,29 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
         ] + results
     source = config.get("sources", {}).get("provider")
     started = bool(played)
-    name = TEAM_SPORT_NAMES[sport]
+    if tiebreakers:
+        tiebreak_note = (
+            "The table breaks ties on win percentage with the league's rules: "
+            + ", then ".join(TIEBREAK_STEPS[step] for step in tiebreakers)
+            + ". Simulated seasons break ties at random."
+        )
+    else:
+        tiebreak_note = (
+            "Tiebreakers are simplified: "
+            + ("points, then regulation wins, then wins" if sport == "ice-hockey" else "win percentage, then division or conference record")
+            + "; head-to-head and common-games rules are not modelled."
+        )
     notes = [
         f"Team ratings come from score margins (capped at {model.margin_cap:g}) with home advantage, fitted on this and last "
         f"season with a {model.half_life_days:g}-day half-life; last season counts {model.previous_weight:g}x as much on top.",
         f"The rest of the regular season is simulated {SIMULATIONS:,} times, letting team strength drift (more when more of "
         "the season is left), then the playoffs are simulated from each simulated table for title odds.",
-        "Tiebreakers are simplified: "
-        + ("points, then regulation wins, then wins" if sport == "ice-hockey" else "win percentage, then division or conference record")
-        + "; head-to-head and common-games rules are not modelled.",
+        tiebreak_note,
+        *config.get("notes", []),
     ]
     if not started:
-        notes.insert(0, f"The {name} season has not started: odds come from last season's ratings, pulled toward average.")
-    if config.get("gamesPerTeam"):
+        notes.insert(0, f"The {config['shortName']} season has not started: odds come from last season's ratings, pulled toward average.")
+    if config.get("gamesPerTeam") and any(records[team]["played"] + sum(team in (game.home, game.away) for game in remaining) < config["gamesPerTeam"] for team in teams):
         notes.append("Games not yet on the published schedule are simulated against an average opponent.")
     if cancelled:
         notes.append(f"{len(cancelled)} scheduled game{'s were' if len(cancelled) > 1 else ' was'} never played and {'are' if len(cancelled) > 1 else 'is'} left out.")
@@ -1324,8 +1488,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
     provider = config.get("postseason", {}).get("provider")
     if postseason and provider == "mlb":
         credits.append({"name": "MLB Stats API", "url": "https://statsapi.mlb.com/", "note": "Playoff results: MLB Stats API"})
-    if postseason and provider == "espn-nba":
-        credits.append({"name": "ESPN", "url": "https://www.espn.com/nba/", "note": "Playoff results: ESPN"})
+    if postseason and provider in ESPN_PROVIDERS:
+        credits.append({"name": "ESPN", "url": ESPN_PROVIDERS[provider]["site"], "note": "Playoff results: ESPN"})
 
     return {
         "metadata": {
@@ -1353,8 +1517,9 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
             "outcomes": ["home", "away"],
             "teams": [meta[team] for team in teams],
             "groups": groups,
+            **({"cutoffs": cutoffs} if single_table else {}),
             "rankLabel": "League",
-            "positionLabel": "Conference seed" if sport != "baseball" else "League seed",
+            "positionLabel": config["playoffs"].get("positionLabel") or ("Conference seed" if sport != "baseball" else "League seed"),
             "positionZones": config["playoffs"].get("zones", [{"to": config["playoffs"]["teamsPerConference"], "kind": "top"}]),
         },
         "standings": standings,

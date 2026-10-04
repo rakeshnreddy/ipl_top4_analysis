@@ -133,9 +133,9 @@ function zoneFor(payload: SportPayload, rank: number) {
   return index === 0 ? 'zone-first' : index > 0 ? 'zone-top' : '';
 }
 
-/** Rows above a group's first cut line (playoff places), and between the first and second (play-in). */
-function groupZone(group: SportGroup, position: number) {
-  const [first, second] = group.cutoffs ?? [];
+/** Rows above the first cut line (playoff places), and between the first and second (play-in). */
+function groupZone(cutoffs: SportGroup['cutoffs'], position: number) {
+  const [first, second] = cutoffs ?? [];
   if (!first) {
     return position === 0 ? 'zone-first' : '';
   }
@@ -291,6 +291,8 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
   const groups = payload.league.groups ?? [];
   const group = groups.find((item) => item.key === groupKey);
   const byKey = new Map(payload.standings.map((row) => [row.teamKey, row]));
+  // Lines under table positions: the selected group's, or the league's own when it is seeded as one table.
+  const cutoffs = group ? group.cutoffs : payload.league.cutoffs;
   const rows = group
     ? group.teams.map((key) => byKey.get(key)).filter((row): row is SportStanding => Boolean(row))
     : payload.standings;
@@ -413,13 +415,13 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                 <tbody>
                   {rows.map((row, position) => (
                     <Fragment key={row.teamKey}>
-                      {group?.cutoffs?.some((cutoff) => cutoff.after === position) && (
+                      {cutoffs?.some((cutoff) => cutoff.after === position) && (
                         <tr className="cutline" aria-hidden="true">
-                          <td colSpan={columnCount}>{group.cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
+                          <td colSpan={columnCount}>{cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
                         </tr>
                       )}
                       <tr
-                        className={`${group ? groupZone(group, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
+                        className={`${group || cutoffs ? groupZone(cutoffs, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
                         onClick={() => selectTeam(row.teamKey)}
                       >
                         <td className="col-rank">{group ? position + 1 : row.rank}</td>
