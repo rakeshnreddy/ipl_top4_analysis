@@ -163,7 +163,7 @@ class SeriesTests(unittest.TestCase):
 
 class TiebreakTests(unittest.TestCase):
     def test_a_three_way_tie_restarts_after_each_split(self) -> None:
-        # A and B beat C twice; A and B split. A then wins on record against winning teams.
+        # A, B and C finish 2-2; A and B both beat C and split their own games.
         from team_sports import Game
 
         start = datetime(2026, 6, 1, tzinfo=timezone.utc)
