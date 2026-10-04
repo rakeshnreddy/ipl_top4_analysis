@@ -189,7 +189,9 @@ class NwslLiveTests(unittest.TestCase):
         self.assertEqual(self.payload["metadata"]["season_status"], "in_progress")
         self.assertNotIn("bracket", self.payload)
         self.assertEqual(len(self.payload["fixtures"]), 27)
-        self.assertEqual(self.payload["standings"][0]["record"], "16-4-6")
+        # One table: the team panel shows place and points, not an MLS-style record and conference seed.
+        self.assertEqual((self.payload["standings"][0]["wins"], self.payload["standings"][0]["losses"], self.payload["standings"][0]["draws"]), (16, 4, 6))
+        self.assertFalse({"record", "seed", "conference"} & set(self.payload["standings"][0]))
         self.assertTrue(self.payload["matchesThatMatter"])
         self.assertEqual(self.payload["metadata"]["warnings"], [])
         team_sports.validate_config(self.cfg)
