@@ -12,6 +12,7 @@ and projection ahead of the frontend build. Two sources are supported:
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import importlib
 import json
 import os
@@ -486,6 +487,16 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
     return list(table.values())
 
 
+def apply_deductions(standings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Take configured points deductions off the league-stage totals."""
+    by_key = {row["teamKey"]: row for row in standings}
+    for item in LEAGUE.deductions:
+        row = by_key[item.team]
+        row["points"] -= item.points
+        row["deductedPoints"] = row.get("deductedPoints", 0) + item.points
+    return standings
+
+
 def apply_cricdata_nrr_from_points(
     standings: list[dict[str, Any]],
     points_payload: dict[str, Any],
@@ -579,7 +590,7 @@ def fetch_cricdata_data(now: datetime) -> tuple[list[dict[str, Any]], list[dict[
     info_payload = fetch_cricdata_json(session, "series_info", api_key, {"offset": 0, "id": series_id})
 
     warnings: list[str] = []
-    standings = derive_cricdata_standings_from_matches(info_payload)
+    standings = apply_deductions(derive_cricdata_standings_from_matches(info_payload))
     # Before the first result there is no points table or NRR to read.
     if any(row["matches"] for row in standings):
         try:
@@ -638,6 +649,7 @@ def validate_source_data(
             + row["noResult"] * LEAGUE.points_no_result
             + row.get("ties", 0) * LEAGUE.points_tie
             + row.get("bonusPoints", 0)
+            - row.get("deductedPoints", 0)
         )
 
     bad_points = [row for row in standings if row["points"] != expected_points(row)]
@@ -684,9 +696,28 @@ def validate_source_data(
         )
 
 
+def seed_order(order: list[str]) -> list[str]:
+    """Team keys in seed order. Without groups that is the table order; with groups, the
+    group winners come first (in table order), then the second-placed teams, and so on.
+    """
+    if not LEAGUE.groups:
+        return order
+    group_of = LEAGUE.team_group
+    filled: dict[str, int] = {}
+    place: dict[str, int] = {}
+    for key in order:
+        filled[group_of[key]] = filled.get(group_of[key], 0) + 1
+        place[key] = filled[group_of[key]]
+    position = {key: index for index, key in enumerate(order)}
+    return sorted(order, key=lambda key: (place[key], position[key]))
+
+
 def ranked_standings(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     has_complete_nrr = all(isinstance(row.get("nrr"), float) for row in rows)
-    has_source_rank = all(isinstance(row.get("rank"), int) and 0 < row["rank"] <= len(TEAM_META) for row in rows)
+    # A feed's rank means little across groups, so group stages are ranked on points.
+    has_source_rank = not LEAGUE.groups and all(
+        isinstance(row.get("rank"), int) and 0 < row["rank"] <= len(TEAM_META) for row in rows
+    )
     if has_complete_nrr:
         ranked = sorted(
             rows,
@@ -696,6 +727,13 @@ def ranked_standings(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ranked = sorted(rows, key=lambda row: row["rank"])
     else:
         ranked = sorted(rows, key=lambda row: (-row["points"], -row["wins"], row["fullName"]))
+    if LEAGUE.groups:
+        by_key = {row["teamKey"]: row for row in ranked}
+        group_of = LEAGUE.team_group
+        for row in ranked:
+            row["group"] = group_of[row["teamKey"]]
+            row["groupRank"] = 1 + sum(1 for other in ranked[: ranked.index(row)] if group_of[other["teamKey"]] == row["group"])
+        ranked = [by_key[key] for key in seed_order(list(by_key))]
     for idx, row in enumerate(ranked, start=1):
         row["rank"] = idx
     return ranked
@@ -711,7 +749,7 @@ def simulation_rank(table: dict[str, dict[str, Any]]) -> list[str]:
             TEAM_META[item[0]].full_name,
         )
     )
-    return [key for key, _ in rows]
+    return seed_order([key for key, _ in rows])
 
 
 def fixture_label(fixture: dict[str, Any]) -> str:
@@ -1098,8 +1136,13 @@ def run_analysis(
     if not fixtures and league_complete and has_nrr:
         return final_table_analysis(standings_rows, now)
     # Without NRR, teams level on points and wins keep sharing slots fractionally.
-    # Bonus points are random per win, which the exact solver cannot express.
-    if len(fixtures) <= EXACT_MAX_FIXTURES and not (LEAGUE.bonus_simulation_rate or LEAGUE.bonus_loser_simulation_rate):
+    # Bonus points are random per win, which the exact solver cannot express; nor can it
+    # rank teams within groups, so group stages are always sampled.
+    if (
+        len(fixtures) <= EXACT_MAX_FIXTURES
+        and not (LEAGUE.bonus_simulation_rate or LEAGUE.bonus_loser_simulation_rate)
+        and not LEAGUE.groups
+    ):
         return run_exact_dp_analysis(standings_rows, fixtures, now)
 
     team_keys = [row["teamKey"] for row in standings_rows]
@@ -1377,13 +1420,34 @@ def extra_result_matches() -> list[cricsheet.Match]:
     ]
 
 
+def with_targets(matches: list[cricsheet.Match]) -> list[cricsheet.Match]:
+    """Add the configured targets of shortened matches whose Cricsheet file has none.
+
+    NRR needs a shortened match's overs (and its D/L target); the 2026 Blast files omit both.
+    """
+    pending = list(LEAGUE.targets)
+    filled = []
+    for match in matches:
+        teams = {team_key(name) for name in match.teams}
+        item = next((item for item in pending if item.date == match.date and {team_key(name) for name in item.teams} == teams), None)
+        if item:
+            pending.remove(item)
+            if match.target_runs is None:
+                match = dataclasses.replace(match, target_runs=item.runs, target_balls=item.overs * match.balls_per_over)
+        filled.append(match)
+    if pending:
+        missing = ", ".join(f"{item.teams[0]} v {item.teams[1]} ({item.date})" for item in pending)
+        raise SourceValidationError(f"Configured targets match no Cricsheet match: {missing}")
+    return filled
+
+
 def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
     """Rebuild a season from Cricsheet: final table with exact NRR, plus playoffs."""
     now = utc_now()
     if not LEAGUE.cricsheet_competition:
         raise SourceValidationError(f"{LEAGUE.id} has no Cricsheet source configured")
     archive = archive or cricsheet.fetch_archive(LEAGUE.cricsheet_competition, CRICSHEET_CACHE_DIR)
-    matches = cricsheet.load_season(archive, LEAGUE.season, gender=LEAGUE.gender)
+    matches = with_targets(cricsheet.load_season(archive, LEAGUE.season, gender=LEAGUE.gender))
     if not matches:
         raise SourceValidationError(f"Cricsheet archive has no {LEAGUE.short_name} {LEAGUE.season} matches")
 
@@ -1421,6 +1485,7 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
                 "remainingMatches": max(0, LEAGUE_MATCHES_PER_TEAM - row.matches),
             }
         )
+    standings = apply_deductions(standings)
     validate_source_data(standings, [], now, strict_zero_fixtures=False)
     if expected_remaining_fixture_count(standings):
         raise SourceValidationError(
@@ -1444,7 +1509,8 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
             "warnings": warnings,
             "notes": [
                 f"{item.teams[0]} v {item.teams[1]} ({item.date}): {item.note}" for item in LEAGUE.extra_results
-            ],
+            ]
+            + [f"{TEAM_META[item.team].full_name}: {item.points} points deducted ({item.note})" for item in LEAGUE.deductions],
         },
         "league": LEAGUE.payload_block(),
         "standings": standings,

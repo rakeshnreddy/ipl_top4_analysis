@@ -352,3 +352,115 @@ export function wplLivePayload(played: boolean): IplSeasonPayload {
   };
 }
 
+const blastGroups = [
+  { name: 'North', teams: ['NOT', 'YOR', 'LAN', 'DUR'] },
+  { name: 'Central', teams: ['NOR', 'SOM', 'GLO', 'WAR'] },
+  { name: 'South', teams: ['HAM', 'SUR', 'ESS', 'SUS'] },
+];
+
+// key, full name, wins, losses, ties, points, NRR, seed (winners, then seconds, then thirds, then fourths).
+const blastRecords: Array<[string, string, number, number, number, number, number, number]> = [
+  ['NOR', 'Northamptonshire Steelbacks', 9, 3, 0, 36, 0.936, 1],
+  ['HAM', 'Hampshire Hawks', 8, 4, 0, 32, 0.283, 2],
+  ['NOT', 'Notts Outlaws', 8, 4, 0, 32, 0.169, 3],
+  ['YOR', 'Yorkshire', 7, 4, 1, 30, 0.72, 4],
+  ['SOM', 'Somerset', 7, 5, 0, 28, 0.763, 5],
+  ['SUR', 'Surrey', 7, 5, 0, 28, 0.666, 6],
+  ['ESS', 'Essex', 7, 5, 0, 28, 0.354, 7],
+  ['GLO', 'Gloucestershire', 7, 5, 0, 28, 0.288, 8],
+  ['LAN', 'Lancashire Lightning', 6, 5, 1, 26, -0.335, 9],
+  ['WAR', 'Warwickshire Bears', 6, 6, 0, 24, 0.367, 10],
+  ['DUR', 'Durham', 5, 7, 0, 20, 0.462, 11],
+  ['SUS', 'Sussex Sharks', 3, 9, 0, 10, -1.168, 12],
+];
+
+const blastFixture = (id: string, teamA: string, teamB: string) => ({
+  id,
+  matchNo: null,
+  teamA,
+  teamB,
+  dateTimeGMT: '2026-07-10T17:30:00Z',
+  dateTimeLocal: null,
+  venue: null,
+  status: 'scheduled',
+  sourceUrl: '',
+});
+
+/** A T20 Blast-style season in three groups: final (with playoffs) or with two games each left (with odds). */
+export function blastPayload(final: boolean): IplSeasonPayload {
+  const group = (key: string) => blastGroups.find((item) => item.teams.includes(key))!;
+  const odds = (seed: number) =>
+    final ? { top8: seed <= 8 ? 100 : 0, top4: seed <= 4 ? 100 : 0 } : { top8: Math.max(0, 100 - seed * 8), top4: Math.max(0, 60 - seed * 6) };
+  return {
+    metadata: {
+      season: '2026',
+      generated_at: '2026-10-03T12:00:00Z',
+      source: final ? 'Cricsheet' : 'CricketData',
+      source_url: final ? 'https://cricsheet.org/' : 'https://cricketdata.org/',
+      data_freshness_status: 'fresh',
+      season_status: final ? 'complete' : 'league_stage',
+      warnings: [],
+    },
+    league: {
+      id: 't20-blast-2026',
+      name: 'T20 Blast',
+      shortName: 'T20 Blast',
+      season: '2026',
+      seasonLabel: '2026',
+      matchesPerTeam: 12,
+      qualification: [
+        { size: 8, label: 'Quarter-finals', shortLabel: 'QF' },
+        { size: 4, label: 'Home quarter-final', shortLabel: 'Home QF' },
+      ],
+      secondChanceStages: [],
+      teams: blastRecords.map(([key, fullName]) => ({ key, shortName: key, fullName, color: '#123456', textColor: '#FFFFFF' })),
+      groups: blastGroups,
+      deductions: [{ team: 'SUS', points: 2, note: 'ECB financial agreement' }],
+    },
+    standings: blastRecords.map(([teamKey, fullName, wins, losses, ties, points, nrr, seed]) => ({
+      teamKey,
+      shortName: teamKey,
+      fullName,
+      matches: final ? 12 : 10,
+      wins: final ? wins : wins - 1,
+      losses: final ? losses : losses - 1,
+      noResult: 0,
+      ties,
+      points: final ? points : points - 4,
+      ...(teamKey === 'SUS' ? { deductedPoints: 2 } : {}),
+      nrr,
+      rank: seed,
+      group: group(teamKey).name,
+      groupRank: group(teamKey).teams.indexOf(teamKey) + 1,
+      remainingMatches: final ? 0 : 2,
+    })),
+    fixtures: final
+      ? []
+      : blastGroups.flatMap(({ name, teams }) => [
+          blastFixture(`${name}-1`, teams[0], teams[1]),
+          blastFixture(`${name}-2`, teams[2], teams[3]),
+          blastFixture(`${name}-3`, teams[0], teams[2]),
+          blastFixture(`${name}-4`, teams[1], teams[3]),
+        ]),
+    playoffs: final
+      ? {
+          matches: [
+            { id: 'qf1', stage: 'Quarter-final', date: '2026-07-15', teamA: 'NOR', teamB: 'GLO', winner: 'NOR', result: 'NOR won by 8 wickets', venue: null },
+            { id: 'qf2', stage: 'Quarter-final', date: '2026-07-15', teamA: 'NOT', teamB: 'SUR', winner: 'NOT', result: 'NOT won by 7 runs', venue: null },
+            { id: 'fi', stage: 'Final', date: '2026-07-18', teamA: 'NOR', teamB: 'HAM', winner: 'NOR', result: 'NOR won by 14 runs', venue: 'Edgbaston, Birmingham' },
+          ],
+          champion: 'NOR',
+          runnerUp: 'HAM',
+        }
+      : undefined,
+    analysis: {
+      method: final ? 'Final standings' : 'Monte Carlo',
+      simulationCount: final ? 1 : 40000,
+      generatedAt: '2026-10-03T12:00:00Z',
+      overallProbabilities: Object.fromEntries(blastRecords.map(([key, , , , , , , seed]) => [key, odds(seed)])),
+      teamAnalysis: { '8': {}, '4': {} },
+      qualificationPath: { '8': {}, '4': {} },
+    },
+  };
+}
+

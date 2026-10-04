@@ -36,6 +36,24 @@ export function rankingSort(a: IplStanding, b: IplStanding) {
   return b.points - a.points || nrrSort || a.rank - b.rank || b.wins - a.wins || a.fullName.localeCompare(b.fullName);
 }
 
+/** Group-stage leagues (the T20 Blast) rank teams within groups and seed them across groups. */
+export const hasGroups = (payload: IplSeasonPayload) => (payload.league?.groups?.length ?? 0) > 0;
+
+/** Teams in qualification order: the table, or the seeds when the league plays in groups. */
+export function orderedStandings(payload: IplSeasonPayload) {
+  return [...payload.standings].sort(hasGroups(payload) ? (a, b) => a.rank - b.rank : rankingSort);
+}
+
+/** Each group's teams in group order; empty when the league has no groups. */
+export function groupTables(payload: IplSeasonPayload) {
+  return (payload.league?.groups ?? []).map((group) => ({
+    name: group.name,
+    teams: payload.standings
+      .filter((team) => team.group === group.name)
+      .sort((a, b) => (a.groupRank ?? a.rank) - (b.groupRank ?? b.rank)),
+  }));
+}
+
 /** A team's chance of finishing in the top `size`; payloads store it as `top{size}`. */
 export function tierProbability(payload: IplSeasonPayload, teamKey: string, size: number) {
   return payload.analysis.overallProbabilities[teamKey]?.[`top${size}`] ?? 0;
@@ -44,7 +62,7 @@ export function tierProbability(payload: IplSeasonPayload, teamKey: string, size
 /** Who holds the playoff places right now and who is chasing them. */
 export function raceSnapshot(payload: IplSeasonPayload, playoffSize = 4) {
   const chance = (team: IplStanding) => tierProbability(payload, team.teamKey, playoffSize);
-  const ordered = [...payload.standings].sort(rankingSort);
+  const ordered = orderedStandings(payload);
   const currentTop = ordered.slice(0, playoffSize);
   const cutlineTeam = currentTop[playoffSize - 1] || null;
   const nearestChallenger = [...ordered.slice(playoffSize)].sort((a, b) => chance(b) - chance(a))[0] || null;

@@ -2,7 +2,7 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from './Root';
-import { finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
+import { blastPayload, finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
 
 describe('App', () => {
   beforeEach(() => {
@@ -247,6 +247,81 @@ describe('App home page', () => {
     await screen.findByRole('heading', { name: 'Punjab Kings' });
     expect(container.querySelector('.deep-dive-grid')).toHaveTextContent('6W-6L-1T-0NR');
     expect(screen.getByText('League stage · 2 bonus points')).toBeInTheDocument();
+  });
+});
+
+describe('App for a league played in groups', () => {
+  const rowsOf = (table: HTMLElement) =>
+    Array.from(table.querySelectorAll<HTMLElement>('.standing-row')).map((row) => ({
+      text: row.textContent || '',
+      qualifying: row.classList.contains('zone-top'),
+    }));
+  const groupTable = (name: string) => screen.getByRole('table', { name: `T20 Blast 2026 ${name} Group standings` });
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  });
+
+  it('shows a table per group and marks the qualifying places across groups', async () => {
+    installFetch(finalPayload, mockManifest, { '/data/t20-blast-2026.json': blastPayload(true) });
+    window.history.replaceState(null, '', '/?league=t20-blast-2026');
+
+    render(<Root />);
+
+    expect(await screen.findByRole('heading', { name: 'T20 Blast 2026 Final Standings' })).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { level: 3 }).slice(0, 3).map((heading) => heading.textContent)).toEqual([
+      'North Group',
+      'Central Group',
+      'South Group',
+    ]);
+    expect(screen.getByText('Each group ranked by points, then net run rate')).toBeInTheDocument();
+
+    const north = rowsOf(groupTable('North'));
+    expect(north.map((row) => row.text.slice(0, 4))).toEqual(['1NOT', '2YOR', '3LAN', '4DUR']);
+    // Lancashire were third, but not one of the two best third-placed teams; Gloucestershire were.
+    expect(north.map((row) => row.qualifying)).toEqual([true, true, false, false]);
+    expect(rowsOf(groupTable('Central')).map((row) => row.qualifying)).toEqual([true, true, true, false]);
+    expect(within(groupTable('South')).getByText('after a 2-point deduction', { exact: false })).toBeInTheDocument();
+
+    expect(screen.getByTestId('group-rules')).toHaveTextContent(
+      'Quarter-finals: the top 2 in each group and the 2 best 3rd-placed teams. Home quarter-final: the group winners and the best 2nd-placed team.',
+    );
+    expect(screen.getByText('* Sussex Sharks: 2 points deducted (ECB financial agreement).')).toBeInTheDocument();
+    expect(screen.getByText('Top seed')).toBeInTheDocument();
+    expect(screen.getByText('3rd in North on 26 pts, 2 pts behind GLO.')).toBeInTheDocument();
+    expect(screen.getByText('DUR, WAR, SUS')).toBeInTheDocument();
+    expect(screen.getByTestId('playoffs-panel')).toHaveTextContent('Northamptonshire Steelbacks won the T20 Blast 2026 title.');
+  });
+
+  it("gives a team's place in its group", async () => {
+    installFetch(finalPayload, mockManifest, { '/data/t20-blast-2026.json': blastPayload(true) });
+    window.history.replaceState(null, '', '/?league=t20-blast-2026#team=SUS');
+
+    const { container } = render(<Root />);
+
+    expect(await screen.findByRole('heading', { name: 'Sussex Sharks' })).toBeInTheDocument();
+    const card = container.querySelector('.deep-dive-grid')!;
+    expect(card).toHaveTextContent('Finished 4th in South');
+    expect(card).toHaveTextContent('seed 12 of 12');
+    expect(card).toHaveTextContent('League stage · 2 points deducted');
+  });
+
+  it('shows live odds inside each group table', async () => {
+    installFetch(finalPayload, mockManifest, { '/data/t20-blast-2026.json': blastPayload(false) });
+    window.history.replaceState(null, '', '/?league=t20-blast-2026');
+
+    render(<Root />);
+
+    expect(await screen.findByRole('heading', { name: 'T20 Blast Quarter-finals Qualification Probabilities' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Quarter-finals Odds' })).toBeInTheDocument();
+    const north = groupTable('North');
+    // Phones show the short tier label; screen readers keep the full one.
+    expect(within(north).getByText('Home quarter-final')).toHaveClass('label-full');
+    expect(within(north).getByText('Home QF')).toHaveAttribute('aria-hidden', 'true');
+    expect(rowsOf(north)[0].text).toContain('76%');
+    const heroFacts = screen.getByLabelText('Race snapshot');
+    expect(within(heroFacts).getByText('NOR, HAM, NOT, YOR, SOM, SUR, ESS, GLO')).toBeInTheDocument();
   });
 });
 

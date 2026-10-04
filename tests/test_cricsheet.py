@@ -514,6 +514,14 @@ OFFICIAL_TABLES = {
     "super-smash-women-2025-26": {
         "WB": (33, 0.891), "NB": (28, 0.702), "AH": (25, 0.316), "CH": (25, -0.281), "OS": (22, 0.247), "CM": (6, -1.82),
     },
+    # https://www.ecb.co.uk/t20-blast/tables/2026 (all 12 group-stage games, cross-pool ones included). 4 points a win,
+    # 2 a tie; Sussex lost 2 points (ECB financial agreement). Two shortened games need the targets in the config.
+    "t20-blast-2026": {
+        "NOT": (32, 0.169), "YOR": (30, 0.72), "LAN": (26, -0.335), "DUR": (20, 0.462), "DER": (16, 0.393),
+        "LEI": (12, -1.6), "NOR": (36, 0.936), "SOM": (28, 0.763), "GLO": (28, 0.288), "WAR": (24, 0.367),
+        "GLA": (24, 0.217), "WOR": (24, -0.337), "HAM": (32, 0.283), "SUR": (28, 0.666), "ESS": (28, 0.354),
+        "KEN": (16, -0.895), "MID": (16, -1.243), "SUS": (10, -1.168),
+    },
 }
 
 

@@ -78,6 +78,7 @@ Every page uses the same frame:
   - Real `<table>` with a visually hidden caption, `scope` on headers, and the team name as a `th scope="row"` containing a button with `aria-pressed`.
   - Optional columns hide below 760px.
   - Short tier labels replace long ones on phones, but the long label stays for screen readers.
+  - A league played in groups shows one table per group, each under an `h3` with its own caption, ranked within the group. The zone stripe marks the qualifying places across groups, and a note under the tables states the rule.
 - **Segmented controls** (`.goal-tabs`): buttons with `aria-pressed`. They stay on one row and scroll sideways when there are many choices.
 - **Charts:** decorative bars are `aria-hidden`, and a visually hidden list carries the values.
 

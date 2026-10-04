@@ -23,9 +23,15 @@ export interface IplStanding {
   ties?: number;
   /** SA20-style bonus points, already included in `points`. */
   bonusPoints?: number;
+  /** Points taken off by a sanction, already subtracted from `points`. */
+  deductedPoints?: number;
   points: number;
   nrr: number | null;
+  /** Overall rank; in a group stage, the seed across groups (winners first, then seconds...). */
   rank: number;
+  /** Group-stage leagues (the T20 Blast): the team's group and its place in it. */
+  group?: string;
+  groupRank?: number;
   remainingMatches: number;
 }
 
@@ -107,6 +113,8 @@ export interface IplPlayoffs {
 export interface QualificationTier {
   size: number;
   label: string;
+  /** Column header on phones, such as "QF". */
+  shortLabel?: string;
 }
 
 export interface LeagueTeam {
@@ -129,6 +137,20 @@ export interface IplLeague {
   secondChanceStages: string[];
   points?: { win: number; noResult: number; tie: number; bonus: boolean };
   teams: LeagueTeam[];
+  /** A league stage played in groups; a tier of size N is the top N seeds across them. */
+  groups?: LeagueGroup[];
+  deductions?: PointsDeduction[];
+}
+
+export interface LeagueGroup {
+  name: string;
+  teams: string[];
+}
+
+export interface PointsDeduction {
+  team: string;
+  points: number;
+  note: string;
 }
 
 /** Change in each team's playoff-tier chance (percentage points) since the previous update. */
