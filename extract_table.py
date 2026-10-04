@@ -213,11 +213,17 @@ def fetch_cricdata_json(
     return payload
 
 
+def is_womens_series(name: str) -> bool:
+    return bool(re.search(r"\bwomens?\b", normalize_name(name)))
+
+
 def find_cricdata_series_id(session: requests.Session, api_key: str) -> str:
     explicit = cricdata_series_id()
     if explicit:
         return explicit
 
+    # "Big Bash League" also matches "Women's Big Bash League": a men's league skips women's series.
+    womens = LEAGUE.gender == "female" or any(is_womens_series(series) for series in LEAGUE.cricketdata_series_names)
     candidates: list[dict[str, Any]] = []
     for offset in range(0, 100, 25):
         payload = fetch_cricdata_json(session, "series", api_key, {"offset": offset})
@@ -228,6 +234,8 @@ def find_cricdata_series_id(session: requests.Session, api_key: str) -> str:
             if not isinstance(item, dict):
                 continue
             name = normalize_name(str(item.get("name", "")))
+            if is_womens_series(name) and not womens:
+                continue
             # Normalised on both sides, so "2026-27" also matches "2026/27".
             if normalize_name(SEASON) in name and any(
                 re.search(rf"\b{re.escape(normalize_name(series))}\b", name)

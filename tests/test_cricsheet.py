@@ -445,6 +445,11 @@ OFFICIAL_TABLES = {
         "GAW": (16, 0.615), "ABF": (13, 0.174), "BT": (12, -0.125), "JAK": (8, -0.085),
         "SLK": (8, -0.887), "SKNP": (7, 0.252), "TKR": (6, -0.01),
     },
+    # https://www.cricket.com.au/matches/series/CA:3193 (ladder). Heat v Sixers on 28 Nov was abandoned without a ball.
+    "wbbl-2025-26": {
+        "HUR": (15, 0.662), "SIX": (13, -0.313), "SCO": (12, -0.132), "STA": (11, 0.629),
+        "REN": (10, 0.121), "STR": (9, 0.077), "THU": (9, -0.124), "HEA": (1, -0.869),
+    },
 }
 
 
