@@ -302,6 +302,99 @@ class ALeagueMenPreseasonTests(unittest.TestCase):
         self.assertTrue(all(5 < values["finals"] < 95 for values in probabilities.values()))
 
 
+# https://aleagues.com.au/ladders/a-league-women/2025-2026/ (final); ESPN's aus.w.1 table agrees.
+# Sydney (4 wins) finish above Western Sydney (5 wins) on goal difference, which comes before wins.
+OFFICIAL_WOMEN_2025 = [
+    ("MCY", 20, 12, 4, 4, 36, 20, 40),
+    ("WEL", 20, 10, 4, 6, 38, 17, 34),
+    ("CAN", 20, 9, 4, 7, 30, 24, 31),
+    ("BRI", 20, 9, 4, 7, 37, 39, 31),
+    ("ADE", 20, 9, 3, 8, 24, 26, 30),
+    ("MVC", 20, 8, 4, 8, 27, 24, 28),
+    ("CCM", 20, 7, 7, 6, 27, 26, 28),
+    ("PER", 20, 7, 3, 10, 20, 30, 24),
+    ("NEW", 20, 7, 2, 11, 30, 36, 23),
+    ("SYD", 20, 4, 7, 9, 18, 29, 19),
+    ("WSW", 20, 5, 4, 11, 18, 34, 19),
+]
+
+# The 2026 Finals Series (https://aleagues.com.au/ninja-a-league-finals-series-2026/: Melbourne City champions;
+# scores from ESPN's aus.w.1 scoreboard, which FixtureDownload's agree with).
+OFFICIAL_WOMEN_FINALS_2025 = {
+    "EF": [
+        ("CAN", "MVC", 3, 6, (1, 3), "MVC", None),
+        ("BRI", "ADE", 4, 5, (3, 0), "BRI", None),
+    ],
+    # Premiers Melbourne City play Victory (6th), the lower-ranked Elimination Final winner: the
+    # semi-finals are reseeded, not 1 v the 4/5 winner.
+    "SF": [
+        ("MCY", "MVC", 1, 6, (2, 0), "MCY", None),
+        ("WEL", "BRI", 2, 4, (3, 2), "WEL", "After extra time"),
+    ],
+    "GF": [("MCY", "WEL", 1, 2, (3, 1), "MCY", None)],
+}
+
+
+class ALeagueWomen2025Tests(unittest.TestCase):
+    """The finished 2025-26 season, rebuilt from the aleague-women-2025 feed and ESPN's finals."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.cfg = leagues.read_config("a-league-women")
+        cls.payload = build(cls.cfg, datetime(2026, 6, 10, tzinfo=UTC), [2025])
+
+    def test_the_final_ladder_matches_the_official_one(self) -> None:
+        self.assertEqual(ladder(self.payload), OFFICIAL_WOMEN_2025)
+
+    def test_a_result_missing_from_the_feed_comes_from_espn(self) -> None:
+        # FixtureDownload has no score for Newcastle Jets v Wellington Phoenix on 1 February 2026.
+        data = json.loads((FIXTURES / "a-league-women-2025.json").read_text(encoding="utf-8"))
+        self.assertIn([75, 15, "2026-02-01 06:00:00Z", "Newcastle Jets", "Wellington Phoenix", None, None], data["games"])
+        result = next(item for item in self.payload["results"] if item["id"] == "75")
+        self.assertEqual((result["home"], result["homeScore"], result["awayScore"], result["away"]), ("Newcastle Jets", 1, 5, "Wellington Phoenix"))
+        self.assertEqual(self.payload["metadata"]["warnings"], ["Previous season unavailable (aleague-women-2024: the feed has no fixtures yet); ratings use this season only."])
+
+    def test_the_real_finals_are_reproduced(self) -> None:
+        self.assertEqual(bracket_rows(self.payload), OFFICIAL_WOMEN_FINALS_2025)
+        self.assertEqual(self.payload["bracket"]["champion"], "Melbourne City")
+        probabilities = self.payload["analysis"]["probabilities"]
+        self.assertEqual(probabilities["Melbourne City"]["premiership"], 100.0)
+        self.assertEqual(probabilities["Melbourne City"]["championship"], 100.0)
+        self.assertEqual(self.payload["metadata"]["season_status"], "complete")
+        self.assertEqual(extract_table.index_entry(self.payload)["champion"], "MCY")
+        # ESPN pads some names ("Sydney FC ", "Western Sydney "); they are trimmed and mapped.
+        self.assertEqual({row["teamKey"] for row in self.payload["standings"]}, set(self.cfg["teams"]) - {"Western United"})
+
+
+class ALeagueWomenPreseasonTests(unittest.TestCase):
+    """2026-27 on 3 October 2026, before the first game."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.cfg = leagues.read_config("a-league-women")
+        cls.payload = build(cls.cfg, datetime(2026, 10, 3, 12, tzinfo=UTC), [2026, 2025])
+
+    def test_every_game_is_still_to_play(self) -> None:
+        self.assertEqual(self.payload["league"]["id"], "a-league-women-2026-27")
+        self.assertEqual(len(self.payload["fixtures"]), 110)
+        self.assertEqual(len(self.payload["standings"]), 11)
+        self.assertIn(("Newcastle Jets", "Perth Glory"), {(item["home"], item["away"]) for item in self.payload["fixtures"][:2]})
+        self.assertEqual(self.payload["metadata"]["season_status"], "in_progress")
+        self.assertEqual(self.payload["metadata"]["warnings"], [])
+        team_sports.validate_config(self.cfg)
+
+    def test_odds_add_up_to_the_places_on_offer(self) -> None:
+        probabilities = self.payload["analysis"]["probabilities"]
+        totals = {key: sum(values[key] for values in probabilities.values()) / 100 for key in ("finals", "top2", "premiership", "championship")}
+        self.assertEqual({key: round(value, 2) for key, value in totals.items()}, {"finals": 6, "top2": 2, "premiership": 1, "championship": 1})
+        for values in probabilities.values():
+            self.assertLessEqual(values["championship"], values["finals"] + 1e-9)
+            self.assertLessEqual(values["premiership"], values["top2"] + 1e-9)
+        # Last season's Grand Finalists start as favourites: Wellington (the best goal difference) and Melbourne City.
+        favourites = sorted(probabilities, key=lambda team: -probabilities[team]["championship"])[:2]
+        self.assertEqual(set(favourites), {"Wellington Phoenix", "Melbourne City"})
+
+
 class ALeagueFailureTests(unittest.TestCase):
     def test_without_espn_the_ladder_still_builds_and_title_odds_wait(self) -> None:
         cfg = leagues.read_config("a-league-men")

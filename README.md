@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, and Australia's A-League Men, NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, and Australia's A-League Men and Women, NBL and WNBL. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -254,6 +254,32 @@ The A-League Men (`leagues/a-league-men.json`) is a rolling football config with
 - Finals, top-two, premiership and title odds at 25%, 50% and 75% of both seasons scored a mean Brier of 0.0895 with no drift, 0.0865 at Europe's 0.2, 0.0848 at 0.3 and 0.0839 at 0.4. At 0.2, finals chances of 10-30% (0.21 on average) came true for 38% of those clubs, against 20% (0.20 predicted) at 0.3; the bins are small (13 and 15 club-checkpoints). With 2023-24 added (no earlier feed), the larger the drift the better, up to 0.6, the largest tried. The A-League uses 0.3: most of the gain, without leaning hard on two seasons.
 
 **Page:** the ladder with the Elimination Final and finals lines, Finals, Top 2 (a semi-final bye), Premiership and Championship odds, ladder-position chances, and, once the regular season ends, the bracket with match scores, semi-final aggregates and penalties.
+
+## A-League Women
+
+The A-League Women (`leagues/a-league-women.json`, ESPN `aus.w.1`) has the men's engine, finals format, tiebreakers and data handling (above). The payload id carries the season (`a-league-women-2026-27`), which starts on 17 October 2026.
+
+- **Rules** ([Ninja A-League Women 25/26 Competition Rules Summary](https://aleagues.com.au/more/official-documents/); [2026-27 fixture](https://aleagues.com.au/news/aleague-women-2026-2027-fixture-list-revealed-key-dates-fixture-information/)):
+  - 11 clubs, Wellington Phoenix from New Zealand among them, 20 games each over 22 matchweeks: home and away, with two byes per club.
+  - Points, tiebreakers, the Premiers Plate and the top-six Finals Series are as for the men.
+  - The 2026-27 rules were not published by 3 October 2026, so these are 2025-26's.
+  - The 2023-24 rules ranked wins before goal difference. That put Western United third ahead of Melbourne Victory: ESPN's order and that season's Elimination Finals agree, and the build uses ESPN's order.
+- **Data:**
+  - FixtureDownload has no score for Newcastle Jets 1-5 Wellington Phoenix (1 February 2026); ESPN's fills it in.
+  - ESPN pads some names ("Sydney FC ", "Western Sydney "); they are trimmed, then mapped in `aliases`.
+  - For 2023-24 to 2025-26, setting the finals apart leaves 132, 138 and 110 regular-season games, ESPN's counts. Every other FixtureDownload score agrees with ESPN's, finals included.
+- **Checks** (`tests/test_a_leagues.py`, fixtures `tests/fixtures/a-league-women-2025.json` and `a-league-women-2026.json`):
+  - The final 2025-26 ladder matches [aleagues.com.au](https://aleagues.com.au/ladders/a-league-women/2025-2026/) for all 11 clubs: played, won, drawn, lost, goals, points and order. Sydney finish above Western Sydney on goal difference with one win fewer.
+  - The [2026 Finals Series](https://aleagues.com.au/ninja-a-league-finals-series-2026/) is rebuilt from the final ladder and ESPN's games:
+    - Elimination Finals: Victory (6th) won 3-1 at Canberra, and Brisbane beat Adelaide 3-0.
+    - Semi-Finals: premiers Melbourne City beat Victory 2-0 on aggregate. 1st plays the lowest-ranked winner, so the semi-finals are reseeded, not 1st against the 4 v 5 winner. Wellington beat Brisbane 3-2 after extra time.
+    - Grand Final: City won 3-1 at home.
+  - Built the same way, the 2024-25 ladder (12 clubs) matches [aleagues.com.au](https://aleagues.com.au/ladders/a-league-women/2024-2025/). The 2025 finals (Central Coast Mariners, on penalties) and 2024 finals (Sydney) are reproduced too.
+- **Model:** football.py's settings, including the strength drift of 0.2. `scripts/backtest_football_playoffs.py --league a-league-women --seasons 2024 2025`:
+  - Week-ahead predictions of 248 games score 0.2282 (ranked probability score) against 0.2363 for base rates (2024-25: 0.2227 v 0.2335; 2025-26: 0.2351 v 0.2399).
+  - The best half-life and ridge tried (180 days, ridge 4) scored 0.2272, too close to change.
+  - Season odds scored a mean Brier of 0.0738 with no drift, 0.0735 at 0.2, 0.0742 at 0.3 and 0.0753 at 0.4, so 0.2 stays.
+  - With 2023-24 added, 0.2 was best again (0.0777). That season's title odds were not scored: the backtest ranks it by the 2025-26 tiebreakers, so ESPN's finals do not fit its bracket.
 
 ## NFL, NBA, WNBA, NHL, MLB, NBL And WNBL
 
