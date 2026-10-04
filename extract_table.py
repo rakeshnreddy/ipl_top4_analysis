@@ -405,7 +405,8 @@ def cricdata_winner(item: dict[str, Any], teams: tuple[str, str], status: str) -
     for team in teams:
         meta = TEAM_META[team]
         candidates = (team.lower(), meta.short_name.lower(), meta.full_name.lower())
-        if any(candidate in lower_status for candidate in candidates):
+        # Whole words only: short names such as "CK" or "OV" hide in "wickets" and "Super Over".
+        if any(re.search(rf"\b{re.escape(candidate)}\b", lower_status) for candidate in candidates):
             return team
     return None
 
@@ -413,6 +414,11 @@ def cricdata_winner(item: dict[str, Any], teams: tuple[str, str], status: str) -
 def cricdata_no_result(status: str) -> bool:
     lower_status = status.lower()
     return any(token in lower_status for token in ("no result", "no-result", "abandoned", "washed out"))
+
+
+def cricdata_tie(status: str) -> bool:
+    """A tie that stands (The Hundred, Super Smash); a Super Over winner is found first."""
+    return bool(re.search(r"\btied\b", status.lower()))
 
 
 def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -447,9 +453,10 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
 
         status = clean_text(str(first_present(item, ("status", "matchStatus", "state"), "")))
         winner = cricdata_winner(item, teams, status)
+        tie = winner is None and cricdata_tie(status)
         no_result = cricdata_no_result(status)
         match_ended = bool(item.get("matchEnded") or item.get("completed"))
-        has_result = winner is not None or no_result
+        has_result = winner is not None or tie or no_result
         if not has_result and not match_ended:
             continue
         if not has_result:
@@ -464,6 +471,10 @@ def derive_cricdata_standings_from_matches(payload: dict[str, Any]) -> list[dict
             table[winner]["wins"] += 1
             table[winner]["points"] += LEAGUE.points_win
             table[loser]["losses"] += 1
+        elif tie:
+            for key in teams:
+                table[key]["ties"] = table[key].get("ties", 0) + 1
+                table[key]["points"] += LEAGUE.points_tie
         else:
             table[left]["noResult"] += 1
             table[right]["noResult"] += 1
@@ -495,12 +506,12 @@ def apply_cricdata_nrr_from_points(
             continue
         # Bonus points can't be derived from match results, so for bonus leagues the
         # official points total is taken from the table once the W/L/NR record agrees.
-        fields = ("matches", "wins", "losses", "noResult") + (() if LEAGUE.bonus_run_rate_ratio else ("points",))
+        fields = ("matches", "wins", "losses", "noResult") + (() if LEAGUE.has_bonus_points else ("points",))
         if not all(derived[field] == points_row[field] for field in fields):
             mismatched.append(points_row["shortName"])
             continue
         bonus = points_row["points"] - derived["points"]
-        if LEAGUE.bonus_run_rate_ratio and bonus >= 0:
+        if LEAGUE.has_bonus_points and bonus >= 0:
             derived["points"] = points_row["points"]
             derived["bonusPoints"] = bonus
         if points_row.get("nrr") is not None:
@@ -1088,7 +1099,7 @@ def run_analysis(
         return final_table_analysis(standings_rows, now)
     # Without NRR, teams level on points and wins keep sharing slots fractionally.
     # Bonus points are random per win, which the exact solver cannot express.
-    if len(fixtures) <= EXACT_MAX_FIXTURES and not LEAGUE.bonus_simulation_rate:
+    if len(fixtures) <= EXACT_MAX_FIXTURES and not (LEAGUE.bonus_simulation_rate or LEAGUE.bonus_loser_simulation_rate):
         return run_exact_dp_analysis(standings_rows, fixtures, now)
 
     team_keys = [row["teamKey"] for row in standings_rows]
@@ -1137,6 +1148,8 @@ def run_analysis(
             table[winner]["points"] += LEAGUE.points_win
             if LEAGUE.bonus_simulation_rate and random.random() < LEAGUE.bonus_simulation_rate:
                 table[winner]["points"] += 1
+            if LEAGUE.bonus_loser_simulation_rate and random.random() < LEAGUE.bonus_loser_simulation_rate:
+                table[loser]["points"] += 1
             table[winner]["matches"] += 1
             table[loser]["matches"] += 1
             own_wins[winner] += 1
@@ -1381,6 +1394,8 @@ def build_cricsheet_payload(archive: Path | None = None) -> dict[str, Any]:
             tie=LEAGUE.points_tie,
             bonus_run_rate_ratio=LEAGUE.bonus_run_rate_ratio,
             rate_balls=LEAGUE.nrr_balls_per_unit,
+            bonus_runs=LEAGUE.bonus_runs,
+            bonus_chase_run_rate_ratio=LEAGUE.bonus_chase_run_rate_ratio,
         )
         table = cricsheet.league_table(matches + extra_result_matches(), team_key, rule)
     except ValueError as exc:

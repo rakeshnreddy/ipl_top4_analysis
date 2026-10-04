@@ -28,6 +28,15 @@ def innings(team: str, balls: int, runs_per_ball: int = 1, wickets: int = 0, **e
     return {"team": team, "overs": overs, **extra}
 
 
+def innings_of(team: str, balls: int, runs: int, wickets: int = 0, **extra: object) -> dict[str, object]:
+    """An innings of exactly ``runs`` off ``balls`` legal balls."""
+    data = innings(team, balls, runs // balls, wickets, **extra)
+    deliveries = [delivery for over in data["overs"] for delivery in over["deliveries"]]
+    for delivery in deliveries[: runs % balls]:
+        delivery["runs"]["total"] += 1
+    return data
+
+
 def raw_match(
     team_a: str,
     team_b: str,
@@ -216,6 +225,49 @@ class CricsheetRulesTests(unittest.TestCase):
 
         self.assertEqual((table["Chennai"].bonus_points, table["Chennai"].points), (1, 5))
         self.assertEqual((table["Gujarat"].bonus_points, table["Gujarat"].points), (0, 4))
+
+    SUPER_SMASH_WOMEN = cricsheet.PointsRule(win=4, no_result=2, tie=2, bonus_runs=150, bonus_chase_run_rate_ratio=1.25)
+
+    def test_150_runs_earns_a_bonus_point_win_or_lose(self) -> None:
+        match = parse(raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[1], "by": {"wickets": 5}},
+                                [innings_of(TEAMS[0], 120, 160, wickets=4),
+                                 innings_of(TEAMS[1], 118, 161, wickets=5, target={"runs": 161, "overs": 20})]))
+        close = parse(raw_match(TEAMS[2], TEAMS[3], {"winner": TEAMS[2], "by": {"runs": 1}},
+                                [innings_of(TEAMS[2], 120, 149), innings_of(TEAMS[3], 120, 148, target={"runs": 150, "overs": 20})]))
+
+        table = cricsheet.league_table([match, close], extract_table.team_key, self.SUPER_SMASH_WOMEN)
+
+        self.assertEqual((table["Chennai"].bonus_points, table["Chennai"].points), (1, 1))
+        self.assertEqual((table["Delhi"].bonus_points, table["Delhi"].points), (1, 5))
+        self.assertEqual((table["Gujarat"].bonus_points, table["Kolkata"].bonus_points), (0, 0))
+
+    def test_the_runs_target_shrinks_with_the_overs_in_a_reduced_match(self) -> None:
+        # Five overs a side: 150 off 20 overs becomes 37.5.
+        match = parse(raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[0], "by": {"runs": 3}},
+                                [innings_of(TEAMS[0], 30, 40, wickets=2), innings_of(TEAMS[1], 30, 37, wickets=3, target={"runs": 41, "overs": 5})]))
+
+        table = cricsheet.league_table([match], extract_table.team_key, self.SUPER_SMASH_WOMEN)
+
+        self.assertEqual((table["Chennai"].bonus_points, table["Delhi"].bonus_points), (1, 0))
+
+    def test_a_chase_needs_more_than_one_and_a_quarter_times_the_first_innings_rate(self) -> None:
+        def chase(balls: int) -> cricsheet.Match:
+            return parse(raw_match(TEAMS[0], TEAMS[1], {"winner": TEAMS[1], "by": {"wickets": 5}},
+                                   [innings_of(TEAMS[0], 120, 120, wickets=6),
+                                    innings_of(TEAMS[1], balls, 125, wickets=5, target={"runs": 121, "overs": 20})]))
+
+        for balls, expected in ((99, 1), (100, 0)):  # 7.58 and exactly 7.5 runs an over against 6.0
+            with self.subTest(balls=balls):
+                table = cricsheet.league_table([chase(balls)], extract_table.team_key, self.SUPER_SMASH_WOMEN)
+                self.assertEqual((table["Delhi"].bonus_points, table["Chennai"].bonus_points), (expected, 0))
+
+    def test_no_result_earns_no_bonus_point(self) -> None:
+        match = parse(raw_match(TEAMS[0], TEAMS[1], {"result": "no result"},
+                                [innings_of(TEAMS[0], 120, 180), innings_of(TEAMS[1], 12, 20)]))
+
+        table = cricsheet.league_table([match], extract_table.team_key, self.SUPER_SMASH_WOMEN)
+
+        self.assertEqual((table["Chennai"].bonus_points, table["Chennai"].points), (0, 2))
 
     def test_a_side_that_runs_out_of_batters_is_charged_its_full_quota(self) -> None:
         # Nine wickets down in 18.1 overs and beaten: the tenth batter was absent, so all out.
@@ -449,6 +501,16 @@ OFFICIAL_TABLES = {
     "wbbl-2025-26": {
         "HUR": (15, 0.662), "SIX": (13, -0.313), "SCO": (12, -0.132), "STA": (11, 0.629),
         "REN": (10, 0.121), "STR": (9, 0.077), "THU": (9, -0.124), "HEA": (1, -0.869),
+    },
+    # https://www.espn.com/cricket/table/series/8654 (ESPNcricinfo's table, which also lists runs and overs for and
+    # against). 4 points a win, 2 a tie or no result; three matches were abandoned without a ball.
+    "super-smash-men-2025-26": {
+        "NB": (28, 1.977), "AA": (24, 0.491), "CK": (20, -0.864), "CS": (18, -0.6), "OV": (16, -0.622), "WF": (14, 0.031),
+    },
+    # https://www.espn.com/cricket/table/series/8819, with bonus points (150 runs, or chasing at more than 1.25x
+    # the first innings' rate): https://www.nzc.nz/news-items/archive/bonus-point-system-introduced-to-women-s-super-smash/
+    "super-smash-women-2025-26": {
+        "WB": (33, 0.891), "NB": (28, 0.702), "AH": (25, 0.316), "CH": (25, -0.281), "OS": (22, 0.247), "CM": (6, -1.82),
     },
 }
 

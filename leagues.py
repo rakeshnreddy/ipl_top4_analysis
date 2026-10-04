@@ -79,6 +79,15 @@ class League:
     nrr_balls_per_unit: int = 6
     # Mixed-gender Cricsheet archives (The Hundred) need a filter.
     gender: str | None = None
+    # Women's Super Smash: a bonus point, win or lose, for 150 runs or a fast chase.
+    bonus_runs: int | None = None
+    bonus_chase_run_rate_ratio: float | None = None
+    # Share of losses that earned a bonus point last season; used when simulating.
+    bonus_loser_simulation_rate: float = 0.0
+
+    @property
+    def has_bonus_points(self) -> bool:
+        return bool(self.bonus_run_rate_ratio or self.bonus_runs or self.bonus_chase_run_rate_ratio)
 
     @property
     def team_meta(self) -> dict[str, TeamMeta]:
@@ -109,7 +118,7 @@ class League:
                 "win": self.points_win,
                 "noResult": self.points_no_result,
                 "tie": self.points_tie,
-                "bonus": self.bonus_run_rate_ratio is not None,
+                "bonus": self.has_bonus_points,
             },
             "teams": [
                 {
@@ -172,6 +181,9 @@ def parse_league(raw: dict[str, Any]) -> League:
         bonus_simulation_rate=points.get("bonusSimulationRate", 0.0),
         nrr_balls_per_unit=raw.get("nrrBallsPerUnit", 6),
         gender=raw.get("gender"),
+        bonus_runs=points.get("bonusRuns"),
+        bonus_chase_run_rate_ratio=points.get("bonusChaseRunRateRatio"),
+        bonus_loser_simulation_rate=points.get("bonusLoserSimulationRate", 0.0),
     )
     validate_league(league)
     return league

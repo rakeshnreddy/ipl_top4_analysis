@@ -147,13 +147,22 @@ class LiveSeasonTests(unittest.TestCase):
                 ("bbl-2026-27", "cricsheet"),
                 ("sa20-2026-27", "cricketdata"),
                 ("ilt-2026-27", "cricsheet"),
+                ("super-smash-men-2026-27", "cricsheet"),
+                ("super-smash-women-2026-27", "cricsheet"),
                 ("bpl-2026-27", "cricsheet"),
             ],
         )
         write_payload(self.data_dir, "bbl-2026-27", "complete")
         self.assertEqual(
             self.cricket_plan(now),
-            [("wpl-2027", "cricketdata"), ("sa20-2026-27", "cricketdata"), ("ilt-2026-27", "cricsheet"), ("bpl-2026-27", "cricsheet")],
+            [
+                ("wpl-2027", "cricketdata"),
+                ("sa20-2026-27", "cricketdata"),
+                ("ilt-2026-27", "cricsheet"),
+                ("super-smash-men-2026-27", "cricsheet"),
+                ("super-smash-women-2026-27", "cricsheet"),
+                ("bpl-2026-27", "cricsheet"),
+            ],
         )
 
     def test_plan_builds_rolling_leagues_only_in_season(self) -> None:
@@ -315,6 +324,8 @@ class LiveSeasonTests(unittest.TestCase):
             "data": [
                 {"id": "wbbl", "name": "Women's Big Bash League 2026-27"},
                 {"id": "bbl", "name": "Big Bash League 2026-27"},
+                {"id": "ssw", "name": "Super Smash Women 2026-27"},
+                {"id": "ss", "name": "Super Smash 2026-27"},
             ],
         }
         session = mock.Mock()
@@ -325,6 +336,10 @@ class LiveSeasonTests(unittest.TestCase):
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "bbl")
             extract_table.use_league(leagues.load_league("wbbl-2026-27"))
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "wbbl")
+            extract_table.use_league(leagues.load_league("super-smash-men-2026-27"))
+            self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "ss")
+            extract_table.use_league(leagues.load_league("super-smash-women-2026-27"))
+            self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "ssw")
 
 
 

@@ -189,6 +189,51 @@ class ExtractTableTests(unittest.TestCase):
         self.assertEqual(by_key["Rajasthan"]["points"], 1)
         self.assertEqual(by_key["Gujarat"]["matches"], 0)
 
+    def test_derive_cricdata_standings_counts_ties_and_reads_winners_by_whole_words(self) -> None:
+        extract_table.use_league(load_league("super-smash-men-2026-27"))
+        self.addCleanup(extract_table.use_league, load_league(DEFAULT_LEAGUE_ID))
+        results = [
+            ("Otago Volts", "Northern Brave", "Match tied"),
+            # "CK" is inside "wickets" and "OV" inside "Super Over"; neither team won here.
+            ("Canterbury Kings", "Wellington Firebirds", "Wellington Firebirds won by 5 wickets"),
+            ("Otago Volts", "Auckland Aces", "Match tied (Auckland Aces won the Super Over)"),
+        ]
+        info_payload = {
+            "status": "success",
+            "data": {"matchList": [
+                {"id": f"m{number}", "name": f"{a} vs {b}, {number}th Match", "teams": [a, b], "status": status, "matchEnded": True}
+                for number, (a, b, status) in enumerate(results, start=1)
+            ]},
+        }
+
+        rows = {row["teamKey"]: row for row in extract_table.derive_cricdata_standings_from_matches(info_payload)}
+
+        self.assertEqual((rows["OV"]["ties"], rows["OV"]["losses"], rows["OV"]["points"]), (1, 1, 2))
+        self.assertEqual((rows["NB"]["ties"], rows["NB"]["points"]), (1, 2))
+        self.assertEqual((rows["WF"]["wins"], rows["CK"]["losses"]), (1, 1))
+        self.assertEqual((rows["AA"]["wins"], rows["AA"]["points"]), (1, 4))
+        extract_table.validate_source_data(list(rows.values()), [], datetime(2027, 2, 1, tzinfo=timezone.utc), strict_zero_fixtures=False)
+
+    def test_bonus_points_for_losers_are_simulated(self) -> None:
+        extract_table.use_league(load_league("super-smash-women-2026-27"))
+        self.addCleanup(extract_table.use_league, load_league(DEFAULT_LEAGUE_ID))
+        keys = list(extract_table.TEAM_META)
+        standings = [
+            {"teamKey": key, "shortName": key, "fullName": key, "matches": 8, "wins": 4, "losses": 4, "noResult": 0,
+             "points": 16, "nrr": 0.0, "rank": rank, "remainingMatches": 2}
+            for rank, key in enumerate(keys, start=1)
+        ]
+        fixtures = [
+            {"id": f"f{index}", "matchNo": 25 + index, "teamA": keys[index % 6], "teamB": keys[(index + 1) % 6]}
+            for index in range(6)
+        ]
+
+        with mock.patch.object(extract_table, "DEFAULT_MONTE_CARLO_SIMULATIONS", 2000):
+            analysis = extract_table.run_analysis(standings, fixtures, FROZEN_MID_SEASON)
+
+        self.assertEqual(analysis["method"], "Monte Carlo")
+        self.assertAlmostEqual(sum(value["top3"] for value in analysis["overallProbabilities"].values()), 300.0, places=1)
+
     def test_points_table_nrr_is_attached_only_when_record_matches_results(self) -> None:
         standings = valid_standings(nrr=None)
         points_payload = {
