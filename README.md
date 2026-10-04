@@ -64,6 +64,7 @@ Configured seasons, each checked against its official table:
 | `hundred-men-2026` | The Hundred 2026, men (4 points a win, NRR per 5-ball set) | Cricsheet, filtered by gender |
 | `hundred-women-2026` | The Hundred 2026, women | Cricsheet, plus one abandoned match |
 | `cpl-2026` | Caribbean Premier League 2026 | Cricsheet; published once Cricsheet adds the playoffs |
+| `wcpl-2026` | Women's Caribbean Premier League 2026 (4 teams, 3 games each; Top 3, first goes straight to the final) | Cricsheet; 2027 is rolled forward from it |
 | `lpl-2026` | Lanka Premier League 2026 | Cricsheet |
 | `bpl-2025-26` | Bangladesh Premier League 2025-26 | Cricsheet |
 | `wbbl-2025-26` | Women's Big Bash League 2025-26 (Top 4; first goes straight to the final, third plays fourth in the Knockout) | Cricsheet, plus one abandoned match |
