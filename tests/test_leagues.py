@@ -406,6 +406,7 @@ class RolloverTests(unittest.TestCase):
         self.assertNotIn("ipl-2028", october)
         self.assertIn("ipl-2028", next_summer)
         self.assertIn("cpl-2027", next_summer)
+        self.assertIn("wcpl-2027", next_summer)
         self.assertNotIn("epl-2027", next_summer)
 
     def test_the_planner_builds_a_rolled_season_live(self) -> None:

@@ -493,6 +493,8 @@ OFFICIAL_TABLES = {
         "TR": (28, 1.391), "SRL": (20, 1.031), "SB": (20, 0.107), "MSG": (18, 0.344),
         "WF": (16, 0.133), "LS": (10, -0.363), "BP": (10, -1.602), "MIL": (6, -1.165),
     },
+    # https://www.espn.com/cricket/table/series/20898 (ESPNcricinfo's table, with runs and overs for and against).
+    "wcpl-2026": {"TKR": (4, 1.016), "GAW": (4, 0.475), "BT": (2, -0.444), "JE": (2, -1.153)},
     "cpl-2026": {
         "GAW": (16, 0.615), "ABF": (13, 0.174), "BT": (12, -0.125), "JAK": (8, -0.085),
         "SLK": (8, -0.887), "SKNP": (7, 0.252), "TKR": (6, -0.01),
