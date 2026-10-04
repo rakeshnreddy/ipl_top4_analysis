@@ -1,4 +1,4 @@
-/** Payloads for team sports other than cricket (football, NFL, NBA, NHL, MLB). */
+/** Payloads for team sports other than cricket (football and the European cups, NFL, NBA, WNBA, NHL, MLB, NBL). */
 
 export interface SportTier {
   key: string;
