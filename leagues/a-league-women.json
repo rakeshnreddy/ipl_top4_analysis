@@ -1,0 +1,238 @@
+{
+  "id": "a-league-women",
+  "sport": "football",
+  "engine": "football_playoffs",
+  "name": "A-League Women",
+  "shortName": "A-League Women",
+  "headline": "A-League Women Finals & Championship Odds",
+  "priority": 39,
+  "timezone": "Australia/Sydney",
+  "season": {
+    "startMonth": 10,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "aleague-women-{year}"
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "11 clubs (Wellington Phoenix from New Zealand), 20 games each over 22 matchweeks: home and away against everyone, with two byes per club. 3 points a win, 1 a draw. Clubs level on points are separated by goal difference, goals scored, wins, head-to-head points, head-to-head goal difference, fewest Fair Play points, away goal difference, away goals per away game, home goal difference, home goals per home game, then a coin toss or drawing of lots. The best record wins the Premiers Plate. The top six reach the Finals Series: 3rd hosts 6th and 4th hosts 5th in single-match Elimination Finals; 1st plays the lower-ranked Elimination Final winner and 2nd the higher-ranked one in two-legged Semi-Finals on aggregate (no away goals; 1st and 2nd choose which leg to host, and have taken the second leg); the Grand Final is one match hosted by the higher-placed finalist. A finals match or tie level after normal time goes to extra time, then penalties. The Grand Final winners are the Champions. The 2026-27 competition rules have not been published yet, so these are the 2025-26 rules; the 2026-27 fixture keeps 11 clubs, 22 matchweeks and two byes each, starting on 17 October 2026.",
+    "sources": [
+      "https://aleagues.com.au/more/official-documents/",
+      "https://aleagues.com.au/news/aleague-women-2026-2027-fixture-list-revealed-key-dates-fixture-information/",
+      "https://aleagues.com.au/ladders/a-league-women/2025-2026/",
+      "https://aleagues.com.au/ladders/a-league-women/2024-2025/"
+    ]
+  },
+  "notes": [
+    "Finals: the top six qualify. 3rd hosts 6th and 4th hosts 5th in Elimination Finals; 1st and 2nd then play the lower- and higher-ranked winners over two legs, with the second leg at 1st's and 2nd's grounds, and the higher-placed finalist hosts the Grand Final. Every level finals match or tie goes to extra time, then penalties.",
+    "The Fair Play tiebreaker (cards) is not in the data; ESPN's published order, which matches aleagues.com.au, is used whenever its records agree with the results.",
+    "These are the 2025-26 competition rules; the A-Leagues have not yet published 2026-27's.",
+    "Backtested on 2024-25 and 2025-26: week-ahead match predictions score 0.228 (ranked probability score) against 0.236 for home/draw/away base rates (0.223 v 0.234 in 2024-25, 0.235 v 0.240 in 2025-26), and finals, top-two, premiership and title odds at a quarter, half and three quarters of each season scored best with the usual strength drift of 0.2."
+  ],
+  "tiebreakers": [
+    "goal-difference",
+    "goals-for",
+    "wins",
+    "head-to-head",
+    "away-goal-difference",
+    "away-goals-per-game",
+    "home-goal-difference",
+    "home-goals-per-game"
+  ],
+  "playoffs": {
+    "rankLabel": "Ladder",
+    "positionLabel": "Ladder position",
+    "cutoffs": [
+      {
+        "after": 2,
+        "label": "Elimination finals"
+      },
+      {
+        "after": 6,
+        "label": "Out"
+      }
+    ],
+    "zones": [
+      {
+        "to": 2,
+        "kind": "top"
+      },
+      {
+        "to": 6,
+        "kind": "mid"
+      }
+    ],
+    "rounds": [
+      {
+        "key": "EF",
+        "label": "Elimination Finals",
+        "match": "single",
+        "pairs": [
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "key": "SF",
+        "label": "Semi-Finals",
+        "match": "two-legged",
+        "teams": [
+          1,
+          2,
+          "EF.1",
+          "EF.2"
+        ]
+      },
+      {
+        "key": "GF",
+        "label": "Grand Final",
+        "match": "single",
+        "pairs": [
+          [
+            "SF.1",
+            "SF.2"
+          ]
+        ]
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "key": "finals",
+      "label": "Finals",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top2",
+      "label": "Top 2",
+      "kind": "seed",
+      "size": 2
+    },
+    {
+      "key": "premiership",
+      "label": "Premiership",
+      "kind": "seed",
+      "size": 1,
+      "shortLabel": "1st"
+    },
+    {
+      "key": "championship",
+      "label": "Championship",
+      "kind": "champion",
+      "shortLabel": "Title"
+    }
+  ],
+  "columns": [
+    {
+      "key": "played",
+      "label": "P"
+    },
+    {
+      "key": "wins",
+      "label": "W"
+    },
+    {
+      "key": "draws",
+      "label": "D"
+    },
+    {
+      "key": "losses",
+      "label": "L"
+    },
+    {
+      "key": "goalsFor",
+      "label": "GF",
+      "title": "Goals for"
+    },
+    {
+      "key": "goalDifference",
+      "label": "GD",
+      "signed": true
+    },
+    {
+      "key": "points",
+      "label": "Pts",
+      "strong": true
+    }
+  ],
+  "sources": {
+    "fixturedownload": "aleague-women-{year}",
+    "espn": "aus.w.1"
+  },
+  "teams": {
+    "Adelaide United": {
+      "shortName": "ADE",
+      "color": "#E31B23",
+      "textColor": "#FFFFFF"
+    },
+    "Brisbane Roar": {
+      "shortName": "BRI",
+      "color": "#F47920",
+      "textColor": "#000000"
+    },
+    "Canberra United": {
+      "shortName": "CAN",
+      "color": "#5BBF21",
+      "textColor": "#000000"
+    },
+    "Central Coast Mariners": {
+      "shortName": "CCM",
+      "color": "#FFE21F",
+      "textColor": "#000000"
+    },
+    "Melbourne City": {
+      "shortName": "MCY",
+      "color": "#6CABDD",
+      "textColor": "#000000"
+    },
+    "Melbourne Victory": {
+      "shortName": "MVC",
+      "color": "#00205B",
+      "textColor": "#FFFFFF"
+    },
+    "Newcastle Jets": {
+      "shortName": "NEW",
+      "color": "#002B5C",
+      "textColor": "#FFFFFF"
+    },
+    "Perth Glory": {
+      "shortName": "PER",
+      "color": "#4E2A84",
+      "textColor": "#FFFFFF"
+    },
+    "Sydney": {
+      "shortName": "SYD",
+      "fullName": "Sydney FC",
+      "color": "#1B8FD2",
+      "textColor": "#FFFFFF"
+    },
+    "Wellington Phoenix": {
+      "shortName": "WEL",
+      "color": "#1A1A1A",
+      "textColor": "#FFFFFF"
+    },
+    "Western Sydney Wanderers": {
+      "shortName": "WSW",
+      "color": "#9B1B30",
+      "textColor": "#FFFFFF"
+    },
+    "Western United": {
+      "shortName": "WUN",
+      "color": "#00843D",
+      "textColor": "#FFFFFF"
+    }
+  },
+  "aliases": {
+    "Sydney FC": "Sydney",
+    "Western Sydney": "Western Sydney Wanderers"
+  }
+}
