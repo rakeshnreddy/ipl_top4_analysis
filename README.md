@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), eight European football leagues, and the NFL, NBA, NHL and MLB. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+Static league tables and season odds: T20 cricket leagues (IPL first), eight European football leagues, the Champions League, and the NFL, NBA, NHL and MLB. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
 
 The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
 
@@ -99,6 +99,22 @@ The Premier League, La Liga, Bundesliga, Serie A, Ligue 1, EFL Championship, Ere
 
 To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed name, tiers and any team colours (teams without one get a generated colour), then run `venv/bin/python extract_table.py --league <id>`.
 
+## European Cups
+
+The UEFA Champions League (`leagues/champions-league.json`) is a rolling football config with `"engine": "european_cups"`, built by `european_cups.py`. The season runs September to June, and the payload id carries the season, for example `champions-league-2026-27`.
+
+- **Data** comes from the public JSON services behind uefa.com (`uefa.py`). No key is needed, but they are unofficial for third parties, like ESPN's, so every download is cached and a failed refresh falls back to the last good copy. Match data covers every qualifying and main-draw match, with 90-minute, extra-time and shoot-out scores and the winner of each tie. The official league-phase table is also used.
+- **Table:** the 36-club league phase is ranked by UEFA's criteria: points, goal difference, goals, away goals, wins, away wins, then the opponents' combined points, goal difference and goals. UEFA's published order is used when it agrees with the results on every club's record. The 2025-26 tables of all three competitions are reproduced exactly (`tests/test_european_cups.py`).
+- **Model:** a Poisson goals model (attack, defence, home advantage; a 730-day half-life) fitted on every UEFA club match from this season and the three before, qualifiers included. Domestic league games from FixtureDownload are added at half weight. They come from England, Spain, Germany, Italy, France, the Netherlands, Portugal, Scotland and Turkey, and are linked to UEFA clubs by name only when the match is unambiguous.
+- **Backtest:** week-ahead predictions of the 1,062 main-draw matches of 2024-25 and 2025-26 in the three competitions score 0.2065 (ranked probability score). That compares with 0.2082 without domestic games and 0.2323 for home/draw/away base rates. Season-long strength drift (0.1) was chosen by scoring top-8, top-24, round-reached and title odds at five checkpoints of those six competitions.
+- **Simulation:** the rest of the league phase and the knockouts are simulated 20,000 times:
+  - The knockout play-offs pair places 9/10 v 23/24, 11/12 v 21/22, 13/14 v 19/20 and 15/16 v 17/18.
+  - The top eight meet the play-off winners of the matching pair.
+  - Each top-eight pair is split between the two halves of the bracket.
+  - Two-legged ties go to extra time and then penalties (a coin flip).
+  - Real draws and results replace the simulated ones as they happen.
+- **Page:** the table with Top 8, Top 24, Quarter-final and Title odds, fixture predictions, the matches that matter, and, from the knockout play-offs on, a bracket with aggregate scores.
+
 ## NFL, NBA, NHL And MLB
 
 `leagues/nfl.json`, `nba.json`, `nhl.json` and `mlb.json` are rolling configs too, with conferences, divisions, team colours and the playoff format. `us_sports.py` builds them:
@@ -138,7 +154,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use) and ESPN's public scoreboard (unofficial; only the NBA playoffs use it, and the page falls back to no title odds if it changes).
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard (unofficial; only the NBA playoffs use it, and the page falls back to no title odds if it changes) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 
