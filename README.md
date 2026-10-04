@@ -66,6 +66,8 @@ Configured seasons, each checked against its official table:
 | `cpl-2026` | Caribbean Premier League 2026 | Cricsheet; published once Cricsheet adds the playoffs |
 | `lpl-2026` | Lanka Premier League 2026 | Cricsheet |
 | `bpl-2025-26` | Bangladesh Premier League 2025-26 | Cricsheet |
+| `wbbl-2025-26` | Women's Big Bash League 2025-26 (Top 4; first goes straight to the final, third plays fourth in the Knockout) | Cricsheet, plus one abandoned match |
+| `wbbl-2026-27` | Women's Big Bash League 2026-27 (29 Oct - 5 Dec 2026) | CricketData in season, Cricsheet once complete |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
 
@@ -140,7 +142,7 @@ Built to run unattended:
 
 API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, NFL, NBA, NHL and MLB need no key. Keyless sources and their terms: FixtureDownload (credit it), the NHL stats API, the MLB Stats API (individual, non-commercial use) and ESPN's public scoreboard (unofficial; only the NBA playoffs use it, and the page falls back to no title odds if it changes).
 
-CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. The `CRICDATA_SERIES_ID` secret applies only to the default league.
+CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. A men's league skips series named "Women's ..." (so the BBL never picks up the WBBL); a league is a women's one when its config sets `"gender": "female"` or names a women's series. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 
 GitHub disables scheduled workflows after 60 days without repository activity. Check that the workflow is enabled under Actions before a season starts.
 

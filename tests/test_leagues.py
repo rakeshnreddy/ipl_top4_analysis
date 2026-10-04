@@ -131,7 +131,10 @@ class LiveSeasonTests(unittest.TestCase):
     def test_plan_builds_live_leagues_from_cricketdata(self) -> None:
         plan = self.cricket_plan(datetime(2026, 12, 20, 19, 30, tzinfo=timezone.utc))
 
-        self.assertEqual(plan, [("bbl-2026-27", "cricketdata"), ("ilt-2026-27", "cricketdata")])
+        # The WBBL final was on 5 December, so it waits for its Cricsheet rebuild.
+        self.assertEqual(
+            plan, [("bbl-2026-27", "cricketdata"), ("ilt-2026-27", "cricketdata"), ("wbbl-2026-27", "cricsheet")]
+        )
 
     def test_plan_rebuilds_a_finished_league_from_cricsheet_until_it_is_complete(self) -> None:
         now = datetime(2027, 2, 1, 19, 30, tzinfo=timezone.utc)
@@ -162,9 +165,12 @@ class LiveSeasonTests(unittest.TestCase):
         self.assertNotIn(("epl", "feed"), summer)
 
     def test_active_build_off_season_writes_nothing(self) -> None:
-        # Between CPL's finalize window (to 4 Nov) and ILT20's start (22 Nov).
+        # Between CPL's finalize window (to 4 Nov) and ILT20's start (22 Nov). Some cricket is on
+        # almost every day of the year, so the leagues in season then are left out.
+        in_season = ("wbbl-",)
+        off_season = [league_id for league_id in CRICKET_IDS if not league_id.startswith(in_season)]
         with mock.patch.object(extract_table, "utc_now", return_value=datetime(2026, 11, 10, tzinfo=timezone.utc)), mock.patch.object(
-            extract_table, "available_league_ids", return_value=CRICKET_IDS
+            extract_table, "available_league_ids", return_value=off_season
         ):
             extract_table.main(["--league", "active"])
 
@@ -301,6 +307,24 @@ class LiveSeasonTests(unittest.TestCase):
 
         with mock.patch.dict(extract_table.os.environ, {}, clear=True):
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "new")
+
+    def test_series_discovery_keeps_mens_and_womens_series_apart(self) -> None:
+        response = mock.Mock(ok=True)
+        response.json.return_value = {
+            "status": "success",
+            "data": [
+                {"id": "wbbl", "name": "Women's Big Bash League 2026-27"},
+                {"id": "bbl", "name": "Big Bash League 2026-27"},
+            ],
+        }
+        session = mock.Mock()
+        session.get.return_value = response
+
+        with mock.patch.dict(extract_table.os.environ, {}, clear=True):
+            extract_table.use_league(leagues.load_league("bbl-2026-27"))
+            self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "bbl")
+            extract_table.use_league(leagues.load_league("wbbl-2026-27"))
+            self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "wbbl")
 
 
 
