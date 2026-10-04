@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
     env:
@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
@@ -41,7 +41,7 @@ jobs:
 
       - name: Configure Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Build frontend
         working-directory: frontend/ipl-analyzer-frontend
@@ -53,12 +53,12 @@ jobs:
           touch dist/.nojekyll
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: frontend/ipl-analyzer-frontend/dist
 
       - name: Deploy Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       # Mirror at https://ipl-playoff-pulse.pages.dev (served from the site root, so it needs
       # its own build; dist is free again once GitHub Pages has its artifact). Runs once the
@@ -76,7 +76,7 @@ jobs:
       - name: Deploy to Cloudflare Pages
         if: steps.cloudflare_build.outcome == 'success' && env.CLOUDFLARE_API_TOKEN != ''
         continue-on-error: true
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
