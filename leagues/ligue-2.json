@@ -1,0 +1,163 @@
+{
+  "id": "ligue-2",
+  "sport": "football",
+  "name": "Ligue 2",
+  "shortName": "Ligue 2",
+  "priority": 25,
+  "season": {
+    "startMonth": 8,
+    "endMonth": 6,
+    "label": "{year}-{yy}",
+    "feed": "ligue-2-{year}",
+    "firstYear": 2026
+  },
+  "points": {
+    "win": 3,
+    "draw": 1
+  },
+  "rules": {
+    "summary": "2026-27: 18 clubs, 34 rounds (8 August 2026 to 21 May 2027). The top two are promoted to Ligue 1; 3rd, 4th and 5th play the play-offs (5th at 4th, the winner at 3rd, each a single match), whose winner meets Ligue 1's 16th over two legs. The bottom two go down to Ligue 3, and 16th plays the Ligue 3 play-off winner over two legs. Teams level on points are ranked by goal difference, then head-to-head points and goal difference (only once both meetings are played), then goals scored, wins, away wins, discipline (1 point a yellow card, 3 a red) and lots.",
+    "sources": [
+      "https://www.lfp.fr/assets/26_27_Reglement_Competitions_08_09_2026_45d0881157.pdf",
+      "https://ligue1.com/fr/competitions/ligue2bkt/standings"
+    ]
+  },
+  "notes": [
+    "There is no earlier Ligue 2 season in the feed to backtest on. With the previous season removed, eight other leagues' 2023-24 to 2025-26 week-ahead predictions scored 0.194-0.222 (ranked probability score) against 0.229-0.235 for home/draw/away base rates, 0.002-0.008 worse than with it. This season's first 63 Ligue 2 matches scored 0.234 against 0.221 for base rates, so treat early match predictions with care.",
+    "Away wins are the last tiebreak step modelled; the league then compares disciplinary points, which the feed does not have, and the table falls back to club names."
+  ],
+  "tiebreak": ["goal-difference", "head-to-head-complete", "goals", "wins", "away-wins"],
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Title",
+      "kind": "top",
+      "size": 1
+    },
+    {
+      "key": "promotion",
+      "label": "Promotion",
+      "kind": "top",
+      "size": 2,
+      "shortLabel": "Top 2"
+    },
+    {
+      "key": "playoffs",
+      "label": "Top 5",
+      "kind": "top",
+      "size": 5
+    },
+    {
+      "key": "relegation",
+      "label": "Relegation",
+      "kind": "bottom",
+      "size": 2,
+      "shortLabel": "Drop"
+    },
+    {
+      "key": "bottom3",
+      "label": "Bottom 3",
+      "kind": "bottom",
+      "size": 3,
+      "shortLabel": "Bot 3"
+    }
+  ],
+  "sources": {
+    "fixturedownload": "ligue-2-{year}",
+    "espn": "fra.2"
+  },
+  "teams": {
+    "AS Nancy Lorraine": {
+      "shortName": "ASN",
+      "color": "#FD0000",
+      "textColor": "#000000"
+    },
+    "AS Saint-Étienne": {
+      "shortName": "STE",
+      "color": "#1D995B",
+      "textColor": "#000000"
+    },
+    "Clermont Foot 63": {
+      "shortName": "CLE",
+      "color": "#C60B46",
+      "textColor": "#FFFFFF"
+    },
+    "Dijon FCO": {
+      "shortName": "DIJ",
+      "color": "#FF0000",
+      "textColor": "#000000"
+    },
+    "EN Avant Guingamp": {
+      "shortName": "EAG",
+      "fullName": "En Avant Guingamp",
+      "color": "#E30613",
+      "textColor": "#FFFFFF"
+    },
+    "FC Annecy": {
+      "shortName": "ANN",
+      "color": "#D10000",
+      "textColor": "#FFFFFF"
+    },
+    "FC Metz": {
+      "shortName": "MET",
+      "color": "#730F14",
+      "textColor": "#FFFFFF"
+    },
+    "FC Nantes": {
+      "shortName": "NAN",
+      "color": "#FFDC00",
+      "textColor": "#000000"
+    },
+    "FC Sochaux-Montbéliard": {
+      "shortName": "SOC",
+      "color": "#FFCF21",
+      "textColor": "#000000"
+    },
+    "Grenoble Foot 38": {
+      "shortName": "GRE",
+      "color": "#004899",
+      "textColor": "#FFFFFF"
+    },
+    "Montpellier Hérault SC": {
+      "shortName": "MHS",
+      "color": "#252557",
+      "textColor": "#FFFFFF"
+    },
+    "Pau FC": {
+      "shortName": "PAU",
+      "color": "#FFCC00",
+      "textColor": "#000000"
+    },
+    "Red Star FC": {
+      "shortName": "RSF",
+      "color": "#003333",
+      "textColor": "#FFFFFF"
+    },
+    "Rodez Aveyron Football": {
+      "shortName": "ROD",
+      "color": "#A6192E",
+      "textColor": "#FFFFFF"
+    },
+    "Stade DE Reims": {
+      "shortName": "REI",
+      "fullName": "Stade de Reims",
+      "color": "#EC3432",
+      "textColor": "#000000"
+    },
+    "Stade Lavallois MFC": {
+      "shortName": "LAV",
+      "color": "#EB6909",
+      "textColor": "#000000"
+    },
+    "US Boulogne CO": {
+      "shortName": "BOU",
+      "color": "#1E1E1C",
+      "textColor": "#FFFFFF"
+    },
+    "USL Dunkerque": {
+      "shortName": "DUN",
+      "color": "#1B2738",
+      "textColor": "#FFFFFF"
+    }
+  }
+}
