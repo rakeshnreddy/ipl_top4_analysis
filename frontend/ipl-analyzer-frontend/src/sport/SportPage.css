@@ -276,9 +276,10 @@
   color: var(--text-muted);
 }
 
+/* Team names keep their width; a long note under the score ("Conference Semifinals, 4-3 pens") wraps. */
 .sport-results li {
   font-size: var(--text-sm);
-  grid-template-columns: 88px minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: 88px minmax(min-content, 1fr) auto minmax(min-content, 1fr);
 }
 
 .sport-results .fixture-when {
@@ -308,7 +309,7 @@
   }
 
   .sport-results li {
-    grid-template-columns: 64px minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-columns: 64px minmax(min-content, 1fr) auto minmax(min-content, 1fr);
   }
 }
 
