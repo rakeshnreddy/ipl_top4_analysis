@@ -1,0 +1,171 @@
+{
+  "id": "nbl",
+  "sport": "basketball",
+  "name": "NBL",
+  "shortName": "NBL",
+  "headline": "NBL Finals & Championship Odds",
+  "priority": 35,
+  "season": {
+    "startMonth": 9,
+    "endMonth": 4,
+    "label": "{year}-{yy}",
+    "feed": "nbl-{year}"
+  },
+  "gamesPerTeam": 33,
+  "rules": {
+    "summary": "10 teams, 33 games each (NBL27: 165 games, 19 September 2026 to 14 February 2027). The ladder ranks by win percentage, then points percentage (points for over points against). The top six play the Finals: 1st and 2nd go straight to the semi-finals; 3rd hosts 4th (the winner meets 2nd), 5th hosts 6th, and the 3 v 4 loser hosts the 5 v 6 winner (that winner meets 1st). Semi-finals are best of three and the Championship Series best of five, the higher ladder place hosting games 1, 3 and 5. Ignite Cup games count on the ladder; the Ignite Cup Finals do not. NBL27's finals have not been announced separately; this is the NBL26 format, used since the play-in arrived in NBL23.",
+    "sources": [
+      "https://www.nbl.com.au/news/nbl27-schedule-by-the-numbers",
+      "https://league.nbl.com.au/news/the-nbl26-finals-format-explained",
+      "https://www.nbl.com.au/news/the-hungry-jacks-nbl27-ignite-cup-schedule-tickets-rules-more",
+      "https://nbl.com.au/news/wildcats-make-finals-in-incredible-finish",
+      "https://www.nbl.com.au/ladders"
+    ]
+  },
+  "notes": [
+    "Ignite Cup games count on the ladder; the Ignite Cup Finals do not and are left out."
+  ],
+  "playoffs": {
+    "format": "nbl",
+    "teamsPerConference": 6,
+    "series": {
+      "PI": "1",
+      "SF": "1-1-1",
+      "F": "1-1-1-1-1"
+    },
+    "tiebreakers": [
+      "percentage"
+    ],
+    "positionLabel": "Ladder position",
+    "cutoffs": [
+      {
+        "after": 2,
+        "label": "Play-in"
+      },
+      {
+        "after": 6,
+        "label": "Out"
+      }
+    ],
+    "zones": [
+      {
+        "to": 2,
+        "kind": "top"
+      },
+      {
+        "to": 6,
+        "kind": "mid"
+      }
+    ]
+  },
+  "postseason": {
+    "provider": "espn-nbl"
+  },
+  "tiers": [
+    {
+      "key": "finals",
+      "label": "Finals",
+      "kind": "playoffs"
+    },
+    {
+      "key": "top2",
+      "label": "Top 2",
+      "kind": "seed",
+      "size": 2
+    },
+    {
+      "key": "top1",
+      "label": "Minor premiership",
+      "kind": "seed",
+      "size": 1,
+      "shortLabel": "1st"
+    },
+    {
+      "key": "title",
+      "label": "Championship",
+      "kind": "champion",
+      "shortLabel": "Title"
+    }
+  ],
+  "conferences": [
+    {
+      "key": "overall",
+      "label": "Ladder",
+      "divisions": [
+        "NBL"
+      ]
+    }
+  ],
+  "teams": {
+    "Adelaide 36ers": {
+      "shortName": "ADL",
+      "color": "#0C2340",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Brisbane Bullets": {
+      "shortName": "BRI",
+      "color": "#D50032",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Cairns Taipans": {
+      "shortName": "CNS",
+      "color": "#F47920",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Illawarra Hawks": {
+      "shortName": "ILL",
+      "color": "#A6192E",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Melbourne United": {
+      "shortName": "MEL",
+      "color": "#1D428A",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "New Zealand Breakers": {
+      "shortName": "NZB",
+      "color": "#000000",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Perth Wildcats": {
+      "shortName": "PER",
+      "color": "#E4002B",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "South East Melbourne Phoenix": {
+      "shortName": "SEM",
+      "color": "#00A3AD",
+      "textColor": "#000000",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Sydney Kings": {
+      "shortName": "SYD",
+      "color": "#4B2C82",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    },
+    "Tasmania JackJumpers": {
+      "shortName": "TAS",
+      "color": "#006A4E",
+      "textColor": "#FFFFFF",
+      "conference": "overall",
+      "division": "NBL"
+    }
+  }
+}
