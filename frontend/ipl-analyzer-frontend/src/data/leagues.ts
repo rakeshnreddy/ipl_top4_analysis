@@ -62,7 +62,7 @@ export function statusLabel(league: Pick<LeagueSummary, 'status' | 'started'>) {
   return league.started === false ? 'Pre-season' : 'Live';
 }
 
-/** Switcher rows: the NFL, NHL and MLB share one row; basketball (NBA, WNBA, NBL) has its own. */
+/** Switcher rows: the NFL, NHL and MLB share one row; basketball (NBA, WNBA, NBL, WNBL) has its own. */
 const SPORT_GROUPS: Record<string, string> = {
   cricket: 'Cricket',
   football: 'Football',
