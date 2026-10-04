@@ -111,9 +111,14 @@ def validate_config(config: dict[str, Any]) -> None:
             raise ValueError(f"{name}: every tier needs a label and a kind from {', '.join(sorted(TIER_KINDS))}")
         if kind in ("top", "bottom", "seed") and tier.get("size", 0) < 1:
             raise ValueError(f"{name}: {kind} tiers need a positive size")
+        if tier.get("skip", 0) < 0:
+            raise ValueError(f"{name}: a tier cannot skip a negative number of places")
         keys.add(tier["key"])
     if not keys or len(keys) != len(config["tiers"]):
         raise ValueError(f"{name}: tiers need unique keys")
+    split = config.get("split")
+    if split is not None and not (split.get("after", 0) > 0 and split.get("size", 0) > 1):
+        raise ValueError(f"{name}: a split needs the games before it (after) and a section size above 1")
     short_names = [team["shortName"] for team in config.get("teams", {}).values() if "shortName" in team]
     if len(short_names) != len(set(short_names)):
         raise ValueError(f"{name}: team short names must be unique")
@@ -241,7 +246,11 @@ def positions_from_keys(keys: np.ndarray) -> np.ndarray:
 
 def tier_flags(positions: np.ndarray, tier: dict[str, Any], team_count: int) -> np.ndarray:
     size = tier["size"]
-    return positions >= team_count - size if tier.get("kind") == "bottom" else positions < size
+    # `skip` leaves out the places nearest the tier's edge: bottom, size 1, skip 1 is 11th of 12.
+    skip = tier.get("skip", 0)
+    if tier.get("kind") == "bottom":
+        return (positions >= team_count - skip - size) & (positions < team_count - skip)
+    return (positions >= skip) & (positions < skip + size)
 
 
 def probability_movement(previous: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any] | None:

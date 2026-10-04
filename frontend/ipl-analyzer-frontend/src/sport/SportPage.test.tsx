@@ -82,6 +82,33 @@ describe('SportPage', () => {
     expect(within(screen.getAllByRole('row')[1]).getAllByText('✓')).toHaveLength(2);
   });
 
+  it('draws a split line over the tier colours and marks a play-off place above the drop', async () => {
+    openLeague('/?league=epl-2026-27#team=CHE', {
+      ...footballPayload,
+      league: {
+        ...footballPayload.league,
+        tiers: [
+          ...footballPayload.league.tiers.slice(0, 2),
+          { key: 'playoff', label: 'Play-off', shortLabel: '11th', kind: 'bottom', size: 1, skip: 1 },
+          footballPayload.league.tiers[2],
+        ],
+        cutoffs: [{ after: 2, label: 'Split' }],
+      },
+    });
+
+    expect(await screen.findByRole('heading', { name: 'Premier League Title, Top 2, Play-off & Relegation Odds' })).toBeInTheDocument();
+    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr'));
+    expect(rows.map((row) => row.textContent)[2]).toBe('Split');
+    expect(rows[0]).toHaveClass('zone-first');
+    expect(rows[1]).toHaveClass('zone-top');
+    expect(rows[3]).toHaveClass('zone-mid');
+    expect(rows[4]).toHaveClass('zone-bottom');
+    // Chelsea's third place is the play-off place in the finishing-position chart too.
+    const chart = within(screen.getByRole('heading', { name: 'Chelsea' }).closest('aside')!).getByRole('figure');
+    expect(chart.querySelectorAll('.position-bar.zone-mid')).toHaveLength(1);
+    expect(chart.querySelectorAll('.position-bar.zone-bottom')).toHaveLength(1);
+  });
+
   it('groups the league switcher by sport', async () => {
     openLeague('/?league=epl-2026-27');
 
