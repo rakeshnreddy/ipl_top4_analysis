@@ -116,6 +116,70 @@ class TableTests(unittest.TestCase):
         self.assertEqual(football.ranked(partial, first_leg, "head-to-head-complete")[:2], ["Borough", "Albion"])
         self.assertEqual(football.ranked(partial, first_leg, "head-to-head")[:2], ["Albion", "Borough"])
 
+    def test_a_league_can_list_its_own_tiebreak_steps(self) -> None:
+        # Albion and Borough finish level on points and goal difference; Borough scored more but lost both meetings.
+        games = [
+            Game("1", 1, KICKOFF, "Albion", "Borough", None, 1, 0),
+            Game("2", 2, KICKOFF, "Borough", "Albion", None, 0, 1),
+            Game("3", 3, KICKOFF, "Albion", "City", None, 0, 0),
+            Game("4", 4, KICKOFF, "Rovers", "Albion", None, 1, 0),
+            Game("5", 5, KICKOFF, "Borough", "City", None, 3, 1),
+            Game("6", 6, KICKOFF, "Borough", "Rovers", None, 2, 1),
+            Game("7", 7, KICKOFF, "Rovers", "Borough", None, 0, 0),
+        ]
+        table = football.standings(games, TEAMS)
+        self.assertEqual([table[team]["points"] for team in ("Albion", "Borough")], [7, 7])
+        self.assertEqual([table[team]["goalDifference"] for team in ("Albion", "Borough")], [1, 1])
+
+        # France: goal difference, then head-to-head once both meetings are played, then goals.
+        france = ["goal-difference", "head-to-head-complete", "goals", "wins", "away-wins"]
+        self.assertEqual(football.ranked(table, games, france)[:2], ["Albion", "Borough"])
+        # England's WSL: goal difference, goals, wins, then head-to-head.
+        self.assertEqual(football.ranked(table, games, ["goal-difference", "goals", "wins", "head-to-head"])[:2], ["Borough", "Albion"])
+        self.assertEqual(football.ranked(table, games)[:2], ["Borough", "Albion"])
+
+    def test_turkey_compares_head_to_head_goals_of_three_teams_level(self) -> None:
+        # Albion, Borough and City draw all six games between them; Borough scored most in them, City least.
+        games = [
+            Game("1", 1, KICKOFF, "Albion", "Borough", None, 2, 2),
+            Game("2", 2, KICKOFF, "Borough", "Albion", None, 1, 1),
+            Game("3", 3, KICKOFF, "Albion", "City", None, 0, 0),
+            Game("4", 4, KICKOFF, "City", "Albion", None, 0, 0),
+            Game("5", 5, KICKOFF, "Borough", "City", None, 1, 1),
+            Game("6", 6, KICKOFF, "City", "Borough", None, 0, 0),
+            Game("7", 7, KICKOFF, "City", "Rovers", None, 5, 0),
+            Game("8", 8, KICKOFF, "Albion", "Rovers", None, 3, 0),
+            Game("9", 9, KICKOFF, "Borough", "Rovers", None, 1, 0),
+        ]
+        table = football.standings(games, TEAMS)
+
+        turkey = ["head-to-head-goals-complete", "goal-difference", "goals"]
+        self.assertEqual(football.ranked(table, games, turkey)[:3], ["Borough", "Albion", "City"])
+        # Without head-to-head goals the overall goal difference decides.
+        self.assertEqual(football.ranked(table, games, "head-to-head-complete")[:3], ["City", "Albion", "Borough"])
+        self.assertIn("then overall goal difference", football.tiebreak_note(turkey))
+
+    def test_away_wins_can_separate_teams(self) -> None:
+        # Same points, goal difference, goals and wins; Borough won away, Albion at home.
+        games = [
+            Game("1", 1, KICKOFF, "Albion", "City", None, 1, 0),
+            Game("2", 2, KICKOFF, "Rovers", "Albion", None, 1, 0),
+            Game("3", 1, KICKOFF, "City", "Borough", None, 0, 1),
+            Game("4", 2, KICKOFF, "Borough", "Rovers", None, 0, 1),
+        ]
+        table = football.standings(games, TEAMS)
+
+        self.assertEqual(football.ranked(table, games)[1:3], ["Albion", "Borough"])
+        self.assertEqual(football.ranked(table, games, ["goal-difference", "goals", "wins", "away-wins"])[1:3], ["Borough", "Albion"])
+
+    def test_every_football_config_names_known_tiebreak_steps(self) -> None:
+        for league_id in leagues.available_league_ids():
+            config = leagues.read_config(league_id)
+            if config.get("sport") == "football" and not config.get("engine"):
+                self.assertTrue(football.tiebreak_steps(config.get("tiebreak")), league_id)
+        with self.assertRaisesRegex(ValueError, "tiebreak"):
+            football.tiebreak_steps(["head-to-tail"])
+
     def test_deductions_are_found_by_matching_records(self) -> None:
         table = football.standings([Game("1", 1, KICKOFF, "Albion", "Borough", None, 2, 0), Game("2", 1, KICKOFF, "City", "Rovers", None, 1, 1)], TEAMS)
         official = [dict(row) for row in table.values()]

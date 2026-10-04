@@ -61,38 +61,90 @@ def standings(games: list[Game], teams: list[str], win: int = 3, draw: int = 1) 
     return rows
 
 
-def ranked(rows: dict[str, dict[str, int]], games: list[Game] | None = None, rule: str | None = None) -> list[str]:
-    """Points, then goal difference, then goals scored.
+# Steps that rank teams level on points, which a config can list under "tiebreak", as the page
+# describes them. A head-to-head step builds one mini-table from the games between the teams
+# still level (it is not built again for teams it leaves level); "-complete" steps wait until
+# those teams have all played each other home and away.
+TIEBREAK_STEPS = {
+    "goal-difference": "goal difference",
+    "goals": "goals scored",
+    "wins": "wins",
+    "away-wins": "away wins",
+    "head-to-head": "head-to-head points, then head-to-head goal difference",
+    "head-to-head-complete": "head-to-head points, then head-to-head goal difference (once they have met home and away)",
+    "head-to-head-goals-complete": "head-to-head points, goal difference and goals (once they have met home and away)",
+}
+# Shorthand "tiebreak" names: the default, Portugal, and Spain and Italy.
+TIEBREAK_RULES = {
+    None: ["goal-difference", "goals"],
+    "head-to-head": ["head-to-head", "goal-difference", "goals"],
+    "head-to-head-complete": ["head-to-head-complete", "goal-difference", "goals"],
+}
 
-    `rule` "head-to-head" (Portugal) ranks teams level on points by the points and goal
-    difference from games between them first; "head-to-head-complete" (Spain, Italy) does
-    so only once those teams have played each other home and away.
+
+def tiebreak_steps(rule: str | list[str] | None) -> list[str]:
+    steps = list(rule) if isinstance(rule, list) else TIEBREAK_RULES.get(rule)
+    if steps is None or any(step not in TIEBREAK_STEPS for step in steps):
+        raise ValueError(f"Unknown football tiebreak {rule!r}; steps are {', '.join(TIEBREAK_STEPS)}")
+    return steps
+
+
+def ranked(rows: dict[str, dict[str, int]], games: list[Game] | None = None, rule: str | list[str] | None = None) -> list[str]:
+    """Points, then the league's tiebreak steps (by default goal difference, then goals scored).
+
+    `rule` is a config's "tiebreak": a list of TIEBREAK_STEPS, or "head-to-head" (Portugal),
+    which ranks teams level on points by their games against each other first, or
+    "head-to-head-complete" (Spain, Italy), which does so once they have met home and away.
+    Teams level on every step are listed by name.
     """
-    mini: dict[str, tuple[int, int]] = {}
-    if rule in ("head-to-head", "head-to-head-complete") and games:
-        by_points: dict[int, list[str]] = {}
-        for team in rows:
-            by_points.setdefault(rows[team]["points"], []).append(team)
-        for group in by_points.values():
-            if len(group) < 2:
-                continue
-            members = set(group)
-            between = [game for game in games if game.played and game.home in members and game.away in members]
-            if rule == "head-to-head-complete" and len(between) < len(group) * (len(group) - 1):
-                continue
-            among = standings(between, group)
-            for team in group:
-                mini[team] = (among[team]["points"], among[team]["goalDifference"])
-    return sorted(
-        rows,
-        key=lambda team: (
-            -rows[team]["points"],
-            *(-value for value in mini.get(team, (0, 0))),
-            -rows[team]["goalDifference"],
-            -rows[team]["goalsFor"],
-            team,
-        ),
-    )
+    played = [game for game in games or [] if game.played]
+    fields = {"points": "points", "goal-difference": "goalDifference", "goals": "goalsFor", "wins": "wins"}
+
+    def values(step: str, group: list[str]) -> dict[str, Any] | None:
+        if step in fields:
+            return {team: rows[team][fields[step]] for team in group}
+        if step == "away-wins":
+            return {team: sum(1 for game in played if game.away == team and game.away_score > game.home_score) for team in group}
+        members = set(group)
+        between = [game for game in played if game.home in members and game.away in members]
+        if step.endswith("-complete") and len(between) < len(group) * (len(group) - 1):
+            return None
+        among = standings(between, group)
+        size = 3 if step.startswith("head-to-head-goals") else 2
+        return {team: (among[team]["points"], among[team]["goalDifference"], among[team]["goalsFor"])[:size] for team in group}
+
+    def order(group: list[str], steps: list[str]) -> list[str]:
+        if len(group) < 2 or not steps:
+            return sorted(group)
+        found = values(steps[0], group)
+        if found is None:
+            return order(group, steps[1:])
+        ranking = []
+        for value in sorted(set(found.values()), reverse=True):
+            ranking += order([team for team in group if found[team] == value], steps[1:])
+        return ranking
+
+    return order(list(rows), ["points", *tiebreak_steps(rule)])
+
+
+def tiebreak_note(rule: str | list[str] | None) -> str:
+    if isinstance(rule, list):
+        phrases, after_head_to_head = [], False
+        for step in tiebreak_steps(rule):
+            overall = after_head_to_head and step in ("goal-difference", "goals")
+            phrases.append(("overall " if overall else "") + TIEBREAK_STEPS[step])
+            after_head_to_head = after_head_to_head or step.startswith("head-to-head")
+        return (
+            "Teams level on points are ranked by "
+            + ", then ".join(phrases)
+            + "; simulated seasons separate them by goal difference, then goals scored."
+        )
+    if rule:
+        return (
+            "The table ranks teams level on points by their head-to-head points and goal difference, then overall goal "
+            "difference; simulated seasons separate them by goal difference, then goals scored."
+        )
+    return "Teams level on points are separated by goal difference, then goals scored."
 
 
 def official_adjustments(table: dict[str, dict[str, int]], official: list[dict[str, int]]) -> dict[str, int]:
@@ -484,12 +536,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 f"defence ratings plus home advantage, fitted on this and last season with a {HALF_LIFE_DAYS}-day half-life.",
                 "Every simulated season also lets team strength drift (more when more of the season is left), because "
                 "form, injuries and transfers change teams; without it, early-season odds were overconfident in backtests.",
-                (
-                    "The table ranks teams level on points by their head-to-head points and goal difference, then overall goal "
-                    "difference; simulated seasons separate them by goal difference, then goals scored."
-                    if config.get("tiebreak", "").startswith("head-to-head")
-                    else "Teams level on points are separated by goal difference, then goals scored."
-                ),
+                tiebreak_note(config.get("tiebreak")),
                 *(
                     [
                         "Points deductions in the official table: "
@@ -501,6 +548,7 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path) -> dic
                 ),
                 "Backtested on 2025-26 in five leagues: match predictions score 0.20-0.21 (ranked probability score) "
                 "against 0.22-0.23 for home/draw/away base rates; season odds were calibrated on 18 league-seasons since 2022-23.",
+                *config.get("notes", []),
             ],
             "probabilities": simulation["probabilities"],
             "positions": simulation["positions"],

@@ -101,13 +101,19 @@ Live odds work for any league whose config has a CricketData source; the others 
 The Premier League, La Liga, Bundesliga, Serie A, Ligue 1, EFL Championship, Eredivisie and Primeira Liga use rolling configs (`leagues/epl.json` and so on, `"sport": "football"`). A rolling config describes the competition, not one season: the `season` rule (`startMonth`, `endMonth`, a `label` such as `{year}-{yy}` and a `feed` such as `epl-{year}`) works out the current season, so a new season is picked up on 1 August without a new file. Payload ids carry the season, for example `epl-2026-27`.
 
 - Fixtures and results: [FixtureDownload](https://fixturedownload.com/) JSON feeds, no key. Credit it on the site. The standings are computed from results and were checked against the official tables of all eight leagues.
-- Tiebreakers: goal difference, then goals scored; `"tiebreak": "head-to-head"` (Portugal) ranks teams level on points by their games against each other first, and `"head-to-head-complete"` (Spain, Italy) does so once they have met home and away.
+- Tiebreakers: goal difference, then goals scored; `"tiebreak": "head-to-head"` (Portugal) ranks teams level on points by their games against each other first, and `"head-to-head-complete"` (Spain, Italy) does so once they have met home and away. A config can instead list its league's own steps in order (`football.TIEBREAK_STEPS`): `goal-difference`, `goals`, `wins`, `away-wins`, `head-to-head` (points, then goal difference in the games between the teams still level), `head-to-head-complete` (the same once they have all met home and away) and `head-to-head-goals-complete` (also goals in those games). A head-to-head step is applied once: teams it leaves level go on to the next step. Simulated seasons break ties by goal difference, then goals scored.
 - Points deductions: with `sources.espn` set, each team is matched to ESPN's table by its record (played, wins, draws, losses, goals), with no name matching, and any points difference is applied as a deduction and listed in the notes. If ESPN is unavailable, nothing changes.
 - Tiers per league in `tiers`: `top` tiers count table places from the top (title, top four), `bottom` ones from the bottom (relegation). `shortLabel` is the column header on phones.
 - Model (`football.py`): a time-weighted Poisson goals model (attack, defence, home advantage; 240-day half-life; promoted sides start below average) fitted on this and last season, then 20,000 simulated seasons. Each simulated season lets team strength drift, which backtesting on 18 league-seasons since 2022-23 showed is needed for calibrated early-season odds. Match predictions score 0.20-0.21 (ranked probability score) against 0.22-0.23 for base rates.
 - The page shows the table with title, top-four and relegation chances, finishing-position chances per team, fixture predictions, the matches that swing a race most, recent results, and the biggest moves since the previous update.
 
-To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed name, tiers and any team colours (teams without one get a generated colour), then run `venv/bin/python extract_table.py --league <id>`.
+To add a football league, copy `leagues/epl.json`, set the FixtureDownload feed name, tiers and any team colours (teams without one get a generated colour), then run `venv/bin/python extract_table.py --league <id>`. A config's `notes` are added to the page's model notes, and `rules` (a summary and source links) documents the league's format.
+
+Backtest a league before publishing its odds: `scripts/backtest_football.py` predicts every past match a week ahead, as the site would have, and compares the ranked probability score with home/draw/away base rates; it also scores the title, top and bottom chances at 25%, 50% and 75% of each finished season against the final table (Brier score, next to a no-skill guess). `--half-lives` and `--ridges` try other model settings, and `--no-history` drops the previous season.
+
+```bash
+venv/bin/python scripts/backtest_football.py --league epl --seasons 2023 2024 2025
+```
 
 ## European Cups
 
