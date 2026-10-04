@@ -526,6 +526,8 @@
 .table-scroll {
   max-width: 100%;
   overflow-x: auto;
+  /* Holds the visually hidden labels (absolutely positioned) inside the scroller, or a wide table pushes the page sideways. */
+  position: relative;
 }
 
 .data-table {
