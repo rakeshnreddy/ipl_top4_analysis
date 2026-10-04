@@ -42,7 +42,9 @@ Canonical generated files:
 
 ## Leagues
 
-Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, the points system (`points`: win, no result, tie, optional bonus points: `bonusRunRateRatio` for the SA20's winner bonus, or `bonusRuns` and `bonusChaseRunRateRatio` for the women's Super Smash, where either side earns one for 150 runs, scaled to its overs in a shortened match, or for chasing at more than 1.25 times the first innings' rate), qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL and The Hundred), playoff stage labels (used only when Cricsheet repeats a stage name), playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources. `gender` filters mixed archives and `nrrBallsPerUnit` sets the NRR scale.
+Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, the points system (`points`: win, no result, tie, optional bonus points: `bonusRunRateRatio` for the SA20's winner bonus, or `bonusRuns` and `bonusChaseRunRateRatio` for the women's Super Smash, where either side earns one for 150 runs, scaled to its overs in a shortened match, or for chasing at more than 1.25 times the first innings' rate), qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL and The Hundred), playoff stage labels (used only when Cricsheet repeats a stage name), playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources. `gender` filters mixed archives and `nrrBallsPerUnit` sets the NRR scale. A tier can have a `shortLabel` for phones.
+
+Leagues played in groups (the T20 Blast) list them under `groups` (name and team keys). Teams are ranked within their group, then seeded across groups: group winners first, then the second-placed teams, and so on, each ordered by points and NRR. A tier of size N is the top N seeds, so "the top two in each of three groups plus the two best thirds" is size 8, and the Blast's quarter-final draw (seed 1 v 8, 2 v 7, ...) follows from the seeds. The page shows one table per group. Group stages are always simulated (Monte Carlo), since the exact solver ranks one table. `deductions` takes points off a team (a sanction), and `targets` supplies the revised target and overs of a shortened match when its Cricsheet file has none, which NRR needs (the 2026 Blast files have no targets). Both are season-specific and are not rolled forward.
 
 Configured seasons, each checked against its official table:
 
@@ -72,6 +74,7 @@ Configured seasons, each checked against its official table:
 | `super-smash-women-2025-26` | Super Smash 2025-26, women (bonus point for 150 runs or a fast chase, win or lose) | Cricsheet, filtered by gender, plus one abandoned match |
 | `super-smash-men-2026-27` | Super Smash 2026-27, men (tentative 26 Dec 2026 - 31 Jan 2027; NZC has not published the schedule yet) | CricketData in season, Cricsheet once complete |
 | `super-smash-women-2026-27` | Super Smash 2026-27, women (same tentative dates) | CricketData in season, Cricsheet once complete |
+| `t20-blast-2026` | T20 Blast 2026, men: three groups of six; the top two in each and the two best thirds reach the quarter-finals (4 points a win) | Cricsheet, plus the targets of two shortened matches and Sussex's 2-point deduction; 2027 is rolled forward from it |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
 

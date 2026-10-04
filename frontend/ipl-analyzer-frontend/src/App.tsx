@@ -23,9 +23,10 @@ import {
   formatGeneratedAt,
   formatNrr,
   formatPercent,
+  groupTables,
   hasNrr,
+  orderedStandings,
   raceSnapshot,
-  rankingSort,
   setTeamPalette,
   teamColor,
   teamTextColor,
@@ -83,8 +84,28 @@ const formatMatchDate = (value: string) =>
     new Date(`${value}T00:00:00Z`),
   );
 
+/** "3rd in North" in a group stage, "3rd" otherwise. */
+function position(team: IplStanding) {
+  return team.group ? `${ordinal(team.groupRank ?? team.rank)} in ${team.group}` : ordinal(team.rank);
+}
+
+/** Who a tier takes from a group stage, e.g. "the top 2 in each group and the 2 best 3rd-placed teams". */
+function groupTierRule(tier: QualificationTier, groupCount: number) {
+  const perGroup = Math.floor(tier.size / groupCount);
+  const extra = tier.size % groupCount;
+  if (perGroup === 0) {
+    return extra === 1 ? 'the best group winner' : `the ${extra} best group winners`;
+  }
+  const head = perGroup === 1 ? 'the group winners' : `the top ${perGroup} in each group`;
+  const place = `${ordinal(perGroup + 1)}-placed`;
+  if (extra === 0) {
+    return head;
+  }
+  return extra === 1 ? `${head} and the best ${place} team` : `${head} and the ${extra} best ${place} teams`;
+}
+
 function finalSnapshot(payload: IplSeasonPayload) {
-  const ordered = [...payload.standings].sort(rankingSort);
+  const ordered = orderedStandings(payload);
   const byKey = (key: string | null | undefined) => payload.standings.find((team) => team.teamKey === key) || null;
   return {
     ordered,
@@ -144,7 +165,7 @@ function pointsGap(team: IplStanding, cutline: IplStanding) {
   if (gap === 0) {
     return `Level with ${cutline.shortName} on ${cutline.points} pts, out on NRR.`;
   }
-  return `${ordinal(team.rank)} on ${team.points} pts, ${gap} pt${gap === 1 ? '' : 's'} behind ${cutline.shortName}.`;
+  return `${position(team)} on ${team.points} pts, ${gap} pt${gap === 1 ? '' : 's'} behind ${cutline.shortName}.`;
 }
 
 function seasonOutcome(payload: IplSeasonPayload, team: IplStanding) {
@@ -167,7 +188,7 @@ function seasonOutcome(payload: IplSeasonPayload, team: IplStanding) {
   if (exit) {
     return `Knocked out in ${exit.stage}`;
   }
-  return team.rank <= playoffTier.size ? 'Reached the playoffs' : `Finished ${ordinal(team.rank)}`;
+  return team.rank <= playoffTier.size ? 'Reached the playoffs' : `Finished ${position(team)}`;
 }
 
 function teamKeyFromHash(payload: IplSeasonPayload) {
@@ -315,7 +336,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
           return;
         }
         setTeamPalette(data.league?.teams);
-        const sorted = [...data.standings].sort(rankingSort);
+        const sorted = orderedStandings(data);
         setPayload(data);
         setSelectedTeamKey(teamKeyFromHash(data) || sorted[0]?.teamKey || '');
         setError(null);
@@ -385,7 +406,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
     setLeagueJsonLd(payload, pageHref, title, description);
   }, [payload, leagueId, homeLeagueId]);
 
-  const sortedStandings = useMemo(() => [...(payload?.standings || [])].sort(rankingSort), [payload]);
+  const sortedStandings = useMemo(() => (payload ? orderedStandings(payload) : []), [payload]);
   const selectedTeam = useMemo(
     () => sortedStandings.find((team) => team.teamKey === selectedTeamKey) || sortedStandings[0],
     [selectedTeamKey, sortedStandings],
@@ -419,6 +440,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
   const sourceIsStale = ['stale', 'invalid'].includes(payload.metadata.data_freshness_status.toLowerCase());
   const sourceWarningText = payload.metadata.warnings.join(' ') || `Freshness status: ${payload.metadata.data_freshness_status}.`;
   const isFinal = isLeagueComplete(payload);
+  const groups = groupTables(payload);
 
   const handleTeamSelect = (team: IplStanding) => {
     setSelectedTeamKey(team.teamKey);
@@ -445,97 +467,48 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
           <div className="ladder-panel" id="standings" data-testid="standings-ladder">
             <div className="section-heading">
               <h2>{isFinal ? 'Final Standings' : 'Standings'}</h2>
-              <p>{isFinal ? 'Ranked by points, then net run rate' : 'Select a team to see its path'}</p>
+              <p>
+                {isFinal
+                  ? `${groups.length ? 'Each group ranked' : 'Ranked'} by points, then net run rate`
+                  : 'Select a team to see its path'}
+              </p>
             </div>
 
-            <div className="table-scroll">
-              <table className="data-table standings-table">
-                <caption className="visually-hidden">
-                  {shortName} {seasonLabel} standings
-                </caption>
-                <thead>
-                  <tr>
-                    <th className="col-rank" scope="col">
-                      #
-                    </th>
-                    <th className="col-team" scope="col">
-                      Team
-                    </th>
-                    <th className="col-optional" scope="col">
-                      Record
-                    </th>
-                    <th scope="col">Pts</th>
-                    <th scope="col">NRR</th>
-                    <th className="col-optional" scope="col">
-                      {isFinal ? 'Played' : 'Left'}
-                    </th>
-                    <th className="col-tier" scope="col">
-                      {playoffTier.label}
-                    </th>
-                    <th className="col-tier" scope="col">
-                      {topTier.label}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedStandings.map((team) => {
-                    const inPlayoffZone = team.rank <= playoffTier.size;
-                    const playoffOdds = tierProbability(payload, team.teamKey, playoffTier.size);
-                    const topOdds = tierProbability(payload, team.teamKey, topTier.size);
-                    const selected = selectedTeam.teamKey === team.teamKey;
-                    return (
-                      <tr
-                        className={`standing-row ${inPlayoffZone ? 'zone-top' : ''} ${selected ? 'is-selected' : ''}`}
-                        key={team.teamKey}
-                        onClick={() => handleTeamSelect(team)}
-                      >
-                        <td className="col-rank">{team.rank}</td>
-                        <th className="col-team" scope="row">
-                          <button
-                            aria-pressed={selected}
-                            className="team-button"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              handleTeamSelect(team);
-                            }}
-                            type="button"
-                          >
-                            <span aria-hidden="true" className="team-chip" style={{ backgroundColor: teamColor(team.teamKey) }} />
-                            <strong>{team.shortName}</strong>
-                            <small>{team.fullName}</small>
-                          </button>
-                        </th>
-                        <td className="col-optional">{formatRecord(team)}</td>
-                        <td className="is-strong">{team.points}</td>
-                        <td className={hasNrr(team.nrr) ? (team.nrr >= 0 ? 'nrr-positive' : 'nrr-negative') : undefined}>
-                          {formatNrr(team.nrr)}
-                        </td>
-                        <td className="col-optional">{isFinal ? team.matches : team.remainingMatches}</td>
-                        {isFinal ? (
-                          <>
-                            <td className="col-tier">
-                              <FinishMark achieved={inPlayoffZone} label={playoffTier.label} />
-                            </td>
-                            <td className="col-tier">
-                              <FinishMark achieved={team.rank <= topTier.size} label={topTier.label} />
-                            </td>
-                          </>
-                        ) : (
-                          <>
-                            <td className="col-tier" style={heatStyle(playoffOdds, 'good')}>
-                              {formatPercent(playoffOdds)}
-                            </td>
-                            <td className="col-tier" style={heatStyle(topOdds, 'good')}>
-                              {formatPercent(topOdds)}
-                            </td>
-                          </>
-                        )}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            {groups.length > 0 ? (
+              groups.map((group) => (
+                <div className="group-table" key={group.name}>
+                  <h3>{group.name} Group</h3>
+                  <StandingsTable
+                    caption={`${shortName} ${seasonLabel} ${group.name} Group standings`}
+                    isFinal={isFinal}
+                    onSelect={handleTeamSelect}
+                    payload={payload}
+                    selectedKey={selectedTeam.teamKey}
+                    teams={group.teams}
+                  />
+                </div>
+              ))
+            ) : (
+              <StandingsTable
+                caption={`${shortName} ${seasonLabel} standings`}
+                isFinal={isFinal}
+                onSelect={handleTeamSelect}
+                payload={payload}
+                selectedKey={selectedTeam.teamKey}
+                teams={sortedStandings}
+              />
+            )}
+            {groups.length > 0 && (
+              <p className="table-note" data-testid="group-rules">
+                {tiers.map((tier) => `${tier.label}: ${groupTierRule(tier, groups.length)}.`).join(' ')}
+              </p>
+            )}
+            {(payload.league?.deductions ?? []).map((item) => (
+              <p className="table-note" key={item.team}>
+                {`* ${payload.standings.find((team) => team.teamKey === item.team)?.fullName ?? item.team}: ` +
+                  `${item.points} point${item.points === 1 ? '' : 's'} deducted (${item.note}).`}
+              </p>
+            ))}
           </div>
 
           {isFinal ? (
@@ -788,6 +761,129 @@ const TodayRaceSummary = ({
   );
 };
 
+/** The league table, or one group's table; the zone stripe marks the qualifying places across groups. */
+const StandingsTable = ({
+  caption,
+  isFinal,
+  onSelect,
+  payload,
+  selectedKey,
+  teams,
+}: {
+  caption: string;
+  isFinal: boolean;
+  onSelect: (team: IplStanding) => void;
+  payload: IplSeasonPayload;
+  selectedKey: string;
+  teams: IplStanding[];
+}) => {
+  const { playoffTier, topTier } = leagueInfo(payload);
+  return (
+    <div className="table-scroll">
+      <table className="data-table standings-table">
+        <caption className="visually-hidden">{caption}</caption>
+        <thead>
+          <tr>
+            <th className="col-rank" scope="col">
+              #
+            </th>
+            <th className="col-team" scope="col">
+              Team
+            </th>
+            <th className="col-optional" scope="col">
+              Record
+            </th>
+            <th scope="col">Pts</th>
+            <th scope="col">NRR</th>
+            <th className="col-optional" scope="col">
+              {isFinal ? 'Played' : 'Left'}
+            </th>
+            {[playoffTier, topTier].map((tier, index) => (
+              <th className="col-tier" key={index} scope="col">
+                {tier.shortLabel ? (
+                  <>
+                    <span className="label-full">{tier.label}</span>
+                    <span aria-hidden="true" className="label-short">
+                      {tier.shortLabel}
+                    </span>
+                  </>
+                ) : (
+                  tier.label
+                )}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {teams.map((team) => {
+            const inPlayoffZone = team.rank <= playoffTier.size;
+            const playoffOdds = tierProbability(payload, team.teamKey, playoffTier.size);
+            const topOdds = tierProbability(payload, team.teamKey, topTier.size);
+            const selected = selectedKey === team.teamKey;
+            return (
+              <tr
+                className={`standing-row ${inPlayoffZone ? 'zone-top' : ''} ${selected ? 'is-selected' : ''}`}
+                key={team.teamKey}
+                onClick={() => onSelect(team)}
+              >
+                <td className="col-rank">{team.groupRank ?? team.rank}</td>
+                <th className="col-team" scope="row">
+                  <button
+                    aria-pressed={selected}
+                    className="team-button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onSelect(team);
+                    }}
+                    type="button"
+                  >
+                    <span aria-hidden="true" className="team-chip" style={{ backgroundColor: teamColor(team.teamKey) }} />
+                    <strong>{team.shortName}</strong>
+                    <small>{team.fullName}</small>
+                  </button>
+                </th>
+                <td className="col-optional">{formatRecord(team)}</td>
+                <td className="is-strong">
+                  {team.points}
+                  {team.deductedPoints ? (
+                    <>
+                      <span aria-hidden="true">*</span>
+                      <span className="visually-hidden"> after a {team.deductedPoints}-point deduction</span>
+                    </>
+                  ) : null}
+                </td>
+                <td className={hasNrr(team.nrr) ? (team.nrr >= 0 ? 'nrr-positive' : 'nrr-negative') : undefined}>
+                  {formatNrr(team.nrr)}
+                </td>
+                <td className="col-optional">{isFinal ? team.matches : team.remainingMatches}</td>
+                {isFinal ? (
+                  <>
+                    <td className="col-tier">
+                      <FinishMark achieved={inPlayoffZone} label={playoffTier.label} />
+                    </td>
+                    <td className="col-tier">
+                      <FinishMark achieved={team.rank <= topTier.size} label={topTier.label} />
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className="col-tier" style={heatStyle(playoffOdds, 'good')}>
+                      {formatPercent(playoffOdds)}
+                    </td>
+                    <td className="col-tier" style={heatStyle(topOdds, 'good')}>
+                      {formatPercent(topOdds)}
+                    </td>
+                  </>
+                )}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const FinishMark = ({ achieved, label }: { achieved: boolean; label: string }) => (
   <>
     <span aria-hidden="true" className={achieved ? 'mark-yes' : 'mark-no'}>
@@ -839,6 +935,8 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
   const lastTopTeam = topTeams[topTeams.length - 1];
   const levelWithTop = ordered.slice(topTier.size).filter((team) => team.points === lastTopTeam.points);
   const leagueMatches = payload.standings.reduce((total, team) => total + team.matches, 0) / 2;
+  const groups = groupTables(payload);
+  const topRule = groups.length ? groupTierRule(topTier, groups.length) : '';
 
   return (
     <section className="race-summary-panel" aria-labelledby="season-summary-title">
@@ -848,9 +946,12 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
 
       <div className="race-summary-grid">
         <article>
-          <span>League stage winners</span>
+          <span>{groups.length ? 'Top seed' : 'League stage winners'}</span>
           <strong>{leader.shortName}</strong>
-          <small>{leader.points} pts · NRR {formatNrr(leader.nrr)}</small>
+          <small>
+            {leader.points} pts · NRR {formatNrr(leader.nrr)}
+            {leader.group ? ` · ${leader.group} winners` : ''}
+          </small>
         </article>
         <article>
           <span>Playoff teams</span>
@@ -863,9 +964,11 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
           <span>{topTier.label} finish</span>
           <strong>{topTeams.map((team) => team.shortName).join(' & ')}</strong>
           <small>
-            {levelWithTop.length > 0
-              ? `${levelWithTop.map((team) => team.shortName).join(', ')} also reached ${lastTopTeam.points} pts but had a lower NRR.`
-              : 'Settled on points.'}
+            {groups.length
+              ? `${topRule.charAt(0).toUpperCase()}${topRule.slice(1)}.`
+              : levelWithTop.length > 0
+                ? `${levelWithTop.map((team) => team.shortName).join(', ')} also reached ${lastTopTeam.points} pts but had a lower NRR.`
+                : 'Settled on points.'}
           </small>
         </article>
         <article>
@@ -873,11 +976,19 @@ const SeasonSummary = ({ payload }: { payload: IplSeasonPayload }) => {
           <strong>{firstOut?.shortName ?? 'None'}</strong>
           <small>{firstOut ? pointsGap(firstOut, cutline) : 'Every team reached the playoffs.'}</small>
         </article>
-        <article>
-          <span>Bottom of the table</span>
-          <strong>{bottom.shortName}</strong>
-          <small>{bottom.points} pts · NRR {formatNrr(bottom.nrr)}</small>
-        </article>
+        {groups.length ? (
+          <article>
+            <span>Bottom of each group</span>
+            <strong>{groups.map((group) => group.teams[group.teams.length - 1]?.shortName).join(', ')}</strong>
+            <small>{groups.map((group) => `${group.name}: ${group.teams[group.teams.length - 1]?.points} pts`).join(' · ')}</small>
+          </article>
+        ) : (
+          <article>
+            <span>Bottom of the table</span>
+            <strong>{bottom.shortName}</strong>
+            <small>{bottom.points} pts · NRR {formatNrr(bottom.nrr)}</small>
+          </article>
+        )}
       </div>
     </section>
   );
@@ -947,11 +1058,10 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
         </article>
         <article>
           <span className="mini-label">Final position</span>
-          <strong>
-            #{team.rank} of {payload.standings.length}
-          </strong>
+          <strong>{team.group ? position(team) : `#${team.rank} of ${payload.standings.length}`}</strong>
           <small>
             {team.points} pts from {team.matches} matches
+            {team.group ? ` · seed ${team.rank} of ${payload.standings.length}` : ''}
           </small>
         </article>
         <article>
@@ -961,6 +1071,7 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
             {team.bonusPoints
               ? `League stage · ${team.bonusPoints} bonus point${team.bonusPoints === 1 ? '' : 's'}`
               : 'League stage'}
+            {team.deductedPoints ? ` · ${team.deductedPoints} points deducted` : ''}
           </small>
         </article>
         <article>
@@ -986,7 +1097,7 @@ const TeamSeasonCard = ({ payload, team }: { payload: IplSeasonPayload; team: Ip
           {journey.length === 0 && (
             <li>
               <span>Did not reach the playoffs.</span>
-              <small>Finished {ordinal(team.rank)} in the league stage.</small>
+              <small>Finished {position(team)} in the league stage.</small>
             </li>
           )}
         </ul>
@@ -1037,7 +1148,9 @@ const TeamDeepDive = ({
         </article>
         <article>
           <span className="mini-label">Points, rank, NRR</span>
-          <strong>#{team.rank} · {team.points} pts · {formatNrr(team.nrr)}</strong>
+          <strong>
+            {team.group ? position(team) : `#${team.rank}`} · {team.points} pts · {formatNrr(team.nrr)}
+          </strong>
           <small>
             {team.matches} played, {team.remainingMatches} left, max {maxPoints(payload, team)} pts
           </small>

@@ -38,6 +38,8 @@ class TeamMeta:
 class QualificationTier:
     size: int
     label: str
+    # Column header on phones, e.g. "QF" for "Quarter-finals".
+    short_label: str | None = None
 
 
 @dataclass(frozen=True)
@@ -46,6 +48,34 @@ class ExtraResult:
 
     date: str
     teams: tuple[str, str]
+    note: str
+
+
+@dataclass(frozen=True)
+class Target:
+    """The (revised) target of a shortened match whose Cricsheet file has none."""
+
+    date: str
+    teams: tuple[str, str]
+    runs: int
+    overs: int
+    note: str = ""
+
+
+@dataclass(frozen=True)
+class Group:
+    """A group of a league stage played in groups (the T20 Blast); teams are team keys."""
+
+    name: str
+    teams: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class Deduction:
+    """Points taken off a team's league-stage total, such as a sanction."""
+
+    team: str
+    points: int
     note: str
 
 
@@ -84,6 +114,12 @@ class League:
     bonus_chase_run_rate_ratio: float | None = None
     # Share of losses that earned a bonus point last season; used when simulating.
     bonus_loser_simulation_rate: float = 0.0
+    # Group stage (the T20 Blast): teams are ranked within their group, then seeded across
+    # groups by group place, then points and NRR. A tier of size N is the top N seeds, so
+    # "top two in each group plus the two best thirds" is the top 8 of three groups.
+    groups: tuple[Group, ...] = ()
+    deductions: tuple[Deduction, ...] = ()
+    targets: tuple[Target, ...] = ()
 
     @property
     def has_bonus_points(self) -> bool:
@@ -92,6 +128,10 @@ class League:
     @property
     def team_meta(self) -> dict[str, TeamMeta]:
         return {team.key: team for team in self.teams}
+
+    @property
+    def team_group(self) -> dict[str, str]:
+        return {key: group.name for group in self.groups for key in group.teams}
 
     @property
     def league_match_count(self) -> int:
@@ -112,7 +152,10 @@ class League:
             "season": self.season,
             "seasonLabel": self.season_label,
             "matchesPerTeam": self.matches_per_team,
-            "qualification": [{"size": tier.size, "label": tier.label} for tier in self.qualification],
+            "qualification": [
+                {"size": tier.size, "label": tier.label, **({"shortLabel": tier.short_label} if tier.short_label else {})}
+                for tier in self.qualification
+            ],
             "secondChanceStages": list(self.second_chance_stages),
             "points": {
                 "win": self.points_win,
@@ -130,6 +173,12 @@ class League:
                 }
                 for team in self.teams
             ],
+            **({"groups": [{"name": group.name, "teams": list(group.teams)} for group in self.groups]} if self.groups else {}),
+            **(
+                {"deductions": [{"team": item.team, "points": item.points, "note": item.note} for item in self.deductions]}
+                if self.deductions
+                else {}
+            ),
         }
 
 
@@ -145,7 +194,10 @@ def parse_league(raw: dict[str, Any]) -> League:
         )
         for item in raw["teams"]
     )
-    qualification = tuple(QualificationTier(size=item["size"], label=item["label"]) for item in raw["qualification"])
+    qualification = tuple(
+        QualificationTier(size=item["size"], label=item["label"], short_label=item.get("shortLabel"))
+        for item in raw["qualification"]
+    )
     playoffs = raw.get("playoffs", {})
     sources = raw.get("sources", {})
     points = raw.get("points", {})
@@ -184,6 +236,21 @@ def parse_league(raw: dict[str, Any]) -> League:
         bonus_runs=points.get("bonusRuns"),
         bonus_chase_run_rate_ratio=points.get("bonusChaseRunRateRatio"),
         bonus_loser_simulation_rate=points.get("bonusLoserSimulationRate", 0.0),
+        groups=tuple(Group(name=item["name"], teams=tuple(item["teams"])) for item in raw.get("groups", ())),
+        deductions=tuple(
+            Deduction(team=item["team"], points=item["points"], note=item.get("note", ""))
+            for item in raw.get("deductions", ())
+        ),
+        targets=tuple(
+            Target(
+                date=item["date"],
+                teams=(item["teams"][0], item["teams"][1]),
+                runs=item["runs"],
+                overs=item["overs"],
+                note=item.get("note", ""),
+            )
+            for item in raw.get("targets", ())
+        ),
     )
     validate_league(league)
     return league
@@ -201,6 +268,11 @@ def validate_league(league: League) -> None:
     sizes = league.qualification_sizes
     if not sizes or sizes != sorted(sizes, reverse=True) or sizes[0] > len(league.teams):
         raise ValueError(f"{league.id}: qualification sizes must be descending and fit the team count")
+    grouped = [key for group in league.groups for key in group.teams]
+    if league.groups and sorted(grouped) != sorted(keys):
+        raise ValueError(f"{league.id}: every team must be in exactly one group")
+    if any(item.team not in keys for item in league.deductions):
+        raise ValueError(f"{league.id}: deductions must name a team key")
 
 
 def _shift_season(text: str) -> str:
@@ -229,8 +301,9 @@ def successor_config(config: dict[str, Any]) -> dict[str, Any]:
     """Next season of a cricket competition, assumed to keep its teams and rules.
 
     Dates move a year and are marked tentative; season-specific details (a fixed
-    CricketData series id, abandoned matches) are dropped. If teams change, the
-    first build reports it and a real config for that season is needed.
+    CricketData series id, abandoned matches, points deductions, missing targets) are
+    dropped. If teams change, the first build reports it and a real config for that
+    season is needed.
     """
     successor = json.loads(json.dumps(config))
     successor["id"] = _neighbour_id(config["id"], 1)
@@ -239,7 +312,8 @@ def successor_config(config: dict[str, Any]) -> dict[str, Any]:
     for key in ("seasonStart", "seasonEnd"):
         if config.get(key):
             successor[key] = _next_year(config[key])
-    successor.pop("extraResults", None)
+    for key in ("extraResults", "deductions", "targets"):
+        successor.pop(key, None)
     (successor.get("sources", {}).get("cricketdata") or {}).pop("seriesId", None)
     successor["tentative"] = True
     return successor

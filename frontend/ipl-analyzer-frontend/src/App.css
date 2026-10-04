@@ -420,10 +420,42 @@
   font-size: var(--text-sm);
 }
 
-.probability-note {
+.probability-note,
+.table-note {
   color: var(--text-subtle);
   font-size: var(--text-sm);
   margin-top: var(--space-3);
+}
+
+/* Short tier labels ("QF") on phones; the full label stays for screen readers. */
+.standings-table .label-short {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .standings-table .label-full {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .standings-table .label-short {
+    display: inline;
+  }
+}
+
+/* Group stages (the T20 Blast): one table per group inside the standings panel. */
+.group-table + .group-table {
+  margin-top: var(--space-5);
+}
+
+.group-table h3 {
+  margin-bottom: var(--space-1);
 }
 
 .mini-label {
