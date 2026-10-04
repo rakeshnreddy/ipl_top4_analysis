@@ -102,6 +102,8 @@ def validate_config(config: dict[str, Any]) -> None:
         raise ValueError(f"{name}: season needs startMonth, endMonth and feed")
     if not (1 <= rule["startMonth"] <= 12 and 1 <= rule["endMonth"] <= 12):
         raise ValueError(f"{name}: season months must be 1-12")
+    if not isinstance(rule.get("firstYear", 0), int):
+        raise ValueError(f"{name}: season firstYear must be a year")
     keys = set()
     for tier in config.get("tiers", []):
         kind = tier.get("kind", "top")

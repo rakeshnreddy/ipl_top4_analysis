@@ -275,6 +275,30 @@ class PayloadTests(unittest.TestCase):
         self.assertEqual(first["analysis"]["probabilities"], second["analysis"]["probabilities"])
         self.assertTrue(first["metadata"]["warnings"])
 
+    def test_a_league_whose_feed_starts_this_season_does_not_look_for_the_last_one(self) -> None:
+        first = config()
+        first["season"] = dict(first["season"], firstYear=2026)
+        team_sports.validate_config(first)
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            # Albion and Borough beat City and Rovers 1-0 at home; the six matches before 3 October are played.
+            played = dict.fromkeys(list(itertools.permutations(TEAMS, 2))[:6], (1, 0))
+            (cache / "test-2026.json").write_text(json.dumps(feed_rows(played)))
+            # No test-2025 feed: fetching it would fail (or go online) and warn.
+            payload = football.build_payload(first, datetime(2026, 10, 3, tzinfo=timezone.utc), cache)
+
+        self.assertEqual(payload["metadata"]["warnings"], [])
+        self.assertEqual(payload["metadata"]["data_freshness_status"], "fresh")
+        notes = payload["analysis"]["modelNotes"]
+        self.assertIn("fitted on this season with", notes[0])
+        self.assertIn("FixtureDownload has no Test League season before 2026-27", notes[1])
+        # Nobody is treated as promoted: both sides of an unplayed match start level.
+        self.assertEqual(payload["analysis"]["ratings"]["City"], payload["analysis"]["ratings"]["Rovers"])
+
+        first["season"]["firstYear"] = "2026"
+        with self.assertRaisesRegex(ValueError, "firstYear"):
+            team_sports.validate_config(first)
+
     def test_movement_compares_with_the_previous_payload(self) -> None:
         previous = {
             "metadata": {"generated_at": "2026-10-02T19:30:00Z"},
