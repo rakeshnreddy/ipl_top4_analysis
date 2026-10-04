@@ -42,7 +42,7 @@ Canonical generated files:
 
 ## Leagues
 
-Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, the points system (`points`: win, no result, tie, optional bonus point), qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL and The Hundred), playoff stage labels (used only when Cricsheet repeats a stage name), playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources. `gender` filters mixed archives and `nrrBallsPerUnit` sets the NRR scale.
+Each competition season has a config in `leagues/<id>.json`: teams (names, short names, aliases, colours), games per team, the points system (`points`: win, no result, tie, optional bonus points: `bonusRunRateRatio` for the SA20's winner bonus, or `bonusRuns` and `bonusChaseRunRateRatio` for the women's Super Smash, where either side earns one for 150 runs, scaled to its overs in a shortened match, or for chasing at more than 1.25 times the first innings' rate), qualification tiers (for example Top 4 and Top 2, or Top 3 and Top 1 for the WPL and The Hundred), playoff stage labels (used only when Cricsheet repeats a stage name), playoff losses that are not exits (such as the IPL's Qualifier 1), and data sources. `gender` filters mixed archives and `nrrBallsPerUnit` sets the NRR scale.
 
 Configured seasons, each checked against its official table:
 
@@ -68,6 +68,10 @@ Configured seasons, each checked against its official table:
 | `bpl-2025-26` | Bangladesh Premier League 2025-26 | Cricsheet |
 | `wbbl-2025-26` | Women's Big Bash League 2025-26 (Top 4; first goes straight to the final, third plays fourth in the Knockout) | Cricsheet, plus one abandoned match |
 | `wbbl-2026-27` | Women's Big Bash League 2026-27 (29 Oct - 5 Dec 2026) | CricketData in season, Cricsheet once complete |
+| `super-smash-men-2025-26` | Super Smash 2025-26, men (4 points a win, 2 a tie or no result; Top 3, first goes straight to the final) | Cricsheet, filtered by gender, plus three abandoned matches |
+| `super-smash-women-2025-26` | Super Smash 2025-26, women (bonus point for 150 runs or a fast chase, win or lose) | Cricsheet, filtered by gender, plus one abandoned match |
+| `super-smash-men-2026-27` | Super Smash 2026-27, men (tentative 26 Dec 2026 - 31 Jan 2027; NZC has not published the schedule yet) | CricketData in season, Cricsheet once complete |
+| `super-smash-women-2026-27` | Super Smash 2026-27, women (same tentative dates) | CricketData in season, Cricsheet once complete |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
 
@@ -86,7 +90,7 @@ To add a league season:
 2. Cricsheet has no file for matches abandoned before a ball was bowled; list them under `extraResults`.
 3. Build it and compare the table with the official one, then add the official points and NRR to `OFFICIAL_TABLES` in `tests/test_cricsheet.py`.
 
-Live odds work for any league whose config has a CricketData source; the others show completed seasons. Bonus points are simulated at the rate seen in the previous season.
+Live odds work for any league whose config has a CricketData source; the others show completed seasons. Bonus points are simulated at the rate seen in the previous season (`bonusSimulationRate` for winners, `bonusLoserSimulationRate` for losers). A tie that stands, as in the Super Smash, is read from CricketData's match status.
 
 ## Football
 

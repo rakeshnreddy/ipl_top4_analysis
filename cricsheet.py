@@ -234,6 +234,11 @@ class PointsRule:
     bonus_run_rate_ratio: float | None = None
     # Balls per scoring unit for NRR (6 = runs per over).
     rate_balls: int = 6
+    # Women's Super Smash-style bonus, win or lose: one point for a side that scores this
+    # many runs in a full innings (scaled to the overs it was allotted), or that chases at
+    # more than bonus_chase_run_rate_ratio times the run rate of the side batting first.
+    bonus_runs: int | None = None
+    bonus_chase_run_rate_ratio: float | None = None
 
 
 def earns_bonus_point(lines: list[tuple[str, int, int]], winner: str, ratio: float) -> bool:
@@ -243,6 +248,37 @@ def earns_bonus_point(lines: list[tuple[str, int, int]], winner: str, ratio: flo
     if winner_rate is None or loser_rate is None:
         return False
     return winner_rate >= loser_rate * Fraction(ratio).limit_denominator(1000)
+
+
+def allotted_balls(match: Match) -> tuple[int, int]:
+    """Balls each main innings was allotted, as far as Cricsheet records them.
+
+    The chase gets its target's overs. The first innings gets the same reduced quota
+    when both sides were cut (no D/L); after a D/L revision it gets the balls it faced,
+    unless it was bowled out, when its full scheduled quota is assumed.
+    """
+    scheduled = match.scheduled_balls
+    chase = match.target_balls or scheduled
+    first = match.innings[0]
+    if not match.method:
+        return min(chase, scheduled), chase
+    return (scheduled if first.wickets >= 10 else first.legal_balls or scheduled), chase
+
+
+def runs_and_chase_bonus(match: Match, lines: list[tuple[str, int, int]], rule: PointsRule) -> set[str]:
+    """Sides (by Cricsheet name) that earn a runs or chasing bonus point, at most one each."""
+    earned: set[str] = set()
+    if rule.bonus_runs:
+        for innings, allotted in zip(match.innings, allotted_balls(match)):
+            # 150 runs off 20 overs becomes 37.5 off 5 overs in a rain-reduced match.
+            if innings.runs * match.scheduled_balls >= rule.bonus_runs * allotted:
+                earned.add(innings.team)
+    if rule.bonus_chase_run_rate_ratio and len(lines) == 2 and all(balls for _, _, balls in lines):
+        (_, first_runs, first_balls), (chaser, chase_runs, chase_balls) = lines
+        ratio = Fraction(rule.bonus_chase_run_rate_ratio).limit_denominator(1000)
+        if Fraction(chase_runs, chase_balls) > Fraction(first_runs, first_balls) * ratio:
+            earned.add(chaser)
+    return earned
 
 
 def league_table(
@@ -296,6 +332,10 @@ def league_table(
 
         if not lines:
             continue
+        if rule.bonus_runs or rule.bonus_chase_run_rate_ratio:
+            for name in runs_and_chase_bonus(match, lines, rule):
+                rows[key_for(name)].points += 1
+                rows[key_for(name)].bonus_points += 1
         for batting_name, runs, balls in lines:
             batting = key_for(batting_name)
             bowling = right if batting == left else left
