@@ -334,13 +334,94 @@ class LiveSeasonTests(unittest.TestCase):
         with mock.patch.dict(extract_table.os.environ, {}, clear=True):
             extract_table.use_league(leagues.load_league("bbl-2026-27"))
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "bbl")
-            extract_table.use_league(leagues.load_league("wbbl-2026-27"))
+            # WBBL|12 has a fixed series id; without one (a rolled season) it is found by name.
+            extract_table.use_league(dataclasses.replace(leagues.load_league("wbbl-2026-27"), cricketdata_series_id=None))
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "wbbl")
             extract_table.use_league(leagues.load_league("super-smash-men-2026-27"))
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "ss")
             extract_table.use_league(leagues.load_league("super-smash-women-2026-27"))
             self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "ssw")
 
+    def test_upcoming_seasons_find_their_series_under_cricketdata_names(self) -> None:
+        session = mock.Mock()
+        session.get.return_value = series_listing(CRICKETDATA_SERIES + list(NEXT_CRICKETDATA_SERIES.values()))
+
+        with mock.patch.dict(extract_table.os.environ, {}, clear=True):
+            for league_id, name in NEXT_CRICKETDATA_SERIES.items():
+                with self.subTest(league_id):
+                    league = dataclasses.replace(leagues.load_league(league_id), cricketdata_series_id=None)
+                    extract_table.use_league(league)
+                    self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), name)
+
+    def test_seasons_inside_one_year_also_match_a_two_year_name(self) -> None:
+        session = mock.Mock()
+        session.get.return_value = series_listing(
+            ["International League T20, 2025-26", "International League T20, 2026-27", "Womens Big Bash League 2026-27"]
+        )
+
+        with mock.patch.dict(extract_table.os.environ, {}, clear=True):
+            for league_id, name in (
+                ("ilt-2026-27", "International League T20, 2026-27"),
+                ("wbbl-2026-27", "Womens Big Bash League 2026-27"),
+            ):
+                with self.subTest(league_id):
+                    league = dataclasses.replace(leagues.load_league(league_id), cricketdata_series_id=None)
+                    extract_table.use_league(league)
+                    self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), name)
+
+    def test_wbbl_12_uses_the_series_cricketdata_lists(self) -> None:
+        extract_table.use_league(leagues.load_league("wbbl-2026-27"))
+        session = mock.Mock()
+
+        with mock.patch.dict(extract_table.os.environ, {}, clear=True):
+            self.assertEqual(extract_table.find_cricdata_series_id(session, "key"), "99c71a79-bc1f-4496-be02-f6b9a2be03ba")
+        session.get.assert_not_called()
+        # A rolled season drops the fixed id and is found by name: CricketData's "Womens Big Bash League 2027".
+        self.assertEqual(leagues.load_league("wbbl-2027-28").season_label, "2027")
+        self.assertIsNone(leagues.load_league("wbbl-2027-28").cricketdata_series_id)
+
+
+# Series names as CricketData lists them (https://cricketdata.org/cricket-data-formats/series and
+# https://cricketdata.org/cricket-data-formats/series-schedule on 3 Oct 2026; "SA20, 2025" from its series page).
+# A season inside one calendar year is named by that year and one that spans New Year by both: "SA20, 2024" and
+# "SA20, 2025" ran in January and February, "SA20, 2025-26" from December; "Womens Big Bash League 2026" runs
+# from October to December.
+CRICKETDATA_SERIES = [
+    "Indian Premier League 2026",
+    "Pakistan Super League 2026",
+    "Women's Premier League 2026",
+    "Big Bash League 2025-26",
+    "SA20, 2025",
+    "SA20, 2025-26",
+    "Super Smash 2025-26",
+    "Caribbean Premier League 2026",
+    "Womens Caribbean Premier League 2026",
+    "Lanka Premier League 2026",
+    "T20 Blast 2026",
+    "Womens T20 Blast 2026",
+    "Womens Big Bash League 2026",
+]
+
+# Each upcoming season's series under that naming. Only the WBBL's is listed so far. CricketData listed no
+# women's Super Smash for 2025-26, so that name follows its other women's leagues.
+NEXT_CRICKETDATA_SERIES = {
+    "ipl-2027": "Indian Premier League 2027",
+    "psl-2027": "Pakistan Super League 2027",
+    "wpl-2027": "Women's Premier League 2027",
+    "bbl-2026-27": "Big Bash League 2026-27",
+    "wbbl-2026-27": "Womens Big Bash League 2026",
+    "sa20-2026-27": "SA20, 2027",
+    "ilt-2026-27": "International League T20, 2026",
+    "super-smash-men-2026-27": "Super Smash 2026-27",
+    "super-smash-women-2026-27": "Womens Super Smash 2026-27",
+}
+
+
+def series_listing(names: list[str]) -> mock.Mock:
+    """A CricketData series page; the name doubles as the id so a test can tell which series was found."""
+    response = mock.Mock(ok=True)
+    response.json.return_value = {"status": "success", "data": [{"id": name, "name": name} for name in names]}
+    return response
 
 
 def live_payload(played: int, odds: dict[str, float], movement: object = None) -> dict[str, object]:

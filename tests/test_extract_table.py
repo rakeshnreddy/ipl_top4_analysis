@@ -74,6 +74,78 @@ def analysis_stub() -> dict[str, object]:
     }
 
 
+# CricketData's 2025-26 league results, team names and statuses as written at
+# https://cricketdata.org/cricket-data-formats/series/super-smash-2025-26-68d49a2e-d03d-4eb4-9241-11ac57a4252d
+# (association names: the Northern Brave are "Northern Knights", later "Northern Districts").
+SUPER_SMASH_2025_26 = [
+    ("Auckland", "Northern Knights", "No result due to rain"),
+    ("Central Districts", "Wellington", "Central Districts won by 46 runs"),
+    ("Canterbury", "Otago", "Canterbury won by 28 runs"),
+    ("Auckland", "Wellington", "Auckland won by 5 wkts"),
+    ("Central Districts", "Otago", "Otago won by 41 runs"),
+    ("Northern Knights", "Wellington", "Wellington won by 13 runs"),
+    ("Canterbury", "Central Districts", "Canterbury won by 36 runs"),
+    ("Auckland", "Wellington", "Match abandoned due to rain (with toss)"),
+    ("Canterbury", "Central Districts", "Canterbury won by 9 wkts"),
+    ("Northern Knights", "Otago", "Match tied"),
+    ("Auckland", "Otago", "Auckland won by 88 runs"),
+    ("Central Districts", "Wellington", "Central Districts won by 2 runs"),
+    ("Canterbury", "Northern Knights", "Northern Knights won by 87 runs"),
+    ("Otago", "Wellington", "Otago won by 6 wkts"),
+    ("Auckland", "Canterbury", "Canterbury won by 17 runs"),
+    ("Northern Knights", "Wellington", "Northern Knights won by 6 wkts"),
+    ("Auckland", "Otago", "Auckland won by 5 wkts"),
+    ("Central Districts", "Northern Knights", "Northern Knights won by 6 wkts (2nd innings reduced to 15 overs due to Bad light, DLS target 120)"),
+    ("Auckland", "Canterbury", "Auckland won by 9 wkts"),
+    ("Otago", "Wellington", "Otago won by 5 wkts"),
+    ("Auckland", "Central Districts", "Central Districts won by 10 runs"),
+    ("Northern Knights", "Otago", "Northern Knights won by 31 runs"),
+    ("Canterbury", "Wellington", "Wellington won by 88 runs"),
+    ("Central Districts", "Northern Knights", "Match abandoned due to rain (without toss)"),
+    ("Canterbury", "Otago", "Match abandoned due to rain (without toss)"),
+    ("Auckland", "Northern Districts", "Northern Districts won by 107 runs"),
+    ("Canterbury", "Wellington", "Wellington won by 13 runs (DLS Method)"),
+    ("Central Districts", "Otago", "Central Districts won by 6 wkts"),
+    ("Canterbury", "Northern Districts", "No result - due to rain"),
+    ("Auckland", "Central Districts", "Auckland won by 9 runs (DLS method)"),
+]
+
+# https://cricketdata.org/cricket-data-formats/series/sa20-2025-26-f530b0f7-25c0-422e-bf8b-1f2c1e6c68f6, which
+# writes Durban's Super Giants as "Durban Super Giants" and "Durbans Super Giants".
+SA20_2025_26 = [
+    ("Durban Super Giants", "MI Cape Town", "Durban Super Giants won by 15 runs"),
+    ("Joburg Super Kings", "Pretoria Capitals", "Joburg Super Kings won by 22 runs"),
+    ("Paarl Royals", "Sunrisers Eastern Cape", "Sunrisers Eastern Cape won by 137 runs"),
+    ("Durban Super Giants", "MI Cape Town", "No result due to rain"),
+    ("Pretoria Capitals", "Sunrisers Eastern Cape", "Sunrisers Eastern Cape won by 48 runs"),
+    ("Durban Super Giants", "Joburg Super Kings", "Joburg Super Kings won by 6 wkts"),
+    ("Paarl Royals", "Sunrisers Eastern Cape", "Paarl Royals won by 5 wkts"),
+    ("MI Cape Town", "Pretoria Capitals", "Pretoria Capitals won by 85 runs"),
+    ("Durban Super Giants", "Joburg Super Kings", "Match tied (Joburg Super Kings won the Super Over)"),
+    ("MI Cape Town", "Paarl Royals", "Paarl Royals won by 1 run"),
+    ("Joburg Super Kings", "Sunrisers Eastern Cape", "Match abandoned due to rain (with toss)"),
+    ("Durban Super Giants", "Pretoria Capitals", "Match abandoned due to rain (with toss)"),
+    ("MI Cape Town", "Paarl Royals", "Paarl Royals won by 7 wkts"),
+    ("Pretoria Capitals", "Sunrisers Eastern Cape", "Sunrisers Eastern Cape won by 10 wkts"),
+    ("Joburg Super Kings", "MI Cape Town", "MI Cape Town won by 4 wkts (12 Overs game due to rain, DLS Target 128)"),
+    ("Durban Super Giants", "Pretoria Capitals", "Pretoria Capitals won by 15 runs"),
+    ("Joburg Super Kings", "Paarl Royals", "No result due to lightning"),
+    ("Durbans Super Giants", "Sunrisers Eastern Cape", "Match abandoned due to rain (no toss)"),
+    ("Paarl Royals", "Pretoria Capitals", "Pretoria Capitals won by 21 runs"),
+    ("Joburg Super Kings", "MI Cape Town", "MI Cape Town won by 36 runs"),
+    ("Sunrisers Eastern Cape", "Durbans Super Giants", "Durbans Super Giants won by 2 wkts"),
+    ("MI Cape Town", "Pretoria Capitals", "Pretoria Capitals won by 53 runs"),
+    ("Paarl Royals", "Durbans Super Giants", "Paarl Royals won by 6 wkts"),
+    ("Joburg Super Kings", "Sunrisers Eastern Cape", "Sunrisers Eastern Cape won by 61 runs"),
+    ("Paarl Royals", "Pretoria Capitals", "Paarl Royals won by 6 wkts"),
+    ("MI Cape Town", "Sunrisers Eastern Cape", "MI Cape Town won by 3 wkts"),
+    ("Durbans Super Giants", "Paarl Royals", "Durbans Super Giants won by 58 runs"),
+    ("Joburg Super Kings", "Pretoria Capitals", "Pretoria Capitals won by 21 runs"),
+    ("MI Cape Town", "Sunrisers Eastern Cape", "Sunrisers Eastern Cape won by 7 wkts"),
+    ("Joburg Super Kings", "Paarl Royals", "Joburg Super Kings won by 44 runs"),
+]
+
+
 class ExtractTableTests(unittest.TestCase):
     def test_parse_cricdata_points_and_fixtures_payloads(self) -> None:
         points_payload = {
@@ -213,6 +285,35 @@ class ExtractTableTests(unittest.TestCase):
         self.assertEqual((rows["WF"]["wins"], rows["CK"]["losses"]), (1, 1))
         self.assertEqual((rows["AA"]["wins"], rows["AA"]["points"]), (1, 4))
         extract_table.validate_source_data(list(rows.values()), [], datetime(2027, 2, 1, tzinfo=timezone.utc), strict_zero_fixtures=False)
+
+    def test_cricketdata_team_names_from_last_season_rebuild_the_official_tables(self) -> None:
+        self.addCleanup(extract_table.use_league, load_league(DEFAULT_LEAGUE_ID))
+        # Records from the official 2025-26 tables (see OFFICIAL_TABLES in test_cricsheet.py): W-L-NR-T, then the
+        # points before bonus points, which CricketData's results don't carry and the SA20 table supplies live.
+        official = {
+            "super-smash-men-2026-27": {
+                "NB": (5, 1, 3, 1, 28), "AA": (5, 3, 2, 0, 24), "CK": (4, 4, 2, 0, 20),
+                "CS": (4, 5, 1, 0, 18), "OV": (3, 5, 1, 1, 16), "WF": (3, 6, 1, 0, 14),
+            },
+            "sa20-2026-27": {
+                "SEC": (5, 3, 2, 0, 24), "PC": (5, 4, 1, 0, 22), "PR": (5, 4, 1, 0, 22),
+                "JSK": (4, 4, 2, 0, 20), "DSG": (3, 4, 3, 0, 18), "MICT": (3, 6, 1, 0, 14),
+            },
+        }
+        for league_id, results in (("super-smash-men-2026-27", SUPER_SMASH_2025_26), ("sa20-2026-27", SA20_2025_26)):
+            with self.subTest(league_id):
+                extract_table.use_league(load_league(league_id))
+                info_payload = {"status": "success", "data": {"matchList": [
+                    {"id": f"m{number}", "name": f"{a} vs {b}, {number}th Match", "teams": [a, b], "status": status, "matchEnded": True}
+                    for number, (a, b, status) in enumerate(results, start=1)
+                ]}}
+
+                rows = extract_table.derive_cricdata_standings_from_matches(info_payload)
+
+                self.assertEqual(
+                    {row["teamKey"]: (row["wins"], row["losses"], row["noResult"], row.get("ties", 0), row["points"]) for row in rows},
+                    official[league_id],
+                )
 
     def test_bonus_points_for_losers_are_simulated(self) -> None:
         extract_table.use_league(load_league("super-smash-women-2026-27"))
