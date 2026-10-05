@@ -10,7 +10,7 @@ import { samePageHref } from '../lib/ui';
 
 const TITLE = 'Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports';
 const DESCRIPTION =
-  'Live odds for every title race, playoff chase and relegation fight: European football and the Champions League, MLS, the NFL, NBA, NHL and MLB, T20 cricket and more, from tens of thousands of simulated seasons, updated twice a day.';
+  'Live odds for every title race, playoff chase and relegation fight: European football and the Champions League, MLS, the NFL, NBA, NHL and MLB, Formula 1, T20 cricket and more, from tens of thousands of simulated seasons, updated twice a day.';
 const FEATURED = 6;
 
 /** "Football, cricket and basketball" from the sport groups that have leagues. */
