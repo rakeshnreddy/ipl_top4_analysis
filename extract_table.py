@@ -60,6 +60,7 @@ SPORT_MODULES = {
     "basketball": "us_sports",
     "ice-hockey": "us_sports",
     "baseball": "us_sports",
+    "motorsport": "formula1",
 }
 LIVE_STATUSES = {"league_stage", "playoffs", "in_progress", "postseason"}
 
@@ -1566,6 +1567,9 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
             facts.append({"label": "On the bubble", "value": f"{short.get(bubble, bubble)} {chance_text(odds[bubble])}"})
         return facts
 
+    if league.get("sport") == "motorsport":
+        return _motorsport_facts(payload, short)
+
     probabilities = payload["analysis"]["probabilities"]
     live = [tier for tier in league["tiers"] if not tier.get("settled")]
     facts = []
@@ -1588,6 +1592,22 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
             if 1 < probabilities[team][race["key"]] < 99:
                 facts.append({"label": f"{race['label']} bubble", "value": f"{short.get(team, team)} {chance_text(probabilities[team][race['key']])}"})
     return facts[:2]
+
+
+def _motorsport_facts(payload: dict[str, Any], short: dict[str, str]) -> list[dict[str, str]]:
+    """The drivers' and constructors' title favourites, e.g. "Drivers' title favourite: VER 54%"."""
+    facts = []
+    analysis = payload["analysis"]
+    team_short = {row["teamKey"]: row["shortName"] for row in payload.get("constructorStandings", [])}
+    for tiers, probabilities, names in (
+        (payload["league"]["tiers"], analysis["probabilities"], short),
+        (payload["league"].get("constructorTiers", []), analysis.get("constructorProbabilities") or {}, team_short),
+    ):
+        tier = next((item for item in tiers if item.get("kind") == "champion"), None)
+        if tier and probabilities:
+            favourite = max(probabilities, key=lambda key: probabilities[key].get(tier["key"], 0.0))
+            facts.append({"label": f"{tier['label']} favourite", "value": f"{names.get(favourite, favourite)} {chance_text(probabilities[favourite][tier['key']])}"})
+    return facts
 
 
 def index_entry(payload: dict[str, Any]) -> dict[str, Any]:

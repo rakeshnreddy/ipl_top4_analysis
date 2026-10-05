@@ -73,6 +73,7 @@ const SPORT_GROUPS: Record<string, string> = {
   basketball: 'Basketball',
   'ice-hockey': 'US sports',
   baseball: 'US sports',
+  motorsport: 'Motorsport',
 };
 
 export const sportOf = (league: Pick<LeagueSummary, 'sport'>) => league.sport ?? 'cricket';
@@ -84,6 +85,7 @@ const SPORT_NAMES: Record<string, string> = {
   basketball: 'Basketball',
   'ice-hockey': 'Ice hockey',
   baseball: 'Baseball',
+  motorsport: 'Motorsport',
 };
 
 /** Display name for a payload's sport, for page breadcrumbs. */

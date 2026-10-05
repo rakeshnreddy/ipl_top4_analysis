@@ -1,0 +1,87 @@
+{
+  "id": "f1",
+  "sport": "motorsport",
+  "engine": "formula1",
+  "name": "Formula 1 World Championship",
+  "shortName": "F1",
+  "headline": "F1 Title Odds: Drivers' & Constructors' Championships",
+  "priority": 40,
+  "season": {
+    "startMonth": 3,
+    "endMonth": 12,
+    "label": "{year}",
+    "feed": "{year}"
+  },
+  "points": {
+    "race": [25, 18, 15, 12, 10, 8, 6, 4, 2, 1],
+    "sprint": [8, 7, 6, 5, 4, 3, 2, 1],
+    "fastestLap": {
+      "points": 1,
+      "maxPosition": 10,
+      "seasons": [2019, 2024]
+    }
+  },
+  "regulationChanges": [2014, 2017, 2022, 2026],
+  "predecessors": {
+    "audi": "sauber",
+    "sauber": "alfa",
+    "rb": "alphatauri"
+  },
+  "tiers": [
+    {
+      "key": "title",
+      "label": "Drivers' title",
+      "shortLabel": "Title",
+      "kind": "champion"
+    },
+    {
+      "key": "top3",
+      "label": "Top 3",
+      "kind": "top",
+      "size": 3
+    }
+  ],
+  "constructorTiers": [
+    {
+      "key": "title",
+      "label": "Constructors' title",
+      "shortLabel": "Title",
+      "kind": "champion"
+    }
+  ],
+  "teams": {
+    "mercedes": { "shortName": "MER", "fullName": "Mercedes", "color": "#27F4D2" },
+    "ferrari": { "shortName": "FER", "fullName": "Ferrari", "color": "#E8002D" },
+    "mclaren": { "shortName": "MCL", "fullName": "McLaren", "color": "#FF8000" },
+    "red_bull": { "shortName": "RBR", "fullName": "Red Bull Racing", "color": "#3671C6" },
+    "rb": { "shortName": "RB", "fullName": "Racing Bulls", "color": "#6692FF" },
+    "alpine": { "shortName": "ALP", "fullName": "Alpine", "color": "#00A1E8" },
+    "haas": { "shortName": "HAA", "fullName": "Haas F1 Team", "color": "#DEE1E2" },
+    "audi": { "shortName": "AUD", "fullName": "Audi", "color": "#FF2D00" },
+    "williams": { "shortName": "WIL", "fullName": "Williams", "color": "#1868DB" },
+    "aston_martin": { "shortName": "AMR", "fullName": "Aston Martin", "color": "#229971" },
+    "cadillac": { "shortName": "CAD", "fullName": "Cadillac", "color": "#AAAAAD" },
+    "sauber": { "shortName": "SAU", "fullName": "Kick Sauber", "color": "#01C00E" }
+  },
+  "rules": {
+    "summary": "11 teams and 22 cars in 2026, with Cadillac new and Audi in place of Sauber. Grand Prix points 25-18-15-12-10-8-6-4-2-1 for the top ten, sprint points 8-7-6-5-4-3-2-1 for the top eight, and no fastest-lap point since 2025. Drivers or teams level on points are split by their race places: most wins, then most second places, and so on; sprint places do not count.",
+    "sources": [
+      {
+        "label": "FIA 2026 Formula 1 Regulations, Section A, Articles A2.1.4 and A2.2 (Issue 03, 25 June 2026)",
+        "url": "https://api.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_a_general_provisions_-_iss_03_-_2026-06-25.pdf"
+      },
+      {
+        "label": "Formula 1: 2026 driver line-ups confirmed in full (11 teams)",
+        "url": "https://www.formula1.com/en/latest/article/2026-line-ups-confirmed-in-full-who-is-on-the-grid-for-next-season.3TyLfOUjOwpBKOp3KX1PiS"
+      },
+      {
+        "label": "Formula 1: fastest lap point scrapped from 2025",
+        "url": "https://www.formula1.com/en/latest/article/fastest-lap-point-to-be-scrapped-in-2025-after-latest-fia-world-motor-sport.4pUjDzWnGRN7KVWENLc1BY"
+      },
+      {
+        "label": "Formula 1: the beginner's guide to the F1 Sprint (points 8 to 1)",
+        "url": "https://www.formula1.com/en/latest/article/the-beginners-guide-to-the-f1-sprint.55yJBEiF7vYkZEwSV9lZJ9"
+      }
+    ]
+  }
+}
