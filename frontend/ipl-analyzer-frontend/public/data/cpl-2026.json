@@ -1,16 +1,14 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-10-03T18:53:46Z",
+    "generated_at": "2026-10-07T23:39:22Z",
     "source": "Cricsheet",
     "source_url": "https://cricsheet.org/",
     "source_license": "ODC-By 1.0",
     "source_license_url": "https://opendatacommons.org/licenses/by/1-0/",
-    "data_freshness_status": "warning",
-    "season_status": "playoffs",
-    "warnings": [
-      "Expected 4 playoff matches but Cricsheet has 1."
-    ],
+    "data_freshness_status": "fresh",
+    "season_status": "complete",
+    "warnings": [],
     "notes": [
       "St Kitts and Nevis Patriots v Antigua and Barbuda Falcons (2026-08-30): Abandoned without a ball bowled (rain)"
     ]
@@ -214,15 +212,45 @@
         "winner": "JAK",
         "result": "JAK won by 9 wickets",
         "venue": "Kensington Oval, Bridgetown, Barbados"
+      },
+      {
+        "id": "1534215",
+        "stage": "Qualifier 1",
+        "date": "2026-09-17",
+        "teamA": "GAW",
+        "teamB": "ABF",
+        "winner": "ABF",
+        "result": "ABF won by 9 wickets",
+        "venue": "Kensington Oval"
+      },
+      {
+        "id": "1534216",
+        "stage": "Qualifier 2",
+        "date": "2026-09-18",
+        "teamA": "GAW",
+        "teamB": "JAK",
+        "winner": "JAK",
+        "result": "JAK won by 5 wickets",
+        "venue": "Kensington Oval"
+      },
+      {
+        "id": "1534217",
+        "stage": "Final",
+        "date": "2026-09-20",
+        "teamA": "JAK",
+        "teamB": "ABF",
+        "winner": "ABF",
+        "result": "ABF won by 8 wickets",
+        "venue": "Kensington Oval"
       }
     ],
-    "champion": null,
-    "runnerUp": null
+    "champion": "ABF",
+    "runnerUp": "JAK"
   },
   "analysis": {
     "method": "Final standings",
     "simulationCount": 1,
-    "generatedAt": "2026-10-03T18:53:46Z",
+    "generatedAt": "2026-10-07T23:39:22Z",
     "stateCount": 1,
     "modelNotes": [
       "The league stage is complete, so qualification is decided by the final table: points, then net run rate."
@@ -611,6 +639,5 @@
         }
       }
     }
-  },
-  "movement": null
+  }
 }
