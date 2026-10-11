@@ -1,14 +1,12 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-10-10T22:47:42Z",
+    "generated_at": "2026-10-11T13:54:53Z",
     "source": "Jolpica F1 API",
     "source_url": "https://github.com/jolpica/jolpica-f1",
-    "data_freshness_status": "warning",
+    "data_freshness_status": "fresh",
     "season_status": "in_progress",
-    "warnings": [
-      "1 event has no results yet at Jolpica F1 API; simulated as still to run."
-    ],
+    "warnings": [],
     "notes": []
   },
   "league": {
@@ -123,7 +121,7 @@
       }
     ],
     "rounds": 23,
-    "eventsLeft": 8,
+    "eventsLeft": 7,
     "rules": {
       "summary": "11 teams and 22 cars in 2026, with Cadillac new and Audi in place of Sauber. Grand Prix points 25-18-15-12-10-8-6-4-2-1 for the top ten, sprint points 8-7-6-5-4-3-2-1 for the top eight, and no fastest-lap point since 2025. Drivers or teams level on points are split by their race places: most wins, then most second places, and so on; sprint places do not count.",
       "sources": [
@@ -157,7 +155,7 @@
         "mercedes"
       ],
       "rank": 1,
-      "points": 320,
+      "points": 325,
       "wins": 8,
       "podiums": 13,
       "sprintWins": 1,
@@ -191,7 +189,7 @@
         "ferrari"
       ],
       "rank": 3,
-      "points": 214,
+      "points": 221,
       "wins": 1,
       "podiums": 6,
       "sprintWins": 0,
@@ -208,10 +206,27 @@
         "ferrari"
       ],
       "rank": 4,
-      "points": 191,
+      "points": 197,
       "wins": 1,
       "podiums": 4,
       "sprintWins": 0,
+      "played": 16,
+      "racing": true
+    },
+    {
+      "teamKey": "max_verstappen",
+      "shortName": "VER",
+      "fullName": "Max Verstappen",
+      "number": "3",
+      "team": "red_bull",
+      "teams": [
+        "red_bull"
+      ],
+      "rank": 5,
+      "points": 196,
+      "wins": 1,
+      "podiums": 8,
+      "sprintWins": 1,
       "played": 16,
       "racing": true
     },
@@ -224,29 +239,12 @@
       "teams": [
         "mclaren"
       ],
-      "rank": 5,
-      "points": 188,
+      "rank": 6,
+      "points": 189,
       "wins": 2,
       "podiums": 5,
       "sprintWins": 1,
       "played": 15,
-      "racing": true
-    },
-    {
-      "teamKey": "max_verstappen",
-      "shortName": "VER",
-      "fullName": "Max Verstappen",
-      "number": "3",
-      "team": "red_bull",
-      "teams": [
-        "red_bull"
-      ],
-      "rank": 6,
-      "points": 188,
-      "wins": 1,
-      "podiums": 8,
-      "sprintWins": 0,
-      "played": 16,
       "racing": true
     },
     {
@@ -294,7 +292,7 @@
         "red_bull"
       ],
       "rank": 9,
-      "points": 65,
+      "points": 69,
       "wins": 0,
       "podiums": 0,
       "sprintWins": 0,
@@ -362,7 +360,7 @@
         "haas"
       ],
       "rank": 13,
-      "points": 20,
+      "points": 23,
       "wins": 0,
       "podiums": 0,
       "sprintWins": 0,
@@ -396,7 +394,7 @@
         "audi"
       ],
       "rank": 15,
-      "points": 7,
+      "points": 9,
       "wins": 0,
       "podiums": 0,
       "sprintWins": 0,
@@ -546,7 +544,7 @@
       "shortName": "MER",
       "fullName": "Mercedes",
       "rank": 1,
-      "points": 556,
+      "points": 561,
       "wins": 11,
       "podiums": 21,
       "drivers": [
@@ -559,7 +557,7 @@
       "shortName": "FER",
       "fullName": "Ferrari",
       "rank": 2,
-      "points": 405,
+      "points": 418,
       "wins": 2,
       "podiums": 10,
       "drivers": [
@@ -572,7 +570,7 @@
       "shortName": "MCL",
       "fullName": "McLaren",
       "rank": 3,
-      "points": 316,
+      "points": 317,
       "wins": 2,
       "podiums": 7,
       "drivers": [
@@ -585,7 +583,7 @@
       "shortName": "RBR",
       "fullName": "Red Bull Racing",
       "rank": 4,
-      "points": 298,
+      "points": 306,
       "wins": 1,
       "podiums": 10,
       "drivers": [
@@ -598,7 +596,7 @@
       "shortName": "RB",
       "fullName": "Racing Bulls",
       "rank": 5,
-      "points": 90,
+      "points": 94,
       "wins": 0,
       "podiums": 0,
       "drivers": [
@@ -624,7 +622,7 @@
       "shortName": "HAA",
       "fullName": "Haas F1 Team",
       "rank": 7,
-      "points": 27,
+      "points": 30,
       "wins": 0,
       "podiums": 0,
       "drivers": [
@@ -637,7 +635,7 @@
       "shortName": "AUD",
       "fullName": "Audi",
       "rank": 8,
-      "points": 17,
+      "points": 19,
       "wins": 0,
       "podiums": 0,
       "drivers": [
@@ -687,48 +685,6 @@
   ],
   "events": [
     {
-      "key": "2026-17-sprint",
-      "round": 17,
-      "kind": "sprint",
-      "name": "Singapore Grand Prix",
-      "date": "2026-10-10T09:00:00Z",
-      "circuit": "Marina Bay Street Circuit",
-      "locality": "Marina Bay",
-      "country": "Singapore",
-      "favourites": [
-        {
-          "driver": "max_verstappen",
-          "win": 22.14,
-          "podium": 55.91
-        },
-        {
-          "driver": "russell",
-          "win": 13.05,
-          "podium": 38.8
-        },
-        {
-          "driver": "leclerc",
-          "win": 12.49,
-          "podium": 37.67
-        },
-        {
-          "driver": "hamilton",
-          "win": 11.89,
-          "podium": 35.73
-        },
-        {
-          "driver": "antonelli",
-          "win": 11.59,
-          "podium": 35.72
-        },
-        {
-          "driver": "norris",
-          "win": 9.66,
-          "podium": 30.58
-        }
-      ]
-    },
-    {
       "key": "2026-17-race",
       "round": 17,
       "kind": "race",
@@ -740,33 +696,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 20.36,
-          "podium": 50.7
-        },
-        {
-          "driver": "russell",
-          "win": 12.86,
-          "podium": 37.71
-        },
-        {
-          "driver": "leclerc",
-          "win": 12.63,
-          "podium": 36.73
-        },
-        {
-          "driver": "antonelli",
-          "win": 12.23,
-          "podium": 37.64
+          "win": 21.1,
+          "podium": 52.29
         },
         {
           "driver": "hamilton",
-          "win": 12.14,
-          "podium": 36.65
+          "win": 12.62,
+          "podium": 37.23
+        },
+        {
+          "driver": "russell",
+          "win": 12.57,
+          "podium": 37.36
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.25,
+          "podium": 37.82
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.21,
+          "podium": 36.55
         },
         {
           "driver": "norris",
-          "win": 9.48,
-          "podium": 29.93
+          "win": 9.07,
+          "podium": 28.95
         }
       ]
     },
@@ -782,33 +738,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 20.6,
-          "podium": 50.52
+          "win": 20.54,
+          "podium": 51.04
         },
         {
           "driver": "russell",
-          "win": 12.65,
-          "podium": 37.33
+          "win": 12.86,
+          "podium": 37.77
         },
         {
           "driver": "leclerc",
-          "win": 12.54,
-          "podium": 36.68
+          "win": 12.62,
+          "podium": 36.88
         },
         {
           "driver": "antonelli",
-          "win": 12.46,
-          "podium": 37.69
+          "win": 12.23,
+          "podium": 37.59
         },
         {
           "driver": "hamilton",
-          "win": 12.03,
-          "podium": 36.56
+          "win": 12.22,
+          "podium": 36.88
         },
         {
           "driver": "norris",
-          "win": 10.1,
-          "podium": 30.28
+          "win": 9.24,
+          "podium": 28.98
         }
       ]
     },
@@ -824,33 +780,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 20.22,
-          "podium": 49.73
-        },
-        {
-          "driver": "leclerc",
-          "win": 12.59,
-          "podium": 36.2
-        },
-        {
-          "driver": "antonelli",
-          "win": 12.57,
-          "podium": 37.09
+          "win": 20.81,
+          "podium": 50.84
         },
         {
           "driver": "russell",
-          "win": 12.38,
-          "podium": 37.01
+          "win": 12.63,
+          "podium": 37.33
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.61,
+          "podium": 36.8
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.46,
+          "podium": 37.61
         },
         {
           "driver": "hamilton",
-          "win": 12.15,
-          "podium": 36.14
+          "win": 12.08,
+          "podium": 36.8
         },
         {
           "driver": "norris",
-          "win": 9.99,
-          "podium": 30.26
+          "win": 9.74,
+          "podium": 29.42
         }
       ]
     },
@@ -866,33 +822,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 20.04,
-          "podium": 49.52
+          "win": 20.39,
+          "podium": 50.13
         },
         {
           "driver": "leclerc",
-          "win": 12.68,
-          "podium": 36.54
+          "win": 12.63,
+          "podium": 36.31
         },
         {
           "driver": "antonelli",
-          "win": 12.65,
-          "podium": 37.31
+          "win": 12.53,
+          "podium": 37.08
         },
         {
           "driver": "russell",
-          "win": 12.12,
-          "podium": 36.55
+          "win": 12.38,
+          "podium": 37.09
         },
         {
           "driver": "hamilton",
-          "win": 11.82,
-          "podium": 36.48
+          "win": 12.28,
+          "podium": 36.36
         },
         {
           "driver": "norris",
-          "win": 9.83,
-          "podium": 29.68
+          "win": 9.66,
+          "podium": 29.34
         }
       ]
     },
@@ -908,33 +864,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 19.8,
-          "podium": 48.95
-        },
-        {
-          "driver": "russell",
-          "win": 12.54,
-          "podium": 36.25
-        },
-        {
-          "driver": "antonelli",
-          "win": 12.39,
-          "podium": 38.06
-        },
-        {
-          "driver": "hamilton",
-          "win": 12.38,
-          "podium": 35.97
+          "win": 20.25,
+          "podium": 49.77
         },
         {
           "driver": "leclerc",
-          "win": 12.27,
-          "podium": 36.1
+          "win": 12.78,
+          "podium": 36.64
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.64,
+          "podium": 37.26
+        },
+        {
+          "driver": "russell",
+          "win": 12.12,
+          "podium": 36.55
+        },
+        {
+          "driver": "hamilton",
+          "win": 11.92,
+          "podium": 36.79
         },
         {
           "driver": "norris",
-          "win": 9.59,
-          "podium": 29.45
+          "win": 9.47,
+          "podium": 29.0
         }
       ]
     },
@@ -950,33 +906,33 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 19.98,
-          "podium": 48.44
+          "win": 20.03,
+          "podium": 49.28
         },
         {
           "driver": "russell",
-          "win": 12.37,
-          "podium": 36.48
-        },
-        {
-          "driver": "antonelli",
-          "win": 12.31,
-          "podium": 37.23
-        },
-        {
-          "driver": "leclerc",
-          "win": 12.11,
-          "podium": 35.67
+          "win": 12.58,
+          "podium": 36.27
         },
         {
           "driver": "hamilton",
-          "win": 11.98,
-          "podium": 36.0
+          "win": 12.45,
+          "podium": 36.22
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.38,
+          "podium": 38.0
+        },
+        {
+          "driver": "leclerc",
+          "win": 12.32,
+          "podium": 36.22
         },
         {
           "driver": "norris",
-          "win": 10.03,
-          "podium": 29.56
+          "win": 9.2,
+          "podium": 28.71
         }
       ]
     },
@@ -992,38 +948,53 @@
       "favourites": [
         {
           "driver": "max_verstappen",
-          "win": 19.91,
-          "podium": 47.73
-        },
-        {
-          "driver": "antonelli",
-          "win": 12.67,
-          "podium": 36.7
+          "win": 20.14,
+          "podium": 48.7
         },
         {
           "driver": "russell",
-          "win": 12.52,
-          "podium": 36.05
+          "win": 12.38,
+          "podium": 36.5
+        },
+        {
+          "driver": "antonelli",
+          "win": 12.29,
+          "podium": 37.18
         },
         {
           "driver": "leclerc",
           "win": 12.19,
-          "podium": 36.01
+          "podium": 35.73
         },
         {
           "driver": "hamilton",
-          "win": 11.77,
-          "podium": 35.66
+          "win": 12.04,
+          "podium": 36.23
         },
         {
           "driver": "norris",
-          "win": 9.96,
-          "podium": 30.11
+          "win": 9.73,
+          "podium": 28.85
         }
       ]
     }
   ],
   "results": [
+    {
+      "key": "2026-17-sprint",
+      "round": 17,
+      "kind": "sprint",
+      "name": "Singapore Grand Prix",
+      "date": "2026-10-10T09:00:00Z",
+      "circuit": "Marina Bay Street Circuit",
+      "locality": "Marina Bay",
+      "country": "Singapore",
+      "podium": [
+        "max_verstappen",
+        "hamilton",
+        "leclerc"
+      ]
+    },
     {
       "key": "2026-16-race",
       "round": 16,
@@ -1128,21 +1099,6 @@
         "max_verstappen",
         "antonelli"
       ]
-    },
-    {
-      "key": "2026-10-race",
-      "round": 10,
-      "kind": "race",
-      "name": "Belgian Grand Prix",
-      "date": "2026-07-19T13:00:00Z",
-      "circuit": "Circuit de Spa-Francorchamps",
-      "locality": "Spa",
-      "country": "Belgium",
-      "podium": [
-        "antonelli",
-        "leclerc",
-        "max_verstappen"
-      ]
     }
   ],
   "fixtures": [],
@@ -1153,36 +1109,36 @@
     "modelNotes": [
       "Pace comes from a rank-ordered logit (Plackett-Luce) model of finishing orders: each driver's strength is their own skill plus their car's, rated per team and season, fitted on this season's and last season's races and sprints, with results losing half their weight every 120 days.",
       "2026 brings new chassis and power-unit rules, so last season's car ratings carry over at only 15% (against 40% when the rules are stable), and the cars are rated mainly on this season's races. Drivers keep their skill from one season to the next, less the time decay.",
-      "A car that does not see the flag is left out of that event's order and counts as a retirement instead. Each driver's retirement chance blends their own, their team's and the field's rates (field: 18% of race starts, sprints 5%).",
-      "The remaining 7 races and 1 sprint are simulated 20,000 times. Car and driver ratings drift as the season goes on (development and form), more for the races furthest away.",
+      "A car that does not see the flag is left out of that event's order and counts as a retirement instead. Each driver's retirement chance blends their own, their team's and the field's rates (field: 18% of race starts, sprints 9%).",
+      "The remaining 7 races are simulated 20,000 times. Car and driver ratings drift as the season goes on (development and form), more for the races furthest away.",
       "Points: 25-18-15-12-10-8-6-4-2-1 in a Grand Prix and 8-7-6-5-4-3-2-1 in a sprint; no fastest-lap point since 2025. Ties are split by race places: most wins, then most second places, and so on (sprints do not count). Simulated ties use wins, second and third places.",
       "Backtested on 2022-2025 (92 Grands Prix, each predicted from the results before it): race-winner log loss 1.49 against 1.89 for chances in proportion to championship points and 2.99 for equal chances. Drivers' title, top-three and constructors' title odds at 25%, 50% and 75% of each season scored a Brier score of 0.020 against 0.026 for the table at the time and 0.085 for base rates; the top-three odds alone (0.026) did slightly worse than the table at the time (0.024).",
-      "The tables are computed from the race and sprint results and match Jolpica F1 API's published standings (drivers and constructors) after round 16."
+      "The tables are computed from the race and sprint results and match Jolpica F1 API's published standings (drivers and constructors) after round 17."
     ],
     "probabilities": {
       "antonelli": {
-        "title": 99.67,
+        "title": 99.84,
         "top3": 100.0
       },
       "russell": {
-        "title": 0.17,
-        "top3": 81.48
+        "title": 0.07,
+        "top3": 77.0
       },
       "hamilton": {
-        "title": 0.1,
-        "top3": 54.47
+        "title": 0.06,
+        "top3": 58.76
       },
       "leclerc": {
         "title": 0.0,
-        "top3": 16.36
-      },
-      "norris": {
-        "title": 0.01,
-        "top3": 10.82
+        "top3": 16.99
       },
       "max_verstappen": {
-        "title": 0.05,
-        "top3": 36.86
+        "title": 0.02,
+        "top3": 40.05
+      },
+      "norris": {
+        "title": 0.0,
+        "top3": 7.19
       },
       "piastri": {
         "title": 0.0,
@@ -1255,10 +1211,10 @@
     },
     "constructorProbabilities": {
       "mercedes": {
-        "title": 99.41
+        "title": 99.52
       },
       "ferrari": {
-        "title": 0.59
+        "title": 0.48
       },
       "mclaren": {
         "title": 0.0
@@ -1290,220 +1246,220 @@
     },
     "expected": {
       "antonelli": {
-        "points": 402.9
+        "points": 404.2
       },
       "russell": {
-        "points": 315.0
+        "points": 311.1
       },
       "hamilton": {
-        "points": 294.6
+        "points": 298.2
       },
       "leclerc": {
-        "points": 269.3
-      },
-      "norris": {
-        "points": 257.9
+        "points": 271.5
       },
       "max_verstappen": {
-        "points": 282.6
+        "points": 286.3
+      },
+      "norris": {
+        "points": 254.3
       },
       "piastri": {
-        "points": 171.4
+        "points": 169.5
       },
       "hadjar": {
-        "points": 148.5
+        "points": 146.2
       },
       "lawson": {
-        "points": 95.2
+        "points": 98.1
       },
       "gasly": {
-        "points": 60.3
+        "points": 59.4
       },
       "arvid_lindblad": {
-        "points": 66.0
+        "points": 64.0
       },
       "colapinto": {
-        "points": 42.2
+        "points": 41.4
       },
       "bearman": {
-        "points": 29.4
+        "points": 32.0
       },
       "bortoleto": {
-        "points": 21.8
+        "points": 21.1
       },
       "hulkenberg": {
-        "points": 26.1
+        "points": 27.3
       },
       "ocon": {
-        "points": 16.2
+        "points": 15.9
       },
       "alonso": {
-        "points": 10.9
+        "points": 10.8
       },
       "sainz": {
-        "points": 13.5
+        "points": 13.1
       },
       "albon": {
-        "points": 9.3
+        "points": 9.0
       },
       "tsunoda": {
         "points": 1.0
       },
       "stroll": {
-        "points": 2.0
+        "points": 1.9
       },
       "bottas": {
-        "points": 0.8
+        "points": 0.7
       },
       "perez": {
-        "points": 2.1
+        "points": 1.9
       }
     },
     "constructorExpected": {
       "mercedes": {
-        "points": 717.9
+        "points": 715.3
       },
       "ferrari": {
-        "points": 563.8
+        "points": 569.8
       },
       "mclaren": {
-        "points": 429.3
+        "points": 423.8
       },
       "red_bull": {
-        "points": 445.1
+        "points": 446.5
       },
       "rb": {
-        "points": 148.2
+        "points": 149.0
       },
       "alpine": {
-        "points": 102.6
+        "points": 100.8
       },
       "haas": {
-        "points": 45.6
-      },
-      "audi": {
         "points": 47.9
       },
+      "audi": {
+        "points": 48.4
+      },
       "williams": {
-        "points": 22.8
+        "points": 22.2
       },
       "aston_martin": {
-        "points": 12.9
+        "points": 12.6
       },
       "cadillac": {
-        "points": 2.9
+        "points": 2.7
       }
     },
     "ratings": {
       "albon": {
-        "skill": -0.803,
-        "car": -0.667,
-        "retirement": 0.377
+        "skill": -0.8,
+        "car": -0.661,
+        "retirement": 0.376
       },
       "alonso": {
-        "skill": -1.004,
-        "car": -0.611,
+        "skill": -0.993,
+        "car": -0.602,
         "retirement": 0.337
       },
       "antonelli": {
-        "skill": 1.502,
-        "car": 0.623,
+        "skill": 1.501,
+        "car": 0.618,
         "retirement": 0.078
       },
       "arvid_lindblad": {
-        "skill": -0.144,
-        "car": 0.321,
-        "retirement": 0.014
+        "skill": -0.186,
+        "car": 0.32,
+        "retirement": 0.015
       },
       "bearman": {
-        "skill": -0.557,
-        "car": -0.34,
+        "skill": -0.547,
+        "car": -0.333,
         "retirement": 0.192
       },
       "bortoleto": {
-        "skill": -0.797,
-        "car": -0.001,
+        "skill": -0.798,
+        "car": -0.0,
         "retirement": 0.052
       },
       "bottas": {
-        "skill": -2.766,
-        "car": -0.242,
-        "retirement": 0.509
+        "skill": -2.756,
+        "car": -0.241,
+        "retirement": 0.507
       },
       "colapinto": {
-        "skill": -0.948,
-        "car": 0.468,
+        "skill": -0.945,
+        "car": 0.464,
         "retirement": 0.089
       },
       "gasly": {
-        "skill": -0.616,
-        "car": 0.468,
+        "skill": -0.611,
+        "car": 0.464,
         "retirement": 0.121
       },
       "hadjar": {
-        "skill": 0.952,
-        "car": 0.333,
+        "skill": 0.948,
+        "car": 0.33,
         "retirement": 0.112
       },
       "hamilton": {
-        "skill": 1.567,
-        "car": 0.556,
+        "skill": 1.571,
+        "car": 0.554,
         "retirement": 0.105
       },
       "hulkenberg": {
-        "skill": -0.127,
-        "car": -0.001,
+        "skill": -0.121,
+        "car": -0.0,
         "retirement": 0.146
       },
       "lawson": {
-        "skill": 0.024,
-        "car": 0.321,
+        "skill": 0.031,
+        "car": 0.32,
         "retirement": 0.064
       },
       "leclerc": {
-        "skill": 1.688,
-        "car": 0.556,
+        "skill": 1.687,
+        "car": 0.554,
         "retirement": 0.171
       },
       "max_verstappen": {
-        "skill": 2.442,
-        "car": 0.333,
+        "skill": 2.449,
+        "car": 0.33,
         "retirement": 0.178
       },
       "norris": {
-        "skill": 2.404,
-        "car": -0.437,
-        "retirement": 0.172
+        "skill": 2.368,
+        "car": -0.443,
+        "retirement": 0.171
       },
       "ocon": {
-        "skill": -0.704,
-        "car": -0.34,
+        "skill": -0.699,
+        "car": -0.333,
         "retirement": 0.085
       },
       "perez": {
-        "skill": -2.076,
-        "car": -0.242,
+        "skill": -2.072,
+        "car": -0.241,
         "retirement": 0.347
       },
       "piastri": {
-        "skill": 1.348,
-        "car": -0.437,
-        "retirement": 0.083
+        "skill": 1.35,
+        "car": -0.443,
+        "retirement": 0.084
       },
       "russell": {
         "skill": 1.635,
-        "car": 0.623,
+        "car": 0.618,
         "retirement": 0.166
       },
       "sainz": {
-        "skill": -0.609,
-        "car": -0.667,
-        "retirement": 0.212
+        "skill": -0.608,
+        "car": -0.661,
+        "retirement": 0.213
       },
       "stroll": {
-        "skill": -1.316,
-        "car": -0.611,
-        "retirement": 0.554
+        "skill": -1.312,
+        "car": -0.602,
+        "retirement": 0.553
       }
     }
   },
