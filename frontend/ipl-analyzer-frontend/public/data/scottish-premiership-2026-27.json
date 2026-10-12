@@ -1,14 +1,12 @@
 {
   "metadata": {
     "season": "2026-27",
-    "generated_at": "2026-10-11T23:01:43Z",
+    "generated_at": "2026-10-12T16:39:42Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
-    "data_freshness_status": "warning",
+    "data_freshness_status": "fresh",
     "season_status": "in_progress",
-    "warnings": [
-      "2 past fixtures have no result yet (postponed, or not yet updated at FixtureDownload); they are simulated as still to play."
-    ]
+    "warnings": []
   },
   "league": {
     "id": "scottish-premiership-2026-27",
@@ -183,10 +181,32 @@
   },
   "standings": [
     {
+      "teamKey": "Celtic",
+      "shortName": "CEL",
+      "fullName": "Celtic",
+      "rank": 1,
+      "played": 8,
+      "wins": 7,
+      "draws": 0,
+      "losses": 1,
+      "goalsFor": 16,
+      "goalsAgainst": 4,
+      "points": 21,
+      "goalDifference": 12,
+      "form": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "remaining": 25
+    },
+    {
       "teamKey": "Rangers",
       "shortName": "RAN",
       "fullName": "Rangers",
-      "rank": 1,
+      "rank": 2,
       "played": 8,
       "wins": 6,
       "draws": 1,
@@ -203,28 +223,6 @@
         "W"
       ],
       "remaining": 25
-    },
-    {
-      "teamKey": "Celtic",
-      "shortName": "CEL",
-      "fullName": "Celtic",
-      "rank": 2,
-      "played": 7,
-      "wins": 6,
-      "draws": 0,
-      "losses": 1,
-      "goalsFor": 14,
-      "goalsAgainst": 4,
-      "points": 18,
-      "goalDifference": 10,
-      "form": [
-        "L",
-        "W",
-        "W",
-        "W",
-        "W"
-      ],
-      "remaining": 26
     },
     {
       "teamKey": "Heart of Midlothian",
@@ -271,10 +269,32 @@
       "remaining": 25
     },
     {
+      "teamKey": "St. Johnstone",
+      "shortName": "STJ",
+      "fullName": "St Johnstone",
+      "rank": 5,
+      "played": 8,
+      "wins": 3,
+      "draws": 2,
+      "losses": 3,
+      "goalsFor": 10,
+      "goalsAgainst": 10,
+      "points": 11,
+      "goalDifference": 0,
+      "form": [
+        "W",
+        "D",
+        "L",
+        "W",
+        "D"
+      ],
+      "remaining": 25
+    },
+    {
       "teamKey": "Dundee United",
       "shortName": "DDU",
       "fullName": "Dundee United",
-      "rank": 5,
+      "rank": 6,
       "played": 8,
       "wins": 3,
       "draws": 2,
@@ -296,7 +316,7 @@
       "teamKey": "St. Mirren",
       "shortName": "STM",
       "fullName": "St Mirren",
-      "rank": 6,
+      "rank": 7,
       "played": 8,
       "wins": 3,
       "draws": 1,
@@ -315,70 +335,48 @@
       "remaining": 25
     },
     {
-      "teamKey": "St. Johnstone",
-      "shortName": "STJ",
-      "fullName": "St Johnstone",
-      "rank": 7,
-      "played": 7,
-      "wins": 2,
-      "draws": 2,
-      "losses": 3,
-      "goalsFor": 9,
-      "goalsAgainst": 10,
-      "points": 8,
-      "goalDifference": -1,
-      "form": [
-        "D",
-        "L",
-        "W",
-        "D",
-        "L"
-      ],
-      "remaining": 26
-    },
-    {
       "teamKey": "Aberdeen",
       "shortName": "ABE",
       "fullName": "Aberdeen",
       "rank": 8,
-      "played": 7,
+      "played": 8,
       "wins": 2,
       "draws": 2,
-      "losses": 3,
+      "losses": 4,
       "goalsFor": 7,
-      "goalsAgainst": 8,
+      "goalsAgainst": 9,
       "points": 8,
-      "goalDifference": -1,
+      "goalDifference": -2,
       "form": [
+        "L",
         "D",
         "W",
         "D",
-        "L",
         "L"
       ],
-      "remaining": 26
+      "remaining": 25
     },
     {
       "teamKey": "Motherwell",
       "shortName": "MOT",
       "fullName": "Motherwell",
       "rank": 9,
-      "played": 7,
+      "played": 8,
       "wins": 2,
       "draws": 2,
-      "losses": 3,
+      "losses": 4,
       "goalsFor": 9,
-      "goalsAgainst": 11,
+      "goalsAgainst": 13,
       "points": 8,
-      "goalDifference": -2,
+      "goalDifference": -4,
       "form": [
         "L",
         "L",
         "L",
-        "W",
-        "D"
+        "L",
+        "W"
       ],
-      "remaining": 26
+      "remaining": 25
     },
     {
       "teamKey": "Hibernian",
@@ -449,32 +447,6 @@
   ],
   "fixtures": [
     {
-      "id": "47",
-      "round": 8,
-      "date": "2026-10-11T11:00:00Z",
-      "home": "Motherwell",
-      "away": "Celtic",
-      "venue": "Fir Park",
-      "probabilities": {
-        "home": 0.145,
-        "draw": 0.193,
-        "away": 0.661
-      }
-    },
-    {
-      "id": "43",
-      "round": 8,
-      "date": "2026-10-11T13:00:00Z",
-      "home": "Aberdeen",
-      "away": "St. Johnstone",
-      "venue": "Pittodrie Stadium",
-      "probabilities": {
-        "home": 0.371,
-        "draw": 0.289,
-        "away": 0.339
-      }
-    },
-    {
       "id": "49",
       "round": 9,
       "date": "2026-10-17T14:00:00Z",
@@ -482,9 +454,9 @@
       "away": "St. Mirren",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.475,
-        "draw": 0.275,
-        "away": 0.251
+        "home": 0.432,
+        "draw": 0.289,
+        "away": 0.279
       }
     },
     {
@@ -495,9 +467,9 @@
       "away": "Falkirk",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.328,
-        "draw": 0.292,
-        "away": 0.38
+        "home": 0.317,
+        "draw": 0.289,
+        "away": 0.393
       }
     },
     {
@@ -508,9 +480,9 @@
       "away": "Motherwell",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.254,
-        "draw": 0.222,
-        "away": 0.524
+        "home": 0.264,
+        "draw": 0.229,
+        "away": 0.507
       }
     },
     {
@@ -521,9 +493,9 @@
       "away": "Dundee United",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.374,
-        "draw": 0.268,
-        "away": 0.359
+        "home": 0.385,
+        "draw": 0.275,
+        "away": 0.34
       }
     },
     {
@@ -534,9 +506,9 @@
       "away": "Rangers",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.311,
-        "draw": 0.308,
-        "away": 0.381
+        "home": 0.305,
+        "draw": 0.305,
+        "away": 0.391
       }
     },
     {
@@ -547,9 +519,9 @@
       "away": "Heart of Midlothian",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.423,
-        "draw": 0.244,
-        "away": 0.333
+        "home": 0.433,
+        "draw": 0.25,
+        "away": 0.317
       }
     },
     {
@@ -560,9 +532,9 @@
       "away": "Aberdeen",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.333,
-        "draw": 0.291,
-        "away": 0.375
+        "home": 0.342,
+        "draw": 0.301,
+        "away": 0.357
       }
     },
     {
@@ -573,9 +545,9 @@
       "away": "Kilmarnock",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.499,
+        "home": 0.491,
         "draw": 0.255,
-        "away": 0.246
+        "away": 0.254
       }
     },
     {
@@ -586,9 +558,9 @@
       "away": "St. Johnstone",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.48,
-        "draw": 0.282,
-        "away": 0.238
+        "home": 0.441,
+        "draw": 0.297,
+        "away": 0.263
       }
     },
     {
@@ -599,9 +571,9 @@
       "away": "Dundee",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.193,
-        "draw": 0.239,
-        "away": 0.568
+        "home": 0.186,
+        "draw": 0.234,
+        "away": 0.58
       }
     },
     {
@@ -612,9 +584,9 @@
       "away": "Celtic",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.137,
-        "draw": 0.214,
-        "away": 0.649
+        "home": 0.12,
+        "draw": 0.207,
+        "away": 0.674
       }
     },
     {
@@ -625,9 +597,9 @@
       "away": "Heart of Midlothian",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.166,
-        "draw": 0.178,
-        "away": 0.657
+        "home": 0.145,
+        "draw": 0.172,
+        "away": 0.683
       }
     },
     {
@@ -638,9 +610,9 @@
       "away": "Falkirk",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.392,
-        "draw": 0.307,
-        "away": 0.301
+        "home": 0.354,
+        "draw": 0.317,
+        "away": 0.329
       }
     },
     {
@@ -651,9 +623,9 @@
       "away": "Dundee United",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.601,
-        "draw": 0.228,
-        "away": 0.171
+        "home": 0.607,
+        "draw": 0.231,
+        "away": 0.161
       }
     },
     {
@@ -664,9 +636,9 @@
       "away": "Kilmarnock",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.645,
-        "draw": 0.205,
-        "away": 0.15
+        "home": 0.637,
+        "draw": 0.207,
+        "away": 0.156
       }
     },
     {
@@ -677,9 +649,9 @@
       "away": "Motherwell",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.421,
-        "draw": 0.246,
-        "away": 0.332
+        "home": 0.449,
+        "draw": 0.256,
+        "away": 0.296
       }
     },
     {
@@ -690,9 +662,9 @@
       "away": "Hibernian",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.326,
-        "draw": 0.271,
-        "away": 0.403
+        "home": 0.319,
+        "draw": 0.269,
+        "away": 0.412
       }
     },
     {
@@ -703,9 +675,9 @@
       "away": "Rangers",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.412,
+        "home": 0.404,
         "draw": 0.267,
-        "away": 0.321
+        "away": 0.329
       }
     },
     {
@@ -716,9 +688,9 @@
       "away": "Heart of Midlothian",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.197,
-        "draw": 0.209,
-        "away": 0.594
+        "home": 0.187,
+        "draw": 0.205,
+        "away": 0.608
       }
     },
     {
@@ -729,9 +701,9 @@
       "away": "St. Johnstone",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.218,
-        "draw": 0.228,
-        "away": 0.553
+        "home": 0.193,
+        "draw": 0.225,
+        "away": 0.582
       }
     },
     {
@@ -742,9 +714,9 @@
       "away": "St. Mirren",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.448,
-        "draw": 0.242,
-        "away": 0.31
+        "home": 0.41,
+        "draw": 0.25,
+        "away": 0.339
       }
     },
     {
@@ -755,9 +727,9 @@
       "away": "Celtic",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.156,
-        "draw": 0.235,
-        "away": 0.609
+        "home": 0.138,
+        "draw": 0.231,
+        "away": 0.631
       }
     },
     {
@@ -768,9 +740,9 @@
       "away": "Motherwell",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.413,
-        "draw": 0.249,
-        "away": 0.339
+        "home": 0.417,
+        "draw": 0.255,
+        "away": 0.329
       }
     },
     {
@@ -781,9 +753,9 @@
       "away": "Dundee",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.276,
-        "draw": 0.268,
-        "away": 0.457
+        "home": 0.286,
+        "draw": 0.276,
+        "away": 0.438
       }
     },
     {
@@ -794,9 +766,9 @@
       "away": "Hibernian",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.426,
-        "draw": 0.294,
-        "away": 0.28
+        "home": 0.389,
+        "draw": 0.305,
+        "away": 0.306
       }
     },
     {
@@ -807,9 +779,9 @@
       "away": "Rangers",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.167,
-        "draw": 0.249,
-        "away": 0.584
+        "home": 0.162,
+        "draw": 0.244,
+        "away": 0.594
       }
     },
     {
@@ -820,9 +792,9 @@
       "away": "Falkirk",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.609,
-        "draw": 0.214,
-        "away": 0.177
+        "home": 0.598,
+        "draw": 0.217,
+        "away": 0.185
       }
     },
     {
@@ -833,9 +805,9 @@
       "away": "Kilmarnock",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.774,
-        "draw": 0.145,
-        "away": 0.081
+        "home": 0.776,
+        "draw": 0.147,
+        "away": 0.077
       }
     },
     {
@@ -846,9 +818,9 @@
       "away": "St. Mirren",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.703,
-        "draw": 0.184,
-        "away": 0.112
+        "home": 0.707,
+        "draw": 0.186,
+        "away": 0.107
       }
     },
     {
@@ -859,9 +831,9 @@
       "away": "St. Johnstone",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.326,
-        "draw": 0.282,
-        "away": 0.392
+        "home": 0.296,
+        "draw": 0.287,
+        "away": 0.418
       }
     },
     {
@@ -872,9 +844,9 @@
       "away": "Dundee United",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.308,
-        "draw": 0.273,
-        "away": 0.418
+        "home": 0.3,
+        "draw": 0.272,
+        "away": 0.428
       }
     },
     {
@@ -885,9 +857,9 @@
       "away": "Aberdeen",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.206,
-        "draw": 0.247,
-        "away": 0.546
+        "home": 0.219,
+        "draw": 0.26,
+        "away": 0.521
       }
     },
     {
@@ -898,9 +870,9 @@
       "away": "Heart of Midlothian",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.288,
-        "draw": 0.242,
-        "away": 0.47
+        "home": 0.278,
+        "draw": 0.239,
+        "away": 0.484
       }
     },
     {
@@ -911,9 +883,9 @@
       "away": "Rangers",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.209,
-        "draw": 0.25,
-        "away": 0.541
+        "home": 0.189,
+        "draw": 0.248,
+        "away": 0.563
       }
     },
     {
@@ -924,9 +896,9 @@
       "away": "Dundee",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.222,
-        "draw": 0.263,
-        "away": 0.515
+        "home": 0.214,
+        "draw": 0.257,
+        "away": 0.529
       }
     },
     {
@@ -937,9 +909,9 @@
       "away": "Aberdeen",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.442,
-        "draw": 0.314,
-        "away": 0.245
+        "home": 0.448,
+        "draw": 0.319,
+        "away": 0.233
       }
     },
     {
@@ -950,9 +922,9 @@
       "away": "Dundee",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.284,
-        "draw": 0.295,
-        "away": 0.421
+        "home": 0.253,
+        "draw": 0.297,
+        "away": 0.45
       }
     },
     {
@@ -963,9 +935,9 @@
       "away": "St. Johnstone",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.36,
-        "draw": 0.268,
-        "away": 0.372
+        "home": 0.322,
+        "draw": 0.274,
+        "away": 0.404
       }
     },
     {
@@ -976,9 +948,9 @@
       "away": "Falkirk",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.496,
-        "draw": 0.294,
-        "away": 0.21
+        "home": 0.485,
+        "draw": 0.296,
+        "away": 0.219
       }
     },
     {
@@ -989,9 +961,9 @@
       "away": "Kilmarnock",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.44,
+        "home": 0.43,
         "draw": 0.248,
-        "away": 0.312
+        "away": 0.322
       }
     },
     {
@@ -1002,9 +974,9 @@
       "away": "Hibernian",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.397,
-        "draw": 0.255,
-        "away": 0.347
+        "home": 0.365,
+        "draw": 0.261,
+        "away": 0.374
       }
     },
     {
@@ -1015,9 +987,9 @@
       "away": "Celtic",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.335,
-        "draw": 0.244,
-        "away": 0.421
+        "home": 0.299,
+        "draw": 0.247,
+        "away": 0.453
       }
     },
     {
@@ -1028,9 +1000,9 @@
       "away": "Celtic",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.247,
-        "draw": 0.267,
-        "away": 0.486
+        "home": 0.22,
+        "draw": 0.266,
+        "away": 0.514
       }
     },
     {
@@ -1041,9 +1013,9 @@
       "away": "Motherwell",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.374,
-        "draw": 0.264,
-        "away": 0.362
+        "home": 0.383,
+        "draw": 0.27,
+        "away": 0.348
       }
     },
     {
@@ -1054,9 +1026,9 @@
       "away": "Aberdeen",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.546,
-        "draw": 0.237,
-        "away": 0.217
+        "home": 0.556,
+        "draw": 0.24,
+        "away": 0.204
       }
     },
     {
@@ -1067,9 +1039,9 @@
       "away": "Hibernian",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.274,
-        "draw": 0.252,
-        "away": 0.474
+        "home": 0.267,
+        "draw": 0.249,
+        "away": 0.484
       }
     },
     {
@@ -1080,9 +1052,9 @@
       "away": "Dundee United",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.485,
-        "draw": 0.283,
-        "away": 0.232
+        "home": 0.477,
+        "draw": 0.284,
+        "away": 0.239
       }
     },
     {
@@ -1093,9 +1065,9 @@
       "away": "St. Mirren",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.478,
-        "draw": 0.254,
-        "away": 0.268
+        "home": 0.486,
+        "draw": 0.258,
+        "away": 0.256
       }
     },
     {
@@ -1106,9 +1078,9 @@
       "away": "Rangers",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.193,
-        "draw": 0.276,
-        "away": 0.532
+        "home": 0.186,
+        "draw": 0.27,
+        "away": 0.544
       }
     },
     {
@@ -1119,9 +1091,9 @@
       "away": "Kilmarnock",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.526,
-        "draw": 0.221,
-        "away": 0.253
+        "home": 0.485,
+        "draw": 0.233,
+        "away": 0.282
       }
     },
     {
@@ -1132,9 +1104,9 @@
       "away": "Heart of Midlothian",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.127,
-        "draw": 0.168,
-        "away": 0.705
+        "home": 0.12,
+        "draw": 0.163,
+        "away": 0.717
       }
     },
     {
@@ -1145,9 +1117,9 @@
       "away": "Dundee United",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.377,
-        "draw": 0.291,
-        "away": 0.332
+        "home": 0.341,
+        "draw": 0.301,
+        "away": 0.358
       }
     },
     {
@@ -1158,9 +1130,9 @@
       "away": "St. Johnstone",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.596,
-        "draw": 0.228,
-        "away": 0.176
+        "home": 0.568,
+        "draw": 0.248,
+        "away": 0.183
       }
     },
     {
@@ -1171,9 +1143,9 @@
       "away": "Falkirk",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.478,
+        "home": 0.469,
         "draw": 0.279,
-        "away": 0.243
+        "away": 0.252
       }
     },
     {
@@ -1184,9 +1156,9 @@
       "away": "St. Mirren",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.469,
-        "draw": 0.257,
-        "away": 0.274
+        "home": 0.456,
+        "draw": 0.259,
+        "away": 0.285
       }
     },
     {
@@ -1197,9 +1169,9 @@
       "away": "Aberdeen",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.302,
-        "draw": 0.307,
-        "away": 0.391
+        "home": 0.314,
+        "draw": 0.317,
+        "away": 0.37
       }
     },
     {
@@ -1210,9 +1182,9 @@
       "away": "Dundee",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.151,
-        "draw": 0.206,
-        "away": 0.644
+        "home": 0.144,
+        "draw": 0.199,
+        "away": 0.656
       }
     },
     {
@@ -1223,9 +1195,9 @@
       "away": "Rangers",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.239,
-        "draw": 0.283,
-        "away": 0.479
+        "home": 0.248,
+        "draw": 0.293,
+        "away": 0.458
       }
     },
     {
@@ -1236,9 +1208,9 @@
       "away": "Hibernian",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.65,
-        "draw": 0.213,
-        "away": 0.137
+        "home": 0.656,
+        "draw": 0.215,
+        "away": 0.129
       }
     },
     {
@@ -1249,9 +1221,9 @@
       "away": "Motherwell",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.658,
-        "draw": 0.177,
-        "away": 0.165
+        "home": 0.663,
+        "draw": 0.179,
+        "away": 0.158
       }
     },
     {
@@ -1262,9 +1234,9 @@
       "away": "Celtic",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.189,
-        "draw": 0.261,
-        "away": 0.55
+        "home": 0.153,
+        "draw": 0.259,
+        "away": 0.588
       }
     },
     {
@@ -1275,9 +1247,9 @@
       "away": "Kilmarnock",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.545,
-        "draw": 0.232,
-        "away": 0.223
+        "home": 0.531,
+        "draw": 0.235,
+        "away": 0.234
       }
     },
     {
@@ -1288,9 +1260,9 @@
       "away": "St. Johnstone",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.303,
-        "draw": 0.271,
-        "away": 0.427
+        "home": 0.271,
+        "draw": 0.272,
+        "away": 0.457
       }
     },
     {
@@ -1301,9 +1273,9 @@
       "away": "Dundee",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.242,
-        "draw": 0.24,
-        "away": 0.518
+        "home": 0.218,
+        "draw": 0.237,
+        "away": 0.545
       }
     },
     {
@@ -1314,9 +1286,9 @@
       "away": "Falkirk",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.297,
-        "draw": 0.277,
-        "away": 0.426
+        "home": 0.288,
+        "draw": 0.274,
+        "away": 0.438
       }
     },
     {
@@ -1327,9 +1299,9 @@
       "away": "Heart of Midlothian",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.322,
-        "draw": 0.267,
-        "away": 0.411
+        "home": 0.311,
+        "draw": 0.265,
+        "away": 0.424
       }
     },
     {
@@ -1340,9 +1312,9 @@
       "away": "Motherwell",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.663,
-        "draw": 0.193,
-        "away": 0.145
+        "home": 0.679,
+        "draw": 0.194,
+        "away": 0.128
       }
     },
     {
@@ -1353,9 +1325,9 @@
       "away": "St. Mirren",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.569,
-        "draw": 0.239,
-        "away": 0.192
+        "home": 0.56,
+        "draw": 0.24,
+        "away": 0.2
       }
     },
     {
@@ -1366,9 +1338,9 @@
       "away": "Dundee United",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.332,
-        "draw": 0.285,
-        "away": 0.384
+        "home": 0.326,
+        "draw": 0.284,
+        "away": 0.39
       }
     },
     {
@@ -1379,9 +1351,9 @@
       "away": "Aberdeen",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.341,
-        "draw": 0.289,
-        "away": 0.37
+        "home": 0.368,
+        "draw": 0.306,
+        "away": 0.326
       }
     },
     {
@@ -1392,9 +1364,9 @@
       "away": "Rangers",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.13,
-        "draw": 0.212,
-        "away": 0.657
+        "home": 0.126,
+        "draw": 0.207,
+        "away": 0.667
       }
     },
     {
@@ -1405,9 +1377,9 @@
       "away": "Hibernian",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.651,
-        "draw": 0.194,
-        "away": 0.155
+        "home": 0.644,
+        "draw": 0.196,
+        "away": 0.16
       }
     },
     {
@@ -1418,9 +1390,9 @@
       "away": "Motherwell",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.424,
-        "draw": 0.267,
-        "away": 0.309
+        "home": 0.398,
+        "draw": 0.283,
+        "away": 0.319
       }
     },
     {
@@ -1431,9 +1403,9 @@
       "away": "Celtic",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.172,
-        "draw": 0.228,
-        "away": 0.6
+        "home": 0.15,
+        "draw": 0.224,
+        "away": 0.626
       }
     },
     {
@@ -1444,9 +1416,9 @@
       "away": "St. Mirren",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.404,
-        "draw": 0.271,
-        "away": 0.325
+        "home": 0.393,
+        "draw": 0.27,
+        "away": 0.337
       }
     },
     {
@@ -1457,9 +1429,9 @@
       "away": "Falkirk",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.248,
-        "draw": 0.255,
-        "away": 0.498
+        "home": 0.239,
+        "draw": 0.251,
+        "away": 0.511
       }
     },
     {
@@ -1470,9 +1442,9 @@
       "away": "Dundee",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.382,
-        "draw": 0.308,
-        "away": 0.31
+        "home": 0.374,
+        "draw": 0.306,
+        "away": 0.32
       }
     },
     {
@@ -1483,9 +1455,9 @@
       "away": "Heart of Midlothian",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.203,
-        "draw": 0.21,
-        "away": 0.588
+        "home": 0.214,
+        "draw": 0.221,
+        "away": 0.565
       }
     },
     {
@@ -1496,9 +1468,9 @@
       "away": "Dundee United",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.464,
-        "draw": 0.268,
-        "away": 0.268
+        "home": 0.456,
+        "draw": 0.269,
+        "away": 0.275
       }
     },
     {
@@ -1509,9 +1481,9 @@
       "away": "Hibernian",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.381,
-        "draw": 0.292,
-        "away": 0.327
+        "home": 0.376,
+        "draw": 0.291,
+        "away": 0.334
       }
     },
     {
@@ -1522,9 +1494,9 @@
       "away": "Kilmarnock",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.781,
-        "draw": 0.131,
-        "away": 0.089
+        "home": 0.772,
+        "draw": 0.135,
+        "away": 0.093
       }
     },
     {
@@ -1535,9 +1507,9 @@
       "away": "St. Johnstone",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.333,
-        "draw": 0.247,
-        "away": 0.42
+        "home": 0.279,
+        "draw": 0.253,
+        "away": 0.469
       }
     },
     {
@@ -1548,9 +1520,9 @@
       "away": "Celtic",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.276,
-        "draw": 0.298,
-        "away": 0.426
+        "home": 0.247,
+        "draw": 0.3,
+        "away": 0.453
       }
     },
     {
@@ -1561,9 +1533,9 @@
       "away": "Aberdeen",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.252,
-        "draw": 0.275,
-        "away": 0.473
+        "home": 0.264,
+        "draw": 0.286,
+        "away": 0.45
       }
     },
     {
@@ -1574,9 +1546,9 @@
       "away": "Heart of Midlothian",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.218,
-        "draw": 0.237,
-        "away": 0.545
+        "home": 0.191,
+        "draw": 0.234,
+        "away": 0.576
       }
     },
     {
@@ -1587,9 +1559,9 @@
       "away": "Dundee",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.487,
-        "draw": 0.267,
-        "away": 0.246
+        "home": 0.495,
+        "draw": 0.27,
+        "away": 0.234
       }
     },
     {
@@ -1600,9 +1572,9 @@
       "away": "Rangers",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.233,
-        "draw": 0.283,
-        "away": 0.484
+        "home": 0.225,
+        "draw": 0.28,
+        "away": 0.495
       }
     },
     {
@@ -1613,9 +1585,9 @@
       "away": "Motherwell",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.348,
-        "draw": 0.255,
-        "away": 0.396
+        "home": 0.355,
+        "draw": 0.261,
+        "away": 0.384
       }
     },
     {
@@ -1626,9 +1598,9 @@
       "away": "St. Mirren",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.314,
-        "draw": 0.248,
-        "away": 0.438
+        "home": 0.304,
+        "draw": 0.245,
+        "away": 0.45
       }
     },
     {
@@ -1639,9 +1611,9 @@
       "away": "Falkirk",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.393,
-        "draw": 0.282,
-        "away": 0.325
+        "home": 0.4,
+        "draw": 0.288,
+        "away": 0.312
       }
     },
     {
@@ -1652,9 +1624,9 @@
       "away": "Aberdeen",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.422,
-        "draw": 0.295,
-        "away": 0.282
+        "home": 0.432,
+        "draw": 0.3,
+        "away": 0.268
       }
     },
     {
@@ -1665,9 +1637,9 @@
       "away": "Heart of Midlothian",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.178,
-        "draw": 0.214,
-        "away": 0.608
+        "home": 0.171,
+        "draw": 0.21,
+        "away": 0.618
       }
     },
     {
@@ -1678,9 +1650,9 @@
       "away": "Kilmarnock",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.475,
-        "draw": 0.252,
-        "away": 0.273
+        "home": 0.464,
+        "draw": 0.253,
+        "away": 0.284
       }
     },
     {
@@ -1691,9 +1663,9 @@
       "away": "Dundee United",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.34,
-        "draw": 0.249,
-        "away": 0.411
+        "home": 0.31,
+        "draw": 0.253,
+        "away": 0.437
       }
     },
     {
@@ -1704,9 +1676,9 @@
       "away": "St. Johnstone",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.48,
-        "draw": 0.282,
-        "away": 0.238
+        "home": 0.441,
+        "draw": 0.297,
+        "away": 0.263
       }
     },
     {
@@ -1717,9 +1689,9 @@
       "away": "Celtic",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.113,
-        "draw": 0.185,
-        "away": 0.702
+        "home": 0.099,
+        "draw": 0.178,
+        "away": 0.724
       }
     },
     {
@@ -1730,9 +1702,9 @@
       "away": "Rangers",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.246,
-        "draw": 0.314,
-        "away": 0.44
+        "home": 0.22,
+        "draw": 0.315,
+        "away": 0.464
       }
     },
     {
@@ -1743,9 +1715,9 @@
       "away": "Hibernian",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.516,
-        "draw": 0.263,
-        "away": 0.221
+        "home": 0.51,
+        "draw": 0.262,
+        "away": 0.228
       }
     },
     {
@@ -1756,9 +1728,9 @@
       "away": "St. Mirren",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.707,
-        "draw": 0.168,
-        "away": 0.126
+        "home": 0.697,
+        "draw": 0.171,
+        "away": 0.132
       }
     },
     {
@@ -1769,9 +1741,9 @@
       "away": "Motherwell",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.254,
-        "draw": 0.222,
-        "away": 0.524
+        "home": 0.264,
+        "draw": 0.229,
+        "away": 0.507
       }
     },
     {
@@ -1782,9 +1754,9 @@
       "away": "Dundee United",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.374,
-        "draw": 0.268,
-        "away": 0.359
+        "home": 0.385,
+        "draw": 0.275,
+        "away": 0.34
       }
     },
     {
@@ -1795,9 +1767,9 @@
       "away": "Falkirk",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.61,
-        "draw": 0.235,
-        "away": 0.155
+        "home": 0.613,
+        "draw": 0.239,
+        "away": 0.149
       }
     },
     {
@@ -1808,9 +1780,9 @@
       "away": "Falkirk",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.392,
-        "draw": 0.307,
-        "away": 0.301
+        "home": 0.354,
+        "draw": 0.317,
+        "away": 0.329
       }
     },
     {
@@ -1821,9 +1793,9 @@
       "away": "Hibernian",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.42,
-        "draw": 0.273,
-        "away": 0.307
+        "home": 0.409,
+        "draw": 0.274,
+        "away": 0.317
       }
     },
     {
@@ -1834,9 +1806,9 @@
       "away": "Dundee",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.472,
+        "home": 0.463,
         "draw": 0.242,
-        "away": 0.286
+        "away": 0.295
       }
     },
     {
@@ -1847,9 +1819,9 @@
       "away": "Celtic",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.145,
-        "draw": 0.193,
-        "away": 0.661
+        "home": 0.117,
+        "draw": 0.186,
+        "away": 0.697
       }
     },
     {
@@ -1860,9 +1832,9 @@
       "away": "Kilmarnock",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.659,
-        "draw": 0.212,
-        "away": 0.13
+        "home": 0.649,
+        "draw": 0.215,
+        "away": 0.136
       }
     },
     {
@@ -1873,9 +1845,9 @@
       "away": "St. Johnstone",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.269,
+        "home": 0.241,
         "draw": 0.254,
-        "away": 0.477
+        "away": 0.506
       }
     },
     {
@@ -1886,9 +1858,9 @@
       "away": "Heart of Midlothian",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.423,
-        "draw": 0.244,
-        "away": 0.333
+        "home": 0.433,
+        "draw": 0.25,
+        "away": 0.317
       }
     },
     {
@@ -1899,9 +1871,9 @@
       "away": "St. Johnstone",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.458,
-        "draw": 0.268,
-        "away": 0.275
+        "home": 0.42,
+        "draw": 0.278,
+        "away": 0.302
       }
     },
     {
@@ -1912,9 +1884,9 @@
       "away": "Rangers",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.211,
-        "draw": 0.295,
-        "away": 0.494
+        "home": 0.207,
+        "draw": 0.291,
+        "away": 0.503
       }
     },
     {
@@ -1925,9 +1897,9 @@
       "away": "Aberdeen",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.281,
-        "draw": 0.294,
-        "away": 0.425
+        "home": 0.291,
+        "draw": 0.303,
+        "away": 0.406
       }
     },
     {
@@ -1938,9 +1910,9 @@
       "away": "Dundee United",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.224,
-        "draw": 0.232,
-        "away": 0.544
+        "home": 0.218,
+        "draw": 0.23,
+        "away": 0.551
       }
     },
     {
@@ -1951,9 +1923,9 @@
       "away": "Motherwell",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.311,
-        "draw": 0.242,
-        "away": 0.446
+        "home": 0.321,
+        "draw": 0.249,
+        "away": 0.431
       }
     },
     {
@@ -1964,9 +1936,9 @@
       "away": "Aberdeen",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.333,
-        "draw": 0.291,
-        "away": 0.375
+        "home": 0.342,
+        "draw": 0.301,
+        "away": 0.357
       }
     },
     {
@@ -1977,9 +1949,9 @@
       "away": "Dundee",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.244,
-        "draw": 0.28,
-        "away": 0.477
+        "home": 0.238,
+        "draw": 0.275,
+        "away": 0.487
       }
     },
     {
@@ -1990,9 +1962,9 @@
       "away": "Celtic",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.137,
-        "draw": 0.214,
-        "away": 0.649
+        "home": 0.12,
+        "draw": 0.207,
+        "away": 0.674
       }
     },
     {
@@ -2003,9 +1975,9 @@
       "away": "Heart of Midlothian",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.166,
-        "draw": 0.178,
-        "away": 0.657
+        "home": 0.145,
+        "draw": 0.172,
+        "away": 0.683
       }
     },
     {
@@ -2016,9 +1988,9 @@
       "away": "St. Mirren",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.585,
-        "draw": 0.249,
-        "away": 0.166
+        "home": 0.576,
+        "draw": 0.251,
+        "away": 0.173
       }
     },
     {
@@ -2029,9 +2001,9 @@
       "away": "Kilmarnock",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.555,
-        "draw": 0.228,
-        "away": 0.217
+        "home": 0.562,
+        "draw": 0.231,
+        "away": 0.207
       }
     },
     {
@@ -2042,9 +2014,9 @@
       "away": "St. Johnstone",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.371,
-        "draw": 0.289,
-        "away": 0.339
+        "home": 0.311,
+        "draw": 0.305,
+        "away": 0.385
       }
     },
     {
@@ -2055,9 +2027,9 @@
       "away": "Rangers",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.427,
-        "draw": 0.298,
-        "away": 0.275
+        "home": 0.436,
+        "draw": 0.304,
+        "away": 0.261
       }
     },
     {
@@ -2068,9 +2040,9 @@
       "away": "Kilmarnock",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.645,
-        "draw": 0.205,
-        "away": 0.15
+        "home": 0.637,
+        "draw": 0.207,
+        "away": 0.156
       }
     },
     {
@@ -2081,9 +2053,9 @@
       "away": "Dundee United",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.595,
-        "draw": 0.209,
-        "away": 0.196
+        "home": 0.587,
+        "draw": 0.212,
+        "away": 0.202
       }
     },
     {
@@ -2094,9 +2066,9 @@
       "away": "Falkirk",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.363,
-        "draw": 0.264,
-        "away": 0.373
+        "home": 0.33,
+        "draw": 0.269,
+        "away": 0.402
       }
     },
     {
@@ -2107,9 +2079,9 @@
       "away": "Hibernian",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.326,
-        "draw": 0.271,
-        "away": 0.403
+        "home": 0.319,
+        "draw": 0.269,
+        "away": 0.412
       }
     },
     {
@@ -2120,9 +2092,9 @@
       "away": "St. Mirren",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.475,
-        "draw": 0.275,
-        "away": 0.251
+        "home": 0.432,
+        "draw": 0.289,
+        "away": 0.279
       }
     },
     {
@@ -2133,9 +2105,9 @@
       "away": "Dundee",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.269,
-        "draw": 0.268,
-        "away": 0.462
+        "home": 0.259,
+        "draw": 0.265,
+        "away": 0.476
       }
     },
     {
@@ -2146,9 +2118,9 @@
       "away": "Falkirk",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.328,
-        "draw": 0.292,
-        "away": 0.38
+        "home": 0.317,
+        "draw": 0.289,
+        "away": 0.393
       }
     },
     {
@@ -2159,9 +2131,9 @@
       "away": "Heart of Midlothian",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.089,
-        "draw": 0.132,
-        "away": 0.779
+        "home": 0.084,
+        "draw": 0.126,
+        "away": 0.79
       }
     },
     {
@@ -2172,9 +2144,9 @@
       "away": "Motherwell",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.542,
-        "draw": 0.25,
-        "away": 0.208
+        "home": 0.544,
+        "draw": 0.254,
+        "away": 0.202
       }
     },
     {
@@ -2185,9 +2157,9 @@
       "away": "Celtic",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.176,
-        "draw": 0.229,
-        "away": 0.595
+        "home": 0.171,
+        "draw": 0.242,
+        "away": 0.587
       }
     },
     {
@@ -2198,9 +2170,9 @@
       "away": "Aberdeen",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.551,
-        "draw": 0.26,
-        "away": 0.188
+        "home": 0.571,
+        "draw": 0.265,
+        "away": 0.164
       }
     },
     {
@@ -2211,9 +2183,9 @@
       "away": "Motherwell",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.519,
-        "draw": 0.24,
-        "away": 0.241
+        "home": 0.525,
+        "draw": 0.242,
+        "away": 0.233
       }
     },
     {
@@ -2224,9 +2196,9 @@
       "away": "Kilmarnock",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.499,
+        "home": 0.491,
         "draw": 0.255,
-        "away": 0.246
+        "away": 0.254
       }
     },
     {
@@ -2237,9 +2209,9 @@
       "away": "Rangers",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.412,
+        "home": 0.404,
         "draw": 0.267,
-        "away": 0.321
+        "away": 0.329
       }
     },
     {
@@ -2250,9 +2222,9 @@
       "away": "Hibernian",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.428,
-        "draw": 0.271,
-        "away": 0.301
+        "home": 0.438,
+        "draw": 0.275,
+        "away": 0.286
       }
     },
     {
@@ -2263,9 +2235,9 @@
       "away": "Dundee United",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.275,
-        "draw": 0.257,
-        "away": 0.468
+        "home": 0.269,
+        "draw": 0.256,
+        "away": 0.476
       }
     },
     {
@@ -2276,9 +2248,9 @@
       "away": "Falkirk",
       "venue": "CalForth Construction Arena at Tannadice Park",
       "probabilities": {
-        "home": 0.385,
+        "home": 0.372,
         "draw": 0.285,
-        "away": 0.33
+        "away": 0.343
       }
     },
     {
@@ -2289,9 +2261,9 @@
       "away": "St. Johnstone",
       "venue": "Tynecastle Park",
       "probabilities": {
-        "home": 0.589,
-        "draw": 0.209,
-        "away": 0.202
+        "home": 0.544,
+        "draw": 0.226,
+        "away": 0.23
       }
     },
     {
@@ -2302,9 +2274,9 @@
       "away": "Celtic",
       "venue": "The BBSP Stadium Rugby Park",
       "probabilities": {
-        "home": 0.081,
-        "draw": 0.146,
-        "away": 0.773
+        "home": 0.07,
+        "draw": 0.138,
+        "away": 0.792
       }
     },
     {
@@ -2315,9 +2287,9 @@
       "away": "Aberdeen",
       "venue": "Fir Park",
       "probabilities": {
-        "home": 0.31,
-        "draw": 0.267,
-        "away": 0.423
+        "home": 0.303,
+        "draw": 0.281,
+        "away": 0.416
       }
     },
     {
@@ -2328,9 +2300,9 @@
       "away": "Hibernian",
       "venue": "Ibrox Stadium",
       "probabilities": {
-        "home": 0.533,
-        "draw": 0.275,
-        "away": 0.192
+        "home": 0.526,
+        "draw": 0.276,
+        "away": 0.198
       }
     },
     {
@@ -2341,9 +2313,9 @@
       "away": "Dundee",
       "venue": "The Marbill Coaches Stadium",
       "probabilities": {
-        "home": 0.193,
-        "draw": 0.239,
-        "away": 0.568
+        "home": 0.186,
+        "draw": 0.234,
+        "away": 0.58
       }
     },
     {
@@ -2354,9 +2326,9 @@
       "away": "Kilmarnock",
       "venue": "Pittodrie Stadium",
       "probabilities": {
-        "home": 0.548,
-        "draw": 0.247,
-        "away": 0.205
+        "home": 0.502,
+        "draw": 0.265,
+        "away": 0.233
       }
     },
     {
@@ -2367,9 +2339,9 @@
       "away": "Dundee United",
       "venue": "Celtic Park",
       "probabilities": {
-        "home": 0.601,
-        "draw": 0.228,
-        "away": 0.171
+        "home": 0.607,
+        "draw": 0.231,
+        "away": 0.161
       }
     },
     {
@@ -2380,9 +2352,9 @@
       "away": "Rangers",
       "venue": "Dens Park",
       "probabilities": {
-        "home": 0.311,
-        "draw": 0.308,
-        "away": 0.381
+        "home": 0.305,
+        "draw": 0.305,
+        "away": 0.391
       }
     },
     {
@@ -2393,9 +2365,9 @@
       "away": "St. Mirren",
       "venue": "The Falkirk Stadium",
       "probabilities": {
-        "home": 0.428,
-        "draw": 0.277,
-        "away": 0.295
+        "home": 0.42,
+        "draw": 0.276,
+        "away": 0.304
       }
     },
     {
@@ -2406,9 +2378,9 @@
       "away": "Heart of Midlothian",
       "venue": "Easter Road Stadium",
       "probabilities": {
-        "home": 0.156,
-        "draw": 0.195,
-        "away": 0.649
+        "home": 0.147,
+        "draw": 0.189,
+        "away": 0.664
       }
     },
     {
@@ -2419,13 +2391,31 @@
       "away": "Motherwell",
       "venue": "McDiarmid Park",
       "probabilities": {
-        "home": 0.421,
-        "draw": 0.246,
-        "away": 0.332
+        "home": 0.449,
+        "draw": 0.256,
+        "away": 0.296
       }
     }
   ],
   "results": [
+    {
+      "id": "43",
+      "round": 8,
+      "date": "2026-10-11T13:00:00Z",
+      "home": "Aberdeen",
+      "away": "St. Johnstone",
+      "homeScore": 0,
+      "awayScore": 1
+    },
+    {
+      "id": "47",
+      "round": 8,
+      "date": "2026-10-11T11:00:00Z",
+      "home": "Motherwell",
+      "away": "Celtic",
+      "homeScore": 0,
+      "awayScore": 2
+    },
     {
       "id": "48",
       "round": 8,
@@ -2858,358 +2848,358 @@
     ],
     "probabilities": {
       "Aberdeen": {
-        "title": 0.27,
-        "top3": 6.42,
-        "top6": 50.83,
-        "playoff": 4.74,
-        "relegation": 1.52
+        "title": 0.06,
+        "top3": 2.72,
+        "top6": 36.12,
+        "playoff": 7.66,
+        "relegation": 3.02
       },
       "Celtic": {
-        "title": 55.77,
-        "top3": 93.4,
-        "top6": 99.7,
+        "title": 63.95,
+        "top3": 96.39,
+        "top6": 99.95,
         "playoff": 0.0,
         "relegation": 0.0
       },
       "Dundee": {
-        "title": 3.8,
-        "top3": 34.34,
-        "top6": 87.75,
-        "playoff": 0.46,
-        "relegation": 0.08
+        "title": 2.88,
+        "top3": 34.2,
+        "top6": 88.41,
+        "playoff": 0.4,
+        "relegation": 0.07
       },
       "Dundee United": {
-        "title": 0.24,
-        "top3": 5.3,
-        "top6": 45.04,
-        "playoff": 5.36,
-        "relegation": 2.05
+        "title": 0.19,
+        "top3": 5.0,
+        "top6": 45.38,
+        "playoff": 5.39,
+        "relegation": 2.11
       },
       "Falkirk": {
-        "title": 0.07,
-        "top3": 1.35,
-        "top6": 20.53,
-        "playoff": 13.47,
-        "relegation": 7.21
+        "title": 0.01,
+        "top3": 1.26,
+        "top6": 22.35,
+        "playoff": 12.61,
+        "relegation": 6.73
       },
       "Heart of Midlothian": {
-        "title": 26.11,
-        "top3": 81.2,
-        "top6": 98.41,
-        "playoff": 0.01,
-        "relegation": 0.01
+        "title": 22.34,
+        "top3": 81.02,
+        "top6": 98.48,
+        "playoff": 0.04,
+        "relegation": 0.0
       },
       "Hibernian": {
         "title": 0.01,
-        "top3": 0.8,
-        "top6": 14.89,
-        "playoff": 18.12,
-        "relegation": 10.62
+        "top3": 0.69,
+        "top6": 14.86,
+        "playoff": 17.36,
+        "relegation": 10.9
       },
       "Kilmarnock": {
         "title": 0.0,
         "top3": 0.03,
-        "top6": 1.96,
+        "top6": 2.22,
         "playoff": 19.8,
-        "relegation": 56.07
+        "relegation": 54.37
       },
       "Motherwell": {
-        "title": 0.15,
-        "top3": 2.44,
-        "top6": 26.9,
-        "playoff": 11.59,
-        "relegation": 7.12
+        "title": 0.06,
+        "top3": 1.21,
+        "top6": 19.3,
+        "playoff": 14.78,
+        "relegation": 9.65
       },
       "Rangers": {
-        "title": 13.3,
-        "top3": 68.61,
-        "top6": 97.5,
+        "title": 10.12,
+        "top3": 67.65,
+        "top6": 97.88,
         "playoff": 0.03,
         "relegation": 0.01
       },
       "St. Johnstone": {
-        "title": 0.26,
-        "top3": 5.38,
-        "top6": 42.2,
-        "playoff": 6.38,
-        "relegation": 2.8
+        "title": 0.37,
+        "top3": 9.16,
+        "top6": 59.88,
+        "playoff": 2.88,
+        "relegation": 0.9
       },
       "St. Mirren": {
-        "title": 0.03,
-        "top3": 0.73,
-        "top6": 14.29,
-        "playoff": 20.04,
-        "relegation": 12.53
+        "title": 0.01,
+        "top3": 0.69,
+        "top6": 15.17,
+        "playoff": 19.05,
+        "relegation": 12.23
       }
     },
     "positions": {
       "Aberdeen": [
-        0.27,
-        1.5,
-        4.64,
-        11.44,
-        16.61,
-        16.36,
-        14.44,
-        12.04,
-        9.1,
-        7.34,
-        4.74,
-        1.52
+        0.06,
+        0.55,
+        2.11,
+        6.38,
+        12.24,
+        14.78,
+        15.76,
+        14.7,
+        12.57,
+        10.19,
+        7.66,
+        3.02
       ],
       "Celtic": [
-        55.77,
-        25.67,
-        11.96,
-        4.3,
-        1.5,
-        0.5,
-        0.24,
-        0.05,
-        0.01,
+        63.95,
+        23.52,
+        8.92,
+        2.72,
+        0.66,
+        0.18,
+        0.03,
+        0.02,
+        0.0,
         0.0,
         0.0,
         0.0
       ],
       "Dundee": [
-        3.8,
-        10.54,
-        20.01,
-        26.82,
-        16.83,
-        9.75,
-        5.78,
-        3.1,
-        1.78,
-        1.04,
-        0.46,
-        0.08
+        2.88,
+        10.84,
+        20.47,
+        27.52,
+        16.99,
+        9.71,
+        5.53,
+        2.98,
+        1.7,
+        0.9,
+        0.4,
+        0.07
       ],
       "Dundee United": [
-        0.24,
-        1.28,
-        3.78,
-        9.12,
-        14.51,
-        16.1,
-        14.56,
-        13.54,
-        11.04,
-        8.43,
-        5.36,
-        2.05
+        0.19,
+        1.08,
+        3.73,
+        9.23,
+        14.87,
+        16.28,
+        15.41,
+        12.58,
+        10.95,
+        8.18,
+        5.39,
+        2.11
       ],
       "Falkirk": [
-        0.06,
+        0.02,
         0.2,
-        1.09,
-        3.21,
-        6.63,
-        9.34,
-        12.76,
+        1.04,
+        3.34,
+        7.14,
+        10.6,
+        13.75,
         14.64,
-        15.99,
-        15.42,
-        13.47,
-        7.2
+        15.43,
+        14.49,
+        12.6,
+        6.73
       ],
       "Heart of Midlothian": [
-        26.1,
-        32.98,
-        22.12,
-        10.68,
-        4.48,
-        2.05,
-        0.98,
-        0.36,
-        0.17,
+        22.34,
+        35.02,
+        23.66,
+        11.41,
+        4.35,
+        1.7,
+        0.87,
+        0.43,
+        0.11,
         0.07,
-        0.02,
+        0.04,
         0.0
       ],
       "Hibernian": [
-        0.02,
-        0.14,
-        0.64,
-        2.02,
-        4.62,
-        7.45,
-        10.23,
-        13.28,
-        15.28,
-        17.58,
-        18.12,
-        10.62
+        0.0,
+        0.11,
+        0.58,
+        1.94,
+        4.7,
+        7.52,
+        10.58,
+        13.74,
+        15.47,
+        17.09,
+        17.36,
+        10.9
       ],
       "Kilmarnock": [
         0.0,
-        0.02,
-        0.01,
+        0.0,
+        0.03,
         0.16,
-        0.5,
-        1.27,
-        2.2,
-        3.5,
-        6.11,
-        10.35,
+        0.56,
+        1.46,
+        2.51,
+        4.02,
+        6.5,
+        10.57,
         19.8,
-        56.08
+        54.37
       ],
       "Motherwell": [
-        0.16,
-        0.52,
-        1.76,
-        4.5,
-        8.38,
-        11.56,
-        13.52,
-        14.19,
-        14.27,
-        12.4,
-        11.6,
-        7.12
+        0.06,
+        0.22,
+        0.94,
+        2.9,
+        6.12,
+        9.08,
+        11.84,
+        13.61,
+        14.9,
+        15.92,
+        14.78,
+        9.65
       ],
       "Rangers": [
-        13.3,
-        25.86,
-        29.45,
-        17.08,
-        8.3,
+        10.12,
+        26.17,
+        31.36,
+        18.58,
+        8.15,
         3.5,
-        1.44,
-        0.66,
-        0.29,
-        0.08,
-        0.03,
-        0.0
+        1.2,
+        0.53,
+        0.21,
+        0.14,
+        0.02,
+        0.01
       ],
       "St. Johnstone": [
-        0.26,
-        1.2,
-        3.92,
-        8.7,
-        13.49,
-        14.63,
-        15.04,
-        12.92,
-        11.4,
-        9.25,
-        6.38,
-        2.8
+        0.37,
+        2.19,
+        6.6,
+        13.84,
+        19.61,
+        17.27,
+        13.31,
+        10.78,
+        7.36,
+        4.9,
+        2.88,
+        0.9
       ],
       "St. Mirren": [
-        0.02,
-        0.08,
-        0.64,
-        1.94,
-        4.14,
-        7.48,
-        8.82,
-        11.72,
-        14.56,
-        18.04,
-        20.04,
-        12.52
+        0.01,
+        0.1,
+        0.57,
+        1.98,
+        4.6,
+        7.9,
+        9.22,
+        11.98,
+        14.8,
+        17.54,
+        19.05,
+        12.24
       ]
     },
     "expected": {
       "Aberdeen": {
-        "points": 50.6,
-        "position": 6.7
+        "points": 47.3,
+        "position": 7.5
       },
       "Celtic": {
-        "points": 78.1,
-        "position": 1.7
+        "points": 80.4,
+        "position": 1.5
       },
       "Dundee": {
-        "points": 60.3,
+        "points": 60.2,
         "position": 4.3
       },
       "Dundee United": {
-        "points": 49.5,
+        "points": 49.3,
         "position": 7.0
       },
       "Falkirk": {
-        "points": 43.9,
-        "position": 8.4
+        "points": 44.2,
+        "position": 8.3
       },
       "Heart of Midlothian": {
-        "points": 71.4,
+        "points": 71.3,
         "position": 2.5
       },
       "Hibernian": {
-        "points": 41.9,
-        "position": 9.0
+        "points": 41.8,
+        "position": 8.9
       },
       "Kilmarnock": {
-        "points": 31.3,
+        "points": 31.7,
         "position": 11.0
       },
       "Motherwell": {
-        "points": 45.3,
-        "position": 8.1
+        "points": 43.0,
+        "position": 8.6
       },
       "Rangers": {
-        "points": 67.8,
-        "position": 3.0
+        "points": 67.5,
+        "position": 3.1
       },
       "St. Johnstone": {
-        "points": 48.9,
-        "position": 7.1
+        "points": 52.1,
+        "position": 6.2
       },
       "St. Mirren": {
-        "points": 41.3,
+        "points": 41.5,
         "position": 9.1
       }
     },
     "ratings": {
       "Aberdeen": {
-        "attack": -0.131,
-        "defence": 0.121
+        "attack": -0.21,
+        "defence": 0.113
       },
       "Celtic": {
-        "attack": 0.321,
-        "defence": 0.352
+        "attack": 0.325,
+        "defence": 0.428
       },
       "Dundee": {
-        "attack": 0.081,
-        "defence": 0.168
+        "attack": 0.104,
+        "defence": 0.145
       },
       "Dundee United": {
-        "attack": -0.037,
-        "defence": -0.051
+        "attack": -0.032,
+        "defence": -0.064
       },
       "Falkirk": {
-        "attack": -0.181,
-        "defence": -0.002
+        "attack": -0.161,
+        "defence": -0.016
       },
       "Heart of Midlothian": {
-        "attack": 0.459,
-        "defence": 0.079
+        "attack": 0.473,
+        "defence": 0.067
       },
       "Hibernian": {
-        "attack": -0.176,
-        "defence": -0.103
+        "attack": -0.16,
+        "defence": -0.125
       },
       "Kilmarnock": {
-        "attack": -0.203,
-        "defence": -0.407
+        "attack": -0.185,
+        "defence": -0.423
       },
       "Motherwell": {
-        "attack": 0.038,
-        "defence": -0.239
+        "attack": -0.024,
+        "defence": -0.243
       },
       "Rangers": {
-        "attack": 0.019,
-        "defence": 0.368
+        "attack": 0.035,
+        "defence": 0.348
       },
       "St. Johnstone": {
-        "attack": -0.014,
-        "defence": -0.05
+        "attack": -0.008,
+        "defence": 0.021
       },
       "St. Mirren": {
-        "attack": -0.175,
-        "defence": -0.237
+        "attack": -0.156,
+        "defence": -0.253
       }
     }
   },
@@ -3222,23 +3212,10 @@
       "tier": "title",
       "tierLabel": "Title",
       "team": "Celtic",
-      "swing": 27.3,
-      "ifHome": 68.5,
-      "ifDraw": 53.5,
-      "ifAway": 41.3
-    },
-    {
-      "fixtureId": "53",
-      "date": "2026-10-17T14:00:00Z",
-      "home": "Kilmarnock",
-      "away": "Motherwell",
-      "tier": "relegation",
-      "tierLabel": "Relegation",
-      "team": "Kilmarnock",
-      "swing": 25.8,
-      "ifHome": 39.8,
-      "ifDraw": 53.0,
-      "ifAway": 65.6
+      "swing": 26.3,
+      "ifHome": 75.3,
+      "ifDraw": 63.7,
+      "ifAway": 49.0
     },
     {
       "fixtureId": "54",
@@ -3248,10 +3225,23 @@
       "tier": "top6",
       "tierLabel": "Top 6",
       "team": "St. Johnstone",
-      "swing": 25.8,
-      "ifHome": 55.7,
-      "ifDraw": 40.3,
-      "ifAway": 30.0
+      "swing": 26.0,
+      "ifHome": 72.4,
+      "ifDraw": 59.4,
+      "ifAway": 46.3
+    },
+    {
+      "fixtureId": "53",
+      "date": "2026-10-17T14:00:00Z",
+      "home": "Kilmarnock",
+      "away": "Motherwell",
+      "tier": "relegation",
+      "tierLabel": "Relegation",
+      "team": "Kilmarnock",
+      "swing": 25.6,
+      "ifHome": 38.4,
+      "ifDraw": 52.2,
+      "ifAway": 64.0
     },
     {
       "fixtureId": "55",
@@ -3261,23 +3251,10 @@
       "tier": "top6",
       "tierLabel": "Top 6",
       "team": "Dundee United",
-      "swing": 25.7,
+      "swing": 25.2,
       "ifHome": 58.7,
-      "ifDraw": 44.4,
-      "ifAway": 33.0
-    },
-    {
-      "fixtureId": "43",
-      "date": "2026-10-11T13:00:00Z",
-      "home": "Aberdeen",
-      "away": "St. Johnstone",
-      "tier": "top6",
-      "tierLabel": "Top 6",
-      "team": "St. Johnstone",
-      "swing": 24.6,
-      "ifHome": 30.8,
-      "ifDraw": 41.3,
-      "ifAway": 55.4
+      "ifDraw": 44.6,
+      "ifAway": 33.5
     },
     {
       "fixtureId": "51",
@@ -3287,23 +3264,10 @@
       "tier": "top3",
       "tierLabel": "Top 3",
       "team": "Dundee",
-      "swing": 24.3,
-      "ifHome": 47.4,
-      "ifDraw": 34.9,
-      "ifAway": 23.1
-    },
-    {
-      "fixtureId": "49",
-      "date": "2026-10-17T14:00:00Z",
-      "home": "Aberdeen",
-      "away": "St. Mirren",
-      "tier": "top6",
-      "tierLabel": "Top 6",
-      "team": "Aberdeen",
-      "swing": 23.1,
-      "ifHome": 60.5,
-      "ifDraw": 46.4,
-      "ifAway": 37.4
+      "swing": 23.9,
+      "ifHome": 47.5,
+      "ifDraw": 34.5,
+      "ifAway": 23.6
     },
     {
       "fixtureId": "56",
@@ -3313,23 +3277,49 @@
       "tier": "relegation",
       "tierLabel": "Relegation",
       "team": "Kilmarnock",
-      "swing": 23.1,
-      "ifHome": 64.6,
-      "ifDraw": 53.8,
-      "ifAway": 41.5
+      "swing": 23.2,
+      "ifHome": 62.6,
+      "ifDraw": 53.6,
+      "ifAway": 39.4
     },
     {
-      "fixtureId": "47",
-      "date": "2026-10-11T11:00:00Z",
-      "home": "Motherwell",
-      "away": "Celtic",
+      "fixtureId": "49",
+      "date": "2026-10-17T14:00:00Z",
+      "home": "Aberdeen",
+      "away": "St. Mirren",
       "tier": "top6",
       "tierLabel": "Top 6",
-      "team": "Motherwell",
-      "swing": 20.8,
-      "ifHome": 42.7,
-      "ifDraw": 31.0,
-      "ifAway": 21.9
+      "team": "Aberdeen",
+      "swing": 23.0,
+      "ifHome": 46.8,
+      "ifDraw": 32.3,
+      "ifAway": 23.8
+    },
+    {
+      "fixtureId": "59",
+      "date": "2026-10-24T14:00:00Z",
+      "home": "Rangers",
+      "away": "St. Johnstone",
+      "tier": "top6",
+      "tierLabel": "Top 6",
+      "team": "St. Johnstone",
+      "swing": 21.2,
+      "ifHome": 51.6,
+      "ifDraw": 60.5,
+      "ifAway": 72.8
+    },
+    {
+      "fixtureId": "60",
+      "date": "2026-10-24T14:00:00Z",
+      "home": "St. Mirren",
+      "away": "Dundee",
+      "tier": "top3",
+      "tierLabel": "Top 3",
+      "team": "Dundee",
+      "swing": 18.9,
+      "ifHome": 21.8,
+      "ifDraw": 28.5,
+      "ifAway": 40.7
     },
     {
       "fixtureId": "52",
@@ -3339,98 +3329,98 @@
       "tier": "top6",
       "tierLabel": "Top 6",
       "team": "Falkirk",
-      "swing": 16.1,
-      "ifHome": 12.9,
-      "ifDraw": 18.1,
-      "ifAway": 29.0
+      "swing": 16.8,
+      "ifHome": 14.1,
+      "ifDraw": 19.8,
+      "ifAway": 30.9
     }
   ],
   "movement": {
-    "since": "2026-10-10T22:46:45Z",
+    "since": "2026-10-11T23:01:43Z",
     "changes": {
       "Aberdeen": {
-        "title": -0.11,
-        "top3": -2.68,
-        "top6": 6.98,
-        "playoff": -2.22,
-        "relegation": -1.58
+        "title": -0.21,
+        "top3": -3.7,
+        "top6": -14.71,
+        "playoff": 2.92,
+        "relegation": 1.5
       },
       "Celtic": {
-        "title": -20.97,
-        "top3": -3.87,
-        "top6": -0.13,
+        "title": 8.18,
+        "top3": 2.99,
+        "top6": 0.25,
         "playoff": 0.0,
         "relegation": 0.0
       },
       "Dundee": {
-        "title": 1.49,
-        "top3": 3.04,
-        "top6": 10.97,
-        "playoff": -0.95,
-        "relegation": -0.38
+        "title": -0.92,
+        "top3": -0.14,
+        "top6": 0.66,
+        "playoff": -0.06,
+        "relegation": -0.01
       },
       "Dundee United": {
-        "title": 0.09,
-        "top3": 0.3,
-        "top6": 15.57,
-        "playoff": -7.39,
-        "relegation": -5.65
+        "title": -0.05,
+        "top3": -0.3,
+        "top6": 0.34,
+        "playoff": 0.03,
+        "relegation": 0.06
       },
       "Falkirk": {
-        "title": 0.01,
-        "top3": -2.63,
-        "top6": -4.44,
-        "playoff": -0.37,
-        "relegation": -1.79
+        "title": -0.06,
+        "top3": -0.09,
+        "top6": 1.82,
+        "playoff": -0.86,
+        "relegation": -0.48
       },
       "Heart of Midlothian": {
-        "title": 17.39,
-        "top3": 23.81,
-        "top6": 8.89,
-        "playoff": -0.55,
-        "relegation": -0.13
+        "title": -3.77,
+        "top3": -0.18,
+        "top6": 0.07,
+        "playoff": 0.03,
+        "relegation": -0.01
       },
       "Hibernian": {
-        "title": -0.06,
-        "top3": -2.04,
-        "top6": -6.95,
-        "playoff": 2.01,
-        "relegation": 0.03
+        "title": 0.0,
+        "top3": -0.11,
+        "top6": -0.03,
+        "playoff": -0.76,
+        "relegation": 0.28
       },
       "Kilmarnock": {
         "title": 0.0,
-        "top3": -0.14,
-        "top6": -1.35,
-        "playoff": -0.08,
-        "relegation": 3.16
+        "top3": 0.0,
+        "top6": 0.26,
+        "playoff": 0.0,
+        "relegation": -1.7
       },
       "Motherwell": {
-        "title": -0.04,
-        "top3": -1.81,
-        "top6": 0.87,
-        "playoff": -2.33,
-        "relegation": -2.61
+        "title": -0.09,
+        "top3": -1.23,
+        "top6": -7.6,
+        "playoff": 3.19,
+        "relegation": 2.53
       },
       "Rangers": {
-        "title": 2.89,
-        "top3": -0.81,
-        "top6": 1.83,
-        "playoff": -0.11,
-        "relegation": -0.01
+        "title": -3.18,
+        "top3": -0.96,
+        "top6": 0.38,
+        "playoff": 0.0,
+        "relegation": 0.0
       },
       "St. Johnstone": {
-        "title": -0.3,
-        "top3": -4.39,
-        "top6": -2.19,
-        "playoff": -0.58,
-        "relegation": -0.28
+        "title": 0.11,
+        "top3": 3.78,
+        "top6": 17.68,
+        "playoff": -3.5,
+        "relegation": -1.9
       },
       "St. Mirren": {
-        "title": -0.38,
-        "top3": -8.79,
-        "top6": -30.05,
-        "playoff": 12.57,
-        "relegation": 9.25
+        "title": -0.02,
+        "top3": -0.04,
+        "top6": 0.88,
+        "playoff": -0.99,
+        "relegation": -0.3
       }
     }
   }
