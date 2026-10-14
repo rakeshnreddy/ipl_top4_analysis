@@ -73,8 +73,8 @@ Configured seasons, each checked against its official table:
 | `wbbl-2026-27` | Women's Big Bash League 2026-27 (29 Oct - 5 Dec 2026; labelled 2026) | CricketData in season (fixed series id), Cricsheet once complete |
 | `super-smash-men-2025-26` | Super Smash 2025-26, men (4 points a win, 2 a tie or no result; Top 3, first goes straight to the final) | Cricsheet, filtered by gender, plus three abandoned matches |
 | `super-smash-women-2025-26` | Super Smash 2025-26, women (bonus point for 150 runs or a fast chase, win or lose) | Cricsheet, filtered by gender, plus one abandoned match |
-| `super-smash-men-2026-27` | Super Smash 2026-27, men (tentative 26 Dec 2026 - 31 Jan 2027: NZC said the schedule would come in late September, but had not published it by 3 Oct 2026) | CricketData in season, Cricsheet once complete |
-| `super-smash-women-2026-27` | Super Smash 2026-27, women (same tentative dates) | CricketData in season, Cricsheet once complete |
+| `super-smash-men-2026-27` | Super Smash 2026-27, men (27 Dec 2026 - 30 Jan 2027, published by NZC on 12 Oct 2026; its final season, with both finals at Kennards Hire Community Oval, Auckland) | CricketData in season, Cricsheet once complete |
+| `super-smash-women-2026-27` | Super Smash 2026-27, women (same dates and finals venue) | CricketData in season, Cricsheet once complete |
 | `t20-blast-2026` | T20 Blast 2026, men: three groups of six; the top two in each and the two best thirds reach the quarter-finals (4 points a win) | Cricsheet, plus the targets of two shortened matches and Sussex's 2-point deduction; 2027 is rolled forward from it |
 
 Build one league, or every configured league, then the site's `data/leagues.json` index is rewritten:
