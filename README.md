@@ -27,8 +27,8 @@ Social posting tools live on a separate page, `/share.html` (Share kit): the lat
 
 ## Data Rules
 
-- Probabilities use exact all-combinations over remaining league fixtures. Playoff fixtures in the feed are ignored.
-- In-season data comes from CricketData (`--source cricketdata`, the default). NRR is display-only when CricketData provides it and is not used in probability math.
+- Cricket qualification odds use exact enumeration when eligible and Monte Carlo for larger schedules, groups and bonus points. Cricket playoff fixtures are excluded from league-stage qualification math. Other sports use the rating models and simulations documented below.
+- The default `--source auto` selects CricketData for configured in-season cricket leagues and Cricsheet otherwise. NRR is display-only when CricketData provides it and is not used in probability math.
 - Completed seasons are rebuilt from Cricsheet (`--source cricsheet`): results, playoffs, and NRR computed from ball-by-ball data.
 - Cricsheet data is licensed ODC-By 1.0. Keep the source and licence credit visible on the site.
 - Do not add Cricbuzz or scraping fallback paths to production automation.

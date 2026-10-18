@@ -21,8 +21,9 @@ const ThemeToggle = () => {
   const next: Theme = theme === 'dark' ? 'light' : 'dark';
   return (
     <button
-      aria-label={`Switch to the ${next} theme`}
+      aria-label="Dark theme"
       className="theme-toggle"
+      aria-pressed={theme === 'dark'}
       onClick={() => {
         applyTheme(next);
         setTheme(next);
@@ -55,22 +56,32 @@ const PulseMark = () => (
  */
 const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | null; currentId?: string; currentLabel?: string }) => {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
   const panelId = useId();
+  const searchId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const home = import.meta.env.BASE_URL;
   const hub = hubHref(index?.default ?? 'hub');
   // Sports with the most live races first; the sort is stable, so ties keep the list's order.
   const groups = index
     ? leaguesBySport(index).sort((a, b) => b.leagues.filter(isLive).length - a.leagues.filter(isLive).length)
     : [];
+  const filteredGroups = groups.map((group) => ({
+    ...group,
+    leagues: group.leagues.filter((league) => `${group.label} ${league.name} ${league.shortName} ${league.seasonLabel}`.toLowerCase().includes(search.trim().toLowerCase())),
+  })).filter((group) => group.leagues.length > 0);
 
   useEffect(() => {
     if (!open) {
       return undefined;
     }
+    searchRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setOpen(false);
+        triggerRef.current?.focus();
       }
     };
     const onPointer = (event: MouseEvent) => {
@@ -101,7 +112,8 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
               aria-controls={panelId}
               aria-expanded={open}
               className="league-menu-button"
-              onClick={() => setOpen((value) => !value)}
+              ref={triggerRef}
+              onClick={() => { setOpen((value) => !value); setSearch(''); }}
               type="button"
             >
               <span>
@@ -116,8 +128,12 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
                 <a className="league-menu-home" href={hub}>
                   All live races
                 </a>
+                <div className="league-search-wrap">
+                  <label className="league-search-label" htmlFor={searchId}>Find a league or sport</label>
+                  <input className="league-search" id={searchId} onChange={(event) => setSearch(event.target.value)} ref={searchRef} type="search" value={search} placeholder="Premier League, cricket, F1…" />
+                </div>
                 <div className="league-menu-groups">
-                  {groups.map((group) => (
+                  {filteredGroups.map((group) => (
                     <div className="league-menu-group" key={group.sport}>
                       <p className="label">{group.label}</p>
                       <ul>
@@ -141,6 +157,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
                     </div>
                   ))}
                 </div>
+                {filteredGroups.length === 0 && <p className="league-menu-empty" role="status">No leagues match. Try a sport or a shorter name.</p>}
               </nav>
             </div>
           </div>
