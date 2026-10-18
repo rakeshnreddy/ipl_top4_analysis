@@ -7,7 +7,7 @@ export type Theme = 'light' | 'dark';
 
 export const THEME_KEY = 'pp-theme';
 // The page ground per theme, for the browser's toolbar colour (keep in step with --bg).
-const THEME_COLORS: Record<Theme, string> = { light: '#edf3f1', dark: '#061012' };
+const THEME_COLORS: Record<Theme, string> = { light: '#eef0f2', dark: '#0b1016' };
 
 export function storedTheme(): Theme | null {
   try {

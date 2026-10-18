@@ -217,7 +217,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
             <h2 id="drivers-title">Drivers' Championship</h2>
             <p>{complete ? 'Final standings' : 'Points so far, and the chance of each finish'}</p>
           </div>
-          <div className="table-scroll">
+          <div className="table-scroll" tabIndex={0} role="region" aria-label="Drivers standings, scroll for all columns">
             <table className="data-table f1-table">
               <caption className="visually-hidden">Drivers' standings{complete ? '' : ' with title and top-three odds'}</caption>
               <thead>
@@ -292,7 +292,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
             <h2 id="constructors-title">Constructors' Championship</h2>
             <p>Both cars score for their team</p>
           </div>
-          <div className="table-scroll">
+          <div className="table-scroll" tabIndex={0} role="region" aria-label="Constructors standings, scroll for all columns">
             <table className="data-table f1-table">
               <caption className="visually-hidden">Constructors' standings{complete ? '' : ' with title odds'}</caption>
               <thead>
