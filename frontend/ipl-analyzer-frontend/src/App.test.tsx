@@ -203,7 +203,7 @@ describe('App with several leagues', () => {
     await waitFor(() =>
       expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        'http://localhost:3000/?league=wpl-2026',
+        'http://localhost:3000/league/wpl-2026/',
       ),
     );
   });

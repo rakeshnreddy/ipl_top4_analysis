@@ -25,7 +25,7 @@ export function buildSitemap(siteUrl: string, list: LeagueList): string {
     { loc: `${base}?view=hub`, lastmod: newest },
   ];
   for (const league of list.leagues) {
-    urls.push({ loc: `${base}?league=${encodeURIComponent(league.id)}`, lastmod: league.generatedAt });
+    urls.push({ loc: `${base}league/${encodeURIComponent(league.id)}/`, lastmod: league.generatedAt });
   }
   const body = urls
     .map(

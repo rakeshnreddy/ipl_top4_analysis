@@ -29,10 +29,19 @@ export const leagueIndexUrl = `${import.meta.env.BASE_URL}data/leagues.json`;
 
 const LEAGUE_ID_PATTERN = /^[a-z0-9-]+$/;
 
-/** The league requested with ?league=, if it is a well-formed id. */
-export function leagueIdFromLocation(search: string = window.location.search): string | null {
+/** Canonical paths take precedence; legacy query links remain supported. */
+export function leagueIdFromLocation(search: string = window.location.search, pathname: string = window.location.pathname): string | null {
+  const base = import.meta.env.BASE_URL;
+  const localPath = pathname.startsWith(base) ? pathname.slice(base.length) : '';
+  const pathId = /^league\/([a-z0-9-]+)\/(?:index\.html)?$/.exec(localPath)?.[1];
+  if (pathId) return pathId;
   const requested = new URLSearchParams(search).get('league')?.trim().toLowerCase();
   return requested && LEAGUE_ID_PATTERN.test(requested) ? requested : null;
+}
+
+/** An address with its own static HTML and social preview on either host. */
+export function canonicalLeagueHref(leagueId: string) {
+  return `${import.meta.env.BASE_URL}league/${encodeURIComponent(leagueId)}/`;
 }
 
 /** A league's page. The site root is the landing page, so every league has its own address. */

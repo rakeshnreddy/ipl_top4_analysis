@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { ChevronDown, Moon, Sun } from 'lucide-react';
-import { hubHref, isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex } from '../data/leagues';
+import { ChevronDown, Link2, Moon, Sun } from 'lucide-react';
+import { canonicalLeagueHref, hubHref, isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex } from '../data/leagues';
 import { applyTheme, currentTheme, storedTheme, type Theme } from '../lib/theme';
 
 /** Switches between the light and dark themes; until the reader picks one, the page follows the system. */
@@ -128,6 +128,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
                 <a className="league-menu-home" href={hub}>
                   All live races
                 </a>
+                {currentId && <a className="league-menu-home" href={canonicalLeagueHref(currentId)} title="Open this league’s shareable page"><Link2 aria-hidden="true" size={18} /> League link</a>}
                 <div className="league-search-wrap">
                   <label className="league-search-label" htmlFor={searchId}>Find a league or sport</label>
                   <input className="league-search" id={searchId} onChange={(event) => setSearch(event.target.value)} ref={searchRef} type="search" value={search} placeholder="Premier League, cricket, F1…" />
