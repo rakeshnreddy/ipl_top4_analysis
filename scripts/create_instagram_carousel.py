@@ -21,6 +21,8 @@ DATA_PATH: Path | None = None
 OUTPUT_ROOT = ROOT / "frontend/ipl-analyzer-frontend/public/social/instagram-carousel"
 WIDTH = 1080
 HEIGHT = 1920
+PREVIEW_WIDTH = 720
+PREVIEW_QUALITY = 85
 SAFE_X = 70
 SAFE_BOTTOM = 1800
 DISCLAIMER = "Probabilities exclude NRR calculation. Final qualification outcomes may still change due to NRR."
@@ -167,6 +169,59 @@ def validate_png_dimensions(paths: list[Path], width: int = WIDTH, height: int =
     return warnings
 
 
+def slide_preview_metadata(path: Path, output_root: Path) -> dict[str, Any]:
+    """Create a bounded display preview while leaving the original PNG untouched."""
+    preview = path.with_suffix(".webp")
+    try:
+        with Image.open(path) as image:
+            width = min(PREVIEW_WIDTH, image.width)
+            height = max(1, round(image.height * width / image.width))
+            reusable = False
+            if preview.is_file() and preview.stat().st_mtime_ns >= path.stat().st_mtime_ns:
+                try:
+                    with Image.open(preview) as existing:
+                        reusable = existing.format == "WEBP" and existing.size == (width, height)
+                except OSError:
+                    pass  # A damaged preview can be rebuilt from the preserved PNG.
+            if not reusable:
+                image.convert("RGBA").resize((width, height), Image.Resampling.LANCZOS).save(
+                    preview, format="WEBP", quality=PREVIEW_QUALITY, method=6
+                )
+    except OSError:
+        # The manifest's PNG validation reports damaged originals; previews are optional.
+        return {}
+    return {
+        "previewPath": public_carousel_path(preview, output_root),
+        "previewWidth": width,
+        "previewHeight": height,
+    }
+
+
+def backfill_archived_previews(output_root: Path) -> None:
+    """Enrich an existing archive without replacing its historical provenance."""
+    manifest_path = output_root / "manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return
+    if not isinstance(manifest, dict) or not isinstance(manifest.get("slides"), list):
+        return
+    prefix = "social/instagram-carousel/"
+    changed = False
+    for slide in manifest["slides"]:
+        if not isinstance(slide, dict) or not isinstance(slide.get("path"), str) or not slide["path"].startswith(prefix):
+            continue
+        path = (output_root / slide["path"][len(prefix) :]).resolve()
+        if not path.is_relative_to(output_root.resolve()) or path.suffix.lower() != ".png" or not path.is_file():
+            continue
+        preview = slide_preview_metadata(path, output_root.resolve())
+        if any(slide.get(key) != value for key, value in preview.items()):
+            slide.update(preview)
+            changed = True
+    if changed:
+        manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+
 def build_manifest(
     payload: dict[str, Any],
     output_root: Path = OUTPUT_ROOT,
@@ -192,6 +247,7 @@ def build_manifest(
             "downloadName": f"ipl-playoff-pulse-{latest_date}-{path.stem}.png",
             "imageWidth": WIDTH,
             "imageHeight": HEIGHT,
+            **slide_preview_metadata(path, output_root),
         }
         for path in latest_slides
     ]
@@ -566,8 +622,9 @@ def current_ipl_payload_path() -> Path:
 def main() -> None:
     payload = json.loads(current_ipl_payload_path().read_text(encoding="utf-8"))
     if payload["metadata"].get("season_status") == "complete":
-        # Slides show the live race; once the season is over the latest pack stays as it is.
-        print("IPL season is complete; Reels pack left unchanged.")
+        # Preserve the actual league-stage pack and only add optional display previews.
+        backfill_archived_previews(OUTPUT_ROOT)
+        print("IPL season is complete; original Reels pack preserved, existing previews checked.")
         return
     teams = probability_order(payload)
     output_dir = OUTPUT_ROOT / generated_date_slug(payload)
