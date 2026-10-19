@@ -1,172 +1,110 @@
-/* All-sports home page. Cards here are whole links, so they earn their border. */
-
-.hub-section {
-  display: grid;
-  gap: var(--space-4);
+/* One explorer, with solid league destinations and honest season states. */
+.hub-controls { border-bottom: 1px solid var(--border-strong); display: grid; gap: var(--space-4); padding: var(--space-3) 0 var(--space-5); }
+.hub-search-row { align-items: end; display: flex; gap: var(--space-3); }
+.hub-search { flex: 1; max-width: 560px; min-width: 0; }
+.hub-search label,
+.hub-filters legend { color: var(--text-muted); font-size: var(--text-xs); font-weight: 600; margin-bottom: var(--space-2); }
+.hub-search label { display: block; }
+.hub-search > div { align-items: center; display: flex; position: relative; }
+.hub-search svg { color: var(--text-subtle); left: var(--space-3); pointer-events: none; position: absolute; }
+.hub-search input {
+  background: var(--surface-solid);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-md);
+  min-height: var(--tap);
+  min-width: 0;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-7);
+  width: 100%;
 }
-
-.hub-section > .section-heading {
-  margin-bottom: 0;
-}
-
-.hub-group {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.hub-group h3,
-.hub-finished h3 {
+.hub-search input::placeholder { color: var(--text-subtle); }
+.hub-filters { border: 0; margin: 0; min-width: 0; padding: 0; }
+.hub-filters > div { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.hub-filters button,
+.hub-clear,
+.hub-empty button {
+  align-items: center;
+  background: var(--surface-solid);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
   font-size: var(--text-sm);
+  font-weight: 600;
+  gap: var(--space-2);
+  justify-content: center;
+  min-height: var(--tap);
+  min-width: var(--tap);
+  padding: var(--space-2) var(--space-3);
+  transition: background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), color 140ms var(--ease-out);
 }
-
-.hub-grid {
-  display: grid;
-  gap: var(--space-3);
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-}
-
+.hub-filters button[aria-pressed='true'] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.hub-filters button[aria-pressed='true']::before { content: '✓'; }
+.hub-filters button:hover,
+.hub-clear:hover:not(:disabled),
+.hub-empty button:hover { border-color: var(--accent); color: var(--accent); }
+.hub-clear:disabled { color: var(--text-subtle); cursor: default; }
+.hub-filters button span { font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+.hub-result-count { color: var(--text-subtle); font-size: var(--text-sm); }
+.hub-section { display: grid; gap: var(--space-4); margin-top: var(--space-3); }
+.hub-section > .section-heading { margin-bottom: 0; }
+.hub-group { display: grid; gap: var(--space-2); }
+.hub-group-heading { align-items: baseline; display: flex; gap: var(--space-3); }
+.hub-group-heading h3 { color: var(--text); font-size: var(--text-md); }
+.hub-group-heading > span { color: var(--text-subtle); font-size: var(--text-xs); }
+.hub-grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
 .hub-card {
+  align-content: start;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   background: var(--surface-solid);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-glass);
   color: var(--text);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-2);
-  grid-template-rows: auto auto 1fr auto;
-  padding: var(--space-3) var(--space-4);
+  min-width: 0;
+  padding: var(--space-4);
   text-decoration: none;
-  transition: border-color 160ms var(--ease-out), transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+  transition: border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
-
-.hub-card:visited {
-  color: var(--text);
-}
-
-.hub-card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.hub-card-top {
-  align-items: center;
-  display: flex;
-  gap: var(--space-2);
-  justify-content: space-between;
-}
-
-.hub-card-top strong {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.hub-card-name {
-  color: var(--text-subtle);
-  font-size: var(--text-sm);
-}
-
-.hub-card dl {
-  align-content: start;
-  display: grid;
-  gap: var(--space-1);
-  margin: 0;
-}
-
-.hub-card dl div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-2);
-  justify-content: space-between;
-}
-
-.hub-card dt {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-}
-
-.hub-card dd {
-  font-size: var(--text-sm);
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  margin: 0;
-}
-
+.hub-card:visited { color: var(--text); }
+.hub-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.hub-card-top { align-items: center; display: flex; gap: var(--space-2); justify-content: space-between; order: -1; }
+.hub-card-season { color: var(--text-subtle); font-size: var(--text-xs); font-variant-numeric: tabular-nums; }
+.hub-card > h4 { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; line-height: 1.1; }
+.hub-card-name { color: var(--text-subtle); font-size: var(--text-xs); }
+.hub-card dl { display: grid; gap: var(--space-2); margin: var(--space-2) 0; }
+.hub-card dt { color: var(--text-muted); font-size: var(--text-xs); }
+.hub-card dd { font-size: var(--text-sm); font-variant-numeric: tabular-nums; font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+.hub-card .hub-card-headline { display: grid; gap: var(--space-1); }
+.hub-card .hub-card-headline dd { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; }
+.hub-card-detail { display: flex; flex-wrap: wrap; gap: 0 var(--space-2); justify-content: space-between; }
+.hub-card-empty { color: var(--text-muted); font-size: var(--text-sm); margin: var(--space-2) 0; }
 .hub-card-foot {
   align-items: center;
   border-top: 1px solid var(--border);
   color: var(--text-subtle);
   display: flex;
   font-size: var(--text-xs);
+  gap: var(--space-3);
   justify-content: space-between;
-  padding-top: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-3);
 }
-
-.hub-card-foot svg {
-  color: var(--accent);
-  transition: transform 120ms var(--ease-out);
-}
-
-.hub-card:hover .hub-card-foot svg {
-  transform: translateX(2px);
-}
-
-.hub-finished-groups {
-  display: grid;
-  gap: var(--space-4) var(--space-6);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.hub-finished {
-  display: grid;
-  align-content: start;
-  gap: var(--space-1);
-}
-
-.hub-finished ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.hub-finished li {
-  border-top: 1px solid var(--border);
-}
-
-.hub-finished li:first-child {
-  border-top: 0;
-}
-
-.hub-finished a {
-  align-items: baseline;
-  color: var(--text);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-2);
-  justify-content: space-between;
-  min-height: var(--tap);
-  padding: var(--space-2) 0;
-  text-decoration: none;
-}
-
-.hub-finished a:visited {
-  color: var(--text);
-}
-
-.hub-finished a:hover strong {
-  color: var(--accent);
-}
-
-.hub-finished strong {
-  font-size: var(--text-sm);
-}
-
-.hub-finished span {
-  color: var(--text-subtle);
-  font-size: var(--text-sm);
+.hub-card-foot svg { color: var(--accent); flex: 0 0 auto; }
+.hub-card-final .hub-card-headline dd { font-size: var(--text-xl); }
+.hub-empty { display: grid; gap: var(--space-3); justify-items: start; padding: var(--space-6) 0; }
+.hub-empty p { color: var(--text-muted); font-size: var(--text-sm); }
+@media (max-width: 760px) {
+  .hub-page { gap: var(--space-2); }
+  .hub-page .page-header { gap: var(--space-2); }
+  .hub-page .key-facts div { flex: 1 1 0; min-width: 0; padding: var(--space-2); }
+  .hub-controls { gap: var(--space-2); padding: 0 0 var(--space-3); }
+  .hub-filters legend { line-height: 1.2; margin-bottom: var(--space-1); }
+  .hub-filters > div { flex-wrap: nowrap; overflow-x: auto; padding: 2px 2px var(--space-1); }
+  .hub-filters button { flex: 0 0 auto; }
+  .hub-section { gap: var(--space-2); margin-top: 0; }
 }

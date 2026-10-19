@@ -32,7 +32,7 @@ describe('HubPage', () => {
     open('/?view=hub');
 
     expect(await screen.findByRole('heading', { level: 1, name: 'All Live Races' })).toBeInTheDocument();
-    const live = screen.getByRole('heading', { name: 'Live Races' }).closest('section')!;
+    const live = screen.getByRole('heading', { name: 'In Season' }).closest('section')!;
     const card = within(live).getByRole('link', { name: /Premier League 2026-27/ });
     expect(card).toHaveAttribute('href', '/?league=epl-2026-27');
     expect(card).toHaveTextContent('Title favourite');
@@ -56,8 +56,50 @@ describe('HubPage', () => {
       leagues: hubIndex.leagues.map((league) => (league.id === 'epl-2026-27' ? { ...league, started: false } : league)),
     });
 
-    const live = (await screen.findByRole('heading', { name: 'Live Races' })).closest('section')!;
-    expect(within(live).getByRole('link', { name: /Premier League 2026-27/ })).toHaveTextContent('Pre-season');
+    const upcoming = (await screen.findByRole('heading', { name: 'Upcoming Seasons' })).closest('section')!;
+    expect(within(upcoming).getByRole('link', { name: /Premier League 2026-27/ })).toHaveTextContent('Pre-season');
+    expect(screen.queryByRole('heading', { name: 'In Season' })).not.toBeInTheDocument();
+  });
+
+  it('searches full league names and combines sport and season filters', async () => {
+    open('/?view=hub');
+    const main = await screen.findByTestId('hub-page');
+    fireEvent.change(within(main).getByRole('searchbox', { name: 'Search leagues' }), { target: { value: 'Premier' } });
+    expect(within(main).getByRole('link', { name: /Premier League 2026-27/ })).toBeInTheDocument();
+    expect(within(main).getByRole('link', { name: /IPL 2026/ })).toBeInTheDocument();
+    fireEvent.click(within(main).getByRole('button', { name: /^Football/ }));
+    expect(within(main).queryByRole('link', { name: /IPL 2026/ })).not.toBeInTheDocument();
+    fireEvent.click(within(main).getByRole('button', { name: /^Cricket/ }));
+    fireEvent.change(within(main).getByRole('searchbox', { name: 'Search leagues' }), { target: { value: 'EPL' } });
+    expect(within(main).getByText('No leagues match these filters.')).toBeVisible();
+    expect(within(main).getByRole('button', { name: /^Cricket/ })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(within(main).getByRole('button', { name: 'Clear filters' }));
+    expect(within(main).getByRole('searchbox', { name: 'Search leagues' })).toHaveValue('');
+    fireEvent.click(within(main).getByRole('button', { name: /^Final/ }));
+    expect(within(main).getByRole('link', { name: /IPL 2026/ })).toBeInTheDocument();
+    expect(within(main).queryByRole('link', { name: /Premier League 2026-27/ })).not.toBeInTheDocument();
+  });
+
+  it('keeps upcoming projections separate from the in-season count', async () => {
+    open('/?view=hub', {
+      ...hubIndex,
+      leagues: [...hubIndex.leagues, { ...hubIndex.leagues[0], id: 'nba-2026-27', sport: 'basketball',
+        name: 'National Basketball Association', shortName: 'NBA', started: false }],
+    });
+    const main = await screen.findByTestId('hub-page');
+    const snapshot = within(main).getByLabelText('Site snapshot');
+    expect(within(snapshot).getByText('In season').nextElementSibling).toHaveTextContent('1');
+    expect(within(snapshot).getByText('Upcoming').nextElementSibling).toHaveTextContent('1');
+    fireEvent.click(within(main).getByRole('button', { name: /^Upcoming/ }));
+    expect(within(main).getByRole('link', { name: /NBA 2026-27/ })).toHaveTextContent('Pre-season');
+    expect(within(main).queryByRole('link', { name: /Premier League 2026-27/ })).not.toBeInTheDocument();
+  });
+
+  it('provides a useful empty index state and clear recovery', async () => {
+    open('/?view=hub', { ...hubIndex, leagues: [] });
+    const main = await screen.findByTestId('hub-page');
+    expect(within(main).getByText('No leagues have been published yet.')).toBeVisible();
+    expect(within(main).getByRole('heading', { level: 1, name: 'All Live Races' })).toBeInTheDocument();
   });
 
   it('links league pages back to the hub', async () => {
