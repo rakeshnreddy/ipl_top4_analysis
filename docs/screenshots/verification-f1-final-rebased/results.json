@@ -1,0 +1,318 @@
+{
+  "base": "http://127.0.0.1:5221/ipl_top4_analysis/",
+  "label": "f1-final-rebased",
+  "startedAt": "2026-10-19T15:46:21.721Z",
+  "configuration": {
+    "engines": [
+      "chromium"
+    ],
+    "widths": [
+      375,
+      1280
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "families": [
+      "f1"
+    ],
+    "reducedMotion": "reduce"
+  },
+  "axe": {
+    "available": true,
+    "path": "/Users/Rakesh/.npm/_npx/0f94ee7615faf582/node_modules/axe-core/axe.min.js"
+  },
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 375,
+      "theme": "light",
+      "family": "f1",
+      "url": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/ipl_top4_analysis/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 2026 Title Odds",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-f1-final-rebased/chromium-f1-375-light.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 3
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "chromium",
+      "width": 375,
+      "theme": "dark",
+      "family": "f1",
+      "url": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/ipl_top4_analysis/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 2026 Title Odds",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-f1-final-rebased/chromium-f1-375-dark.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 3
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "theme": "light",
+      "family": "f1",
+      "url": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/ipl_top4_analysis/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Formula 1: fastest lap point scrapped from 2025",
+            "selector": "a",
+            "width": 347.3,
+            "height": 20
+          }
+        ],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 2026 Title Odds",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-f1-final-rebased/chromium-f1-1280-light.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "theme": "dark",
+      "family": "f1",
+      "url": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/ipl_top4_analysis/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5221/ipl_top4_analysis/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Formula 1: fastest lap point scrapped from 2025",
+            "selector": "a",
+            "width": 347.3,
+            "height": 20
+          }
+        ],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 2026 Title Odds",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-f1-final-rebased/chromium-f1-1280-dark.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    }
+  ],
+  "summary": {
+    "cases": 4,
+    "passed": 4,
+    "failed": 0,
+    "axeAvailable": true,
+    "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-f1-final-rebased"
+  },
+  "limits": [
+    "Synthetic browser checks do not establish real-user INP.",
+    "Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.",
+    "Inline prose links are recorded separately from the required 44px standalone controls.",
+    "The route matrix uses current served payload states; it does not inject missing/error/season fixtures."
+  ],
+  "completedAt": "2026-10-19T15:46:33.999Z"
+}
