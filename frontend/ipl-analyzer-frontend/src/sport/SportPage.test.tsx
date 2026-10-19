@@ -119,8 +119,11 @@ describe('SportPage', () => {
     openLeague('/?league=epl-2026-27#team=TOT');
     await screen.findByRole('heading', { name: 'Tottenham Hotspur' });
     await waitFor(() => expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled());
+    const inspector = document.getElementById('team')!;
+    inspector.scrollTop = 400;
     fireEvent.click(within(screen.getByRole('table')).getAllByRole('button')[0]);
     await waitFor(() => expect(screen.getByRole('heading', { name: 'Arsenal' })).toHaveFocus());
+    expect(inspector.scrollTop).toBe(0);
     expect(within(screen.getByRole('table')).getAllByRole('button')[0]).toHaveAttribute('aria-controls', 'team');
   });
 

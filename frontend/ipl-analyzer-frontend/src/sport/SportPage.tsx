@@ -326,7 +326,11 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
     setSelectedKey(key);
     window.history.replaceState(null, '', samePageHref(`#team=${encodeURIComponent(short(key))}`));
     scrollToSection('team');
-    window.setTimeout(() => document.getElementById('team-title')?.focus({ preventScroll: true }), 0);
+    window.setTimeout(() => {
+      const panel = document.getElementById('team');
+      if (panel) panel.scrollTop = 0;
+      document.getElementById('team-title')?.focus({ preventScroll: true });
+    }, 0);
   };
 
   const status = seasonStatus(payload, started);
