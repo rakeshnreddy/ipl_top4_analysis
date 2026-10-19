@@ -193,7 +193,12 @@ function teamKeyFromHash(payload: SportPayload) {
   if (!match) {
     return null;
   }
-  const wanted = decodeURIComponent(match[1]).toLowerCase();
+  let wanted: string;
+  try {
+    wanted = decodeURIComponent(match[1]).toLowerCase();
+  } catch {
+    return null;
+  }
   return payload.standings.find((team) => team.shortName.toLowerCase() === wanted || team.teamKey.toLowerCase() === wanted)?.teamKey ?? null;
 }
 
@@ -206,6 +211,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
 
   useEffect(() => {
     let active = true;
+    setError(null);
     loadSportData(fetch, leagueId)
       .then((data) => {
         if (active) {
@@ -266,10 +272,17 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
       if (key) {
         setSelectedKey(key);
         scrollToSection('team');
+      } else if (['#table', '#fixtures', '#matters', '#team', '#method', '#bracket'].includes(window.location.hash)) {
+        scrollToSection(window.location.hash.slice(1));
       }
     };
     window.addEventListener('hashchange', syncFromHash);
-    return () => window.removeEventListener('hashchange', syncFromHash);
+    window.addEventListener('popstate', syncFromHash);
+    syncFromHash();
+    return () => {
+      window.removeEventListener('hashchange', syncFromHash);
+      window.removeEventListener('popstate', syncFromHash);
+    };
   }, [payload]);
 
   const team = useMemo(() => (payload ? teamLookup(payload) : null), [payload]);
@@ -313,6 +326,11 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
     setSelectedKey(key);
     window.history.replaceState(null, '', samePageHref(`#team=${encodeURIComponent(short(key))}`));
     scrollToSection('team');
+    window.setTimeout(() => {
+      const panel = document.getElementById('team');
+      if (panel) panel.scrollTop = 0;
+      document.getElementById('team-title')?.focus({ preventScroll: true });
+    }, 0);
   };
 
   const status = seasonStatus(payload, started);
@@ -332,7 +350,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
     { href: '#table', label: 'Table' },
     ...(!complete && payload.fixtures.length > 0 ? [{ href: '#fixtures', label: 'Fixtures' }] : []),
     ...(payload.matchesThatMatter.length > 0 ? [{ href: '#matters', label: 'Matches that matter' }] : []),
-    { href: '#team', label: 'Team view' },
+    ...(selected ? [{ href: '#team', label: 'Team view' }] : []),
     { href: '#method', label: 'How it works' },
   ];
 
@@ -346,7 +364,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
         currentLabel={`${payload.league.shortName} ${payload.league.seasonLabel}`}
         index={leagueIndex}
       />
-      <main className="pulse-app sport-page" data-testid="sport-page" id="main">
+      <main className="pulse-app sport-page" data-testid="sport-page" data-sport={payload.league.sport} id="main">
         <PageHeader
           crumb={`${sportName(payload.league.sport)} · ${payload.league.shortName} ${payload.league.seasonLabel}`}
           facts={facts}
@@ -357,11 +375,18 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
             complete
               ? 'The season is over: final table, last results and how each race finished.'
               : started
-                ? `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
+                ? `Updated twice daily · ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
                 : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
           }
           title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Table` : headline(payload)}
         />
+
+        {payload.metadata.warnings.length > 0 && (
+          <aside className="data-note sport-data-note" aria-label="Data notes">
+            <strong>Data note</strong>
+            {payload.metadata.warnings.map((warning) => <p key={warning}>{warning}</p>)}
+          </aside>
+        )}
 
         {payload.bracket && <BracketPanel bracket={payload.bracket} short={short} />}
 
@@ -424,10 +449,13 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                   </tr>
                 </thead>
                 <tbody>
+                  {rows.length === 0 && (
+                    <tr><td colSpan={columnCount} className="sport-empty">No teams have been published for this season yet.</td></tr>
+                  )}
                   {rows.map((row, position) => (
                     <Fragment key={row.teamKey}>
                       {cutoffs?.some((cutoff) => cutoff.after === position) && (
-                        <tr className="cutline" aria-hidden="true">
+                        <tr className="cutline">
                           <td colSpan={columnCount}>{cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
                         </tr>
                       )}
@@ -439,6 +467,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
                         <th scope="row" className="col-team">
                           <button
                             aria-pressed={row.teamKey === selected.teamKey}
+                            aria-controls="team"
                             className="team-button"
                             onClick={(event) => {
                               event.stopPropagation();
@@ -484,7 +513,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
             </p>
           </section>
 
-          <TeamPanel payload={payload} row={selected} short={short} team={team} />
+          {selected && <TeamPanel payload={payload} row={selected} short={short} team={team} />}
         </div>
 
         {!complete && payload.movement && <MovementPanel payload={payload} short={short} />}
@@ -572,7 +601,7 @@ const MovementPanel = ({ payload, short }: { payload: SportPayload; short: Short
     return null;
   }
   const describe = (entry: readonly [string, number] | null) =>
-    entry ? `${short(entry[0])} ${entry[1] > 0 ? '+' : ''}${entry[1].toFixed(1)}` : 'No big change';
+    entry ? `${short(entry[0])} ${entry[1] > 0 ? '+' : ''}${entry[1].toFixed(1)} pp` : 'No big change';
 
   return (
     <section className="panel" aria-labelledby="movement-title">
@@ -601,23 +630,26 @@ const MovementPanel = ({ payload, short }: { payload: SportPayload; short: Short
 const OutcomeBar = ({ fixture, team }: { fixture: SportFixture; team: TeamLookup }) => {
   const home = team(fixture.home);
   const away = team(fixture.away);
-  const segments = Object.entries(fixture.probabilities);
+  const segments = ['home', 'draw', 'away']
+    .filter((key) => fixture.probabilities[key] !== undefined)
+    .map((key) => [key, fixture.probabilities[key]] as const);
   return (
-    <span className="outcome-bar" role="img" aria-label={segments.map(([key, value]) => `${OUTCOME_LABELS[key] ?? key} ${Math.round(value * 100)}%`).join(', ')}>
-      {segments.map(([key, value]) => (
-        <span
-          className={`outcome-${key}`}
-          key={key}
-          style={{
-            width: `${Math.max(value * 100, 6)}%`,
-            backgroundColor: key === 'home' ? home.color : key === 'away' ? away.color : undefined,
-            color: key === 'home' ? readableOn(home.color) : key === 'away' ? readableOn(away.color) : undefined,
-          }}
-        >
-          {Math.round(value * 100)}%
-        </span>
-      ))}
-    </span>
+    <div className="fixture-forecast">
+      <span className="outcome-bar" role="img" aria-label={segments.map(([key, value]) => `${OUTCOME_LABELS[key]} ${formatChance(value * 100)}`).join(', ')}>
+        {segments.map(([key, value]) => (
+          <span className={`outcome-${key}`} key={key} style={{ width: `${value * 100}%`,
+            backgroundColor: key === 'home' ? home.color : key === 'away' ? away.color : undefined }} />
+        ))}
+      </span>
+      <dl className="outcome-labels">
+        {segments.map(([key, value]) => (
+          <div key={key}>
+            <dt>{key === 'home' ? home.shortName : key === 'away' ? away.shortName : 'Draw'}</dt>
+            <dd>{formatChance(value * 100)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 };
 
@@ -737,6 +769,26 @@ const MattersPanel = ({ payload, short }: { payload: SportPayload; short: ShortN
           <small>
             {short(match.team)}&apos;s {match.tierLabel.toLowerCase()} chance after each result
           </small>
+          <div className="conditional-summary">
+            <strong>{match.swing.toFixed(1)} pp</strong>
+            <span>percentage-point swing</span>
+          </div>
+          <p className="conditional-scale">Chance scale: 0–100%</p>
+          <div className="conditional-track" aria-hidden="true">
+            {(() => {
+              const values = [match.ifHome, match.ifDraw, match.ifAway].filter((value): value is number => typeof value === 'number');
+              if (values.length === 0) return null;
+              const low = Math.min(...values);
+              return <span className="conditional-range" style={{ left: `${low}%`, width: `${Math.max(...values) - low}%` }} />;
+            })()}
+            {[
+              { label: 'home', value: match.ifHome },
+              { label: 'draw', value: match.ifDraw },
+              { label: 'away', value: match.ifAway },
+            ].filter((item) => typeof item.value === 'number').map((item) => (
+              <span className={`conditional-dot conditional-${item.label}`} key={item.label} style={{ left: `${item.value}%` }} />
+            ))}
+          </div>
           <dl>
             <div>
               <dt>{short(match.home)} win</dt>
@@ -790,7 +842,9 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
   const complete = isSeasonComplete(payload);
   const positions = payload.analysis.positions?.[row.teamKey] ?? [];
   const expected = payload.analysis.expected?.[row.teamKey];
-  const peak = Math.max(...positions, 1);
+  const peak = Math.max(...positions, 0);
+  const scaleMax = Math.min(100, Math.max(10, Math.ceil(peak / 10) * 10));
+  const modalPlace = positions.indexOf(peak) + 1;
   const count = payload.standings.length;
   const next = payload.fixtures.filter((fixture) => fixture.home === row.teamKey || fixture.away === row.teamKey).slice(0, 5);
   const recent = payload.results.filter((result) => result.home === row.teamKey || result.away === row.teamKey).slice(0, 5);
@@ -812,7 +866,7 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
         <span aria-hidden="true" className="team-badge" style={{ backgroundColor: meta.color, color: readableOn(meta.color, meta.textColor) }}>
           {row.shortName}
         </span>
-        <h2 id="team-title">{row.fullName}</h2>
+        <h2 id="team-title" tabIndex={-1}>{row.fullName}</h2>
       </div>
 
       <dl className="team-facts">
@@ -863,28 +917,31 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
             {positionLabel}
             <span className="visually-hidden"> chances for {row.shortName}</span>
           </h3>
+          <p className="distribution-takeaway">Most likely: {modalPlace}{ordinalSuffix(modalPlace)} · {formatChance(peak)}</p>
+          <p className="distribution-scale">Scale: 0–{scaleMax}% · adaptive</p>
           <div className="position-bars" aria-hidden="true">
             {positions.map((value, index) => {
               const place = index + 1;
               const zone = placeZone(place);
               return (
                 <span className={`position-bar ${zone}`} key={place} title={`${place}${ordinalSuffix(place)}: ${formatChance(value)}`}>
-                  <span style={{ height: `${Math.max((value / peak) * 100, value > 0 ? 3 : 0)}%` }} />
+                  <span style={{ height: `${(value / scaleMax) * 100}%` }} />
                   <small>{place}</small>
                 </span>
               );
             })}
           </div>
-          <ul className="visually-hidden">
-            {positions.map((value, index) =>
-              value > 0 ? (
-                <li key={index}>
-                  {index + 1}
-                  {ordinalSuffix(index + 1)}: {formatChance(value)}
-                </li>
-              ) : null,
-            )}
-          </ul>
+          <details className="distribution-values">
+            <summary>See every position chance</summary>
+            <dl>
+              {positions.map((value, index) => (
+                <div key={index}>
+                  <dt>{index + 1}{ordinalSuffix(index + 1)}</dt>
+                  <dd>{value >= 99.95 ? formatChance(value) : `${value}%`}</dd>
+                </div>
+              ))}
+            </dl>
+          </details>
         </figure>
       )}
 
@@ -902,9 +959,9 @@ const TeamPanel = ({ payload, row, short, team }: { payload: SportPayload; row: 
                     {home ? 'vs' : '@'} <strong>{short(home ? fixture.away : fixture.home)}</strong> · {formatDay(fixture.date)}
                   </span>
                   <small>
-                    Win {Math.round(win * 100)}%
-                    {fixture.probabilities.draw !== undefined && ` · Draw ${Math.round(fixture.probabilities.draw * 100)}%`} · Loss{' '}
-                    {Math.round(loss * 100)}%
+                    Win {formatChance(win * 100)}
+                    {fixture.probabilities.draw !== undefined && ` · Draw ${formatChance(fixture.probabilities.draw * 100)}`} · Loss{' '}
+                    {formatChance(loss * 100)}
                   </small>
                 </li>
               );
