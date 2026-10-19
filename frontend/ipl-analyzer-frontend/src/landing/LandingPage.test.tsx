@@ -38,7 +38,7 @@ describe('LandingPage', () => {
 
     expect(await screen.findByRole('heading', { level: 1, name: /Every race.*In the balance/ })).toBeInTheDocument();
     const feature = await screen.findByRole('link', { name: 'Explore the title race' });
-    expect(feature).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(feature).toHaveAttribute('href', '/league/epl-2026-27/');
     const raceFeature = feature.closest('section')!;
     expect(within(raceFeature).getByText('81%')).toBeInTheDocument();
     expect(raceFeature.querySelector('.landing-feature-track > span')).toHaveStyle({ width: '81.2%' });
@@ -97,7 +97,7 @@ describe('LandingPage', () => {
 
   it('keeps direct access when the extra preview payload is malformed', async () => {
     open('/', index, { analysis: { probabilities: {} } });
-    expect(await screen.findByRole('link', { name: 'Explore this season' })).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(await screen.findByRole('link', { name: 'Explore this season' })).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
     expect(screen.queryByText('0–100% scale')).not.toBeInTheDocument();
   });
