@@ -283,11 +283,17 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
         const entries = (JSON.parse(readFileSync(resolve(publicDir, 'data/leagues.json'), 'utf8')) as { leagues: LeagueEntry[] }).leagues;
         this.emitFile({ type: 'asset', fileName: 'social/og/playoff-pulse.png', source: renderSocialPng(renderHomeOgSvg(entries.length, new Set(entries.map((entry) => entry.sport ?? 'cricket')).size)) });
         const homeImage = new URL('social/og/playoff-pulse.png', site).href;
-        const fontPreloads = Object.keys(bundle).filter((file) => /(?:barlow-semi-condensed-latin-700-normal|ibm-plex-sans-latin-wght-normal)[^/]*\.woff2$/.test(file)).map((file) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${escapeHtml(base + file)}" />`).join('\n');
+        const fontFiles = Object.keys(bundle).filter((file) => /(?:barlow-semi-condensed-latin-700-normal|ibm-plex-sans-latin-wght-normal)[^/]*\.woff2$/.test(file));
+        const fontTag = (file: string) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${escapeHtml(base + file)}" />`;
+        const fontPreloads = fontFiles.map(fontTag).join('\n');
         const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
         template.source = homeTemplate;
         const share = bundle['share.html'];
-        if (share?.type === 'asset') share.source = String(share.source).replace('</head>', `${fontPreloads}\n</head>`);
+        if (share?.type === 'asset') {
+          const existing = String(share.source);
+          const missing = fontFiles.filter((file) => !existing.includes(`href="${escapeHtml(base + file)}"`)).map(fontTag).join('\n');
+          share.source = existing.replace('</head>', `${missing}\n</head>`);
+        }
         for (const entry of entries) {
           if (!validId.test(entry.id) || entry.path !== `data/${entry.id}.json`) throw new Error(`Unsafe league path: ${entry.id}`);
           const payload = JSON.parse(readFileSync(resolve(publicDir, entry.path), 'utf8')) as LeaguePayload;

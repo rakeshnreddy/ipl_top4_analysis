@@ -6,7 +6,7 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 ## What The Site Shows
 
-The site root is a landing page. It says what the site does, lists the biggest live races from the data, shows every league by sport and explains how the odds are made. The all-sports hub is at `/?view=hub`: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. Every league has its own address, `/?league=<id>`, and the header's Leagues menu links to all of them. Light and dark themes follow the system, and the header's theme button saves a choice; see DESIGN.md.
+The site root is a landing page. It says what the site does, lists the biggest live races from the data, shows every league by sport and explains how the odds are made. The all-sports hub is at `/?view=hub`: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. Normal league links use the canonical `/league/<id>/` address; legacy `/?league=<id>` links still open the same interactive league. Light and dark themes follow the system, and the header's theme button saves a choice; see DESIGN.md.
 
 Cricket pages, during the league stage:
 
@@ -84,7 +84,7 @@ venv/bin/python extract_table.py --league wpl-2026
 venv/bin/python extract_table.py --league all --source cricsheet
 ```
 
-`--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. Each league page is at `/?league=<id>`; the site root is the landing page.
+`--source auto` (the default) uses CricketData when a league configures it and Cricsheet otherwise. Each league page is at `/league/<id>/`; the site root is the landing page.
 
 Seasons roll forward on their own: once a competition's newest configured season is over, the next one is created from it in memory (same teams and rules, dates a year later and marked tentative, no fixed CricketData series id), so `--league active` keeps building new seasons without new files. CricketData finds the new series by name and season label. When a season changes teams, format or dates, add a real config for it; the first build of a rolled season reports a team mismatch as a warning.
 
@@ -475,6 +475,9 @@ Cloudflare Pages should serve these files directly from the static build:
 
 - `/`
 - `/share.html`
+- `/league/<id>/index.html`: one canonical source document per published league
+- `/social/og/<id>.png`: its data-derived 1200×630 social preview
+- `/manifest.webmanifest` and `/icons/`: installation metadata and app icons
 - `/data/ipl-2026.json`
 - `/social/instagram-carousel/manifest.json`
 - `/social/instagram-carousel/latest-overview.png`
@@ -483,6 +486,10 @@ Cloudflare Pages should serve these files directly from the static build:
 - `/sitemap.xml`: the home page and every published league page, written at build time when `SITE_URL` is set (the GitHub Pages workflows take it from the Pages configuration; set it for a Cloudflare or custom-domain build too)
 
 The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#standings`, `#top4`, `#playoffs`, or `#deep-dive`.
+
+The build reads the league index and real payloads to generate every league's HTML and PNG (currently 44 of each), canonical metadata, JSON-LD and sitemap entries. Source HTML includes a meaningful `<noscript>` snapshot with standings, facts, source notices and model notes; Formula 1 includes both championship tables. The interactive React app is client-rendered, not React SSR or hydration. Keeping the snapshot in `<noscript>` prevents a large table flashing before the loading state. Legacy query links retain generic initial social previews because a static host cannot vary HTML by query; use canonical paths when sharing.
+
+Build-only `@resvg/resvg-js` renders previews with the existing Fontsource fonts. The build preloads critical Latin fonts and the canonical page's route, styles and data to shorten request discovery. The web manifest provides standalone installation metadata with icons; no service worker or offline odds cache is installed. Both the root deployment and GitHub Pages subpath use the same build commands above.
 
 `public/_headers` keeps hashed Vite assets cacheable while giving canonical JSON and latest social assets short freshness windows.
 
