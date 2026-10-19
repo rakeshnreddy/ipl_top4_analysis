@@ -137,3 +137,25 @@
   max-width: 80ch;
   padding-left: var(--space-5);
 }
+
+/* Timing boards: coral race context, solid planes and crisp tabular points. */
+.f1-page .page-header h1 { font-size:clamp(2rem,3vw,3rem); }
+.f1-championships { display:grid; gap:var(--space-4); min-width:0; align-items:start; }
+.f1-championships > * { min-width:0; }
+.f1-table tbody tr:first-child .is-strong { color:var(--gold); }
+.f1-table td.is-strong { font-family:var(--font-display); font-size:var(--text-lg); }
+.f1-gap-grid { display:grid; gap:var(--space-6); }
+.f1-gap-plot h3 { color:var(--sport-accent); font-family:var(--font-display); font-size:var(--text-lg); }
+.f1-gap-plot > p { color:var(--text-subtle); font-size:var(--text-xs); margin:4px 0 16px; }
+.f1-gap-plot dl { display:grid; gap:var(--space-3); margin:0; }
+.f1-gap-plot dl > div { display:grid; grid-template-columns:88px minmax(0,1fr); align-items:center; gap:var(--space-3); }
+.f1-gap-plot dt { font-size:var(--text-sm); font-weight:600; overflow-wrap:anywhere; }
+.f1-gap-plot dd { display:grid; grid-template-columns:minmax(0,1fr) 38px; align-items:center; gap:var(--space-3); margin:0; }
+.f1-gap-plot strong { font-size:var(--text-sm); font-variant-numeric:tabular-nums; text-align:right; }
+.f1-gap-track { background:var(--surface-2); border-bottom:1px solid var(--border-strong); height:12px; }
+.f1-gap-track > span { background:var(--sport-accent); display:block; height:100%; }
+.f1-events article { border-radius:var(--radius-sm); padding:var(--space-4); }
+.f1-events h3 { font-family:var(--font-display); font-size:var(--text-xl); margin:var(--space-1) 0; }
+.f1-results > li { min-height:76px; }
+@media (min-width:1100px) { .f1-championships { grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); } }
+@media (min-width:760px) { .f1-gap-grid { grid-template-columns:1fr 1fr; } }
