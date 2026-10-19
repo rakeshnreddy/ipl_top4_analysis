@@ -102,6 +102,13 @@ describe('LandingPage', () => {
     expect(screen.queryByText('0–100% scale')).not.toBeInTheDocument();
   });
 
+  it('keeps source warnings beside the hero forecast instead of hiding provenance', async () => {
+    open('/', index, { ...footballPayload, metadata: { ...footballPayload.metadata, warnings: ['A scheduled result is missing from the source.'] } });
+    const note = await screen.findByText('Data notes (1)');
+    fireEvent.click(note);
+    expect(screen.getByText('A scheduled result is missing from the source.')).toBeVisible();
+  });
+
   it('switches between light and dark and remembers the choice', async () => {
     open();
 

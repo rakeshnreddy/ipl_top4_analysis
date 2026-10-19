@@ -17,6 +17,8 @@ interface RacePreview {
   id: string;
   generatedAt: string;
   simulations: number;
+  warnings: string[];
+  freshness: string;
   teams: { key: string; name: string; chance: number; color: string }[];
 }
 
@@ -37,6 +39,8 @@ function titlePreview(payload: SportPayload): RacePreview | null {
     id: payload.league.id,
     generatedAt: payload.metadata.generated_at,
     simulations: payload.analysis.simulations,
+    warnings: payload.metadata.warnings,
+    freshness: payload.metadata.data_freshness_status,
     teams,
   } : null;
 }
@@ -87,6 +91,8 @@ const RaceFeature = ({ league, preview }: { league: LeagueSummary | undefined; p
             ))}
           </ol>
           <p className="landing-feature-note">Title chances · 0–100% scale<br />{preview.simulations.toLocaleString()} simulated seasons · {formatGeneratedAt(preview.generatedAt)}</p>
+          {preview.warnings.length > 0 && <details className="landing-feature-warning"><summary>Data notes ({preview.warnings.length})</summary><ul>{preview.warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></details>}
+          {preview.warnings.length === 0 && preview.freshness === 'stale' && <p className="landing-feature-note">Source data is marked stale. Check the league’s data notes before interpreting these odds.</p>}
         </div>
       ) : (
         <div className="landing-feature-body landing-feature-fallback">
