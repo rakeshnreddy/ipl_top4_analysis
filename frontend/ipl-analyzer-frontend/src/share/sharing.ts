@@ -1,4 +1,5 @@
 import type { IplSeasonPayload } from '../data/iplData';
+import { formatChance } from '../sport/format';
 import {
   formatGeneratedDate,
   formatNrr,
@@ -13,16 +14,30 @@ export type ShareKind = 'instagram' | 'x' | 'whatsapp';
 
 /** "IPL 2027" and "#IPL2027" for the season on screen. */
 const seasonOf = (payload: IplSeasonPayload) => payload.league?.seasonLabel ?? String(payload.metadata.season);
+const usesMonteCarlo = (payload: IplSeasonPayload) => payload.analysis.method.toLowerCase().includes('monte carlo');
+const qualificationChance = (payload: IplSeasonPayload, value: number) =>
+  usesMonteCarlo(payload) ? formatChance(value) : formatPercent(value);
+
+// A fixed Night Signal palette keeps the downloaded image independent of page theme.
+const exportPalette = {
+  ground: '#0b1016',
+  plane: '#151e28',
+  inset: '#1b2632',
+  ink: '#f2f5f8',
+  secondary: '#b7c4d1',
+  border: '#364758',
+  citron: '#d4f75b',
+};
 
 export function shareTexts(payload: IplSeasonPayload): Record<ShareKind, string> {
   const snapshot = raceSnapshot(payload);
   const season = seasonOf(payload);
   const topFour = snapshot.currentTop.map((team) => team.shortName).join(', ');
   const cutline = snapshot.cutlineTeam
-    ? `${snapshot.cutlineTeam.shortName} (${formatPercent(tierProbability(payload, snapshot.cutlineTeam.teamKey, 4))})`
+    ? `${snapshot.cutlineTeam.shortName} (${qualificationChance(payload, tierProbability(payload, snapshot.cutlineTeam.teamKey, 4))})`
     : 'Unavailable';
   const challenger = snapshot.nearestChallenger
-    ? `${snapshot.nearestChallenger.shortName} (${formatPercent(tierProbability(payload, snapshot.nearestChallenger.teamKey, 4))})`
+    ? `${snapshot.nearestChallenger.shortName} (${qualificationChance(payload, tierProbability(payload, snapshot.nearestChallenger.teamKey, 4))})`
     : 'Unavailable';
   const date = formatGeneratedDate(payload.metadata.generated_at);
 
@@ -40,9 +55,12 @@ export async function copyToClipboard(text: string) {
     const element = document.createElement('textarea');
     element.value = text;
     document.body.appendChild(element);
-    element.select();
-    document.execCommand('copy');
-    document.body.removeChild(element);
+    try {
+      element.select();
+      if (!document.execCommand('copy')) throw new Error('Clipboard copy was unavailable.');
+    } finally {
+      document.body.removeChild(element);
+    }
   }
 }
 
@@ -52,7 +70,8 @@ export function raceCaption(payload: IplSeasonPayload) {
   const chase = ordered.slice(4, 7).map((team) => team.shortName).join(', ');
 
   const season = seasonOf(payload);
-  return `IPL ${season} Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. Exact all-combinations model, NRR shown when available. #IPL${season} #IPLPlayoffs`;
+  const method = usesMonteCarlo(payload) ? 'Monte Carlo result scenarios' : 'Exact all-combinations model';
+  return `IPL ${season} Top 4 race: ${topFour} hold the playoff line right now. ${chase} are chasing. ${method}, equal-strength teams. NRR is not simulated. #IPL${season} #IPLPlayoffs`;
 }
 
 export function drawRoundedRect(
@@ -63,6 +82,7 @@ export function drawRoundedRect(
   height: number,
   radius: number,
 ) {
+  radius = Math.max(0, Math.min(radius, width / 2, height / 2));
   context.beginPath();
   context.moveTo(x + radius, y);
   context.lineTo(x + width - radius, y);
@@ -77,6 +97,13 @@ export function drawRoundedRect(
 }
 
 export async function exportRacePng(payload: IplSeasonPayload) {
+  if (document.fonts) {
+    await Promise.all([
+      document.fonts.load('700 84px "Barlow Semi Condensed"'),
+      document.fonts.load('500 22px "IBM Plex Sans Variable"'),
+    ]);
+    await document.fonts.ready;
+  }
   const teams = [...payload.standings].sort(rankingSort);
   const canvas = document.createElement('canvas');
   const width = 1080;
@@ -88,26 +115,25 @@ export async function exportRacePng(payload: IplSeasonPayload) {
     throw new Error('Canvas export is unavailable in this browser.');
   }
 
-  const background = context.createLinearGradient(0, 0, width, height);
-  background.addColorStop(0, '#0b1020');
-  background.addColorStop(0.5, '#182036');
-  background.addColorStop(1, '#24151b');
-  context.fillStyle = background;
+  context.fillStyle = exportPalette.ground;
   context.fillRect(0, 0, width, height);
 
-  context.fillStyle = 'rgba(255,255,255,0.09)';
-  drawRoundedRect(context, 54, 54, 972, 1242, 34);
+  context.fillStyle = exportPalette.plane;
+  drawRoundedRect(context, 54, 54, 972, 1242, 16);
   context.fill();
-  context.strokeStyle = 'rgba(255,255,255,0.2)';
+  context.strokeStyle = exportPalette.border;
   context.lineWidth = 2;
   context.stroke();
 
-  context.fillStyle = '#facc15';
-  context.font = '800 32px Inter, Arial, sans-serif';
+  context.fillStyle = exportPalette.citron;
+  context.font = '700 32px "Barlow Semi Condensed", sans-serif';
   context.fillText('IPL PLAYOFF PULSE', 94, 122);
-  context.fillStyle = '#ffffff';
-  context.font = '900 84px Inter, Arial, sans-serif';
+  context.fillStyle = exportPalette.ink;
+  context.font = '700 84px "Barlow Semi Condensed", sans-serif';
   context.fillText('Top 4 Odds', 94, 220);
+  context.fillStyle = exportPalette.secondary;
+  context.font = '500 22px "IBM Plex Sans Variable", sans-serif';
+  context.fillText(`IPL ${seasonOf(payload)} · Qualification probability · 0–100% scale`, 94, 264);
 
   const y = 300;
   teams.forEach((team, index) => {
@@ -115,38 +141,44 @@ export async function exportRacePng(payload: IplSeasonPayload) {
     const rowHeight = 70;
     const rowY = y + index * 78;
 
-    context.fillStyle = index < 4 ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.08)';
-    drawRoundedRect(context, 94, rowY, 892, rowHeight, 20);
+    context.fillStyle = index < 4 ? exportPalette.inset : exportPalette.ground;
+    drawRoundedRect(context, 94, rowY, 892, rowHeight, 12);
     context.fill();
 
     context.fillStyle = teamColor(team.teamKey);
     drawRoundedRect(context, 116, rowY + 18, 34, 34, 17);
     context.fill();
 
-    context.fillStyle = '#ffffff';
-    context.font = '900 30px Inter, Arial, sans-serif';
+    context.fillStyle = exportPalette.ink;
+    context.font = '700 30px "Barlow Semi Condensed", sans-serif';
     context.fillText(String(team.rank), 176, rowY + 43);
     context.fillText(team.shortName, 234, rowY + 43);
 
-    context.fillStyle = 'rgba(255,255,255,0.62)';
-    context.font = '700 22px Inter, Arial, sans-serif';
+    context.fillStyle = exportPalette.secondary;
+    context.font = '500 22px "IBM Plex Sans Variable", sans-serif';
     context.fillText(`${team.points} pts  ${formatNrr(team.nrr)}`, 350, rowY + 43);
 
-    context.fillStyle = 'rgba(255,255,255,0.18)';
+    context.fillStyle = exportPalette.border;
     drawRoundedRect(context, 620, rowY + 24, 220, 18, 9);
     context.fill();
 
-    context.fillStyle = teamColor(team.teamKey);
-    drawRoundedRect(context, 620, rowY + 24, Math.max(8, probability * 2.2), 18, 9);
-    context.fill();
+    const probabilityWidth = 220 * probability / 100;
+    if (probabilityWidth > 0) {
+      context.fillStyle = teamColor(team.teamKey);
+      drawRoundedRect(context, 620, rowY + 24, probabilityWidth, 18, 9);
+      context.fill();
+    }
 
-    context.fillStyle = '#ffffff';
-    context.font = '900 30px Inter, Arial, sans-serif';
-    context.fillText(formatPercent(probability), 858, rowY + 45);
+    context.fillStyle = exportPalette.ink;
+    context.font = '700 30px "Barlow Semi Condensed", sans-serif';
+    context.fillText(qualificationChance(payload, probability), 858, rowY + 45);
   });
 
-  context.fillStyle = 'rgba(255,255,255,0.58)';
-  context.font = '600 22px Inter, Arial, sans-serif';
+  context.fillStyle = exportPalette.secondary;
+  context.font = '500 22px "IBM Plex Sans Variable", sans-serif';
+  const method = usesMonteCarlo(payload) ? 'Monte Carlo result scenarios' : 'Exact result combinations';
+  context.fillText(`${method} · Equal-strength teams`, 94, 1166);
+  context.fillText('NRR shown in the table; NRR is not simulated.', 94, 1202);
   context.fillText(formatGeneratedDate(payload.metadata.generated_at), 94, 1252);
 
   const blob = await new Promise<Blob>((resolve, reject) => {

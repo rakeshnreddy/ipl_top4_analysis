@@ -5,6 +5,9 @@ export interface ReelsSlide {
   downloadName: string;
   imageWidth: number;
   imageHeight: number;
+  previewPath?: string;
+  previewWidth?: number;
+  previewHeight?: number;
 }
 
 export interface ReelsManifest {

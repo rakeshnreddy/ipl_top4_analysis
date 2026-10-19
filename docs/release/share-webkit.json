@@ -1,0 +1,192 @@
+{
+  "sourceCommit": "f345dbf81a01e75bfa7b63eab840678bdfd2faca",
+  "baseCommit": "247f6898209622e95b05a77291c7c821198fe175",
+  "startedAt": "2026-10-19T20:39:10.510Z",
+  "completedAt": "2026-10-19T20:39:15.782Z",
+  "base": "http://127.0.0.1:5222/ipl_top4_analysis/",
+  "configuration": {
+    "engines": [
+      "webkit"
+    ],
+    "widths": [
+      375,
+      1280
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "families": [
+      "share"
+    ],
+    "reducedMotion": "reduce"
+  },
+  "summary": {
+    "cases": 4,
+    "passed": 4,
+    "failed": 0,
+    "axeAvailable": true,
+    "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-share-release-webkit"
+  },
+  "axeAvailable": true,
+  "cases": [
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "passed": true,
+      "overflow": false,
+      "smallText": 0,
+      "smallTargets": 0,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "httpErrors": [],
+      "failedRequests": [],
+      "axeViolations": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "screenshot": "docs/screenshots/verification-share-release-webkit/webkit-share-375-light.png"
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "passed": true,
+      "overflow": false,
+      "smallText": 0,
+      "smallTargets": 0,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "httpErrors": [],
+      "failedRequests": [],
+      "axeViolations": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "screenshot": "docs/screenshots/verification-share-release-webkit/webkit-share-375-dark.png"
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "passed": true,
+      "overflow": false,
+      "smallText": 0,
+      "smallTargets": 0,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "httpErrors": [],
+      "failedRequests": [],
+      "axeViolations": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "screenshot": "docs/screenshots/verification-share-release-webkit/webkit-share-1280-light.png"
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "passed": true,
+      "overflow": false,
+      "smallText": 0,
+      "smallTargets": 0,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "httpErrors": [],
+      "failedRequests": [],
+      "axeViolations": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "screenshot": "docs/screenshots/verification-share-release-webkit/webkit-share-1280-dark.png"
+    }
+  ],
+  "limits": [
+    "Synthetic browser checks do not establish real-user INP.",
+    "Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.",
+    "Inline prose links are recorded separately from the required 44px standalone controls.",
+    "The route matrix uses current served payload states; it does not inject missing/error/season fixtures."
+  ]
+}
