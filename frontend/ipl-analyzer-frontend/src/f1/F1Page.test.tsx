@@ -26,7 +26,7 @@ describe('F1Page', () => {
   it('routes a motorsport league to the F1 page with both championship tables', async () => {
     openF1();
 
-    expect(await screen.findByRole('heading', { name: "F1 Title Odds: Drivers' & Constructors' Championships" })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: "F1 2026 Title Odds" })).toBeInTheDocument();
     expect(screen.getByTestId('f1-page')).toBeInTheDocument();
 
     const drivers = tableRows(/Drivers' standings/);
@@ -114,6 +114,15 @@ describe('F1Page', () => {
     expect(screen.queryByRole('heading', { name: 'Next Races' })).not.toBeInTheDocument();
     expect(within(tableRows(/Drivers' standings/)[1]).getByText("Drivers' title: yes")).toBeInTheDocument();
     expect(within(tableRows(/Constructors' standings/)[1]).getByText("Constructors' title: yes")).toBeInTheDocument();
+  });
+
+  it('shows exact points gaps with a named zero baseline', async () => {
+    openF1();
+    const section = (await screen.findByRole('heading', { name: 'The Points Gap' })).closest('section')!;
+    expect(within(section).getByText(/Points behind VER/)).toBeInTheDocument();
+    expect(within(section).getByText(/Points behind MER/)).toBeInTheDocument();
+    expect(section.querySelector('.f1-gap-plot dd strong')).toHaveTextContent('0');
+    expect(section.querySelector('.f1-gap-track > span')).toHaveStyle({ width: '0%' });
   });
 
   it('shows an error when the payload is malformed', async () => {

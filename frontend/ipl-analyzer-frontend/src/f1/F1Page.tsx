@@ -74,6 +74,14 @@ const Named = ({ team, code, name }: { team: F1Team | undefined; code: string; n
   </span>
 );
 
+/** Points gaps use a zero baseline, with exact text beside every mark. */
+const GapPlot = ({ rows, label }: { rows: { shortName: string; fullName: string; points: number }[]; label: string }) => {
+  const leaders = [...rows].sort((a, b) => b.points - a.points).slice(0, 5);
+  const first = leaders[0]?.points ?? 0;
+  const scale = Math.max(1, ...leaders.map((row) => first - row.points));
+  return <div className="f1-gap-plot"><h3>{label}</h3><p>Points behind {leaders[0]?.shortName ?? 'the leader'} · shorter is closer</p><dl>{leaders.map((row) => <div key={row.shortName}><dt title={row.fullName}>{row.shortName}</dt><dd><span className="f1-gap-track" aria-hidden="true"><span style={{ width: `${((first - row.points) / scale) * 100}%` }} /></span><strong>{first - row.points}<span className="visually-hidden"> points behind the leader</span></strong></dd></div>)}</dl></div>;
+};
+
 const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueIndex | null }) => {
   const [payload, setPayload] = useState<F1Payload | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -130,6 +138,14 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
     });
   }, [payload]);
 
+  useEffect(() => {
+    if (!payload) return;
+    const id = window.location.hash.slice(1);
+    if (!['drivers', 'constructors', 'gaps', 'races', 'results', 'method'].includes(id)) return;
+    const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }));
+    return () => cancelAnimationFrame(frame);
+  }, [payload]);
+
   const teams = useMemo(() => new Map((payload?.league.teams ?? []).map((team) => [team.key, team])), [payload]);
 
   if (error) {
@@ -183,6 +199,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
   const sections = [
     { href: '#drivers', label: 'Drivers' },
     { href: '#constructors', label: 'Constructors' },
+    ...(started ? [{ href: '#gaps', label: 'Points gaps' }] : []),
     ...(!complete && payload.events.length > 0 ? [{ href: '#races', label: 'Next races' }] : []),
     ...(payload.results.length > 0 ? [{ href: '#results', label: 'Results' }] : []),
     { href: '#method', label: 'How it works' },
@@ -206,12 +223,14 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
             complete
               ? 'The season is over: the final standings and the last results.'
               : started
-                ? `Updated daily from ${payload.analysis.simulations.toLocaleString()} simulated seasons: ${races} race${races === 1 ? '' : 's'} and ${payload.events.length - races} sprint${payload.events.length - races === 1 ? '' : 's'} to go.`
+                ? `${races} races and ${payload.events.length - races} sprints remaining. Odds from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
                 : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
           }
-          title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Standings` : (payload.league.headline ?? `${payload.league.name} Title Odds`)}
+          title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Standings` : `${payload.league.shortName} ${payload.league.seasonLabel} Title Odds`}
         />
 
+        {payload.metadata.warnings.length > 0 && <p className="data-note" role="status">Data note: {payload.metadata.warnings.join(' ')}</p>}
+        <div className="f1-championships">
         <section className="panel" id="drivers" aria-labelledby="drivers-title">
           <div className="section-heading">
             <h2 id="drivers-title">Drivers' Championship</h2>
@@ -346,6 +365,9 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
             </table>
           </div>
         </section>
+
+        </div>
+        {started && <section className="panel" id="gaps" aria-labelledby="gaps-title"><div className="section-heading"><h2 id="gaps-title">The Points Gap</h2><p>Current results, separate from forecast odds</p></div><div className="f1-gap-grid"><GapPlot rows={payload.standings} label="Drivers" /><GapPlot rows={payload.constructorStandings} label="Constructors" /></div></section>}
 
         {!complete && payload.events.length > 0 && (
           <section className="panel" id="races" aria-labelledby="races-title">
