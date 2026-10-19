@@ -195,7 +195,7 @@ describe('SportPage', () => {
     expect(within(nav).getByText('Football')).toBeInTheDocument();
     expect(within(nav).getByText('Cricket')).toBeInTheDocument();
     expect(within(nav).getByRole('link', { name: /Premier League 2026-27/ })).toHaveAttribute('aria-current', 'page');
-    expect(within(nav).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
+    expect(within(nav).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
   });
 });
 

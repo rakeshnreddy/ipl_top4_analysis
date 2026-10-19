@@ -22,7 +22,7 @@ describe('static league source documents', () => {
         const page = describeLeague(entry, payload, base);
         const document = new DOMParser().parseFromString(renderLeagueHtml(template, page), 'text/html');
         expect(document.querySelector('h1')?.textContent).toBe(page.heading);
-        expect(document.querySelectorAll('tbody tr').length).toBe(payload.standings.length || 1);
+        expect(document.querySelectorAll('table')[0].querySelectorAll('tbody tr').length).toBe(payload.standings.length || 1);
         if (payload.standings[0]) expect(document.querySelector('tbody')?.textContent).toContain(payload.standings[0].fullName);
         expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${base}league/${entry.id}/`);
         expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(`${base}social/og/${entry.id}.png`);
@@ -52,6 +52,37 @@ describe('static league source documents', () => {
     const document = new DOMParser().parseFromString(renderLeagueHtml(template, page), 'text/html');
     expect(document.querySelector('tbody')?.textContent).toContain('+0.783');
     expect(document.querySelector('thead')?.textContent).not.toContain('Top 4');
+  });
+
+  it('includes both real F1 championship tables in the no-JavaScript snapshot', () => {
+    const { entry, payload } = load('f1-2026');
+    const page = describeLeague(entry, payload, 'https://example.org/');
+    const document = new DOMParser().parseFromString(renderLeagueHtml(template, page), 'text/html');
+    const tables = document.querySelectorAll('table');
+    expect(tables).toHaveLength(2);
+    expect(tables[0].caption?.textContent).toContain('Drivers');
+    expect(tables[1].caption?.textContent).toContain('Constructors');
+    expect(tables[1].querySelectorAll('tbody tr')).toHaveLength(payload.constructorStandings!.length);
+    expect(tables[1].querySelector('tbody tr')?.textContent).toContain('Mercedes');
+    expect(tables[1].querySelector('tbody tr')?.textContent).toContain('578');
+  });
+
+  it('does not call a tied zero-game table a standings leader before the season', () => {
+    const { entry, payload } = load('epl-2026-27');
+    payload.standings.forEach((row) => { row.played = 0; });
+    const page = describeLeague(entry, payload, 'https://example.org/');
+    expect(page.status).toBe('Pre-season');
+    expect(page.facts.some((fact) => fact.label === 'Standings leader')).toBe(false);
+    expect(page.facts).toContainEqual({ label: 'Teams', value: '20' });
+  });
+
+  it('keeps the real snapshot outside the React root as an explicit no-JavaScript fallback', () => {
+    const { entry, payload } = load('epl-2026-27');
+    const page = describeLeague(entry, payload, 'https://example.org/');
+    const html = renderLeagueHtml(template, page);
+    expect(html).toContain('<div id="root"></div><noscript><main');
+    expect(html).toContain('Man City');
+    expect(html).not.toContain('<div id="root"><main');
   });
 
   it('escapes source text and structured data instead of allowing embedded markup', () => {

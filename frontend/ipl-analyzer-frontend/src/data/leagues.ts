@@ -47,7 +47,7 @@ export function canonicalLeagueHref(leagueId: string) {
 /** A league's page. The site root is the landing page, so every league has its own address. */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function leagueHref(leagueId: string, _defaultId?: string) {
-  return `${import.meta.env.BASE_URL}?league=${leagueId}`;
+  return canonicalLeagueHref(leagueId);
 }
 
 /** The all-sports hub of live races (the site root is the landing page). */

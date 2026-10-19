@@ -12,8 +12,8 @@ describe('league helpers', () => {
   });
 
   it('gives every league and the hub an address of its own (the root is the landing page)', () => {
-    expect(leagueHref('ipl-2026', 'ipl-2026')).toBe('/?league=ipl-2026');
-    expect(leagueHref('bbl-2025-26')).toBe('/?league=bbl-2025-26');
+    expect(leagueHref('ipl-2026', 'ipl-2026')).toBe('/league/ipl-2026/');
+    expect(leagueHref('bbl-2025-26')).toBe('/league/bbl-2025-26/');
     expect(hubHref('hub')).toBe('/?view=hub');
   });
 

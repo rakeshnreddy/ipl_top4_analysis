@@ -150,7 +150,8 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
     if (chance !== undefined) facts.push({ label: `${tier.label} favourite`, value: `${favourite.shortName} ${formatProbability(payload, chance)}` });
   }
   const leader = rows[0];
-  if (leader) facts.push({ label: 'Standings leader', value: `${leader.fullName}${typeof leader.points === 'number' ? ` · ${leader.points} points` : typeof leader.wins === 'number' ? ` · ${leader.wins} wins` : ''}` });
+  if (leader && (started || complete)) facts.push({ label: 'Standings leader', value: `${leader.fullName}${typeof leader.points === 'number' ? ` · ${leader.points} points` : typeof leader.wins === 'number' ? ` · ${leader.wins} wins` : ''}` });
+  if (!started && !complete) facts.push({ label: 'Teams', value: String(rows.length) });
   if (typeof payload.league.eventsLeft === 'number') facts.push({ label: 'Grands Prix remaining', value: String(payload.league.eventsLeft) });
   const description = `${heading}: ${status.toLowerCase()} standings${complete ? '' : ' and model probabilities'}. ${facts.map((fact) => `${fact.label}: ${fact.value}.`).join(' ')} Updated ${payload.metadata.generated_at.slice(0, 10)}.`;
   return {
@@ -166,9 +167,10 @@ function formatProbability(payload: LeaguePayload, value: number) {
   return payload.analysis.method.toLowerCase().includes('monte carlo') ? formatChance(value) : `${Number(value.toFixed(2))}%`;
 }
 
-function cell(page: LeaguePage, row: Standing, column: Column) {
+function cell(page: LeaguePage, row: Standing, column: Column, constructors = false) {
   if (column.probability) {
-    const value = (page.payload.analysis.probabilities ?? page.payload.analysis.overallProbabilities)?.[row.teamKey]?.[column.key];
+    const probabilities = constructors ? page.payload.analysis.constructorProbabilities : page.payload.analysis.probabilities ?? page.payload.analysis.overallProbabilities;
+    const value = probabilities?.[row.teamKey]?.[column.key];
     return typeof value === 'number' ? formatProbability(page.payload, value) : '—';
   }
   const value = row[column.key];
@@ -180,10 +182,14 @@ function cell(page: LeaguePage, row: Standing, column: Column) {
   return typeof value === 'string' ? value : '—';
 }
 
-function standingsTable(page: LeaguePage) {
-  const headers = page.columns.map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`).join('');
-  const rows = page.rows.map((row) => `<tr><td>${row.rank}</td><th scope="row">${escapeHtml(row.fullName)}</th>${page.columns.map((column) => `<td>${escapeHtml(cell(page, row, column))}</td>`).join('')}</tr>`).join('\n');
-  return `<div class="snapshot-scroll"><table><caption>${escapeHtml(page.heading)} ${page.status === 'Final' ? 'final' : 'current'} standings</caption><thead><tr><th scope="col">Rank</th><th scope="col">${page.payload.league.sport === 'motorsport' ? 'Driver' : 'Team'}</th>${headers}</tr></thead><tbody>${rows || `<tr><td colspan="${page.columns.length + 2}">Standings are not available yet.</td></tr>`}</tbody></table></div>`;
+function standingsTable(page: LeaguePage, constructors = false) {
+  const columns: Column[] = constructors ? [{ key: 'points', label: 'Points' }, { key: 'wins', label: 'Wins' }, ...(page.status === 'Final' ? [] : [{ key: 'title', label: 'Title', probability: true }])] : page.columns;
+  const records = constructors ? page.payload.constructorStandings ?? [] : page.rows;
+  const label = constructors ? 'Constructors' : page.payload.league.sport === 'motorsport' ? 'Drivers' : '';
+  const caption = `${page.heading} ${label} ${page.status === 'Final' ? 'final' : 'current'} standings`;
+  const headers = columns.map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`).join('');
+  const rows = records.map((row) => `<tr><td>${row.rank}</td><th scope="row">${escapeHtml(row.fullName)}</th>${columns.map((column) => `<td>${escapeHtml(cell(page, row, column, constructors))}</td>`).join('')}</tr>`).join('\n');
+  return `<div class="snapshot-scroll" tabindex="0" role="region" aria-label="${escapeHtml(label || 'League')} standings table"><table><caption>${escapeHtml(caption)}</caption><thead><tr><th scope="col">Rank</th><th scope="col">${label === 'Drivers' ? 'Driver' : 'Team'}</th>${headers}</tr></thead><tbody>${rows || `<tr><td colspan="${columns.length + 2}">Standings are not available yet.</td></tr>`}</tbody></table></div>`;
 }
 
 export function leagueJsonLd(page: LeaguePage) {
@@ -197,9 +203,9 @@ export function leagueJsonLd(page: LeaguePage) {
   };
 }
 
-/** Initial source content for crawlers and JavaScript-free readers; React replaces it when it loads. */
+/** Real no-JavaScript source content. The interactive app remains client-rendered. */
 export function renderLeagueHtml(template: string, page: LeaguePage) {
-  const content = `<main id="source-snapshot"><nav aria-label="Site"><a href="${escapeHtml(page.base)}">Playoff Pulse</a> · <a href="${escapeHtml(page.base)}?view=hub">All sports</a></nav><p>${escapeHtml(page.status)}</p><h1>${escapeHtml(page.heading)}</h1><p>${escapeHtml(page.description)}</p><dl>${page.facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>${standingsTable(page)}<h2>Source and method</h2><p>Snapshot updated <time datetime="${escapeHtml(page.updated)}">${escapeHtml(page.updated)}</time>. Source: ${escapeHtml(page.payload.metadata.source)}. Method: ${escapeHtml(page.payload.analysis.model ?? page.payload.analysis.method)}.</p>${(page.payload.metadata.warnings ?? []).map((warning) => `<p>Source notice: ${escapeHtml(warning)}</p>`).join('')}<details><summary>Model notes</summary><ul>${(page.payload.analysis.modelNotes ?? []).map((note) => `<li>${escapeHtml(note)}</li>`).join('')}</ul></details><p>Interactive team analysis loads when JavaScript is available. <a href="${escapeHtml(page.dataUrl)}">View this data snapshot</a>.</p></main>`;
+  const content = `<main id="source-snapshot"><nav aria-label="Site"><a href="${escapeHtml(page.base)}">Playoff Pulse</a> · <a href="${escapeHtml(page.base)}?view=hub">All sports</a></nav><p>${escapeHtml(page.status)}</p><h1>${escapeHtml(page.heading)}</h1><p>${escapeHtml(page.description)}</p><dl>${page.facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>${standingsTable(page)}${page.payload.constructorStandings ? standingsTable(page, true) : ''}<h2>Source and method</h2><p>Snapshot updated <time datetime="${escapeHtml(page.updated)}">${escapeHtml(page.updated)}</time>. Source: ${escapeHtml(page.payload.metadata.source)}. Method: ${escapeHtml(page.payload.analysis.model ?? page.payload.analysis.method)}.</p>${(page.payload.metadata.warnings ?? []).map((warning) => `<p>Source notice: ${escapeHtml(warning)}</p>`).join('')}<details><summary>Model notes</summary><ul>${(page.payload.analysis.modelNotes ?? []).map((note) => `<li>${escapeHtml(note)}</li>`).join('')}</ul></details><p>Interactive team analysis loads when JavaScript is available. <a href="${escapeHtml(page.dataUrl)}">View this data snapshot</a>.</p></main>`;
   let html = template.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`)
     .replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/gi, '')
     .replace(/<meta\b(?=[^>]*(?:\bname="(?:description|twitter:[^"]+)"|\bproperty="og:[^"]+"))[^>]*>/gi, '');
@@ -210,10 +216,32 @@ export function renderLeagueHtml(template: string, page: LeaguePage) {
 <meta property="og:image" content="${escapeHtml(page.image)}" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:alt" content="${escapeHtml(page.title)}" />
 <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="${escapeHtml(page.title)}" /><meta name="twitter:description" content="${escapeHtml(page.description)}" /><meta name="twitter:image" content="${escapeHtml(page.image)}" />
 <script type="application/ld+json" data-ipl-jsonld="true">${safeJson(leagueJsonLd(page))}</script>
-<style>#source-snapshot{font-family:system-ui,sans-serif;max-width:1200px;margin:24px auto;padding:0 16px;color:#17212b;background:#fff}#source-snapshot a{color:#456500}#source-snapshot h1{font-size:32px}#source-snapshot dl{display:flex;flex-wrap:wrap;gap:24px}#source-snapshot dd{margin:4px 0;font-weight:600}#source-snapshot .snapshot-scroll{overflow-x:auto}#source-snapshot table{border-collapse:collapse;min-width:640px;width:100%;font-variant-numeric:tabular-nums}#source-snapshot caption{text-align:left;font-weight:600;padding:16px 0}#source-snapshot th,#source-snapshot td{text-align:left;padding:12px;border-bottom:1px solid #dce2e8}#source-snapshot details{padding:16px 0}</style>`;
+<style>#source-snapshot{font:16px/1.5 system-ui,sans-serif;max-width:1200px;margin:24px auto;padding:0 16px;color:#17212b;background:#fff}#source-snapshot a{color:#456500;display:inline-flex;align-items:center;min-height:44px;min-width:44px}#source-snapshot h1{font-size:32px}#source-snapshot dl{display:flex;flex-wrap:wrap;gap:24px}#source-snapshot dd{margin:4px 0;font-weight:600}#source-snapshot .snapshot-scroll{overflow-x:auto}#source-snapshot :focus-visible{outline:2px solid #456500;outline-offset:2px}#source-snapshot table{border-collapse:collapse;min-width:640px;width:100%;font-variant-numeric:tabular-nums}#source-snapshot caption{text-align:left;font-weight:600;padding:16px 0}#source-snapshot th,#source-snapshot td{text-align:left;padding:12px;border-bottom:1px solid #dce2e8}#source-snapshot details{padding:16px 0}#source-snapshot summary{display:list-item;cursor:pointer;min-height:44px;padding:10px 0}</style>`;
   html = html.replace('</head>', `${meta}\n</head>`);
   if (!/<div id="root"><\/div>/.test(html)) throw new Error('Built index is missing its React root.');
-  return html.replace('<div id="root"></div>', `<div id="root">${content}</div>`);
+  return html.replace('<div id="root"></div>', `<div id="root"></div><noscript>${content}</noscript>`);
+}
+
+/** Canonical HTML knows its route: remove the index → route → payload discovery waterfall. */
+function criticalPreloads(bundle: Record<string, { type: string; fileName: string; facadeModuleId?: string | null; imports?: string[] }>, sport: string, id: string, base: string, template: string) {
+  const component = sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
+  const route = Object.values(bundle).find((item) => item.type === 'chunk' && item.facadeModuleId?.endsWith(component));
+  const modules = new Set<string>();
+  const styles = new Set<string>();
+  const visit = (file: string) => {
+    const chunk = bundle[file];
+    if (!chunk || chunk.type !== 'chunk' || modules.has(file)) return;
+    modules.add(file);
+    const css = (chunk as { viteMetadata?: { importedCss?: Set<string> } }).viteMetadata?.importedCss;
+    css?.forEach((file) => styles.add(file));
+    chunk.imports?.forEach(visit);
+  };
+  if (route) visit(route.fileName);
+  const tags: string[] = [];
+  for (const file of modules) if (!template.includes(`href="${base}${file}"`)) tags.push(`<link rel="modulepreload" href="${escapeHtml(base + file)}" />`);
+  for (const file of styles) if (!template.includes(`href="${base}${file}"`)) tags.push(`<link rel="stylesheet" href="${escapeHtml(base + file)}" />`);
+  for (const file of ['data/leagues.json', `data/${id}.json`]) tags.push(`<link rel="preload" as="fetch" crossorigin href="${escapeHtml(base + file)}" />`);
+  return tags.join('\n');
 }
 
 const accents: Record<string, string> = { cricket: '#82c4ff', motorsport: '#ff9b8d', basketball: '#ffbd88', 'american-football': '#c4afff', 'ice-hockey': '#a4daed', baseball: '#97c7ff' };
@@ -250,17 +278,23 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
       handler(_options, bundle) {
         const template = bundle['index.html'];
         if (!template || template.type !== 'asset') throw new Error('Missing built index.html.');
-        const site = siteUrl ?? (base === '/' ? 'https://ipl-playoff-pulse.pages.dev/' : `https://rakeshnreddy.github.io${base}`);
+        const address = siteUrl ?? (base === '/' ? 'https://ipl-playoff-pulse.pages.dev/' : `https://rakeshnreddy.github.io${base}`);
+        const site = address.endsWith('/') ? address : `${address}/`;
         const entries = (JSON.parse(readFileSync(resolve(publicDir, 'data/leagues.json'), 'utf8')) as { leagues: LeagueEntry[] }).leagues;
         this.emitFile({ type: 'asset', fileName: 'social/og/playoff-pulse.png', source: renderSocialPng(renderHomeOgSvg(entries.length, new Set(entries.map((entry) => entry.sport ?? 'cricket')).size)) });
         const homeImage = new URL('social/og/playoff-pulse.png', site).href;
-        const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n</head>`);
+        const fontPreloads = Object.keys(bundle).filter((file) => /(?:barlow-semi-condensed-latin-700-normal|ibm-plex-sans-latin-wght-normal)[^/]*\.woff2$/.test(file)).map((file) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${escapeHtml(base + file)}" />`).join('\n');
+        const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
         template.source = homeTemplate;
+        const share = bundle['share.html'];
+        if (share?.type === 'asset') share.source = String(share.source).replace('</head>', `${fontPreloads}\n</head>`);
         for (const entry of entries) {
           if (!validId.test(entry.id) || entry.path !== `data/${entry.id}.json`) throw new Error(`Unsafe league path: ${entry.id}`);
           const payload = JSON.parse(readFileSync(resolve(publicDir, entry.path), 'utf8')) as LeaguePayload;
           const page = describeLeague(entry, payload, site);
-          this.emitFile({ type: 'asset', fileName: `league/${entry.id}/index.html`, source: renderLeagueHtml(homeTemplate, page) });
+          const preloads = criticalPreloads(bundle, entry.sport ?? 'cricket', entry.id, base, homeTemplate);
+          const html = renderLeagueHtml(homeTemplate, page).replace('</head>', `${preloads}\n</head>`);
+          this.emitFile({ type: 'asset', fileName: `league/${entry.id}/index.html`, source: html });
           const png = renderSocialPng(renderLeagueOgSvg(page));
           this.emitFile({ type: 'asset', fileName: `social/og/${entry.id}.png`, source: png });
         }
