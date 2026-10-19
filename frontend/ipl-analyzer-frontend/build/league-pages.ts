@@ -288,12 +288,6 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
         const fontPreloads = fontFiles.map(fontTag).join('\n');
         const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
         template.source = homeTemplate;
-        const share = bundle['share.html'];
-        if (share?.type === 'asset') {
-          const existing = String(share.source);
-          const missing = fontFiles.filter((file) => !existing.includes(`href="${escapeHtml(base + file)}"`)).map(fontTag).join('\n');
-          share.source = existing.replace('</head>', `${missing}\n</head>`);
-        }
         for (const entry of entries) {
           if (!validId.test(entry.id) || entry.path !== `data/${entry.id}.json`) throw new Error(`Unsafe league path: ${entry.id}`);
           const payload = JSON.parse(readFileSync(resolve(publicDir, entry.path), 'utf8')) as LeaguePayload;
