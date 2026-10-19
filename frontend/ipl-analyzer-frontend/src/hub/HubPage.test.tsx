@@ -107,7 +107,7 @@ describe('HubPage', () => {
 
     fireEvent.click(await screen.findByRole('button', { name: /^Leagues/ }));
     const nav = screen.getByRole('navigation', { name: 'Leagues' });
-    expect(within(nav).getByRole('link', { name: 'All live races' })).toHaveAttribute('href', '/?view=hub');
+    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/?view=hub');
     // The wordmark goes to the landing page.
     expect(screen.getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
   });

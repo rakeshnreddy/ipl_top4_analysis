@@ -222,8 +222,10 @@ export function renderLeagueHtml(template: string, page: LeaguePage) {
   return html.replace('<div id="root"></div>', `<div id="root"></div><noscript>${content}</noscript>`);
 }
 
+type RouteBundle = Record<string, { type: string; fileName: string; facadeModuleId?: string | null; imports?: string[] }>;
+
 /** Canonical HTML knows its route: remove the index → route → payload discovery waterfall. */
-function criticalPreloads(bundle: Record<string, { type: string; fileName: string; facadeModuleId?: string | null; imports?: string[] }>, sport: string, id: string, base: string, template: string) {
+function criticalPreloads(bundle: RouteBundle, sport: string, id: string, base: string, template: string) {
   const component = sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
   const route = Object.values(bundle).find((item) => item.type === 'chunk' && item.facadeModuleId?.endsWith(component));
   const modules = new Set<string>();
@@ -242,6 +244,29 @@ function criticalPreloads(bundle: Record<string, { type: string; fileName: strin
   for (const file of styles) if (!template.includes(`href="${base}${file}"`)) tags.push(`<link rel="stylesheet" href="${escapeHtml(base + file)}" />`);
   for (const file of ['data/leagues.json', `data/${id}.json`]) tags.push(`<link rel="preload" as="fetch" crossorigin href="${escapeHtml(base + file)}" />`);
   return tags.join('\n');
+}
+
+/** Legacy query entries get only the published league's hints; metadata stays generic. */
+export function legacyQueryPreloadScript(entries: Pick<LeagueEntry, 'id' | 'sport'>[], bundle: RouteBundle, base: string, template: string) {
+  const family = (sport: string | undefined) => sport === 'motorsport' ? 'motorsport' : !sport || sport === 'cricket' ? 'cricket' : 'sport';
+  const leagues = Object.fromEntries(entries.filter((entry) => validId.test(entry.id)).map((entry) => [entry.id, family(entry.sport)]));
+  const placeholder = '__pp_league_id__';
+  const hints = Object.fromEntries([...new Set(Object.values(leagues))].map((sport) => [sport, criticalPreloads(bundle, sport, placeholder, base, template)]));
+  return `(() => {
+  const base = ${JSON.stringify(base)};
+  if (location.pathname !== base && location.pathname !== base + 'index.html') return;
+  const id = (new URLSearchParams(location.search).get('league') || '').trim().toLowerCase();
+  if (!id) return;
+  const leagues = ${safeJson(leagues)};
+  if (!Object.prototype.hasOwnProperty.call(leagues, id)) return;
+  const hints = ${safeJson(hints)};
+  const template = document.createElement('template');
+  template.innerHTML = hints[leagues[id]].replaceAll(${JSON.stringify(placeholder)}, encodeURIComponent(id));
+  for (const link of template.content.querySelectorAll('link')) {
+    const href = link.getAttribute('href');
+    if (![...document.head.querySelectorAll('link[href]')].some((existing) => existing.getAttribute('href') === href)) document.head.append(link);
+  }
+})();`;
 }
 
 const accents: Record<string, string> = { cricket: '#82c4ff', motorsport: '#ff9b8d', basketball: '#ffbd88', 'american-football': '#c4afff', 'ice-hockey': '#a4daed', baseball: '#97c7ff' };
@@ -287,7 +312,8 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
         const fontTag = (file: string) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${escapeHtml(base + file)}" />`;
         const fontPreloads = fontFiles.map(fontTag).join('\n');
         const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
-        template.source = homeTemplate;
+        const legacyHints = legacyQueryPreloadScript(entries, bundle, base, homeTemplate);
+        template.source = homeTemplate.replace('</head>', `<script data-pp-legacy-preloads>${legacyHints}</script>\n</head>`);
         for (const entry of entries) {
           if (!validId.test(entry.id) || entry.path !== `data/${entry.id}.json`) throw new Error(`Unsafe league path: ${entry.id}`);
           const payload = JSON.parse(readFileSync(resolve(publicDir, entry.path), 'utf8')) as LeaguePayload;

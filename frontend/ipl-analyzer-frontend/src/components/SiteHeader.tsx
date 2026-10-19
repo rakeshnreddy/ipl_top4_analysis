@@ -126,7 +126,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
             <div className="league-menu-panel" hidden={!open} id={panelId}>
               <nav aria-label="Leagues">
                 <a className="league-menu-home" href={hub}>
-                  All live races
+                  All leagues
                 </a>
                 {currentId && <a className="league-menu-home" href={canonicalLeagueHref(currentId)} title="Open this league’s shareable page"><Link2 aria-hidden="true" size={18} /> League link</a>}
                 <div className="league-search-wrap">

@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { describeLeague, leagueJsonLd, renderLeagueHtml, renderLeagueOgSvg, renderSocialPng, type LeaguePayload } from './league-pages';
+import { describeLeague, leagueJsonLd, legacyQueryPreloadScript, renderLeagueHtml, renderLeagueOgSvg, renderSocialPng, type LeaguePayload } from './league-pages';
 
 const publicDir = resolve(import.meta.dirname, '../public');
 const entries = (JSON.parse(readFileSync(resolve(publicDir, 'data/leagues.json'), 'utf8')) as { leagues: { id: string; name: string; shortName: string; seasonLabel: string; path: string }[] }).leagues;
@@ -108,5 +108,45 @@ describe('static league source documents', () => {
     expect(image.readUInt32BE(20)).toBe(630);
     expect(image.subarray(1, 4).toString()).toBe('PNG');
     expect(image.length).toBeGreaterThan(10000);
+  });
+});
+
+describe('legacy query critical hints', () => {
+  const bundle = { ...Object.fromEntries([
+    ['cricket.js', '/src/App.tsx'], ['f1.js', '/src/f1/F1Page.tsx'], ['sport.js', '/src/sport/SportPage.tsx'],
+  ].map(([fileName, facadeModuleId]) => [fileName, { type: 'chunk', fileName, facadeModuleId, imports: ['shared.js'], viteMetadata: { importedCss: new Set([fileName.replace('.js', '.css')]) } }])), 'shared.js': { type: 'chunk', fileName: 'shared.js', imports: [] } };
+  const leagues = [{ id: 'ipl-2026', sport: 'cricket' }, { id: 'f1-2026', sport: 'motorsport' }, { id: 'epl-2026-27', sport: 'football' }];
+  function run(search: string, base: string, pathname = base) {
+    const document = new DOMParser().parseFromString('<html><head></head><body></body></html>', 'text/html');
+    const source = legacyQueryPreloadScript(leagues, bundle, base, '');
+    const execute = new Function('document', 'location', source);
+    const location = new URL(`https://example.org${pathname}${search}`);
+    execute(document, location);
+    return { document, execute, location };
+  }
+
+  it('normalizes the published query and hints only its family, dependencies, styles and data on both bases', () => {
+    for (const base of ['/', '/ipl_top4_analysis/']) {
+      const { document } = run('?league=%20EPL-2026-27%20', base);
+      expect(Array.from(document.querySelectorAll('link')).map((link) => link.getAttribute('href'))).toEqual([
+        `${base}sport.js`, `${base}shared.js`, `${base}sport.css`, `${base}data/leagues.json`, `${base}data/epl-2026-27.json`,
+      ]);
+      expect(document.querySelectorAll('body *')).toHaveLength(0);
+    }
+  });
+
+  it('allows root/index.html but ignores unknown IDs and conflicting queries on canonical paths', () => {
+    expect(run('?league=ipl-2026', '/pulse/', '/pulse/index.html').document.querySelector('link')?.getAttribute('href')).toBe('/pulse/cricket.js');
+    for (const query of ['?league=unknown', '?league=constructor', '?league=../secret', '?view=hub']) {
+      expect(run(query, '/pulse/').document.querySelectorAll('link')).toHaveLength(0);
+    }
+    expect(run('?league=ipl-2026', '/pulse/', '/pulse/league/f1-2026/').document.querySelectorAll('link')).toHaveLength(0);
+  });
+
+  it('reuses existing hints when the helper runs again', () => {
+    const { document, execute, location } = run('?league=f1-2026', '/');
+    execute(document, location);
+    expect(document.querySelectorAll('link[href="/f1.js"]')).toHaveLength(1);
+    expect(document.querySelectorAll('link[href="/data/f1-2026.json"]')).toHaveLength(1);
   });
 });
