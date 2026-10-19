@@ -59,14 +59,27 @@ describe('LandingPage', () => {
   it('switches between light and dark and remembers the choice', async () => {
     open();
 
-    const toggle = await screen.findByRole('button', { name: /Switch to the (dark|light) theme/ });
-    const first = toggle.getAttribute('aria-label')!.includes('dark') ? 'dark' : 'light';
+    const toggle = await screen.findByRole('button', { name: 'Dark theme' });
+    const first = toggle.getAttribute('aria-pressed') === 'true' ? 'light' : 'dark';
     fireEvent.click(toggle);
     expect(document.documentElement).toHaveAttribute('data-theme', first);
     expect(window.localStorage.getItem('pp-theme')).toBe(first);
     const second = first === 'dark' ? 'light' : 'dark';
-    fireEvent.click(screen.getByRole('button', { name: `Switch to the ${second} theme` }));
+    fireEvent.click(screen.getByRole('button', { name: 'Dark theme' }));
     expect(document.documentElement).toHaveAttribute('data-theme', second);
     expect(window.localStorage.getItem('pp-theme')).toBe(second);
+  });
+
+  it('filters the league picker and restores focus on Escape', async () => {
+    open();
+    const menu = await screen.findByRole('button', { name: 'Leagues' });
+    fireEvent.click(menu);
+    const search = screen.getByRole('searchbox', { name: 'Find a league or sport' });
+    expect(search).toHaveFocus();
+    fireEvent.change(search, { target: { value: 'zzzz-no-league' } });
+    expect(screen.getByRole('status')).toHaveTextContent('No leagues match');
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(menu).toHaveFocus();
+    expect(menu).toHaveAttribute('aria-expanded', 'false');
   });
 });

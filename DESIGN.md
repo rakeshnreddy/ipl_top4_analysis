@@ -1,104 +1,76 @@
-# Playoff Pulse design system
+# Playoff Pulse · Night Signal
 
-Playoff Pulse is a working tool with one front door. The landing page (the site root) says what the site does and shows the biggest races from the live data; every other page is a tool. Readers arrive to check a table and a few probabilities, often on a phone, often in the evening while games are on. Every rule below serves one goal: the standings start within the first phone screen, and every number is readable.
+A season has dozens of possible endings. The design should make them feel immediate, then make the numbers effortless to read. Night Signal replaces the uniform green glass wash with ink, slate, a distinctive citron signature and solid, precise data planes. Readers are often on a phone, at night, watching a game. Tables and odds take priority over decoration.
 
-**North star: "Floodlit pitch".** A calm jade-and-amber field behind frosted-glass panels, light by day and dark by night. Rich, quiet colour, never neon; the data stays the brightest thing on the page.
+## Direction and evidence
 
-Tokens live in `frontend/ipl-analyzer-frontend/src/index.css`. Shared components are styled in `src/App.css`; each page adds only what it needs (`sport/SportPage.css`, `hub/HubPage.css`, `landing/LandingPage.css`).
+Three directions were rendered with the site's actual payloads across landing, hub, football, cricket and Formula 1, at 375 and 1280px in both themes. The full 60-image comparison is in `docs/screenshots/directions/`; source studies are in `docs/design-directions/`.
 
-## Themes
+| Direction | Beauty | Odds clarity | Distinctiveness | Accessibility potential | Performance safety | Night fit |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Night Signal: ink, citron, selective glass | 9 | 9 | 9 | 9 | 9 | 10 |
+| Season Ledger: editorial serif, paper, open rules | 8 | 9 | 9 | 9 | 10 | 7 |
+| Race Control: coral, squared timing boards, condensed capitals | 8 | 8 | 8 | 8 | 10 | 9 |
 
-- **Light and dark, one set of tokens.** Every colour is a single `light-dark()` pair. With no choice saved, the page follows the OS setting (`color-scheme: light dark`). The header's theme button saves `pp-theme` (`src/lib/theme.ts`) and sets `html[data-theme]`; an inline script in `index.html` and `share.html` applies a saved choice before first paint, so there is no flash.
-- **The ambient field.** `body::before` is a fixed layer of three soft radial colour fields (jade top-left, amber top-right, azure at the foot: `--ambient-1/2/3`). It gives the glass something to blur and is the only decoration. Never put a halo behind specific content.
-- **Glass, in one layer.** Page-level containers are frosted glass (`--glass`, `backdrop-filter: blur(--glass-blur)`, a `--glass-border` hairline and `--shadow-glass`, which is a lit top edge plus an offset drop). That covers panels, hub cards, the key-facts strip, the site header and the landing race list. Layers that float over content (the league menu) use `--glass-strong`. Inside a panel, surfaces are tints (`--surface-2/3`) or near-opaque tiles (`--surface-solid`), never more glass.
-- **Shadows have an offset.** No zero-offset glows.
+These scores are design judgments from the renders, not measured user-study results. Night Signal wins for night reading and a recognisable multi-sport identity. It borrows the Ledger's disciplined dividers and Race Control's sport-specific accents. The final implementation goes beyond the studies with purpose-built page compositions. See `docs/site-analysis.md` for audit and release evidence.
 
-## Colour roles
+## Tokens
 
-| Token | Use |
-| --- | --- |
-| `--accent` (jade) | Links, focus rings, selected state, the brand mark, the one solid call to action |
-| `--gold` | Champions and first place (`zone-first`) |
-| `--good` | Qualifying places, wins, positive NRR |
-| `--warn` | Play-in or middle zones, data warnings |
-| `--bad` | Relegation and elimination, losses, negative NRR |
-| `--heat-good` / `--heat-bad` | Probability cell tints only |
+The source of truth is `frontend/ipl-analyzer-frontend/src/index.css`. Each colour has a `light-dark()` pair; system preference applies unless `html[data-theme]` overrides it. `pp-theme` remains the storage key. Inline head scripts apply the choice before first paint on both entry documents. Toolbar colours match the ground.
 
-- Each role has a `-soft` background variant (a translucent tint) for pills and selected rows.
-- Every text/background pair meets WCAG AA (4.5:1) in both themes, measured on the glass as it renders over the brightest part of the ambient field. For example, `--text-subtle` on light glass over amber is 5.7:1, and on dark glass over jade it is 6.2:1.
-- Colour is never the only signal: zone stripes sit next to rank numbers, and ticks carry visually hidden text.
+| Role | Day | Night |
+| --- | --- | --- |
+| Ground | `#eef0f2` | `#0b1016` |
+| Data plane | `#ffffff` | `#151e28` |
+| Quiet inset | `#f3f5f7` | `#1b2632` |
+| Main ink | `#17212b` | `#f2f5f8` |
+| Secondary ink | `#46576a` | `#b7c4d1` |
+| Small labels | `#506175` | `#9eafc1` |
+| Citron action | `#456500` | `#d4f75b` |
+| Action text | `#ffffff` | `#172000` |
+| Champion | `#815200` | `#f4cd72` |
+| Qualifying / positive | `#08734d` | `#6ddbb0` |
+| Elimination / negative | `#ad342e` | `#ff9c95` |
+| Play-in / caution | `#8f4b00` | `#ffc184` |
 
-**Team colours are data, not theme.** They appear as a thin chip beside the team name, which has a hairline outline so near-black and near-white colours stay visible. When text sits on a team colour, `readableOn()` in `src/lib/ui.ts` picks black or white by contrast instead of trusting the feed's suggested text colour.
+Solid surfaces make contrast predictable. Glass is 90% opaque, with a 10px blur, limited to the header and selected feature surfaces. League tables, stat tiles and repeating hub cards do not blur. The subtle fixed two-direction ambient field is never animated. No nested blur and no stacked glowing panels.
 
-**Probability tints.** `heatStyle()` mixes the heat colour at up to 40% over the surface, so cell text stays above 4.5:1 at 100%.
+## Typography, spacing and shape
 
-## Type
+Self-hosted Barlow Semi Condensed 600/700 supplies display headings and prominent odds. Self-hosted IBM Plex Sans variable supplies UI, prose and tables. Keep the existing fonts: distinct type without extra downloads. Numbers align with tabular figures.
 
-- **Display:** Barlow Semi Condensed 600/700, for page titles, section headings, the wordmark and team badges.
-- **UI:** IBM Plex Sans (variable), for everything else.
-- Both are self-hosted via `@fontsource` (`src/fonts.ts`); no third-party font requests.
-- **Scale:** 12 / 14 / 16 / 20 / 24 / 32 / 40 / 56px (`--text-xs` … `--text-4xl`; 56px is only the landing headline). Nothing renders below 12px.
-- Numbers use `font-variant-numeric: tabular-nums` wherever they line up in columns.
-- Uppercase is reserved for small labels (12px, 600, +0.04em tracking): table headers, fact labels and menu group names.
+The text scale is 12 / 14 / 16 / 20 / 24 / 32 / 40 / 56px; landing display may grow to 88px. Nothing below 12px. Uppercase only for short labels. The main league heading is compact enough that the table starts on the first phone screen. Space uses a 4px base, with 16px phone and 24px desktop gutters. Maximum content width is 1280px. Radius distinguishes layers: 16px major planes, 12px groups, 6px controls; pills only for status and small selectors. All interactive targets have at least 44px in each dimension, including icon and section controls.
 
-## Space, size, shape
+## Sport and team identity
 
-- Spacing is on a 4px base: `--space-1` (4) to `--space-8` (72). Use tight gaps inside a group and larger gaps between sections; the landing page uses the large end.
-- Radius: `--radius-lg` 18px for glass containers, `--radius-md` 12px and `--radius-sm` 8px for things inside them, and `--radius-pill` for pills, the theme button and the call to action.
-- Tap targets are at least 44px (`--tap`). This covers table rows, team buttons, menu items, list links and section links.
-- Content is at most 1280px wide, with gutters of 16px on phones and 24px from 960px.
+`--sport-accent` identifies the current competition. Football uses the brand citron, cricket azure, basketball apricot, American football lilac, ice hockey ice, baseball sky and Formula 1 coral. These colours label the sport and highlight a feature, never replace qualifying, danger or championship semantics. Pair each with text. Team colours remain payload data, confined to identity chips and actual match probability segments. Use `readableOn()` for text over a team colour; outline chips so black and white teams stay visible.
 
-## Page structure
+## Components and composition
 
-Every page uses the same frame:
+Rollout: the foundation implements tokens, shared surfaces/header/search, control sizes, theme semantics, lazy routes and loading/recovery. The page-family and static-sharing rules below are the target contract for the subsequent dedicated PRs; they do not claim those features already shipped in the foundation.
 
-1. **Skip link** to `#main`.
-2. **Site header** (`components/SiteHeader.tsx`). It is sticky glass and holds:
-   - the wordmark, which links to the landing page;
-   - one **Leagues** menu grouped by sport, with the sports that have the most live races first ("All live races" opens the hub);
-   - the theme button.
-3. **Page header** (`components/PageHeader.tsx`), in this order:
-   - Breadcrumb with a status pill (Live, Playoffs, Final, Pre-season).
-   - One `h1`.
-   - A one-line strap.
-   - A joined strip of 3–4 key facts.
-   - A row of in-page section links.
-4. **Main content**, which is the table first:
+- Shared header: citron pulse tile, wordmark, searchable league picker, theme toggle. The picker searches sport, long/short league names and season. Escape returns focus to the trigger. The theme button reports its pressed state.
+- League header: sport rail, breadcrumb and status, one h1, concise method/freshness strap, joined key facts and 44px section navigation. Facts use solid tiles with crisp dividers.
+- Data plane: one bordered surface, quiet column headers, aligned figures and a clear selected row. Real tables retain captions, scoped headers and row-header buttons. Wide data scrolls inside its own container; the page never scrolls sideways at 320px.
+- Selected team: immediate quantitative payoff, readable distribution, and named next fixture. A selected state must be distinguishable beyond colour.
+- Probability tracks: exact 0–100% geometry. Zero has zero length. Labels live outside segments when they do not fit. Do not give an unlikely event extra visual width. Finishing-position distributions state their scale and make values available on touch and keyboard.
+- Conditional match impact: show the affected team/outcome, the named results and the difference in **percentage points**. Do not imply the probabilities are additive across overlapping season outcomes.
+- F1: a timing-board rhythm with points, constructors and a derived points gap. Display actual remaining races/sprints; do not invent possible-points calculations.
+- Landing: a distinct editorial front door with real race facts and direct league destinations, clear coverage, then method. No decorative charts, fake history, testimonials, vanity counters or stock photos.
+- Hub: search and sport filtering above dense, scannable league destinations. Pre-season, ongoing and final states have honest labels. “Live” describes the season, not second-by-second updates.
+- Share kit: genuine generated media, a visible date/archive state, and a correct route back to its league. No stale asset masquerades as current.
+- Loading: static skeleton geometry and a polite status. Errors explain recovery; pre-season and completed views are designed states, not blank fallbacks.
 
-   | Page | Order |
-   | --- | --- |
-   | Cricket | Standings, odds or playoffs, season summary, team view |
-   | Football and US sports | Bracket (postseason only), table + sticky team panel, movers, fixtures, swing games, results, method |
-   | Landing (the root) | Hero (headline, one-line lede, one solid call to action to the hub, a text link to the method) beside the biggest live races from the data; every league by sport; how the odds are made |
-   | Hub (`?view=hub`) | Live races grouped by sport, then final tables |
+## Motion and platform support
 
-5. **Footer**, outside `<main>`. It always starts with "Model estimates for fans, not betting advice." and then credits sources.
+140–180ms on explicit colour, border, opacity, shadow and transform properties. Small lifts signal a clickable destination. No idle animations, parallax or moving backgrounds. Supported cross-document View Transitions are progressive enhancement; reduced-motion disables them. Avoid scroll-driven or gradient animation unless it conveys a real change. The site works without those APIs and without backdrop-filter. `light-dark()` has a conservative fallback. Never hide content pending an animation.
 
-## Components
+## Data, navigation and delivery rules
 
-- **Panels** (`.panel` and friends) are a single surface. Do not nest a card in a card. Inside a panel:
-  - Group stats in a joined block (`.stat-grid`, `.race-summary-grid`, `.key-facts`): one border, 1px dividers, wrapping flex so a short last row stretches.
-  - Lists of games are separator lists (`.fixture-list`, `.sport-results`), not stacks of boxes.
-- **Hub cards** are whole-card links, the one place a bordered card earns its keep. They lift 2px on hover.
-- **Links within a page** use `samePageHref()`, never a bare `#id`: the page's `<base href>` would send a bare hash to the site root.
-- **The landing page shows the product, not decoration.** Its "biggest races" list and sport lists come from `leagues.json`. Avoid feature-icon grids, stock imagery, big vanity numbers and gradient buttons.
-- **Section headings:** an `h2` plus an optional one-line `p` note. No kicker labels above headings and no decorative icons beside them.
-- **Tables** (`.data-table`):
-  - Real `<table>` with a visually hidden caption, `scope` on headers, and the team name as a `th scope="row"` containing a button with `aria-pressed`.
-  - Optional columns hide below 760px.
-  - Short tier labels replace long ones on phones, but the long label stays for screen readers.
-  - A league played in groups shows one table per group, each under an `h3` with its own caption, ranked within the group. The zone stripe marks the qualifying places across groups, and a note under the tables states the rule.
-  - A football table that splits in two (Scotland) draws a dashed "Split" line between the halves and keeps its tier stripes. A play-off place just above the drop (11th) takes the `--warn` stripe; the drop itself stays `--bad`.
-- **Segmented controls** (`.goal-tabs`): buttons with `aria-pressed`. They stay on one row and scroll sideways when there are many choices.
-- **Charts:** decorative bars are `aria-hidden`, and a visually hidden list carries the values.
+Only real payload data. Never draw an odds timeline from one snapshot or parse prose into chart data. Use the shared probability formatters, including near-certainty rules; simulated estimates never round to 100%. Explain model differences and limitations in context. All hash navigation must use `samePageHref()` because `<base>` otherwise drops `?league=`. Keep query routes, team hashes and both hosting bases working.
 
-## Motion
+No runtime server, external fonts, trackers or paid dependencies. Load page families lazily. Per-league static HTML must have meaningful source content and metadata, with social images derived from the data. Existing query links remain compatible.
 
-- Transitions are 120–160ms on colour, border, shadow and transform only. The one authored moment is the hover lift on cards and the call to action.
-- `prefers-reduced-motion` removes animation and smooth scrolling. `scrollToSection()` jumps instead of gliding when it is set.
+## Verification
 
-## Checks before shipping UI changes
-
-- `npm run lint` and `npx vitest run` in `frontend/ipl-analyzer-frontend`.
-- Look at the landing page, a cricket page, a football page, an NFL page and the hub at 375px and at desktop width, in light and dark (toggle the theme button too). Check for no horizontal scroll and no console errors, and click a section link on a `?league=` page to confirm it stays on the league.
-- No text below 12px. No new raw hex values outside `index.css`, except team data.
+Before every merge: Python tests, Vitest, ESLint, GitHub build; rendered phone and desktop checks in light/dark, no page overflow, no console errors, real clicks on league section/team links, and independent review. Measure contrast on the actual composited surfaces, not token names. Check Chromium and WebKit, theme persistence and reduced motion. Record Lighthouse's test conditions and lab metrics; TBT is not measured real-user INP. Match the deployed revision to the merge SHA, inspect Cloudflare's completion log, then capture production evidence. Never claim unperformed checks passed.

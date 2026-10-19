@@ -1,7 +1,7 @@
 /*
  * Design tokens. See DESIGN.md at the repo root.
  *
- * "Floodlit pitch": a calm jade-and-amber field behind frosted-glass panels.
+ * "Night Signal": ink, citron and clear data planes with selective glass.
  * Every colour is one light-dark() pair, so the light theme, the dark theme and
  * "follow the system" all come from the same tokens: the system decides unless
  * the reader picked a theme (html[data-theme], set before first paint in
@@ -35,9 +35,9 @@
   --space-8: 72px;
 
   /* Radii: inner = outer - padding, so nested shapes stay concentric. */
-  --radius-sm: 8px;
+  --radius-sm: 6px;
   --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-lg: 16px;
   --radius-pill: 999px;
 
   --content-max: 1280px;
@@ -46,55 +46,45 @@
   --tap: 44px;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  /* Ground and the ambient field the glass blurs */
-  --bg: light-dark(#edf3f1, #061012);
-  --ambient-1: light-dark(rgb(45 212 191 / 0.24), rgb(20 184 166 / 0.27));
-  --ambient-2: light-dark(rgb(251 191 36 / 0.2), rgb(245 158 11 / 0.15));
-  --ambient-3: light-dark(rgb(96 165 250 / 0.16), rgb(37 99 235 / 0.2));
-
-  /* Glass: the page's containers. Strong glass is for layers that float over content. */
-  --glass: light-dark(rgb(255 255 255 / 0.64), rgb(17 33 36 / 0.58));
-  --glass-strong: light-dark(rgb(255 255 255 / 0.88), rgb(13 27 30 / 0.9));
-  --glass-border: light-dark(rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.09));
-  --glass-edge: light-dark(rgb(13 40 36 / 0.07), rgb(0 0 0 / 0.35));
-  --glass-highlight: light-dark(rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.05));
-  --glass-blur: 18px;
-
-  /* Surfaces inside the glass are tints, not new opaque layers. */
-  --surface: var(--glass);
+  /* Night Signal: a quiet ground, solid data planes and selective glass. */
+  --bg: light-dark(#eef0f2, #0b1016);
+  --ambient-1: light-dark(rgb(69 101 0 / 0.06), rgb(212 247 91 / 0.045));
+  --ambient-2: light-dark(rgb(60 112 164 / 0.05), rgb(112 172 224 / 0.045));
+  --ambient-3: transparent;
+  --glass: light-dark(rgb(255 255 255 / 0.9), rgb(21 30 40 / 0.9));
+  --glass-strong: light-dark(#ffffff, #151e28);
+  --glass-border: light-dark(rgb(25 45 65 / 0.12), rgb(214 231 245 / 0.12));
+  --glass-edge: light-dark(rgb(25 45 65 / 0.07), rgb(0 0 0 / 0.4));
+  --glass-highlight: light-dark(rgb(255 255 255 / 0.85), rgb(255 255 255 / 0.06));
+  --glass-blur: 10px;
+  --surface: light-dark(#ffffff, #151e28);
   --surface-raised: var(--glass-strong);
-  /* Tiles inside a panel (joined stat blocks): near-opaque, so their 1px gap dividers stay crisp. */
-  --surface-solid: light-dark(#f7fbfa, #0f1e20);
-  --surface-2: light-dark(rgb(13 40 36 / 0.035), rgb(255 255 255 / 0.035));
-  --surface-3: light-dark(rgb(13 40 36 / 0.07), rgb(255 255 255 / 0.07));
-  --border: light-dark(rgb(13 40 36 / 0.1), rgb(255 255 255 / 0.09));
-  --border-strong: light-dark(rgb(13 40 36 / 0.2), rgb(255 255 255 / 0.17));
-
-  --text: light-dark(#0d1f1c, #e6f0ee);
-  --text-muted: light-dark(#3f5552, #a9bcb8);
-  --text-subtle: light-dark(#4f6662, #93a8a4);
-
-  /* Jade: links, focus, selection and the brand mark. */
-  --accent: light-dark(#0b7a6a, #45d9bc);
-  --accent-contrast: light-dark(#ffffff, #04211b);
-  --accent-soft: light-dark(rgb(11 122 106 / 0.12), rgb(69 217 188 / 0.14));
-  /* Amber: champions and first place. */
-  --gold: light-dark(#8a5a00, #f4c35a);
-  --gold-soft: light-dark(rgb(245 166 35 / 0.2), rgb(244 195 90 / 0.15));
-  --good: light-dark(#0f7a4e, #52d49c);
-  --good-soft: light-dark(rgb(15 122 78 / 0.13), rgb(82 212 156 / 0.14));
-  --bad: light-dark(#bb322c, #ff847c);
-  --bad-soft: light-dark(rgb(187 50 44 / 0.12), rgb(255 132 124 / 0.14));
-  --warn: light-dark(#9c5000, #f7ab5e);
-  --warn-soft: light-dark(rgb(240 140 20 / 0.16), rgb(247 171 94 / 0.14));
-  --heat-good: light-dark(#14a88a, #22b993);
-  --heat-bad: light-dark(#ef5b53, #e5534b);
-
-  /* Depth has an offset: a soft drop plus a lit top edge. No zero-offset glow. */
+  --surface-solid: var(--surface);
+  --surface-2: light-dark(#f3f5f7, #1b2632);
+  --surface-3: light-dark(#e6ebef, #253340);
+  --border: light-dark(#dce2e8, #2b3947);
+  --border-strong: light-dark(#b7c2cd, #4b5e70);
+  --text: light-dark(#17212b, #f2f5f8);
+  --text-muted: light-dark(#46576a, #b7c4d1);
+  --text-subtle: light-dark(#506175, #9eafc1);
+  --accent: light-dark(#456500, #d4f75b);
+  --accent-contrast: light-dark(#ffffff, #172000);
+  --accent-soft: light-dark(rgb(69 101 0 / 0.09), rgb(212 247 91 / 0.09));
+  --sport-accent: var(--accent);
+  --gold: light-dark(#815200, #f4cd72);
+  --gold-soft: light-dark(#f8edce, #3a321e);
+  --good: light-dark(#08734d, #6ddbb0);
+  --good-soft: light-dark(#e0f3e9, #18372e);
+  --bad: light-dark(#ad342e, #ff9c95);
+  --bad-soft: light-dark(#fbe9e6, #42282a);
+  --warn: light-dark(#8f4b00, #ffc184);
+  --warn-soft: light-dark(#fcf0dd, #3b3022);
+  --heat-good: light-dark(#29ad8d, #1c8268);
+  --heat-bad: light-dark(#e7776c, #a24944);
   --shadow-sm: 0 1px 2px var(--glass-edge);
-  --shadow-md: 0 18px 40px -18px light-dark(rgb(13 40 36 / 0.28), rgb(0 0 0 / 0.7));
-  --shadow-glass: inset 0 1px 0 var(--glass-highlight), 0 12px 32px -18px light-dark(rgb(13 40 36 / 0.25), rgb(0 0 0 / 0.65));
-  --focus: light-dark(#0b7a6a, #7de7d2);
+  --shadow-md: 0 18px 40px -18px light-dark(rgb(25 45 65 / 0.3), rgb(0 0 0 / 0.7));
+  --shadow-glass: inset 0 1px 0 var(--glass-highlight), 0 12px 32px -20px var(--glass-edge);
+  --focus: light-dark(#456500, #d4f75b);
 }
 
 :root[data-theme='light'] {
@@ -124,9 +114,8 @@ html {
 /* The ambient field: fixed, so the glass shows the same soft colour wherever you scroll. */
 body::before {
   background:
-    radial-gradient(60vmax 50vmax at 0% 0%, var(--ambient-1), transparent 70%),
-    radial-gradient(50vmax 40vmax at 100% 10%, var(--ambient-2), transparent 70%),
-    radial-gradient(70vmax 50vmax at 60% 110%, var(--ambient-3), transparent 70%);
+    linear-gradient(145deg, var(--ambient-1), transparent 38%),
+    linear-gradient(325deg, var(--ambient-2), transparent 55%);
   content: '';
   inset: 0;
   pointer-events: none;
@@ -257,4 +246,19 @@ textarea {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Sport colour identifies the competition; outcome colours retain their meaning. */
+:root[data-sport='cricket'] { --sport-accent: light-dark(#1765a6, #8cc8ff); }
+:root[data-sport='basketball'] { --sport-accent: light-dark(#9b4d14, #ffc08a); }
+:root[data-sport='motorsport'] { --sport-accent: light-dark(#b33c32, #ffa49b); }
+:root[data-sport='american-football'] { --sport-accent: light-dark(#6c4cac, #c5b6ff); }
+:root[data-sport='ice-hockey'] { --sport-accent: light-dark(#09677c, #95e1ec); }
+:root[data-sport='baseball'] { --sport-accent: light-dark(#315fa8, #9cbfff); }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 140ms; }
+}
+@supports not (color: light-dark(white, black)) {
+  :root { color-scheme: light; --bg:#eef0f2; --surface:#fff; --surface-solid:#fff; --surface-raised:#fff; --surface-2:#f3f5f7; --surface-3:#e6ebef; --text:#17212b; --text-muted:#46576a; --text-subtle:#506175; --accent:#456500; --accent-contrast:#fff; --accent-soft:#eff2e8; --border:#dce2e8; --border-strong:#b7c2cd; --glass:#fff; --glass-strong:#fff; --glass-border:#dce2e8; --good:#08734d; --good-soft:#e0f3e9; --bad:#ad342e; --bad-soft:#fbe9e6; --gold:#815200; --gold-soft:#f8edce; --warn:#8f4b00; --warn-soft:#fcf0dd; --heat-good:#29ad8d; --heat-bad:#e7776c; --focus:#456500; }
 }

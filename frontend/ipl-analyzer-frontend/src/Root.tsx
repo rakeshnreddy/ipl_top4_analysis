@@ -1,12 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
-import App from './App';
-import { LoadingState } from './components/PageState';
+import { Component, lazy, Suspense, useEffect, useMemo, useState, type ReactNode } from 'react';
+import './App.css';
+import { ErrorState, LoadingState } from './components/PageState';
 import { DEFAULT_LEAGUE_ID } from './data/iplData';
 import { HUB_ID, hubRequested, leagueIdFromLocation, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
-import F1Page from './f1/F1Page';
-import HubPage from './hub/HubPage';
-import LandingPage from './landing/LandingPage';
-import SportPage from './sport/SportPage';
+const App = lazy(() => import('./App'));
+const F1Page = lazy(() => import('./f1/F1Page'));
+const HubPage = lazy(() => import('./hub/HubPage'));
+const LandingPage = lazy(() => import('./landing/LandingPage'));
+const SportPage = lazy(() => import('./sport/SportPage'));
 
 /** Loads the league list, then shows the cricket page or the page for the league's sport. */
 function Root() {
@@ -14,6 +15,11 @@ function Root() {
   const wantsHub = useMemo(() => hubRequested(), []);
   const [index, setIndex] = useState<LeagueIndex | null>(null);
   const [settled, setSettled] = useState(false);
+  const sport = index?.leagues.find((league) => league.id === requestedLeague)?.sport ?? '';
+
+  useEffect(() => {
+    document.documentElement.dataset.sport = sport;
+  }, [sport]);
 
   useEffect(() => {
     let active = true;
@@ -55,4 +61,15 @@ function Root() {
   return <App leagueId={leagueId} leagueIndex={index} />;
 }
 
-export default Root;
+/** A stale/offline deployment chunk must offer recovery instead of a blank page. */
+class RouteBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() {
+    return this.state.failed
+      ? <ErrorState title="This page could not load" message="A connection or site update interrupted the page. Reload to try again." onRetry={() => window.location.reload()} />
+      : this.props.children;
+  }
+}
+const RoutedRoot = () => <RouteBoundary><Suspense fallback={<LoadingState />}><Root /></Suspense></RouteBoundary>;
+export default RoutedRoot;
