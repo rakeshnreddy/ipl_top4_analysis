@@ -116,6 +116,44 @@ async function domAudit(page) {
   });
 }
 
+/** Exercise bounded gallery loading before preserving full-page screenshot evidence. */
+async function prepareShareGallery(page, record) {
+  const selector = '.reels-gallery img';
+  const images = page.locator(selector);
+  const count = await images.count();
+  record.gallery = { imageCount: count, loadedCount: 0, images: [] };
+  for (let index = 0; index < count; index++) {
+    const image = images.nth(index);
+    try {
+      await image.scrollIntoViewIfNeeded({ timeout: 5000 });
+      await page.waitForFunction(({ selector, index }) => {
+        const image = document.querySelectorAll(selector)[index];
+        return Boolean(image?.getAttribute('src') && image.complete && image.naturalWidth > 0);
+      }, { selector, index }, { timeout: 8000 });
+      await image.evaluate(async (image) => {
+        if (typeof image.decode !== 'function') throw new Error('Image decode readiness is unavailable');
+        let timer;
+        try {
+          await Promise.race([image.decode(), new Promise((_, reject) => {
+            timer = setTimeout(() => reject(new Error('Image decode timed out after 8 seconds')), 8000);
+          })]);
+        } finally { clearTimeout(timer); }
+      });
+      const state = await image.evaluate((image) => ({ src: image.currentSrc || image.getAttribute('src'),
+        naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, complete: image.complete, decoded: true }));
+      record.gallery.images.push({ index: index + 1, passed: true, ...state });
+      record.gallery.loadedCount++;
+    } catch (error) {
+      const state = await image.evaluate((image) => ({ src: image.currentSrc || image.getAttribute('src'),
+        naturalWidth: image.naturalWidth, complete: image.complete })).catch(() => ({}));
+      record.gallery.images.push({ index: index + 1, passed: false, ...state, error: error.message.split('\n')[0] });
+      throw new Error(`Share gallery image ${index + 1}/${count} did not load for the screenshot: ${error.message.split('\n')[0]}`);
+    }
+  }
+  await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+  await settle(page);
+}
+
 async function interactionAudit(page, family, record) {
   const check = async (name, action) => {
     try { const details = await action(); record.interactions.push({ name, passed: true, ...details }); }
@@ -262,6 +300,7 @@ async function run() {
           await page.goto(record.url, { waitUntil: 'domcontentloaded', timeout: 25000 });
           await settle(page);
           record.dom = await domAudit(page);
+          if (family === 'share') await prepareShareGallery(page, record);
           record.screenshot = path.join(output, `${engine}-${family}-${width}-${theme}.png`);
           await page.screenshot({ path: record.screenshot, fullPage: true, timeout: 20000 });
           if (axeSource) {
