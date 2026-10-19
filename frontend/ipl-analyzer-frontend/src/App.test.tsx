@@ -114,6 +114,18 @@ describe('Cricket race interactions', () => {
     const panel = await screen.findByTestId('probability-panel');
     expect(within(panel).getAllByText('>99.9%').length).toBeGreaterThan(0);
   });
+
+  it('qualifies a sampled own-win threshold in the compact path summary', async () => {
+    const payload = structuredClone(mockPayload);
+    payload.analysis.qualificationPath['4'].Punjab = {
+      ...payload.analysis.qualificationPath['4'].Punjab,
+      method: 'Monte Carlo', guaranteed: 2,
+    };
+    installFetch(payload);
+    render(<Root />);
+    expect(await screen.findByText(/2\+ wins succeeds in all sampled scenarios/)).toBeInTheDocument();
+    expect(screen.queryByText(/2\+ wins locks it/)).not.toBeInTheDocument();
+  });
 });
 
 describe('App after the season ends', () => {

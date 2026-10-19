@@ -259,7 +259,11 @@ function pathShort(path: QualificationPathResult | null) {
   }
 
   const likely = typeof path.likely === 'number' ? `${path.likely}+ wins for 50%+` : 'No 50% path by own wins';
-  const guaranteed = typeof path.guaranteed === 'number' ? `${path.guaranteed}+ wins locks it` : 'No own-win lock';
+  const guaranteed = typeof path.guaranteed === 'number'
+    ? path.method.toLowerCase().includes('monte carlo')
+      ? `${path.guaranteed}+ wins succeeds in all sampled scenarios`
+      : `${path.guaranteed}+ wins locks it`
+    : 'No own-win lock';
   return `${likely}; ${guaranteed}`;
 }
 
