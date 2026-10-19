@@ -4,7 +4,22 @@ Verified 2026-10-19 against application commit `f0ee5c2`, rebased onto `6ecef1d`
 
 The release coordinator regenerated WPL/the league index and ran all 300 Python tests before this frontend pass: successful, with two skips. Regeneration left the release checkout unchanged. The independent frontend pass ran all 84 Vitest tests with one worker, ESLint and `build:github`; all passed.
 
-## Browser evidence
+## Hub integration refresh
+
+On 2026-10-19, merged published `origin/main` at hub release `1581bdb` into this branch using merge commit `ccf2bab`; no history rewrite. Regenerated with `extract_table.py --league wpl-2026`: WPL and the regenerated league index were unchanged. All 300 Python tests passed (one skip); all 87 frontend tests passed with one worker; lint and GitHub build passed.
+
+Chromium and WebKit again passed all four combinations of 375/1280px and light/dark, including actual axe, overflow/text/target checks, real section navigation, menu search/Escape focus and theme persistence. No browser failures were recorded.
+
+- [Post-hub Chromium results](../screenshots/verification-f1-post-hub/results.json)
+- [Post-hub WebKit results](../screenshots/verification-f1-post-hub-webkit/results.json)
+- [Post-hub phone, light](../screenshots/verification-f1-post-hub/chromium-f1-375-light.png)
+- [Post-hub phone, dark](../screenshots/verification-f1-post-hub/chromium-f1-375-dark.png)
+- [Post-hub desktop, light](../screenshots/verification-f1-post-hub/chromium-f1-1280-light.png)
+- [Post-hub desktop, dark](../screenshots/verification-f1-post-hub/chromium-f1-1280-dark.png)
+
+The local performance sample below predates this hub-only integration and remains explicitly labelled by its application commit. Final canonical-page and production performance are separate release checks.
+
+## Browser evidence before hub integration
 
 Chromium and WebKit each passed all four combinations of 375/1280px and light/dark. The harness ran actual axe, checked text/target sizes, page overflow and browser/network errors, clicked a section link while preserving the league query/base, exercised menu search and no-results state, restored focus with Escape, and checked theme persistence through reload. No confirmed failures were recorded.
 
