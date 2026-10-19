@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-10-02T02:37:32Z",
+    "generated_at": "2026-10-19T02:07:36Z",
     "source": "Cricsheet",
     "source_url": "https://cricsheet.org/",
     "source_license": "ODC-By 1.0",
@@ -13,6 +13,8 @@
   },
   "league": {
     "id": "wpl-2026",
+    "sport": "cricket",
+    "priority": 2,
     "name": "Women's Premier League",
     "shortName": "WPL",
     "season": "2025/26",
@@ -29,6 +31,12 @@
       }
     ],
     "secondChanceStages": [],
+    "points": {
+      "win": 2,
+      "noResult": 1,
+      "tie": 1,
+      "bonus": false
+    },
     "teams": [
       {
         "key": "RCB",
@@ -76,6 +84,8 @@
       "wins": 6,
       "losses": 2,
       "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
       "points": 12,
       "nrr": 1.247,
       "rank": 1,
@@ -89,6 +99,8 @@
       "wins": 5,
       "losses": 3,
       "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
       "points": 10,
       "nrr": -0.168,
       "rank": 2,
@@ -102,6 +114,8 @@
       "wins": 4,
       "losses": 4,
       "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
       "points": 8,
       "nrr": -0.055,
       "rank": 3,
@@ -115,6 +129,8 @@
       "wins": 3,
       "losses": 5,
       "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
       "points": 6,
       "nrr": 0.059,
       "rank": 4,
@@ -128,6 +144,8 @@
       "wins": 2,
       "losses": 6,
       "noResult": 0,
+      "ties": 0,
+      "bonusPoints": 0,
       "points": 4,
       "nrr": -1.076,
       "rank": 5,
@@ -164,7 +182,7 @@
   "analysis": {
     "method": "Final standings",
     "simulationCount": 1,
-    "generatedAt": "2026-10-02T02:37:32Z",
+    "generatedAt": "2026-10-19T02:07:36Z",
     "stateCount": 1,
     "modelNotes": [
       "The league stage is complete, so qualification is decided by the final table: points, then net run rate."

@@ -1,0 +1,1643 @@
+{
+  "base": "http://127.0.0.1:5180/",
+  "label": "foundation-webkit",
+  "startedAt": "2026-10-18T21:56:38.513Z",
+  "configuration": {
+    "engines": [
+      "webkit"
+    ],
+    "widths": [
+      375,
+      1280
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "families": [
+      "landing",
+      "hub",
+      "football",
+      "cricket",
+      "f1",
+      "share"
+    ],
+    "reducedMotion": "reduce"
+  },
+  "axe": {
+    "available": true,
+    "path": "/Users/Rakesh/.npm/_npx/0f94ee7615faf582/node_modules/axe-core/axe.min.js"
+  },
+  "cases": [
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "landing",
+      "url": "http://127.0.0.1:5180/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every title race, playoff chase and relegation fight, in odds.",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-landing-375-light.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "impact": "critical",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "hub",
+      "url": "http://127.0.0.1:5180/?view=hub",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse",
+        "heading": "All Live Races",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-hub-375-light.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "football",
+      "url": "http://127.0.0.1:5180/?league=epl-2026-27",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=epl-2026-27#table",
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#table"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#team=ARS",
+          "selected": "ARS"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Premier League 2026-27 Odds: Title, Top 4 & Relegation Chances | Playoff Pulse",
+        "heading": "Premier League Title, Top 4 & Relegation Odds",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-football-375-light.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 14
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "cricket",
+      "url": "http://127.0.0.1:5180/?league=ipl-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=ipl-2026#standings",
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#standings"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#team=GT",
+          "selected": "GT"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse",
+        "heading": "IPL 2026 Final Standings",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-cricket-375-light.png",
+      "axe": {
+        "passes": 23,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 6
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "f1",
+      "url": "http://127.0.0.1:5180/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5180/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 Title Odds: Drivers' & Constructors' Championships",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-f1-375-light.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "share",
+      "url": "http://127.0.0.1:5180/share.html",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Back to standings",
+            "selector": "a",
+            "width": 144.8,
+            "height": 20
+          }
+        ],
+        "title": "Share Kit | IPL Playoff Pulse",
+        "heading": "Share Kit",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-share-375-light.png",
+      "axe": {
+        "passes": 19,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "landing",
+      "url": "http://127.0.0.1:5180/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every title race, playoff chase and relegation fight, in odds.",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-landing-375-dark.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "impact": "critical",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "hub",
+      "url": "http://127.0.0.1:5180/?view=hub",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse",
+        "heading": "All Live Races",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-hub-375-dark.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "football",
+      "url": "http://127.0.0.1:5180/?league=epl-2026-27",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=epl-2026-27#table",
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#table"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#team=ARS",
+          "selected": "ARS"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Premier League 2026-27 Odds: Title, Top 4 & Relegation Chances | Playoff Pulse",
+        "heading": "Premier League Title, Top 4 & Relegation Odds",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-football-375-dark.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 14
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "cricket",
+      "url": "http://127.0.0.1:5180/?league=ipl-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=ipl-2026#standings",
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#standings"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#team=GT",
+          "selected": "GT"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse",
+        "heading": "IPL 2026 Final Standings",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-cricket-375-dark.png",
+      "axe": {
+        "passes": 23,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 6
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "f1",
+      "url": "http://127.0.0.1:5180/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5180/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 Title Odds: Drivers' & Constructors' Championships",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-f1-375-dark.png",
+      "axe": {
+        "passes": 29,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "share",
+      "url": "http://127.0.0.1:5180/share.html",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Back to standings",
+            "selector": "a",
+            "width": 144.8,
+            "height": 20
+          }
+        ],
+        "title": "Share Kit | IPL Playoff Pulse",
+        "heading": "Share Kit",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-share-375-dark.png",
+      "axe": {
+        "passes": 19,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "landing",
+      "url": "http://127.0.0.1:5180/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every title race, playoff chase and relegation fight, in odds.",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-landing-1280-light.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "impact": "critical",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "hub",
+      "url": "http://127.0.0.1:5180/?view=hub",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse",
+        "heading": "All Live Races",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-hub-1280-light.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "football",
+      "url": "http://127.0.0.1:5180/?league=epl-2026-27",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=epl-2026-27#table",
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#table"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#team=ARS",
+          "selected": "ARS\nArsenal"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Premier League 2026-27 Odds: Title, Top 4 & Relegation Chances | Playoff Pulse",
+        "heading": "Premier League Title, Top 4 & Relegation Odds",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-football-1280-light.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "impact": "serious",
+            "count": 20
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "cricket",
+      "url": "http://127.0.0.1:5180/?league=ipl-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=ipl-2026#standings",
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#standings"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#team=GT",
+          "selected": "GT\nGujarat Titans"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse",
+        "heading": "IPL 2026 Final Standings",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-cricket-1280-light.png",
+      "axe": {
+        "passes": 23,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 6
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "f1",
+      "url": "http://127.0.0.1:5180/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5180/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Formula 1: fastest lap point scrapped from 2025",
+            "selector": "a",
+            "width": 347.3,
+            "height": 20
+          }
+        ],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 Title Odds: Drivers' & Constructors' Championships",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-f1-1280-light.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "share",
+      "url": "http://127.0.0.1:5180/share.html",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Back to standings",
+            "selector": "a",
+            "width": 144.8,
+            "height": 20
+          }
+        ],
+        "title": "Share Kit | IPL Playoff Pulse",
+        "heading": "Share Kit",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-share-1280-light.png",
+      "axe": {
+        "passes": 19,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "landing",
+      "url": "http://127.0.0.1:5180/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every title race, playoff chase and relegation fight, in odds.",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-landing-1280-dark.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [
+          {
+            "id": "aria-valid-attr-value",
+            "impact": "critical",
+            "count": 1
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "hub",
+      "url": "http://127.0.0.1:5180/?view=hub",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse",
+        "heading": "All Live Races",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-hub-1280-dark.png",
+      "axe": {
+        "passes": 21,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "football",
+      "url": "http://127.0.0.1:5180/?league=epl-2026-27",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=epl-2026-27#table",
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#table"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=epl-2026-27#team=ARS",
+          "selected": "ARS\nArsenal"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Premier League 2026-27 Odds: Title, Top 4 & Relegation Chances | Playoff Pulse",
+        "heading": "Premier League Title, Top 4 & Relegation Odds",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-football-1280-dark.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [
+          {
+            "id": "aria-prohibited-attr",
+            "impact": "serious",
+            "count": 20
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "cricket",
+      "url": "http://127.0.0.1:5180/?league=ipl-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=ipl-2026#standings",
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#standings"
+        },
+        {
+          "name": "team row click retains league and writes team hash",
+          "passed": true,
+          "result": "http://127.0.0.1:5180/?league=ipl-2026#team=GT",
+          "selected": "GT\nGujarat Titans"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "IPL 2026 Final Standings, NRR & Playoff Results | IPL Playoff Pulse",
+        "heading": "IPL 2026 Final Standings",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 1
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-cricket-1280-dark.png",
+      "axe": {
+        "passes": 23,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 6
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "f1",
+      "url": "http://127.0.0.1:5180/?league=f1-2026",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "section click retains league and deployment base",
+          "passed": true,
+          "href": "/?league=f1-2026#drivers",
+          "result": "http://127.0.0.1:5180/?league=f1-2026#drivers"
+        },
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Formula 1: fastest lap point scrapped from 2025",
+            "selector": "a",
+            "width": 347.3,
+            "height": 20
+          }
+        ],
+        "title": "F1 2026 Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse",
+        "heading": "F1 Title Odds: Drivers' & Constructors' Championships",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 6
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-f1-1280-dark.png",
+      "axe": {
+        "passes": 28,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "share",
+      "url": "http://127.0.0.1:5180/share.html",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final",
+            "WPL 2026Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [
+          {
+            "tag": "a",
+            "text": "Back to standings",
+            "selector": "a",
+            "width": 144.8,
+            "height": 20
+          }
+        ],
+        "title": "Share Kit | IPL Playoff Pulse",
+        "heading": "Share Kit",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit/webkit-share-1280-dark.png",
+      "axe": {
+        "passes": 19,
+        "incomplete": [],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    }
+  ],
+  "summary": {
+    "cases": 24,
+    "passed": 24,
+    "failed": 0,
+    "axeAvailable": true,
+    "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-foundation-webkit"
+  },
+  "limits": [
+    "Synthetic browser checks do not establish real-user INP.",
+    "Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.",
+    "Inline prose links are recorded separately from the required 44px standalone controls.",
+    "The route matrix uses current served payload states; it does not inject missing/error/season fixtures."
+  ],
+  "completedAt": "2026-10-18T21:57:39.835Z"
+}

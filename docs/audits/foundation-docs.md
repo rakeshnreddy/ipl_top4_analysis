@@ -39,3 +39,7 @@ No new tutorial is required for these presentation changes. No VERSION file or v
 Optional discoverability improvement: turn README's plain “see DESIGN.md” into a Markdown link and add a link to `docs/site-analysis.md`, so the redesign evidence is reachable directly from the repository front door.
 
 The four required corrections above were sent to the lead implementer. This report must not be treated as a clean documentation sign-off until they are applied and rechecked.
+
+## Lead resolution
+
+All four required corrections were applied before the foundation release: README now scopes exact/Monte Carlo cricket and the auto source default; DESIGN explicitly marks the page-family target contract; hub cards are now solid and the menu uses the shared 10px blur. Footer/download targets and F1 keyboard scroll regions were also repaired after actual browser findings. Final foundation verification: Chromium 36/36 cases at 320/375/1280 in both themes and WebKit 24/24 at 375/1280, with zero axe violations, overflow, small standalone controls, sub-12px text or console errors. The corresponding machine-readable result files are saved beside this report in the screenshot evidence directories.
