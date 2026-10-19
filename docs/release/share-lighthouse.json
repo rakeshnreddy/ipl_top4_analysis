@@ -1,0 +1,45 @@
+{
+  "url": "http://127.0.0.1:5222/ipl_top4_analysis/share.html",
+  "fetchTime": "2026-10-19T20:34:10.476Z",
+  "performance": 98,
+  "accessibility": 100,
+  "lcpMs": 2272.59015,
+  "fcpMs": 1515.0601,
+  "cls": 0,
+  "tbtMs": 0,
+  "images": [
+    {
+      "url": "http://127.0.0.1:5222/ipl_top4_analysis/social/instagram-carousel/2026-05-24/slide-01-overview.webp",
+      "transferSize": 58268
+    }
+  ],
+  "limits": [
+    "Local mobile Lighthouse point estimate; synthetic TBT is not real-user INP.",
+    "Production and combined-branch verification remain with the release owner."
+  ],
+  "sourceCommit": "f345dbf81a01e75bfa7b63eab840678bdfd2faca",
+  "baseCommit": "247f6898209622e95b05a77291c7c821198fe175",
+  "measurementCommit": "86cc9ff",
+  "rebasedShareInputsIdentical": true,
+  "checks": {
+    "python": {
+      "tests": 303,
+      "skipped": 1,
+      "passed": true
+    },
+    "frontend": {
+      "tests": 105,
+      "workers": 1,
+      "passed": true
+    },
+    "lint": true,
+    "githubBuild": true,
+    "wplAndIndexRegenerated": true,
+    "dataDiff": false
+  },
+  "independentReview": {
+    "passed": 5,
+    "total": 5,
+    "scope": "Original PNG integrity, optional preview fallback, individual archive dates, preload reuse and responsive preview readability."
+  }
+}
