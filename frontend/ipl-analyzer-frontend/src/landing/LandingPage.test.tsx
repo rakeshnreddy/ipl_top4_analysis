@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from '../Root';
 import type { LeagueIndex } from '../data/leagues';
 import { finalPayload, installFetch, mockManifest } from '../test/fixtures';
-import { multiSportIndex } from '../test/sportFixtures';
+import { footballPayload, multiSportIndex } from '../test/sportFixtures';
 
 const index: LeagueIndex = {
   ...multiSportIndex,
@@ -16,9 +16,9 @@ const index: LeagueIndex = {
   ),
 };
 
-function open(path = '/') {
+function open(path = '/', seasonIndex = index, feature: unknown = footballPayload) {
   window.history.replaceState(null, '', path);
-  installFetch(finalPayload, mockManifest, { '/data/leagues.json': index });
+  installFetch(finalPayload, mockManifest, { '/data/leagues.json': seasonIndex, '/data/epl-2026-27.json': feature });
   return render(<Root />);
 }
 
@@ -33,27 +33,73 @@ describe('LandingPage', () => {
     document.documentElement.removeAttribute('data-theme');
   });
 
-  it('is the site root, with the biggest live races from the data', async () => {
+  it('shows numerical title chances from the payload and a direct league destination', async () => {
     open();
 
-    expect(await screen.findByRole('heading', { level: 1, name: /Every title race/ })).toBeInTheDocument();
-    const races = screen.getByRole('heading', { name: 'Biggest races right now' }).closest('section')!;
+    expect(await screen.findByRole('heading', { level: 1, name: /Every race.*In the balance/ })).toBeInTheDocument();
+    const feature = await screen.findByRole('link', { name: 'Explore the title race' });
+    expect(feature).toHaveAttribute('href', '/?league=epl-2026-27');
+    const raceFeature = feature.closest('section')!;
+    expect(within(raceFeature).getByText('81%')).toBeInTheDocument();
+    expect(raceFeature.querySelector('.landing-feature-track > span')).toHaveStyle({ width: '81.2%' });
+    const races = screen.getByRole('heading', { name: 'Featured races' }).closest('section')!;
     const epl = within(races).getByRole('link', { name: /Premier League/ });
     expect(epl).toHaveAttribute('href', '/?league=epl-2026-27');
     expect(epl).toHaveTextContent('ARS 81%');
-    expect(screen.getByRole('link', { name: /See all 1 live races/ })).toHaveAttribute('href', '/?view=hub');
+    expect(screen.getByRole('link', { name: 'Explore the races' })).toHaveAttribute('href', '/?view=hub');
     await waitFor(() => expect(document.title).toBe('Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports'));
   });
 
-  it('lists every league under its sport and links to the method on the same page', async () => {
+  it('opens sport directories into direct links and explains the cricket model', async () => {
     open();
 
-    const sports = (await screen.findByRole('heading', { name: 'Every League, by Sport' })).closest('section')!;
-    expect(within(sports).getByRole('heading', { name: 'Football' })).toBeInTheDocument();
-    expect(within(sports).getByRole('heading', { name: 'Cricket' })).toBeInTheDocument();
+    const sports = (await screen.findByRole('heading', { name: 'Find your league.' })).closest('section')!;
+    expect(within(sports).getByRole('button', { name: /Football/ })).toHaveAttribute('aria-expanded', 'false');
+    const cricket = within(sports).getByRole('button', { name: /Cricket/ });
+    fireEvent.click(cricket);
+    expect(cricket).toHaveAttribute('aria-expanded', 'true');
     expect(within(sports).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
     expect(screen.getByRole('link', { name: 'How the odds are made' })).toHaveAttribute('href', '/#method');
-    expect(screen.getByRole('heading', { name: 'How the Odds Are Made' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /The odds have a method/ })).toBeInTheDocument();
+    expect(screen.getByText(/Cricket uses equal-strength result scenarios/)).toBeInTheDocument();
+  });
+
+  it('keeps tiny tracks exact and near-certainty formatted safely', async () => {
+    const feature = structuredClone(footballPayload);
+    feature.analysis.probabilities.Arsenal.title = 99.96;
+    feature.analysis.probabilities.Liverpool.title = 0.04;
+    feature.analysis.probabilities.Chelsea.title = 0;
+    open('/', index, feature);
+    const race = (await screen.findByRole('link', { name: 'Explore the title race' })).closest('section')!;
+    expect(within(race).getByText('>99.9%')).toBeInTheDocument();
+    expect(race.querySelector('.landing-contender-track > span')).toHaveStyle({ width: '0.04%' });
+    expect(race.querySelectorAll('.landing-contender-track > span')[1]).toHaveStyle({ width: '0%' });
+  });
+
+  it('features multiple sports before a second league from one sport and labels preseason honestly', async () => {
+    const epl = index.leagues[0];
+    const expanded: LeagueIndex = { ...index, leagues: [
+      epl,
+      { ...epl, id: 'la-liga-2026-27', shortName: 'La Liga' },
+      { ...epl, id: 'bundesliga-2026-27', shortName: 'Bundesliga' },
+      { ...epl, id: 'nba-2026-27', sport: 'basketball', shortName: 'NBA', started: false },
+      { ...epl, id: 'f1-2026', sport: 'motorsport', shortName: 'F1' },
+    ] };
+    open('/', expanded);
+    const races = (await screen.findByRole('heading', { name: 'Featured races' })).closest('section')!;
+    const links = within(races).getAllByRole('link');
+    expect(links[0]).toHaveTextContent('Premier League');
+    expect(links[1]).toHaveTextContent('NBA');
+    expect(links[2]).toHaveTextContent('F1');
+    expect(links[1]).toHaveTextContent('Pre-season');
+    expect(within(races).getByText('4 seasons in progress · 1 upcoming')).toBeInTheDocument();
+  });
+
+  it('keeps direct access when the extra preview payload is malformed', async () => {
+    open('/', index, { analysis: { probabilities: {} } });
+    expect(await screen.findByRole('link', { name: 'Explore this season' })).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    expect(screen.queryByText('0–100% scale')).not.toBeInTheDocument();
   });
 
   it('switches between light and dark and remembers the choice', async () => {
