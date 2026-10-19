@@ -48,7 +48,7 @@ describe('SportPage', () => {
     expect(within(matters).getByText('88%')).toBeInTheDocument();
 
     const moves = screen.getByRole('heading', { name: 'Biggest Moves' }).closest('section')!;
-    expect(within(moves).getByText('ARS +6.5')).toBeInTheDocument();
+    expect(within(moves).getByText('ARS +6.5 pp')).toBeInTheDocument();
   });
 
   it('keeps the league in section links, the skip link and team links', async () => {
@@ -72,6 +72,67 @@ describe('SportPage', () => {
     expect(within(panel).getByRole('figure', { name: 'Finishing position chances for TOT' })).toBeInTheDocument();
     // Spurs host Arsenal: the win/draw/loss split is from Spurs' side.
     expect(within(panel).getByText('Win 20% · Draw 25% · Loss 55%')).toBeInTheDocument();
+  });
+
+  it('keeps tiny match probabilities proportional without rounding to certainty', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...footballPayload,
+      fixtures: [{ ...footballPayload.fixtures[0], probabilities: { home: 0.996, draw: 0.004, away: 0 } }],
+    });
+    const panel = (await screen.findByRole('heading', { name: 'Fixture Predictions' })).closest('section')!;
+    const graphic = within(panel).getByRole('img', { name: 'Home 99.6%, Draw 0.4%, Away –' });
+    expect(graphic.querySelector('.outcome-home')).toHaveStyle({ width: '99.6%' });
+    expect(graphic.querySelector('.outcome-draw')).toHaveStyle({ width: '0.4%' });
+    expect(graphic.querySelector('.outcome-away')).toHaveStyle({ width: '0%' });
+    expect(within(panel).getByText('99.6%')).toBeVisible();
+    expect(within(panel).queryByText('100%')).not.toBeInTheDocument();
+  });
+
+  it('shows an explicit distribution scale and values without hover', async () => {
+    openLeague('/?league=epl-2026-27');
+    const panel = (await screen.findByRole('heading', { name: 'Arsenal' })).closest('aside')!;
+    expect(within(panel).getByText('Scale: 0–90% · adaptive')).toBeVisible();
+    expect(within(panel).getByText(/Most likely: 1st/)).toHaveTextContent('81%');
+    fireEvent.click(within(panel).getByText('See every position chance'));
+    expect(within(panel).getByText('18.76%')).toBeInTheDocument();
+    expect(within(panel).getByText('0.04%')).toBeInTheDocument();
+  });
+
+  it('shows the real conditional swing and chance scale', async () => {
+    openLeague('/?league=epl-2026-27');
+    const panel = (await screen.findByRole('heading', { name: 'Matches That Matter' })).closest('section')!;
+    expect(within(panel).getByText('30.2 pp')).toBeVisible();
+    expect(within(panel).getByText('Chance scale: 0–100%')).toBeVisible();
+    const range = panel.querySelector<HTMLElement>('.conditional-range')!;
+    expect(parseFloat(range.style.left)).toBeCloseTo(58.1);
+    expect(parseFloat(range.style.width)).toBeCloseTo(30.2);
+  });
+
+  it('ignores malformed team hashes without losing the league', async () => {
+    openLeague('/?league=epl-2026-27#team=%');
+    expect(await screen.findByRole('heading', { name: 'Premier League Title, Top 2 & Relegation Odds' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Arsenal' })).toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('scrolls fresh team links after loading and focuses details after selection', async () => {
+    openLeague('/?league=epl-2026-27#team=TOT');
+    await screen.findByRole('heading', { name: 'Tottenham Hotspur' });
+    await waitFor(() => expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled());
+    fireEvent.click(within(screen.getByRole('table')).getAllByRole('button')[0]);
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Arsenal' })).toHaveFocus());
+    expect(within(screen.getByRole('table')).getAllByRole('button')[0]).toHaveAttribute('aria-controls', 'team');
+  });
+
+  it('keeps an empty published table readable without inventing a selected team', async () => {
+    openLeague('/?league=epl-2026-27', {
+      ...footballPayload, league: { ...footballPayload.league, teams: [] },
+      standings: [], fixtures: [], results: [], matchesThatMatter: [], movement: null,
+      analysis: { ...footballPayload.analysis, probabilities: {}, positions: {}, expected: {} },
+    });
+    expect(await screen.findByText('No teams have been published for this season yet.')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Arsenal' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
   it('marks finished races instead of showing odds once the season is over', async () => {
