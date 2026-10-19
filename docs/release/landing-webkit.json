@@ -1,0 +1,290 @@
+{
+  "base": "http://127.0.0.1:5224/ipl_top4_analysis/",
+  "label": "landing-webkit",
+  "startedAt": "2026-10-19T08:54:07.526Z",
+  "configuration": {
+    "engines": [
+      "webkit"
+    ],
+    "widths": [
+      375,
+      1280
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "families": [
+      "landing"
+    ],
+    "reducedMotion": "reduce"
+  },
+  "axe": {
+    "available": true,
+    "path": "/Users/Rakesh/.npm/_npx/0f94ee7615faf582/node_modules/axe-core/axe.min.js"
+  },
+  "cases": [
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "family": "landing",
+      "url": "http://127.0.0.1:5224/ipl_top4_analysis/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every race.In the balance.",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-landing-webkit/webkit-landing-375-light.png",
+      "axe": {
+        "passes": 22,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 7
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "dark",
+      "family": "landing",
+      "url": "http://127.0.0.1:5224/ipl_top4_analysis/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 375,
+        "pageWidth": 375,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every race.In the balance.",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-landing-webkit/webkit-landing-375-dark.png",
+      "axe": {
+        "passes": 22,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 7
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "light",
+      "family": "landing",
+      "url": "http://127.0.0.1:5224/ipl_top4_analysis/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "light",
+          "chosen": "dark",
+          "restored": "dark"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every race.In the balance.",
+        "theme": "light",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-landing-webkit/webkit-landing-1280-light.png",
+      "axe": {
+        "passes": 22,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 7
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "theme": "dark",
+      "family": "landing",
+      "url": "http://127.0.0.1:5224/ipl_top4_analysis/",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "interactions": [
+        {
+          "name": "league search filters and empty state; Escape restores focus",
+          "passed": true,
+          "matches": [
+            "Premier League 2026-27Live",
+            "Scottish Premiership 2026-27Live",
+            "WPL 2026Final",
+            "CPL 2026Final",
+            "WCPL 2026Final",
+            "IPL 2026Final",
+            "LPL 2026Final",
+            "BPL 2025-26Final"
+          ]
+        },
+        {
+          "name": "theme choice survives reload",
+          "passed": true,
+          "previous": "dark",
+          "chosen": "light",
+          "restored": "light"
+        }
+      ],
+      "passed": true,
+      "dom": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "overflowElements": [],
+        "smallText": [],
+        "smallTargets": [],
+        "inlineLinks": [],
+        "title": "Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports",
+        "heading": "Every race.In the balance.",
+        "theme": "dark",
+        "reducedMotion": true,
+        "tables": 0
+      },
+      "screenshot": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-landing-webkit/webkit-landing-1280-dark.png",
+      "axe": {
+        "passes": 22,
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "count": 7
+          }
+        ],
+        "violations": []
+      },
+      "menuSmallTargets": []
+    }
+  ],
+  "summary": {
+    "cases": 4,
+    "passed": 4,
+    "failed": 0,
+    "axeAvailable": true,
+    "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-landing-webkit"
+  },
+  "limits": [
+    "Synthetic browser checks do not establish real-user INP.",
+    "Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.",
+    "Inline prose links are recorded separately from the required 44px standalone controls.",
+    "The route matrix uses current served payload states; it does not inject missing/error/season fixtures."
+  ],
+  "completedAt": "2026-10-19T08:54:19.034Z"
+}
