@@ -1,0 +1,130 @@
+/* Cricket: an azure scorebook, with gold reserved for an actual champion. */
+.cricket-page {
+  --cricket-accent: var(--sport-accent, var(--accent));
+  row-gap: var(--space-5);
+}
+
+.cricket-page .ladder-panel,
+.cricket-page .probability-panel {
+  background: var(--surface-solid);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.cricket-page .page-header { border-top-color: var(--cricket-accent); }
+.cricket-final .page-header { border-top-color: var(--gold); }
+.cricket-page .section-heading { align-items: start; }
+.cricket-page .standings-table .team-button { grid-template-columns: 4px minmax(0, 1fr) 16px; min-width: 72px; }
+.cricket-selected-mark {
+  color: var(--cricket-accent);
+  font-size: var(--text-xs);
+  grid-column: 3;
+  grid-row: 1;
+  text-align: right;
+}
+.cricket-page .standing-row.is-selected { box-shadow: inset 0 -1px 0 var(--cricket-accent); }
+.cricket-page abbr { text-decoration: none; }
+.cricket-table-help { border-top: 1px solid var(--border); margin-top: var(--space-3); }
+.cricket-table-help summary,
+.cricket-method summary {
+  align-content: center;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  min-height: var(--tap);
+  padding: var(--space-2) 0;
+}
+.cricket-table-help p { color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2); max-width: 65ch; }
+.cricket-race-scale {
+  color: var(--text-subtle);
+  display: flex;
+  font-size: var(--text-xs);
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+.cricket-page .race-bars { gap: 0; }
+.cricket-page .race-bar-row {
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  gap: var(--space-3);
+  grid-template-columns: 46px minmax(0, 1fr) 60px;
+  min-height: var(--tap);
+  padding: var(--space-2) 0;
+}
+.cricket-page .race-bar-row:last-child { border-bottom: 0; }
+.cricket-page .race-bar-row.is-selected .race-team::after { content: ' ✓'; }
+.cricket-page .race-track { background: var(--surface-3); border-radius: 2px; height: 12px; }
+.cricket-page .race-fill { background: var(--cricket-accent); border-radius: 0 2px 2px 0; }
+.cricket-page .race-summary-panel {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--border-strong);
+  box-shadow: none;
+  padding: var(--space-5) 0 0;
+}
+.cricket-page .race-summary-grid article { padding: var(--space-4); }
+.cricket-page .race-summary-grid strong { font-family: var(--font-display); font-size: var(--text-xl); }
+.cricket-champion {
+  align-items: center;
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  display: flex;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-5);
+  padding: var(--space-4);
+}
+.cricket-champion-code {
+  align-items: center;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  height: 56px;
+  justify-content: center;
+  min-width: 56px;
+  padding: 0 var(--space-2);
+}
+.cricket-champion > div { display: grid; gap: var(--space-1); min-width: 0; }
+.cricket-champion strong { font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.2; }
+.cricket-champion small { color: var(--text-muted); font-size: var(--text-xs); }
+.cricket-page .playoff-list li { border-left: 1px solid var(--border-strong); gap: var(--space-1); padding: var(--space-3) 0 var(--space-3) var(--space-4); }
+.cricket-page .playoff-list li.is-final { border-left-color: var(--gold); }
+.cricket-team-view { border-top: 2px solid var(--cricket-accent); min-width: 0; padding-top: var(--space-5); }
+.cricket-page .spotlight-title > div { min-width: 0; }
+.cricket-team-context {
+  color: var(--text-subtle);
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+  text-transform: uppercase;
+}
+.cricket-page #selected-team-title { overflow-wrap: anywhere; }
+.cricket-page .deep-dive-grid article { padding: var(--space-4); }
+.cricket-live .deep-dive-grid article:first-child > strong { color: var(--cricket-accent); font-family: var(--font-display); font-size: var(--text-2xl); }
+.cricket-page .deep-dive-columns { gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.cricket-page .deep-dive-section { border-top: 1px solid var(--border-strong); padding-top: var(--space-4); }
+.cricket-page .deep-dive-section h3,
+.cricket-page .path-details h3 { font-family: var(--font-display); font-size: var(--text-lg); }
+.cricket-method { border-top: 1px solid var(--border-strong); display: grid; gap: var(--space-3); padding-top: var(--space-5); }
+.cricket-method p,
+.cricket-method ul { color: var(--text-muted); max-width: 80ch; }
+.cricket-method ul { display: grid; font-size: var(--text-sm); gap: var(--space-2); margin: 0; padding-left: var(--space-5); }
+
+@media (min-width: 1000px) {
+  .cricket-page .race-grid { gap: var(--space-5); grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr); }
+}
+@media (max-width: 520px) {
+  .cricket-page .race-summary-grid article,
+  .cricket-page .deep-dive-grid article { flex-basis: 130px; padding: var(--space-3); }
+  .cricket-page .race-summary-grid strong { font-size: var(--text-lg); }
+  .cricket-page .team-detail-header { align-items: start; flex-direction: column; }
+}

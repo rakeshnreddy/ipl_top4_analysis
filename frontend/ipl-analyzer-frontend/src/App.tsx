@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import './App.css';
+import './cricket.css';
 import {
   DEFAULT_LEAGUE_ID,
   isLeagueComplete,
@@ -19,6 +20,7 @@ import { ErrorState, LoadingState } from './components/PageState';
 import SiteHeader from './components/SiteHeader';
 import { appBaseHref, setJsonLd, setPageMeta } from './lib/seo';
 import { heatStyle, readableOn, samePageHref, scrollToSection } from './lib/ui';
+import { formatChance } from './sport/format';
 import {
   formatGeneratedAt,
   formatNrr,
@@ -36,8 +38,12 @@ const DEFAULT_TIERS: QualificationTier[] = [
   { size: 4, label: 'Top 4' },
   { size: 2, label: 'Top 2' },
 ];
-const SECTION_HASHES = new Set(['standings', 'top4', 'deep-dive', 'playoffs']);
+const SECTION_HASHES = new Set(['standings', 'top4', 'deep-dive', 'playoffs', 'method']);
 const SHARE_KIT_HREF = `${import.meta.env.BASE_URL}share.html`;
+
+/** Exact enumeration can establish certainty; Monte Carlo cannot. */
+const qualificationChance = (payload: IplSeasonPayload, value: number) =>
+  payload.analysis.method.toLowerCase().includes('monte carlo') ? formatChance(value) : formatPercent(value);
 
 const formatFixtureTime = (fixture: IplFixture) => {
   if (!fixture.dateTimeGMT) {
@@ -197,7 +203,12 @@ function teamKeyFromHash(payload: IplSeasonPayload) {
     return null;
   }
 
-  const requested = decodeURIComponent(hash.slice('team='.length)).trim().toLowerCase();
+  let requested: string;
+  try {
+    requested = decodeURIComponent(hash.slice('team='.length)).trim().toLowerCase();
+  } catch {
+    return null;
+  }
   if (!requested) {
     return null;
   }
@@ -231,9 +242,13 @@ function pathSummary(path: QualificationPathResult | null, label: string) {
     return `No ${label} path data available.`;
   }
 
-  const possible = typeof path.possible === 'number' ? `${path.possible}+ win(s) keeps it possible` : 'not alive in the exact model';
-  const likely = typeof path.likely === 'number' ? `${path.likely}+ win(s) reaches 50%+` : 'no 50% path by own wins alone';
-  const guaranteed = typeof path.guaranteed === 'number' ? `${path.guaranteed}+ win(s) guarantees it` : 'no own-win guarantee';
+  const possible = typeof path.possible === 'number' ? `${path.possible}+ wins keeps it possible` : 'no path in this model';
+  const likely = typeof path.likely === 'number' ? `${path.likely}+ wins reaches 50%+` : 'own wins alone do not reach 50%';
+  const guaranteed = typeof path.guaranteed === 'number'
+    ? path.method.toLowerCase().includes('monte carlo')
+      ? `${path.guaranteed}+ wins succeeds in every sampled scenario`
+      : `${path.guaranteed}+ wins guarantees it in this model`
+    : 'no guarantee from own wins alone';
 
   return `${possible}; ${likely}; ${guaranteed}.`;
 }
@@ -244,7 +259,11 @@ function pathShort(path: QualificationPathResult | null) {
   }
 
   const likely = typeof path.likely === 'number' ? `${path.likely}+ wins for 50%+` : 'No 50% path by own wins';
-  const guaranteed = typeof path.guaranteed === 'number' ? `${path.guaranteed}+ wins locks it` : 'No own-win lock';
+  const guaranteed = typeof path.guaranteed === 'number'
+    ? path.method.toLowerCase().includes('monte carlo')
+      ? `${path.guaranteed}+ wins succeeds in all sampled scenarios`
+      : `${path.guaranteed}+ wins locks it`
+    : 'No own-win lock';
   return `${likely}; ${guaranteed}`;
 }
 
@@ -325,6 +344,11 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
   const [targetGoal, setTargetGoal] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const selectedTitleRef = useRef<HTMLHeadingElement>(null);
+  const revealSelectedTeam = useCallback(() => {
+    scrollToSection('deep-dive');
+    window.setTimeout(() => selectedTitleRef.current?.focus({ preventScroll: true }), 0);
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -372,7 +396,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
       const hashTeam = teamKeyFromHash(payload);
       if (hashTeam) {
         setSelectedTeamKey(hashTeam);
-        scrollToSection('deep-dive');
+        revealSelectedTeam();
         return;
       }
 
@@ -390,7 +414,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
       window.removeEventListener('hashchange', syncTeamFromHash);
       window.removeEventListener('popstate', syncTeamFromHash);
     };
-  }, [payload]);
+  }, [payload, revealSelectedTeam]);
 
   useEffect(() => {
     if (!payload) {
@@ -445,7 +469,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
   const handleTeamSelect = (team: IplStanding) => {
     setSelectedTeamKey(team.teamKey);
     updateHash(`team=${encodeURIComponent(team.shortName)}`);
-    scrollToSection('deep-dive');
+    revealSelectedTeam();
   };
 
   const { shortName, seasonLabel } = leagueInfo(payload);
@@ -456,14 +480,14 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
         Skip to content
       </a>
       <SiteHeader currentId={payload.league?.id ?? leagueId} currentLabel={`${shortName} ${seasonLabel}`} index={leagueIndex} />
-      <main className="pulse-app" data-testid="app-loaded" id="main">
+      <main className={`pulse-app cricket-page ${isFinal ? 'cricket-final' : 'cricket-live'}`} data-testid="app-loaded" id="main">
         {isFinal ? (
           <FinalHero payload={payload} />
         ) : (
           <HeroSummary payload={payload} seasonStarted={seasonStarted} snapshot={snapshot} sourceIsStale={sourceIsStale} />
         )}
 
-        <section className="race-grid" aria-label={isFinal ? 'IPL final standings and playoffs' : 'IPL playoff race board'}>
+        <section className="race-grid" aria-label={isFinal ? `${shortName} final standings and playoffs` : `${shortName} playoff race board`}>
           <div className="ladder-panel" id="standings" data-testid="standings-ladder">
             <div className="section-heading">
               <h2>{isFinal ? 'Final Standings' : 'Standings'}</h2>
@@ -509,6 +533,11 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
                   `${item.points} point${item.points === 1 ? '' : 's'} deducted (${item.note}).`}
               </p>
             ))}
+            <details className="cricket-table-help">
+              <summary>How to read the table</summary>
+              <p>Pts are league points. Net run rate (NRR) compares a team&apos;s scoring rate with its opponents&apos;; it separates teams level on points.</p>
+              <p>{isFinal ? 'Ticks show the places each team reached.' : 'The odds estimate each qualification outcome. Select a team for its remaining games and paths.'}</p>
+            </details>
           </div>
 
           {isFinal ? (
@@ -520,12 +549,15 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
                 <p>Probabilities exclude NRR simulation</p>
               </div>
 
+              <div className="cricket-race-scale" aria-hidden="true"><span>0%</span><span>Qualification chance</span><span>100%</span></div>
+
               <div className="race-bars">
                 {sortedStandings.map((team) => {
                   const probability = tierProbability(payload, team.teamKey, playoffTier.size);
                   return (
                     <button
                       aria-pressed={selectedTeam.teamKey === team.teamKey}
+                      aria-controls="deep-dive"
                       className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
                       key={team.teamKey}
                       type="button"
@@ -535,10 +567,10 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
                       <span aria-hidden="true" className="race-track">
                         <span
                           className="race-fill"
-                          style={{ width: `${Math.max(probability, 2)}%`, backgroundColor: teamColor(team.teamKey) }}
+                          style={{ width: `${probability}%` }}
                         />
                       </span>
-                      <strong>{formatPercent(probability)}</strong>
+                      <strong>{qualificationChance(payload, probability)}</strong>
                     </button>
                   );
                 })}
@@ -553,7 +585,10 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
           )}
         </section>
 
-        <section className="team-detail-panel spotlight-card" id="deep-dive" aria-label="Selected team detail">
+        {isFinal && <SeasonSummary payload={payload} />}
+        {!isFinal && seasonStarted && <TodayRaceSummary payload={payload} snapshot={snapshot} />}
+
+        <section className="cricket-team-view" id="deep-dive" aria-labelledby="selected-team-title">
           <div className="team-detail-header">
             <div className="spotlight-title">
               <span
@@ -566,7 +601,10 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
               >
                 {selectedTeam.shortName}
               </span>
-              <h2>{selectedTeam.fullName}</h2>
+              <div>
+                <span className="cricket-team-context">{isFinal ? 'Season review' : 'Team path'}</span>
+                <h2 id="selected-team-title" ref={selectedTitleRef} tabIndex={-1}>{selectedTeam.fullName}</h2>
+              </div>
             </div>
             {!isFinal && (
               <div className="goal-tabs" role="group" aria-label="Select goal">
@@ -584,25 +622,35 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
               </div>
             )}
           </div>
+          {isFinal ? (
+            <TeamSeasonCard payload={payload} team={selectedTeam} />
+          ) : (
+            <TeamDeepDive
+              goalLabel={tierLabel(payload, goal)}
+              path={selectedGoalPath}
+              payload={payload}
+              playoffChance={playoffChance}
+              playoffPath={playoffPath}
+              team={selectedTeam}
+              topChance={topChance}
+              topPath={topPath}
+            />
+          )}
         </section>
 
-        {isFinal && <SeasonSummary payload={payload} />}
-        {!isFinal && seasonStarted && <TodayRaceSummary payload={payload} snapshot={snapshot} />}
-
-        {isFinal ? (
-          <TeamSeasonCard payload={payload} team={selectedTeam} />
-        ) : (
-          <TeamDeepDive
-            goalLabel={tierLabel(payload, goal)}
-            path={selectedGoalPath}
-            payload={payload}
-            playoffChance={playoffChance}
-            playoffPath={playoffPath}
-            team={selectedTeam}
-            topChance={topChance}
-            topPath={topPath}
-          />
-        )}
+        <section className="cricket-method" id="method" aria-labelledby="method-title">
+          <h2 id="method-title">How These Odds Work</h2>
+          <p>{isFinal
+            ? 'The league table uses recorded points and net run rate. The playoff results decide the champion.'
+            : 'These are qualification scenarios, with equal win chances for each remaining match. Unresolved ties share available places; future net run rate is not forecast.'}</p>
+          <details>
+            <summary>Model details and limitations</summary>
+            <ul>
+              <li>{payload.analysis.method}{!isFinal && ` · ${payload.analysis.simulationCount.toLocaleString()} scenarios`}</li>
+              {(payload.analysis.modelNotes ?? []).map((note) => <li key={note}>{note}</li>)}
+            </ul>
+          </details>
+        </section>
       </main>
 
       <footer className="pulse-footer">
@@ -649,7 +697,7 @@ const HeroSummary = ({
   sourceIsStale: boolean;
 }) => {
   const { shortName, seasonLabel, playoffTier } = leagueInfo(payload);
-  const chance = (team: IplStanding) => formatPercent(tierProbability(payload, team.teamKey, playoffTier.size));
+  const chance = (team: IplStanding) => qualificationChance(payload, tierProbability(payload, team.teamKey, playoffTier.size));
   const opener = payload.fixtures[0];
   const facts = seasonStarted
     ? [
@@ -687,10 +735,11 @@ const HeroSummary = ({
           { href: '#standings', label: 'Standings' },
           { href: '#top4', label: `${playoffTier.label} odds` },
           { href: '#deep-dive', label: 'Team path' },
+          { href: '#method', label: 'How it works' },
           ...(isIplLeague(payload) ? [{ href: SHARE_KIT_HREF, label: 'Share kit' }] : []),
         ]}
         status={{ label: seasonStarted ? 'Live' : 'Pre-season', tone: seasonStarted ? 'live' : 'pre-season' }}
-        strap="Updated daily after the night match"
+        strap="Updated twice daily · equal-chance qualification scenarios"
         title={`${shortName} ${playoffTier.label} Qualification Probabilities`}
       />
       {sourceIsStale && <p className="stale-alert">Data freshness is marked {payload.metadata.data_freshness_status}.</p>}
@@ -730,7 +779,7 @@ const TodayRaceSummary = ({
           <strong>{snapshot.cutlineTeam?.shortName || 'Unavailable'}</strong>
           {snapshot.cutlineTeam && (
             <small>
-              {formatPercent(tierProbability(payload, snapshot.cutlineTeam.teamKey, playoffTier.size))} {label} chance
+              {qualificationChance(payload, tierProbability(payload, snapshot.cutlineTeam.teamKey, playoffTier.size))} {label} chance
             </small>
           )}
         </article>
@@ -793,8 +842,8 @@ const StandingsTable = ({
             <th className="col-optional" scope="col">
               Record
             </th>
-            <th scope="col">Pts</th>
-            <th scope="col">NRR</th>
+            <th scope="col"><abbr title="League points">Pts</abbr></th>
+            <th scope="col"><abbr title="Net run rate">NRR</abbr></th>
             <th className="col-optional" scope="col">
               {isFinal ? 'Played' : 'Left'}
             </th>
@@ -830,6 +879,7 @@ const StandingsTable = ({
                 <th className="col-team" scope="row">
                   <button
                     aria-pressed={selected}
+                    aria-controls="deep-dive"
                     className="team-button"
                     onClick={(event) => {
                       event.stopPropagation();
@@ -840,6 +890,7 @@ const StandingsTable = ({
                     <span aria-hidden="true" className="team-chip" style={{ backgroundColor: teamColor(team.teamKey) }} />
                     <strong>{team.shortName}</strong>
                     <small>{team.fullName}</small>
+                    <span aria-hidden="true" className="cricket-selected-mark">{selected ? '✓' : ''}</span>
                   </button>
                 </th>
                 <td className="col-optional">{formatRecord(team)}</td>
@@ -868,10 +919,10 @@ const StandingsTable = ({
                 ) : (
                   <>
                     <td className="col-tier" style={heatStyle(playoffOdds, 'good')}>
-                      {formatPercent(playoffOdds)}
+                      {qualificationChance(payload, playoffOdds)}
                     </td>
                     <td className="col-tier" style={heatStyle(topOdds, 'good')}>
-                      {formatPercent(topOdds)}
+                      {qualificationChance(payload, topOdds)}
                     </td>
                   </>
                 )}
@@ -912,6 +963,7 @@ const FinalHero = ({ payload }: { payload: IplSeasonPayload }) => {
         { href: '#standings', label: 'Standings' },
         { href: '#playoffs', label: 'Playoffs' },
         { href: '#deep-dive', label: 'Team view' },
+        { href: '#method', label: 'How it works' },
       ]}
       status={champion ? { label: 'Final', tone: 'final' } : { label: 'Playoffs', tone: 'playoffs' }}
       strap={
@@ -1010,10 +1062,20 @@ const PlayoffRow = ({ match, payload }: { match: IplPlayoffMatch; payload: IplSe
 
 const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
   const matches = payload.playoffs?.matches || [];
-  const { champion } = finalSnapshot(payload);
+  const { champion, finalMatch } = finalSnapshot(payload);
   const { shortName, seasonLabel } = leagueInfo(payload);
   return (
     <div className="probability-panel" id="playoffs" data-testid="playoffs-panel">
+      {champion && (
+        <div className="cricket-champion" aria-label={`${shortName} ${seasonLabel} champions`}>
+          <span aria-hidden="true" className="cricket-champion-code" style={{ backgroundColor: teamColor(champion.teamKey), color: readableOn(teamColor(champion.teamKey), teamTextColor(champion.teamKey)) }}>{champion.shortName}</span>
+          <div>
+            <span className="cricket-team-context">{seasonLabel} champions</span>
+            <strong>{champion.fullName}</strong>
+            {finalMatch && <small>{formatMatchDate(finalMatch.date)}</small>}
+          </div>
+        </div>
+      )}
       <div className="section-heading">
         <h2>Playoffs</h2>
       </div>
@@ -1138,12 +1200,12 @@ const TeamDeepDive = ({
       <div className="deep-dive-grid">
         <article>
           <span className="mini-label">{playoffTier.label} chance</span>
-          <strong>{formatPercent(playoffChance)}</strong>
+          <strong>{qualificationChance(payload, playoffChance)}</strong>
           <small>{pathShort(playoffPath)}</small>
         </article>
         <article>
           <span className="mini-label">{topTier.label} chance</span>
-          <strong>{formatPercent(topChance)}</strong>
+          <strong>{qualificationChance(payload, topChance)}</strong>
           <small>{pathShort(topPath)}</small>
         </article>
         <article>
@@ -1177,7 +1239,7 @@ const TeamDeepDive = ({
             })}
             {ownFixtures.length === 0 && (
               <li>
-                <span>No own fixtures listed.</span>
+                <span>No remaining games listed.</span>
                 <small>The current fixture feed does not list another match for {team.shortName}.</small>
               </li>
             )}
@@ -1190,13 +1252,13 @@ const TeamDeepDive = ({
             {rivalImpacts.map((impact) => (
               <li key={`${team.teamKey}-${goalLabel}-help-${impact.fixtureId}`}>
                 <strong>{impact.preferredLabel}</strong>
-                <small>{impact.label} · adds {impact.impact.toFixed(1)} pts to {goalLabel} odds</small>
+                <small>{impact.label} · adds {impact.impact.toFixed(1)} percentage points to {goalLabel} odds</small>
               </li>
             ))}
             {rivalImpacts.length === 0 && (
               <li>
                 <strong>No clear rival swing.</strong>
-                <small>The current model does not show a material neutral fixture dependency.</small>
+                <small>No rival result changes the chance materially in the current model.</small>
               </li>
             )}
           </ul>
@@ -1208,13 +1270,13 @@ const TeamDeepDive = ({
             {rivalImpacts.map((impact) => (
               <li key={`${team.teamKey}-${goalLabel}-hurt-${impact.fixtureId}`}>
                 <strong>{oppositeResultLabel(payload, impact)}</strong>
-                <small>{impact.label} · costs {impact.impact.toFixed(1)} pts versus preferred result</small>
+                <small>{impact.label} · costs {impact.impact.toFixed(1)} percentage points versus preferred result</small>
               </li>
             ))}
             {rivalImpacts.length === 0 && (
               <li>
                 <strong>No clear rival swing.</strong>
-                <small>No material opposite result is available from this payload.</small>
+                <small>No rival result changes the chance materially in the current model.</small>
               </li>
             )}
           </ul>
@@ -1229,13 +1291,13 @@ const TeamDeepDive = ({
 
         <div className="path-details">
           <h3>
-            {team.shortName} {goalLabel} win buckets
+            {team.shortName} · {goalLabel} chance by remaining wins
           </h3>
           <div className="bucket-grid">
             {(path?.ownWinBuckets || []).map((bucket) => (
               <div className="bucket-cell" key={`${team.teamKey}-${goalLabel}-${bucket.wins}`}>
                 <span>{bucket.wins}W</span>
-                <strong>{formatPercent(bucket.probability)}</strong>
+                <strong>{qualificationChance(payload, bucket.probability)}</strong>
                 <small>{bucket.scenarios.toLocaleString()} scenarios</small>
               </div>
             ))}

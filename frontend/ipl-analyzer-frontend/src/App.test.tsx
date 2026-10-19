@@ -2,7 +2,7 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Root from './Root';
-import { blastPayload, finalPayload, installFetch, leagueIndex, mockManifest, wplFinalPayload, wplLivePayload } from './test/fixtures';
+import { blastPayload, finalPayload, installFetch, leagueIndex, mockManifest, mockPayload, wplFinalPayload, wplLivePayload } from './test/fixtures';
 
 describe('App', () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('App', () => {
     render(<Root />);
 
     expect(await screen.findByRole('heading', { name: 'IPL Top 4 Qualification Probabilities' })).toBeInTheDocument();
-    expect(screen.getByText('Updated daily after the night match')).toBeInTheDocument();
+    expect(screen.getByText('Updated twice daily · equal-chance qualification scenarios')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: "Today's Race Summary" })).toBeInTheDocument();
     expect(screen.getByTestId('freshness-warning')).toHaveTextContent('Test source warning');
     expect(screen.getByText('Royal Challengers Bengaluru')).toBeInTheDocument();
@@ -56,6 +56,75 @@ describe('App', () => {
     expect(await screen.findByTestId('latest-update')).toHaveTextContent('2026');
     expect(screen.getAllByText(/Source: CricketData/).length).toBeGreaterThan(0);
     expect(screen.getByText(/Probabilities exclude NRR simulation/)).toBeInTheDocument();
+  });
+});
+
+describe('Cricket race interactions', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.history.replaceState(null, '', '/?league=ipl-2026');
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+    installFetch();
+  });
+
+  it('ignores malformed team encoding and still opens the requested league', async () => {
+    window.history.replaceState(null, '', '/?league=ipl-2026#team=%');
+    render(<Root />);
+    expect(await screen.findByTestId('standings-ladder')).toBeInTheDocument();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(window.location.search).toBe('?league=ipl-2026');
+  });
+
+  it('draws a zero chance with no filled track and preserves the probability scale', async () => {
+    const { container } = render(<Root />);
+    await screen.findByTestId('probability-panel');
+    const rows = Array.from(container.querySelectorAll('.race-bar-row'));
+    const chennai = rows.find((row) => row.querySelector('.race-team')?.textContent === 'CSK');
+    const punjab = rows.find((row) => row.querySelector('.race-team')?.textContent === 'PBKS');
+    expect(chennai?.querySelector<HTMLElement>('.race-fill')?.style.width).toBe('0%');
+    expect(punjab?.querySelector<HTMLElement>('.race-fill')?.style.width).toBe('100%');
+  });
+
+  it('moves focus into the selected team detail after team activation', async () => {
+    render(<Root />);
+    const table = await screen.findByRole('table', { name: 'IPL 2026 standings' });
+    fireEvent.click(within(table).getByRole('button', { name: /CSK Chennai Super Kings/ }));
+    const heading = await screen.findByRole('heading', { name: 'Chennai Super Kings' });
+    await waitFor(() => expect(heading).toHaveFocus());
+    expect(window.location.search).toBe('?league=ipl-2026');
+    expect(window.location.hash).toBe('#team=CSK');
+    expect(within(heading.closest('section')!).getByText('Practical takeaway')).toBeInTheDocument();
+  });
+
+  it('labels conditional probability changes as percentage points', async () => {
+    const payload = structuredClone(mockPayload);
+    payload.analysis.qualificationPath['4'].Punjab.fixtureImpacts = [{
+      fixtureId: 'rival', matchNo: 44, label: 'CSK vs MI', teamA: 'Chennai', teamB: 'Mumbai',
+      preferredWinner: 'Chennai', preferredLabel: 'CSK beat MI', teamAWinProbability: 60,
+      teamBWinProbability: 47.5, impact: 12.5,
+    }];
+    installFetch(payload);
+    render(<Root />);
+    expect(await screen.findByText('CSK vs MI · adds 12.5 percentage points to Top 4 odds')).toBeInTheDocument();
+  });
+
+  it('does not describe a Monte Carlo estimate as certain', async () => {
+    installFetch({ ...mockPayload, analysis: { ...mockPayload.analysis, method: 'Monte Carlo' } });
+    render(<Root />);
+    const panel = await screen.findByTestId('probability-panel');
+    expect(within(panel).getAllByText('>99.9%').length).toBeGreaterThan(0);
+  });
+
+  it('qualifies a sampled own-win threshold in the compact path summary', async () => {
+    const payload = structuredClone(mockPayload);
+    payload.analysis.qualificationPath['4'].Punjab = {
+      ...payload.analysis.qualificationPath['4'].Punjab,
+      method: 'Monte Carlo', guaranteed: 2,
+    };
+    installFetch(payload);
+    render(<Root />);
+    expect(await screen.findByText(/2\+ wins succeeds in all sampled scenarios/)).toBeInTheDocument();
+    expect(screen.queryByText(/2\+ wins locks it/)).not.toBeInTheDocument();
   });
 });
 
