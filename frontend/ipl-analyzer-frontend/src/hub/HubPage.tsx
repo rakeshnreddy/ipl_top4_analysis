@@ -91,11 +91,11 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
           facts={[
             { label: 'In season', value: counts['in-season'] },
             { label: 'Upcoming', value: counts.upcoming },
-            { label: 'Final tables', value: counts.final },
-            { label: 'Leagues covered', value: index.leagues.length },
+            { label: 'Final', value: counts.final },
+            { label: 'Leagues', value: index.leagues.length },
           ]}
           factsLabel="Site snapshot"
-          strap="Seasons in progress, pre-season projections and final tables. Find your league; see what the next result could change. Odds refreshed twice daily."
+          strap="Current, upcoming and final seasons. Odds updated twice daily."
           title="All Live Races"
         />
 
