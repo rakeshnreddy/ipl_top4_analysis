@@ -3,6 +3,7 @@
  * node scripts/verify_redesign.mjs https://ipl-playoff-pulse.pages.dev/ foundation
  * Optional: PLAYWRIGHT_MODULE, AXE_PATH, VERIFY_BROWSERS=chromium,webkit,
  * VERIFY_WIDTHS=320,375,1280, VERIFY_FAMILIES=landing,hub,football,cricket,f1,share.
+ * VERIFY_CANONICAL=1 checks generated league paths; the default keeps legacy query routes.
  * Uses existing runtimes only. Exits 1 for confirmed failures, 2 for setup errors.
  */
 import { createRequire } from 'node:module';
@@ -25,10 +26,12 @@ const definitions = {
   landing: '', hub: '?view=hub', football: '?league=epl-2026-27',
   cricket: '?league=ipl-2026', f1: '?league=f1-2026', share: 'share.html',
 };
+const canonical = process.env.VERIFY_CANONICAL === '1';
+if (canonical) Object.assign(definitions, { football: 'league/epl-2026-27/', cricket: 'league/ipl-2026/', f1: 'league/f1-2026/' });
 const families = (process.env.VERIFY_FAMILIES || Object.keys(definitions).join(',')).split(',');
 const report = {
   base: base.href, label, startedAt: new Date().toISOString(),
-  configuration: { engines, widths, themes: ['light', 'dark'], families, reducedMotion: 'reduce' },
+  configuration: { engines, widths, themes: ['light', 'dark'], families, canonical, reducedMotion: 'reduce' },
   axe: null, cases: [], summary: {},
   limits: ['Synthetic browser checks do not establish real-user INP.',
     'Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.',
@@ -113,6 +116,44 @@ async function domAudit(page) {
   });
 }
 
+/** Exercise bounded gallery loading before preserving full-page screenshot evidence. */
+async function prepareShareGallery(page, record) {
+  const selector = '.reels-gallery img';
+  const images = page.locator(selector);
+  const count = await images.count();
+  record.gallery = { imageCount: count, loadedCount: 0, images: [] };
+  for (let index = 0; index < count; index++) {
+    const image = images.nth(index);
+    try {
+      await image.scrollIntoViewIfNeeded({ timeout: 5000 });
+      await page.waitForFunction(({ selector, index }) => {
+        const image = document.querySelectorAll(selector)[index];
+        return Boolean(image?.getAttribute('src') && image.complete && image.naturalWidth > 0);
+      }, { selector, index }, { timeout: 8000 });
+      await image.evaluate(async (image) => {
+        if (typeof image.decode !== 'function') throw new Error('Image decode readiness is unavailable');
+        let timer;
+        try {
+          await Promise.race([image.decode(), new Promise((_, reject) => {
+            timer = setTimeout(() => reject(new Error('Image decode timed out after 8 seconds')), 8000);
+          })]);
+        } finally { clearTimeout(timer); }
+      });
+      const state = await image.evaluate((image) => ({ src: image.currentSrc || image.getAttribute('src'),
+        naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, complete: image.complete, decoded: true }));
+      record.gallery.images.push({ index: index + 1, passed: true, ...state });
+      record.gallery.loadedCount++;
+    } catch (error) {
+      const state = await image.evaluate((image) => ({ src: image.currentSrc || image.getAttribute('src'),
+        naturalWidth: image.naturalWidth, complete: image.complete })).catch(() => ({}));
+      record.gallery.images.push({ index: index + 1, passed: false, ...state, error: error.message.split('\n')[0] });
+      throw new Error(`Share gallery image ${index + 1}/${count} did not load for the screenshot: ${error.message.split('\n')[0]}`);
+    }
+  }
+  await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+  await settle(page);
+}
+
 async function interactionAudit(page, family, record) {
   const check = async (name, action) => {
     try { const details = await action(); record.interactions.push({ name, passed: true, ...details }); }
@@ -126,7 +167,7 @@ async function interactionAudit(page, family, record) {
       const href = await link.getAttribute('href');
       await link.click({ timeout: 4000 });
       const after = new URL(page.url());
-      if (after.searchParams.get('league') !== before.searchParams.get('league') || !after.pathname.startsWith(base.pathname)) {
+      if (after.pathname !== before.pathname || after.search !== before.search || !after.pathname.startsWith(base.pathname)) {
         throw new Error(`Section link lost league/base: ${href} -> ${after.href}`);
       }
       if (!after.hash) throw new Error(`Section link did not set a fragment: ${href}`);
@@ -141,7 +182,7 @@ async function interactionAudit(page, family, record) {
       const before = new URL(page.url());
       await button.click({ timeout: 4000 });
       const after = new URL(page.url());
-      if (!after.hash.startsWith('#team=') || after.search !== before.search || !after.pathname.startsWith(base.pathname)) {
+      if (!after.hash.startsWith('#team=') || after.pathname !== before.pathname || after.search !== before.search || !after.pathname.startsWith(base.pathname)) {
         throw new Error(`Team selection lost its league/base/hash: ${after.href}`);
       }
       if (await button.getAttribute('aria-pressed') !== 'true') throw new Error('Selected team button is not aria-pressed=true');
@@ -172,6 +213,38 @@ async function interactionAudit(page, family, record) {
     if (await trigger.getAttribute('aria-expanded') !== 'false') throw new Error('Escape did not close the menu');
     if (!await trigger.evaluate((element) => document.activeElement === element)) throw new Error('Escape did not restore trigger focus');
     return { matches: matches.map((text) => text.trim()) };
+  });
+  if (canonical) await check('all published menu links use canonical paths; real navigation keeps the deployment base', async () => {
+    const before = new URL(page.url());
+    const response = await page.request.get(new URL('data/leagues.json', base).href);
+    if (!response.ok()) throw new Error(`Cannot verify published league links (${response.status()})`);
+    const index = await response.json();
+    if (!Array.isArray(index.leagues) || !index.leagues.length) throw new Error('Published league index is empty');
+    const trigger = page.locator('.league-menu-button');
+    await trigger.click({ timeout: 4000 });
+    const links = page.locator('.league-menu-group a');
+    const hrefs = await links.evaluateAll((elements) => elements.map((element) => element.href));
+    const expected = index.leagues.map((league) => new URL(`league/${encodeURIComponent(league.id)}/`, base).href);
+    const missing = expected.filter((href) => !hrefs.includes(href));
+    const unexpected = hrefs.filter((href) => !expected.includes(href));
+    if (missing.length || unexpected.length || hrefs.length !== expected.length) {
+      throw new Error(`Canonical menu mismatch (${hrefs.length}/${expected.length}); missing=${missing.slice(0, 3)} unexpected=${unexpected.slice(0, 3)}`);
+    }
+    const target = expected.find((href) => new URL(href).pathname !== before.pathname) || expected[0];
+    // Inspect actual hrefs rather than assuming an index order across sport groups.
+    const position = hrefs.indexOf(target);
+    await Promise.all([
+      page.waitForURL((url) => url.href === target, { timeout: 15000 }),
+      links.nth(position).click({ timeout: 4000 }),
+    ]);
+    await settle(page);
+    const arrived = new URL(page.url());
+    if (arrived.href !== target || !arrived.pathname.startsWith(base.pathname)) throw new Error(`Menu navigation lost its canonical base: ${arrived.href}`);
+    await page.goBack({ waitUntil: 'domcontentloaded', timeout: 20000 });
+    await settle(page);
+    const returned = new URL(page.url());
+    if (returned.href !== before.href) throw new Error(`Back navigation lost the starting route or hash: ${returned.href}`);
+    return { publishedLeagues: expected.length, canonicalLinks: hrefs.length, destination: arrived.href, returned: returned.href };
   });
   await check('theme choice survives reload', async () => {
     const previous = await page.locator('html').getAttribute('data-theme');
@@ -227,6 +300,7 @@ async function run() {
           await page.goto(record.url, { waitUntil: 'domcontentloaded', timeout: 25000 });
           await settle(page);
           record.dom = await domAudit(page);
+          if (family === 'share') await prepareShareGallery(page, record);
           record.screenshot = path.join(output, `${engine}-${family}-${width}-${theme}.png`);
           await page.screenshot({ path: record.screenshot, fullPage: true, timeout: 20000 });
           if (axeSource) {

@@ -203,7 +203,7 @@ describe('App with several leagues', () => {
     await waitFor(() =>
       expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        'http://localhost:3000/?league=wpl-2026',
+        'http://localhost:3000/league/wpl-2026/',
       ),
     );
   });
@@ -220,8 +220,8 @@ describe('App with several leagues', () => {
 
     const switcher = screen.getByRole('navigation', { name: 'Leagues' });
     expect(switcher.querySelector('a[aria-current="page"]')).toHaveTextContent('WPL 2026');
-    expect(within(switcher).getByRole('link', { name: /^IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
-    expect(within(switcher).getByRole('link', { name: /^WPL 2026/ })).toHaveAttribute('href', '/?league=wpl-2026');
+    expect(within(switcher).getByRole('link', { name: /^IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
+    expect(within(switcher).getByRole('link', { name: /^WPL 2026/ })).toHaveAttribute('href', '/league/wpl-2026/');
 
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(menu).toHaveAttribute('aria-expanded', 'false');

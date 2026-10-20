@@ -89,7 +89,7 @@ describe('F1Page', () => {
     fireEvent.click(await screen.findByRole('button', { name: /F1 2026/ }));
     const menu = screen.getByRole('navigation', { name: 'Leagues' });
     expect(within(menu).getByText('Motorsport')).toBeInTheDocument();
-    expect(within(menu).getByRole('link', { name: /F1 2026/ })).toHaveAttribute('href', '/?league=f1-2026');
+    expect(within(menu).getByRole('link', { name: /F1 2026/ })).toHaveAttribute('href', '/league/f1-2026/');
   });
 
   it('marks the champions once the season is over', async () => {

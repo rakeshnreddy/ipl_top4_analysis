@@ -34,13 +34,13 @@ describe('HubPage', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'All Live Races' })).toBeInTheDocument();
     const live = screen.getByRole('heading', { name: 'In Season' }).closest('section')!;
     const card = within(live).getByRole('link', { name: /Premier League 2026-27/ });
-    expect(card).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(card).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(card).toHaveTextContent('Title favourite');
     expect(card).toHaveTextContent('ARS 81%');
     expect(card).toHaveTextContent('Live');
 
     const finals = screen.getByRole('heading', { name: 'Final Tables' }).closest('section')!;
-    expect(within(finals).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
+    expect(within(finals).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
     await waitFor(() => expect(document.title).toBe('All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse'));
   });
 
@@ -107,7 +107,7 @@ describe('HubPage', () => {
 
     fireEvent.click(await screen.findByRole('button', { name: /^Leagues/ }));
     const nav = screen.getByRole('navigation', { name: 'Leagues' });
-    expect(within(nav).getByRole('link', { name: 'All live races' })).toHaveAttribute('href', '/?view=hub');
+    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/?view=hub');
     // The wordmark goes to the landing page.
     expect(screen.getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
   });

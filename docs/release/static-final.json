@@ -1,0 +1,325 @@
+{
+  "testedSourceCommit": "2162d358b1733c5a49a2a1035d8d2f608abedb0b",
+  "baseCommit": "6774576bc68749f2ddc060d320bbfd18bffe6a9b",
+  "checks": {
+    "python": {
+      "total": 303,
+      "skipped": 1,
+      "passed": true
+    },
+    "frontend": {
+      "total": 120,
+      "passed": true,
+      "workers": 1
+    },
+    "lint": true,
+    "builds": [
+      "cloudflare",
+      "github"
+    ],
+    "wplRegeneration": "Unchanged; league index byte-identical."
+  },
+  "artifacts": {
+    "perBuild": {
+      "leagueHtml": 44,
+      "leagueOgPng": 44,
+      "ogDimensions": [
+        1200,
+        630
+      ],
+      "sitemapEntries": 46
+    },
+    "checks": [
+      "Canonical URLs and metadata preserve both bases",
+      "Meaningful noscript standings and source/model notes",
+      "F1 drivers and constructors tables",
+      "Root-only selected route hints; canonical and Share omit helper",
+      "Root/canonical manifest and icons; no service worker/offline cache",
+      "Share omits install-manifest link after repeatable LCP comparison"
+    ]
+  },
+  "browserMatrices": [
+    {
+      "label": "static-final-github-canonical",
+      "base": "http://127.0.0.1:5233/ipl_top4_analysis/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "landing",
+          "hub",
+          "football",
+          "cricket",
+          "f1",
+          "share"
+        ],
+        "canonical": true,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:28:43.908Z",
+      "completedAt": "2026-10-20T03:31:47.915Z",
+      "cases": 48,
+      "passed": 48,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "shareCases": [
+        {
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        }
+      ],
+      "rawResults": "docs/screenshots/verification-static-final-github-canonical/results.json"
+    },
+    {
+      "label": "static-final-cloudflare-query",
+      "base": "http://127.0.0.1:5232/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "landing",
+          "hub",
+          "football",
+          "cricket",
+          "f1",
+          "share"
+        ],
+        "canonical": false,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:28:43.908Z",
+      "completedAt": "2026-10-20T03:30:33.297Z",
+      "cases": 48,
+      "passed": 48,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "shareCases": [
+        {
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "images": 11,
+          "decoded": 11
+        },
+        {
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "images": 11,
+          "decoded": 11
+        }
+      ],
+      "rawResults": "docs/screenshots/verification-static-final-cloudflare-query/results.json"
+    },
+    {
+      "label": "static-final-cloudflare-canonical",
+      "base": "http://127.0.0.1:5232/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "football",
+          "cricket",
+          "f1"
+        ],
+        "canonical": true,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:31:17.431Z",
+      "completedAt": "2026-10-20T03:33:00.275Z",
+      "cases": 24,
+      "passed": 24,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "rawResults": "docs/screenshots/verification-static-final-cloudflare-canonical/results.json"
+    },
+    {
+      "label": "static-final-github-query",
+      "base": "http://127.0.0.1:5233/ipl_top4_analysis/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "football",
+          "cricket",
+          "f1"
+        ],
+        "canonical": false,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:31:17.431Z",
+      "completedAt": "2026-10-20T03:32:18.302Z",
+      "cases": 24,
+      "passed": 24,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "rawResults": "docs/screenshots/verification-static-final-github-query/results.json"
+    }
+  ],
+  "independentPreloadChecks": [
+    {
+      "name": "guards.json",
+      "total": 58,
+      "passed": 58
+    },
+    {
+      "name": "browser.json",
+      "total": 7,
+      "passed": 7
+    },
+    {
+      "name": "root-hub-guards.json",
+      "total": 24,
+      "passed": 24
+    }
+  ],
+  "performanceEvidence": "docs/performance/static-final.json",
+  "limits": [
+    "Browser matrix uses the served payload states; family unit tests cover other states.",
+    "Screenshots and full local results remain untracked; this file preserves the compact gate evidence.",
+    "Lighthouse laboratory TBT is not field INP."
+  ],
+  "browserCases": 144
+}

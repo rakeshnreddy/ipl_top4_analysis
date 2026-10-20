@@ -38,13 +38,13 @@ describe('LandingPage', () => {
 
     expect(await screen.findByRole('heading', { level: 1, name: /Every race.*In the balance/ })).toBeInTheDocument();
     const feature = await screen.findByRole('link', { name: 'Explore the title race' });
-    expect(feature).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(feature).toHaveAttribute('href', '/league/epl-2026-27/');
     const raceFeature = feature.closest('section')!;
     expect(within(raceFeature).getByText('81%')).toBeInTheDocument();
     expect(raceFeature.querySelector('.landing-feature-track > span')).toHaveStyle({ width: '81.2%' });
     const races = screen.getByRole('heading', { name: 'Featured races' }).closest('section')!;
     const epl = within(races).getByRole('link', { name: /Premier League/ });
-    expect(epl).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(epl).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(epl).toHaveTextContent('ARS 81%');
     expect(screen.getByRole('link', { name: 'Explore the races' })).toHaveAttribute('href', '/?view=hub');
     await waitFor(() => expect(document.title).toBe('Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports'));
@@ -58,7 +58,7 @@ describe('LandingPage', () => {
     const cricket = within(sports).getByRole('button', { name: /Cricket/ });
     fireEvent.click(cricket);
     expect(cricket).toHaveAttribute('aria-expanded', 'true');
-    expect(within(sports).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/?league=ipl-2026');
+    expect(within(sports).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
     expect(screen.getByRole('link', { name: 'How the odds are made' })).toHaveAttribute('href', '/#method');
     expect(screen.getByRole('heading', { name: /The odds have a method/ })).toBeInTheDocument();
     expect(screen.getByText(/Cricket uses equal-strength result scenarios/)).toBeInTheDocument();
@@ -97,7 +97,7 @@ describe('LandingPage', () => {
 
   it('keeps direct access when the extra preview payload is malformed', async () => {
     open('/', index, { analysis: { probabilities: {} } });
-    expect(await screen.findByRole('link', { name: 'Explore this season' })).toHaveAttribute('href', '/?league=epl-2026-27');
+    expect(await screen.findByRole('link', { name: 'Explore this season' })).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
     expect(screen.queryByText('0–100% scale')).not.toBeInTheDocument();
   });

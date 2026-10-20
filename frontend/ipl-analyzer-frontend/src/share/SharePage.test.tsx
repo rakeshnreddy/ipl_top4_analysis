@@ -23,7 +23,7 @@ describe('SharePage', () => {
     expect(screen.getByRole('button', { name: /x short post/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /whatsapp share text/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /race png/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /back to standings/i })).toHaveAttribute('href', '/?league=ipl-2026');
+    expect(screen.getByRole('link', { name: /back to standings/i })).toHaveAttribute('href', '/league/ipl-2026/');
   });
 
   it('copies Reels share text from caption buttons', async () => {
