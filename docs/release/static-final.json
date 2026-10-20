@@ -228,6 +228,74 @@
         }
       ],
       "rawResults": "docs/screenshots/verification-static-final-cloudflare-query/results.json"
+    },
+    {
+      "label": "static-final-cloudflare-canonical",
+      "base": "http://127.0.0.1:5232/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "football",
+          "cricket",
+          "f1"
+        ],
+        "canonical": true,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:31:17.431Z",
+      "completedAt": "2026-10-20T03:33:00.275Z",
+      "cases": 24,
+      "passed": 24,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "rawResults": "docs/screenshots/verification-static-final-cloudflare-canonical/results.json"
+    },
+    {
+      "label": "static-final-github-query",
+      "base": "http://127.0.0.1:5233/ipl_top4_analysis/",
+      "configuration": {
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "widths": [
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "football",
+          "cricket",
+          "f1"
+        ],
+        "canonical": false,
+        "reducedMotion": "reduce"
+      },
+      "startedAt": "2026-10-20T03:31:17.431Z",
+      "completedAt": "2026-10-20T03:32:18.302Z",
+      "cases": 24,
+      "passed": 24,
+      "axeAvailable": true,
+      "axeViolations": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "rawResults": "docs/screenshots/verification-static-final-github-query/results.json"
     }
   ],
   "independentPreloadChecks": [
@@ -242,14 +310,16 @@
       "passed": 7
     },
     {
-      "name": "root-hub-guards.json"
+      "name": "root-hub-guards.json",
+      "total": 24,
+      "passed": 24
     }
   ],
   "performanceEvidence": "docs/performance/static-final.json",
   "limits": [
     "Browser matrix uses the served payload states; family unit tests cover other states.",
     "Screenshots and full local results remain untracked; this file preserves the compact gate evidence.",
-    "Complementary canonical/query cases continue independently before merge.",
     "Lighthouse laboratory TBT is not field INP."
-  ]
+  ],
+  "browserCases": 144
 }
