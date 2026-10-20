@@ -1,0 +1,371 @@
+{
+  "source": "2162d35 built root helper",
+  "environment": "isolated jsdom, network disabled; no browser performance measurement",
+  "cases": [
+    {
+      "host": "cloudflare",
+      "name": "landing",
+      "url": "https://example.test/#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/assets/LandingPage-BOJDEnxp.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/sportData-D1ucgSR3.js",
+        "/assets/format-UiViWuGL.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/LandingPage-DNjC3kVK.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "hub",
+      "url": "https://example.test/?view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/assets/HubPage-CiKSZVLC.js",
+        "/assets/PageHeader-CP0cDT-Y.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/HubPage-DZda6KJ3.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "strict-view",
+      "url": "https://example.test/?view=HUB#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/assets/LandingPage-BOJDEnxp.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/sportData-D1ucgSR3.js",
+        "/assets/format-UiViWuGL.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/LandingPage-DNjC3kVK.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "empty-league-hub",
+      "url": "https://example.test/?league=%20&view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/assets/HubPage-CiKSZVLC.js",
+        "/assets/PageHeader-CP0cDT-Y.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/HubPage-DZda6KJ3.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "index-landing",
+      "url": "https://example.test/index.html#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/assets/LandingPage-BOJDEnxp.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/sportData-D1ucgSR3.js",
+        "/assets/format-UiViWuGL.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/LandingPage-DNjC3kVK.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "index-hub",
+      "url": "https://example.test/index.html?view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/assets/HubPage-CiKSZVLC.js",
+        "/assets/PageHeader-CP0cDT-Y.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/arrow-right-Bi_KtiTY.js",
+        "/assets/HubPage-DZda6KJ3.css",
+        "/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "league-precedes-hub",
+      "url": "https://example.test/?view=hub&league=epl-2026-27#team=test",
+      "route": "SportPage",
+      "added": [
+        "/assets/SportPage-B5XxoFi5.js",
+        "/assets/PageHeader-CP0cDT-Y.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/sportData-D1ucgSR3.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/format-UiViWuGL.js",
+        "/assets/external-link-sDYbWZD5.js",
+        "/assets/SportPage-peGEFa_Q.css",
+        "/data/leagues.json",
+        "/data/epl-2026-27.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "normalized-league",
+      "url": "https://example.test/?league=%20F1-2026%20#team=test",
+      "route": "F1Page",
+      "added": [
+        "/assets/F1Page-2T2HcbIY.js",
+        "/assets/PageHeader-CP0cDT-Y.js",
+        "/assets/standings-CdL6Ngra.js",
+        "/assets/seo-Ce7Ff9bt.js",
+        "/assets/format-UiViWuGL.js",
+        "/assets/external-link-sDYbWZD5.js",
+        "/assets/F1Page-CoOm4beY.css",
+        "/data/leagues.json",
+        "/data/f1-2026.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "unknown-league",
+      "url": "https://example.test/?view=hub&league=unknown#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "prototype-league",
+      "url": "https://example.test/?league=constructor#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "canonical-path",
+      "url": "https://example.test/league/ipl-2026/?league=f1-2026#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "cloudflare",
+      "name": "wrong-path",
+      "url": "https://example.test/share.html?view=hub#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "landing",
+      "url": "https://example.test/ipl_top4_analysis/#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/ipl_top4_analysis/assets/LandingPage-riu388iC.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/sportData-BcU4lojd.js",
+        "/ipl_top4_analysis/assets/format-UiViWuGL.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/LandingPage-DNjC3kVK.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "hub",
+      "url": "https://example.test/ipl_top4_analysis/?view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/ipl_top4_analysis/assets/HubPage-DWUUGWxW.js",
+        "/ipl_top4_analysis/assets/PageHeader-Y4FcxceP.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/HubPage-DZda6KJ3.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "strict-view",
+      "url": "https://example.test/ipl_top4_analysis/?view=HUB#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/ipl_top4_analysis/assets/LandingPage-riu388iC.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/sportData-BcU4lojd.js",
+        "/ipl_top4_analysis/assets/format-UiViWuGL.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/LandingPage-DNjC3kVK.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "empty-league-hub",
+      "url": "https://example.test/ipl_top4_analysis/?league=%20&view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/ipl_top4_analysis/assets/HubPage-DWUUGWxW.js",
+        "/ipl_top4_analysis/assets/PageHeader-Y4FcxceP.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/HubPage-DZda6KJ3.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "index-landing",
+      "url": "https://example.test/ipl_top4_analysis/index.html#team=test",
+      "route": "LandingPage",
+      "added": [
+        "/ipl_top4_analysis/assets/LandingPage-riu388iC.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/sportData-BcU4lojd.js",
+        "/ipl_top4_analysis/assets/format-UiViWuGL.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/LandingPage-DNjC3kVK.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "index-hub",
+      "url": "https://example.test/ipl_top4_analysis/index.html?view=hub#team=test",
+      "route": "HubPage",
+      "added": [
+        "/ipl_top4_analysis/assets/HubPage-DWUUGWxW.js",
+        "/ipl_top4_analysis/assets/PageHeader-Y4FcxceP.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/arrow-right-CfHns7sV.js",
+        "/ipl_top4_analysis/assets/HubPage-DZda6KJ3.css",
+        "/ipl_top4_analysis/data/leagues.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "league-precedes-hub",
+      "url": "https://example.test/ipl_top4_analysis/?view=hub&league=epl-2026-27#team=test",
+      "route": "SportPage",
+      "added": [
+        "/ipl_top4_analysis/assets/SportPage-DVtkHw2k.js",
+        "/ipl_top4_analysis/assets/PageHeader-Y4FcxceP.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/sportData-BcU4lojd.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/format-UiViWuGL.js",
+        "/ipl_top4_analysis/assets/external-link-DL4ZQ7RC.js",
+        "/ipl_top4_analysis/assets/SportPage-peGEFa_Q.css",
+        "/ipl_top4_analysis/data/leagues.json",
+        "/ipl_top4_analysis/data/epl-2026-27.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "normalized-league",
+      "url": "https://example.test/ipl_top4_analysis/?league=%20F1-2026%20#team=test",
+      "route": "F1Page",
+      "added": [
+        "/ipl_top4_analysis/assets/F1Page-C3RO-c3B.js",
+        "/ipl_top4_analysis/assets/PageHeader-Y4FcxceP.js",
+        "/ipl_top4_analysis/assets/standings-gy6m9M0w.js",
+        "/ipl_top4_analysis/assets/seo-ChdUNQhJ.js",
+        "/ipl_top4_analysis/assets/format-UiViWuGL.js",
+        "/ipl_top4_analysis/assets/external-link-DL4ZQ7RC.js",
+        "/ipl_top4_analysis/assets/F1Page-CoOm4beY.css",
+        "/ipl_top4_analysis/data/leagues.json",
+        "/ipl_top4_analysis/data/f1-2026.json"
+      ],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "unknown-league",
+      "url": "https://example.test/ipl_top4_analysis/?view=hub&league=unknown#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "prototype-league",
+      "url": "https://example.test/ipl_top4_analysis/?league=constructor#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "canonical-path",
+      "url": "https://example.test/ipl_top4_analysis/league/ipl-2026/?league=f1-2026#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    },
+    {
+      "host": "github",
+      "name": "wrong-path",
+      "url": "https://example.test/ipl_top4_analysis/share.html?view=hub#team=test",
+      "route": null,
+      "added": [],
+      "passed": true,
+      "failures": []
+    }
+  ],
+  "summary": {
+    "total": 24,
+    "passed": 24,
+    "failed": 0
+  }
+}

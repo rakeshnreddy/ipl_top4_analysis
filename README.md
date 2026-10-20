@@ -6,7 +6,7 @@ The deployed app does not need a live backend. Data generation happens ahead of 
 
 ## What The Site Shows
 
-The site root is a landing page. It says what the site does, lists the biggest live races from the data, shows every league by sport and explains how the odds are made. The all-sports hub is at `/?view=hub`: a card per live league with its headline odds (title favourite, relegation risk, playoff bubble), then last season's final tables. Normal league links use the canonical `/league/<id>/` address; legacy `/?league=<id>` links still open the same interactive league. Light and dark themes follow the system, and the header's theme button saves a choice; see DESIGN.md.
+The site root is a landing page with a real title-race feature, selected races across sports, every league by sport and an explanation of the models. The all-sports hub at `/?view=hub` has search, sport and season-state filters, headline odds (title favourite, relegation risk, playoff bubble) and completed-season context. Normal league links use the canonical `/league/<id>/` address; legacy `/?league=<id>` links still open the same interactive league. Light and dark themes follow the system, and the header's theme button saves a choice. See [DESIGN.md](DESIGN.md) and the [redesign analysis and production evidence](docs/site-analysis.md).
 
 Cricket pages, during the league stage:
 

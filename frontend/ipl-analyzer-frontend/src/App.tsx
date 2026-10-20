@@ -1067,7 +1067,7 @@ const PlayoffsPanel = ({ payload }: { payload: IplSeasonPayload }) => {
   return (
     <div className="probability-panel" id="playoffs" data-testid="playoffs-panel">
       {champion && (
-        <div className="cricket-champion" aria-label={`${shortName} ${seasonLabel} champions`}>
+        <div className="cricket-champion">
           <span aria-hidden="true" className="cricket-champion-code" style={{ backgroundColor: teamColor(champion.teamKey), color: readableOn(teamColor(champion.teamKey), teamTextColor(champion.teamKey)) }}>{champion.shortName}</span>
           <div>
             <span className="cricket-team-context">{seasonLabel} champions</span>

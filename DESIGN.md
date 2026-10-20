@@ -47,7 +47,7 @@ The text scale is 12 / 14 / 16 / 20 / 24 / 32 / 40 / 56px; landing display may g
 
 ## Components and composition
 
-Rollout: the foundation implements tokens, shared surfaces/header/search, control sizes, theme semantics, lazy routes and loading/recovery. The page-family and static-sharing rules below are the target contract for the subsequent dedicated PRs; they do not claim those features already shipped in the foundation.
+The foundation, all six page families and static league sharing shipped in PRs #78–85. These rules describe the deployed design. Production screenshots, browser checks and performance measurements are linked from [the release report](docs/site-analysis.md#delivery-and-evidence).
 
 - Shared header: citron pulse tile, wordmark, searchable league picker, theme toggle. The picker searches sport, long/short league names and season. Escape returns focus to the trigger. The theme button reports its pressed state.
 - League header: sport rail, breadcrumb and status, one h1, concise method/freshness strap, joined key facts and 44px section navigation. Facts use solid tiles with crisp dividers.

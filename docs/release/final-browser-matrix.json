@@ -1,0 +1,4618 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-20T03:43:01.977332+00:00",
+  "deployment": {
+    "pr": 85,
+    "merge": "4089f17249c90f248dd5b18e442fb835976f7489",
+    "run": 39365075241,
+    "cloudflare": "d669d3be.ipl-playoff-pulse.pages.dev"
+  },
+  "verificationWindow": {
+    "startedAt": "2026-10-20T03:37:52.800Z",
+    "completedAt": "2026-10-20T03:39:39.956Z"
+  },
+  "verified": true,
+  "summary": {
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "httpErrors": 0,
+    "axeViolations": 0,
+    "overflowCases": 0,
+    "textBelow12px": 0,
+    "standaloneTargetsBelow44px": 0,
+    "menuTargetsBelow44px": 0,
+    "failedInteractions": 0,
+    "runs": 8,
+    "cases": 180,
+    "passed": 180,
+    "failed": 0,
+    "screenshots": 180,
+    "axeCheckedCases": 180,
+    "galleryCases": 20,
+    "galleryImages": 220,
+    "loadedGalleryImages": 220,
+    "decodedGalleryImages": 220
+  },
+  "countsBy": {
+    "host": {
+      "primary": 108,
+      "mirror": 72
+    },
+    "routeForm": {
+      "legacy": 120,
+      "canonical": 60
+    },
+    "engine": {
+      "chromium": 90,
+      "webkit": 90
+    },
+    "width": {
+      "320": 36,
+      "375": 72,
+      "1280": 72
+    },
+    "theme": {
+      "light": 90,
+      "dark": 90
+    },
+    "family": {
+      "landing": 20,
+      "hub": 20,
+      "football": 40,
+      "cricket": 40,
+      "f1": 40,
+      "share": 20
+    }
+  },
+  "interactionChecks": [
+    {
+      "name": "league search filters and empty state; Escape restores focus",
+      "passed": true,
+      "count": 180
+    },
+    {
+      "name": "theme choice survives reload",
+      "passed": true,
+      "count": 180
+    },
+    {
+      "name": "section click retains league and deployment base",
+      "passed": true,
+      "count": 120
+    },
+    {
+      "name": "team row click retains league and writes team hash",
+      "passed": true,
+      "count": 80
+    },
+    {
+      "name": "all published menu links use canonical paths; real navigation keeps the deployment base",
+      "passed": true,
+      "count": 60
+    }
+  ],
+  "errors": [],
+  "axeViolations": [],
+  "axeIncomplete": {
+    "interpretation": "Recorded manual-review flags, not confirmed violations. Counts are repeated node occurrences across viewport/theme/browser runs, not distinct elements.",
+    "rules": {
+      "color-contrast": {
+        "caseOccurrences": 124,
+        "nodeOccurrences": 2020,
+        "impacts": [
+          "serious"
+        ]
+      },
+      "aria-prohibited-attr": {
+        "caseOccurrences": 56,
+        "nodeOccurrences": 360,
+        "impacts": [
+          "serious"
+        ]
+      }
+    }
+  },
+  "validation": {
+    "exactExpectedMatrices": true,
+    "noDuplicateCases": true,
+    "allScreenshotsExist": true,
+    "rawSummariesReconciled": true,
+    "failures": []
+  },
+  "limits": [
+    "Synthetic browser checks do not establish real-user INP.",
+    "Axe and computed text sizes do not replace manual screen-reader or composited-contrast review.",
+    "Inline prose links are recorded separately from the required 44px standalone controls.",
+    "The route matrix uses current served payload states; it does not inject missing/error/season fixtures.",
+    "This report records browser behavior, layout and automated accessibility checks only. Production Lighthouse/performance conclusions are not asserted here.",
+    "Axe incomplete rules remain manual-review evidence and are not counted as violations or claimed automatically resolved.",
+    "The complete 180 screenshot set remains in the local verification directories. The repository curates 24 final Chromium images at docs/screenshots/after/ plus two comparison boards; all eight raw JSON reports are committed. Per-case screenshot paths record capture provenance, not a promise that every duplicate matrix image is published."
+  ],
+  "runs": [
+    {
+      "label": "final-primary-legacy",
+      "host": "primary",
+      "base": "https://ipl-playoff-pulse.pages.dev/",
+      "routeForm": "legacy",
+      "engine": "chromium",
+      "widths": [
+        320,
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "landing",
+        "hub",
+        "football",
+        "cricket",
+        "f1",
+        "share"
+      ],
+      "startedAt": "2026-10-20T03:37:52.800Z",
+      "completedAt": "2026-10-20T03:39:18.488Z",
+      "cases": 36,
+      "passed": 36,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-primary-legacy/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-primary-legacy",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 22,
+          "nodeOccurrences": 356
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 8,
+          "nodeOccurrences": 46
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 6,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 12,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 18,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 19,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 20,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 21,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 22,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 23,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 24,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 25,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 26,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 27,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 28,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 29,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 30,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-landing-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 31,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-hub-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 32,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 33,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 34,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 35,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy/chromium-share-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-primary-legacy-webkit",
+      "host": "primary",
+      "base": "https://ipl-playoff-pulse.pages.dev/",
+      "routeForm": "legacy",
+      "engine": "webkit",
+      "widths": [
+        320,
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "landing",
+        "hub",
+        "football",
+        "cricket",
+        "f1",
+        "share"
+      ],
+      "startedAt": "2026-10-20T03:37:52.800Z",
+      "completedAt": "2026-10-20T03:39:39.956Z",
+      "cases": 36,
+      "passed": 36,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-primary-legacy-webkit/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-primary-legacy-webkit",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 22,
+          "nodeOccurrences": 356
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 8,
+          "nodeOccurrences": 46
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 6,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 12,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 18,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 19,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 20,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 21,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 22,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 23,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 24,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 25,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 26,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 27,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 28,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 29,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 30,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://ipl-playoff-pulse.pages.dev/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-landing-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 31,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://ipl-playoff-pulse.pages.dev/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-hub-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 32,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 33,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 34,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 35,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://ipl-playoff-pulse.pages.dev/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-legacy-webkit/webkit-share-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-primary-canonical",
+      "host": "primary",
+      "base": "https://ipl-playoff-pulse.pages.dev/",
+      "routeForm": "canonical",
+      "engine": "chromium",
+      "widths": [
+        320,
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "football",
+        "cricket",
+        "f1"
+      ],
+      "startedAt": "2026-10-20T03:37:55.428Z",
+      "completedAt": "2026-10-20T03:39:09.493Z",
+      "cases": 18,
+      "passed": 18,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-primary-canonical/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-primary-canonical",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 16,
+          "nodeOccurrences": 314
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 8,
+          "nodeOccurrences": 46
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "chromium",
+          "width": 320,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 6,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 12,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical/chromium-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-primary-canonical-webkit",
+      "host": "primary",
+      "base": "https://ipl-playoff-pulse.pages.dev/",
+      "routeForm": "canonical",
+      "engine": "webkit",
+      "widths": [
+        320,
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "football",
+        "cricket",
+        "f1"
+      ],
+      "startedAt": "2026-10-20T03:37:55.432Z",
+      "completedAt": "2026-10-20T03:39:32.430Z",
+      "cases": 18,
+      "passed": 18,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-primary-canonical-webkit/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-primary-canonical-webkit",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 16,
+          "nodeOccurrences": 314
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 8,
+          "nodeOccurrences": 46
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-320-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "webkit",
+          "width": 320,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-320-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 6,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 12,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://ipl-playoff-pulse.pages.dev/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-primary-canonical-webkit/webkit-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-mirror-legacy",
+      "host": "mirror",
+      "base": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+      "routeForm": "legacy",
+      "engine": "chromium",
+      "widths": [
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "landing",
+        "hub",
+        "football",
+        "cricket",
+        "f1",
+        "share"
+      ],
+      "startedAt": "2026-10-20T03:37:55.433Z",
+      "completedAt": "2026-10-20T03:38:49.102Z",
+      "cases": 24,
+      "passed": 24,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-mirror-legacy/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-mirror-legacy",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 14,
+          "nodeOccurrences": 184
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 6,
+          "nodeOccurrences": 44
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-landing-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-hub-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-share-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 6,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-landing-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-hub-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-share-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 12,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-landing-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-hub-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-share-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 18,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-landing-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 19,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-hub-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 20,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 21,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 22,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 23,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy/chromium-share-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-mirror-legacy-webkit",
+      "host": "mirror",
+      "base": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+      "routeForm": "legacy",
+      "engine": "webkit",
+      "widths": [
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "landing",
+        "hub",
+        "football",
+        "cricket",
+        "f1",
+        "share"
+      ],
+      "startedAt": "2026-10-20T03:37:55.435Z",
+      "completedAt": "2026-10-20T03:39:06.472Z",
+      "cases": 24,
+      "passed": 24,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-mirror-legacy-webkit/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-mirror-legacy-webkit",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 14,
+          "nodeOccurrences": 184
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 6,
+          "nodeOccurrences": 44
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-landing-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-hub-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-share-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 6,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-landing-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-hub-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-share-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 12,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-landing-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 13,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-hub-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 14,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 15,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 16,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 17,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-share-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        },
+        {
+          "index": 18,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "landing",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-landing-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 19,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "hub",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?view=hub",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-hub-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 20,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=epl-2026-27",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 21,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=ipl-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 22,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/?league=f1-2026",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 23,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "share",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/share.html",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-legacy-webkit/webkit-share-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          },
+          "gallery": {
+            "images": 11,
+            "loaded": 11,
+            "decoded": 11
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-mirror-canonical",
+      "host": "mirror",
+      "base": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+      "routeForm": "canonical",
+      "engine": "chromium",
+      "widths": [
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "football",
+        "cricket",
+        "f1"
+      ],
+      "startedAt": "2026-10-20T03:37:52.800Z",
+      "completedAt": "2026-10-20T03:38:36.133Z",
+      "cases": 12,
+      "passed": 12,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-mirror-canonical/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-mirror-canonical",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 10,
+          "nodeOccurrences": 156
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 6,
+          "nodeOccurrences": 44
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "chromium",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 6,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "chromium",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical/chromium-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        }
+      ]
+    },
+    {
+      "label": "final-mirror-canonical-webkit",
+      "host": "mirror",
+      "base": "https://rakeshnreddy.github.io/ipl_top4_analysis/",
+      "routeForm": "canonical",
+      "engine": "webkit",
+      "widths": [
+        375,
+        1280
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "families": [
+        "football",
+        "cricket",
+        "f1"
+      ],
+      "startedAt": "2026-10-20T03:37:52.801Z",
+      "completedAt": "2026-10-20T03:38:57.016Z",
+      "cases": 12,
+      "passed": 12,
+      "failed": 0,
+      "evidence": "../screenshots/verification-final-mirror-canonical-webkit/results.json",
+      "screenshotsDirectory": "../screenshots/verification-final-mirror-canonical-webkit",
+      "diagnosticCounts": {
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "axeViolations": 0,
+        "overflowCases": 0,
+        "textBelow12px": 0,
+        "standaloneTargetsBelow44px": 0,
+        "menuTargetsBelow44px": 0,
+        "failedInteractions": 0
+      },
+      "axeIncomplete": {
+        "color-contrast": {
+          "caseOccurrences": 10,
+          "nodeOccurrences": 156
+        },
+        "aria-prohibited-attr": {
+          "caseOccurrences": 6,
+          "nodeOccurrences": 44
+        }
+      },
+      "details": [
+        {
+          "index": 0,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-football-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 1,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-cricket-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 2,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-f1-375-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 3,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-football-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 4,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-cricket-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 5,
+          "engine": "webkit",
+          "width": 375,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-f1-375-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 6,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-football-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 7,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-cricket-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 8,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "light",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-f1-1280-light.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 9,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "football",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/epl-2026-27/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-football-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 10,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "cricket",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/ipl-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-cricket-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        },
+        {
+          "index": 11,
+          "engine": "webkit",
+          "width": 1280,
+          "theme": "dark",
+          "family": "f1",
+          "url": "https://rakeshnreddy.github.io/ipl_top4_analysis/league/f1-2026/",
+          "passed": true,
+          "screenshot": "../screenshots/verification-final-mirror-canonical-webkit/webkit-f1-1280-dark.png",
+          "diagnosticCounts": {
+            "consoleErrors": 0,
+            "pageErrors": 0,
+            "failedRequests": 0,
+            "httpErrors": 0,
+            "axeViolations": 0,
+            "overflowCases": 0,
+            "textBelow12px": 0,
+            "standaloneTargetsBelow44px": 0,
+            "menuTargetsBelow44px": 0,
+            "failedInteractions": 0
+          }
+        }
+      ]
+    }
+  ]
+}

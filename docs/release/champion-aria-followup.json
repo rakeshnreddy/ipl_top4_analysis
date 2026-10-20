@@ -1,0 +1,158 @@
+{
+  "base": "4089f17249c90f248dd5b18e442fb835976f7489",
+  "sourceBlob": "cf012a3421f06544e724e1a3bd906a2ececc51d2",
+  "change": "Remove unsupported redundant aria-label from generic cricket champion div; visible descendant headings/text unchanged.",
+  "at": "2026-10-20T03:53:27.832266+00:00",
+  "review": "Independent scoped gstack-review found no issue; no CSS, selectors or test consumers depend on removed attribute.",
+  "checks": {
+    "python": {
+      "total": 303,
+      "skipped": 1,
+      "passed": true
+    },
+    "vitest": {
+      "total": 120,
+      "passed": true,
+      "command": "npx vitest run --maxWorkers=1 --minWorkers=1"
+    },
+    "lint": true,
+    "builds": [
+      "cloudflare",
+      "github"
+    ]
+  },
+  "browserCases": 24,
+  "passed": 24,
+  "ariaProhibitedIncompleteCases": 0,
+  "runs": [
+    {
+      "path": "docs/screenshots/verification-champion-final-cf-chromium/results.json",
+      "configuration": {
+        "engines": [
+          "chromium"
+        ],
+        "widths": [
+          320,
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "cricket"
+        ],
+        "canonical": true,
+        "reducedMotion": "reduce"
+      },
+      "summary": {
+        "cases": 6,
+        "passed": 6,
+        "failed": 0,
+        "axeAvailable": true,
+        "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-champion-final-cf-chromium"
+      },
+      "startedAt": "2026-10-20T03:52:35.790Z",
+      "completedAt": "2026-10-20T03:53:00.179Z",
+      "ariaIncomplete": 0
+    },
+    {
+      "path": "docs/screenshots/verification-champion-final-cf-webkit/results.json",
+      "configuration": {
+        "engines": [
+          "webkit"
+        ],
+        "widths": [
+          320,
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "cricket"
+        ],
+        "canonical": true,
+        "reducedMotion": "reduce"
+      },
+      "summary": {
+        "cases": 6,
+        "passed": 6,
+        "failed": 0,
+        "axeAvailable": true,
+        "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-champion-final-cf-webkit"
+      },
+      "startedAt": "2026-10-20T03:52:35.790Z",
+      "completedAt": "2026-10-20T03:53:03.819Z",
+      "ariaIncomplete": 0
+    },
+    {
+      "path": "docs/screenshots/verification-champion-final-gh-chromium/results.json",
+      "configuration": {
+        "engines": [
+          "chromium"
+        ],
+        "widths": [
+          320,
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "cricket"
+        ],
+        "canonical": false,
+        "reducedMotion": "reduce"
+      },
+      "summary": {
+        "cases": 6,
+        "passed": 6,
+        "failed": 0,
+        "axeAvailable": true,
+        "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-champion-final-gh-chromium"
+      },
+      "startedAt": "2026-10-20T03:52:35.790Z",
+      "completedAt": "2026-10-20T03:52:50.383Z",
+      "ariaIncomplete": 0
+    },
+    {
+      "path": "docs/screenshots/verification-champion-final-gh-webkit/results.json",
+      "configuration": {
+        "engines": [
+          "webkit"
+        ],
+        "widths": [
+          320,
+          375,
+          1280
+        ],
+        "themes": [
+          "light",
+          "dark"
+        ],
+        "families": [
+          "cricket"
+        ],
+        "canonical": false,
+        "reducedMotion": "reduce"
+      },
+      "summary": {
+        "cases": 6,
+        "passed": 6,
+        "failed": 0,
+        "axeAvailable": true,
+        "output": "/Users/Rakesh/Projects/ipl_top4_analysis/docs/screenshots/verification-champion-final-gh-webkit"
+      },
+      "startedAt": "2026-10-20T03:52:35.790Z",
+      "completedAt": "2026-10-20T03:52:53.194Z",
+      "ariaIncomplete": 0
+    }
+  ],
+  "productionFollowup": "Required after final merge; pre-repair production evidence remains explicitly attributed to4089f17."
+}
