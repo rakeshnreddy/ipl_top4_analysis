@@ -1,0 +1,149 @@
+{
+  "testedSourceCommit": "2162d35",
+  "baseCommit": "6774576",
+  "configuration": "Local production Vite preview, GitHub Pages base; Lighthouse mobile simulation; runs sequential without concurrent browser/test load.",
+  "requestedLcpLimitMs": 2500,
+  "lighthouseConfiguration": {
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    }
+  },
+  "comparisons": {
+    "rootLcpBeforeMs": [
+      2585,
+      2578
+    ],
+    "rootLcpAfterMs": 2423,
+    "shareManifestLinkedLcpMs": [
+      2568,
+      2567
+    ],
+    "shareManifestExcludedLcpMs": [
+      2422,
+      2420
+    ]
+  },
+  "cases": [
+    {
+      "name": "root-hints",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/",
+      "measuredAt": "2026-10-20T03:24:58.433Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 97,
+      "fcpMs": 1515,
+      "lcpMs": 2423,
+      "cls": 0.0003434511135236268,
+      "tbtMs": 0,
+      "rawReport": "/tmp/pp-static-final-root-hints.json"
+    },
+    {
+      "name": "hub-hints",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/?view=hub",
+      "measuredAt": "2026-10-20T03:25:09.123Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 98,
+      "fcpMs": 1511,
+      "lcpMs": 2261,
+      "cls": 0,
+      "tbtMs": 0,
+      "rawReport": "/tmp/pp-static-final-hub-hints.json"
+    },
+    {
+      "name": "epl-query-release",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/?league=epl-2026-27",
+      "measuredAt": "2026-10-20T03:27:46.842Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 97,
+      "fcpMs": 1509,
+      "lcpMs": 2409,
+      "cls": 0,
+      "tbtMs": 10,
+      "rawReport": "/tmp/pp-static-final-epl-query-release.json"
+    },
+    {
+      "name": "cricket-canonical-release",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/league/ipl-2026/",
+      "measuredAt": "2026-10-20T03:27:25.722Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 98,
+      "fcpMs": 1705,
+      "lcpMs": 2265,
+      "cls": 0,
+      "tbtMs": 13,
+      "rawReport": "/tmp/pp-static-final-cricket-canonical-release.json"
+    },
+    {
+      "name": "f1-canonical-release",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/league/f1-2026/",
+      "measuredAt": "2026-10-20T03:27:36.271Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 98,
+      "fcpMs": 1662,
+      "lcpMs": 2262,
+      "cls": 0.0005692763467100578,
+      "tbtMs": 0,
+      "rawReport": "/tmp/pp-static-final-f1-canonical-release.json"
+    },
+    {
+      "name": "cricket-query-release",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/?league=ipl-2026",
+      "measuredAt": "2026-10-20T03:27:57.383Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 98,
+      "fcpMs": 1511,
+      "lcpMs": 2261,
+      "cls": 0,
+      "tbtMs": 1,
+      "rawReport": "/tmp/pp-static-final-cricket-query-release.json"
+    },
+    {
+      "name": "f1-query-release",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/?league=f1-2026",
+      "measuredAt": "2026-10-20T03:28:07.867Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 98,
+      "fcpMs": 1509,
+      "lcpMs": 2259,
+      "cls": 0.0005692763467100578,
+      "tbtMs": 0,
+      "rawReport": "/tmp/pp-static-final-f1-query-release.json"
+    },
+    {
+      "name": "share-manifest-off",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/share.html",
+      "measuredAt": "2026-10-20T03:25:59.603Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 97,
+      "fcpMs": 1511,
+      "lcpMs": 2422,
+      "cls": 0,
+      "tbtMs": 7,
+      "rawReport": "/tmp/pp-static-final-share-manifest-off.json"
+    },
+    {
+      "name": "share-manifest-off-repeat",
+      "url": "http://127.0.0.1:5233/ipl_top4_analysis/share.html",
+      "measuredAt": "2026-10-20T03:26:09.891Z",
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 97,
+      "fcpMs": 1510,
+      "lcpMs": 2420,
+      "cls": 0,
+      "tbtMs": 0,
+      "rawReport": "/tmp/pp-static-final-share-manifest-off-repeat.json"
+    }
+  ],
+  "limits": [
+    "Synthetic laboratory measurements do not establish field INP or real-user percentile performance.",
+    "TBT is reported as a laboratory metric, not INP.",
+    "Deployment verification remains separate from these local build measurements.",
+    "Root/Hub reports precede the Share-only manifest exclusion; their emitted route assets and data inputs are unchanged."
+  ]
+}
