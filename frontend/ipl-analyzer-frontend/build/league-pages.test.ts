@@ -114,6 +114,7 @@ describe('static league source documents', () => {
 describe('legacy query critical hints', () => {
   const bundle = { ...Object.fromEntries([
     ['cricket.js', '/src/App.tsx'], ['f1.js', '/src/f1/F1Page.tsx'], ['sport.js', '/src/sport/SportPage.tsx'],
+    ['landing.js', '/src/landing/LandingPage.tsx'], ['hub.js', '/src/hub/HubPage.tsx'],
   ].map(([fileName, facadeModuleId]) => [fileName, { type: 'chunk', fileName, facadeModuleId, imports: ['shared.js'], viteMetadata: { importedCss: new Set([fileName.replace('.js', '.css')]) } }])), 'shared.js': { type: 'chunk', fileName: 'shared.js', imports: [] } };
   const leagues = [{ id: 'ipl-2026', sport: 'cricket' }, { id: 'f1-2026', sport: 'motorsport' }, { id: 'epl-2026-27', sport: 'football' }];
   function run(search: string, base: string, pathname = base) {
@@ -137,10 +138,25 @@ describe('legacy query critical hints', () => {
 
   it('allows root/index.html but ignores unknown IDs and conflicting queries on canonical paths', () => {
     expect(run('?league=ipl-2026', '/pulse/', '/pulse/index.html').document.querySelector('link')?.getAttribute('href')).toBe('/pulse/cricket.js');
-    for (const query of ['?league=unknown', '?league=constructor', '?league=../secret', '?view=hub']) {
+    for (const query of ['?league=unknown', '?league=constructor', '?league=../secret']) {
       expect(run(query, '/pulse/').document.querySelectorAll('link')).toHaveLength(0);
     }
     expect(run('?league=ipl-2026', '/pulse/', '/pulse/league/f1-2026/').document.querySelectorAll('link')).toHaveLength(0);
+  });
+
+  it('hints only the actual root landing or hub route and index without guessing a league payload', () => {
+    for (const base of ['/', '/ipl_top4_analysis/']) {
+      for (const [query, route] of [['', 'landing'], ['?league=', 'landing'], ['?view=HUB', 'landing'], ['?view=hub', 'hub'], ['?league=%20&view=hub', 'hub']]) {
+        const { document } = run(query, base);
+        expect(Array.from(document.querySelectorAll('link')).map((link) => link.getAttribute('href'))).toEqual([
+          `${base}${route}.js`, `${base}shared.js`, `${base}${route}.css`, `${base}data/leagues.json`,
+        ]);
+        expect(document.querySelectorAll('body *')).toHaveLength(0);
+      }
+      expect(run('?view=hub&league=epl-2026-27', base).document.querySelector('link')?.getAttribute('href')).toBe(`${base}sport.js`);
+      expect(run('?view=hub&league=unknown', base).document.querySelectorAll('link')).toHaveLength(0);
+      expect(run('', base, `${base}league/ipl-2026/`).document.querySelectorAll('link')).toHaveLength(0);
+    }
   });
 
   it('reuses existing hints when the helper runs again', () => {

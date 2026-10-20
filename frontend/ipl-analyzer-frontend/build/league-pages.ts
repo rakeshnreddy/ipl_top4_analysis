@@ -224,9 +224,9 @@ export function renderLeagueHtml(template: string, page: LeaguePage) {
 
 type RouteBundle = Record<string, { type: string; fileName: string; facadeModuleId?: string | null; imports?: string[] }>;
 
-/** Canonical HTML knows its route: remove the index → route → payload discovery waterfall. */
-function criticalPreloads(bundle: RouteBundle, sport: string, id: string, base: string, template: string) {
-  const component = sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
+/** Hint only the selected route to remove the index → route → payload discovery waterfall. */
+function criticalPreloads(bundle: RouteBundle, sport: string, id: string | null, base: string, template: string) {
+  const component = sport === 'landing' ? '/src/landing/LandingPage.tsx' : sport === 'hub' ? '/src/hub/HubPage.tsx' : sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
   const route = Object.values(bundle).find((item) => item.type === 'chunk' && item.facadeModuleId?.endsWith(component));
   const modules = new Set<string>();
   const styles = new Set<string>();
@@ -242,26 +242,27 @@ function criticalPreloads(bundle: RouteBundle, sport: string, id: string, base: 
   const tags: string[] = [];
   for (const file of modules) if (!template.includes(`href="${base}${file}"`)) tags.push(`<link rel="modulepreload" href="${escapeHtml(base + file)}" />`);
   for (const file of styles) if (!template.includes(`href="${base}${file}"`)) tags.push(`<link rel="stylesheet" href="${escapeHtml(base + file)}" />`);
-  for (const file of ['data/leagues.json', `data/${id}.json`]) tags.push(`<link rel="preload" as="fetch" crossorigin href="${escapeHtml(base + file)}" />`);
+  for (const file of ['data/leagues.json', ...(id ? [`data/${id}.json`] : [])]) tags.push(`<link rel="preload" as="fetch" crossorigin href="${escapeHtml(base + file)}" />`);
   return tags.join('\n');
 }
 
-/** Legacy query entries get only the published league's hints; metadata stays generic. */
+/** Root entries get only the selected route's hints; query metadata stays generic. */
 export function legacyQueryPreloadScript(entries: Pick<LeagueEntry, 'id' | 'sport'>[], bundle: RouteBundle, base: string, template: string) {
   const family = (sport: string | undefined) => sport === 'motorsport' ? 'motorsport' : !sport || sport === 'cricket' ? 'cricket' : 'sport';
   const leagues = Object.fromEntries(entries.filter((entry) => validId.test(entry.id)).map((entry) => [entry.id, family(entry.sport)]));
   const placeholder = '__pp_league_id__';
-  const hints = Object.fromEntries([...new Set(Object.values(leagues))].map((sport) => [sport, criticalPreloads(bundle, sport, placeholder, base, template)]));
+  const hints = Object.fromEntries([...new Set([...Object.values(leagues), 'landing', 'hub'])].map((sport) => [sport, criticalPreloads(bundle, sport, ['landing', 'hub'].includes(sport) ? null : placeholder, base, template)]));
   return `(() => {
   const base = ${JSON.stringify(base)};
   if (location.pathname !== base && location.pathname !== base + 'index.html') return;
-  const id = (new URLSearchParams(location.search).get('league') || '').trim().toLowerCase();
-  if (!id) return;
+  const params = new URLSearchParams(location.search);
+  const id = (params.get('league') || '').trim().toLowerCase();
   const leagues = ${safeJson(leagues)};
-  if (!Object.prototype.hasOwnProperty.call(leagues, id)) return;
+  if (id && !Object.prototype.hasOwnProperty.call(leagues, id)) return;
+  const route = id ? leagues[id] : params.get('view') === 'hub' ? 'hub' : 'landing';
   const hints = ${safeJson(hints)};
   const template = document.createElement('template');
-  template.innerHTML = hints[leagues[id]].replaceAll(${JSON.stringify(placeholder)}, encodeURIComponent(id));
+  template.innerHTML = hints[route].replaceAll(${JSON.stringify(placeholder)}, encodeURIComponent(id));
   for (const link of template.content.querySelectorAll('link')) {
     const href = link.getAttribute('href');
     if (![...document.head.querySelectorAll('link[href]')].some((existing) => existing.getAttribute('href') === href)) document.head.append(link);
