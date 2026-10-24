@@ -1,0 +1,858 @@
+{
+  "base": "http://127.0.0.1:5193/ipl_top4_analysis/",
+  "label": "github-navigation-repair-probe",
+  "mode": "real-free-source-with-in-memory-replays",
+  "startedAt": "2026-10-24T09:21:21.617Z",
+  "providerProbe": {
+    "passed": true,
+    "capturedAt": "2026-10-24T09:21:25.644Z",
+    "coveredMatches": 17,
+    "selectedId": "ss-1792850400-montreal-warriors-vs-mississauga-skyhawks",
+    "requests": [
+      {
+        "url": "https://sportscore.com/api/widget/matches/?sport=cricket&limit=50",
+        "status": 200,
+        "bytes": 9409,
+        "accessControlAllowOrigin": "*"
+      },
+      {
+        "url": "https://sportscore.com/api/widget/match/?sport=cricket&slug=montreal-warriors-vs-mississauga-skyhawks",
+        "status": 200,
+        "bytes": 800,
+        "accessControlAllowOrigin": "*"
+      }
+    ],
+    "errors": [],
+    "note": "Unmodified built page; direct browser CORS requests, no interception during this probe."
+  },
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "theme": "dark",
+      "source": "unchanged real snapshot replayed in memory",
+      "checks": [
+        {
+          "name": "bounded real-source lobby, attribution and field-level coverage",
+          "passed": true,
+          "matches": 17
+        },
+        {
+          "name": "a lower fixture brings the selected score and keyboard focus into view; Back focuses the lobby",
+          "passed": true,
+          "scrollBefore": 3825,
+          "selectedHeadingTop": 174.640625,
+          "lobbyHeadingTop": 83.640625
+        },
+        {
+          "name": "search, drilldown, Back and selected deep-link reload retain deployment base",
+          "passed": true,
+          "deepLink": "http://127.0.0.1:5193/ipl_top4_analysis/cricket/?match=ss-1792850400-montreal-warriors-vs-mississauga-skyhawks",
+          "filter": "Mississauga Skyhawks"
+        },
+        {
+          "name": "direct bookmark metadata and source links retain the correct hosting base",
+          "passed": true,
+          "canonical": "https://rakeshnreddy.github.io/ipl_top4_analysis/cricket/",
+          "ogUrl": "https://rakeshnreddy.github.io/ipl_top4_analysis/cricket/",
+          "description": "Follow covered cricket matches, available scores and scorecards, with separate model and bookmaker views and clear source timestamps.",
+          "activeRoute": "/ipl_top4_analysis/cricket/",
+          "attribution": "https://sportscore.com/"
+        },
+        {
+          "name": "roving tabs support arrows, Home and End",
+          "passed": true
+        },
+        {
+          "name": "real Scorecard is honestly unavailable",
+          "passed": true
+        },
+        {
+          "name": "real Commentary is honestly unavailable",
+          "passed": true
+        },
+        {
+          "name": "real Model win chance is honestly unavailable",
+          "passed": true
+        },
+        {
+          "name": "real Bookmaker odds is honestly unavailable",
+          "passed": true
+        },
+        {
+          "name": "pause freezes foreground requests and Resume preserves selected match and focus",
+          "passed": true,
+          "requestsDuringPause": 0,
+          "selected": "http://127.0.0.1:5193/ipl_top4_analysis/cricket/?match=ss-1792850400-montreal-warriors-vs-mississauga-skyhawks"
+        },
+        {
+          "name": "optional field guide defaults flat; tilt is explicit and reduced-motion-safe",
+          "passed": true
+        },
+        {
+          "name": "phone/desktop geometry, 44px controls, 12px text and solid-plane composited contrast",
+          "passed": true,
+          "contrastSamples": 39
+        },
+        {
+          "name": "theme selection persists across reload",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "screenshots": [
+        "chromium-1280-dark-real-lobby.png",
+        "chromium-1280-dark-real-model-unavailable.png",
+        "chromium-1280-dark-real-markets-unavailable.png",
+        "chromium-1280-dark-real-field-guide.png"
+      ],
+      "passed": true,
+      "audit": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "smallText": [],
+        "smallTargets": [],
+        "contrast": [
+          {
+            "tag": "button",
+            "text": "Pause updates",
+            "class": "lc-button",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Refresh",
+            "class": "lc-button",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Live",
+            "class": "",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Upcoming",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Results",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "All",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Upcoming",
+            "class": "lc-state ",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Unknown · unknown",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "NCL GT20",
+            "class": "lc-eyebrow",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h2",
+            "text": "Mississauga Skyhawks v Montreal Warriors",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Innings scores have not been supplied.",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Not started",
+            "class": "lc-match-status",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Venue not supplied · Oct 24, 07:00:00 AM PDT",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "SportScore",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Event time not supplied",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Feed published Oct 24, 02:15:50 AM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 24, 02:15:50 AM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Checked Oct 24, 02:22:58 AM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 24, 02:22:58 AM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Summary",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Scorecard",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Commentary",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Model win chance",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Bookmaker odds",
+            "class": "",
+            "ratio": 8.93,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              187,
+              199,
+              212
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Field guide",
+            "class": "",
+            "ratio": 13.618,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              238,
+              242,
+              245
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Illustrative · not match tracking",
+            "class": "lc-eyebrow",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h3",
+            "text": "A guide to the field",
+            "class": "lc-section-title",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "A simplified field for a right-handed batter facing the bowler. Positions change",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Flat view",
+            "class": "lc-button",
+            "ratio": 15.189,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              22,
+              31,
+              42
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Tilt field",
+            "class": "lc-button",
+            "ratio": 14.203,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              26,
+              37,
+              48
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Off side · left",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Leg side · right",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dt",
+            "text": "Bowler",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dd",
+            "text": "Delivers toward the batter.",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dt",
+            "text": "Batter",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dd",
+            "text": "Faces the bowler from the crease.",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dt",
+            "text": "Wicketkeeper",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "dd",
+            "text": "Stands behind the batter's wicket.",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Tracked field placement, shot paths and ball flight require a verified spatial f",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          }
+        ],
+        "skippedContrast": 0,
+        "reducedMotion": false
+      },
+      "providerReplayRequests": 10
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "checks": 13,
+    "contrastSamples": 39,
+    "providerNetworkRequests": 2
+  },
+  "limitations": [
+    "Only owned local build tabs and contexts were used. No subscriptions or credential-bearing requests.",
+    "Provider payloads stay in memory; matrix contexts replay the same bounded real snapshot and do not establish ongoing provider availability.",
+    "Synthetic contracts are test-only browser network responses, not real matches, predictions or bookmaker prices.",
+    "Computed contrast includes alpha blending over opaque UI planes; ambient/gradient page backgrounds and disabled controls are excluded.",
+    "No manual screen-reader assessment, Lighthouse run or real-user INP measurement is claimed."
+  ],
+  "runtime": {
+    "playwright": "/Users/Rakesh/gstack/node_modules/playwright",
+    "webkitPlaywright": null,
+    "webkitExecutable": null
+  },
+  "configuration": {
+    "engines": [
+      "chromium"
+    ],
+    "widths": [
+      1280
+    ],
+    "themes": [
+      "dark"
+    ]
+  },
+  "completedAt": "2026-10-24T09:21:29.287Z"
+}

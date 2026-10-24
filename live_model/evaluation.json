@@ -1,0 +1,4741 @@
+{
+  "schemaVersion": 1,
+  "version": "t20-chase-logistic-2026-10-v1",
+  "dataCutoff": "2026-10-23",
+  "excludedMatches": {
+    "no_standard_winner": 188,
+    "unsupported_resources": 132,
+    "super_over": 45,
+    "revised_or_unknown_target": 53,
+    "unknown_or_multiday_date": 4
+  },
+  "archiveManifest": [
+    {
+      "archive": "bbl_json.zip",
+      "sha256": "983fd1948ade32ae6b620f8f353f1e81e8d9658b51fe1e0e1bf48e06e163f55a"
+    },
+    {
+      "archive": "bpl_json.zip",
+      "sha256": "03ede3a5aecf91bf8fa3cdac0576eb8e9238896ec690a040eedece8cd0562203"
+    },
+    {
+      "archive": "cpl_json.zip",
+      "sha256": "7da178776b0a01795f50a85f64d44cec7a5bc2dc7cf078c30b893962b20ad19b"
+    },
+    {
+      "archive": "ilt_json.zip",
+      "sha256": "3e9d7fe03a8b604ec9c1eb9e1fddd88025cda3554e77e7a005a9ade3c939584f"
+    },
+    {
+      "archive": "ipl_json.zip",
+      "sha256": "841b98290a08bdf2a063a9f4d6342fb2363ff246491ed3db4c571bddb6ea2a79"
+    },
+    {
+      "archive": "lpl_json.zip",
+      "sha256": "5902268a3c0b3a0e03f9cdd96586ab52256165609aa1530a06d84c458cb72943"
+    },
+    {
+      "archive": "mlc_json.zip",
+      "sha256": "29b0b2e62dfa50687552a58edbc7dedfd1b302f40165d33550bd1e14a9516af3"
+    },
+    {
+      "archive": "psl_json.zip",
+      "sha256": "b3f8b011c6c196f6d70913b22eb46967e50e8a510239851c1a495c276f72159f"
+    },
+    {
+      "archive": "sat_json.zip",
+      "sha256": "ffe7b399bcd700d9800d374f1471f39544431935f017cec2f445e1f22e45ee52"
+    },
+    {
+      "archive": "wbb_json.zip",
+      "sha256": "c63eed6e02c284cbea14b594549e1cd6d78627598720b9fa85a7db2051ed00d0"
+    },
+    {
+      "archive": "wpl_json.zip",
+      "sha256": "533e7937056b47f169418b06d995ca85b193415390e750964e0a22982a07e6cc"
+    }
+  ],
+  "partitions": {
+    "train": {
+      "matches": 2437,
+      "firstDate": "2008-04-18",
+      "lastDate": "2022-12-31",
+      "matchIdsSha256": "4bea5f95caa31ab0debfed180361b09495837a0dcf68421bccf54d028d1047d2",
+      "genders": {
+        "male": 2112,
+        "female": 325
+      },
+      "competitions": {
+        "ipl": 879,
+        "bbl": 446,
+        "bpl": 275,
+        "cpl": 258,
+        "wbb": 325,
+        "psl": 198,
+        "lpl": 56
+      }
+    },
+    "calibration": {
+      "matches": 395,
+      "firstDate": "2023-01-01",
+      "lastDate": "2023-12-31",
+      "matchIdsSha256": "ba17c3a80dc7ff6743e6cf4cae2190a0bbe57db7855f9fa283cf2a803e4e406b",
+      "genders": {
+        "male": 321,
+        "female": 74
+      },
+      "competitions": {
+        "bbl": 50,
+        "bpl": 41,
+        "sat": 30,
+        "ilt": 30,
+        "psl": 32,
+        "wpl": 21,
+        "ipl": 69,
+        "mlc": 19,
+        "lpl": 23,
+        "cpl": 27,
+        "wbb": 53
+      }
+    },
+    "test": {
+      "matches": 1042,
+      "firstDate": "2024-01-01",
+      "lastDate": "2026-09-16",
+      "matchIdsSha256": "91f22b3fdef88147abab351cd5be33c7a6e6fb6fa806b98f282c7b1b0ffb760c",
+      "genders": {
+        "male": 914,
+        "female": 128
+      },
+      "competitions": {
+        "bbl": 92,
+        "sat": 83,
+        "ilt": 97,
+        "bpl": 120,
+        "psl": 103,
+        "wpl": 65,
+        "ipl": 205,
+        "lpl": 41,
+        "mlc": 82,
+        "cpl": 91,
+        "wbb": 63
+      }
+    }
+  },
+  "evaluation": {
+    "train": {
+      "matches": 2437,
+      "snapshots": 45750,
+      "model": {
+        "brier": 0.13623194218642704,
+        "logLoss": 0.41352077523570896,
+        "ece10": 0.0439993720852729,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "snapshots": 5963,
+            "weightFraction": 0.12713813900709744,
+            "predicted": 0.03298088276802043,
+            "observed": 0.02281817202280025
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "snapshots": 3355,
+            "weightFraction": 0.07068042360888016,
+            "predicted": 0.14904221626283345,
+            "observed": 0.12164209850293589
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "snapshots": 3144,
+            "weightFraction": 0.06595608512918535,
+            "predicted": 0.24987601798203457,
+            "observed": 0.19375133566896274
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "snapshots": 3099,
+            "weightFraction": 0.06481919339863687,
+            "predicted": 0.3501101918010189,
+            "observed": 0.29923276030309404
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "snapshots": 3014,
+            "weightFraction": 0.06318648147013989,
+            "predicted": 0.44932173745015885,
+            "observed": 0.34952770963165236
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "snapshots": 3364,
+            "weightFraction": 0.07056219342180041,
+            "predicted": 0.5500645622943424,
+            "observed": 0.4516874842754069
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "snapshots": 3789,
+            "weightFraction": 0.07974119783137365,
+            "predicted": 0.6515310859579821,
+            "observed": 0.5584433965822491
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "snapshots": 4504,
+            "weightFraction": 0.09610133734588573,
+            "predicted": 0.7514943313970317,
+            "observed": 0.685529204913033
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "snapshots": 5733,
+            "weightFraction": 0.12496411549636408,
+            "predicted": 0.8528522515477125,
+            "observed": 0.8048374296377081
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "snapshots": 9785,
+            "weightFraction": 0.23685083329063644,
+            "predicted": 0.9616014837255964,
+            "observed": 0.9648158581126005
+          }
+        ]
+      },
+      "baselines": {
+        "constant50": {
+          "brier": 0.25,
+          "logLoss": 0.6931471805599454,
+          "ece10": 0.03713582273286831,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 45750,
+              "weightFraction": 1.0,
+              "predicted": 0.5,
+              "observed": 0.5371358227328683
+            }
+          ]
+        },
+        "trainChasePrior": {
+          "brier": 0.248620930669953,
+          "logLoss": 0.6903865005117521,
+          "ece10": 1.1102230246251565e-16,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 45750,
+              "weightFraction": 1.0,
+              "predicted": 0.5371358227328682,
+              "observed": 0.5371358227328683
+            }
+          ]
+        },
+        "trainResourceBuckets": {
+          "brier": 0.1631870587850564,
+          "logLoss": 0.4994616009729724,
+          "ece10": 0.07318388257521687,
+          "calibrationBins": [
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "snapshots": 2062,
+              "weightFraction": 0.042909845477904204,
+              "predicted": 0.15579785001642912,
+              "observed": 0.04835672372744058
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.3,
+              "snapshots": 7366,
+              "weightFraction": 0.15629135938079203,
+              "predicted": 0.25712052974781774,
+              "observed": 0.16722466143840195
+            },
+            {
+              "lower": 0.3,
+              "upper": 0.4,
+              "snapshots": 6874,
+              "weightFraction": 0.1435172714639742,
+              "predicted": 0.3382195997756812,
+              "observed": 0.2594070712617522
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "snapshots": 3765,
+              "weightFraction": 0.08050262481303982,
+              "predicted": 0.45878104750187837,
+              "observed": 0.3206454954376481
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 3434,
+              "weightFraction": 0.07253897465699266,
+              "predicted": 0.548979065952602,
+              "observed": 0.5296340732719186
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.7,
+              "snapshots": 8880,
+              "weightFraction": 0.19446805129413997,
+              "predicted": 0.640729717156984,
+              "observed": 0.6789327252977455
+            },
+            {
+              "lower": 0.7,
+              "upper": 0.8,
+              "snapshots": 5176,
+              "weightFraction": 0.11372328263420317,
+              "predicted": 0.7327248512325901,
+              "observed": 0.7910351706949043
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "snapshots": 5369,
+              "weightFraction": 0.12330067624072523,
+              "predicted": 0.8304525155706217,
+              "observed": 0.9277266767039086
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "snapshots": 2824,
+              "weightFraction": 0.07274791403822874,
+              "predicted": 0.9134271080940825,
+              "observed": 0.9771358509260786
+            }
+          ]
+        }
+      },
+      "groups": {
+        "gender": {
+          "female": {
+            "brier": 0.12283045363355452,
+            "logLoss": 0.37618620177251927,
+            "ece10": 0.049621233870077885,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 883,
+                "weightFraction": 0.13891318038686462,
+                "predicted": 0.030349015292292166,
+                "observed": 0.029960751803733105
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 390,
+                "weightFraction": 0.061162657775660885,
+                "predicted": 0.1497565163756894,
+                "observed": 0.1239146179065656
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 417,
+                "weightFraction": 0.0650840147124977,
+                "predicted": 0.2505183331609545,
+                "observed": 0.16472013628287638
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 424,
+                "weightFraction": 0.06641179116720913,
+                "predicted": 0.35114467924654774,
+                "observed": 0.29799487442664024
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 371,
+                "weightFraction": 0.05788637506284566,
+                "predicted": 0.44902127377273204,
+                "observed": 0.32303033849214463
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 372,
+                "weightFraction": 0.058270381836945315,
+                "predicted": 0.5499584302718116,
+                "observed": 0.42581522331451477
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 449,
+                "weightFraction": 0.0708362705406049,
+                "predicted": 0.6527702504816717,
+                "observed": 0.5336875766607327
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 539,
+                "weightFraction": 0.08593664917813526,
+                "predicted": 0.7503120107697414,
+                "observed": 0.6852654399845077
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 685,
+                "weightFraction": 0.11383593736844512,
+                "predicted": 0.854241937588679,
+                "observed": 0.8099007531701145
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1530,
+                "weightFraction": 0.28166274197079155,
+                "predicted": 0.9615869468122515,
+                "observed": 0.9803078012177108
+              }
+            ],
+            "matches": 325,
+            "snapshots": 6060,
+            "baselineBrier": 0.17848792444404424
+          },
+          "male": {
+            "brier": 0.1382941977639287,
+            "logLoss": 0.419265915565035,
+            "ece10": 0.04313426551327402,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 5080,
+                "weightFraction": 0.12532616530992682,
+                "predicted": 0.03342978851701565,
+                "observed": 0.021599894447699126
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 2965,
+                "weightFraction": 0.07214504193075338,
+                "predicted": 0.14894903040129662,
+                "observed": 0.12134563112924363
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 2727,
+                "weightFraction": 0.06609028157114721,
+                "predicted": 0.24977868178711182,
+                "observed": 0.19815071244694923
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 2675,
+                "weightFraction": 0.06457412035186319,
+                "predicted": 0.3499464719403498,
+                "observed": 0.29942867036859877
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 2643,
+                "weightFraction": 0.06400207549588355,
+                "predicted": 0.44936355549480117,
+                "observed": 0.35321557053618136
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 2992,
+                "weightFraction": 0.07245368904920471,
+                "predicted": 0.5500776970878234,
+                "observed": 0.4548894095426488
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 3340,
+                "weightFraction": 0.08111151097981108,
+                "predicted": 0.6513645562905357,
+                "observed": 0.5617702982002983
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 3965,
+                "weightFraction": 0.0976655057429117,
+                "predicted": 0.751654420557127,
+                "observed": 0.6855649193418398
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 5048,
+                "weightFraction": 0.12667654821017735,
+                "predicted": 0.8526600799019411,
+                "observed": 0.8041372519086298
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 8255,
+                "weightFraction": 0.2299550613583209,
+                "predicted": 0.9616042237099233,
+                "observed": 0.9618958653814591
+              }
+            ],
+            "matches": 2112,
+            "snapshots": 39690,
+            "baselineBrier": 0.1608325221661307
+          }
+        },
+        "competition": {
+          "bbl": {
+            "brier": 0.13071840425024975,
+            "logLoss": 0.40208229144665897,
+            "ece10": 0.06574918413908265,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 1090,
+                "weightFraction": 0.13093182443808582,
+                "predicted": 0.03187592257290881,
+                "observed": 0.0179808087131587
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 636,
+                "weightFraction": 0.07440334989108746,
+                "predicted": 0.14879616082890829,
+                "observed": 0.06701094835585833
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 623,
+                "weightFraction": 0.07226867711863338,
+                "predicted": 0.24999599286951538,
+                "observed": 0.11199020109553175
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 580,
+                "weightFraction": 0.0664783477523832,
+                "predicted": 0.35128799312553183,
+                "observed": 0.22888390098933864
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 594,
+                "weightFraction": 0.06838911553922175,
+                "predicted": 0.44778865117921807,
+                "observed": 0.26834373073421003
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 667,
+                "weightFraction": 0.07684033982564784,
+                "predicted": 0.5512325233937766,
+                "observed": 0.41213471771975624
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 684,
+                "weightFraction": 0.07897243548509011,
+                "predicted": 0.6514695451060513,
+                "observed": 0.5304899428164022
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 846,
+                "weightFraction": 0.09883624756705389,
+                "predicted": 0.7508424804777215,
+                "observed": 0.70846209067068
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 1086,
+                "weightFraction": 0.13048174544776608,
+                "predicted": 0.8528351800298248,
+                "observed": 0.8299798555096577
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1531,
+                "weightFraction": 0.20239791693503043,
+                "predicted": 0.9613948065830832,
+                "observed": 0.9616353363083399
+              }
+            ],
+            "matches": 446,
+            "snapshots": 8337,
+            "baselineBrier": 0.15506918708675285
+          },
+          "bpl": {
+            "brier": 0.1397496241750762,
+            "logLoss": 0.4200698227892705,
+            "ece10": 0.0839752203544822,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 598,
+                "weightFraction": 0.11190473063228482,
+                "predicted": 0.030444321913779333,
+                "observed": 0.004874276023655253
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 342,
+                "weightFraction": 0.06374274366844027,
+                "predicted": 0.14828394274406662,
+                "observed": 0.05194324238553776
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 350,
+                "weightFraction": 0.06505345136459688,
+                "predicted": 0.24848884573546737,
+                "observed": 0.14298142852664314
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 387,
+                "weightFraction": 0.07178512680989461,
+                "predicted": 0.34937719950975354,
+                "observed": 0.25127784121181124
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 356,
+                "weightFraction": 0.06584699047082948,
+                "predicted": 0.44796778794957165,
+                "observed": 0.3130047853249357
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 360,
+                "weightFraction": 0.06695528035775714,
+                "predicted": 0.5511369891828806,
+                "observed": 0.3434747964646906
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 430,
+                "weightFraction": 0.08010769794361126,
+                "predicted": 0.6509710023122951,
+                "observed": 0.5052586195021679
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 485,
+                "weightFraction": 0.0919746541727966,
+                "predicted": 0.7552621060052088,
+                "observed": 0.6280601790427947
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 679,
+                "weightFraction": 0.1300919823210845,
+                "predicted": 0.8527871711875368,
+                "observed": 0.75535867561003
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1157,
+                "weightFraction": 0.2525373422587045,
+                "predicted": 0.9647922282452492,
+                "observed": 0.9559642134916059
+              }
+            ],
+            "matches": 275,
+            "snapshots": 5144,
+            "baselineBrier": 0.15753937590209138
+          },
+          "cpl": {
+            "brier": 0.14649640854174342,
+            "logLoss": 0.4469088000558615,
+            "ece10": 0.062133500914691955,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 608,
+                "weightFraction": 0.12340609370363131,
+                "predicted": 0.033258290401827664,
+                "observed": 0.060006281186226605
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 317,
+                "weightFraction": 0.0635965650370035,
+                "predicted": 0.15115643434163029,
+                "observed": 0.16295089348038666
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 313,
+                "weightFraction": 0.06241864112706146,
+                "predicted": 0.24843114858618068,
+                "observed": 0.16410137320897333
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 306,
+                "weightFraction": 0.06065233144801509,
+                "predicted": 0.34720551070341776,
+                "observed": 0.22856207007698734
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 294,
+                "weightFraction": 0.058577095668948934,
+                "predicted": 0.4500707483996597,
+                "observed": 0.317646927799474
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 310,
+                "weightFraction": 0.0617307228208841,
+                "predicted": 0.5519532743604436,
+                "observed": 0.4757490335116782
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 409,
+                "weightFraction": 0.08183341914217068,
+                "predicted": 0.6536678234611922,
+                "observed": 0.5462372161834671
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 545,
+                "weightFraction": 0.1109335473801058,
+                "predicted": 0.7519618057233733,
+                "observed": 0.6521332618432943
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 591,
+                "weightFraction": 0.12268592608834888,
+                "predicted": 0.8527617008594562,
+                "observed": 0.7616143354013508
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1085,
+                "weightFraction": 0.25416565758383025,
+                "predicted": 0.9616427304564837,
+                "observed": 0.9533276634903098
+              }
+            ],
+            "matches": 258,
+            "snapshots": 4778,
+            "baselineBrier": 0.16222797513122136
+          },
+          "ipl": {
+            "brier": 0.14430143411708124,
+            "logLoss": 0.4326058276911374,
+            "ece10": 0.03210580718687535,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 2150,
+                "weightFraction": 0.1258590642535158,
+                "predicted": 0.034284601261341696,
+                "observed": 0.01982793927595295
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 1273,
+                "weightFraction": 0.07371997944092959,
+                "predicted": 0.1484101139163126,
+                "observed": 0.1509912249056953
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 1110,
+                "weightFraction": 0.0640974647171881,
+                "predicted": 0.2498754259388813,
+                "observed": 0.2642386320118645
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 1104,
+                "weightFraction": 0.063772821265504,
+                "predicted": 0.3503282783955968,
+                "observed": 0.3718024448100419
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 1094,
+                "weightFraction": 0.06353359182002766,
+                "predicted": 0.4494488307063494,
+                "observed": 0.4140368380123642
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 1305,
+                "weightFraction": 0.07564577028421215,
+                "predicted": 0.5489617913890354,
+                "observed": 0.4724933857882708
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 1463,
+                "weightFraction": 0.08513161739434734,
+                "predicted": 0.6502975713581391,
+                "observed": 0.5783180438159663
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 1647,
+                "weightFraction": 0.09708225441498722,
+                "predicted": 0.7510613425266642,
+                "observed": 0.6819486091671294
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 2134,
+                "weightFraction": 0.12762872144231835,
+                "predicted": 0.8526626362117818,
+                "observed": 0.8031453854906867
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 3401,
+                "weightFraction": 0.22352871496696983,
+                "predicted": 0.9600964126935856,
+                "observed": 0.9628449321513574
+              }
+            ],
+            "matches": 879,
+            "snapshots": 16681,
+            "baselineBrier": 0.16826716362884028
+          },
+          "lpl": {
+            "brier": 0.10395262828275309,
+            "logLoss": 0.32832966541533726,
+            "ece10": 0.06833850984993113,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 201,
+                "weightFraction": 0.1902714046144774,
+                "predicted": 0.03458428094663639,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 92,
+                "weightFraction": 0.08542910585286745,
+                "predicted": 0.15197313682184133,
+                "observed": 0.06270863780746269
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 88,
+                "weightFraction": 0.08241029964617426,
+                "predicted": 0.254385313521821,
+                "observed": 0.10834290697771926
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 54,
+                "weightFraction": 0.05060583443903875,
+                "predicted": 0.35076553751349,
+                "observed": 0.10586018226013495
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 62,
+                "weightFraction": 0.05688209494324044,
+                "predicted": 0.45616367308894096,
+                "observed": 0.237101712212269
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 77,
+                "weightFraction": 0.06969169246646024,
+                "predicted": 0.5503250226734968,
+                "observed": 0.5194288358564157
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 68,
+                "weightFraction": 0.06134177355152586,
+                "predicted": 0.6482368967307788,
+                "observed": 0.527060520030643
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 80,
+                "weightFraction": 0.07306808688387637,
+                "predicted": 0.7533390810524633,
+                "observed": 0.7639702729741316
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 106,
+                "weightFraction": 0.1002642175291169,
+                "predicted": 0.8506255286238763,
+                "observed": 0.8106506700608143
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 204,
+                "weightFraction": 0.23003549007322224,
+                "predicted": 0.9679065599271389,
+                "observed": 0.9803887730799592
+              }
+            ],
+            "matches": 56,
+            "snapshots": 1032,
+            "baselineBrier": 0.13216842598527764
+          },
+          "psl": {
+            "brier": 0.12569398766233195,
+            "logLoss": 0.38733462728744317,
+            "ece10": 0.01684408037563225,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 433,
+                "weightFraction": 0.11310797069955994,
+                "predicted": 0.037055714698392334,
+                "observed": 0.018448355329148992
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 305,
+                "weightFraction": 0.07911805233141661,
+                "predicted": 0.14901073994959838,
+                "observed": 0.16580315038088558
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 243,
+                "weightFraction": 0.06262872667026434,
+                "predicted": 0.25067065529400534,
+                "observed": 0.27906372306302235
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 244,
+                "weightFraction": 0.06288763170858112,
+                "predicted": 0.349193990541579,
+                "observed": 0.35103919152357826
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 243,
+                "weightFraction": 0.062720203677376,
+                "predicted": 0.45227856829131174,
+                "observed": 0.4198610591807049
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 273,
+                "weightFraction": 0.07079194073518119,
+                "predicted": 0.5489562994199028,
+                "observed": 0.5805988683787827
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 286,
+                "weightFraction": 0.07412795394606542,
+                "predicted": 0.6545620164986785,
+                "observed": 0.6677556226839174
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 362,
+                "weightFraction": 0.09518980856700153,
+                "predicted": 0.7505646976614815,
+                "observed": 0.7593017616694593
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 452,
+                "weightFraction": 0.12180457046298118,
+                "predicted": 0.8523774425608128,
+                "observed": 0.8730437703798614
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 877,
+                "weightFraction": 0.2576231412015726,
+                "predicted": 0.9618012427053577,
+                "observed": 0.97312155962387
+              }
+            ],
+            "matches": 198,
+            "snapshots": 3718,
+            "baselineBrier": 0.1516717915773734
+          },
+          "wbb": {
+            "brier": 0.12283045363355452,
+            "logLoss": 0.37618620177251927,
+            "ece10": 0.049621233870077885,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 883,
+                "weightFraction": 0.13891318038686462,
+                "predicted": 0.030349015292292166,
+                "observed": 0.029960751803733105
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 390,
+                "weightFraction": 0.061162657775660885,
+                "predicted": 0.1497565163756894,
+                "observed": 0.1239146179065656
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 417,
+                "weightFraction": 0.0650840147124977,
+                "predicted": 0.2505183331609545,
+                "observed": 0.16472013628287638
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 424,
+                "weightFraction": 0.06641179116720913,
+                "predicted": 0.35114467924654774,
+                "observed": 0.29799487442664024
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 371,
+                "weightFraction": 0.05788637506284566,
+                "predicted": 0.44902127377273204,
+                "observed": 0.32303033849214463
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 372,
+                "weightFraction": 0.058270381836945315,
+                "predicted": 0.5499584302718116,
+                "observed": 0.42581522331451477
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 449,
+                "weightFraction": 0.0708362705406049,
+                "predicted": 0.6527702504816717,
+                "observed": 0.5336875766607327
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 539,
+                "weightFraction": 0.08593664917813526,
+                "predicted": 0.7503120107697414,
+                "observed": 0.6852654399845077
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 685,
+                "weightFraction": 0.11383593736844512,
+                "predicted": 0.854241937588679,
+                "observed": 0.8099007531701145
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1530,
+                "weightFraction": 0.28166274197079155,
+                "predicted": 0.9615869468122515,
+                "observed": 0.9803078012177108
+              }
+            ],
+            "matches": 325,
+            "snapshots": 6060,
+            "baselineBrier": 0.17848792444404424
+          }
+        },
+        "phase": {
+          "death": {
+            "brier": 0.08228855214991022,
+            "logLoss": 0.2627923773916978,
+            "ece10": 0.029099626547167953,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 2386,
+                "weightFraction": 0.32431535637066794,
+                "predicted": 0.019261928068094545,
+                "observed": 0.011204621475367769
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 499,
+                "weightFraction": 0.06722744097208233,
+                "predicted": 0.1476793095116435,
+                "observed": 0.0880198170197352
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 346,
+                "weightFraction": 0.04658638372055628,
+                "predicted": 0.2498572513460706,
+                "observed": 0.22216910251387365
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 308,
+                "weightFraction": 0.04152904606419555,
+                "predicted": 0.348155899019797,
+                "observed": 0.2825906030112733
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 222,
+                "weightFraction": 0.029926866856202664,
+                "predicted": 0.45038531512407587,
+                "observed": 0.30663026930547527
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 266,
+                "weightFraction": 0.03588663216771532,
+                "predicted": 0.5486321404649834,
+                "observed": 0.4294626244938164
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 285,
+                "weightFraction": 0.03840266331214331,
+                "predicted": 0.6516186226609122,
+                "observed": 0.5905743740795286
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 355,
+                "weightFraction": 0.04801039884991996,
+                "predicted": 0.7562887678174948,
+                "observed": 0.6838462671182447
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 557,
+                "weightFraction": 0.07570245190471843,
+                "predicted": 0.8553668462537362,
+                "observed": 0.8060328726186029
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 2079,
+                "weightFraction": 0.29241275978179826,
+                "predicted": 0.968871397231767,
+                "observed": 0.9699907731744783
+              }
+            ],
+            "matches": 2150,
+            "snapshots": 7303,
+            "baselineBrier": 0.12414879855018328
+          },
+          "middle": {
+            "brier": 0.12442030269359836,
+            "logLoss": 0.38258337317104857,
+            "ece10": 0.04353175119637332,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 2888,
+                "weightFraction": 0.1335863796751316,
+                "predicted": 0.0380895347640127,
+                "observed": 0.026880837321354104
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 1734,
+                "weightFraction": 0.07808793683179402,
+                "predicted": 0.1477134058287441,
+                "observed": 0.11799225391273394
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 1539,
+                "weightFraction": 0.06880835011929694,
+                "predicted": 0.2484418651660084,
+                "observed": 0.17631065934665605
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 1306,
+                "weightFraction": 0.058024218839057166,
+                "predicted": 0.349003374024407,
+                "observed": 0.27242863575478027
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 1248,
+                "weightFraction": 0.055628447300110864,
+                "predicted": 0.44888893999282337,
+                "observed": 0.3556294348937751
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 1353,
+                "weightFraction": 0.06029037207883127,
+                "predicted": 0.5507880126698959,
+                "observed": 0.4627290539548646
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 1538,
+                "weightFraction": 0.06867401113972874,
+                "predicted": 0.6501276694623749,
+                "observed": 0.5460463299387969
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 1898,
+                "weightFraction": 0.08540399150096409,
+                "predicted": 0.7513118451242607,
+                "observed": 0.6918636353237235
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 2657,
+                "weightFraction": 0.12176532107614271,
+                "predicted": 0.8538630787985083,
+                "observed": 0.8077233391778171
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 5231,
+                "weightFraction": 0.26973097143894276,
+                "predicted": 0.9637960913275965,
+                "observed": 0.9710890368527368
+              }
+            ],
+            "matches": 2434,
+            "snapshots": 21392,
+            "baselineBrier": 0.15263231367604727
+          },
+          "powerplay": {
+            "brier": 0.17250462323376836,
+            "logLoss": 0.5123262281027866,
+            "ece10": 0.0516737882568574,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 689,
+                "weightFraction": 0.03982435541419599,
+                "predicted": 0.05682588421438768,
+                "observed": 0.04408701912701435
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 1122,
+                "weightFraction": 0.06293908241331081,
+                "predicted": 0.15166044254591218,
+                "observed": 0.1416794028517208
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 1259,
+                "weightFraction": 0.07023654638504709,
+                "predicted": 0.25161295009061335,
+                "observed": 0.20722637193999213
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 1485,
+                "weightFraction": 0.08256974236657424,
+                "predicted": 0.35146460652101746,
+                "observed": 0.3258209295320714
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 1544,
+                "weightFraction": 0.08589042252311528,
+                "predicted": 0.44951811014675447,
+                "observed": 0.350672420450478
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 1745,
+                "weightFraction": 0.09718132806816983,
+                "predicted": 0.5497242117141881,
+                "observed": 0.44654683724560235
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 1966,
+                "weightFraction": 0.11002266275677733,
+                "predicted": 0.6525986086200318,
+                "observed": 0.5634678354889433
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 2251,
+                "weightFraction": 0.12864478762336778,
+                "predicted": 0.750923469132677,
+                "observed": 0.6805982066767954
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 2519,
+                "weightFraction": 0.14873537926930094,
+                "predicted": 0.8513170020898962,
+                "observed": 0.8016801523153183
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 2475,
+                "weightFraction": 0.17395569318014079,
+                "predicted": 0.952487948911067,
+                "observed": 0.94932409456981
+              }
+            ],
+            "matches": 2437,
+            "snapshots": 17055,
+            "baselineBrier": 0.19191096560928741
+          }
+        }
+      }
+    },
+    "calibration": {
+      "matches": 395,
+      "snapshots": 7321,
+      "model": {
+        "brier": 0.12530149408928964,
+        "logLoss": 0.3883784062011745,
+        "ece10": 0.014185640643170254,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "snapshots": 1445,
+            "weightFraction": 0.19443034980764728,
+            "predicted": 0.031196526597516826,
+            "observed": 0.03659540037195211
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "snapshots": 535,
+            "weightFraction": 0.07073197572893855,
+            "predicted": 0.14906416692237742,
+            "observed": 0.1775450109957067
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "snapshots": 497,
+            "weightFraction": 0.06528611429197313,
+            "predicted": 0.25036298415639446,
+            "observed": 0.25716056894421063
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "snapshots": 465,
+            "weightFraction": 0.060438622504500154,
+            "predicted": 0.3478167242835696,
+            "observed": 0.2792375619161335
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "snapshots": 508,
+            "weightFraction": 0.06635227619806527,
+            "predicted": 0.4502712222915861,
+            "observed": 0.4265943893365453
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "snapshots": 531,
+            "weightFraction": 0.06940047862158613,
+            "predicted": 0.548974256617249,
+            "observed": 0.5384830191702779
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "snapshots": 549,
+            "weightFraction": 0.07232160759211352,
+            "predicted": 0.6507212999025842,
+            "observed": 0.6417491325250909
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "snapshots": 604,
+            "weightFraction": 0.08059530999061507,
+            "predicted": 0.7513106085927902,
+            "observed": 0.776056640608673
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "snapshots": 759,
+            "weightFraction": 0.10251451867923239,
+            "predicted": 0.8546631980532137,
+            "observed": 0.8654096167821592
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "snapshots": 1428,
+            "weightFraction": 0.21792874658532846,
+            "predicted": 0.9608738274523321,
+            "observed": 0.9631165011064886
+          }
+        ]
+      },
+      "baselines": {
+        "constant50": {
+          "brier": 0.24999999999999997,
+          "logLoss": 0.6931471805599454,
+          "ece10": 0.026582278481012685,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 7321,
+              "weightFraction": 0.9999999999999999,
+              "predicted": 0.5,
+              "observed": 0.5265822784810127
+            }
+          ]
+        },
+        "trainChasePrior": {
+          "brier": 0.24940475976703375,
+          "logLoss": 0.6919570508300014,
+          "ece10": 0.010553544251855838,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 7321,
+              "weightFraction": 0.9999999999999999,
+              "predicted": 0.5371358227328685,
+              "observed": 0.5265822784810127
+            }
+          ]
+        },
+        "trainResourceBuckets": {
+          "brier": 0.1650719226436213,
+          "logLoss": 0.5057350131555534,
+          "ece10": 0.08247128500765379,
+          "calibrationBins": [
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "snapshots": 317,
+              "weightFraction": 0.04073926750358149,
+              "predicted": 0.15628175294140642,
+              "observed": 0.08078542993481651
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.3,
+              "snapshots": 1289,
+              "weightFraction": 0.17081082127149455,
+              "predicted": 0.26028196780470264,
+              "observed": 0.1828218504957949
+            },
+            {
+              "lower": 0.3,
+              "upper": 0.4,
+              "snapshots": 1302,
+              "weightFraction": 0.17087060969972362,
+              "predicted": 0.344166404828877,
+              "observed": 0.2602461328490788
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "snapshots": 760,
+              "weightFraction": 0.10278442311390934,
+              "predicted": 0.46363509280054616,
+              "observed": 0.3601533500011407
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 603,
+              "weightFraction": 0.08055949927417969,
+              "predicted": 0.544027741332321,
+              "observed": 0.5605167388421399
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.7,
+              "snapshots": 1206,
+              "weightFraction": 0.1639439527218263,
+              "predicted": 0.6407350824248788,
+              "observed": 0.7292964213076871
+            },
+            {
+              "lower": 0.7,
+              "upper": 0.8,
+              "snapshots": 682,
+              "weightFraction": 0.0946516127621861,
+              "predicted": 0.7328414410477174,
+              "observed": 0.8338014426272427
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "snapshots": 766,
+              "weightFraction": 0.11129955389674401,
+              "predicted": 0.8303425288986733,
+              "observed": 0.9499582877184605
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "snapshots": 396,
+              "weightFraction": 0.0643402597563549,
+              "predicted": 0.9128844507886555,
+              "observed": 0.951307137952678
+            }
+          ]
+        }
+      },
+      "groups": {
+        "gender": {
+          "female": {
+            "brier": 0.09727482399255322,
+            "logLoss": 0.3173817124180646,
+            "ece10": 0.03737750437899401,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 368,
+                "weightFraction": 0.26522147147147146,
+                "predicted": 0.029407107889146092,
+                "observed": 0.03566626565706603
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 99,
+                "weightFraction": 0.0703601627943733,
+                "predicted": 0.1446243138836449,
+                "observed": 0.11977199657433284
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 66,
+                "weightFraction": 0.04719752647384227,
+                "predicted": 0.2517616005274049,
+                "observed": 0.2819439502710396
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 71,
+                "weightFraction": 0.04939544807965861,
+                "predicted": 0.34687814683342116,
+                "observed": 0.2435605151587873
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 87,
+                "weightFraction": 0.0612405168326221,
+                "predicted": 0.4508304004070453,
+                "observed": 0.4458907976449714
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 81,
+                "weightFraction": 0.05657697170855066,
+                "predicted": 0.5463645495855652,
+                "observed": 0.5369102908824248
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 88,
+                "weightFraction": 0.06206170745644429,
+                "predicted": 0.6505208294588607,
+                "observed": 0.7245262273765769
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 110,
+                "weightFraction": 0.08000873134387063,
+                "predicted": 0.7452116326954166,
+                "observed": 0.8644351371869508
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 119,
+                "weightFraction": 0.09006949763528707,
+                "predicted": 0.8526742962425128,
+                "observed": 0.9099794234343382
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 252,
+                "weightFraction": 0.21786796620387955,
+                "predicted": 0.9602439820495464,
+                "observed": 0.9937973839160605
+              }
+            ],
+            "matches": 74,
+            "snapshots": 1341,
+            "baselineBrier": 0.18373588062147206
+          },
+          "male": {
+            "brier": 0.1317624709963255,
+            "logLoss": 0.4047452452664396,
+            "ece10": 0.013930657765701793,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 1077,
+                "weightFraction": 0.17811090119978756,
+                "predicted": 0.031810793110289434,
+                "observed": 0.036914351067247275
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 436,
+                "weightFraction": 0.07081768961416542,
+                "predicted": 0.15008107187832628,
+                "observed": 0.19077735543879476
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 431,
+                "weightFraction": 0.06945606911609054,
+                "predicted": 0.25014388821489986,
+                "observed": 0.25327820464634554
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 394,
+                "weightFraction": 0.06298440103234526,
+                "predicted": 0.3479864121264695,
+                "observed": 0.285687707404226
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 421,
+                "weightFraction": 0.06753068801439799,
+                "predicted": 0.4501543222875287,
+                "observed": 0.42256034339092635
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 450,
+                "weightFraction": 0.07235667647692763,
+                "predicted": 0.5494446698508096,
+                "observed": 0.5387665116046467
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 461,
+                "weightFraction": 0.07468681821528962,
+                "predicted": 0.6507597021640865,
+                "observed": 0.6258922930635565
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 494,
+                "weightFraction": 0.08073053372849387,
+                "predicted": 0.7527040322023724,
+                "observed": 0.755864941906502
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 640,
+                "weightFraction": 0.10538346434045344,
+                "predicted": 0.8550550710152582,
+                "observed": 0.8566280358833023
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1176,
+                "weightFraction": 0.2179427582620488,
+                "predicted": 0.9610189756299313,
+                "observed": 0.9560460768289516
+              }
+            ],
+            "matches": 321,
+            "snapshots": 5980,
+            "baselineBrier": 0.16076932796959964
+          }
+        },
+        "competition": {
+          "bbl": {
+            "brier": 0.14504963257913372,
+            "logLoss": 0.4464783246426385,
+            "ece10": 0.04150084427092258,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 64,
+                "weightFraction": 0.06817105263157895,
+                "predicted": 0.03874164863549509,
+                "observed": 0.08801389693109438
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 42,
+                "weightFraction": 0.04267105263157895,
+                "predicted": 0.1586129770507383,
+                "observed": 0.046870181930311436
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 58,
+                "weightFraction": 0.05873684210526316,
+                "predicted": 0.24913992125255463,
+                "observed": 0.20878136200716843
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 53,
+                "weightFraction": 0.05342105263157895,
+                "predicted": 0.35817122047551414,
+                "observed": 0.24926108374384237
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 56,
+                "weightFraction": 0.057024423804609564,
+                "predicted": 0.4556292797241664,
+                "observed": 0.5597454304156362
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 86,
+                "weightFraction": 0.08885036119711046,
+                "predicted": 0.5523990715753854,
+                "observed": 0.5817924177662143
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 118,
+                "weightFraction": 0.12309459924320607,
+                "predicted": 0.6503286924312701,
+                "observed": 0.6327172224147375
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 116,
+                "weightFraction": 0.12196972824217406,
+                "predicted": 0.7496735178332029,
+                "observed": 0.7777705702182387
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 141,
+                "weightFraction": 0.1488355693154455,
+                "predicted": 0.8535943695349943,
+                "observed": 0.872342343383449
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 199,
+                "weightFraction": 0.2372253181974545,
+                "predicted": 0.9631198180521907,
+                "observed": 0.9283381717888559
+              }
+            ],
+            "matches": 50,
+            "snapshots": 933,
+            "baselineBrier": 0.16982501376827422
+          },
+          "bpl": {
+            "brier": 0.11774812269826844,
+            "logLoss": 0.37719087820681885,
+            "ece10": 0.059453897590985134,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 80,
+                "weightFraction": 0.09906743185078909,
+                "predicted": 0.026445324493350086,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 29,
+                "weightFraction": 0.03657026353545269,
+                "predicted": 0.14107852839373144,
+                "observed": 0.07020441874870947
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 40,
+                "weightFraction": 0.04912406554406101,
+                "predicted": 0.25695522019037614,
+                "observed": 0.12673891322726924
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 40,
+                "weightFraction": 0.049059880691686174,
+                "predicted": 0.3423501631839713,
+                "observed": 0.3244574418962598
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 56,
+                "weightFraction": 0.06923657781469456,
+                "predicted": 0.44766394432200846,
+                "observed": 0.5005998473115935
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 71,
+                "weightFraction": 0.0885335649022125,
+                "predicted": 0.5501682873876832,
+                "observed": 0.639430252889249
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 58,
+                "weightFraction": 0.07248431036941949,
+                "predicted": 0.6536148079958677,
+                "observed": 0.8107243881441396
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 73,
+                "weightFraction": 0.09300206817857651,
+                "predicted": 0.7561570335392734,
+                "observed": 0.8787071295746028
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 109,
+                "weightFraction": 0.13984348125215,
+                "predicted": 0.8588206588514415,
+                "observed": 0.8779122875171927
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 220,
+                "weightFraction": 0.303078355860958,
+                "predicted": 0.9543486794094888,
+                "observed": 0.9215368324889959
+              }
+            ],
+            "matches": 41,
+            "snapshots": 776,
+            "baselineBrier": 0.15012256548193142
+          },
+          "cpl": {
+            "brier": 0.08957512271016654,
+            "logLoss": 0.2921706346330013,
+            "ece10": 0.07759680033103912,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 121,
+                "weightFraction": 0.251519125168936,
+                "predicted": 0.022265274846603705,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 31,
+                "weightFraction": 0.06251640357247513,
+                "predicted": 0.14303389754628135,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 23,
+                "weightFraction": 0.04857706665412204,
+                "predicted": 0.254847279463705,
+                "observed": 0.08248606149988044
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 17,
+                "weightFraction": 0.03356457592783703,
+                "predicted": 0.35206881311257976,
+                "observed": 0.23262920154111857
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 39,
+                "weightFraction": 0.07699805068226122,
+                "predicted": 0.44801677322074246,
+                "observed": 0.5644163150492262
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 42,
+                "weightFraction": 0.08313840155945418,
+                "predicted": 0.5577275160618702,
+                "observed": 0.658460336068777
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 41,
+                "weightFraction": 0.08037877919198869,
+                "predicted": 0.6540719981917574,
+                "observed": 0.8464062388549419
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 39,
+                "weightFraction": 0.07712099784683205,
+                "predicted": 0.7514901415646708,
+                "observed": 0.9679836118384642
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 42,
+                "weightFraction": 0.08192039648867994,
+                "predicted": 0.8498847462036238,
+                "observed": 0.8417614718850362
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 97,
+                "weightFraction": 0.2042662029074138,
+                "predicted": 0.9612182103749696,
+                "observed": 0.9637365002042706
+              }
+            ],
+            "matches": 27,
+            "snapshots": 492,
+            "baselineBrier": 0.13879796760720936
+          },
+          "ilt": {
+            "brier": 0.08984128026484922,
+            "logLoss": 0.2865899798796067,
+            "ece10": 0.048431867397442076,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 107,
+                "weightFraction": 0.20069444444444448,
+                "predicted": 0.02869051723890419,
+                "observed": 0.024913494809688578
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 27,
+                "weightFraction": 0.04652777777777777,
+                "predicted": 0.15002969108503245,
+                "observed": 0.10746268656716419
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 32,
+                "weightFraction": 0.05517543859649123,
+                "predicted": 0.25621628254574186,
+                "observed": 0.2750397456279809
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 35,
+                "weightFraction": 0.05979704162366701,
+                "predicted": 0.3460695854845549,
+                "observed": 0.3775240177184605
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 25,
+                "weightFraction": 0.04312865497076023,
+                "predicted": 0.4408902758622399,
+                "observed": 0.3688135593220339
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 37,
+                "weightFraction": 0.06515823873409013,
+                "predicted": 0.5558048549783591,
+                "observed": 0.693054932291529
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 33,
+                "weightFraction": 0.057991056071551424,
+                "predicted": 0.6466746549252417,
+                "observed": 0.6263791671609917
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 41,
+                "weightFraction": 0.07458032335741314,
+                "predicted": 0.7559099611572396,
+                "observed": 0.7988745647009985
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 68,
+                "weightFraction": 0.12314757481940147,
+                "predicted": 0.8520702488590606,
+                "observed": 0.986466102405095
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 140,
+                "weightFraction": 0.27379944960440317,
+                "predicted": 0.9642421572630623,
+                "observed": 1.0
+              }
+            ],
+            "matches": 30,
+            "snapshots": 545,
+            "baselineBrier": 0.1377345267696275
+          },
+          "ipl": {
+            "brier": 0.16911077891836845,
+            "logLoss": 0.5067481926540971,
+            "ece10": 0.06366961570249283,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 316,
+                "weightFraction": 0.2345594410475283,
+                "predicted": 0.03374615776797931,
+                "observed": 0.05577101065628411
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 146,
+                "weightFraction": 0.10867904150310936,
+                "predicted": 0.15137408120205956,
+                "observed": 0.3165396010731852
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 129,
+                "weightFraction": 0.0955507196522138,
+                "predicted": 0.24631595274078225,
+                "observed": 0.3966429873968544
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 85,
+                "weightFraction": 0.06293590547191302,
+                "predicted": 0.34600376373593394,
+                "observed": 0.3526453487116041
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 108,
+                "weightFraction": 0.08050657333871768,
+                "predicted": 0.4527673628308416,
+                "observed": 0.49617141176288426
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 74,
+                "weightFraction": 0.055623969764500125,
+                "predicted": 0.5446117386973267,
+                "observed": 0.5427381121646027
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 67,
+                "weightFraction": 0.04989555445875274,
+                "predicted": 0.6457687368432952,
+                "observed": 0.6369227233668391
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 94,
+                "weightFraction": 0.07102941354522994,
+                "predicted": 0.7526946907431582,
+                "observed": 0.6633360422857274
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 110,
+                "weightFraction": 0.08218941784697609,
+                "predicted": 0.8504795060249984,
+                "observed": 0.7354996421162452
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 195,
+                "weightFraction": 0.15902996337105907,
+                "predicted": 0.9598542951436466,
+                "observed": 0.9225376129216166
+              }
+            ],
+            "matches": 69,
+            "snapshots": 1324,
+            "baselineBrier": 0.19023489698920468
+          },
+          "lpl": {
+            "brier": 0.08027433000248488,
+            "logLoss": 0.26480765400674733,
+            "ece10": 0.1481107281050173,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 60,
+                "weightFraction": 0.14073600454674617,
+                "predicted": 0.029181002887646298,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 25,
+                "weightFraction": 0.05569764137539074,
+                "predicted": 0.14503766693811607,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 33,
+                "weightFraction": 0.07433930093776642,
+                "predicted": 0.24722130871427492,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 42,
+                "weightFraction": 0.09202898550724638,
+                "predicted": 0.35441137139938916,
+                "observed": 0.023622047244094488
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 26,
+                "weightFraction": 0.05676328502415459,
+                "predicted": 0.4484316808692749,
+                "observed": 0.1148936170212766
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 29,
+                "weightFraction": 0.06304347826086958,
+                "predicted": 0.5455110156170171,
+                "observed": 0.03448275862068965
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 21,
+                "weightFraction": 0.04599542334096111,
+                "predicted": 0.6642429199994547,
+                "observed": 0.29104477611940294
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 21,
+                "weightFraction": 0.04660564454614799,
+                "predicted": 0.7690977943980369,
+                "observed": 0.8134206219312602
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 42,
+                "weightFraction": 0.09742249419864173,
+                "predicted": 0.86281836535577,
+                "observed": 0.9107428705717301
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 112,
+                "weightFraction": 0.3273677422620753,
+                "predicted": 0.9631745976788021,
+                "observed": 1.0
+              }
+            ],
+            "matches": 23,
+            "snapshots": 411,
+            "baselineBrier": 0.12422835637949428
+          },
+          "mlc": {
+            "brier": 0.16030608600834084,
+            "logLoss": 0.4690021132519411,
+            "ece10": 0.061755861253293076,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 51,
+                "weightFraction": 0.14210526315789473,
+                "predicted": 0.03987191996487044,
+                "observed": 0.05555555555555556
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 27,
+                "weightFraction": 0.08233082706766916,
+                "predicted": 0.1437759725564474,
+                "observed": 0.15981735159817353
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 33,
+                "weightFraction": 0.09223057644110273,
+                "predicted": 0.2488515057133234,
+                "observed": 0.45652173913043487
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 26,
+                "weightFraction": 0.07257727652464493,
+                "predicted": 0.34619598444023125,
+                "observed": 0.3807194244604317
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 32,
+                "weightFraction": 0.08983698280789693,
+                "predicted": 0.45075348082283656,
+                "observed": 0.3634622796767266
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 21,
+                "weightFraction": 0.05739128523062041,
+                "predicted": 0.5412788522070833,
+                "observed": 0.6033326948860371
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 35,
+                "weightFraction": 0.09841929384865672,
+                "predicted": 0.6556404779836489,
+                "observed": 0.5488417807760181
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 33,
+                "weightFraction": 0.09076638965835641,
+                "predicted": 0.7469160305042741,
+                "observed": 0.671414038657172
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 29,
+                "weightFraction": 0.08583795013850413,
+                "predicted": 0.866523557714768,
+                "observed": 0.8160548608309802
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 61,
+                "weightFraction": 0.18850415512465377,
+                "predicted": 0.9537894726953702,
+                "observed": 0.9720793534166057
+              }
+            ],
+            "matches": 19,
+            "snapshots": 348,
+            "baselineBrier": 0.18827178845396733
+          },
+          "psl": {
+            "brier": 0.1848703623473462,
+            "logLoss": 0.5418682929201123,
+            "ece10": 0.10179071088260985,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 148,
+                "weightFraction": 0.24038804118138482,
+                "predicted": 0.03578554271665623,
+                "observed": 0.07252528220886331
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 78,
+                "weightFraction": 0.12724611774534375,
+                "predicted": 0.15266275455312317,
+                "observed": 0.30892267067027446
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 58,
+                "weightFraction": 0.09508176077448521,
+                "predicted": 0.2532453441969041,
+                "observed": 0.21363192934738723
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 62,
+                "weightFraction": 0.10185620300751877,
+                "predicted": 0.3414761174931078,
+                "observed": 0.31084198385236456
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 56,
+                "weightFraction": 0.08979771733254704,
+                "predicted": 0.4519814941995593,
+                "observed": 0.24909788040373917
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 46,
+                "weightFraction": 0.0738427717578259,
+                "predicted": 0.5525616517172388,
+                "observed": 0.5434733555097795
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 42,
+                "weightFraction": 0.07035872463020294,
+                "predicted": 0.6475832856702589,
+                "observed": 0.3966203466742043
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 38,
+                "weightFraction": 0.06187274251805986,
+                "predicted": 0.7511160774338421,
+                "observed": 0.48601808657579937
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 36,
+                "weightFraction": 0.05961779448621554,
+                "predicted": 0.8530032463168906,
+                "observed": 0.6330793483972673
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 42,
+                "weightFraction": 0.07993812656641605,
+                "predicted": 0.9625074930761417,
+                "observed": 0.9609072649782001
+              }
+            ],
+            "matches": 32,
+            "snapshots": 606,
+            "baselineBrier": 0.1799621768270488
+          },
+          "sat": {
+            "brier": 0.08750704148055598,
+            "logLoss": 0.27803826999726733,
+            "ece10": 0.07413830235544767,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 130,
+                "weightFraction": 0.23591617933723197,
+                "predicted": 0.032747337345375355,
+                "observed": 0.007064656062796943
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 31,
+                "weightFraction": 0.05332358674463936,
+                "predicted": 0.1521923009669387,
+                "observed": 0.06251142387132154
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 25,
+                "weightFraction": 0.042660818713450295,
+                "predicted": 0.24707503954122567,
+                "observed": 0.11720356408498972
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 34,
+                "weightFraction": 0.05792397660818714,
+                "predicted": 0.34946580209289996,
+                "observed": 0.25896012115093386
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 23,
+                "weightFraction": 0.039122807017543844,
+                "predicted": 0.44108024650080424,
+                "observed": 0.21300448430493282
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 44,
+                "weightFraction": 0.07377192982456143,
+                "predicted": 0.5399626613695456,
+                "observed": 0.31629013079667045
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 46,
+                "weightFraction": 0.07719298245614037,
+                "predicted": 0.6486135741235293,
+                "observed": 0.5852272727272726
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 39,
+                "weightFraction": 0.06686016511867905,
+                "predicted": 0.7508435580865647,
+                "observed": 0.7218599266833878
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 63,
+                "weightFraction": 0.1098658410732714,
+                "predicted": 0.8567256886826342,
+                "observed": 0.9696599661844825
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 110,
+                "weightFraction": 0.24336171310629517,
+                "predicted": 0.9677344554701421,
+                "observed": 1.0
+              }
+            ],
+            "matches": 30,
+            "snapshots": 545,
+            "baselineBrier": 0.12538945828368916
+          },
+          "wbb": {
+            "brier": 0.08723798853987913,
+            "logLoss": 0.2827138388433759,
+            "ece10": 0.06504245368049222,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 272,
+                "weightFraction": 0.278066037735849,
+                "predicted": 0.02916521743707112,
+                "observed": 0.0
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 79,
+                "weightFraction": 0.07893081761006288,
+                "predicted": 0.1454341854217749,
+                "observed": 0.026560424966799466
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 48,
+                "weightFraction": 0.04842767295597483,
+                "predicted": 0.2571488493057823,
+                "observed": 0.22294372294372294
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 62,
+                "weightFraction": 0.060036687631027236,
+                "predicted": 0.3467859019395705,
+                "observed": 0.1641204714098647
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 67,
+                "weightFraction": 0.06545845746441574,
+                "predicted": 0.4509360286255842,
+                "observed": 0.2906026127265065
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 51,
+                "weightFraction": 0.04880696237448967,
+                "predicted": 0.5473969926771621,
+                "observed": 0.4539520162771639
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 57,
+                "weightFraction": 0.05451699216594945,
+                "predicted": 0.6517122120398036,
+                "observed": 0.5803627899916513
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 79,
+                "weightFraction": 0.07990569282992904,
+                "predicted": 0.7460899845639802,
+                "observed": 0.8229044402838078
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 97,
+                "weightFraction": 0.10156420766050413,
+                "predicted": 0.8523947829513469,
+                "observed": 0.8885359815455588
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 165,
+                "weightFraction": 0.18428647157179778,
+                "predicted": 0.9562679749475148,
+                "observed": 0.9897616334137956
+              }
+            ],
+            "matches": 53,
+            "snapshots": 977,
+            "baselineBrier": 0.18300874494252523
+          },
+          "wpl": {
+            "brier": 0.12260588489692105,
+            "logLoss": 0.40487682191608826,
+            "ece10": 0.16100782702900757,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 96,
+                "weightFraction": 0.2328042328042328,
+                "predicted": 0.03013628390817097,
+                "observed": 0.14318181818181822
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 20,
+                "weightFraction": 0.04872946254525202,
+                "predicted": 0.14131355394478462,
+                "observed": 0.5008214872490891
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 18,
+                "weightFraction": 0.04409287106655528,
+                "predicted": 0.2368285398890228,
+                "observed": 0.4454882766242993
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 9,
+                "weightFraction": 0.02253898635477583,
+                "predicted": 0.3474982747074644,
+                "observed": 0.7776061776061777
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 20,
+                "weightFraction": 0.05059523809523809,
+                "predicted": 0.450485500836914,
+                "observed": 0.9529411764705883
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 30,
+                "weightFraction": 0.07618699526594266,
+                "predicted": 0.5446952909533934,
+                "observed": 0.6710376022296337
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 31,
+                "weightFraction": 0.08110313176102654,
+                "predicted": 0.648499662997658,
+                "observed": 0.9690977942560194
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 31,
+                "weightFraction": 0.0802687809266757,
+                "predicted": 0.7430048673329748,
+                "observed": 0.9687765824368275
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 22,
+                "weightFraction": 0.06105903900021547,
+                "predicted": 0.8538477061717106,
+                "observed": 1.0
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 87,
+                "weightFraction": 0.3026212621800858,
+                "predicted": 0.9663547774485876,
+                "observed": 1.0
+              }
+            ],
+            "matches": 21,
+            "snapshots": 364,
+            "baselineBrier": 0.1855710325730996
+          }
+        },
+        "phase": {
+          "death": {
+            "brier": 0.06985872133083179,
+            "logLoss": 0.23939923113193523,
+            "ece10": 0.03761862263663292,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 410,
+                "weightFraction": 0.36353833074912933,
+                "predicted": 0.017456254897398767,
+                "observed": 0.021726529568276264
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 55,
+                "weightFraction": 0.04840672955701431,
+                "predicted": 0.15016423767638812,
+                "observed": 0.09064885496183206
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 53,
+                "weightFraction": 0.04689273621315096,
+                "predicted": 0.25355162289438715,
+                "observed": 0.13100580059100358
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 38,
+                "weightFraction": 0.033348911011607196,
+                "predicted": 0.3484421870698412,
+                "observed": 0.2894736842105262
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 36,
+                "weightFraction": 0.03173227405121072,
+                "predicted": 0.4442828067145576,
+                "observed": 0.2489082969432314
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 33,
+                "weightFraction": 0.029099465287136465,
+                "predicted": 0.5522028711994866,
+                "observed": 0.39206349206349206
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 42,
+                "weightFraction": 0.03709027083423902,
+                "predicted": 0.6481003667980091,
+                "observed": 0.526774595267746
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 56,
+                "weightFraction": 0.04928433247837239,
+                "predicted": 0.7557770240365936,
+                "observed": 0.7685098406747892
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 96,
+                "weightFraction": 0.08546107512546672,
+                "predicted": 0.8551475678087822,
+                "observed": 0.9589238529906317
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 297,
+                "weightFraction": 0.27514587469267293,
+                "predicted": 0.9690541015214108,
+                "observed": 0.9712936772137873
+              }
+            ],
+            "matches": 336,
+            "snapshots": 1116,
+            "baselineBrier": 0.12248746055142574
+          },
+          "middle": {
+            "brier": 0.1096247006453343,
+            "logLoss": 0.3434875580409692,
+            "ece10": 0.019450372528916994,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 713,
+                "weightFraction": 0.2079378533552526,
+                "predicted": 0.029459949418485204,
+                "observed": 0.015539173463324405
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 252,
+                "weightFraction": 0.07006784200957512,
+                "predicted": 0.14785643539370358,
+                "observed": 0.18142633395342433
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 211,
+                "weightFraction": 0.05778909625465053,
+                "predicted": 0.25111163593058583,
+                "observed": 0.25210057480015485
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 219,
+                "weightFraction": 0.05983686939712611,
+                "predicted": 0.34597648378401896,
+                "observed": 0.251394069719408
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 217,
+                "weightFraction": 0.0597472201900551,
+                "predicted": 0.45103083837123575,
+                "observed": 0.4307370798033413
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 205,
+                "weightFraction": 0.05626781206434334,
+                "predicted": 0.5450790652128619,
+                "observed": 0.5541623454656197
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 225,
+                "weightFraction": 0.062048237456106534,
+                "predicted": 0.6487684513736501,
+                "observed": 0.6608479259026767
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 247,
+                "weightFraction": 0.06921724967126776,
+                "predicted": 0.750221219835106,
+                "observed": 0.7723297818634492
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 385,
+                "weightFraction": 0.10946827485470811,
+                "predicted": 0.8547826888550585,
+                "observed": 0.8745524664295615
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 766,
+                "weightFraction": 0.24761954474691478,
+                "predicted": 0.963720009466981,
+                "observed": 0.9730864797006493
+              }
+            ],
+            "matches": 395,
+            "snapshots": 3440,
+            "baselineBrier": 0.15542285036825743
+          },
+          "powerplay": {
+            "brier": 0.16514624979821643,
+            "logLoss": 0.49881614103182365,
+            "ece10": 0.02536512519908036,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 322,
+                "weightFraction": 0.1147193085593164,
+                "predicted": 0.051318045668124056,
+                "observed": 0.10074029295814016
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 228,
+                "weightFraction": 0.07989111855419623,
+                "predicted": 0.15010603420010488,
+                "observed": 0.19308701120357308
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 233,
+                "weightFraction": 0.08130371211662119,
+                "predicted": 0.24902653429909133,
+                "observed": 0.2887570627627036
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 208,
+                "weightFraction": 0.07130362627235734,
+                "predicted": 0.34958974833175754,
+                "observed": 0.30592889379084487
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 255,
+                "weightFraction": 0.08735133734018347,
+                "predicted": 0.45045149676410423,
+                "observed": 0.44728136966907817
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 293,
+                "weightFraction": 0.10048107694002792,
+                "predicted": 0.5512834002339523,
+                "observed": 0.5436391458482233
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 282,
+                "weightFraction": 0.09802080938830529,
+                "predicted": 0.6525990469386544,
+                "observed": 0.6432832384363449
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 301,
+                "weightFraction": 0.10617487119678315,
+                "predicted": 0.7514009172900027,
+                "observed": 0.7803283584019455
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 278,
+                "weightFraction": 0.10041616810545193,
+                "predicted": 0.8543502403820166,
+                "observed": 0.8234948715352773
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 365,
+                "weightFraction": 0.16033797152675722,
+                "predicted": 0.9502658308716702,
+                "observed": 0.939099929060045
+              }
+            ],
+            "matches": 395,
+            "snapshots": 2765,
+            "baselineBrier": 0.19276018800777553
+          }
+        }
+      }
+    },
+    "test": {
+      "matches": 1042,
+      "snapshots": 19282,
+      "model": {
+        "brier": 0.12268657768059768,
+        "logLoss": 0.37929086642959814,
+        "ece10": 0.03785408681928942,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "snapshots": 3796,
+            "weightFraction": 0.1910076000075807,
+            "predicted": 0.03388776945124194,
+            "observed": 0.042436829919961824
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "snapshots": 1668,
+            "weightFraction": 0.0827588026592828,
+            "predicted": 0.1461793358779169,
+            "observed": 0.1675380368715986
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "snapshots": 1438,
+            "weightFraction": 0.07127509899833902,
+            "predicted": 0.249202190137019,
+            "observed": 0.31310633867538384
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "snapshots": 1275,
+            "weightFraction": 0.06295957318743339,
+            "predicted": 0.3511399275005763,
+            "observed": 0.4236145999490449
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "snapshots": 1235,
+            "weightFraction": 0.06131025517824838,
+            "predicted": 0.45039178862445384,
+            "observed": 0.5125513173337238
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "snapshots": 1263,
+            "weightFraction": 0.06284033868118416,
+            "predicted": 0.5518477500905936,
+            "observed": 0.6293036249412313
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "snapshots": 1415,
+            "weightFraction": 0.0711160911233111,
+            "predicted": 0.6511985427655134,
+            "observed": 0.7081524778851158
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "snapshots": 1649,
+            "weightFraction": 0.08390346252875444,
+            "predicted": 0.7516015389322317,
+            "observed": 0.8020041562649969
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "snapshots": 1977,
+            "weightFraction": 0.10293596083470878,
+            "predicted": 0.8521995568891761,
+            "observed": 0.8898245994938089
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "snapshots": 3566,
+            "weightFraction": 0.20989281680115723,
+            "predicted": 0.9619239448518446,
+            "observed": 0.9833879789493661
+          }
+        ]
+      },
+      "baselines": {
+        "constant50": {
+          "brier": 0.25,
+          "logLoss": 0.6931471805599454,
+          "ece10": 0.05758157389635321,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 19282,
+              "weightFraction": 1.0,
+              "predicted": 0.5,
+              "observed": 0.5575815738963532
+            }
+          ]
+        },
+        "trainChasePrior": {
+          "brier": 0.24710239108825793,
+          "logLoss": 0.687343818335003,
+          "ece10": 0.020445751163484793,
+          "calibrationBins": [
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 19282,
+              "weightFraction": 1.0,
+              "predicted": 0.5371358227328684,
+              "observed": 0.5575815738963532
+            }
+          ]
+        },
+        "trainResourceBuckets": {
+          "brier": 0.16090743119749695,
+          "logLoss": 0.49564996457544125,
+          "ece10": 0.08398796821479264,
+          "calibrationBins": [
+            {
+              "lower": 0.1,
+              "upper": 0.2,
+              "snapshots": 932,
+              "weightFraction": 0.04576253835541018,
+              "predicted": 0.15549184914776948,
+              "observed": 0.059712580434836966
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.3,
+              "snapshots": 4038,
+              "weightFraction": 0.20296925748341668,
+              "predicted": 0.25872383574703206,
+              "observed": 0.21674227962605983
+            },
+            {
+              "lower": 0.3,
+              "upper": 0.4,
+              "snapshots": 3433,
+              "weightFraction": 0.1690370108907261,
+              "predicted": 0.3429361122995556,
+              "observed": 0.32397652568228535
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.5,
+              "snapshots": 1650,
+              "weightFraction": 0.08398058540363468,
+              "predicted": 0.45809649023311916,
+              "observed": 0.40934317815933724
+            },
+            {
+              "lower": 0.5,
+              "upper": 0.6,
+              "snapshots": 1396,
+              "weightFraction": 0.07031971862287462,
+              "predicted": 0.5475784941242172,
+              "observed": 0.6072806827795345
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.7,
+              "snapshots": 3076,
+              "weightFraction": 0.160609534722933,
+              "predicted": 0.6412562628342793,
+              "observed": 0.8001324850632549
+            },
+            {
+              "lower": 0.7,
+              "upper": 0.8,
+              "snapshots": 1914,
+              "weightFraction": 0.10124863852657956,
+              "predicted": 0.730418978758727,
+              "observed": 0.8834942987169846
+            },
+            {
+              "lower": 0.8,
+              "upper": 0.9,
+              "snapshots": 1992,
+              "weightFraction": 0.10954857221406725,
+              "predicted": 0.8300238966379067,
+              "observed": 0.9611889775997998
+            },
+            {
+              "lower": 0.9,
+              "upper": 1.0,
+              "snapshots": 851,
+              "weightFraction": 0.05652414378035801,
+              "predicted": 0.9120360943303955,
+              "observed": 0.9863725520684006
+            }
+          ]
+        }
+      },
+      "groups": {
+        "gender": {
+          "female": {
+            "brier": 0.12534322914975937,
+            "logLoss": 0.388069033474472,
+            "ece10": 0.05458646911194504,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 625,
+                "weightFraction": 0.24709994195046436,
+                "predicted": 0.03362874628291994,
+                "observed": 0.06581278570100137
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 228,
+                "weightFraction": 0.08996854978285174,
+                "predicted": 0.14660152376826155,
+                "observed": 0.21389053284817347
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 176,
+                "weightFraction": 0.06978128628095975,
+                "predicted": 0.246066777911725,
+                "observed": 0.30787342933632195
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 164,
+                "weightFraction": 0.06565157244367045,
+                "predicted": 0.35006711746305746,
+                "observed": 0.42539790563860613
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 137,
+                "weightFraction": 0.05630351441563468,
+                "predicted": 0.45074640721777953,
+                "observed": 0.5244874032308587
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 133,
+                "weightFraction": 0.05429331409098726,
+                "predicted": 0.5475993839585773,
+                "observed": 0.7021691810224814
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 156,
+                "weightFraction": 0.06546298934553578,
+                "predicted": 0.65619623763217,
+                "observed": 0.7013477809733266
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 208,
+                "weightFraction": 0.08758716659318924,
+                "predicted": 0.7517697257011626,
+                "observed": 0.7942082448735396
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 229,
+                "weightFraction": 0.10098182338682773,
+                "predicted": 0.854549530698245,
+                "observed": 0.9316944881738125
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 341,
+                "weightFraction": 0.16286984170987895,
+                "predicted": 0.9639170702973862,
+                "observed": 0.9904064498154097
+              }
+            ],
+            "matches": 128,
+            "snapshots": 2397,
+            "baselineBrier": 0.19679252150192872
+          },
+          "male": {
+            "brier": 0.12231453021008053,
+            "logLoss": 0.378061538878456,
+            "ece10": 0.03551082102775772,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 3171,
+                "weightFraction": 0.18315221732848974,
+                "predicted": 0.03393670932534027,
+                "observed": 0.038020173524848065
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 1440,
+                "weightFraction": 0.08174912253694491,
+                "predicted": 0.14611426642334016,
+                "observed": 0.1603939863186463
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 1262,
+                "weightFraction": 0.0714842981535081,
+                "predicted": 0.24963082425270658,
+                "observed": 0.3138217162097723
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 1111,
+                "weightFraction": 0.06258257547977657,
+                "predicted": 0.3512975355168413,
+                "observed": 0.4233526120273286
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 1098,
+                "weightFraction": 0.0620114179983956,
+                "predicted": 0.45034669770218244,
+                "observed": 0.511033604693887
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 1130,
+                "weightFraction": 0.06403729617302793,
+                "predicted": 0.5523521779649125,
+                "observed": 0.6206519653565883
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 1259,
+                "weightFraction": 0.07190777277271508,
+                "predicted": 0.6505613754253524,
+                "observed": 0.7090200239733762
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 1441,
+                "weightFraction": 0.08338758274730187,
+                "predicted": 0.7515767992171358,
+                "observed": 0.8031509089374176
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 1748,
+                "weightFraction": 0.10320962559765054,
+                "predicted": 0.8518775613897048,
+                "observed": 0.8840875501418969
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 3225,
+                "weightFraction": 0.2164780912121896,
+                "predicted": 0.9617139420292664,
+                "observed": 0.9826484877671376
+              }
+            ],
+            "matches": 914,
+            "snapshots": 16885,
+            "baselineBrier": 0.15588194809140582
+          }
+        },
+        "competition": {
+          "bbl": {
+            "brier": 0.11999795719978469,
+            "logLoss": 0.3738111714989891,
+            "ece10": 0.04135865006533095,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 220,
+                "weightFraction": 0.12190290303764527,
+                "predicted": 0.03456355626360262,
+                "observed": 0.022291440454938617
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 98,
+                "weightFraction": 0.054106841058315015,
+                "predicted": 0.15145795272387366,
+                "observed": 0.12159178469374002
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 108,
+                "weightFraction": 0.06068317105637069,
+                "predicted": 0.25564133332582534,
+                "observed": 0.2783691275374552
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 105,
+                "weightFraction": 0.058996088900854005,
+                "predicted": 0.34990185517554256,
+                "observed": 0.39019466794269286
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 119,
+                "weightFraction": 0.06725950105442635,
+                "predicted": 0.4502928752442301,
+                "observed": 0.44519030584023356
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 114,
+                "weightFraction": 0.06437184046005892,
+                "predicted": 0.5577362376839381,
+                "observed": 0.694281944921435
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 173,
+                "weightFraction": 0.09827155404495894,
+                "predicted": 0.6497624938086664,
+                "observed": 0.716246443045205
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 208,
+                "weightFraction": 0.12196140660688379,
+                "predicted": 0.7512351671880575,
+                "observed": 0.7947212727651175
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 200,
+                "weightFraction": 0.11818432750674639,
+                "predicted": 0.8511182293768143,
+                "observed": 0.9345665549510839
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 365,
+                "weightFraction": 0.23426236627374059,
+                "predicted": 0.9611851332654556,
+                "observed": 0.9768004451797222
+              }
+            ],
+            "matches": 92,
+            "snapshots": 1710,
+            "baselineBrier": 0.15697198844893018
+          },
+          "bpl": {
+            "brier": 0.10310956374171834,
+            "logLoss": 0.3290849796574484,
+            "ece10": 0.0331174047195687,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 400,
+                "weightFraction": 0.17484684955853685,
+                "predicted": 0.035718778244456094,
+                "observed": 0.03449133781713894
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 196,
+                "weightFraction": 0.08457290591675268,
+                "predicted": 0.1481225129097923,
+                "observed": 0.13120621915241673
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 145,
+                "weightFraction": 0.062339503783969734,
+                "predicted": 0.2501605149283801,
+                "observed": 0.18538834675215163
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 131,
+                "weightFraction": 0.05578918701983718,
+                "predicted": 0.3557668252747264,
+                "observed": 0.27284381984944633
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 110,
+                "weightFraction": 0.0466772732484807,
+                "predicted": 0.4512087154958286,
+                "observed": 0.44789318855977717
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 139,
+                "weightFraction": 0.05926470588235294,
+                "predicted": 0.5493531579630535,
+                "observed": 0.4856606639289152
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 157,
+                "weightFraction": 0.0679987178284392,
+                "predicted": 0.653355109842119,
+                "observed": 0.6648998916940113
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 172,
+                "weightFraction": 0.07613507690423325,
+                "predicted": 0.7541569053896199,
+                "observed": 0.8185358177143179
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 282,
+                "weightFraction": 0.127227786117105,
+                "predicted": 0.8541456114930097,
+                "observed": 0.8905978868855009
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 480,
+                "weightFraction": 0.24514799374029247,
+                "predicted": 0.9600065426084257,
+                "observed": 0.9949010392419355
+              }
+            ],
+            "matches": 120,
+            "snapshots": 2212,
+            "baselineBrier": 0.13752203736694965
+          },
+          "cpl": {
+            "brier": 0.12128719176418876,
+            "logLoss": 0.36918045515536346,
+            "ece10": 0.05171394148797444,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 256,
+                "weightFraction": 0.14974857014330697,
+                "predicted": 0.038103225602209786,
+                "observed": 0.024053342202243335
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 99,
+                "weightFraction": 0.05596523359681253,
+                "predicted": 0.14595276886936412,
+                "observed": 0.10960241136787716
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 100,
+                "weightFraction": 0.056676145491934955,
+                "predicted": 0.25043358890385864,
+                "observed": 0.4063780029764015
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 109,
+                "weightFraction": 0.06122678491099542,
+                "predicted": 0.34911055681623954,
+                "observed": 0.42335345053791673
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 98,
+                "weightFraction": 0.055688429217840965,
+                "predicted": 0.44847989574830827,
+                "observed": 0.5348891672012303
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 117,
+                "weightFraction": 0.06642416750775881,
+                "predicted": 0.5566223136296752,
+                "observed": 0.6978599050174571
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 141,
+                "weightFraction": 0.07963233876546569,
+                "predicted": 0.6507071887720374,
+                "observed": 0.6104615559891199
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 171,
+                "weightFraction": 0.09743599194063587,
+                "predicted": 0.7562807313233844,
+                "observed": 0.7182432491413819
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 200,
+                "weightFraction": 0.11814972952743849,
+                "predicted": 0.8488299799890572,
+                "observed": 0.8709837393886892
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 382,
+                "weightFraction": 0.2590526088978101,
+                "predicted": 0.9595853021118647,
+                "observed": 1.0
+              }
+            ],
+            "matches": 91,
+            "snapshots": 1673,
+            "baselineBrier": 0.15304610846916059
+          },
+          "ilt": {
+            "brier": 0.11497037087572574,
+            "logLoss": 0.3587064778686444,
+            "ece10": 0.05537717273118511,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 230,
+                "weightFraction": 0.12821407595273734,
+                "predicted": 0.03199609166951395,
+                "observed": 0.004020337967539422
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 110,
+                "weightFraction": 0.05940161733266007,
+                "predicted": 0.1425827212319143,
+                "observed": 0.10413128948440843
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 88,
+                "weightFraction": 0.04757640162510738,
+                "predicted": 0.2519119922000218,
+                "observed": 0.23114601257668344
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 102,
+                "weightFraction": 0.054430836638953185,
+                "predicted": 0.3539721694004811,
+                "observed": 0.41874200106789217
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 122,
+                "weightFraction": 0.06526998600823249,
+                "predicted": 0.4539734789468216,
+                "observed": 0.4070413201932023
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 147,
+                "weightFraction": 0.07865266562403583,
+                "predicted": 0.5483854978112968,
+                "observed": 0.7037049561735742
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 164,
+                "weightFraction": 0.08936498817287811,
+                "predicted": 0.6512611581869922,
+                "observed": 0.7879741498191402
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 178,
+                "weightFraction": 0.09718205965692478,
+                "predicted": 0.749329742699273,
+                "observed": 0.8562308189159701
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 220,
+                "weightFraction": 0.12128815443703252,
+                "predicted": 0.8509931017110989,
+                "observed": 0.8235168346273487
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 406,
+                "weightFraction": 0.2586192145514382,
+                "predicted": 0.9634808715127425,
+                "observed": 0.9780754763229096
+              }
+            ],
+            "matches": 97,
+            "snapshots": 1767,
+            "baselineBrier": 0.14025329620247876
+          },
+          "ipl": {
+            "brier": 0.12603173507513266,
+            "logLoss": 0.3903972051106236,
+            "ece10": 0.08470927433666278,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 916,
+                "weightFraction": 0.23137787678186386,
+                "predicted": 0.03546550325546947,
+                "observed": 0.056257271622771436
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 407,
+                "weightFraction": 0.10175551863877774,
+                "predicted": 0.14265434726819232,
+                "observed": 0.21595988929690005
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 316,
+                "weightFraction": 0.07975282539203102,
+                "predicted": 0.2469901751231457,
+                "observed": 0.4149137341539109
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 259,
+                "weightFraction": 0.06524709070620119,
+                "predicted": 0.3481472943966283,
+                "observed": 0.5216717320733147
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 238,
+                "weightFraction": 0.0595553206306057,
+                "predicted": 0.4512848316744698,
+                "observed": 0.6051179027981661
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 217,
+                "weightFraction": 0.05560065275575357,
+                "predicted": 0.55299363976284,
+                "observed": 0.6702612468169385
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 234,
+                "weightFraction": 0.06055410525356913,
+                "predicted": 0.6496976897450008,
+                "observed": 0.8437915268027537
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 246,
+                "weightFraction": 0.06423620924621454,
+                "predicted": 0.7505418642652456,
+                "observed": 0.8991307095597038
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 344,
+                "weightFraction": 0.09124532881517705,
+                "predicted": 0.8510002919618892,
+                "observed": 0.9307471538723646
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 645,
+                "weightFraction": 0.19067507177980636,
+                "predicted": 0.9619814190081046,
+                "observed": 0.9801731407803334
+              }
+            ],
+            "matches": 205,
+            "snapshots": 3822,
+            "baselineBrier": 0.1652035374123682
+          },
+          "lpl": {
+            "brier": 0.10853029270562019,
+            "logLoss": 0.3464500313935014,
+            "ece10": 0.07740686941549639,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 136,
+                "weightFraction": 0.16739409499358152,
+                "predicted": 0.037986359881467584,
+                "observed": 0.021855828220858894
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 109,
+                "weightFraction": 0.1343068035943517,
+                "predicted": 0.14872916693264682,
+                "observed": 0.05591397849462367
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 95,
+                "weightFraction": 0.11865283126515472,
+                "predicted": 0.2462302070720819,
+                "observed": 0.1292111194590534
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 65,
+                "weightFraction": 0.08219405220367992,
+                "predicted": 0.350874920034503,
+                "observed": 0.31437495932843107
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 70,
+                "weightFraction": 0.08966235831088956,
+                "predicted": 0.4486773462168093,
+                "observed": 0.5803325898000652
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 59,
+                "weightFraction": 0.07521950800003355,
+                "predicted": 0.5500000384127488,
+                "observed": 0.7356901347573602
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 45,
+                "weightFraction": 0.05745456719273075,
+                "predicted": 0.6504406991314229,
+                "observed": 0.7419404300992831
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 38,
+                "weightFraction": 0.04830214285114988,
+                "predicted": 0.7443390171641281,
+                "observed": 0.8142974081496615
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 45,
+                "weightFraction": 0.05873396427462727,
+                "predicted": 0.8471927011703277,
+                "observed": 0.9355244220804035
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 117,
+                "weightFraction": 0.16807967731380102,
+                "predicted": 0.9580934071160471,
+                "observed": 0.9923625683484618
+              }
+            ],
+            "matches": 41,
+            "snapshots": 779,
+            "baselineBrier": 0.14264252828628587
+          },
+          "mlc": {
+            "brier": 0.16901676180906444,
+            "logLoss": 0.5004700764406183,
+            "ece10": 0.07672557611133017,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 256,
+                "weightFraction": 0.1729477477769028,
+                "predicted": 0.03093050866413182,
+                "observed": 0.0801625247577631
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 123,
+                "weightFraction": 0.07764952793269639,
+                "predicted": 0.14653645488882086,
+                "observed": 0.3368841236298637
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 120,
+                "weightFraction": 0.07603140742818308,
+                "predicted": 0.25420675495291783,
+                "observed": 0.3454690380407099
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 98,
+                "weightFraction": 0.06110791235621334,
+                "predicted": 0.35216406761778246,
+                "observed": 0.5061592365378527
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 116,
+                "weightFraction": 0.07303076557965933,
+                "predicted": 0.44518147325651675,
+                "observed": 0.483194096197741
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 114,
+                "weightFraction": 0.07112292178317625,
+                "predicted": 0.5534043530971994,
+                "observed": 0.4709998010355631
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 115,
+                "weightFraction": 0.07219075905929338,
+                "predicted": 0.6481539888113665,
+                "observed": 0.496966597708096
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 147,
+                "weightFraction": 0.09491687881827955,
+                "predicted": 0.7523509436917616,
+                "observed": 0.6562325059798818
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 174,
+                "weightFraction": 0.11319630226930309,
+                "predicted": 0.8565937122529104,
+                "observed": 0.7965334196838215
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 260,
+                "weightFraction": 0.18780577699629275,
+                "predicted": 0.9618547702931173,
+                "observed": 0.9704186120128497
+              }
+            ],
+            "matches": 82,
+            "snapshots": 1523,
+            "baselineBrier": 0.1885365960392573
+          },
+          "psl": {
+            "brier": 0.1230738822256052,
+            "logLoss": 0.37985138461702245,
+            "ece10": 0.08455445557931442,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 429,
+                "weightFraction": 0.22364096038687997,
+                "predicted": 0.030391941761373647,
+                "observed": 0.041584282616616994
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 187,
+                "weightFraction": 0.09637863576703037,
+                "predicted": 0.1468591361488759,
+                "observed": 0.15932094586253362
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 165,
+                "weightFraction": 0.08259378099732484,
+                "predicted": 0.24883441191536826,
+                "observed": 0.3971886728079153
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 159,
+                "weightFraction": 0.0796453822544177,
+                "predicted": 0.35129294149171614,
+                "observed": 0.5147709403501416
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 114,
+                "weightFraction": 0.05728121942014755,
+                "predicted": 0.4509137349096543,
+                "observed": 0.6815645552497785
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 106,
+                "weightFraction": 0.05276800892388978,
+                "predicted": 0.5539001520214331,
+                "observed": 0.7263549970411111
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 137,
+                "weightFraction": 0.06934287341235251,
+                "predicted": 0.6518321874470586,
+                "observed": 0.8316188214810563
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 160,
+                "weightFraction": 0.08153089629651894,
+                "predicted": 0.7482190588794645,
+                "observed": 0.9166436674492374
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 160,
+                "weightFraction": 0.08399056011435402,
+                "predicted": 0.8535691394987275,
+                "observed": 0.9190847579108725
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 286,
+                "weightFraction": 0.17282768242708424,
+                "predicted": 0.9628658114057398,
+                "observed": 0.9719120868609293
+              }
+            ],
+            "matches": 103,
+            "snapshots": 1903,
+            "baselineBrier": 0.1680681909572024
+          },
+          "sat": {
+            "brier": 0.11290395718346251,
+            "logLoss": 0.34793197840019296,
+            "ece10": 0.05727245021602,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 328,
+                "weightFraction": 0.2123878974544796,
+                "predicted": 0.030925373157134346,
+                "observed": 0.0056727303746987685
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 111,
+                "weightFraction": 0.07321211722905187,
+                "predicted": 0.1497152545911939,
+                "observed": 0.05759794456820039
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 125,
+                "weightFraction": 0.07885284318758155,
+                "predicted": 0.24745754343568313,
+                "observed": 0.22239925934741628
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 83,
+                "weightFraction": 0.05140686585350691,
+                "predicted": 0.3548071189705824,
+                "observed": 0.21223444995364213
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 111,
+                "weightFraction": 0.06887912848504439,
+                "predicted": 0.4510941115140127,
+                "observed": 0.34587202471836087
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 117,
+                "weightFraction": 0.07316733393843694,
+                "predicted": 0.5489414986466977,
+                "observed": 0.42333098021611393
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 93,
+                "weightFraction": 0.05755110224178448,
+                "predicted": 0.6491971875577932,
+                "observed": 0.48995345127597156
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 121,
+                "weightFraction": 0.07513951575134388,
+                "predicted": 0.7531592175880594,
+                "observed": 0.6605962993121108
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 123,
+                "weightFraction": 0.07988216318021606,
+                "predicted": 0.8497784882952679,
+                "observed": 0.8416342033565305
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 284,
+                "weightFraction": 0.2295210326785544,
+                "predicted": 0.9648268136469962,
+                "observed": 0.9763782574358618
+              }
+            ],
+            "matches": 83,
+            "snapshots": 1496,
+            "baselineBrier": 0.13872498986495416
+          },
+          "wbb": {
+            "brier": 0.1251564858455566,
+            "logLoss": 0.3848552914681524,
+            "ece10": 0.02840968714043319,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 260,
+                "weightFraction": 0.20866272434899885,
+                "predicted": 0.032033086564983396,
+                "observed": 0.015214040670213296
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 108,
+                "weightFraction": 0.0868775287892935,
+                "predicted": 0.14913714375505088,
+                "observed": 0.16443509023330793
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 99,
+                "weightFraction": 0.07990673852386959,
+                "predicted": 0.24599024378993012,
+                "observed": 0.21223572180235337
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 93,
+                "weightFraction": 0.07565222970279728,
+                "predicted": 0.34887772199969774,
+                "observed": 0.3033231625348926
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 85,
+                "weightFraction": 0.07130974222047491,
+                "predicted": 0.4467098413098356,
+                "observed": 0.4115511510089695
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 81,
+                "weightFraction": 0.06682324001725445,
+                "predicted": 0.5469216670761131,
+                "observed": 0.5941253015690786
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 87,
+                "weightFraction": 0.07349050731403671,
+                "predicted": 0.6575127185513043,
+                "observed": 0.6646828824310643
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 136,
+                "weightFraction": 0.11482750995134895,
+                "predicted": 0.7519534524474022,
+                "observed": 0.7916593852719673
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 114,
+                "weightFraction": 0.0988646725746829,
+                "predicted": 0.8514236937339978,
+                "observed": 0.8903592282743319
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 129,
+                "weightFraction": 0.12358510655724278,
+                "predicted": 0.964252674308786,
+                "observed": 0.9871562065080522
+              }
+            ],
+            "matches": 63,
+            "snapshots": 1192,
+            "baselineBrier": 0.2061332319403373
+          },
+          "wpl": {
+            "brier": 0.12552422650614048,
+            "logLoss": 0.3911838911113664,
+            "ece10": 0.10352985837150172,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 365,
+                "weightFraction": 0.28435447593342333,
+                "predicted": 0.034763632388369554,
+                "observed": 0.10180029108397139
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 120,
+                "weightFraction": 0.09296446243814664,
+                "predicted": 0.14430483653708573,
+                "observed": 0.2586857640569051
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 77,
+                "weightFraction": 0.05996738641475485,
+                "predicted": 0.24616562197262967,
+                "observed": 0.4313898317799072
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 71,
+                "weightFraction": 0.055958627715593665,
+                "predicted": 0.3516256222743976,
+                "observed": 0.5853565403662165
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 52,
+                "weightFraction": 0.041759016697097195,
+                "predicted": 0.45742735140235385,
+                "observed": 0.7114088643730019
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 52,
+                "weightFraction": 0.04214892434706677,
+                "predicted": 0.548640781458199,
+                "observed": 0.8681922340458927
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 69,
+                "weightFraction": 0.05768247192991181,
+                "predicted": 0.6545705797890196,
+                "observed": 0.7466234693765668
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 72,
+                "weightFraction": 0.06118498764604981,
+                "predicted": 0.7514355301631321,
+                "observed": 0.7988445731346501
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 115,
+                "weightFraction": 0.10303383109706044,
+                "predicted": 0.8574565960790943,
+                "observed": 0.970136769212973
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 212,
+                "weightFraction": 0.20094581578089554,
+                "predicted": 0.963717018938882,
+                "observed": 0.9923438986152415
+              }
+            ],
+            "matches": 65,
+            "snapshots": 1205,
+            "baselineBrier": 0.18773921753854803
+          }
+        },
+        "phase": {
+          "death": {
+            "brier": 0.07005303312737034,
+            "logLoss": 0.2272465239805057,
+            "ece10": 0.01919235347500682,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 1041,
+                "weightFraction": 0.35442792409167534,
+                "predicted": 0.017364435783961955,
+                "observed": 0.009459878983839128
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 164,
+                "weightFraction": 0.055367043710860396,
+                "predicted": 0.14306282719640762,
+                "observed": 0.10900205396982789
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 106,
+                "weightFraction": 0.0357048610374236,
+                "predicted": 0.24466947547098852,
+                "observed": 0.19719934102141684
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 84,
+                "weightFraction": 0.028324679986085743,
+                "predicted": 0.3497145200250881,
+                "observed": 0.3220960819604043
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 116,
+                "weightFraction": 0.039071431405422304,
+                "predicted": 0.4519408427488791,
+                "observed": 0.483715561800572
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 116,
+                "weightFraction": 0.039034177569084526,
+                "predicted": 0.5559248369648758,
+                "observed": 0.6383363471971067
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 116,
+                "weightFraction": 0.03912241033935822,
+                "predicted": 0.6472837195362883,
+                "observed": 0.6396030672079386
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 145,
+                "weightFraction": 0.04909663483674284,
+                "predicted": 0.7520474403386359,
+                "observed": 0.7875798722044729
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 226,
+                "weightFraction": 0.07712524486035462,
+                "predicted": 0.8551782480488046,
+                "observed": 0.8867420871996949
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 802,
+                "weightFraction": 0.2827255921629923,
+                "predicted": 0.9689103987774282,
+                "observed": 0.9798396851304673
+              }
+            ],
+            "matches": 886,
+            "snapshots": 2916,
+            "baselineBrier": 0.1240380535828256
+          },
+          "middle": {
+            "brier": 0.10740884134295742,
+            "logLoss": 0.3373580590376643,
+            "ece10": 0.03205263788381237,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 1896,
+                "weightFraction": 0.20566855623740726,
+                "predicted": 0.0350072627233995,
+                "observed": 0.030890532756220723
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 752,
+                "weightFraction": 0.07921628784892959,
+                "predicted": 0.14512216901506392,
+                "observed": 0.13630897962310337
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 588,
+                "weightFraction": 0.06165674163263621,
+                "predicted": 0.2497801875421809,
+                "observed": 0.2991974895769358
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 528,
+                "weightFraction": 0.05502995970413947,
+                "predicted": 0.35186390260120515,
+                "observed": 0.4372449477879038
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 499,
+                "weightFraction": 0.05213627734030754,
+                "predicted": 0.4504577664590683,
+                "observed": 0.5050593285502173
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 517,
+                "weightFraction": 0.05406627124173079,
+                "predicted": 0.551439114860762,
+                "observed": 0.5887667061850588
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 597,
+                "weightFraction": 0.06281736197553656,
+                "predicted": 0.6514627990578045,
+                "observed": 0.6905381280642182
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 733,
+                "weightFraction": 0.0782388274964683,
+                "predicted": 0.7500995241191397,
+                "observed": 0.8067951323581095
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 964,
+                "weightFraction": 0.1052474650297637,
+                "predicted": 0.8529552509427167,
+                "observed": 0.9036672920103035
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 1998,
+                "weightFraction": 0.24592225149308056,
+                "predicted": 0.9618926853555344,
+                "observed": 0.9849478414591702
+              }
+            ],
+            "matches": 1037,
+            "snapshots": 9072,
+            "baselineBrier": 0.15063660217597044
+          },
+          "powerplay": {
+            "brier": 0.16070417876150436,
+            "logLoss": 0.48644150711798023,
+            "ece10": 0.06107411474476622,
+            "calibrationBins": [
+              {
+                "lower": 0.0,
+                "upper": 0.1,
+                "snapshots": 859,
+                "weightFraction": 0.11276632559857303,
+                "predicted": 0.05061507607259909,
+                "observed": 0.10634098666306835
+              },
+              {
+                "lower": 0.1,
+                "upper": 0.2,
+                "snapshots": 752,
+                "weightFraction": 0.09719091098574449,
+                "predicted": 0.14788225155147453,
+                "observed": 0.21077918344049473
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.3,
+                "snapshots": 744,
+                "weightFraction": 0.09610985996661076,
+                "predicted": 0.24937468825741158,
+                "observed": 0.33986632235171044
+              },
+              {
+                "lower": 0.3,
+                "upper": 0.4,
+                "snapshots": 663,
+                "weightFraction": 0.08539774768169545,
+                "predicted": 0.3507482670420666,
+                "observed": 0.42540175057149515
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.5,
+                "snapshots": 620,
+                "weightFraction": 0.08067499937773787,
+                "predicted": 0.4500625572045985,
+                "observed": 0.523595513494444
+              },
+              {
+                "lower": 0.5,
+                "upper": 0.6,
+                "snapshots": 630,
+                "weightFraction": 0.0822991197060303,
+                "predicted": 0.55145857107968,
+                "observed": 0.6600571678655356
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.7,
+                "snapshots": 702,
+                "weightFraction": 0.09302567958372912,
+                "predicted": 0.6515907485353142,
+                "observed": 0.7332578890101241
+              },
+              {
+                "lower": 0.7,
+                "upper": 0.8,
+                "snapshots": 771,
+                "weightFraction": 0.10365482972525511,
+                "predicted": 0.7529001244073911,
+                "observed": 0.8001396619491539
+              },
+              {
+                "lower": 0.8,
+                "upper": 0.9,
+                "snapshots": 787,
+                "weightFraction": 0.10967473129682662,
+                "predicted": 0.8505442718322842,
+                "observed": 0.8744954555816076
+              },
+              {
+                "lower": 0.9,
+                "upper": 1.0,
+                "snapshots": 766,
+                "weightFraction": 0.13920579607779707,
+                "predicted": 0.9567432840539395,
+                "observed": 0.9827069558624244
+              }
+            ],
+            "matches": 1042,
+            "snapshots": 7294,
+            "baselineBrier": 0.1870149625223593
+          }
+        }
+      }
+    }
+  },
+  "releaseGates": {
+    "minimum500TestMatches": true,
+    "beatsConstantAndPriorBrier": true,
+    "beatsResourceBaselineBrier": true,
+    "beatsResourceBaselineLogLoss": true,
+    "overallCalibrationEceAtMost005": true,
+    "genderCoverage": false,
+    "phaseCalibrationEceAtMost008": true,
+    "independentModelReview": false,
+    "liveProviderReplayValidation": false
+  },
+  "competitionCandidates": [
+    "bpl"
+  ],
+  "uncertainty": "Snapshots are correlated within matches. Match-balanced scores and counts are descriptive; no independent-delivery standard errors or causal claims.",
+  "limits": [
+    "Only cached club T20 competitions; no international/associate coverage claim.",
+    "No player strength, venue, team strength, weather or live bookmaker inputs.",
+    "Rain/DLS, revised/missing targets, ties, super overs, shortened matches, injury resource anomalies, miscounted overs and penalties excluded.",
+    "Evaluation is at over boundaries, not every delivery; no live source replay/correction validation yet.",
+    "Performance on unseen competitions, new scoring environments and sparse cohorts is unverified.",
+    "Thresholds were set before evaluation for this candidate; no hyperparameter search or test-driven feature selection. Independent review required.",
+    "A held-out test set becomes development evidence once viewed. Future iterations must use a new holdout before release."
+  ]
+}

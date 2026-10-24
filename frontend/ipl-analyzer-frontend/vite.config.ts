@@ -4,18 +4,20 @@ import { configDefaults } from 'vitest/config';
 import { sitemapPlugin } from './build/sitemap';
 import { sharePreloadsPlugin } from './build/share-preloads';
 import { leaguePagesPlugin } from './build/league-pages';
+import { liveCricketEntryPlugin } from './build/live-cricket';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   // SITE_URL (the deployed address) turns on sitemap.xml.
-  plugins: [react(), sitemapPlugin(process.env.SITE_URL), sharePreloadsPlugin(), leaguePagesPlugin(process.env.SITE_URL)],
+  plugins: [react(), sitemapPlugin(process.env.SITE_URL), sharePreloadsPlugin(), leaguePagesPlugin(process.env.SITE_URL), liveCricketEntryPlugin(process.env.SITE_URL)],
   build: {
     rollupOptions: {
       // Two pages: the standings site and the separate social share kit.
       input: {
         main: 'index.html',
         share: 'share.html',
+        cricket: 'cricket/index.html',
       },
     },
   },

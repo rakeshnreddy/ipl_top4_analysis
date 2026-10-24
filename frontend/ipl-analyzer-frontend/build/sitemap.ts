@@ -23,6 +23,8 @@ export function buildSitemap(siteUrl: string, list: LeagueList): string {
   const urls: { loc: string; lastmod?: string }[] = [
     { loc: base, lastmod: newest },
     { loc: `${base}?view=hub`, lastmod: newest },
+    // Current matches are runtime data; season export times are not their lastmod.
+    { loc: `${base}cricket/` },
   ];
   for (const league of list.leagues) {
     urls.push({ loc: `${base}league/${encodeURIComponent(league.id)}/`, lastmod: league.generatedAt });

@@ -1,0 +1,132 @@
+{
+  "base": "http://127.0.0.1:5194/ipl_top4_analysis/",
+  "label": "parent-score-followup",
+  "mode": "synthetic-parent-score-followup",
+  "startedAt": "2026-10-24T09:31:38.157Z",
+  "providerProbe": null,
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 375,
+      "theme": "light",
+      "source": "synthetic normalized service contracts",
+      "checks": [
+        {
+          "name": "fresh parent score and fresh same-revision model establish a visible baseline",
+          "passed": true
+        },
+        {
+          "name": "a freshly calculated same-revision model is withheld for an overdue parent observedAt",
+          "passed": true,
+          "syntheticClockContract": {
+            "scoreObservedAgeSeconds": 600,
+            "publicationAgeSeconds": 0,
+            "predictionAgeSeconds": 0,
+            "outerModelObservedAgeSeconds": 0
+          },
+          "matchingScoreRevision": "score-one"
+        },
+        {
+          "name": "absent parent observedAt uses overdue generatedAt rather than fresh fetch or prediction clocks",
+          "passed": true,
+          "syntheticClockContract": {
+            "scoreObservedAt": null,
+            "publicationAgeSeconds": 600,
+            "predictionAgeSeconds": 0,
+            "outerModelObservedAgeSeconds": 0
+          },
+          "matchingScoreRevision": "score-one"
+        },
+        {
+          "name": "fresh parent score recovery restores the matching estimate without changing selection",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "screenshots": [
+        "chromium-375-light-synthetic-old-score-model-withheld.png",
+        "chromium-375-light-synthetic-old-score-publication-model-withheld.png"
+      ],
+      "passed": true,
+      "requests": 10
+    },
+    {
+      "engine": "webkit",
+      "width": 375,
+      "theme": "light",
+      "source": "synthetic normalized service contracts",
+      "checks": [
+        {
+          "name": "fresh parent score and fresh same-revision model establish a visible baseline",
+          "passed": true
+        },
+        {
+          "name": "a freshly calculated same-revision model is withheld for an overdue parent observedAt",
+          "passed": true,
+          "syntheticClockContract": {
+            "scoreObservedAgeSeconds": 600,
+            "publicationAgeSeconds": 0,
+            "predictionAgeSeconds": 0,
+            "outerModelObservedAgeSeconds": 0
+          },
+          "matchingScoreRevision": "score-one"
+        },
+        {
+          "name": "absent parent observedAt uses overdue generatedAt rather than fresh fetch or prediction clocks",
+          "passed": true,
+          "syntheticClockContract": {
+            "scoreObservedAt": null,
+            "publicationAgeSeconds": 600,
+            "predictionAgeSeconds": 0,
+            "outerModelObservedAgeSeconds": 0
+          },
+          "matchingScoreRevision": "score-one"
+        },
+        {
+          "name": "fresh parent score recovery restores the matching estimate without changing selection",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "screenshots": [
+        "webkit-375-light-synthetic-old-score-model-withheld.png",
+        "webkit-375-light-synthetic-old-score-publication-model-withheld.png"
+      ],
+      "passed": true,
+      "requests": 10
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "checks": 8,
+    "contrastSamples": 0,
+    "providerNetworkRequests": 0
+  },
+  "limitations": [
+    "Only owned local build tabs and contexts were used. No subscriptions or credential-bearing requests.",
+    "Provider payloads stay in memory; matrix contexts replay the same bounded real snapshot and do not establish ongoing provider availability.",
+    "Synthetic contracts are test-only browser network responses, not real matches, predictions or bookmaker prices.",
+    "Computed contrast includes alpha blending over opaque UI planes; ambient/gradient page backgrounds and disabled controls are excluded.",
+    "No manual screen-reader assessment, Lighthouse run or real-user INP measurement is claimed."
+  ],
+  "runtime": {
+    "playwright": "/Users/Rakesh/gstack/node_modules/playwright",
+    "webkitPlaywright": "/Users/Rakesh/.npm/_npx/520e866687cefe78/node_modules/playwright",
+    "webkitExecutable": null
+  },
+  "configuration": {
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "widths": [
+      375
+    ],
+    "themes": [
+      "light"
+    ]
+  },
+  "completedAt": "2026-10-24T09:31:43.885Z"
+}

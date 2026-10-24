@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "version": "t20-chase-logistic-2026-10-v1",
+  "trainingCutoff": "2022-12-31",
+  "dataCutoff": "2026-10-23",
+  "conditioning": "Probability the chasing team wins a standard unreduced 120-ball club T20 without a revised target, conditional on a completed match with a non-tied regulation winner.",
+  "release": {
+    "status": "research_only",
+    "gates": {
+      "minimum500TestMatches": true,
+      "beatsConstantAndPriorBrier": true,
+      "beatsResourceBaselineBrier": true,
+      "beatsResourceBaselineLogLoss": true,
+      "overallCalibrationEceAtMost005": true,
+      "genderCoverage": false,
+      "phaseCalibrationEceAtMost008": true,
+      "independentModelReview": false,
+      "liveProviderReplayValidation": false
+    }
+  },
+  "support": {
+    "format": "T20",
+    "innings": 2,
+    "scheduledBalls": 120,
+    "genders": [
+      "male",
+      "female"
+    ],
+    "competitions": [
+      "bpl"
+    ],
+    "minimumTestMatchesPerCompetition": 100,
+    "maxCompetitionEce": 0.08,
+    "sampling": "initial state and every six legal balls; terminal states excluded",
+    "inputRequirements": [
+      "status=live",
+      "scoreRevision",
+      "targetRevised=false",
+      "interruption=false",
+      "superOver=false"
+    ]
+  },
+  "model": {
+    "family": "weighted ridge logistic regression plus chronological Platt calibration",
+    "featureNames": [
+      "runsNeeded",
+      "ballsRemaining",
+      "wicketsRemaining",
+      "requiredRate",
+      "targetRate",
+      "female",
+      "resourceRate",
+      "requiredRateSquared",
+      "wicketsSquared",
+      "ballsSquared",
+      "rateWickets",
+      "femaleRate",
+      "femaleTarget"
+    ],
+    "means": [
+      92.50519954817531,
+      66.68075502667214,
+      7.642243704093137,
+      9.238911253461598,
+      7.925851456709086,
+      0.13336068937218595,
+      10.96129697249631,
+      117.12705878272722,
+      62.98952224095111,
+      5551.423061140888,
+      64.24834808087182,
+      1.0749290470657096,
+      0.924476815757072
+    ],
+    "scales": [
+      48.73375275189275,
+      33.24304393724606,
+      2.1414092108240697,
+      5.636450801114951,
+      1.5399496602768383,
+      0.33996413914164514,
+      6.0638129415253905,
+      304.41583103952166,
+      28.992321228861226,
+      4457.319684000437,
+      24.397767276745245,
+      3.3672549374263623,
+      2.4095570773407604
+    ],
+    "coefficients": [
+      0.05942637740043932,
+      -0.6125375432446339,
+      0.22338400054859828,
+      0.862733831909112,
+      -1.0969464478426185,
+      0.28810348609304365,
+      0.10336836792992912,
+      -1.042451263856795,
+      -0.2401656111824995,
+      0.2792814942013949,
+      0.06801330525034524,
+      -0.7175639285483728,
+      -0.40813125881247153,
+      -0.07270739508342984
+    ],
+    "calibration": {
+      "intercept": 0.31669524988085523,
+      "slope": 0.9921268769922839
+    }
+  },
+  "validation": {
+    "testMatches": 1042,
+    "testSnapshots": 19282,
+    "brier": 0.12268657768059768,
+    "logLoss": 0.37929086642959814,
+    "ece10": 0.03785408681928942,
+    "split": "train before 2023; calibrate 2023; untouched test 2024 through data cutoff; whole matches",
+    "partitions": {
+      "train": {
+        "matches": 2437,
+        "firstDate": "2008-04-18",
+        "lastDate": "2022-12-31",
+        "matchIdsSha256": "4bea5f95caa31ab0debfed180361b09495837a0dcf68421bccf54d028d1047d2",
+        "genders": {
+          "male": 2112,
+          "female": 325
+        },
+        "competitions": {
+          "ipl": 879,
+          "bbl": 446,
+          "bpl": 275,
+          "cpl": 258,
+          "wbb": 325,
+          "psl": 198,
+          "lpl": 56
+        }
+      },
+      "calibration": {
+        "matches": 395,
+        "firstDate": "2023-01-01",
+        "lastDate": "2023-12-31",
+        "matchIdsSha256": "ba17c3a80dc7ff6743e6cf4cae2190a0bbe57db7855f9fa283cf2a803e4e406b",
+        "genders": {
+          "male": 321,
+          "female": 74
+        },
+        "competitions": {
+          "bbl": 50,
+          "bpl": 41,
+          "sat": 30,
+          "ilt": 30,
+          "psl": 32,
+          "wpl": 21,
+          "ipl": 69,
+          "mlc": 19,
+          "lpl": 23,
+          "cpl": 27,
+          "wbb": 53
+        }
+      },
+      "test": {
+        "matches": 1042,
+        "firstDate": "2024-01-01",
+        "lastDate": "2026-09-16",
+        "matchIdsSha256": "91f22b3fdef88147abab351cd5be33c7a6e6fb6fa806b98f282c7b1b0ffb760c",
+        "genders": {
+          "male": 914,
+          "female": 128
+        },
+        "competitions": {
+          "bbl": 92,
+          "sat": 83,
+          "ilt": 97,
+          "bpl": 120,
+          "psl": 103,
+          "wpl": 65,
+          "ipl": 205,
+          "lpl": 41,
+          "mlc": 82,
+          "cpl": 91,
+          "wbb": 63
+        }
+      }
+    }
+  },
+  "source": {
+    "name": "Cricsheet JSON",
+    "url": "https://cricsheet.org/",
+    "license": "Open Data Commons Attribution License (ODC-By)",
+    "licenseUrl": "https://cricsheet.org/using/",
+    "archives": [
+      {
+        "archive": "bbl_json.zip",
+        "sha256": "983fd1948ade32ae6b620f8f353f1e81e8d9658b51fe1e0e1bf48e06e163f55a"
+      },
+      {
+        "archive": "bpl_json.zip",
+        "sha256": "03ede3a5aecf91bf8fa3cdac0576eb8e9238896ec690a040eedece8cd0562203"
+      },
+      {
+        "archive": "cpl_json.zip",
+        "sha256": "7da178776b0a01795f50a85f64d44cec7a5bc2dc7cf078c30b893962b20ad19b"
+      },
+      {
+        "archive": "ilt_json.zip",
+        "sha256": "3e9d7fe03a8b604ec9c1eb9e1fddd88025cda3554e77e7a005a9ade3c939584f"
+      },
+      {
+        "archive": "ipl_json.zip",
+        "sha256": "841b98290a08bdf2a063a9f4d6342fb2363ff246491ed3db4c571bddb6ea2a79"
+      },
+      {
+        "archive": "lpl_json.zip",
+        "sha256": "5902268a3c0b3a0e03f9cdd96586ab52256165609aa1530a06d84c458cb72943"
+      },
+      {
+        "archive": "mlc_json.zip",
+        "sha256": "29b0b2e62dfa50687552a58edbc7dedfd1b302f40165d33550bd1e14a9516af3"
+      },
+      {
+        "archive": "psl_json.zip",
+        "sha256": "b3f8b011c6c196f6d70913b22eb46967e50e8a510239851c1a495c276f72159f"
+      },
+      {
+        "archive": "sat_json.zip",
+        "sha256": "ffe7b399bcd700d9800d374f1471f39544431935f017cec2f445e1f22e45ee52"
+      },
+      {
+        "archive": "wbb_json.zip",
+        "sha256": "c63eed6e02c284cbea14b594549e1cd6d78627598720b9fa85a7db2051ed00d0"
+      },
+      {
+        "archive": "wpl_json.zip",
+        "sha256": "533e7937056b47f169418b06d995ca85b193415390e750964e0a22982a07e6cc"
+      }
+    ]
+  }
+}

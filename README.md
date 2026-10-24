@@ -1,8 +1,8 @@
 # Playoff Pulse
 
-Static league tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-League Men and Women, NBL and WNBL, and Formula 1. The frontend is a React/Vite app that serves checked-in JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`.
+League tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-League Men and Women, NBL and WNBL, and Formula 1. The React/Vite frontend serves checked-in season JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`. A separate `/cricket/` section discovers covered cricket matches through a free source.
 
-The deployed app does not need a live backend. Data generation happens ahead of the frontend build, then the static output is deployed.
+Season data generation happens ahead of the frontend build. Live Cricket uses the keyless SportScore API by default; an optional coordinated Worker service supports additional authorized feeds. See the [implementation and verification notes](docs/live-cricket-implementation.md), [service setup](services/live-cricket/README.md), and [future sports roadmap](docs/designs/live-sports-roadmap.md). These changes have been verified locally and have not been deployed.
 
 ## What The Site Shows
 

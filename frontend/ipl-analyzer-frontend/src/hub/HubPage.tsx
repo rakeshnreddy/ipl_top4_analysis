@@ -9,7 +9,7 @@ import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
 import { samePageHref } from '../lib/ui';
 
-const TITLE = 'All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse';
+const TITLE = 'Season Odds: Title, Playoff & Relegation Odds | Playoff Pulse';
 const DESCRIPTION =
   "Title, playoff and relegation odds across football, cricket, basketball, US sports and Formula 1. Find seasons in progress, pre-season projections and final tables, with odds updated twice daily.";
 
@@ -31,7 +31,7 @@ const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueInd
       <h4>{league.shortName}</h4>
       <span className="hub-card-top">
         <span className="hub-card-season">{league.seasonLabel}</span>
-        <small className={`status-pill status-${status.toLowerCase()}`}>{status}</small>
+        <small className={`status-pill status-${status.toLowerCase().replace(/\s+/g, '-')}`}>{status}</small>
       </span>
       {league.name !== league.shortName && <span className="hub-card-name">{league.name}</span>}
       {facts.length > 0 ? (
@@ -96,7 +96,7 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
           ]}
           factsLabel="Site snapshot"
           strap="Current, upcoming and final seasons. Odds updated twice daily."
-          title="All Live Races"
+          title="Season Odds"
         />
 
         <section className="hub-controls" aria-label="Find a league">

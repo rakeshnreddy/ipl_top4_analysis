@@ -1,0 +1,29 @@
+{
+  "name": "playoff-pulse-live-cricket",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "types": "wrangler types",
+    "dry-run": "wrangler deploy --dry-run --outdir dist",
+    "test:runtime": "vitest run --config vitest.runtime.config.ts",
+    "format": "prettier --write src test *config.ts package.json wrangler.jsonc tsconfig.json"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.7",
+    "@msw/cloudflare": "^0.2.0",
+    "@types/node": "^24.19.2",
+    "msw": "^3.0.3",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5",
+    "wrangler": "^4.152.0"
+  },
+  "overrides": {
+    "undici": "^7.30.1",
+    "zod": "^4.6.6"
+  }
+}

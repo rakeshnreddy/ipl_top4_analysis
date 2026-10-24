@@ -130,6 +130,20 @@
   min-width: 0;
 }
 
+.site-destinations { display:flex; align-self:stretch; align-items:stretch; gap:var(--space-2); margin-left:auto; }
+.site-destinations a { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 12px; border-bottom:3px solid transparent; color:var(--text-muted); font-size:14px; font-weight:600; text-decoration:none; white-space:nowrap; }
+.site-destinations a[aria-current='page'] { color:var(--text); border-bottom-color:var(--sport-accent, var(--accent)); }
+.site-destinations a:hover { color:var(--accent); }
+.live-static-credit { max-width:1280px; margin:0 auto; padding:16px var(--gutter); border-top:1px solid var(--border); display:flex; align-items:center; flex-wrap:wrap; gap:8px 20px; color:var(--text-muted); font-size:14px; }
+.live-static-credit a { display:inline-flex; align-items:center; min-height:44px; }
+@media (max-width:760px) {
+  html:root { --header-height:104px; }
+  .site-header-inner { display:grid; grid-template-columns:minmax(0,1fr) auto; height:104px; row-gap:0; padding-top:4px; }
+  .site-header-actions { grid-column:2; grid-row:1; justify-self:end; }
+  .site-destinations { grid-column:1 / -1; grid-row:2; margin:0; gap:0; }
+  .site-destinations a { flex:1; }
+}
+
 .theme-toggle {
   align-items: center;
   background: var(--surface-raised);
@@ -284,6 +298,8 @@
   font-weight: 600;
 }
 
+.status-in-season,
+.status-text.status-in-season,
 .status-live,
 .status-text.status-live {
   color: var(--good);
@@ -312,7 +328,8 @@
   padding: 2px var(--space-2);
 }
 
-.status-pill.status-live {
+.status-pill.status-live,
+.status-pill.status-in-season {
   background: var(--good-soft);
 }
 

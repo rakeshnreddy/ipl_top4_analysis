@@ -54,3 +54,28 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  live-cricket-service:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: services/live-cricket
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: services/live-cricket/package-lock.json
+      - name: Install service development dependencies
+        run: npm ci
+      - name: Test adapters and collector
+        run: npm test
+      - name: Test Worker and Durable Object runtime
+        run: npm run test:runtime
+      - name: Type-check service
+        run: npm run typecheck
+      - name: Verify bundle without deploying
+        run: npm run dry-run

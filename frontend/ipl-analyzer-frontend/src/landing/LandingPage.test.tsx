@@ -47,7 +47,7 @@ describe('LandingPage', () => {
     expect(epl).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(epl).toHaveTextContent('ARS 81%');
     expect(screen.getByRole('link', { name: 'Explore the races' })).toHaveAttribute('href', '/?view=hub');
-    await waitFor(() => expect(document.title).toBe('Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports'));
+    await waitFor(() => expect(document.title).toBe('Playoff Pulse: Season Title, Playoff & Relegation Odds Across Sports'));
   });
 
   it('opens sport directories into direct links and explains the cricket model', async () => {

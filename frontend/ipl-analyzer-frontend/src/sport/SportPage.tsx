@@ -175,7 +175,7 @@ function seasonStatus(payload: SportPayload, started: boolean): { label: string;
   if (payload.bracket || payload.metadata.season_status === 'postseason' || payload.metadata.season_status === 'playoffs') {
     return { label: 'Playoffs', tone: 'playoffs' };
   }
-  return started ? { label: 'Live', tone: 'live' } : { label: 'Pre-season', tone: 'pre-season' };
+  return started ? { label: 'In season', tone: 'live' } : { label: 'Pre-season', tone: 'pre-season' };
 }
 
 /** ✓ or – for a race that is over, with words for screen readers. */

@@ -2,20 +2,22 @@ import { Component, lazy, Suspense, useEffect, useMemo, useState, type ReactNode
 import './App.css';
 import { ErrorState, LoadingState } from './components/PageState';
 import { DEFAULT_LEAGUE_ID } from './data/iplData';
-import { HUB_ID, hubRequested, leagueIdFromLocation, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
+import { HUB_ID, hubRequested, leagueIdFromLocation, liveCricketRequested, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
 const App = lazy(() => import('./App'));
 const F1Page = lazy(() => import('./f1/F1Page'));
 const HubPage = lazy(() => import('./hub/HubPage'));
 const LandingPage = lazy(() => import('./landing/LandingPage'));
 const SportPage = lazy(() => import('./sport/SportPage'));
+const LiveCricketPage = lazy(() => import('./live/LiveCricketPage'));
 
 /** Loads the league list, then shows the cricket page or the page for the league's sport. */
 function Root() {
   const requestedLeague = useMemo(() => leagueIdFromLocation(), []);
   const wantsHub = useMemo(() => hubRequested(), []);
+  const wantsLiveCricket = useMemo(() => liveCricketRequested(), []);
   const [index, setIndex] = useState<LeagueIndex | null>(null);
   const [settled, setSettled] = useState(false);
-  const sport = index?.leagues.find((league) => league.id === requestedLeague)?.sport ?? '';
+  const sport = wantsLiveCricket ? 'cricket' : index?.leagues.find((league) => league.id === requestedLeague)?.sport ?? '';
 
   useEffect(() => {
     document.documentElement.dataset.sport = sport;
@@ -40,6 +42,8 @@ function Root() {
       active = false;
     };
   }, []);
+
+  if (wantsLiveCricket) return <LiveCricketPage index={index} />;
 
   if (!settled) {
     return <LoadingState />;

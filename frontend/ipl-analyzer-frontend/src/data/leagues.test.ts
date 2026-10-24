@@ -1,10 +1,21 @@
 /// <reference types="vitest/globals" />
 import { describe, expect, it, vi } from 'vitest';
-import { canonicalLeagueHref, hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, sportName, type LeagueSummary } from './leagues';
+import { canonicalLeagueHref, hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, liveCricketHref, liveCricketRequested, loadLeagueIndex, sportName, statusLabel, type LeagueSummary } from './leagues';
 import { setJsonLd, setPageMeta } from '../lib/seo';
 import { samePageHref } from '../lib/ui';
 
 describe('league helpers', () => {
+  it('separates match-live navigation from in-season qualification odds on either host', () => {
+    expect(liveCricketHref()).toBe('/cricket/');
+    expect(liveCricketRequested('/cricket/')).toBe(true);
+    expect(liveCricketRequested('/league/ipl-2026/')).toBe(false);
+    expect(statusLabel({ status: 'in_progress', started: true })).toBe('In season');
+    vi.stubEnv('BASE_URL', '/ipl_top4_analysis/');
+    expect(liveCricketHref('ss-1-example')).toBe('/ipl_top4_analysis/cricket/?match=ss-1-example');
+    expect(liveCricketRequested('/ipl_top4_analysis/cricket/index.html')).toBe(true);
+    expect(liveCricketRequested('/cricket/')).toBe(false);
+    vi.unstubAllEnvs();
+  });
   it('reads a well-formed league id from the query string', () => {
     expect(leagueIdFromLocation('?league=WPL-2026')).toBe('wpl-2026');
     expect(leagueIdFromLocation('?league=../secrets')).toBeNull();
