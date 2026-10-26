@@ -1,12 +1,14 @@
 {
   "metadata": {
     "season": "2026-27",
-    "generated_at": "2026-10-19T14:33:16Z",
+    "generated_at": "2026-10-25T21:58:37Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
-    "data_freshness_status": "fresh",
+    "data_freshness_status": "warning",
     "season_status": "in_progress",
-    "warnings": []
+    "warnings": [
+      "1 past fixture has no result yet (postponed, or not yet updated at FixtureDownload); they are simulated as still to play."
+    ]
   },
   "league": {
     "id": "super-lig-2026-27",
@@ -202,10 +204,32 @@
   },
   "standings": [
     {
+      "teamKey": "Amedspor",
+      "shortName": "AMD",
+      "fullName": "Amedspor",
+      "rank": 1,
+      "played": 9,
+      "wins": 6,
+      "draws": 2,
+      "losses": 1,
+      "goalsFor": 20,
+      "goalsAgainst": 10,
+      "points": 20,
+      "goalDifference": 10,
+      "form": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "remaining": 25
+    },
+    {
       "teamKey": "Galatasaray",
       "shortName": "GS",
       "fullName": "Galatasaray",
-      "rank": 1,
+      "rank": 2,
       "played": 8,
       "wins": 6,
       "draws": 1,
@@ -220,28 +244,6 @@
         "L",
         "W",
         "W"
-      ],
-      "remaining": 26
-    },
-    {
-      "teamKey": "Amedspor",
-      "shortName": "AMD",
-      "fullName": "Amedspor",
-      "rank": 2,
-      "played": 8,
-      "wins": 5,
-      "draws": 2,
-      "losses": 1,
-      "goalsFor": 18,
-      "goalsAgainst": 9,
-      "points": 17,
-      "goalDifference": 9,
-      "form": [
-        "W",
-        "D",
-        "W",
-        "W",
-        "D"
       ],
       "remaining": 26
     },
@@ -268,54 +270,120 @@
       "remaining": 26
     },
     {
-      "teamKey": "Besiktas",
-      "shortName": "BJK",
-      "fullName": "Be\u015fikta\u015f",
-      "rank": 4,
-      "played": 7,
-      "wins": 5,
-      "draws": 0,
-      "losses": 2,
-      "goalsFor": 16,
-      "goalsAgainst": 8,
-      "points": 15,
-      "goalDifference": 8,
-      "form": [
-        "W",
-        "L",
-        "W",
-        "W",
-        "W"
-      ],
-      "remaining": 27
-    },
-    {
       "teamKey": "Trabzonspor",
       "shortName": "TS",
       "fullName": "Trabzonspor",
-      "rank": 5,
-      "played": 7,
-      "wins": 4,
+      "rank": 4,
+      "played": 8,
+      "wins": 5,
       "draws": 1,
       "losses": 2,
-      "goalsFor": 16,
+      "goalsFor": 18,
       "goalsAgainst": 5,
-      "points": 13,
-      "goalDifference": 11,
+      "points": 16,
+      "goalDifference": 13,
       "form": [
         "W",
         "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "remaining": 26
+    },
+    {
+      "teamKey": "Kasimpasa",
+      "shortName": "KAS",
+      "fullName": "Kas\u0131mpa\u015fa",
+      "rank": 5,
+      "played": 9,
+      "wins": 4,
+      "draws": 4,
+      "losses": 1,
+      "goalsFor": 13,
+      "goalsAgainst": 9,
+      "points": 16,
+      "goalDifference": 4,
+      "form": [
+        "W",
+        "W",
+        "L",
+        "D",
+        "W"
+      ],
+      "remaining": 25
+    },
+    {
+      "teamKey": "Besiktas",
+      "shortName": "BJK",
+      "fullName": "Be\u015fikta\u015f",
+      "rank": 6,
+      "played": 8,
+      "wins": 5,
+      "draws": 0,
+      "losses": 3,
+      "goalsFor": 16,
+      "goalsAgainst": 10,
+      "points": 15,
+      "goalDifference": 6,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "remaining": 26
+    },
+    {
+      "teamKey": "Kocaelispor",
+      "shortName": "KOC",
+      "fullName": "Kocaelispor",
+      "rank": 7,
+      "played": 9,
+      "wins": 5,
+      "draws": 0,
+      "losses": 4,
+      "goalsFor": 11,
+      "goalsAgainst": 9,
+      "points": 15,
+      "goalDifference": 2,
+      "form": [
+        "W",
+        "L",
         "L",
         "W",
         "L"
       ],
-      "remaining": 27
+      "remaining": 25
+    },
+    {
+      "teamKey": "Erzurumspor",
+      "shortName": "ERZ",
+      "fullName": "Erzurumspor",
+      "rank": 8,
+      "played": 9,
+      "wins": 4,
+      "draws": 2,
+      "losses": 3,
+      "goalsFor": 8,
+      "goalsAgainst": 12,
+      "points": 14,
+      "goalDifference": -4,
+      "form": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "L"
+      ],
+      "remaining": 25
     },
     {
       "teamKey": "\u00c7orum",
       "shortName": "COR",
       "fullName": "\u00c7orum FK",
-      "rank": 6,
+      "rank": 9,
       "played": 8,
       "wins": 4,
       "draws": 1,
@@ -334,76 +402,32 @@
       "remaining": 26
     },
     {
-      "teamKey": "Kasimpasa",
-      "shortName": "KAS",
-      "fullName": "Kas\u0131mpa\u015fa",
-      "rank": 7,
-      "played": 8,
+      "teamKey": "Alanyaspor",
+      "shortName": "ALA",
+      "fullName": "Alanyaspor",
+      "rank": 10,
+      "played": 9,
       "wins": 3,
-      "draws": 4,
-      "losses": 1,
-      "goalsFor": 12,
-      "goalsAgainst": 9,
-      "points": 13,
-      "goalDifference": 3,
+      "draws": 3,
+      "losses": 3,
+      "goalsFor": 9,
+      "goalsAgainst": 11,
+      "points": 12,
+      "goalDifference": -2,
       "form": [
-        "W",
+        "L",
         "L",
         "D",
         "W",
         "D"
       ],
-      "remaining": 26
-    },
-    {
-      "teamKey": "Kocaelispor",
-      "shortName": "KOC",
-      "fullName": "Kocaelispor",
-      "rank": 8,
-      "played": 8,
-      "wins": 4,
-      "draws": 0,
-      "losses": 4,
-      "goalsFor": 9,
-      "goalsAgainst": 8,
-      "points": 12,
-      "goalDifference": 1,
-      "form": [
-        "L",
-        "L",
-        "W",
-        "L",
-        "W"
-      ],
-      "remaining": 26
-    },
-    {
-      "teamKey": "Alanyaspor",
-      "shortName": "ALA",
-      "fullName": "Alanyaspor",
-      "rank": 9,
-      "played": 8,
-      "wins": 3,
-      "draws": 3,
-      "losses": 2,
-      "goalsFor": 8,
-      "goalsAgainst": 9,
-      "points": 12,
-      "goalDifference": -1,
-      "form": [
-        "L",
-        "D",
-        "W",
-        "D",
-        "W"
-      ],
-      "remaining": 26
+      "remaining": 25
     },
     {
       "teamKey": "Istanbul Basaksehir",
       "shortName": "IBF",
       "fullName": "\u0130stanbul Ba\u015fak\u015fehir",
-      "rank": 10,
+      "rank": 11,
       "played": 8,
       "wins": 3,
       "draws": 2,
@@ -418,28 +442,6 @@
         "W",
         "L",
         "L"
-      ],
-      "remaining": 26
-    },
-    {
-      "teamKey": "Erzurumspor",
-      "shortName": "ERZ",
-      "fullName": "Erzurumspor",
-      "rank": 11,
-      "played": 8,
-      "wins": 3,
-      "draws": 2,
-      "losses": 3,
-      "goalsFor": 5,
-      "goalsAgainst": 11,
-      "points": 11,
-      "goalDifference": -6,
-      "form": [
-        "W",
-        "D",
-        "W",
-        "L",
-        "W"
       ],
       "remaining": 26
     },
@@ -492,22 +494,22 @@
       "shortName": "GFK",
       "fullName": "Gaziantep FK",
       "rank": 14,
-      "played": 8,
+      "played": 9,
       "wins": 2,
       "draws": 2,
-      "losses": 4,
-      "goalsFor": 8,
-      "goalsAgainst": 12,
+      "losses": 5,
+      "goalsFor": 9,
+      "goalsAgainst": 15,
       "points": 8,
-      "goalDifference": -4,
+      "goalDifference": -6,
       "form": [
         "L",
         "L",
         "L",
-        "D",
-        "W"
+        "L",
+        "D"
       ],
-      "remaining": 26
+      "remaining": 25
     },
     {
       "teamKey": "Gen\u00e7lerbirligi",
@@ -558,14 +560,14 @@
       "shortName": "SAM",
       "fullName": "Samsunspor",
       "rank": 17,
-      "played": 8,
+      "played": 9,
       "wins": 1,
       "draws": 1,
-      "losses": 6,
-      "goalsFor": 7,
-      "goalsAgainst": 19,
+      "losses": 7,
+      "goalsFor": 8,
+      "goalsAgainst": 21,
       "points": 4,
-      "goalDifference": -12,
+      "goalDifference": -13,
       "form": [
         "L",
         "L",
@@ -573,21 +575,21 @@
         "L",
         "L"
       ],
-      "remaining": 26
+      "remaining": 25
     },
     {
       "teamKey": "Ey\u00fcpspor",
       "shortName": "EYP",
       "fullName": "Ey\u00fcpspor",
       "rank": 18,
-      "played": 8,
+      "played": 9,
       "wins": 1,
       "draws": 0,
-      "losses": 7,
+      "losses": 8,
       "goalsFor": 2,
-      "goalsAgainst": 22,
+      "goalsAgainst": 23,
       "points": 3,
-      "goalDifference": -20,
+      "goalDifference": -21,
       "form": [
         "L",
         "L",
@@ -595,75 +597,10 @@
         "L",
         "L"
       ],
-      "remaining": 26
+      "remaining": 25
     }
   ],
   "fixtures": [
-    {
-      "id": "64",
-      "round": 8,
-      "date": "2026-10-19T17:00:00Z",
-      "home": "Trabzonspor",
-      "away": "Besiktas",
-      "venue": "Papara Park",
-      "probabilities": {
-        "home": 0.522,
-        "draw": 0.225,
-        "away": 0.253
-      }
-    },
-    {
-      "id": "75",
-      "round": 9,
-      "date": "2026-10-23T17:00:00Z",
-      "home": "Alanyaspor",
-      "away": "Kocaelispor",
-      "venue": "Alanya Oba Stadyumu",
-      "probabilities": {
-        "home": 0.425,
-        "draw": 0.335,
-        "away": 0.241
-      }
-    },
-    {
-      "id": "74",
-      "round": 9,
-      "date": "2026-10-24T10:30:00Z",
-      "home": "Ey\u00fcpspor",
-      "away": "Kasimpasa",
-      "venue": "Necmi Kadioglu Stadyumu",
-      "probabilities": {
-        "home": 0.255,
-        "draw": 0.278,
-        "away": 0.467
-      }
-    },
-    {
-      "id": "73",
-      "round": 9,
-      "date": "2026-10-24T13:00:00Z",
-      "home": "Gaziantep",
-      "away": "Erzurumspor",
-      "venue": "Gaziantep Stadyumu",
-      "probabilities": {
-        "home": 0.455,
-        "draw": 0.27,
-        "away": 0.274
-      }
-    },
-    {
-      "id": "81",
-      "round": 9,
-      "date": "2026-10-24T16:00:00Z",
-      "home": "Samsunspor",
-      "away": "Amedspor",
-      "venue": "Samsun 19 Mayis Stadyumu",
-      "probabilities": {
-        "home": 0.306,
-        "draw": 0.225,
-        "away": 0.469
-      }
-    },
     {
       "id": "78",
       "round": 9,
@@ -672,9 +609,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.468,
+        "home": 0.465,
         "draw": 0.286,
-        "away": 0.247
+        "away": 0.25
       }
     },
     {
@@ -685,9 +622,9 @@
       "away": "\u00c7orum",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.486,
-        "draw": 0.219,
-        "away": 0.294
+        "home": 0.48,
+        "draw": 0.22,
+        "away": 0.3
       }
     },
     {
@@ -698,9 +635,9 @@
       "away": "Trabzonspor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.234,
-        "draw": 0.228,
-        "away": 0.538
+        "home": 0.216,
+        "draw": 0.225,
+        "away": 0.559
       }
     },
     {
@@ -711,9 +648,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.5,
-        "draw": 0.229,
-        "away": 0.271
+        "home": 0.483,
+        "draw": 0.233,
+        "away": 0.284
       }
     },
     {
@@ -737,9 +674,9 @@
       "away": "Galatasaray",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.211,
-        "draw": 0.233,
-        "away": 0.556
+        "home": 0.209,
+        "draw": 0.232,
+        "away": 0.559
       }
     },
     {
@@ -750,9 +687,9 @@
       "away": "\u00c7orum",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.315,
-        "draw": 0.251,
-        "away": 0.434
+        "home": 0.352,
+        "draw": 0.246,
+        "away": 0.402
       }
     },
     {
@@ -763,9 +700,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.411,
-        "draw": 0.306,
-        "away": 0.282
+        "home": 0.429,
+        "draw": 0.298,
+        "away": 0.273
       }
     },
     {
@@ -776,9 +713,9 @@
       "away": "G\u00f6ztepe",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.713,
-        "draw": 0.159,
-        "away": 0.128
+        "home": 0.708,
+        "draw": 0.161,
+        "away": 0.131
       }
     },
     {
@@ -789,9 +726,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.757,
-        "draw": 0.151,
-        "away": 0.091
+        "home": 0.769,
+        "draw": 0.148,
+        "away": 0.084
       }
     },
     {
@@ -802,9 +739,9 @@
       "away": "Gaziantep",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.75,
-        "draw": 0.154,
-        "away": 0.096
+        "home": 0.776,
+        "draw": 0.141,
+        "away": 0.083
       }
     },
     {
@@ -815,9 +752,9 @@
       "away": "Samsunspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.675,
-        "draw": 0.182,
-        "away": 0.143
+        "home": 0.674,
+        "draw": 0.183,
+        "away": 0.144
       }
     },
     {
@@ -828,9 +765,9 @@
       "away": "Besiktas",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.297,
-        "draw": 0.254,
-        "away": 0.449
+        "home": 0.305,
+        "draw": 0.26,
+        "away": 0.435
       }
     },
     {
@@ -841,9 +778,9 @@
       "away": "Alanyaspor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.337,
-        "draw": 0.298,
-        "away": 0.365
+        "home": 0.35,
+        "draw": 0.294,
+        "away": 0.356
       }
     },
     {
@@ -854,9 +791,9 @@
       "away": "Kasimpasa",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.37,
+        "home": 0.343,
         "draw": 0.27,
-        "away": 0.36
+        "away": 0.387
       }
     },
     {
@@ -867,9 +804,9 @@
       "away": "Kocaelispor",
       "venue": "Necmi Kadioglu Stadyumu",
       "probabilities": {
-        "home": 0.263,
-        "draw": 0.331,
-        "away": 0.406
+        "home": 0.242,
+        "draw": 0.325,
+        "away": 0.433
       }
     },
     {
@@ -880,9 +817,9 @@
       "away": "Konyaspor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.412,
-        "draw": 0.269,
-        "away": 0.318
+        "home": 0.402,
+        "draw": 0.271,
+        "away": 0.327
       }
     },
     {
@@ -893,9 +830,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.381,
+        "home": 0.374,
         "draw": 0.243,
-        "away": 0.376
+        "away": 0.383
       }
     },
     {
@@ -906,9 +843,9 @@
       "away": "Amedspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.647,
-        "draw": 0.178,
-        "away": 0.175
+        "home": 0.628,
+        "draw": 0.184,
+        "away": 0.188
       }
     },
     {
@@ -919,9 +856,9 @@
       "away": "Erzurumspor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.508,
-        "draw": 0.258,
-        "away": 0.235
+        "home": 0.469,
+        "draw": 0.259,
+        "away": 0.272
       }
     },
     {
@@ -932,9 +869,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.249,
-        "draw": 0.197,
-        "away": 0.554
+        "home": 0.247,
+        "draw": 0.196,
+        "away": 0.556
       }
     },
     {
@@ -945,9 +882,9 @@
       "away": "Trabzonspor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.266,
-        "draw": 0.264,
-        "away": 0.469
+        "home": 0.24,
+        "draw": 0.258,
+        "away": 0.503
       }
     },
     {
@@ -958,9 +895,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.695,
-        "draw": 0.183,
-        "away": 0.122
+        "home": 0.678,
+        "draw": 0.192,
+        "away": 0.131
       }
     },
     {
@@ -971,9 +908,9 @@
       "away": "Gaziantep",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.438,
-        "draw": 0.266,
-        "away": 0.296
+        "home": 0.458,
+        "draw": 0.261,
+        "away": 0.281
       }
     },
     {
@@ -984,9 +921,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.607,
-        "draw": 0.2,
-        "away": 0.193
+        "home": 0.62,
+        "draw": 0.196,
+        "away": 0.184
       }
     },
     {
@@ -997,9 +934,9 @@
       "away": "Samsunspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.79,
+        "home": 0.789,
         "draw": 0.127,
-        "away": 0.084
+        "away": 0.083
       }
     },
     {
@@ -1010,9 +947,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.195,
-        "draw": 0.254,
-        "away": 0.551
+        "home": 0.205,
+        "draw": 0.253,
+        "away": 0.542
       }
     },
     {
@@ -1023,9 +960,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.306,
-        "draw": 0.267,
-        "away": 0.428
+        "home": 0.341,
+        "draw": 0.262,
+        "away": 0.396
       }
     },
     {
@@ -1036,9 +973,9 @@
       "away": "Alanyaspor",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.408,
-        "draw": 0.294,
-        "away": 0.298
+        "home": 0.423,
+        "draw": 0.291,
+        "away": 0.286
       }
     },
     {
@@ -1049,9 +986,9 @@
       "away": "Besiktas",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.268,
-        "draw": 0.258,
-        "away": 0.473
+        "home": 0.275,
+        "draw": 0.262,
+        "away": 0.464
       }
     },
     {
@@ -1062,9 +999,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.827,
-        "draw": 0.119,
-        "away": 0.054
+        "home": 0.832,
+        "draw": 0.118,
+        "away": 0.05
       }
     },
     {
@@ -1075,9 +1012,9 @@
       "away": "\u00c7orum",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.576,
+        "home": 0.573,
         "draw": 0.204,
-        "away": 0.22
+        "away": 0.223
       }
     },
     {
@@ -1088,9 +1025,9 @@
       "away": "Konyaspor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.458,
+        "home": 0.443,
         "draw": 0.295,
-        "away": 0.246
+        "away": 0.262
       }
     },
     {
@@ -1101,9 +1038,9 @@
       "away": "Kasimpasa",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.421,
-        "draw": 0.265,
-        "away": 0.314
+        "home": 0.407,
+        "draw": 0.269,
+        "away": 0.324
       }
     },
     {
@@ -1114,9 +1051,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.468,
-        "draw": 0.255,
-        "away": 0.277
+        "home": 0.458,
+        "draw": 0.257,
+        "away": 0.286
       }
     },
     {
@@ -1127,9 +1064,9 @@
       "away": "Amedspor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.291,
-        "draw": 0.23,
-        "away": 0.479
+        "home": 0.257,
+        "draw": 0.221,
+        "away": 0.523
       }
     },
     {
@@ -1140,9 +1077,9 @@
       "away": "Kocaelispor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.502,
-        "draw": 0.267,
-        "away": 0.231
+        "home": 0.488,
+        "draw": 0.265,
+        "away": 0.246
       }
     },
     {
@@ -1153,9 +1090,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Necmi Kadioglu Stadyumu",
       "probabilities": {
-        "home": 0.163,
-        "draw": 0.217,
-        "away": 0.62
+        "home": 0.154,
+        "draw": 0.216,
+        "away": 0.63
       }
     },
     {
@@ -1166,9 +1103,9 @@
       "away": "Erzurumspor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.802,
-        "draw": 0.129,
-        "away": 0.069
+        "home": 0.775,
+        "draw": 0.141,
+        "away": 0.084
       }
     },
     {
@@ -1179,9 +1116,9 @@
       "away": "Trabzonspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.303,
+        "home": 0.283,
         "draw": 0.238,
-        "away": 0.459
+        "away": 0.479
       }
     },
     {
@@ -1192,9 +1129,9 @@
       "away": "Galatasaray",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.396,
-        "draw": 0.228,
-        "away": 0.376
+        "home": 0.379,
+        "draw": 0.229,
+        "away": 0.392
       }
     },
     {
@@ -1206,7 +1143,7 @@
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
         "home": 0.749,
-        "draw": 0.148,
+        "draw": 0.147,
         "away": 0.104
       }
     },
@@ -1218,9 +1155,9 @@
       "away": "Gaziantep",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.48,
-        "draw": 0.267,
-        "away": 0.253
+        "home": 0.5,
+        "draw": 0.26,
+        "away": 0.24
       }
     },
     {
@@ -1231,9 +1168,9 @@
       "away": "Alanyaspor",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.532,
-        "draw": 0.238,
-        "away": 0.229
+        "home": 0.561,
+        "draw": 0.229,
+        "away": 0.21
       }
     },
     {
@@ -1244,9 +1181,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.334,
+        "home": 0.333,
         "draw": 0.227,
-        "away": 0.439
+        "away": 0.44
       }
     },
     {
@@ -1257,9 +1194,9 @@
       "away": "Kocaelispor",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.338,
-        "draw": 0.344,
-        "away": 0.317
+        "home": 0.362,
+        "draw": 0.328,
+        "away": 0.31
       }
     },
     {
@@ -1270,9 +1207,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.544,
-        "draw": 0.259,
-        "away": 0.197
+        "home": 0.549,
+        "draw": 0.261,
+        "away": 0.191
       }
     },
     {
@@ -1283,9 +1220,9 @@
       "away": "Samsunspor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.711,
-        "draw": 0.165,
-        "away": 0.124
+        "home": 0.697,
+        "draw": 0.172,
+        "away": 0.131
       }
     },
     {
@@ -1296,9 +1233,9 @@
       "away": "\u00c7orum",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.662,
-        "draw": 0.178,
-        "away": 0.16
+        "home": 0.671,
+        "draw": 0.177,
+        "away": 0.153
       }
     },
     {
@@ -1309,9 +1246,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.397,
-        "draw": 0.262,
-        "away": 0.341
+        "home": 0.399,
+        "draw": 0.265,
+        "away": 0.337
       }
     },
     {
@@ -1322,9 +1259,9 @@
       "away": "Amedspor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.431,
-        "draw": 0.216,
-        "away": 0.353
+        "home": 0.41,
+        "draw": 0.217,
+        "away": 0.373
       }
     },
     {
@@ -1335,9 +1272,9 @@
       "away": "Kasimpasa",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.341,
-        "draw": 0.296,
-        "away": 0.363
+        "home": 0.369,
+        "draw": 0.291,
+        "away": 0.34
       }
     },
     {
@@ -1348,9 +1285,9 @@
       "away": "Samsunspor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.522,
-        "draw": 0.25,
-        "away": 0.228
+        "home": 0.51,
+        "draw": 0.251,
+        "away": 0.239
       }
     },
     {
@@ -1361,9 +1298,9 @@
       "away": "Galatasaray",
       "venue": "Necmi Kadioglu Stadyumu",
       "probabilities": {
-        "home": 0.103,
-        "draw": 0.162,
-        "away": 0.735
+        "home": 0.096,
+        "draw": 0.159,
+        "away": 0.744
       }
     },
     {
@@ -1374,9 +1311,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.44,
-        "draw": 0.323,
-        "away": 0.237
+        "home": 0.454,
+        "draw": 0.314,
+        "away": 0.232
       }
     },
     {
@@ -1387,9 +1324,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.302,
-        "draw": 0.242,
-        "away": 0.455
+        "home": 0.296,
+        "draw": 0.241,
+        "away": 0.463
       }
     },
     {
@@ -1400,9 +1337,9 @@
       "away": "Konyaspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.525,
-        "draw": 0.25,
-        "away": 0.225
+        "home": 0.517,
+        "draw": 0.252,
+        "away": 0.231
       }
     },
     {
@@ -1413,9 +1350,9 @@
       "away": "Trabzonspor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.537,
-        "draw": 0.214,
-        "away": 0.25
+        "home": 0.508,
+        "draw": 0.221,
+        "away": 0.27
       }
     },
     {
@@ -1426,9 +1363,9 @@
       "away": "Besiktas",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.232,
-        "draw": 0.224,
-        "away": 0.544
+        "home": 0.221,
+        "draw": 0.219,
+        "away": 0.56
       }
     },
     {
@@ -1439,9 +1376,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.212,
-        "draw": 0.221,
-        "away": 0.567
+        "home": 0.216,
+        "draw": 0.224,
+        "away": 0.56
       }
     },
     {
@@ -1452,9 +1389,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.525,
-        "draw": 0.216,
-        "away": 0.259
+        "home": 0.538,
+        "draw": 0.214,
+        "away": 0.248
       }
     },
     {
@@ -1465,9 +1402,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.58,
-        "draw": 0.253,
-        "away": 0.167
+        "home": 0.584,
+        "draw": 0.255,
+        "away": 0.161
       }
     },
     {
@@ -1478,9 +1415,9 @@
       "away": "Erzurumspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.664,
-        "draw": 0.203,
-        "away": 0.133
+        "home": 0.633,
+        "draw": 0.211,
+        "away": 0.156
       }
     },
     {
@@ -1491,9 +1428,9 @@
       "away": "Alanyaspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.672,
-        "draw": 0.193,
-        "away": 0.135
+        "home": 0.688,
+        "draw": 0.184,
+        "away": 0.128
       }
     },
     {
@@ -1504,9 +1441,9 @@
       "away": "\u00c7orum",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.33,
-        "draw": 0.246,
-        "away": 0.424
+        "home": 0.329,
+        "draw": 0.245,
+        "away": 0.426
       }
     },
     {
@@ -1517,9 +1454,9 @@
       "away": "Gaziantep",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.477,
-        "draw": 0.239,
-        "away": 0.284
+        "home": 0.491,
+        "draw": 0.235,
+        "away": 0.274
       }
     },
     {
@@ -1530,9 +1467,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.666,
-        "draw": 0.185,
-        "away": 0.149
+        "home": 0.653,
+        "draw": 0.191,
+        "away": 0.156
       }
     },
     {
@@ -1543,9 +1480,9 @@
       "away": "Kocaelispor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.628,
+        "home": 0.626,
         "draw": 0.239,
-        "away": 0.133
+        "away": 0.135
       }
     },
     {
@@ -1556,9 +1493,9 @@
       "away": "Galatasaray",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.174,
-        "draw": 0.194,
-        "away": 0.632
+        "home": 0.156,
+        "draw": 0.182,
+        "away": 0.662
       }
     },
     {
@@ -1569,9 +1506,9 @@
       "away": "Samsunspor",
       "venue": "Necmi Kadioglu Stadyumu",
       "probabilities": {
-        "home": 0.312,
-        "draw": 0.261,
-        "away": 0.427
+        "home": 0.3,
+        "draw": 0.265,
+        "away": 0.435
       }
     },
     {
@@ -1582,9 +1519,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.333,
-        "draw": 0.273,
-        "away": 0.394
+        "home": 0.317,
+        "draw": 0.268,
+        "away": 0.415
       }
     },
     {
@@ -1595,9 +1532,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.501,
-        "draw": 0.253,
-        "away": 0.246
+        "home": 0.492,
+        "draw": 0.255,
+        "away": 0.253
       }
     },
     {
@@ -1608,9 +1545,9 @@
       "away": "Besiktas",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.354,
-        "draw": 0.237,
-        "away": 0.409
+        "home": 0.357,
+        "draw": 0.239,
+        "away": 0.405
       }
     },
     {
@@ -1621,9 +1558,9 @@
       "away": "Konyaspor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.537,
-        "draw": 0.234,
-        "away": 0.229
+        "home": 0.531,
+        "draw": 0.235,
+        "away": 0.234
       }
     },
     {
@@ -1634,9 +1571,9 @@
       "away": "Amedspor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.684,
-        "draw": 0.164,
-        "away": 0.152
+        "home": 0.66,
+        "draw": 0.172,
+        "away": 0.168
       }
     },
     {
@@ -1647,9 +1584,9 @@
       "away": "Kasimpasa",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.375,
-        "draw": 0.332,
-        "away": 0.293
+        "home": 0.382,
+        "draw": 0.329,
+        "away": 0.289
       }
     },
     {
@@ -1660,9 +1597,9 @@
       "away": "Trabzonspor",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.184,
-        "draw": 0.235,
-        "away": 0.581
+        "home": 0.197,
+        "draw": 0.237,
+        "away": 0.566
       }
     },
     {
@@ -1673,8 +1610,8 @@
       "away": "Gaziantep",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.527,
-        "draw": 0.256,
+        "home": 0.535,
+        "draw": 0.248,
         "away": 0.217
       }
     },
@@ -1686,9 +1623,9 @@
       "away": "Kasimpasa",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.658,
-        "draw": 0.202,
-        "away": 0.141
+        "home": 0.655,
+        "draw": 0.207,
+        "away": 0.138
       }
     },
     {
@@ -1699,9 +1636,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.285,
-        "draw": 0.303,
-        "away": 0.412
+        "home": 0.295,
+        "draw": 0.299,
+        "away": 0.406
       }
     },
     {
@@ -1712,9 +1649,9 @@
       "away": "Amedspor",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.272,
-        "draw": 0.249,
-        "away": 0.48
+        "home": 0.291,
+        "draw": 0.246,
+        "away": 0.463
       }
     },
     {
@@ -1725,9 +1662,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.801,
-        "draw": 0.128,
-        "away": 0.071
+        "home": 0.794,
+        "draw": 0.131,
+        "away": 0.075
       }
     },
     {
@@ -1738,9 +1675,9 @@
       "away": "Konyaspor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.444,
-        "draw": 0.271,
-        "away": 0.285
+        "home": 0.435,
+        "draw": 0.272,
+        "away": 0.293
       }
     },
     {
@@ -1751,9 +1688,9 @@
       "away": "Galatasaray",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.277,
-        "draw": 0.207,
-        "away": 0.516
+        "home": 0.272,
+        "draw": 0.205,
+        "away": 0.523
       }
     },
     {
@@ -1764,9 +1701,9 @@
       "away": "Besiktas",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.144,
-        "draw": 0.201,
-        "away": 0.655
+        "home": 0.142,
+        "draw": 0.205,
+        "away": 0.653
       }
     },
     {
@@ -1777,9 +1714,9 @@
       "away": "Samsunspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.594,
-        "draw": 0.207,
-        "away": 0.198
+        "home": 0.59,
+        "draw": 0.209,
+        "away": 0.201
       }
     },
     {
@@ -1790,9 +1727,9 @@
       "away": "Trabzonspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.381,
-        "draw": 0.245,
-        "away": 0.373
+        "home": 0.361,
+        "draw": 0.248,
+        "away": 0.391
       }
     },
     {
@@ -1803,9 +1740,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.569,
-        "draw": 0.238,
-        "away": 0.193
+        "home": 0.556,
+        "draw": 0.243,
+        "away": 0.201
       }
     },
     {
@@ -1816,9 +1753,9 @@
       "away": "Alanyaspor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.59,
-        "draw": 0.228,
-        "away": 0.182
+        "home": 0.592,
+        "draw": 0.226,
+        "away": 0.181
       }
     },
     {
@@ -1829,9 +1766,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.424,
-        "draw": 0.243,
-        "away": 0.333
+        "home": 0.419,
+        "draw": 0.244,
+        "away": 0.337
       }
     },
     {
@@ -1856,8 +1793,8 @@
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
         "home": 0.413,
-        "draw": 0.246,
-        "away": 0.342
+        "draw": 0.248,
+        "away": 0.34
       }
     },
     {
@@ -1868,9 +1805,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.19,
-        "draw": 0.22,
-        "away": 0.59
+        "home": 0.191,
+        "draw": 0.221,
+        "away": 0.589
       }
     },
     {
@@ -1881,9 +1818,9 @@
       "away": "Kocaelispor",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.543,
-        "draw": 0.259,
-        "away": 0.198
+        "home": 0.542,
+        "draw": 0.257,
+        "away": 0.202
       }
     },
     {
@@ -1894,9 +1831,9 @@
       "away": "Erzurumspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.774,
-        "draw": 0.145,
-        "away": 0.081
+        "home": 0.748,
+        "draw": 0.155,
+        "away": 0.096
       }
     },
     {
@@ -1907,9 +1844,9 @@
       "away": "Gaziantep",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.512,
-        "draw": 0.237,
-        "away": 0.251
+        "home": 0.528,
+        "draw": 0.232,
+        "away": 0.241
       }
     },
     {
@@ -1920,9 +1857,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.624,
-        "draw": 0.235,
-        "away": 0.14
+        "home": 0.617,
+        "draw": 0.239,
+        "away": 0.144
       }
     },
     {
@@ -1934,8 +1871,8 @@
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
         "home": 0.321,
-        "draw": 0.263,
-        "away": 0.416
+        "draw": 0.266,
+        "away": 0.414
       }
     },
     {
@@ -1946,9 +1883,9 @@
       "away": "Amedspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.604,
-        "draw": 0.199,
-        "away": 0.197
+        "home": 0.597,
+        "draw": 0.204,
+        "away": 0.199
       }
     },
     {
@@ -1959,9 +1896,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.411,
-        "draw": 0.294,
-        "away": 0.295
+        "home": 0.447,
+        "draw": 0.281,
+        "away": 0.272
       }
     },
     {
@@ -1972,9 +1909,9 @@
       "away": "Konyaspor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.392,
-        "draw": 0.341,
-        "away": 0.267
+        "home": 0.404,
+        "draw": 0.334,
+        "away": 0.262
       }
     },
     {
@@ -1985,9 +1922,9 @@
       "away": "Galatasaray",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.283,
-        "draw": 0.221,
-        "away": 0.496
+        "home": 0.275,
+        "draw": 0.22,
+        "away": 0.505
       }
     },
     {
@@ -1998,9 +1935,9 @@
       "away": "Besiktas",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.353,
-        "draw": 0.223,
-        "away": 0.424
+        "home": 0.358,
+        "draw": 0.224,
+        "away": 0.417
       }
     },
     {
@@ -2011,9 +1948,9 @@
       "away": "Samsunspor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.819,
-        "draw": 0.112,
-        "away": 0.07
+        "home": 0.815,
+        "draw": 0.114,
+        "away": 0.071
       }
     },
     {
@@ -2024,9 +1961,9 @@
       "away": "Trabzonspor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.193,
-        "draw": 0.232,
-        "away": 0.575
+        "home": 0.182,
+        "draw": 0.23,
+        "away": 0.589
       }
     },
     {
@@ -2037,9 +1974,9 @@
       "away": "Kasimpasa",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.559,
-        "draw": 0.225,
-        "away": 0.216
+        "home": 0.56,
+        "draw": 0.227,
+        "away": 0.212
       }
     },
     {
@@ -2050,9 +1987,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.589,
-        "draw": 0.203,
-        "away": 0.208
+        "home": 0.586,
+        "draw": 0.204,
+        "away": 0.21
       }
     },
     {
@@ -2063,9 +2000,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.48,
-        "draw": 0.265,
-        "away": 0.256
+        "home": 0.468,
+        "draw": 0.264,
+        "away": 0.269
       }
     },
     {
@@ -2076,9 +2013,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.33,
-        "draw": 0.245,
-        "away": 0.425
+        "home": 0.31,
+        "draw": 0.241,
+        "away": 0.449
       }
     },
     {
@@ -2089,9 +2026,9 @@
       "away": "\u00c7orum",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.221,
-        "draw": 0.225,
-        "away": 0.555
+        "home": 0.209,
+        "draw": 0.224,
+        "away": 0.567
       }
     },
     {
@@ -2102,9 +2039,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.365,
-        "draw": 0.224,
-        "away": 0.41
+        "home": 0.353,
+        "draw": 0.225,
+        "away": 0.421
       }
     },
     {
@@ -2115,9 +2052,9 @@
       "away": "Kocaelispor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.388,
-        "draw": 0.303,
-        "away": 0.31
+        "home": 0.37,
+        "draw": 0.299,
+        "away": 0.331
       }
     },
     {
@@ -2128,9 +2065,9 @@
       "away": "Erzurumspor",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.473,
-        "draw": 0.291,
-        "away": 0.236
+        "home": 0.444,
+        "draw": 0.29,
+        "away": 0.267
       }
     },
     {
@@ -2141,9 +2078,9 @@
       "away": "Gaziantep",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.819,
-        "draw": 0.113,
-        "away": 0.067
+        "home": 0.833,
+        "draw": 0.106,
+        "away": 0.062
       }
     },
     {
@@ -2154,9 +2091,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.622,
-        "draw": 0.218,
-        "away": 0.16
+        "home": 0.621,
+        "draw": 0.221,
+        "away": 0.157
       }
     },
     {
@@ -2167,9 +2104,9 @@
       "away": "Alanyaspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.478,
-        "draw": 0.26,
-        "away": 0.262
+        "home": 0.489,
+        "draw": 0.255,
+        "away": 0.256
       }
     },
     {
@@ -2180,9 +2117,9 @@
       "away": "Amedspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.517,
-        "draw": 0.219,
-        "away": 0.263
+        "home": 0.497,
+        "draw": 0.223,
+        "away": 0.28
       }
     },
     {
@@ -2193,8 +2130,8 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.506,
-        "draw": 0.268,
+        "home": 0.503,
+        "draw": 0.271,
         "away": 0.226
       }
     },
@@ -2206,9 +2143,9 @@
       "away": "Konyaspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.674,
+        "home": 0.678,
         "draw": 0.2,
-        "away": 0.126
+        "away": 0.122
       }
     },
     {
@@ -2219,9 +2156,9 @@
       "away": "Galatasaray",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.214,
-        "draw": 0.267,
-        "away": 0.519
+        "home": 0.222,
+        "draw": 0.264,
+        "away": 0.514
       }
     },
     {
@@ -2232,9 +2169,9 @@
       "away": "Besiktas",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.219,
-        "draw": 0.243,
-        "away": 0.539
+        "home": 0.253,
+        "draw": 0.248,
+        "away": 0.499
       }
     },
     {
@@ -2245,7 +2182,7 @@
       "away": "Samsunspor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.606,
+        "home": 0.605,
         "draw": 0.194,
         "away": 0.2
       }
@@ -2258,9 +2195,9 @@
       "away": "Trabzonspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.501,
-        "draw": 0.223,
-        "away": 0.276
+        "home": 0.478,
+        "draw": 0.229,
+        "away": 0.293
       }
     },
     {
@@ -2271,9 +2208,9 @@
       "away": "Kasimpasa",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.395,
-        "draw": 0.296,
-        "away": 0.309
+        "home": 0.387,
+        "draw": 0.299,
+        "away": 0.314
       }
     },
     {
@@ -2284,9 +2221,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.251,
-        "draw": 0.252,
-        "away": 0.497
+        "home": 0.25,
+        "draw": 0.251,
+        "away": 0.5
       }
     },
     {
@@ -2297,9 +2234,9 @@
       "away": "Amedspor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.555,
-        "draw": 0.208,
-        "away": 0.237
+        "home": 0.521,
+        "draw": 0.217,
+        "away": 0.262
       }
     },
     {
@@ -2310,9 +2247,9 @@
       "away": "G\u00f6ztepe",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.382,
+        "home": 0.377,
         "draw": 0.245,
-        "away": 0.373
+        "away": 0.378
       }
     },
     {
@@ -2323,9 +2260,9 @@
       "away": "\u00c7orum",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.425,
-        "draw": 0.253,
-        "away": 0.323
+        "home": 0.408,
+        "draw": 0.25,
+        "away": 0.341
       }
     },
     {
@@ -2336,9 +2273,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.088,
-        "draw": 0.146,
-        "away": 0.766
+        "home": 0.084,
+        "draw": 0.145,
+        "away": 0.771
       }
     },
     {
@@ -2349,9 +2286,9 @@
       "away": "Kocaelispor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.37,
-        "draw": 0.313,
-        "away": 0.317
+        "home": 0.342,
+        "draw": 0.305,
+        "away": 0.353
       }
     },
     {
@@ -2362,9 +2299,9 @@
       "away": "Erzurumspor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.476,
-        "draw": 0.259,
-        "away": 0.265
+        "home": 0.435,
+        "draw": 0.26,
+        "away": 0.306
       }
     },
     {
@@ -2375,9 +2312,9 @@
       "away": "Gaziantep",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.613,
-        "draw": 0.197,
-        "away": 0.19
+        "home": 0.633,
+        "draw": 0.189,
+        "away": 0.178
       }
     },
     {
@@ -2388,9 +2325,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.703,
-        "draw": 0.182,
-        "away": 0.115
+        "home": 0.702,
+        "draw": 0.185,
+        "away": 0.113
       }
     },
     {
@@ -2401,9 +2338,9 @@
       "away": "Alanyaspor",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.322,
-        "draw": 0.305,
-        "away": 0.372
+        "home": 0.37,
+        "draw": 0.293,
+        "away": 0.337
       }
     },
     {
@@ -2414,9 +2351,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.78,
-        "draw": 0.132,
-        "away": 0.088
+        "home": 0.776,
+        "draw": 0.134,
+        "away": 0.09
       }
     },
     {
@@ -2427,9 +2364,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.643,
-        "draw": 0.2,
-        "away": 0.158
+        "home": 0.65,
+        "draw": 0.197,
+        "away": 0.153
       }
     },
     {
@@ -2440,9 +2377,9 @@
       "away": "Konyaspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.601,
-        "draw": 0.229,
-        "away": 0.17
+        "home": 0.595,
+        "draw": 0.231,
+        "away": 0.174
       }
     },
     {
@@ -2454,8 +2391,8 @@
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
         "home": 0.235,
-        "draw": 0.232,
-        "away": 0.533
+        "draw": 0.235,
+        "away": 0.53
       }
     },
     {
@@ -2466,9 +2403,9 @@
       "away": "Besiktas",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.265,
+        "home": 0.282,
         "draw": 0.292,
-        "away": 0.443
+        "away": 0.426
       }
     },
     {
@@ -2479,9 +2416,9 @@
       "away": "Samsunspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.749,
-        "draw": 0.151,
-        "away": 0.1
+        "home": 0.757,
+        "draw": 0.149,
+        "away": 0.094
       }
     },
     {
@@ -2492,9 +2429,9 @@
       "away": "Trabzonspor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.414,
-        "draw": 0.239,
-        "away": 0.347
+        "home": 0.381,
+        "draw": 0.245,
+        "away": 0.374
       }
     },
     {
@@ -2505,9 +2442,9 @@
       "away": "Kasimpasa",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.388,
-        "draw": 0.262,
-        "away": 0.35
+        "home": 0.373,
+        "draw": 0.266,
+        "away": 0.361
       }
     },
     {
@@ -2518,9 +2455,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.256,
-        "draw": 0.236,
-        "away": 0.508
+        "home": 0.236,
+        "draw": 0.228,
+        "away": 0.536
       }
     },
     {
@@ -2531,9 +2468,9 @@
       "away": "Amedspor",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.328,
-        "draw": 0.258,
-        "away": 0.414
+        "home": 0.314,
+        "draw": 0.257,
+        "away": 0.429
       }
     },
     {
@@ -2544,9 +2481,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.772,
-        "draw": 0.144,
-        "away": 0.084
+        "home": 0.768,
+        "draw": 0.146,
+        "away": 0.086
       }
     },
     {
@@ -2557,9 +2494,9 @@
       "away": "\u00c7orum",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.395,
-        "draw": 0.231,
-        "away": 0.374
+        "home": 0.388,
+        "draw": 0.23,
+        "away": 0.382
       }
     },
     {
@@ -2570,9 +2507,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.226,
-        "draw": 0.234,
-        "away": 0.54
+        "home": 0.214,
+        "draw": 0.226,
+        "away": 0.56
       }
     },
     {
@@ -2583,9 +2520,9 @@
       "away": "Kocaelispor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.49,
+        "home": 0.474,
         "draw": 0.285,
-        "away": 0.225
+        "away": 0.241
       }
     },
     {
@@ -2596,9 +2533,9 @@
       "away": "Erzurumspor",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.327,
-        "draw": 0.298,
-        "away": 0.375
+        "home": 0.285,
+        "draw": 0.29,
+        "away": 0.426
       }
     },
     {
@@ -2609,9 +2546,9 @@
       "away": "Gaziantep",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.42,
-        "draw": 0.275,
-        "away": 0.305
+        "home": 0.481,
+        "draw": 0.257,
+        "away": 0.262
       }
     },
     {
@@ -2622,9 +2559,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.621,
-        "draw": 0.231,
-        "away": 0.148
+        "home": 0.623,
+        "draw": 0.235,
+        "away": 0.142
       }
     },
     {
@@ -2635,9 +2572,9 @@
       "away": "Alanyaspor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.355,
-        "draw": 0.345,
-        "away": 0.3
+        "home": 0.382,
+        "draw": 0.332,
+        "away": 0.286
       }
     },
     {
@@ -2648,9 +2585,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.707,
-        "draw": 0.172,
-        "away": 0.121
+        "home": 0.716,
+        "draw": 0.17,
+        "away": 0.115
       }
     },
     {
@@ -2661,9 +2598,9 @@
       "away": "G\u00f6ztepe",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.473,
+        "home": 0.471,
         "draw": 0.221,
-        "away": 0.306
+        "away": 0.308
       }
     },
     {
@@ -2674,9 +2611,9 @@
       "away": "Konyaspor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.378,
+        "home": 0.375,
         "draw": 0.298,
-        "away": 0.324
+        "away": 0.328
       }
     },
     {
@@ -2687,9 +2624,9 @@
       "away": "Galatasaray",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.522,
-        "draw": 0.206,
-        "away": 0.271
+        "home": 0.512,
+        "draw": 0.208,
+        "away": 0.28
       }
     },
     {
@@ -2700,9 +2637,9 @@
       "away": "Besiktas",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.437,
-        "draw": 0.237,
-        "away": 0.326
+        "home": 0.442,
+        "draw": 0.238,
+        "away": 0.319
       }
     },
     {
@@ -2713,9 +2650,9 @@
       "away": "Samsunspor",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.654,
-        "draw": 0.182,
-        "away": 0.164
+        "home": 0.666,
+        "draw": 0.178,
+        "away": 0.155
       }
     },
     {
@@ -2726,9 +2663,9 @@
       "away": "Trabzonspor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.194,
-        "draw": 0.216,
-        "away": 0.59
+        "home": 0.167,
+        "draw": 0.203,
+        "away": 0.63
       }
     },
     {
@@ -2739,9 +2676,9 @@
       "away": "Kasimpasa",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.617,
-        "draw": 0.213,
-        "away": 0.169
+        "home": 0.592,
+        "draw": 0.225,
+        "away": 0.183
       }
     },
     {
@@ -2752,9 +2689,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.269,
-        "draw": 0.231,
-        "away": 0.5
+        "home": 0.262,
+        "draw": 0.23,
+        "away": 0.508
       }
     },
     {
@@ -2765,9 +2702,9 @@
       "away": "Amedspor",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.185,
-        "draw": 0.215,
-        "away": 0.6
+        "home": 0.166,
+        "draw": 0.21,
+        "away": 0.624
       }
     },
     {
@@ -2778,9 +2715,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.513,
-        "draw": 0.274,
-        "away": 0.213
+        "home": 0.498,
+        "draw": 0.275,
+        "away": 0.228
       }
     },
     {
@@ -2791,9 +2728,9 @@
       "away": "Konyaspor",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.717,
-        "draw": 0.174,
-        "away": 0.11
+        "home": 0.712,
+        "draw": 0.176,
+        "away": 0.112
       }
     },
     {
@@ -2804,9 +2741,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.255,
+        "home": 0.252,
         "draw": 0.212,
-        "away": 0.532
+        "away": 0.536
       }
     },
     {
@@ -2817,9 +2754,9 @@
       "away": "Kocaelispor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.415,
-        "draw": 0.306,
-        "away": 0.279
+        "home": 0.399,
+        "draw": 0.302,
+        "away": 0.298
       }
     },
     {
@@ -2830,9 +2767,9 @@
       "away": "Erzurumspor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.605,
-        "draw": 0.214,
-        "away": 0.181
+        "home": 0.569,
+        "draw": 0.219,
+        "away": 0.212
       }
     },
     {
@@ -2843,9 +2780,9 @@
       "away": "Gaziantep",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.519,
-        "draw": 0.25,
-        "away": 0.23
+        "home": 0.54,
+        "draw": 0.245,
+        "away": 0.215
       }
     },
     {
@@ -2856,9 +2793,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.543,
-        "draw": 0.292,
-        "away": 0.165
+        "home": 0.564,
+        "draw": 0.283,
+        "away": 0.153
       }
     },
     {
@@ -2869,9 +2806,9 @@
       "away": "Alanyaspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.63,
-        "draw": 0.218,
-        "away": 0.152
+        "home": 0.654,
+        "draw": 0.208,
+        "away": 0.137
       }
     },
     {
@@ -2882,9 +2819,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.373,
-        "draw": 0.276,
-        "away": 0.351
+        "home": 0.414,
+        "draw": 0.266,
+        "away": 0.32
       }
     },
     {
@@ -2895,9 +2832,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.553,
-        "draw": 0.22,
-        "away": 0.227
+        "home": 0.551,
+        "draw": 0.221,
+        "away": 0.228
       }
     },
     {
@@ -2908,9 +2845,9 @@
       "away": "\u00c7orum",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.74,
-        "draw": 0.142,
-        "away": 0.119
+        "home": 0.734,
+        "draw": 0.144,
+        "away": 0.123
       }
     },
     {
@@ -2921,9 +2858,9 @@
       "away": "Galatasaray",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.327,
-        "draw": 0.217,
-        "away": 0.456
+        "home": 0.336,
+        "draw": 0.219,
+        "away": 0.445
       }
     },
     {
@@ -2934,9 +2871,9 @@
       "away": "Besiktas",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.229,
-        "draw": 0.239,
-        "away": 0.532
+        "home": 0.235,
+        "draw": 0.243,
+        "away": 0.522
       }
     },
     {
@@ -2947,9 +2884,9 @@
       "away": "Samsunspor",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.474,
+        "home": 0.475,
         "draw": 0.261,
-        "away": 0.265
+        "away": 0.264
       }
     },
     {
@@ -2960,9 +2897,9 @@
       "away": "Trabzonspor",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.119,
-        "draw": 0.188,
-        "away": 0.693
+        "home": 0.106,
+        "draw": 0.184,
+        "away": 0.71
       }
     },
     {
@@ -2973,9 +2910,9 @@
       "away": "Kasimpasa",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.439,
-        "draw": 0.29,
-        "away": 0.271
+        "home": 0.418,
+        "draw": 0.292,
+        "away": 0.29
       }
     },
     {
@@ -2986,9 +2923,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.382,
+        "home": 0.377,
         "draw": 0.228,
-        "away": 0.39
+        "away": 0.395
       }
     },
     {
@@ -2999,9 +2936,9 @@
       "away": "Amedspor",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.343,
-        "draw": 0.233,
-        "away": 0.424
+        "home": 0.321,
+        "draw": 0.232,
+        "away": 0.447
       }
     },
     {
@@ -3012,9 +2949,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.448,
+        "home": 0.425,
         "draw": 0.265,
-        "away": 0.287
+        "away": 0.31
       }
     },
     {
@@ -3025,9 +2962,9 @@
       "away": "Konyaspor",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.636,
-        "draw": 0.212,
-        "away": 0.152
+        "home": 0.618,
+        "draw": 0.22,
+        "away": 0.162
       }
     },
     {
@@ -3038,9 +2975,9 @@
       "away": "Galatasaray",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.183,
-        "draw": 0.191,
-        "away": 0.626
+        "home": 0.176,
+        "draw": 0.188,
+        "away": 0.635
       }
     },
     {
@@ -3051,9 +2988,9 @@
       "away": "Kocaelispor",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.701,
-        "draw": 0.194,
-        "away": 0.105
+        "home": 0.688,
+        "draw": 0.197,
+        "away": 0.115
       }
     },
     {
@@ -3064,9 +3001,9 @@
       "away": "Erzurumspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.59,
-        "draw": 0.23,
-        "away": 0.18
+        "home": 0.553,
+        "draw": 0.236,
+        "away": 0.211
       }
     },
     {
@@ -3077,9 +3014,9 @@
       "away": "Gaziantep",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.659,
-        "draw": 0.184,
-        "away": 0.157
+        "home": 0.692,
+        "draw": 0.171,
+        "away": 0.137
       }
     },
     {
@@ -3090,9 +3027,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.768,
-        "draw": 0.151,
-        "away": 0.08
+        "home": 0.769,
+        "draw": 0.153,
+        "away": 0.078
       }
     },
     {
@@ -3103,9 +3040,9 @@
       "away": "Alanyaspor",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.374,
-        "draw": 0.307,
-        "away": 0.319
+        "home": 0.388,
+        "draw": 0.302,
+        "away": 0.31
       }
     },
     {
@@ -3116,9 +3053,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.471,
-        "draw": 0.258,
-        "away": 0.271
+        "home": 0.472,
+        "draw": 0.261,
+        "away": 0.267
       }
     },
     {
@@ -3129,9 +3066,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.636,
-        "draw": 0.196,
-        "away": 0.168
+        "home": 0.645,
+        "draw": 0.195,
+        "away": 0.16
       }
     },
     {
@@ -3142,9 +3079,9 @@
       "away": "\u00c7orum",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.364,
-        "draw": 0.286,
-        "away": 0.351
+        "home": 0.378,
+        "draw": 0.28,
+        "away": 0.342
       }
     },
     {
@@ -3155,9 +3092,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.148,
-        "draw": 0.197,
-        "away": 0.656
+        "home": 0.17,
+        "draw": 0.203,
+        "away": 0.627
       }
     },
     {
@@ -3168,9 +3105,9 @@
       "away": "Besiktas",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.563,
+        "home": 0.569,
         "draw": 0.206,
-        "away": 0.231
+        "away": 0.225
       }
     },
     {
@@ -3181,9 +3118,9 @@
       "away": "Samsunspor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.43,
+        "home": 0.432,
         "draw": 0.26,
-        "away": 0.31
+        "away": 0.308
       }
     },
     {
@@ -3194,9 +3131,9 @@
       "away": "Trabzonspor",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.3,
-        "draw": 0.223,
-        "away": 0.477
+        "home": 0.281,
+        "draw": 0.222,
+        "away": 0.497
       }
     },
     {
@@ -3207,9 +3144,9 @@
       "away": "Kasimpasa",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.503,
-        "draw": 0.248,
-        "away": 0.249
+        "home": 0.489,
+        "draw": 0.253,
+        "away": 0.258
       }
     },
     {
@@ -3220,9 +3157,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.625,
-        "draw": 0.191,
-        "away": 0.184
+        "home": 0.617,
+        "draw": 0.193,
+        "away": 0.19
       }
     },
     {
@@ -3233,9 +3170,9 @@
       "away": "Amedspor",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.374,
-        "draw": 0.259,
-        "away": 0.366
+        "home": 0.344,
+        "draw": 0.256,
+        "away": 0.4
       }
     },
     {
@@ -3246,9 +3183,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.319,
-        "draw": 0.29,
-        "away": 0.391
+        "home": 0.303,
+        "draw": 0.292,
+        "away": 0.405
       }
     },
     {
@@ -3259,9 +3196,9 @@
       "away": "Konyaspor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.394,
-        "draw": 0.279,
-        "away": 0.328
+        "home": 0.372,
+        "draw": 0.277,
+        "away": 0.352
       }
     },
     {
@@ -3272,9 +3209,9 @@
       "away": "Galatasaray",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.213,
-        "draw": 0.208,
-        "away": 0.579
+        "home": 0.207,
+        "draw": 0.205,
+        "away": 0.588
       }
     },
     {
@@ -3285,9 +3222,9 @@
       "away": "Besiktas",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.244,
-        "draw": 0.22,
-        "away": 0.537
+        "home": 0.245,
+        "draw": 0.223,
+        "away": 0.532
       }
     },
     {
@@ -3298,9 +3235,9 @@
       "away": "Erzurumspor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.444,
-        "draw": 0.329,
-        "away": 0.227
+        "home": 0.435,
+        "draw": 0.318,
+        "away": 0.247
       }
     },
     {
@@ -3311,9 +3248,9 @@
       "away": "Gaziantep",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.714,
-        "draw": 0.167,
-        "away": 0.119
+        "home": 0.72,
+        "draw": 0.164,
+        "away": 0.116
       }
     },
     {
@@ -3325,8 +3262,8 @@
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
         "home": 0.862,
-        "draw": 0.095,
-        "away": 0.043
+        "draw": 0.096,
+        "away": 0.042
       }
     },
     {
@@ -3337,9 +3274,9 @@
       "away": "Alanyaspor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.367,
-        "draw": 0.271,
-        "away": 0.362
+        "home": 0.374,
+        "draw": 0.268,
+        "away": 0.357
       }
     },
     {
@@ -3350,9 +3287,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.63,
+        "home": 0.629,
         "draw": 0.201,
-        "away": 0.169
+        "away": 0.17
       }
     },
     {
@@ -3363,9 +3300,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.362,
+        "home": 0.363,
         "draw": 0.272,
-        "away": 0.366
+        "away": 0.365
       }
     },
     {
@@ -3376,9 +3313,9 @@
       "away": "\u00c7orum",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.546,
-        "draw": 0.201,
-        "away": 0.253
+        "home": 0.558,
+        "draw": 0.199,
+        "away": 0.243
       }
     },
     {
@@ -3389,9 +3326,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.417,
-        "draw": 0.229,
-        "away": 0.353
+        "home": 0.432,
+        "draw": 0.231,
+        "away": 0.337
       }
     },
     {
@@ -3402,9 +3339,9 @@
       "away": "Kocaelispor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.354,
-        "draw": 0.335,
-        "away": 0.311
+        "home": 0.343,
+        "draw": 0.329,
+        "away": 0.328
       }
     },
     {
@@ -3415,9 +3352,9 @@
       "away": "Erzurumspor",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.512,
-        "draw": 0.273,
-        "away": 0.216
+        "home": 0.481,
+        "draw": 0.276,
+        "away": 0.243
       }
     },
     {
@@ -3428,9 +3365,9 @@
       "away": "Trabzonspor",
       "venue": "Kocaeli Stadyumu",
       "probabilities": {
-        "home": 0.229,
-        "draw": 0.29,
-        "away": 0.481
+        "home": 0.227,
+        "draw": 0.288,
+        "away": 0.485
       }
     },
     {
@@ -3441,9 +3378,9 @@
       "away": "Kasimpasa",
       "venue": "S\u00fckr\u00fc Saracoglu Spor Kompleksi",
       "probabilities": {
-        "home": 0.732,
-        "draw": 0.161,
-        "away": 0.107
+        "home": 0.717,
+        "draw": 0.169,
+        "away": 0.114
       }
     },
     {
@@ -3454,9 +3391,9 @@
       "away": "Istanbul Basaksehir",
       "venue": "Erzurum K\u00e2zim Karabekir",
       "probabilities": {
-        "home": 0.24,
-        "draw": 0.256,
-        "away": 0.504
+        "home": 0.268,
+        "draw": 0.255,
+        "away": 0.476
       }
     },
     {
@@ -3467,9 +3404,9 @@
       "away": "Amedspor",
       "venue": "G\u00fcrsel Aksel Stadyumu",
       "probabilities": {
-        "home": 0.429,
-        "draw": 0.229,
-        "away": 0.342
+        "home": 0.406,
+        "draw": 0.23,
+        "away": 0.363
       }
     },
     {
@@ -3480,9 +3417,9 @@
       "away": "Gen\u00e7lerbirligi",
       "venue": "\u00c7orum Sehir Stadyumu",
       "probabilities": {
-        "home": 0.599,
-        "draw": 0.211,
-        "away": 0.19
+        "home": 0.593,
+        "draw": 0.213,
+        "away": 0.195
       }
     },
     {
@@ -3493,9 +3430,9 @@
       "away": "Konyaspor",
       "venue": "TBA",
       "probabilities": {
-        "home": 0.276,
-        "draw": 0.294,
-        "away": 0.43
+        "home": 0.262,
+        "draw": 0.296,
+        "away": 0.443
       }
     },
     {
@@ -3506,9 +3443,9 @@
       "away": "Galatasaray",
       "venue": "Alanya Oba Stadyumu",
       "probabilities": {
-        "home": 0.249,
-        "draw": 0.244,
-        "away": 0.506
+        "home": 0.233,
+        "draw": 0.236,
+        "away": 0.53
       }
     },
     {
@@ -3519,9 +3456,9 @@
       "away": "Besiktas",
       "venue": "\u00c7aykur Didi",
       "probabilities": {
-        "home": 0.277,
-        "draw": 0.233,
-        "away": 0.49
+        "home": 0.279,
+        "draw": 0.235,
+        "away": 0.486
       }
     },
     {
@@ -3532,9 +3469,9 @@
       "away": "Samsunspor",
       "venue": "Gaziantep Stadyumu",
       "probabilities": {
-        "home": 0.447,
+        "home": 0.428,
         "draw": 0.243,
-        "away": 0.31
+        "away": 0.329
       }
     },
     {
@@ -3545,9 +3482,9 @@
       "away": "Gaziantep",
       "venue": "Ali Sami Yen Spor Kompleksi",
       "probabilities": {
-        "home": 0.791,
-        "draw": 0.129,
-        "away": 0.08
+        "home": 0.808,
+        "draw": 0.119,
+        "away": 0.072
       }
     },
     {
@@ -3558,9 +3495,9 @@
       "away": "Ey\u00fcpspor",
       "venue": "Samsun 19 Mayis Stadyumu",
       "probabilities": {
-        "home": 0.592,
-        "draw": 0.225,
-        "away": 0.183
+        "home": 0.59,
+        "draw": 0.229,
+        "away": 0.181
       }
     },
     {
@@ -3571,9 +3508,9 @@
       "away": "Alanyaspor",
       "venue": "Basaksehir Fatih Terim",
       "probabilities": {
-        "home": 0.554,
-        "draw": 0.244,
-        "away": 0.202
+        "home": 0.569,
+        "draw": 0.236,
+        "away": 0.194
       }
     },
     {
@@ -3584,9 +3521,9 @@
       "away": "\u00c7aykur Rizespor",
       "venue": "Eryaman Stadyumu",
       "probabilities": {
-        "home": 0.39,
+        "home": 0.391,
         "draw": 0.268,
-        "away": 0.342
+        "away": 0.341
       }
     },
     {
@@ -3597,9 +3534,9 @@
       "away": "G\u00f6ztepe",
       "venue": "Besiktas Park",
       "probabilities": {
-        "home": 0.59,
-        "draw": 0.207,
-        "away": 0.203
+        "home": 0.575,
+        "draw": 0.212,
+        "away": 0.213
       }
     },
     {
@@ -3610,9 +3547,9 @@
       "away": "\u00c7orum",
       "venue": "Konya B\u00fcy\u00fcksehir Stadyumu",
       "probabilities": {
-        "home": 0.376,
+        "home": 0.375,
         "draw": 0.255,
-        "away": 0.369
+        "away": 0.37
       }
     },
     {
@@ -3623,9 +3560,9 @@
       "away": "Fenerbah\u00e7e",
       "venue": "Diyarbakir Stadyumu",
       "probabilities": {
-        "home": 0.297,
-        "draw": 0.211,
-        "away": 0.493
+        "home": 0.31,
+        "draw": 0.213,
+        "away": 0.477
       }
     },
     {
@@ -3636,9 +3573,9 @@
       "away": "Kocaelispor",
       "venue": "Recep Tayyip Erdogan Stadyumu",
       "probabilities": {
-        "home": 0.42,
-        "draw": 0.326,
-        "away": 0.255
+        "home": 0.409,
+        "draw": 0.325,
+        "away": 0.265
       }
     },
     {
@@ -3649,13 +3586,58 @@
       "away": "Erzurumspor",
       "venue": "Papara Park",
       "probabilities": {
-        "home": 0.733,
-        "draw": 0.172,
-        "away": 0.095
+        "home": 0.714,
+        "draw": 0.179,
+        "away": 0.106
       }
     }
   ],
   "results": [
+    {
+      "id": "81",
+      "round": 9,
+      "date": "2026-10-24T16:00:00Z",
+      "home": "Samsunspor",
+      "away": "Amedspor",
+      "homeScore": 1,
+      "awayScore": 2
+    },
+    {
+      "id": "73",
+      "round": 9,
+      "date": "2026-10-24T13:00:00Z",
+      "home": "Gaziantep",
+      "away": "Erzurumspor",
+      "homeScore": 1,
+      "awayScore": 3
+    },
+    {
+      "id": "74",
+      "round": 9,
+      "date": "2026-10-24T10:30:00Z",
+      "home": "Ey\u00fcpspor",
+      "away": "Kasimpasa",
+      "homeScore": 0,
+      "awayScore": 1
+    },
+    {
+      "id": "75",
+      "round": 9,
+      "date": "2026-10-23T17:00:00Z",
+      "home": "Alanyaspor",
+      "away": "Kocaelispor",
+      "homeScore": 1,
+      "awayScore": 2
+    },
+    {
+      "id": "64",
+      "round": 8,
+      "date": "2026-10-19T17:00:00Z",
+      "home": "Trabzonspor",
+      "away": "Besiktas",
+      "homeScore": 2,
+      "awayScore": 0
+    },
     {
       "id": "66",
       "round": 8,
@@ -4309,604 +4291,604 @@
     ],
     "probabilities": {
       "Alanyaspor": {
-        "title": 0.18,
-        "top2": 0.67,
-        "relegation": 4.38
+        "title": 0.03,
+        "top2": 0.2,
+        "relegation": 6.72
       },
       "Amedspor": {
-        "title": 3.76,
-        "top2": 11.5,
-        "relegation": 0.27
+        "title": 5.63,
+        "top2": 15.25,
+        "relegation": 0.06
       },
       "Besiktas": {
-        "title": 9.94,
-        "top2": 24.3,
+        "title": 6.22,
+        "top2": 16.95,
         "relegation": 0.07
       },
       "Erzurumspor": {
-        "title": 0.0,
-        "top2": 0.03,
-        "relegation": 27.0
+        "title": 0.03,
+        "top2": 0.12,
+        "relegation": 11.64
       },
       "Ey\u00fcpspor": {
         "title": 0.0,
         "top2": 0.0,
-        "relegation": 90.94
+        "relegation": 94.3
       },
       "Fenerbah\u00e7e": {
-        "title": 30.46,
-        "top2": 55.45,
+        "title": 28.07,
+        "top2": 52.42,
         "relegation": 0.0
       },
       "Galatasaray": {
-        "title": 38.54,
-        "top2": 63.28,
+        "title": 38.51,
+        "top2": 62.98,
         "relegation": 0.0
       },
       "Gaziantep": {
-        "title": 0.01,
-        "top2": 0.04,
-        "relegation": 35.0
+        "title": 0.0,
+        "top2": 0.0,
+        "relegation": 49.48
       },
       "Gen\u00e7lerbirligi": {
-        "title": 0.0,
-        "top2": 0.01,
-        "relegation": 31.18
+        "title": 0.01,
+        "top2": 0.02,
+        "relegation": 28.62
       },
       "G\u00f6ztepe": {
-        "title": 0.18,
-        "top2": 0.81,
-        "relegation": 6.3
+        "title": 0.14,
+        "top2": 0.57,
+        "relegation": 6.38
       },
       "Istanbul Basaksehir": {
-        "title": 1.44,
-        "top2": 5.51,
+        "title": 1.36,
+        "top2": 5.17,
         "relegation": 0.62
       },
       "Kasimpasa": {
-        "title": 0.19,
-        "top2": 0.73,
-        "relegation": 3.96
+        "title": 0.18,
+        "top2": 0.92,
+        "relegation": 2.1
       },
       "Kocaelispor": {
-        "title": 0.04,
-        "top2": 0.21,
-        "relegation": 6.71
+        "title": 0.09,
+        "top2": 0.38,
+        "relegation": 2.89
       },
       "Konyaspor": {
-        "title": 0.01,
+        "title": 0.0,
         "top2": 0.03,
-        "relegation": 28.48
+        "relegation": 26.31
       },
       "Samsunspor": {
-        "title": 0.01,
-        "top2": 0.02,
-        "relegation": 47.66
+        "title": 0.0,
+        "top2": 0.0,
+        "relegation": 53.34
       },
       "Trabzonspor": {
-        "title": 14.7,
-        "top2": 35.03,
-        "relegation": 0.01
+        "title": 19.27,
+        "top2": 42.83,
+        "relegation": 0.0
       },
       "\u00c7aykur Rizespor": {
-        "title": 0.01,
-        "top2": 0.16,
-        "relegation": 14.77
+        "title": 0.02,
+        "top2": 0.17,
+        "relegation": 14.93
       },
       "\u00c7orum": {
-        "title": 0.53,
-        "top2": 2.23,
-        "relegation": 2.66
+        "title": 0.45,
+        "top2": 1.99,
+        "relegation": 2.54
       }
     },
     "positions": {
       "Alanyaspor": [
+        0.02,
         0.18,
-        0.49,
-        1.5,
-        3.0,
-        5.34,
-        7.89,
-        9.75,
-        10.84,
-        11.5,
-        11.39,
-        9.63,
-        8.24,
-        6.6,
-        5.36,
-        3.91,
-        2.68,
-        1.42,
-        0.27
+        0.6,
+        1.44,
+        2.91,
+        4.71,
+        6.78,
+        9.05,
+        10.34,
+        11.14,
+        11.14,
+        10.69,
+        9.61,
+        8.19,
+        6.48,
+        4.2,
+        2.22,
+        0.3
       ],
       "Amedspor": [
-        3.76,
-        7.74,
-        11.66,
-        14.68,
-        16.05,
-        13.84,
-        10.08,
-        7.15,
-        5.22,
-        3.7,
-        2.46,
-        1.54,
-        1.03,
-        0.55,
-        0.27,
-        0.17,
-        0.09,
-        0.0
-      ],
-      "Besiktas": [
-        9.94,
-        14.36,
-        17.95,
-        17.43,
-        13.58,
-        9.51,
-        6.35,
-        4.13,
-        2.53,
-        1.54,
-        1.16,
-        0.69,
-        0.38,
-        0.3,
-        0.08,
-        0.06,
+        5.64,
+        9.62,
+        14.46,
+        17.2,
+        16.66,
+        12.61,
+        8.33,
+        5.87,
+        3.82,
+        2.36,
+        1.56,
+        0.96,
+        0.52,
+        0.24,
+        0.12,
+        0.05,
         0.01,
         0.0
       ],
-      "Erzurumspor": [
-        0.0,
+      "Besiktas": [
+        6.22,
+        10.73,
+        15.24,
+        17.52,
+        15.54,
+        11.83,
+        8.36,
+        5.4,
+        3.48,
+        2.18,
+        1.47,
+        0.92,
+        0.56,
+        0.36,
+        0.14,
+        0.05,
         0.02,
-        0.12,
-        0.26,
-        0.7,
-        1.42,
-        2.38,
-        3.56,
-        4.54,
-        6.26,
-        7.9,
-        9.18,
-        10.88,
-        12.52,
-        13.26,
-        12.87,
-        10.68,
-        3.45
+        0.0
+      ],
+      "Erzurumspor": [
+        0.03,
+        0.09,
+        0.28,
+        0.82,
+        1.54,
+        3.02,
+        4.61,
+        6.4,
+        8.07,
+        9.51,
+        10.36,
+        11.44,
+        11.51,
+        11.04,
+        9.64,
+        7.12,
+        3.84,
+        0.68
       ],
       "Ey\u00fcpspor": [
         0.0,
         0.0,
         0.0,
         0.0,
-        0.01,
+        0.0,
+        0.0,
         0.0,
         0.01,
         0.06,
-        0.11,
-        0.22,
-        0.4,
-        0.74,
-        1.21,
-        2.29,
-        4.0,
-        7.61,
-        17.85,
-        65.47
+        0.08,
+        0.17,
+        0.32,
+        0.69,
+        1.48,
+        2.9,
+        6.56,
+        17.06,
+        70.68
       ],
       "Fenerbah\u00e7e": [
-        30.46,
-        25.0,
-        18.22,
-        11.42,
-        6.94,
-        3.8,
-        1.96,
-        1.03,
-        0.64,
-        0.29,
+        28.07,
+        24.36,
+        18.13,
+        12.46,
+        7.69,
+        4.27,
+        2.34,
+        1.25,
+        0.72,
+        0.36,
+        0.2,
         0.1,
-        0.06,
-        0.06,
+        0.05,
+        0.02,
         0.0,
-        0.01,
         0.0,
         0.0,
         0.0
       ],
       "Galatasaray": [
-        38.54,
-        24.74,
-        15.9,
-        10.14,
-        5.26,
-        2.65,
-        1.31,
-        0.72,
-        0.38,
-        0.19,
-        0.1,
+        38.51,
+        24.48,
+        15.76,
+        9.62,
+        5.9,
+        2.84,
+        1.48,
+        0.64,
+        0.33,
+        0.24,
+        0.12,
         0.06,
+        0.02,
         0.01,
-        0.0,
-        0.0,
+        0.01,
         0.0,
         0.0,
         0.0
       ],
       "Gaziantep": [
         0.0,
-        0.03,
+        0.0,
+        0.04,
         0.06,
-        0.24,
-        0.47,
-        1.0,
-        1.84,
-        2.79,
-        3.93,
-        4.95,
-        6.72,
-        8.12,
-        9.94,
-        11.52,
-        13.39,
+        0.18,
+        0.38,
+        0.68,
+        1.19,
+        2.07,
+        3.0,
+        4.28,
+        5.55,
+        7.82,
+        10.96,
         14.3,
-        14.92,
-        5.78
+        19.13,
+        22.06,
+        8.28
       ],
       "Gen\u00e7lerbirligi": [
         0.0,
-        0.0,
-        0.05,
-        0.19,
-        0.43,
-        1.33,
-        2.02,
-        3.41,
-        4.42,
-        5.86,
-        7.17,
-        8.96,
-        10.28,
-        11.72,
-        13.0,
-        13.98,
-        11.96,
-        5.24
+        0.02,
+        0.07,
+        0.22,
+        0.61,
+        1.12,
+        2.31,
+        3.45,
+        4.3,
+        5.9,
+        7.72,
+        8.8,
+        10.82,
+        12.33,
+        13.72,
+        13.84,
+        11.2,
+        3.6
       ],
       "G\u00f6ztepe": [
-        0.18,
-        0.63,
-        1.39,
-        3.17,
-        5.42,
-        7.06,
-        9.03,
-        10.2,
-        10.46,
-        9.9,
-        9.28,
-        8.75,
-        7.32,
-        6.16,
-        4.75,
-        3.62,
-        2.16,
-        0.52
+        0.14,
+        0.43,
+        1.25,
+        2.58,
+        4.41,
+        6.48,
+        8.82,
+        9.46,
+        10.3,
+        10.23,
+        10.27,
+        9.09,
+        8.02,
+        6.66,
+        5.47,
+        3.88,
+        2.12,
+        0.38
       ],
       "Istanbul Basaksehir": [
+        1.36,
+        3.81,
+        7.0,
+        10.68,
+        13.88,
+        15.04,
+        12.48,
+        10.1,
+        7.51,
+        5.46,
+        4.52,
+        3.11,
+        2.14,
         1.44,
-        4.06,
-        7.45,
-        10.98,
-        14.01,
-        14.64,
-        12.85,
-        9.96,
-        7.23,
-        5.48,
-        4.19,
-        2.8,
-        2.13,
-        1.34,
-        0.82,
-        0.41,
-        0.17,
-        0.04
+        0.84,
+        0.46,
+        0.14,
+        0.02
       ],
       "Kasimpasa": [
-        0.19,
-        0.53,
-        1.36,
-        3.39,
-        5.64,
-        8.7,
-        10.71,
-        11.11,
-        11.43,
-        10.42,
-        9.31,
-        8.2,
-        6.44,
-        4.98,
-        3.62,
-        2.38,
-        1.23,
-        0.35
+        0.18,
+        0.74,
+        1.8,
+        3.92,
+        6.59,
+        9.78,
+        12.08,
+        12.35,
+        11.96,
+        10.36,
+        8.41,
+        7.52,
+        5.56,
+        3.96,
+        2.69,
+        1.48,
+        0.55,
+        0.07
       ],
       "Kocaelispor": [
-        0.04,
-        0.16,
-        0.54,
-        1.37,
-        2.82,
-        4.98,
-        7.16,
-        9.32,
-        10.53,
-        11.12,
-        11.28,
-        10.65,
-        9.46,
-        7.77,
-        6.08,
-        4.12,
-        2.16,
-        0.43
+        0.09,
+        0.29,
+        0.88,
+        2.4,
+        4.44,
+        7.3,
+        10.02,
+        11.68,
+        12.16,
+        11.88,
+        10.44,
+        9.02,
+        7.18,
+        5.62,
+        3.74,
+        2.02,
+        0.78,
+        0.1
       ],
       "Konyaspor": [
         0.0,
         0.03,
-        0.08,
-        0.25,
-        0.68,
-        1.5,
-        2.26,
-        3.6,
-        4.81,
-        6.38,
-        7.76,
-        9.35,
-        10.71,
-        11.74,
-        12.36,
-        12.6,
-        11.05,
-        4.83
+        0.11,
+        0.24,
+        0.56,
+        1.36,
+        2.36,
+        3.21,
+        4.85,
+        6.54,
+        7.9,
+        9.64,
+        11.4,
+        12.26,
+        13.23,
+        12.76,
+        10.2,
+        3.34
       ],
       "Samsunspor": [
         0.0,
+        0.0,
         0.02,
-        0.02,
-        0.1,
-        0.22,
-        0.58,
-        0.96,
-        1.74,
-        2.5,
-        3.59,
-        4.83,
-        6.44,
-        7.95,
-        10.46,
-        12.92,
-        15.45,
-        20.23,
-        11.98
+        0.05,
+        0.13,
+        0.26,
+        0.53,
+        1.07,
+        1.78,
+        2.62,
+        3.65,
+        5.36,
+        7.54,
+        10.17,
+        13.5,
+        18.34,
+        23.8,
+        11.2
       ],
       "Trabzonspor": [
-        14.7,
-        20.32,
-        19.98,
-        16.25,
-        11.27,
-        7.02,
-        4.36,
-        2.58,
-        1.56,
-        0.86,
-        0.56,
-        0.26,
-        0.16,
+        19.27,
+        23.56,
+        21.24,
+        14.98,
+        9.25,
+        5.28,
+        3.12,
+        1.58,
+        0.82,
+        0.45,
+        0.19,
+        0.14,
         0.08,
-        0.04,
+        0.03,
+        0.0,
         0.0,
         0.0,
         0.0
       ],
       "\u00c7aykur Rizespor": [
-        0.01,
-        0.15,
-        0.46,
-        1.14,
-        2.1,
-        3.49,
-        5.06,
-        6.54,
-        8.14,
-        9.15,
-        9.46,
-        10.24,
-        10.68,
-        9.65,
-        8.96,
-        8.09,
-        5.22,
-        1.46
+        0.02,
+        0.14,
+        0.36,
+        0.73,
+        1.78,
+        3.0,
+        4.15,
+        5.67,
+        7.17,
+        8.66,
+        9.68,
+        11.08,
+        11.06,
+        11.24,
+        10.34,
+        8.43,
+        5.21,
+        1.29
       ],
       "\u00c7orum": [
-        0.53,
-        1.7,
-        3.27,
-        5.98,
+        0.44,
+        1.54,
+        2.77,
+        5.08,
+        7.94,
+        10.71,
+        11.56,
+        11.63,
+        10.3,
         9.06,
-        10.6,
-        11.92,
-        11.28,
-        10.08,
-        8.69,
-        7.68,
-        5.73,
-        4.75,
-        3.55,
-        2.53,
-        1.66,
-        0.82,
-        0.17
+        7.92,
+        6.22,
+        5.42,
+        3.99,
+        2.88,
+        1.69,
+        0.78,
+        0.07
       ]
     },
     "expected": {
       "Alanyaspor": {
-        "points": 46.3,
-        "position": 9.6
+        "points": 43.6,
+        "position": 10.7
       },
       "Amedspor": {
-        "points": 57.5,
-        "position": 5.6
+        "points": 59.9,
+        "position": 5.0
       },
       "Besiktas": {
-        "points": 62.0,
-        "position": 4.4
+        "points": 60.2,
+        "position": 4.9
       },
       "Erzurumspor": {
-        "points": 37.3,
-        "position": 13.2
+        "points": 41.3,
+        "position": 11.7
       },
       "Ey\u00fcpspor": {
-        "points": 22.7,
-        "position": 17.3
+        "points": 21.1,
+        "position": 17.5
       },
       "Fenerbah\u00e7e": {
-        "points": 68.5,
-        "position": 2.7
+        "points": 68.1,
+        "position": 2.9
       },
       "Galatasaray": {
-        "points": 70.6,
+        "points": 70.8,
         "position": 2.4
       },
       "Gaziantep": {
-        "points": 35.5,
-        "position": 13.8
+        "points": 32.5,
+        "position": 14.8
       },
       "Gen\u00e7lerbirligi": {
-        "points": 36.5,
-        "position": 13.5
+        "points": 36.8,
+        "position": 13.4
       },
       "G\u00f6ztepe": {
-        "points": 45.3,
-        "position": 9.9
+        "points": 44.8,
+        "position": 10.2
       },
       "Istanbul Basaksehir": {
-        "points": 54.0,
-        "position": 6.7
+        "points": 54.1,
+        "position": 6.8
       },
       "Kasimpasa": {
-        "points": 46.7,
-        "position": 9.4
+        "points": 48.2,
+        "position": 8.9
       },
       "Kocaelispor": {
-        "points": 43.5,
-        "position": 10.7
+        "points": 46.2,
+        "position": 9.7
       },
       "Konyaspor": {
-        "points": 36.7,
-        "position": 13.3
+        "points": 36.9,
+        "position": 13.2
       },
       "Samsunspor": {
-        "points": 33.0,
-        "position": 14.6
+        "points": 31.7,
+        "position": 15.0
       },
       "Trabzonspor": {
-        "points": 64.4,
-        "position": 3.7
+        "points": 66.5,
+        "position": 3.2
       },
       "\u00c7aykur Rizespor": {
-        "points": 41.0,
-        "position": 11.7
+        "points": 40.4,
+        "position": 12.0
       },
       "\u00c7orum": {
-        "points": 49.2,
-        "position": 8.4
+        "points": 48.9,
+        "position": 8.7
       }
     },
     "ratings": {
       "Alanyaspor": {
-        "attack": -0.25,
-        "defence": 0.067
+        "attack": -0.271,
+        "defence": 0.016
       },
       "Amedspor": {
-        "attack": 0.158,
-        "defence": -0.098
+        "attack": 0.155,
+        "defence": -0.077
       },
       "Besiktas": {
-        "attack": 0.205,
-        "defence": 0.061
-      },
-      "Erzurumspor": {
-        "attack": -0.419,
-        "defence": -0.115
-      },
-      "Ey\u00fcpspor": {
-        "attack": -0.556,
-        "defence": -0.322
-      },
-      "Fenerbah\u00e7e": {
-        "attack": 0.442,
-        "defence": 0.144
-      },
-      "Galatasaray": {
-        "attack": 0.374,
-        "defence": 0.121
-      },
-      "Gaziantep": {
-        "attack": -0.237,
-        "defence": -0.239
-      },
-      "Gen\u00e7lerbirligi": {
-        "attack": -0.354,
-        "defence": -0.137
-      },
-      "G\u00f6ztepe": {
-        "attack": 0.014,
-        "defence": -0.086
-      },
-      "Istanbul Basaksehir": {
-        "attack": 0.123,
+        "attack": 0.157,
         "defence": 0.055
       },
+      "Erzurumspor": {
+        "attack": -0.332,
+        "defence": -0.106
+      },
+      "Ey\u00fcpspor": {
+        "attack": -0.62,
+        "defence": -0.32
+      },
+      "Fenerbah\u00e7e": {
+        "attack": 0.418,
+        "defence": 0.133
+      },
+      "Galatasaray": {
+        "attack": 0.356,
+        "defence": 0.118
+      },
+      "Gaziantep": {
+        "attack": -0.27,
+        "defence": -0.292
+      },
+      "Gen\u00e7lerbirligi": {
+        "attack": -0.369,
+        "defence": -0.141
+      },
+      "G\u00f6ztepe": {
+        "attack": -0.01,
+        "defence": -0.094
+      },
+      "Istanbul Basaksehir": {
+        "attack": 0.104,
+        "defence": 0.05
+      },
       "Kasimpasa": {
-        "attack": -0.221,
-        "defence": -0.016
+        "attack": -0.251,
+        "defence": 0.005
       },
       "Kocaelispor": {
-        "attack": -0.514,
-        "defence": 0.191
+        "attack": -0.479,
+        "defence": 0.181
       },
       "Konyaspor": {
-        "attack": -0.328,
-        "defence": -0.006
+        "attack": -0.344,
+        "defence": -0.008
       },
       "Samsunspor": {
-        "attack": -0.163,
-        "defence": -0.269
+        "attack": -0.195,
+        "defence": -0.274
       },
       "Trabzonspor": {
-        "attack": 0.242,
-        "defence": 0.18
+        "attack": 0.224,
+        "defence": 0.22
       },
       "\u00c7aykur Rizespor": {
-        "attack": -0.141,
-        "defence": -0.174
+        "attack": -0.165,
+        "defence": -0.185
       },
       "\u00c7orum": {
-        "attack": 0.112,
-        "defence": -0.202
+        "attack": 0.096,
+        "defence": -0.211
       }
     }
   },
@@ -4919,36 +4901,36 @@
       "tier": "title",
       "tierLabel": "Title",
       "team": "Galatasaray",
-      "swing": 29.3,
-      "ifHome": 51.6,
-      "ifDraw": 36.2,
-      "ifAway": 22.3
+      "swing": 27.6,
+      "ifHome": 50.9,
+      "ifDraw": 35.4,
+      "ifAway": 23.3
     },
     {
-      "fixtureId": "64",
-      "date": "2026-10-19T17:00:00Z",
-      "home": "Trabzonspor",
-      "away": "Besiktas",
+      "fixtureId": "88",
+      "date": "2026-10-31T16:00:00Z",
+      "home": "Fenerbah\u00e7e",
+      "away": "G\u00f6ztepe",
       "tier": "top2",
       "tierLabel": "Top 2",
-      "team": "Trabzonspor",
-      "swing": 24.2,
-      "ifHome": 44.5,
-      "ifDraw": 29.9,
-      "ifAway": 20.3
+      "team": "Fenerbah\u00e7e",
+      "swing": 23.3,
+      "ifHome": 58.2,
+      "ifDraw": 42.5,
+      "ifAway": 35.0
     },
     {
-      "fixtureId": "73",
-      "date": "2026-10-24T13:00:00Z",
-      "home": "Gaziantep",
-      "away": "Erzurumspor",
-      "tier": "relegation",
-      "tierLabel": "Relegation",
-      "team": "Gaziantep",
-      "swing": 23.2,
-      "ifHome": 24.8,
-      "ifDraw": 38.6,
-      "ifAway": 48.0
+      "fixtureId": "87",
+      "date": "2026-10-30T17:00:00Z",
+      "home": "Konyaspor",
+      "away": "Galatasaray",
+      "tier": "top2",
+      "tierLabel": "Top 2",
+      "team": "Galatasaray",
+      "swing": 21.2,
+      "ifHome": 49.7,
+      "ifDraw": 56.6,
+      "ifAway": 70.8
     },
     {
       "fixtureId": "78",
@@ -4957,24 +4939,11 @@
       "away": "Gen\u00e7lerbirligi",
       "tier": "relegation",
       "tierLabel": "Relegation",
-      "team": "Konyaspor",
-      "swing": 22.3,
-      "ifHome": 19.5,
-      "ifDraw": 31.6,
-      "ifAway": 41.8
-    },
-    {
-      "fixtureId": "81",
-      "date": "2026-10-24T16:00:00Z",
-      "home": "Samsunspor",
-      "away": "Amedspor",
-      "tier": "relegation",
-      "tierLabel": "Relegation",
-      "team": "Samsunspor",
-      "swing": 21.6,
-      "ifHome": 35.2,
-      "ifDraw": 45.9,
-      "ifAway": 56.7
+      "team": "Gen\u00e7lerbirligi",
+      "swing": 21.0,
+      "ifHome": 37.0,
+      "ifDraw": 26.4,
+      "ifAway": 16.0
     },
     {
       "fixtureId": "76",
@@ -4984,10 +4953,10 @@
       "tier": "top2",
       "tierLabel": "Top 2",
       "team": "Trabzonspor",
-      "swing": 19.9,
-      "ifHome": 22.7,
-      "ifDraw": 30.1,
-      "ifAway": 42.6
+      "swing": 19.6,
+      "ifHome": 30.0,
+      "ifDraw": 38.3,
+      "ifAway": 49.6
     },
     {
       "fixtureId": "80",
@@ -4997,23 +4966,49 @@
       "tier": "top2",
       "tierLabel": "Top 2",
       "team": "Besiktas",
-      "swing": 16.8,
-      "ifHome": 31.5,
-      "ifDraw": 20.0,
-      "ifAway": 14.7
+      "swing": 13.6,
+      "ifHome": 23.0,
+      "ifDraw": 13.9,
+      "ifAway": 9.3
     },
     {
-      "fixtureId": "74",
-      "date": "2026-10-24T10:30:00Z",
-      "home": "Ey\u00fcpspor",
-      "away": "Kasimpasa",
+      "fixtureId": "89",
+      "date": "2026-10-31T13:00:00Z",
+      "home": "Kocaelispor",
+      "away": "\u00c7aykur Rizespor",
       "tier": "relegation",
       "tierLabel": "Relegation",
-      "team": "Ey\u00fcpspor",
-      "swing": 10.3,
-      "ifHome": 84.2,
-      "ifDraw": 91.5,
-      "ifAway": 94.5
+      "team": "\u00c7aykur Rizespor",
+      "swing": 12.2,
+      "ifHome": 20.2,
+      "ifDraw": 13.6,
+      "ifAway": 8.0
+    },
+    {
+      "fixtureId": "85",
+      "date": "2026-11-01T10:30:00Z",
+      "home": "Amedspor",
+      "away": "Ey\u00fcpspor",
+      "tier": "top2",
+      "tierLabel": "Top 2",
+      "team": "Amedspor",
+      "swing": 11.5,
+      "ifHome": 17.5,
+      "ifDraw": 9.4,
+      "ifAway": 6.1
+    },
+    {
+      "fixtureId": "90",
+      "date": "2026-10-31T10:30:00Z",
+      "home": "Erzurumspor",
+      "away": "\u00c7orum",
+      "tier": "relegation",
+      "tierLabel": "Relegation",
+      "team": "Erzurumspor",
+      "swing": 10.8,
+      "ifHome": 6.0,
+      "ifDraw": 11.6,
+      "ifAway": 16.7
     },
     {
       "fixtureId": "77",
@@ -5023,117 +5018,104 @@
       "tier": "relegation",
       "tierLabel": "Relegation",
       "team": "G\u00f6ztepe",
-      "swing": 7.3,
-      "ifHome": 3.3,
-      "ifDraw": 6.9,
-      "ifAway": 10.6
-    },
-    {
-      "fixtureId": "75",
-      "date": "2026-10-23T17:00:00Z",
-      "home": "Alanyaspor",
-      "away": "Kocaelispor",
-      "tier": "relegation",
-      "tierLabel": "Relegation",
-      "team": "Kocaelispor",
-      "swing": 6.7,
-      "ifHome": 9.6,
-      "ifDraw": 5.9,
-      "ifAway": 2.9
+      "swing": 7.8,
+      "ifHome": 3.2,
+      "ifDraw": 7.1,
+      "ifAway": 10.9
     }
   ],
   "movement": {
-    "since": "2026-10-18T21:39:12Z",
+    "since": "2026-10-24T21:42:53Z",
     "changes": {
       "Alanyaspor": {
-        "title": 0.04,
-        "top2": -0.02,
-        "relegation": -0.37
+        "title": -0.03,
+        "top2": -0.07,
+        "relegation": -0.83
       },
       "Amedspor": {
-        "title": -0.16,
-        "top2": 0.21,
-        "relegation": 0.03
+        "title": 2.16,
+        "top2": 4.29,
+        "relegation": -0.15
       },
       "Besiktas": {
-        "title": -0.14,
-        "top2": -0.58,
-        "relegation": 0.0
+        "title": -0.22,
+        "top2": -0.53,
+        "relegation": -0.06
       },
       "Erzurumspor": {
-        "title": -0.01,
-        "top2": -0.01,
-        "relegation": 0.02
+        "title": 0.02,
+        "top2": 0.08,
+        "relegation": -16.7
       },
       "Ey\u00fcpspor": {
         "title": 0.0,
         "top2": 0.0,
-        "relegation": 0.02
+        "relegation": 3.09
       },
       "Fenerbah\u00e7e": {
-        "title": -0.35,
-        "top2": -0.9,
+        "title": -1.24,
+        "top2": -2.2,
         "relegation": 0.0
       },
       "Galatasaray": {
-        "title": 0.66,
-        "top2": 0.52,
+        "title": 0.16,
+        "top2": -0.15,
         "relegation": 0.0
       },
       "Gaziantep": {
         "title": 0.0,
-        "top2": -0.03,
-        "relegation": 0.07
+        "top2": -0.01,
+        "relegation": 14.47
       },
       "Gen\u00e7lerbirligi": {
         "title": 0.0,
-        "top2": 0.0,
-        "relegation": -0.4
+        "top2": 0.01,
+        "relegation": -1.83
       },
       "G\u00f6ztepe": {
-        "title": 0.09,
-        "top2": 0.37,
-        "relegation": -5.02
+        "title": 0.0,
+        "top2": -0.1,
+        "relegation": 0.13
       },
       "Istanbul Basaksehir": {
-        "title": -0.06,
-        "top2": 0.18,
-        "relegation": -0.5
+        "title": -0.28,
+        "top2": -0.42,
+        "relegation": -0.01
       },
       "Kasimpasa": {
-        "title": 0.16,
-        "top2": 0.4,
-        "relegation": -5.46
+        "title": 0.03,
+        "top2": 0.16,
+        "relegation": -1.77
       },
       "Kocaelispor": {
-        "title": -0.04,
-        "top2": -0.24,
-        "relegation": 2.21
+        "title": 0.01,
+        "top2": -0.09,
+        "relegation": -0.04
       },
       "Konyaspor": {
-        "title": 0.0,
+        "title": -0.01,
         "top2": 0.0,
-        "relegation": -1.19
+        "relegation": -1.38
       },
       "Samsunspor": {
-        "title": 0.01,
+        "title": -0.01,
         "top2": -0.01,
-        "relegation": 11.16
+        "relegation": 5.43
       },
       "Trabzonspor": {
-        "title": -0.19,
-        "top2": 0.19,
-        "relegation": -0.02
+        "title": -0.55,
+        "top2": -0.96,
+        "relegation": -0.01
       },
       "\u00c7aykur Rizespor": {
         "title": -0.01,
         "top2": 0.01,
-        "relegation": -0.33
+        "relegation": 0.18
       },
       "\u00c7orum": {
-        "title": -0.02,
-        "top2": -0.1,
-        "relegation": -0.2
+        "title": -0.03,
+        "top2": 0.03,
+        "relegation": -0.52
       }
     }
   }
