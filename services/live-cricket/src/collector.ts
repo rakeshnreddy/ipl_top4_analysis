@@ -59,6 +59,11 @@ interface Job {
   error: string | null;
 }
 type Fetcher = (input: string | URL, init?: RequestInit) => Promise<Response>;
+interface ScoreSnapshot {
+  match: MatchSummary;
+  resource: "list" | "detail";
+  publishedAt: string | null;
+}
 
 /** The sole state owner for one set of provider credentials and its shared quotas. */
 export class Collector {
@@ -313,22 +318,61 @@ export class Collector {
     for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
     return u;
   }
-  private accepted(
-    previous: MatchSummary | undefined,
-    incoming: MatchSummary,
-  ): MatchSummary {
-    if (
-      previous?.observedAt &&
-      incoming.observedAt &&
-      Date.parse(incoming.observedAt) < Date.parse(previous.observedAt)
-    )
-      return previous;
+  /** Synchronous read/compare/write after I/O: both resources share one winner. */
+  private acceptScore(incoming: ScoreSnapshot): ScoreSnapshot {
+    const key = this.key(`score:${incoming.match.id}`);
+    const current = this.store.get<ScoreSnapshot>(key);
+    if (current) {
+      const sameResource = current.resource === incoming.resource;
+      if (this.config.scoreProvider === "sportscore") {
+        // Publication is snapshot provenance, never the observation time of a ball.
+        // A cross-resource tie/unknown clock cannot resolve conflicting scores.
+        const before = current.publishedAt;
+        const after = incoming.publishedAt;
+        if (before && after) {
+          const delta = Date.parse(after) - Date.parse(before);
+          if (
+            delta < 0 ||
+            (delta === 0 &&
+              !sameResource &&
+              current.match.revision !== incoming.match.revision)
+          )
+            return current;
+        } else if (
+          !sameResource &&
+          (!after || current.match.revision !== incoming.match.revision)
+        ) {
+          return current;
+        }
+      } else {
+        const before = current.match.observedAt;
+        const after = incoming.match.observedAt;
+        if (before && (!after || Date.parse(after) < Date.parse(before)))
+          return current;
+        if (
+          before &&
+          after &&
+          Date.parse(after) === Date.parse(before) &&
+          !sameResource &&
+          current.match.revision !== incoming.match.revision
+        )
+          return current;
+        if (
+          !before &&
+          !after &&
+          !sameResource &&
+          current.match.revision !== incoming.match.revision
+        )
+          return current;
+      }
+    }
+    // Equal-time corrections from the same resource may legitimately lower runs.
+    this.store.put(key, incoming);
     return incoming;
   }
   private async collectList(): Promise<void> {
     const at = new Date(this.now()).toISOString(),
-      c = this.config,
-      previous = this.store.get<MatchListSnapshot>(this.key("list"));
+      c = this.config;
     let result: MatchListSnapshot;
     if (c.scoreProvider === "sportscore") {
       const p = await this.request(
@@ -338,12 +382,6 @@ export class Collector {
         ),
       );
       result = normalizeSportScoreList(p, at);
-      if (
-        previous?.generatedAt &&
-        result.generatedAt &&
-        Date.parse(result.generatedAt) < Date.parse(previous.generatedAt)
-      )
-        throw new Error("older_source_snapshot");
     } else {
       const matches: MatchSummary[] = [];
       let partial = false,
@@ -425,15 +463,17 @@ export class Collector {
         coverage: [],
       };
     }
-    const byId = new Map(
-      result.matches.map((m) => [
-        m.id,
-        this.accepted(
-          previous?.matches.find((p) => p.id === m.id),
-          m,
-        ),
-      ]),
-    );
+    // No await from this current-state read through publishing and trimming.
+    const previous = this.store.get<MatchListSnapshot>(this.key("list"));
+    if (
+      c.scoreProvider === "sportscore" &&
+      previous?.generatedAt &&
+      result.generatedAt &&
+      Date.parse(result.generatedAt) < Date.parse(previous.generatedAt)
+    )
+      throw new Error("older_source_snapshot");
+    const incomingIds = new Set(result.matches.map((m) => m.id));
+    const byId = new Map(result.matches.map((m) => [m.id, m]));
     // Missing rows during a provider outage do not silently finish active matches.
     for (const old of previous?.matches ?? [])
       if (
@@ -458,7 +498,20 @@ export class Collector {
       result.message =
         "The bounded match registry is full; some source matches were omitted.";
     }
-    result.matches = [...byId.values()].slice(0, c.maxMatches);
+    result.matches = [...byId.values()].slice(0, c.maxMatches).map((match) => {
+      if (!incomingIds.has(match.id)) return match;
+      const chosen = this.acceptScore({
+        match,
+        resource: "list",
+        publishedAt: result.generatedAt,
+      });
+      if (chosen.match.revision !== match.revision) {
+        result.status = "partial";
+        result.message =
+          "Some scores are retained from a newer or unresolved source snapshot; their original clocks are preserved.";
+      }
+      return chosen.match;
+    });
     result.refreshAfterSeconds = c.discoverySeconds;
     result.staleAfterSeconds = c.staleSeconds;
     result.coverage = [
@@ -481,6 +534,7 @@ export class Collector {
         this.store.delete(this.key(`detail:${old.id}`));
         this.store.delete(`job:${this.key(`detail:${old.id}`)}`);
         this.store.delete(this.key(`market-map:${old.id}`));
+        this.store.delete(this.key(`score:${old.id}`));
       }
   }
   async list(): Promise<MatchListSnapshot> {
@@ -597,16 +651,40 @@ export class Collector {
         throw new Error("source_identity_changed");
       result = sportmonksDetail(payload, at);
     }
-    if (this.accepted(previous?.match, result.match) !== result.match) return;
-    if (previous?.markets.data) result.markets = previous.markets;
-    this.store.put(this.key(`detail:${summary.id}`), result);
+    // Read current state after all I/O. A removed match cannot be resurrected by
+    // a late detail response; its bounded cache/provenance rows stay removed.
     const list = this.store.get<MatchListSnapshot>(this.key("list"));
-    if (list) {
-      list.matches = list.matches.map((m) =>
-        m.id === summary.id ? result.match : m,
-      );
-      this.store.put(this.key("list"), list);
-    }
+    if (!list?.matches.some((m) => m.id === summary.id)) return;
+    const currentDetail = this.store.get<MatchDetailSnapshot>(
+      this.key(`detail:${summary.id}`),
+    );
+    if (
+      c.scoreProvider === "sportscore" &&
+      currentDetail?.generatedAt &&
+      result.generatedAt &&
+      Date.parse(result.generatedAt) < Date.parse(currentDetail.generatedAt)
+    )
+      throw new Error("older_source_snapshot");
+    if (
+      currentDetail?.match.observedAt &&
+      result.match.observedAt &&
+      Date.parse(result.match.observedAt) <
+        Date.parse(currentDetail.match.observedAt)
+    )
+      return;
+    const chosen = this.acceptScore({
+      match: result.match,
+      resource: "detail",
+      publishedAt: result.generatedAt,
+    });
+    if (currentDetail?.markets.data) result.markets = currentDetail.markets;
+    // Keep this resource's sections and envelope intact even when another
+    // resource supplied the winning score. Never re-date an old card or delivery.
+    this.store.put(this.key(`detail:${summary.id}`), result);
+    list.matches = list.matches.map((m) =>
+      m.id === summary.id ? chosen.match : m,
+    );
+    this.store.put(this.key("list"), list);
   }
   private async collectMarkets(scope: MarketScope): Promise<void> {
     const u = new URL(
@@ -716,24 +794,64 @@ export class Collector {
     await this.job(this.key(`detail:${id}`), this.config.detailSeconds, () =>
       this.collectDetail(summary),
     );
-    let result =
-      this.store.get<MatchDetailSnapshot>(this.key(`detail:${id}`)) ??
-      baseDetail(summary, this.config.detailSeconds, this.config.staleSeconds);
+    const listed = this.store
+      .get<MatchListSnapshot>(this.key("list"))
+      ?.matches.find((m) => m.id === id);
+    if (!listed) throw new Error("match_not_found");
+    const marketMatch =
+      this.store.get<ScoreSnapshot>(this.key(`score:${id}`))?.match ?? listed;
+    let markets = await this.marketPart(marketMatch);
+    // Market I/O can overlap discovery too. Assemble from current storage only
+    // after it finishes, keeping the detailed envelope's own publication clock.
+    const currentSummary = this.store
+      .get<MatchListSnapshot>(this.key("list"))
+      ?.matches.find((m) => m.id === id);
+    if (!currentSummary) {
+      this.store.delete(this.key(`market-map:${id}`));
+      throw new Error("match_not_found");
+    }
+    const detail = this.store.get<MatchDetailSnapshot>(
+      this.key(`detail:${id}`),
+    ) ?? {
+      ...baseDetail(
+        currentSummary,
+        this.config.detailSeconds,
+        this.config.staleSeconds,
+      ),
+      generatedAt: null,
+    };
+    const current =
+      this.store.get<ScoreSnapshot>(this.key(`score:${id}`))?.match ??
+      currentSummary;
+    const identity = (match: MatchSummary) =>
+      JSON.stringify([
+        match.teams,
+        match.competition.id,
+        match.format,
+        match.gender,
+        match.startTime,
+      ]);
+    if (identity(marketMatch) !== identity(current))
+      markets = unavailable(
+        SOURCES.odds.name,
+        "The match identity changed during the quote request; prices require a fresh verified mapping.",
+      );
+    const retainedScore = current.revision !== detail.match.revision;
     const failed = this.store.get<Job>(
       `job:${this.key(`detail:${id}`)}`,
     )?.error;
-    const markets = await this.marketPart(result.match);
-    result = {
-      ...result,
+    const result: MatchDetailSnapshot = {
+      ...detail,
+      match: current,
       refreshAfterSeconds: this.config.detailSeconds,
       staleAfterSeconds: this.config.staleSeconds,
       scorecard: refreshPart(
-        result.scorecard,
+        detail.scorecard,
         this.now(),
         this.config.staleSeconds,
       ),
       commentary: refreshPart(
-        result.commentary,
+        detail.commentary,
         this.now(),
         this.config.staleSeconds,
       ),
@@ -742,13 +860,19 @@ export class Collector {
         "Playoff Pulse",
         "No released match-win artifact and complete verified inference state are configured.",
       ),
-      status: failed ? "partial" : result.status,
-      message: failed ?? result.message,
+      status: failed || retainedScore ? ("partial" as const) : detail.status,
+      message:
+        failed ??
+        (retainedScore
+          ? "The score is retained from another accepted source snapshot; detailed sections keep their own original source clocks."
+          : detail.message),
     };
     result.match = {
       ...result.match,
       capabilities: {
         ...result.match.capabilities,
+        scorecard: result.scorecard.data !== null,
+        commentary: result.commentary.data !== null,
         markets: markets.data !== null,
         model: false,
       },

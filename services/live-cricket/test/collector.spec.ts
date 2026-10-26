@@ -28,6 +28,55 @@ const keyed = {
   discoverySeconds: 60,
   detailSeconds: 60,
 };
+type Resource = "list" | "detail";
+function heldResponse() {
+  let resolve!: (response: Response) => void;
+  const promise = new Promise<Response>((complete) => {
+    resolve = complete;
+  });
+  return { promise, resolve };
+}
+function sourcePayload(
+  provider: "sportscore" | "cricketdata",
+  resource: Resource,
+  updated: string | null,
+  runs: number,
+) {
+  if (provider === "sportscore") {
+    const row = {
+      home: "Synthetic A",
+      away: "Synthetic B",
+      competition: "Synthetic Men T20",
+      time: "2026-10-23T11:00:00Z",
+      url: "/cricket/match/synthetic-a-vs-synthetic-b/",
+      status: "live",
+      status_text: "1st innings",
+      home_score: `${runs}/3 (17.5)`,
+      away_score: null,
+    };
+    return resource === "list"
+      ? { sport: "cricket", count: 1, matches: [row], updated }
+      : { sport: "cricket", match: row, updated };
+  }
+  const row = {
+    ...match,
+    updated_at: updated,
+    score: [{ ...match.score[0], r: runs }],
+  };
+  return resource === "list"
+    ? cdPayload([row])
+    : { status: "success", data: row };
+}
+const interleavings = (["sportscore", "cricketdata"] as const).flatMap(
+  (provider) =>
+    (["list", "detail"] as const).flatMap((newer) =>
+      ([true, false] as const).map((newerFirst) => ({
+        provider,
+        newer,
+        newerFirst,
+      })),
+    ),
+);
 
 describe("shared collector and quotas", () => {
   it("makes zero upstream requests when keyed access/redisplay is disabled", async () => {
@@ -180,6 +229,58 @@ describe("shared collector and quotas", () => {
     expect(older.matches[0].scores[0].runs).toBe(99);
     expect(older.matches[0].revision).not.toBe(first.matches[0].revision);
   });
+  it.each(["list", "detail"] as const)(
+    "rejects an older SportScore %s publication but accepts an equal-time score correction",
+    async (kind) => {
+      let now = clock;
+      const published = "2026-10-23T12:00:00Z";
+      let updated = published;
+      let score = "100/3 (17.5)";
+      const sourceMatch = () => ({
+        home: "Synthetic A",
+        away: "Synthetic B",
+        competition: "Synthetic Men T20",
+        time: "2026-10-23T11:00:00Z",
+        url: "/cricket/match/synthetic-a-vs-synthetic-b/",
+        status: "live",
+        status_text: "1st innings",
+        home_score: score,
+        away_score: null,
+      });
+      const fetcher = vi.fn(async (input: string | URL) =>
+        Response.json(
+          new URL(input).pathname.endsWith("/matches/")
+            ? { sport: "cricket", count: 1, matches: [sourceMatch()], updated }
+            : { sport: "cricket", match: sourceMatch(), updated },
+        ),
+      );
+      const c = new Collector(
+        new MemoryStore(),
+        defaultConfig(),
+        fetcher,
+        () => now,
+      );
+      const list = await c.list();
+      const id = list.matches[0].id;
+      const first = kind === "list" ? list : await c.detail(id);
+      const read = () => (kind === "list" ? c.list() : c.detail(id));
+      const matchOf = (snapshot: Awaited<ReturnType<typeof read>>) =>
+        "matches" in snapshot ? snapshot.matches[0] : snapshot.match;
+      now += 61000;
+      updated = "2026-10-23T11:59:00Z";
+      score = "90/3 (17.5)";
+      const older = await read();
+      expect(matchOf(older).scores[0].runs).toBe(100);
+      expect(older.generatedAt).toBe(first.generatedAt);
+      expect(matchOf(older).fetchedAt).toBe(matchOf(first).fetchedAt);
+      now += 61000;
+      updated = published;
+      score = "99/3 (17.5)";
+      const correction = await read();
+      expect(matchOf(correction).scores[0].runs).toBe(99);
+      expect(correction.generatedAt).toBe(published);
+    },
+  );
   it("rejects a wrong scorecard identity while preserving useful verified scores", async () => {
     const f = vi.fn(async (input: string | URL) => {
       const path = new URL(input).pathname;
@@ -359,5 +460,278 @@ describe("shared collector and quotas", () => {
     now = Date.parse("2026-10-24T00:01:00Z");
     await c.list();
     expect(f).toHaveBeenCalledTimes(2);
+  });
+  it.each(interleavings)(
+    "reconciles overlapping $provider requests with newer $newer publication finishing first=$newerFirst",
+    async ({ provider, newer, newerFirst }) => {
+      let now = clock;
+      let held = false;
+      const pending = { list: heldResponse(), detail: heldResponse() };
+      const initial = "2026-10-23T11:58:00Z";
+      const oldTime = "2026-10-23T11:59:00Z";
+      const newTime = "2026-10-23T12:00:00Z";
+      const fetcher = vi.fn((input: string | URL) => {
+        const path = new URL(input).pathname;
+        const resource: Resource =
+          path.endsWith("/matches/") || path.endsWith("currentMatches")
+            ? "list"
+            : "detail";
+        return held
+          ? pending[resource].promise
+          : Promise.resolve(
+              Response.json(sourcePayload(provider, resource, initial, 80)),
+            );
+      });
+      const c = new Collector(
+        new MemoryStore(),
+        provider === "sportscore" ? defaultConfig() : keyed,
+        fetcher,
+        () => now,
+      );
+      const seed = await c.list();
+      const id = seed.matches[0].id;
+      await c.detail(id);
+      held = true;
+      now += 61000;
+      const listAt = new Date(now).toISOString();
+      const listPromise = c.list();
+      now += 1000;
+      const detailAt = new Date(now).toISOString();
+      const detailPromise = c.detail(id);
+      const promises = { list: listPromise, detail: detailPromise };
+      const older: Resource = newer === "list" ? "detail" : "list";
+      for (const resource of newerFirst ? [newer, older] : [older, newer]) {
+        pending[resource].resolve(
+          Response.json(
+            sourcePayload(
+              provider,
+              resource,
+              resource === newer ? newTime : oldTime,
+              resource === newer ? 100 : 90,
+            ),
+          ),
+        );
+        await promises[resource];
+      }
+      const finalList = await c.list();
+      const finalDetail = await c.detail(id);
+      expect(finalList.matches[0].scores[0].runs).toBe(100);
+      expect(finalDetail.match.scores[0].runs).toBe(100);
+      expect(finalList.matches[0].revision).toBe(finalDetail.match.revision);
+      const originalFetch = newer === "list" ? listAt : detailAt;
+      expect(finalList.matches[0].fetchedAt).toBe(originalFetch);
+      expect(finalDetail.match.fetchedAt).toBe(originalFetch);
+      expect(finalDetail.match.observedAt).toBe(
+        provider === "cricketdata" ? newTime.replace("Z", ".000Z") : null,
+      );
+      // Envelopes describe their own resource. Retaining a score cannot re-date
+      // an older detail publication or claim its time is a ball observation.
+      expect(finalList.generatedAt).toBe(
+        provider === "sportscore"
+          ? newer === "list"
+            ? newTime
+            : oldTime
+          : listAt,
+      );
+      expect(finalDetail.generatedAt).toBe(
+        provider === "sportscore"
+          ? newer === "detail"
+            ? newTime
+            : oldTime
+          : detailAt,
+      );
+    },
+  );
+  it.each(["2026-10-23T12:00:00Z", null])(
+    "retains SportScore's incumbent for conflicting cross-resource publication %s across restart",
+    async (detailTime) => {
+      const store = new MemoryStore();
+      const published = "2026-10-23T12:00:00Z";
+      const fetcher = vi.fn(async (input: string | URL) => {
+        const list = new URL(input).pathname.endsWith("/matches/");
+        return Response.json(
+          sourcePayload(
+            "sportscore",
+            list ? "list" : "detail",
+            list ? published : detailTime,
+            list ? 100 : 99,
+          ),
+        );
+      });
+      const first = new Collector(store, defaultConfig(), fetcher, () => clock);
+      const list = await first.list();
+      const id = list.matches[0].id;
+      const detail = await first.detail(id);
+      expect(detail.match.scores[0].runs).toBe(100);
+      expect(detail.match.observedAt).toBeNull();
+      expect(detail.generatedAt).toBe(detailTime);
+      const restarted = new Collector(
+        store,
+        defaultConfig(),
+        fetcher,
+        () => clock + 1000,
+      );
+      expect((await restarted.detail(id)).match.scores[0].runs).toBe(100);
+      expect(fetcher).toHaveBeenCalledTimes(2);
+    },
+  );
+  it("retains a keyed provider's incumbent on an equal-observation cross-resource conflict", async () => {
+    const published = "2026-10-23T12:00:00Z";
+    const fetcher = vi.fn(async (input: string | URL) => {
+      const list = new URL(input).pathname.endsWith("currentMatches");
+      return Response.json(
+        sourcePayload(
+          "cricketdata",
+          list ? "list" : "detail",
+          published,
+          list ? 100 : 99,
+        ),
+      );
+    });
+    const c = new Collector(new MemoryStore(), keyed, fetcher, () => clock);
+    const list = await c.list();
+    const detail = await c.detail(list.matches[0].id);
+    expect(detail.match.scores[0].runs).toBe(100);
+    expect(detail.match.fetchedAt).toBe(list.matches[0].fetchedAt);
+  });
+  it("trims score provenance with the registry and does not resurrect an evicted match after late detail I/O", async () => {
+    let now = clock;
+    let replaced = false;
+    const pending = heldResponse();
+    const original = {
+      home: "Synthetic A",
+      away: "Synthetic B",
+      competition: "Synthetic Men T20",
+      time: "2026-10-23T11:00:00Z",
+      url: "/cricket/match/synthetic-a-vs-synthetic-b/",
+      status: "completed",
+      status_text: "Final",
+      home_score: "100/3",
+      away_score: null,
+    };
+    const replacement = {
+      ...original,
+      home: "Synthetic C",
+      away: "Synthetic D",
+      url: "/cricket/match/synthetic-c-vs-synthetic-d/",
+    };
+    const fetcher = vi.fn((input: string | URL) =>
+      new URL(input).pathname.endsWith("/matches/")
+        ? Promise.resolve(
+            Response.json({
+              sport: "cricket",
+              count: 1,
+              matches: [replaced ? replacement : original],
+              updated: new Date(now).toISOString(),
+            }),
+          )
+        : pending.promise,
+    );
+    const store = new MemoryStore();
+    const c = new Collector(
+      store,
+      { ...defaultConfig(), maxMatches: 1 },
+      fetcher,
+      () => now,
+    );
+    const first = await c.list();
+    const oldId = first.matches[0].id;
+    expect(store.get(`sportscore:score:${oldId}`)).toBeDefined();
+    const late = c.detail(oldId);
+    const rejection = expect(late).rejects.toThrow("match_not_found");
+    replaced = true;
+    now += 61000;
+    const next = await c.list();
+    expect(next.matches).toHaveLength(1);
+    pending.resolve(
+      Response.json({
+        sport: "cricket",
+        match: original,
+        updated: "2026-10-23T12:00:00Z",
+      }),
+    );
+    await rejection;
+    expect(store.get(`sportscore:score:${oldId}`)).toBeUndefined();
+    expect(store.get(`sportscore:detail:${oldId}`)).toBeUndefined();
+    expect(store.get(`job:sportscore:detail:${oldId}`)).toBeUndefined();
+    expect(store.get(`sportscore:score:${next.matches[0].id}`)).toBeDefined();
+  });
+  it("preserves old detail/card clocks when a newer discovered score wins during detail I/O", async () => {
+    let now = clock;
+    let held = false;
+    const pending = { list: heldResponse(), detail: heldResponse() };
+    const initial = "2026-10-23T11:58:00Z",
+      oldTime = "2026-10-23T11:59:00Z",
+      newTime = "2026-10-23T12:00:00Z";
+    const info = (at: string, runs: number) => ({
+      ...match,
+      updated_at: at,
+      fantasyEnabled: true,
+      score: [{ ...match.score[0], r: runs }],
+    });
+    const fetcher = vi.fn((input: string | URL) => {
+      const path = new URL(input).pathname;
+      if (path.endsWith("match_scorecard"))
+        return Promise.resolve(
+          Response.json({
+            status: "success",
+            data: {
+              ...info(held ? oldTime : initial, held ? 90 : 80),
+              scorecard: [
+                {
+                  inning: "A Inning 1",
+                  totals: { R: held ? 90 : 80, W: 3, O: 17.5 },
+                  batting: [
+                    { batsman: { id: "p", name: "Synthetic Player" }, r: 20 },
+                  ],
+                  bowling: [],
+                },
+              ],
+            },
+          }),
+        );
+      const resource: Resource = path.endsWith("currentMatches")
+        ? "list"
+        : "detail";
+      return held
+        ? pending[resource].promise
+        : Promise.resolve(
+            Response.json(
+              resource === "list"
+                ? cdPayload([info(initial, 80)])
+                : { status: "success", data: info(initial, 80) },
+            ),
+          );
+    });
+    const c = new Collector(
+      new MemoryStore(),
+      { ...keyed, cricketDataFantasy: true },
+      fetcher,
+      () => now,
+    );
+    const first = await c.list();
+    const id = first.matches[0].id;
+    await c.detail(id);
+    held = true;
+    now += 61000;
+    const listPromise = c.list();
+    now += 1000;
+    const detailAt = new Date(now).toISOString();
+    const detailPromise = c.detail(id);
+    pending.list.resolve(Response.json(cdPayload([info(newTime, 100)])));
+    await listPromise;
+    pending.detail.resolve(
+      Response.json({ status: "success", data: info(oldTime, 90) }),
+    );
+    const detail = await detailPromise;
+    expect(detail.match.scores[0].runs).toBe(100);
+    expect(detail.match.observedAt).toBe(newTime.replace("Z", ".000Z"));
+    expect(detail.generatedAt).toBe(detailAt);
+    expect(detail.scorecard.data?.[0].runs).toBe(90);
+    expect(detail.scorecard.observedAt).toBe(oldTime.replace("Z", ".000Z"));
+    expect(detail.scorecard.fetchedAt).toBe(detailAt);
+    expect(detail.match.capabilities.scorecard).toBe(true);
+    expect(detail.model.status).toBe("unavailable");
+    expect(detail.message).toMatch(/original source clocks/);
   });
 });

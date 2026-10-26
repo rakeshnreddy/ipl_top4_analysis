@@ -19,12 +19,15 @@ export function useLiveFeed<T extends FeedMeta>(path: string | null, parse: (val
   const [attempt, setAttempt] = useState(0);
   const parser = useRef(parse);
   const loadSource = useRef(loader);
+  const accepted = useRef<{ path: string; data: T } | null>(null);
   loadSource.current = loader;
   parser.current = parse;
   const retry = useCallback(() => {
     if (!paused && !document.hidden) setAttempt(value => value + 1);
   }, [paused]);
   useEffect(() => {
+    // Publication clocks order one resource, never two selected matches or feeds.
+    if (accepted.current?.path !== path) accepted.current = null;
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
     let controller: AbortController | undefined;
@@ -66,6 +69,13 @@ export function useLiveFeed<T extends FeedMeta>(path: string | null, parse: (val
         }
         const data = parser.current(raw);
         if (!active || request.signal.aborted || paused || document.hidden) return;
+        const previous = accepted.current;
+        if (previous?.path === path && previous.data.source.id === data.source.id
+          && previous.data.generatedAt && data.generatedAt
+          && Date.parse(data.generatedAt) < Date.parse(previous.data.generatedAt)) {
+          throw new Error('The feed returned an older snapshot. Last verified data is retained.');
+        }
+        accepted.current = { path, data };
         failures = 0;
         interval = data.refreshAfterSeconds;
         setState({
