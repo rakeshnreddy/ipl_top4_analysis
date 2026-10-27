@@ -30,7 +30,7 @@ function stateOf(status: string, description: string): MatchState {
 function score(value: unknown, team: string, id: string, format: string): InningsScore | null {
   if (value === null || value === undefined || value === '') return null;
   const raw = typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? String(value) : text(value, 120);
-  if (!raw) return null;
+  if (!raw || /^(?:[-–—]+|n\/a)$/i.test(raw)) return null;
   const match = /^(\d{1,4})(?:\/(\d{1,2}))?(?:\s*\((\d{1,3})(?:\.([0-5]))?\s*(?:ov(?:ers?)?)?\))?$/.exec(raw);
   const wickets = match?.[2] === undefined ? null : Number(match[2]);
   const valid = match && (wickets === null || wickets <= 10);
@@ -88,7 +88,7 @@ export function normalizeSportScoreList(payload: unknown, fetchedAt: string): Ma
     ...meta(source), status: partial ? 'partial' : 'ok',
     message: partial ? 'Some matches may be omitted by the free source or could not be read.' : 'Free source coverage is limited; detailed scorecards and bookmaker prices are separate feeds.',
     matches,
-    coverage: [...new Set(matches.map((match) => match.competition.name))].map((competition) => ({ competition, scores: true, scorecard: false, commentary: false, markets: false, note: 'Discovery and available score totals only. Detailed coverage is not guaranteed.' })),
+    coverage: [...new Set(matches.map((match) => match.competition.name))].map((competition) => ({ competition, scores: matches.some((match) => match.competition.name === competition && match.scores.some((score) => score.runs !== null || /\d/.test(score.display ?? ''))), scorecard: false, commentary: false, markets: false, note: 'Discovery and available score totals only. Detailed coverage is not guaranteed.' })),
   };
 }
 

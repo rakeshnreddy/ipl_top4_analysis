@@ -518,7 +518,11 @@ export class Collector {
       ...new Set(result.matches.map((m) => m.competition.name)),
     ].map((competition) => ({
       competition,
-      scores: true,
+      scores: result.matches.some(
+        (match) => match.competition.name === competition && match.scores.some(
+          (score) => score.runs !== null || /\d/.test(score.display ?? ""),
+        ),
+      ),
       scorecard: result.matches.some(
         (m) => m.competition.name === competition && m.capabilities.scorecard,
       ),

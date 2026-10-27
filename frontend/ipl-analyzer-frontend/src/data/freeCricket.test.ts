@@ -6,6 +6,14 @@ const row = { home: 'Example A', away: 'Example B', home_score: '122/3 (17.5)', 
 const payload = { sport: 'cricket', updated: at, count: 1, matches: [row] };
 
 describe('free cricket source contract', () => {
+  it('keeps placeholder totals unavailable while treating a supplied zero as a score', () => {
+    const missing = normalizeSportScoreList({ ...payload, matches: [{ ...row, home_score: '-', away_score: '—' }] }, at);
+    expect(missing.matches[0].scores).toEqual([]);
+    expect(missing.coverage[0].scores).toBe(false);
+    const zero = normalizeSportScoreList({ ...payload, matches: [{ ...row, home_score: 0 }] }, at);
+    expect(zero.matches[0].scores[0].runs).toBe(0);
+    expect(zero.coverage[0].scores).toBe(true);
+  });
   it('preserves scoring, legal balls and unknown event time without inventing a scorecard', () => {
     const feed = normalizeSportScoreList(payload, at);
     expect(feed.matches).toHaveLength(1);

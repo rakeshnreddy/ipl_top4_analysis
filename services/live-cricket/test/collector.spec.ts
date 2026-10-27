@@ -79,6 +79,15 @@ const interleavings = (["sportscore", "cricketdata"] as const).flatMap(
 );
 
 describe("shared collector and quotas", () => {
+  it("does not promote placeholder-only fixture coverage to available scores", async () => {
+    const payload = sourcePayload("sportscore", "list", new Date(clock).toISOString(), 100) as { matches: Record<string, unknown>[] };
+    payload.matches[0].home_score = "-";
+    payload.matches[0].away_score = "—";
+    const collector = new Collector(new MemoryStore(), defaultConfig(), async () => Response.json(payload), () => clock);
+    const list = await collector.list();
+    expect(list.matches[0].scores).toEqual([]);
+    expect(list.coverage[0].scores).toBe(false);
+  });
   it("makes zero upstream requests when keyed access/redisplay is disabled", async () => {
     const fetcher = vi.fn();
     const c = new Collector(
