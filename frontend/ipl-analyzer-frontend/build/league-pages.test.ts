@@ -3,6 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { PRIMARY_SITE_URL } from '../src/lib/siteIdentity';
 import { describeLeague, leagueJsonLd, legacyQueryPreloadScript, renderLeagueHtml, renderLeagueOgSvg, renderSocialPng, type LeaguePayload } from './league-pages';
 
 const publicDir = resolve(import.meta.dirname, '../public');
@@ -24,11 +25,11 @@ describe('static league source documents', () => {
         expect(document.querySelector('h1')?.textContent).toBe(page.heading);
         expect(document.querySelectorAll('table')[0].querySelectorAll('tbody tr').length).toBe(payload.standings.length || 1);
         if (payload.standings[0]) expect(document.querySelector('tbody')?.textContent).toContain(payload.standings[0].fullName);
-        expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${base}league/${entry.id}/`);
-        expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(`${base}social/og/${entry.id}.png`);
+        expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${PRIMARY_SITE_URL}league/${entry.id}/`);
+        expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(`${PRIMARY_SITE_URL}social/og/${entry.id}.png`);
         const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]')!.textContent!)['@graph'];
         expect(graph[1].url).toBe(page.canonical);
-        expect(graph[2].distribution.contentUrl).toBe(`${base}${entry.path}`);
+        expect(graph[2].distribution.contentUrl).toBe(`${PRIMARY_SITE_URL}${entry.path}`);
       }
     }
   });
@@ -63,8 +64,8 @@ describe('static league source documents', () => {
     expect(tables[0].caption?.textContent).toContain('Drivers');
     expect(tables[1].caption?.textContent).toContain('Constructors');
     expect(tables[1].querySelectorAll('tbody tr')).toHaveLength(payload.constructorStandings!.length);
-    expect(tables[1].querySelector('tbody tr')?.textContent).toContain('Mercedes');
-    expect(tables[1].querySelector('tbody tr')?.textContent).toContain('578');
+    expect(tables[1].querySelector('tbody tr')?.textContent).toContain(payload.constructorStandings![0].fullName);
+    expect(tables[1].querySelector('tbody tr')?.textContent).toContain(String(payload.constructorStandings![0].points));
   });
 
   it('does not call a tied zero-game table a standings leader before the season', () => {
@@ -76,13 +77,13 @@ describe('static league source documents', () => {
     expect(page.facts).toContainEqual({ label: 'Teams', value: '20' });
   });
 
-  it('keeps the real snapshot outside the React root as an explicit no-JavaScript fallback', () => {
+  it('serves the real snapshot in the initial React root before the client replaces it', () => {
     const { entry, payload } = load('epl-2026-27');
     const page = describeLeague(entry, payload, 'https://example.org/');
     const html = renderLeagueHtml(template, page);
-    expect(html).toContain('<div id="root"></div><noscript><main');
+    expect(html).toContain('<div id="root"><main');
     expect(html).toContain('Man City');
-    expect(html).not.toContain('<div id="root"><main');
+    expect(html).not.toContain('<noscript><main');
   });
 
   it('escapes source text and structured data instead of allowing embedded markup', () => {

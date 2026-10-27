@@ -32,6 +32,8 @@ jobs:
     environment:
       name: github-pages
     env:
+      # Optional normalized cricket service origin; no provider credential is public.
+      VITE_LIVE_CRICKET_API_URL: ${{ vars.LIVE_CRICKET_API_URL }}
       # Secrets cannot be tested in `if:`; this makes the Cloudflare steps conditional.
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 

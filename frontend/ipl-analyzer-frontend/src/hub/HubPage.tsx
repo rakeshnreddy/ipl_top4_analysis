@@ -7,11 +7,11 @@ import SiteHeader from '../components/SiteHeader';
 import { leagueHref, leaguesBySport, sportName, sportOf, statusLabel, type LeagueIndex, type LeagueSummary } from '../data/leagues';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { DIRECTORY_DESCRIPTION, DIRECTORY_TITLE } from '../lib/siteIdentity';
 import { samePageHref } from '../lib/ui';
 
-const TITLE = 'All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse';
-const DESCRIPTION =
-  "Title, playoff and relegation odds across football, cricket, basketball, US sports and Formula 1. Find seasons in progress, pre-season projections and final tables, with odds updated twice daily.";
+const TITLE = DIRECTORY_TITLE;
+const DESCRIPTION = DIRECTORY_DESCRIPTION;
 
 type SeasonState = 'in-season' | 'upcoming' | 'final';
 const SEASONS: { key: SeasonState; label: string; heading: string; note: string }[] = [
@@ -31,7 +31,7 @@ const LeagueCard = ({ league, index }: { league: LeagueSummary; index: LeagueInd
       <h4>{league.shortName}</h4>
       <span className="hub-card-top">
         <span className="hub-card-season">{league.seasonLabel}</span>
-        <small className={`status-pill status-${status.toLowerCase()}`}>{status}</small>
+        <small className={`status-pill status-${status.toLowerCase().replace(/\s+/g, '-')}`}>{status}</small>
       </span>
       {league.name !== league.shortName && <span className="hub-card-name">{league.name}</span>}
       {facts.length > 0 ? (
@@ -64,9 +64,12 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
   const searchRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const href = appBaseHref();
-    setPageMeta(TITLE, DESCRIPTION, `${href}?view=hub`);
-    setJsonLd({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${href}#website`,
-      name: 'Playoff Pulse', url: href, description: DESCRIPTION });
+    const page = new URL('leagues/', href).href;
+    setPageMeta(TITLE, DESCRIPTION, page);
+    setJsonLd({ '@context': 'https://schema.org', '@graph': [
+      { '@type': 'WebSite', '@id': `${href}#website`, name: 'Playoff Pulse', url: href },
+      { '@type': 'CollectionPage', '@id': `${page}#webpage`, name: TITLE, url: page, description: DESCRIPTION, isPartOf: { '@id': `${href}#website` } },
+    ] });
   }, [index.default]);
 
   const sports = leaguesBySport(index);
@@ -96,7 +99,7 @@ const HubPage = ({ index }: { index: LeagueIndex }) => {
           ]}
           factsLabel="Site snapshot"
           strap="Current, upcoming and final seasons. Odds updated twice daily."
-          title="All Live Races"
+          title="Season Odds"
         />
 
         <section className="hub-controls" aria-label="Find a league">

@@ -1,10 +1,22 @@
 /// <reference types="vitest/globals" />
 import { describe, expect, it, vi } from 'vitest';
-import { canonicalLeagueHref, hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, loadLeagueIndex, sportName, type LeagueSummary } from './leagues';
+import { canonicalLeagueHref, hubHref, leagueHref, leagueIdFromLocation, leaguesBySport, liveCricketHref, liveCricketRequested, loadLeagueIndex, sportName, statusLabel, type LeagueSummary } from './leagues';
 import { setJsonLd, setPageMeta } from '../lib/seo';
 import { samePageHref } from '../lib/ui';
+import { PRIMARY_SITE_URL } from '../lib/siteIdentity';
 
 describe('league helpers', () => {
+  it('separates match-live navigation from in-season qualification odds on either host', () => {
+    expect(liveCricketHref()).toBe('/cricket/');
+    expect(liveCricketRequested('/cricket/')).toBe(true);
+    expect(liveCricketRequested('/league/ipl-2026/')).toBe(false);
+    expect(statusLabel({ status: 'in_progress', started: true })).toBe('In season');
+    vi.stubEnv('BASE_URL', '/ipl_top4_analysis/');
+    expect(liveCricketHref('ss-1-example')).toBe('/ipl_top4_analysis/cricket/?match=ss-1-example');
+    expect(liveCricketRequested('/ipl_top4_analysis/cricket/index.html')).toBe(true);
+    expect(liveCricketRequested('/cricket/')).toBe(false);
+    vi.unstubAllEnvs();
+  });
   it('reads a well-formed league id from the query string', () => {
     expect(leagueIdFromLocation('?league=WPL-2026')).toBe('wpl-2026');
     expect(leagueIdFromLocation('?league=../secrets')).toBeNull();
@@ -14,7 +26,7 @@ describe('league helpers', () => {
   it('gives every league and the hub an address of its own (the root is the landing page)', () => {
     expect(leagueHref('ipl-2026', 'ipl-2026')).toBe('/league/ipl-2026/');
     expect(leagueHref('bbl-2025-26')).toBe('/league/bbl-2025-26/');
-    expect(hubHref('hub')).toBe('/?view=hub');
+    expect(hubHref('hub')).toBe('/leagues/');
   });
 
   it('opens canonical paths while preserving legacy query links', () => {
@@ -40,11 +52,11 @@ describe('league helpers', () => {
   it('canonicalizes legacy metadata and JSON-LD while preserving their fragments', () => {
     const origin = window.location.origin;
     setPageMeta('Premier League', 'A current snapshot', `${origin}/?league=epl-2026-27`);
-    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${origin}/league/epl-2026-27/`);
-    expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(`${origin}/social/og/epl-2026-27.png`);
+    expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${PRIMARY_SITE_URL}league/epl-2026-27/`);
+    expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(`${PRIMARY_SITE_URL}social/og/epl-2026-27.png`);
     setJsonLd({ '@id': `${origin}/?league=epl-2026-27#dataset`, url: 'https://example.org/?league=external' });
     const data = JSON.parse(document.querySelector('script[data-ipl-jsonld]')!.textContent!);
-    expect(data['@id']).toBe(`${origin}/league/epl-2026-27/#dataset`);
+    expect(data['@id']).toBe(`${PRIMARY_SITE_URL}league/epl-2026-27/#dataset`);
     expect(data.url).toBe('https://example.org/?league=external');
   });
 

@@ -738,7 +738,7 @@ const HeroSummary = ({
           { href: '#method', label: 'How it works' },
           ...(isIplLeague(payload) ? [{ href: SHARE_KIT_HREF, label: 'Share kit' }] : []),
         ]}
-        status={{ label: seasonStarted ? 'Live' : 'Pre-season', tone: seasonStarted ? 'live' : 'pre-season' }}
+        status={{ label: seasonStarted ? 'In season' : 'Pre-season', tone: seasonStarted ? 'live' : 'pre-season' }}
         strap="Updated twice daily · equal-chance qualification scenarios"
         title={`${shortName} ${playoffTier.label} Qualification Probabilities`}
       />

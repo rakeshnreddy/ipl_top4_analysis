@@ -31,23 +31,29 @@ describe('HubPage', () => {
   it('lists every live race at ?view=hub', async () => {
     open('/?view=hub');
 
-    expect(await screen.findByRole('heading', { level: 1, name: 'All Live Races' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { level: 1, name: 'Season Odds' })).toBeInTheDocument();
     const live = screen.getByRole('heading', { name: 'In Season' }).closest('section')!;
     const card = within(live).getByRole('link', { name: /Premier League 2026-27/ });
     expect(card).toHaveAttribute('href', '/league/epl-2026-27/');
     expect(card).toHaveTextContent('Title favourite');
     expect(card).toHaveTextContent('ARS 81%');
-    expect(card).toHaveTextContent('Live');
+    expect(card).toHaveTextContent('In season');
 
     const finals = screen.getByRole('heading', { name: 'Final Tables' }).closest('section')!;
     expect(within(finals).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
-    await waitFor(() => expect(document.title).toBe('All Live Races: Title, Playoff & Relegation Odds | Playoff Pulse'));
+    await waitFor(() => expect(document.title).toBe('Season Odds by League | Playoff Pulse'));
   });
 
   it('can be opened while the IPL is the home page', async () => {
     open('/?view=hub', { ...hubIndex, default: 'ipl-2026' });
 
     expect(await screen.findByTestId('hub-page')).toBeInTheDocument();
+  });
+
+  it('opens its static directory route and keeps its canonical after conflicting legacy parameters', async () => {
+    open('/leagues/?league=ipl-2026&utm_source=test');
+    expect(await screen.findByTestId('hub-page')).toBeInTheDocument();
+    await waitFor(() => expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ipl-playoff-pulse.pages.dev/leagues/'));
   });
 
   it('marks a league that has not started as pre-season', async () => {
@@ -99,7 +105,7 @@ describe('HubPage', () => {
     open('/?view=hub', { ...hubIndex, leagues: [] });
     const main = await screen.findByTestId('hub-page');
     expect(within(main).getByText('No leagues have been published yet.')).toBeVisible();
-    expect(within(main).getByRole('heading', { level: 1, name: 'All Live Races' })).toBeInTheDocument();
+    expect(within(main).getByRole('heading', { level: 1, name: 'Season Odds' })).toBeInTheDocument();
   });
 
   it('links league pages back to the hub', async () => {
@@ -107,8 +113,8 @@ describe('HubPage', () => {
 
     fireEvent.click(await screen.findByRole('button', { name: /^Leagues/ }));
     const nav = screen.getByRole('navigation', { name: 'Leagues' });
-    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/?view=hub');
+    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/leagues/');
     // The wordmark goes to the landing page.
-    expect(screen.getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
+    expect(within(screen.getByRole('banner')).getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
   });
 });

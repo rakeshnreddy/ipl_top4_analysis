@@ -8,10 +8,11 @@ import { loadSportData, type SportPayload } from '../data/sportData';
 import { formatChance } from '../sport/format';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { HOME_DESCRIPTION, HOME_TITLE } from '../lib/siteIdentity';
 import { samePageHref } from '../lib/ui';
 
-const TITLE = 'Playoff Pulse: Live Title, Playoff & Relegation Odds Across Sports';
-const DESCRIPTION = 'Title races, playoff chases and relegation fights across football, cricket, basketball, American sports and Formula 1. Explore model season odds, standings and the games that matter, refreshed twice a day.';
+const TITLE = HOME_TITLE;
+const DESCRIPTION = HOME_DESCRIPTION;
 
 interface RacePreview {
   id: string;
@@ -68,7 +69,7 @@ const RaceFeature = ({ league, preview }: { league: LeagueSummary | undefined; p
     <section className="landing-feature" aria-labelledby="feature-title">
       <div className="landing-feature-top">
         <span className="landing-eyebrow">{sportName(sportOf(league))} · {league.seasonLabel}</span>
-        <span className={`status-pill status-${statusLabel(league).toLowerCase()}`}>{statusLabel(league)}</span>
+        <span className={`status-pill status-${statusLabel(league).toLowerCase().replace(/\s+/g, '-')}`}>{statusLabel(league)}</span>
       </div>
       <h2 id="feature-title">{league.shortName}</h2>
       {leader && preview ? (
@@ -201,7 +202,7 @@ const LandingPage = ({ index }: { index: LeagueIndex }) => {
               {featured.map((league) => (
                 <li key={league.id}>
                   <a className="landing-race" href={leagueHref(league.id)}>
-                    <span className="landing-race-sport">{sportName(sportOf(league))}<span className={`status-text status-${statusLabel(league).toLowerCase()}`}>{statusLabel(league)}</span></span>
+                    <span className="landing-race-sport">{sportName(sportOf(league))}<span className={`status-text status-${statusLabel(league).toLowerCase().replace(/\s+/g, '-')}`}>{statusLabel(league)}</span></span>
                     <h3>{league.shortName}</h3>
                     <span className="landing-race-label">{league.facts?.[0].label}</span>
                     <strong>{league.facts?.[0].value}</strong>

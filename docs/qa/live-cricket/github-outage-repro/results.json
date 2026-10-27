@@ -1,0 +1,983 @@
+{
+  "base": "http://127.0.0.1:5194/ipl_top4_analysis/",
+  "label": "github-outage-repro",
+  "mode": "synthetic-service-contracts",
+  "startedAt": "2026-10-24T02:07:30.304Z",
+  "providerProbe": null,
+  "cases": [
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "theme": "dark",
+      "source": "synthetic normalized service contracts",
+      "checks": [
+        {
+          "name": "synthetic full scorecard is a contained, labelled table at every viewport",
+          "passed": true
+        },
+        {
+          "name": "synthetic model is separate and tied to the accepted score revision",
+          "passed": true
+        },
+        {
+          "name": "fresh synthetic market is current; pausing immediately removes current status",
+          "passed": true
+        },
+        {
+          "name": "fresh collection time does not refresh old quote source time",
+          "passed": true
+        },
+        {
+          "name": "score and market clocks remain independent",
+          "passed": true
+        },
+        {
+          "name": "model revision mismatch suppresses probabilities",
+          "passed": true
+        },
+        {
+          "name": "outage retains last accepted match and exposes recovery without completing the match",
+          "passed": false,
+          "error": "Feed outage left retained bookmaker quotes labelled current"
+        },
+        {
+          "name": "synthetic states retain geometry, targets, text and contrast",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "screenshots": [
+        "chromium-1280-dark-synthetic-scorecard.png",
+        "chromium-1280-dark-synthetic-paused-market.png",
+        "chromium-1280-dark-synthetic-independent-clocks.png"
+      ],
+      "passed": false,
+      "audit": {
+        "viewport": 1280,
+        "pageWidth": 1280,
+        "overflow": false,
+        "smallText": [],
+        "smallTargets": [],
+        "contrast": [
+          {
+            "tag": "button",
+            "text": "Pause updates",
+            "class": "lc-button",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Refresh",
+            "class": "lc-button",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Live",
+            "class": "",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Upcoming",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Results",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "All",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Live",
+            "class": "lc-state lc-state-active",
+            "ratio": 7.638,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              109,
+              219,
+              176
+            ],
+            "background": [
+              24,
+              55,
+              46
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "T20 · female",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Synthetic women’s T20 test",
+            "class": "lc-eyebrow",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h2",
+            "text": "Synthetic Alpha v Synthetic Beta",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Synthetic Alpha",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "small",
+            "text": "First innings",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "strong",
+            "text": "100/2",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "12.0 ov",
+            "class": "",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Synthetic test innings in progress",
+            "class": "lc-match-status",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Synthetic test ground · Oct 23, 06:09:31 PM PDT",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Synthetic browser contract fixture",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Source event Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Feed published Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Checked Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "The feed is temporarily unavailable.",
+            "class": "lc-notice",
+            "ratio": 8.097,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              255,
+              193,
+              132
+            ],
+            "background": [
+              59,
+              48,
+              34
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Summary",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Scorecard",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Commentary",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Model win chance",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Bookmaker odds",
+            "class": "",
+            "ratio": 14.01,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "button",
+            "text": "Field guide",
+            "class": "",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "External bookmaker odds · decimal prices",
+            "class": "lc-eyebrow",
+            "ratio": 9.052,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              135,
+              197,
+              242
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h3",
+            "text": "Prices by bookmaker",
+            "class": "lc-section-title",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Prices include bookmaker margin. They are separate from our model percentages. O",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Synthetic browser contract fixture",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Source event Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Checked Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "time",
+            "text": "Oct 23, 07:09:31 PM PDT",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "label",
+            "text": "BookmakerAll bookmakersSynthetic test bookmaker",
+            "class": "lc-field",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h4",
+            "text": "Synthetic test bookmaker",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "h5",
+            "text": "Synthetic match winner",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Open",
+            "class": "lc-state ",
+            "ratio": 8.636,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              27,
+              38,
+              50
+            ]
+          },
+          {
+            "tag": "p",
+            "text": "Quote Oct 23, 07:09:31 PM PDT · Synthetic outcome including super over; test onl",
+            "class": "lc-muted",
+            "ratio": 9.477,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              183,
+              196,
+              209
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Synthetic Alpha",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "strong",
+            "text": "1.75",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "small",
+            "text": "Current quote",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "span",
+            "text": "Synthetic Beta",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "strong",
+            "text": "2.10",
+            "class": "",
+            "ratio": 15.375,
+            "minimum": 3,
+            "passed": true,
+            "foreground": [
+              242,
+              245,
+              248
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          },
+          {
+            "tag": "small",
+            "text": "Current quote",
+            "class": "",
+            "ratio": 7.495,
+            "minimum": 4.5,
+            "passed": true,
+            "foreground": [
+              158,
+              175,
+              193
+            ],
+            "background": [
+              21,
+              30,
+              40
+            ]
+          }
+        ],
+        "skippedContrast": 0,
+        "reducedMotion": true
+      },
+      "requests": 12
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 0,
+    "failed": 1,
+    "checks": 8,
+    "contrastSamples": 49,
+    "providerNetworkRequests": 0
+  },
+  "limitations": [
+    "Only owned local build tabs and contexts were used. No subscriptions or credential-bearing requests.",
+    "Provider payloads stay in memory; matrix contexts replay the same bounded real snapshot and do not establish ongoing provider availability.",
+    "Synthetic contracts are test-only browser network responses, not real matches, predictions or bookmaker prices.",
+    "Computed contrast includes alpha blending over opaque UI planes; ambient/gradient page backgrounds and disabled controls are excluded.",
+    "No manual screen-reader assessment, Lighthouse run or real-user INP measurement is claimed."
+  ],
+  "runtime": {
+    "playwright": "/Users/Rakesh/gstack/node_modules/playwright",
+    "webkitPlaywright": null,
+    "webkitExecutable": null
+  },
+  "configuration": {
+    "engines": [
+      "chromium"
+    ],
+    "widths": [
+      1280
+    ],
+    "themes": [
+      "dark"
+    ]
+  },
+  "completedAt": "2026-10-24T02:07:32.081Z"
+}

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { ChevronDown, Link2, Moon, Sun } from 'lucide-react';
-import { canonicalLeagueHref, hubHref, isLive, leagueHref, leaguesBySport, statusLabel, type LeagueIndex } from '../data/leagues';
+import { canonicalLeagueHref, hubHref, isLive, leagueHref, leaguesBySport, liveCricketHref, liveCricketRequested, statusLabel, type LeagueIndex } from '../data/leagues';
 import { applyTheme, currentTheme, storedTheme, type Theme } from '../lib/theme';
 
 /** Switches between the light and dark themes; until the reader picks one, the page follows the system. */
@@ -63,6 +63,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
   const triggerRef = useRef<HTMLButtonElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const home = import.meta.env.BASE_URL;
+  const inLiveCricket = liveCricketRequested();
   const hub = hubHref(index?.default ?? 'hub');
   // Sports with the most live races first; the sort is stable, so ties keep the list's order.
   const groups = index
@@ -105,8 +106,12 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
           <span>Playoff Pulse</span>
         </a>
 
+        <nav className="site-destinations" aria-label="Main sections">
+          <a href={hub} aria-current={!inLiveCricket ? 'page' : undefined}>Season Odds</a>
+          <a href={liveCricketHref()} aria-current={inLiveCricket ? 'page' : undefined}>Live Cricket</a>
+        </nav>
         <div className="site-header-actions">
-        {index && index.leagues.length > 0 && (
+        {!inLiveCricket && index && index.leagues.length > 0 && (
           <div className="league-menu" ref={menuRef}>
             <button
               aria-controls={panelId}
@@ -148,7 +153,7 @@ const SiteHeader = ({ index, currentId, currentLabel }: { index: LeagueIndex | n
                               <span>
                                 {league.shortName} {league.seasonLabel}
                               </span>
-                              <small className={`status-text status-${statusLabel(league).toLowerCase()}`}>
+                              <small className={`status-text status-${statusLabel(league).toLowerCase().replace(/\s+/g, '-')}`}>
                                 {statusLabel(league)}
                               </small>
                             </a>

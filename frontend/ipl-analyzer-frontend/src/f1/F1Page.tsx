@@ -50,7 +50,7 @@ function status(payload: F1Payload, started: boolean): { label: string; tone: St
   if (isComplete(payload)) {
     return { label: 'Final', tone: 'final' };
   }
-  return started ? { label: 'Live', tone: 'live' } : { label: 'Pre-season', tone: 'pre-season' };
+  return started ? { label: 'In season', tone: 'live' } : { label: 'Pre-season', tone: 'pre-season' };
 }
 
 /** The key of a tier by kind: the title ("champion") or the top-N place. */

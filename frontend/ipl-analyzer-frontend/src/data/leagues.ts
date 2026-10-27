@@ -35,6 +35,7 @@ export function leagueIdFromLocation(search: string = window.location.search, pa
   const localPath = pathname.startsWith(base) ? pathname.slice(base.length) : '';
   const pathId = /^league\/([a-z0-9-]+)\/(?:index\.html)?$/.exec(localPath)?.[1];
   if (pathId) return pathId;
+  if (/^leagues(?:\/(?:index\.html)?)?$/.test(localPath)) return null;
   const requested = new URLSearchParams(search).get('league')?.trim().toLowerCase();
   return requested && LEAGUE_ID_PATTERN.test(requested) ? requested : null;
 }
@@ -53,11 +54,22 @@ export function leagueHref(leagueId: string, _defaultId?: string) {
 /** The all-sports hub of live races (the site root is the landing page). */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function hubHref(_defaultId?: string) {
-  return `${import.meta.env.BASE_URL}?view=hub`;
+  return `${import.meta.env.BASE_URL}leagues/`;
 }
 
-export function hubRequested(search: string = window.location.search) {
-  return new URLSearchParams(search).get('view') === HUB_ID;
+export function hubRequested(search: string = window.location.search, pathname: string = window.location.pathname) {
+  const path = `${import.meta.env.BASE_URL}leagues`;
+  return [path, `${path}/`, `${path}/index.html`].includes(pathname) || new URLSearchParams(search).get('view') === HUB_ID;
+}
+
+/** A real static entry keeps match bookmarks working on GitHub Pages as well. */
+export function liveCricketHref(matchId?: string) {
+  return `${import.meta.env.BASE_URL}cricket/${matchId ? `?match=${encodeURIComponent(matchId)}` : ''}`;
+}
+
+export function liveCricketRequested(pathname: string = window.location.pathname) {
+  const path = `${import.meta.env.BASE_URL}cricket`;
+  return [path, `${path}/`, `${path}/index.html`].includes(pathname);
 }
 
 export function isLive(league: Pick<LeagueSummary, 'status'>) {
@@ -71,7 +83,7 @@ export function statusLabel(league: Pick<LeagueSummary, 'status' | 'started'>) {
   if (league.status === 'postseason' || league.status === 'playoffs') {
     return 'Playoffs';
   }
-  return league.started === false ? 'Pre-season' : 'Live';
+  return league.started === false ? 'Pre-season' : 'In season';
 }
 
 /** Switcher rows: the NFL, NHL and MLB share one row; basketball (NBA, WNBA, NBL, WNBL) has its own. */

@@ -1,0 +1,173 @@
+{
+  "verifiedAt": "2026-10-27T19:27:00Z",
+  "kind": "Local release-candidate regression; not production proof or formal full QA certification",
+  "browser": {
+    "runs": [
+      {
+        "label": "github-free",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "checks": 156,
+        "contrastSamples": 460,
+        "providerNetworkRequests": 2
+      },
+      {
+        "label": "cloudflare-free",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "checks": 156,
+        "contrastSamples": 460,
+        "providerNetworkRequests": 2
+      },
+      {
+        "label": "synthetic-service",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "checks": 180,
+        "contrastSamples": 568,
+        "providerNetworkRequests": 0
+      },
+      {
+        "label": "routes",
+        "cases": 80,
+        "passed": 80,
+        "failed": 0,
+        "checks": 308
+      },
+      {
+        "label": "synthetic-followup",
+        "cases": 8,
+        "passed": 8,
+        "failed": 0,
+        "checks": 32
+      }
+    ],
+    "cases": 124,
+    "checks": 832,
+    "contrastSamples": 1488,
+    "viewports": [
+      320,
+      375,
+      1280
+    ],
+    "engines": [
+      "Chromium",
+      "WebKit"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "errors": 0
+  },
+  "layoutRegression": {
+    "command": "PLAYWRIGHT_MODULE=/existing/playwright node build/verify-entry-layout.mjs BASE...",
+    "before": {
+      "viewportWidth": 375,
+      "viewportHeight": 900,
+      "footerTop": 796,
+      "passed": false
+    },
+    "after": {
+      "bases": [
+        "root",
+        "GitHub subpath"
+      ],
+      "widths": [
+        375,
+        1280
+      ],
+      "viewportHeight": 900,
+      "footerTop": 900,
+      "casesPassed": 4
+    }
+  },
+  "performance": {
+    "lighthouseVersion": "13.5.0",
+    "formFactor": "mobile",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "before": [
+      {
+        "page": "cloudflare-home",
+        "url": "http://127.0.0.1:5395/",
+        "fetchTime": "2026-10-27T19:15:23.154Z",
+        "performance": 92,
+        "lcpMs": 2467.5925500000003,
+        "cls": 0.1317025855714494,
+        "tbtMs": 2,
+        "fcpMs": 1770.0616999999997
+      },
+      {
+        "page": "cloudflare-cricket",
+        "url": "http://127.0.0.1:5395/cricket/",
+        "fetchTime": "2026-10-27T19:15:35.354Z",
+        "performance": 92,
+        "lcpMs": 2464.4019,
+        "cls": 0.12734152980854108,
+        "tbtMs": 0,
+        "fcpMs": 1756.6682500000002
+      },
+      {
+        "page": "github-cricket",
+        "url": "http://127.0.0.1:5393/ipl_top4_analysis/cricket/",
+        "fetchTime": "2026-10-27T19:15:47.120Z",
+        "performance": 93,
+        "lcpMs": 2465.8552,
+        "cls": 0.1097775025780519,
+        "tbtMs": 0,
+        "fcpMs": 1763.5459999999998
+      }
+    ],
+    "after": [
+      {
+        "page": "cloudflare-home",
+        "fetchTime": "2026-10-27T19:26:12.716Z",
+        "performance": 97,
+        "lcpMs": 2420.59455,
+        "cls": 0.005335635389189407,
+        "tbtMs": 0,
+        "fcpMs": 1738.7297
+      },
+      {
+        "page": "cloudflare-cricket",
+        "fetchTime": "2026-10-27T19:26:24.178Z",
+        "performance": 96,
+        "lcpMs": 2461.1030499999997,
+        "cls": 0.04040187419066556,
+        "tbtMs": 0,
+        "fcpMs": 1760.0858750000002
+      },
+      {
+        "page": "github-cricket",
+        "fetchTime": "2026-10-27T19:26:35.586Z",
+        "performance": 96,
+        "lcpMs": 2462.19135,
+        "cls": 0.04040187419066556,
+        "tbtMs": 0,
+        "fcpMs": 1762.326125
+      }
+    ]
+  },
+  "screenshots": [
+    "cricket-375-light.png",
+    "cricket-1280-dark.png"
+  ],
+  "limits": [
+    "Anonymous free-source data replayed only in memory; no continuous or worldwide coverage claim.",
+    "Synthetic contracts establish UI behavior, not actual bookmaker or match-model availability.",
+    "Computed contrast excludes unsupported ambient/gradient samples and disabled controls.",
+    "Installed gstack report template/materializer could not certify full QA; direct scoped browser checks above passed.",
+    "No production revision/status, manual screen-reader assessment or real-user INP is established here.",
+    "Before/after mobile Lighthouse is a single sequential lab run per page and configuration; not real-user performance."
+  ]
+}

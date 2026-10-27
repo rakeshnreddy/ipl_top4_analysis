@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <base href="%BASE_URL%" />
+    <link rel="canonical" href="https://ipl-playoff-pulse.pages.dev/cricket/" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="%BASE_URL%icons/apple-touch-icon.png" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#eef0f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1016" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Apply a saved theme before first paint (see src/lib/theme.ts); otherwise the system decides.
+      try {
+        var theme = localStorage.getItem('pp-theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
+      } catch (error) {}
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>#root { min-height: 100vh; }</style>
+    <meta
+      name="description"
+      content="Follow covered cricket fixtures, available scores and match details. Scorecards, model estimates and bookmaker prices appear only when supplied and verified."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:site_name" content="Playoff Pulse" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Live Cricket Scores &amp; Match Center | Playoff Pulse" />
+    <meta property="og:url" content="%BASE_URL%cricket/" />
+    <meta
+      property="og:description"
+      content="Follow covered cricket fixtures, available scores and match details. Scorecards, model estimates and bookmaker prices appear only when supplied and verified."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Live Cricket Scores &amp; Match Center | Playoff Pulse" />
+    <meta
+      name="twitter:description"
+      content="Follow covered cricket fixtures, available scores and match details. Scorecards, model estimates and bookmaker prices appear only when supplied and verified."
+    />
+    <title>Live Cricket Scores &amp; Match Center | Playoff Pulse</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript><main><h1>Live Cricket</h1><p>Enable JavaScript to fetch current covered matches. No historical result is presented as a live score.</p></main></noscript>
+    <footer class="live-static-credit"><a href="https://sportscore.com/" rel="dofollow" title="Sports data by SportScore">Powered by SportScore</a><span>Free public cricket data · coverage varies by match.</span></footer>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

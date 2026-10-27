@@ -49,7 +49,7 @@ The text scale is 12 / 14 / 16 / 20 / 24 / 32 / 40 / 56px; landing display may g
 
 The foundation, all six page families and static league sharing shipped in PRs #78–85. These rules describe the deployed design. Production screenshots, browser checks and performance measurements are linked from [the release report](docs/site-analysis.md#delivery-and-evidence).
 
-- Shared header: citron pulse tile, wordmark, searchable league picker, theme toggle. The picker searches sport, long/short league names and season. Escape returns focus to the trigger. The theme button reports its pressed state.
+- Shared header: citron pulse tile, wordmark, Season Odds / Live Cricket destinations, searchable season league picker, theme toggle. The picker searches sport, long/short league names and season and stays in the season section. Escape returns focus to the trigger. The theme button reports its pressed state. On phones, the two primary destinations occupy a second row.
 - League header: sport rail, breadcrumb and status, one h1, concise method/freshness strap, joined key facts and 44px section navigation. Facts use solid tiles with crisp dividers.
 - Data plane: one bordered surface, quiet column headers, aligned figures and a clear selected row. Real tables retain captions, scoped headers and row-header buttons. Wide data scrolls inside its own container; the page never scrolls sideways at 320px.
 - Selected team: immediate quantitative payoff, readable distribution, and named next fixture. A selected state must be distinguishable beyond colour.
@@ -57,7 +57,8 @@ The foundation, all six page families and static league sharing shipped in PRs #
 - Conditional match impact: show the affected team/outcome, the named results and the difference in **percentage points**. Do not imply the probabilities are additive across overlapping season outcomes.
 - F1: a timing-board rhythm with points, constructors and a derived points gap. Display actual remaining races/sprints; do not invent possible-points calculations.
 - Landing: a distinct editorial front door with real race facts and direct league destinations, clear coverage, then method. No decorative charts, fake history, testimonials, vanity counters or stock photos.
-- Hub: search and sport filtering above dense, scannable league destinations. Pre-season, ongoing and final states have honest labels. “Live” describes the season, not second-by-second updates.
+- Hub: search and sport filtering above dense, scannable league destinations. Pre-season, In season, Playoffs and Final labels distinguish season status from live match scores.
+- Live Cricket: separate score-first lobby and match center. Model percentages and named bookmaker decimal prices have separate views, provenance and clocks. Missing coverage stays unavailable. Pause freezes displayed content and marks prices not current; resume preserves reader context. The optional field guide is an illustrative flat SVG with explicit CSS tilt, readable HTML labels and a reduced-motion fallback; it never claims match tracking.
 - Share kit: genuine generated media, a visible date/archive state, and a correct route back to its league. No stale asset masquerades as current.
 - Loading: static skeleton geometry and a polite status. Errors explain recovery; pre-season and completed views are designed states, not blank fallbacks.
 
@@ -69,7 +70,7 @@ The foundation, all six page families and static league sharing shipped in PRs #
 
 Only real payload data. Never draw an odds timeline from one snapshot or parse prose into chart data. Use the shared probability formatters, including near-certainty rules; simulated estimates never round to 100%. Explain model differences and limitations in context. All hash navigation must use `samePageHref()` because `<base>` otherwise drops `?league=`. Keep query routes, team hashes and both hosting bases working.
 
-No runtime server, external fonts, trackers or paid dependencies. Load page families lazily. Per-league static HTML must have meaningful source content and metadata, with social images derived from the data. Existing query links remain compatible.
+Season forecasts remain static. Following the approved Live Cricket expansion, its fixed static entry can read SportScore's free public API directly, with visible crawlable attribution. An optional shared Worker keeps keyed provider credentials server-side and enforces free quotas; it is not required for the default source. No external fonts, trackers or paid dependencies. Load page families lazily, including the optional field guide. Per-league static HTML must have meaningful source content and metadata, with social images derived from the data. Existing query links remain compatible.
 
 ## Verification
 

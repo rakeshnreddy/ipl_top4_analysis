@@ -1,0 +1,7 @@
+.sponsorship-notice { min-height: 160px; width: 100%; margin: 32px 0; padding: 20px 24px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--surface); color: var(--text); overflow-wrap: anywhere; }
+.sponsorship-disclosure { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); line-height: 1.5; }
+.sponsorship-notice .sponsorship-name { min-height: 44px; display: inline-flex; align-items: center; font-size: 16px; font-weight: 600; line-height: 1.5; color: var(--text); text-underline-offset: 3px; }
+.sponsorship-name:hover { color: var(--sport-accent, var(--accent)); }
+.sponsorship-name:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.sponsorship-notice .sponsorship-message { max-width: 70ch; margin: 8px 0 0; font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+@media (max-width: 540px) { .sponsorship-notice { padding: 16px; margin: 24px 0; } }

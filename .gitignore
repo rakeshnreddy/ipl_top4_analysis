@@ -21,3 +21,8 @@ venv/
 
 # Downloaded source archives (Cricsheet zips) used by extract_table.py.
 /.cache/
+# Existing local runtimes may be linked into managed worktrees.
+/.cache
+/venv
+# Disposable browser-verification build variants.
+/frontend/ipl-analyzer-frontend/.qa-*/
