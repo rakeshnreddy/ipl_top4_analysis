@@ -41,13 +41,19 @@ describe('HubPage', () => {
 
     const finals = screen.getByRole('heading', { name: 'Final Tables' }).closest('section')!;
     expect(within(finals).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
-    await waitFor(() => expect(document.title).toBe('Season Odds: Title, Playoff & Relegation Odds | Playoff Pulse'));
+    await waitFor(() => expect(document.title).toBe('Season Odds by League | Playoff Pulse'));
   });
 
   it('can be opened while the IPL is the home page', async () => {
     open('/?view=hub', { ...hubIndex, default: 'ipl-2026' });
 
     expect(await screen.findByTestId('hub-page')).toBeInTheDocument();
+  });
+
+  it('opens its static directory route and keeps its canonical after conflicting legacy parameters', async () => {
+    open('/leagues/?league=ipl-2026&utm_source=test');
+    expect(await screen.findByTestId('hub-page')).toBeInTheDocument();
+    await waitFor(() => expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ipl-playoff-pulse.pages.dev/leagues/'));
   });
 
   it('marks a league that has not started as pre-season', async () => {
@@ -107,8 +113,8 @@ describe('HubPage', () => {
 
     fireEvent.click(await screen.findByRole('button', { name: /^Leagues/ }));
     const nav = screen.getByRole('navigation', { name: 'Leagues' });
-    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/?view=hub');
+    expect(within(nav).getByRole('link', { name: 'All leagues' })).toHaveAttribute('href', '/leagues/');
     // The wordmark goes to the landing page.
-    expect(screen.getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
+    expect(within(screen.getByRole('banner')).getByRole('link', { name: 'Playoff Pulse' })).toHaveAttribute('href', '/');
   });
 });

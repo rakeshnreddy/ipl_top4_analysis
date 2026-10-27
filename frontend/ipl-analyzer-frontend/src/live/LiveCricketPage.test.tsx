@@ -7,6 +7,57 @@ vi.mock('../data/freeCricket', () => ({ loadFreeMatches: vi.fn(async () => listF
 beforeEach(() => { vi.mocked(loadFreeMatches).mockImplementation(async () => listFixture()); vi.mocked(loadFreeDetail).mockImplementation(async () => detailFixture()); });
 afterEach(() => { cleanup(); window.history.replaceState({}, '', '/cricket/'); vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 describe('Live Cricket match center', () => {
+  it.each(['publication', 'event'])('uses the newer %s score across lobby and detail snapshots without refreshing an old model', async (clock) => {
+    const t1 = new Date(Date.now() - 2000).toISOString();
+    const t2 = new Date(Date.now() - 1000).toISOString();
+    const t3 = new Date().toISOString();
+    const initialList = listFixture(); const detail = detailFixture();
+    initialList.generatedAt = t1; detail.generatedAt = t1;
+    for (const item of [initialList.matches[0], detail.match]) {
+      item.source.id = 'sportscore'; item.observedAt = clock === 'event' ? t1 : null;
+      item.revision = 'score-100';
+    }
+    detail.model = { status: 'available', source: 'Synthetic model', observedAt: t3, fetchedAt: t3, reason: null, data: { modelId: 'test', modelVersion: 'test', scoreRevision: 'score-100', predictedAt: t3, conditioning: 'Synthetic completed match', probabilities: [{ outcome: 'Synthetic Alpha', probability: 0.7 }, { outcome: 'Synthetic Beta', probability: 0.3 }], history: [] } };
+    vi.mocked(loadFreeMatches).mockResolvedValue(initialList);
+    vi.mocked(loadFreeDetail).mockResolvedValue(detail);
+    window.history.replaceState({}, '', '/cricket/?match=synthetic-one');
+    render(<LiveCricketPage />);
+    await screen.findByRole('heading', { name: 'Synthetic Alpha v Synthetic Beta' });
+    fireEvent.click(screen.getByRole('tab', { name: 'Model win chance' }));
+    await screen.findByText('70%');
+    const newerList = structuredClone(initialList);
+    newerList.generatedAt = t2;
+    newerList.matches[0].observedAt = clock === 'event' ? t2 : null;
+    newerList.matches[0].scores[0].runs = 120;
+    newerList.matches[0].revision = 'score-120';
+    // A later detail collection cannot make its earlier score observation newer.
+    if (clock === 'event') detail.generatedAt = t3;
+    vi.mocked(loadFreeMatches).mockResolvedValue(newerList);
+    fireEvent.click(screen.getByRole('button', { name: 'Refresh' }));
+    await waitFor(() => expect(document.querySelector('.lc-center .lc-score-number strong')).toHaveTextContent('120/2'));
+    expect(screen.getByRole('tabpanel')).not.toHaveTextContent('70%');
+    expect(screen.getByRole('tabpanel')).toHaveTextContent('earlier score revision');
+    expect(document.querySelector('.lc-match-header time[datetime="' + t2 + '"]')).not.toBeNull();
+    const correction = structuredClone(detail);
+    correction.generatedAt = t3; correction.match.observedAt = clock === 'event' ? t3 : null;
+    correction.match.scores[0].runs = 119; correction.match.revision = 'score-119';
+    vi.mocked(loadFreeDetail).mockResolvedValue(correction);
+    fireEvent.click(screen.getByRole('button', { name: 'Refresh' }));
+    await waitFor(() => expect(document.querySelector('.lc-center .lc-score-number strong')).toHaveTextContent('119/2'));
+  });
+
+  it('keeps selected mirror bookmarks under the stable primary lobby search identity', async () => {
+    vi.stubEnv('BASE_URL', '/ipl_top4_analysis/');
+    window.history.replaceState({}, '', '/ipl_top4_analysis/cricket/?match=synthetic-one&utm_source=test');
+    render(<LiveCricketPage />);
+    await screen.findByRole('heading', { name: 'Synthetic Alpha v Synthetic Beta' });
+    await waitFor(() => expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ipl-playoff-pulse.pages.dev/cricket/'));
+    const data = JSON.parse(document.querySelector('script[data-ipl-jsonld]')!.textContent!);
+    expect(data['@type']).toBe('CollectionPage');
+    expect(data['@id']).toBe('https://ipl-playoff-pulse.pages.dev/cricket/#webpage');
+    expect(JSON.stringify(data)).not.toContain('SportsEvent');
+  });
+
   it('keeps missing models and bookmaker prices unavailable without invented numbers', async () => {
     window.history.replaceState({}, '', '/cricket/?match=synthetic-one');
     render(<LiveCricketPage />);

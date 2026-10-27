@@ -1,20 +1,7 @@
-import { canonicalLeagueHref } from '../data/leagues';
+import { PRIMARY_SITE_URL, primaryPageUrl } from './siteIdentity';
 
 export function appBaseHref() {
-  return new URL(import.meta.env.BASE_URL, window.location.origin).href;
-}
-
-/** Normalize legacy query destinations without changing the address being viewed. */
-function canonicalPageHref(href: string) {
-  const url = new URL(href, window.location.origin);
-  if (url.origin !== window.location.origin) return href;
-  const leagueId = url.searchParams.get('league');
-  if (leagueId && /^[a-z0-9-]+$/.test(leagueId)) {
-    const canonical = new URL(canonicalLeagueHref(leagueId), url.origin);
-    canonical.hash = url.hash;
-    return canonical.href;
-  }
-  return url.href;
+  return PRIMARY_SITE_URL;
 }
 
 export function setMetaTag(attribute: 'name' | 'property', key: string, content: string) {
@@ -34,12 +21,12 @@ export function setCanonical(href: string) {
     element.rel = 'canonical';
     document.head.appendChild(element);
   }
-  element.href = href;
+  element.href = primaryPageUrl(href, import.meta.env.BASE_URL);
 }
 
 /** Title, description, canonical and social tags for the page on screen. */
 export function setPageMeta(title: string, description: string, pageHref: string) {
-  pageHref = canonicalPageHref(pageHref);
+  pageHref = primaryPageUrl(pageHref, import.meta.env.BASE_URL);
   document.title = title;
   setCanonical(pageHref);
   setMetaTag('name', 'description', description);
@@ -66,6 +53,11 @@ export function setJsonLd(data: object) {
     script.dataset.iplJsonld = 'true';
     document.head.appendChild(script);
   }
-  script.text = JSON.stringify(data, (_key, value: unknown) =>
-    typeof value === 'string' && /^https?:\/\//.test(value) ? canonicalPageHref(value) : value);
+  script.text = JSON.stringify(data, (key, value: unknown) => {
+    if (typeof value !== 'string' || !/^https?:\/\//.test(value)) return value;
+    const canonical = primaryPageUrl(value, import.meta.env.BASE_URL);
+    // Page canonicals omit fragments; entity IDs require them to remain distinct.
+    const fragment = key === '@id' ? new URL(value).hash : '';
+    return fragment && !new URL(canonical).hash ? `${canonical}${fragment}` : canonical;
+  });
 }

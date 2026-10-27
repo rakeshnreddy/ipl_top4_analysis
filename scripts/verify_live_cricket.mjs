@@ -177,9 +177,9 @@ async function freeMatrix() {
         });
         await step(record, 'direct bookmark metadata and source links retain the correct hosting base', async () => {
           const metadata = await page.evaluate(() => ({ canonical: document.querySelector('link[rel=canonical]')?.href, ogUrl: document.querySelector('meta[property="og:url"]')?.content, description: document.querySelector('meta[name=description]')?.content, activeRoute: document.querySelector('a[aria-current=page]')?.getAttribute('href'), attribution: document.querySelector('.lc-attribution')?.href }));
-          const wantedPath = new URL('cricket/', base).pathname;
-          must(metadata.canonical && new URL(metadata.canonical).pathname === wantedPath, `Canonical path ${metadata.canonical} does not match ${wantedPath}`);
-          must(metadata.ogUrl && new URL(metadata.ogUrl).pathname === wantedPath, `Open Graph URL path mismatch: ${metadata.ogUrl}`);
+          const wantedCanonical = 'https://ipl-playoff-pulse.pages.dev/cricket/';
+          must(metadata.canonical === wantedCanonical, `Canonical ${metadata.canonical} does not match ${wantedCanonical}`);
+          must(metadata.ogUrl === wantedCanonical, `Open Graph URL mismatch: ${metadata.ogUrl}`);
           must(metadata.description?.length > 20, 'Meaningful route description absent');
           must(metadata.attribution === 'https://sportscore.com/', 'Provider attribution destination incorrect');
           return metadata;
@@ -261,7 +261,15 @@ async function parentScoreChecks(page, record, setMode) {
     ['old-score', 'a freshly calculated same-revision model is withheld for an overdue parent observedAt', { scoreObservedAgeSeconds: 600, publicationAgeSeconds: 0, predictionAgeSeconds: 0, outerModelObservedAgeSeconds: 0 }],
     ['old-score-publication', 'absent parent observedAt uses overdue generatedAt rather than fresh fetch or prediction clocks', { scoreObservedAt: null, publicationAgeSeconds: 600, predictionAgeSeconds: 0, outerModelObservedAgeSeconds: 0 }]
   ]) await step(record, name, async () => {
-    setMode(mode); await keyboardActivate(page, 'Pause updates'); await keyboardActivate(page, 'Resume updates');
+    setMode(mode);
+    if (mode === 'old-score-publication') {
+      // Test a first accepted snapshot with no event clock. An older publication
+      // offered to an existing session is correctly rejected by its order guard.
+      await page.reload({ waitUntil: 'domcontentloaded' }); await settle(page); await page.locator('.lc-center').waitFor();
+      await page.getByRole('tab', { name: 'Model win chance', exact: true }).click();
+    } else {
+      await keyboardActivate(page, 'Pause updates'); await keyboardActivate(page, 'Resume updates');
+    }
     if (mode === 'old-score-publication') await page.locator('.lc-match-header .lc-clocks').getByText('Event time not supplied', { exact: true }).waitFor();
     await page.getByRole('heading', { name: 'Current model estimate unavailable', exact: true }).waitFor();
     await page.getByText('The parent score source is overdue. Waiting for a fresh score snapshot before showing a current estimate.', { exact: true }).waitFor();
@@ -330,6 +338,7 @@ async function serviceMatrix() {
         await parentScoreChecks(page, record, value => { mode = value; });
         await step(record, 'suspended synthetic markets cannot appear current', async () => {
           mode = 'suspended-market'; await keyboardActivate(page, 'Pause updates'); await keyboardActivate(page, 'Resume updates');
+          await page.getByRole('tab', { name: 'Bookmaker odds', exact: true }).click();
           await page.locator('.lc-market-heading .lc-state').filter({ hasText: 'Suspended' }).waitFor();
           must(!await page.getByText('Current quote', { exact: true }).count(), 'Suspended quote remained current');
         });

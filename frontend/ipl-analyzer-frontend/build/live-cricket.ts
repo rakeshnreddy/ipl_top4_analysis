@@ -1,7 +1,10 @@
 import type { Plugin } from 'vite';
+import { primaryPageUrl } from '../src/lib/siteIdentity';
 
 /** The fixed lobby entry needs no SPA rewrite, even for unknown match query IDs. */
-export function liveCricketEntryPlugin(siteUrl?: string): Plugin {
+export function liveCricketEntryPlugin(_siteUrl?: string): Plugin {
+  // Retain the existing plugin call signature; serving origin cannot change search identity.
+  void _siteUrl;
   let base = '/';
   return {
     name: 'live-cricket-entry', apply: 'build', enforce: 'post',
@@ -11,8 +14,7 @@ export function liveCricketEntryPlugin(siteUrl?: string): Plugin {
       handler(_options, bundle) {
         const entry = bundle['cricket/index.html'];
         if (!entry || entry.type !== 'asset') throw new Error('Missing static cricket entry.');
-        const site = siteUrl ?? (base === '/' ? 'https://ipl-playoff-pulse.pages.dev/' : `https://rakeshnreddy.github.io${base}`);
-        const canonical = new URL('cricket/', site.endsWith('/') ? site : `${site}/`).href.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        const canonical = primaryPageUrl('/cricket/');
         entry.source = String(entry.source)
           .replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${canonical}" />`)
           .replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);

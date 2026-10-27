@@ -2,11 +2,11 @@
 
 League tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-League Men and Women, NBL and WNBL, and Formula 1. The React/Vite frontend serves checked-in season JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`. A separate `/cricket/` section discovers covered cricket matches through a free source.
 
-Season data generation happens ahead of the frontend build. Live Cricket uses the keyless SportScore API by default; an optional coordinated Worker service supports additional authorized feeds. See the [implementation and verification notes](docs/live-cricket-implementation.md), [service setup](services/live-cricket/README.md), and [future sports roadmap](docs/designs/live-sports-roadmap.md). These changes have been verified locally and have not been deployed.
+Season data generation happens ahead of the frontend build. Live Cricket uses the keyless SportScore API by default; an optional coordinated Worker service supports additional authorized feeds. See the [implementation and verification notes](docs/live-cricket-implementation.md), [service setup](services/live-cricket/README.md), and [future sports roadmap](docs/designs/live-sports-roadmap.md). The notes distinguish dated local verification from release and deployment evidence. See [revenue readiness](docs/revenue-readiness.md) for the integrated trust pages and default-off advertising prerequisites.
 
 ## What The Site Shows
 
-The site root is a landing page with a real title-race feature, selected races across sports, every league by sport and an explanation of the models. The all-sports hub at `/?view=hub` has search, sport and season-state filters, headline odds (title favourite, relegation risk, playoff bubble) and completed-season context. Normal league links use the canonical `/league/<id>/` address; legacy `/?league=<id>` links still open the same interactive league. Light and dark themes follow the system, and the header's theme button saves a choice. See [DESIGN.md](DESIGN.md) and the [redesign analysis and production evidence](docs/site-analysis.md).
+The site root is a landing page with a real title-race feature, selected races across sports, every league by sport and an explanation of the models. The all-sports hub at `/leagues/` (with legacy `/?view=hub` compatibility) has search, sport and season-state filters, headline odds (title favourite, relegation risk, playoff bubble) and completed-season context. Normal league links use the canonical `/league/<id>/` address; legacy `/?league=<id>` links still open the same interactive league. Light and dark themes follow the system, and the header's theme button saves a choice. See [DESIGN.md](DESIGN.md) and the [redesign analysis and production evidence](docs/site-analysis.md).
 
 Cricket pages, during the league stage:
 
@@ -368,7 +368,7 @@ Built to run unattended:
 - Downloads are retried, and the workflow caches `.cache/` between runs so a source that is down for a night falls back to its last good copy.
 - The data commit is rebased and pushed again if `main` moved during the run.
 
-API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for live cricket. Without it, cricket leagues are skipped with a warning. Football, MLS, the NWSL, the A-Leagues, NFL, NBA, WNBA, NBL, NHL, MLB and Formula 1 need no key. Keyless sources and their terms: FixtureDownload (credit it), the Jolpica F1 API (Formula 1; 4 requests a second and 500 an hour, cached, credited on the page), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL, MLS, NWSL and A-League playoffs, MLS, NWSL and A-League score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
+API keys: only `CRICDATA_API_KEY` (free CricketData plan, 100 calls a day, personal and non-commercial use) for in-season cricket data generation. Without it, those season updates are skipped with a warning; the separate Live Cricket section uses SportScore without a key. Football, MLS, the NWSL, the A-Leagues, NFL, NBA, WNBA, NBL, NHL, MLB and Formula 1 need no key. Keyless sources and their terms: FixtureDownload (credit it), the Jolpica F1 API (Formula 1; 4 requests a second and 500 an hour, cached, credited on the page), the NHL stats API, the MLB Stats API (individual, non-commercial use), ESPN's public scoreboard and table (unofficial; the NBA, WNBA, NBL, MLS, NWSL and A-League playoffs, MLS, NWSL and A-League score checks and football deductions use them, and the page falls back to no title odds if they change) and UEFA.com's match and standings services (unofficial; the European cups, cached, credited on the page).
 
 CricketData series ids: set `sources.cricketdata.seriesId` in the league config once the series is listed (most reliable). Otherwise the generator searches CricketData's series list for the configured `seriesNames` plus the season label. A men's league skips series named "Women's ..." (so the BBL never picks up the WBBL); a league is a women's one when its config sets `"gender": "female"` or names a women's series. The `CRICDATA_SERIES_ID` secret applies only to the default league.
 
@@ -475,6 +475,10 @@ Cloudflare Pages should serve these files directly from the static build:
 
 - `/`
 - `/share.html`
+- `/leagues/`: the searchable season directory
+- `/cricket/`: covered cricket fixtures and available match details
+- `/about/`, `/methodology/`, `/privacy/`, `/advertise/`: standalone trust documents
+- `/404.html`: a noindex page for unknown paths
 - `/league/<id>/index.html`: one canonical source document per published league
 - `/social/og/<id>.png`: its data-derived 1200×630 social preview
 - `/manifest.webmanifest` and `/icons/`: installation metadata and app icons
@@ -483,13 +487,13 @@ Cloudflare Pages should serve these files directly from the static build:
 - `/social/instagram-carousel/latest-overview.png`
 - `/social/instagram-carousel/<latest-date>/slide-*.png`
 - `/robots.txt`
-- `/sitemap.xml`: the home page and every published league page, written at build time when `SITE_URL` is set (the GitHub Pages workflows take it from the Pages configuration; set it for a Cloudflare or custom-domain build too)
+- `/sitemap.xml`: home, season directory, cricket, trust and published league pages; both builds advertise the primary Cloudflare origin. `SITE_URL` describes the served deployment and does not change that canonical identity.
 
 The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#standings`, `#top4`, `#playoffs`, or `#deep-dive`.
 
-The build reads the league index and real payloads to generate every league's HTML and PNG (currently 44 of each), canonical metadata, JSON-LD and sitemap entries. Source HTML includes a meaningful `<noscript>` snapshot with standings, facts, source notices and model notes; Formula 1 includes both championship tables. The interactive React app is client-rendered, not React SSR or hydration. Keeping the snapshot in `<noscript>` prevents a large table flashing before the loading state. Legacy query links retain generic initial social previews because a static host cannot vary HTML by query; use canonical paths when sharing.
+The build reads the league index and real payloads to generate every league's HTML and PNG (currently 44 of each), canonical metadata, JSON-LD and sitemap entries. Source HTML includes a visible snapshot with standings, facts, source notices and model notes inside the application root; Formula 1 includes both championship tables. Home, directory and cricket entries also contain readable source HTML. React replaces each source snapshot when it mounts; there is no React SSR or hydration. Legacy root queries redirect to canonical paths in the browser while preserving hashes; use canonical paths when sharing.
 
-Build-only `@resvg/resvg-js` renders previews with the existing Fontsource fonts. The build preloads critical Latin fonts and the canonical page's route, styles and data to shorten request discovery. On root entries, a small helper selects Landing, Hub or an allowlisted league family's route and data hints; it never redirects or fetches other sport families. Legacy query entries retain generic initial social metadata. Root and league pages link the web manifest for standalone installation with icons; no service worker or offline odds cache is installed. Both the root deployment and GitHub Pages subpath use the same build commands above.
+Build-only `@resvg/resvg-js` renders previews with the existing Fontsource fonts. The build preloads critical Latin fonts and the canonical page's route, styles and data to shorten request discovery. On root entries, a small helper selects Landing, Hub or an allowlisted league family's route and data hints; it never redirects or fetches other sport families. Canonical and social page URLs use `src/lib/siteIdentity.ts` and the primary Cloudflare origin; GitHub mirror assets and navigation retain their deployment base. Root and league pages link the web manifest for standalone installation with icons; no service worker or offline odds cache is installed. Both the root deployment and GitHub Pages subpath use the same build commands above.
 
 `public/_headers` keeps hashed Vite assets cacheable while giving canonical JSON and latest social assets short freshness windows.
 
@@ -498,13 +502,13 @@ Build-only `@resvg/resvg-js` renders previews with the existing Fontsource fonts
 When a custom domain is ready:
 
 1. Attach it in Cloudflare Pages.
-2. Update any Cloudflare Pages project settings that should reference the new production URL.
+2. Update `PRIMARY_SITE_URL` in `src/lib/siteIdentity.ts` and any Cloudflare Pages project settings that should reference the new production URL, then rebuild both hosting outputs.
 3. Verify canonical URL, `og:url`, `og:image`, `twitter:image`, and JSON-LD on the custom domain.
 4. Re-test `/data/ipl-2026.json`, the carousel manifest, latest overview image, and dated carousel PNGs.
 
 For ads later:
 
-- Keep ad scripts out until a provider is selected.
+- Display ads and direct sponsorships are selected; serving remains off, and no AdSense account or ad loader is configured. Follow [revenue readiness](docs/revenue-readiness.md) before activation.
 - Reserve layout space before loading ad units to avoid Cumulative Layout Shift.
 - Load ads after primary content and data JSON.
 - Keep image dimensions explicit and monitor Core Web Vitals after adding any ad network script.

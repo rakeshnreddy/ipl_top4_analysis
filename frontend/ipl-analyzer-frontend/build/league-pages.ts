@@ -6,6 +6,7 @@ import { inflateSync } from 'node:zlib';
 import type { Plugin } from 'vite';
 import { Resvg } from '@resvg/resvg-js';
 import { formatChance } from '../src/sport/format';
+import { PRIMARY_SITE_URL, primaryPageUrl } from '../src/lib/siteIdentity';
 
 interface LeagueEntry {
   id: string;
@@ -157,9 +158,9 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
   return {
     id: entry.id, title, heading, description, status, rows, columns, facts, payload, base,
     updated: payload.metadata.generated_at,
-    canonical: new URL(`league/${entry.id}/`, base).href,
-    image: new URL(`social/og/${entry.id}.png`, base).href,
-    dataUrl: new URL(entry.path, base).href,
+    canonical: primaryPageUrl(`league/${entry.id}/`),
+    image: new URL(`social/og/${entry.id}.png`, PRIMARY_SITE_URL).href,
+    dataUrl: new URL(entry.path, PRIMARY_SITE_URL).href,
   };
 }
 
@@ -196,16 +197,16 @@ export function leagueJsonLd(page: LeaguePage) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'WebSite', '@id': `${page.base}#website`, name: 'Playoff Pulse', url: page.base },
-      { '@type': 'WebPage', '@id': `${page.canonical}#webpage`, url: page.canonical, name: page.title, description: page.description, dateModified: page.updated, isPartOf: { '@id': `${page.base}#website` }, mainEntity: { '@id': `${page.canonical}#dataset` }, primaryImageOfPage: { '@type': 'ImageObject', url: page.image, width: 1200, height: 630 } },
+      { '@type': 'WebSite', '@id': `${PRIMARY_SITE_URL}#website`, name: 'Playoff Pulse', url: PRIMARY_SITE_URL },
+      { '@type': 'WebPage', '@id': `${page.canonical}#webpage`, url: page.canonical, name: page.title, description: page.description, dateModified: page.updated, isPartOf: { '@id': `${PRIMARY_SITE_URL}#website` }, mainEntity: { '@id': `${page.canonical}#dataset` }, primaryImageOfPage: { '@type': 'ImageObject', url: page.image, width: 1200, height: 630 } },
       { '@type': 'Dataset', '@id': `${page.canonical}#dataset`, name: `${page.heading} standings and probabilities`, description: page.description, url: page.canonical, dateModified: page.updated, creator: { '@type': 'Organization', name: 'Playoff Pulse' }, distribution: { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: page.dataUrl }, ...(page.payload.metadata.source_url ? { isBasedOn: page.payload.metadata.source_url } : {}) },
     ],
   };
 }
 
-/** Real no-JavaScript source content. The interactive app remains client-rendered. */
+/** Useful initial source content remains readable when JavaScript or data loading fails. */
 export function renderLeagueHtml(template: string, page: LeaguePage) {
-  const content = `<main id="source-snapshot"><nav aria-label="Site"><a href="${escapeHtml(page.base)}">Playoff Pulse</a> · <a href="${escapeHtml(page.base)}?view=hub">All sports</a></nav><p>${escapeHtml(page.status)}</p><h1>${escapeHtml(page.heading)}</h1><p>${escapeHtml(page.description)}</p><dl>${page.facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>${standingsTable(page)}${page.payload.constructorStandings ? standingsTable(page, true) : ''}<h2>Source and method</h2><p>Snapshot updated <time datetime="${escapeHtml(page.updated)}">${escapeHtml(page.updated)}</time>. Source: ${escapeHtml(page.payload.metadata.source)}. Method: ${escapeHtml(page.payload.analysis.model ?? page.payload.analysis.method)}.</p>${(page.payload.metadata.warnings ?? []).map((warning) => `<p>Source notice: ${escapeHtml(warning)}</p>`).join('')}<details><summary>Model notes</summary><ul>${(page.payload.analysis.modelNotes ?? []).map((note) => `<li>${escapeHtml(note)}</li>`).join('')}</ul></details><p>Interactive team analysis loads when JavaScript is available. <a href="${escapeHtml(page.dataUrl)}">View this data snapshot</a>.</p></main>`;
+  const content = `<main id="source-snapshot"><nav aria-label="Site"><a href="${escapeHtml(page.base)}">Playoff Pulse</a> · <a href="${escapeHtml(page.base)}leagues/">All sports</a></nav><p>${escapeHtml(page.status)}</p><h1>${escapeHtml(page.heading)}</h1><p>${escapeHtml(page.description)}</p><dl>${page.facts.map((fact) => `<div><dt>${escapeHtml(fact.label)}</dt><dd>${escapeHtml(fact.value)}</dd></div>`).join('')}</dl>${standingsTable(page)}${page.payload.constructorStandings ? standingsTable(page, true) : ''}<h2>Source and method</h2><p>Snapshot updated <time datetime="${escapeHtml(page.updated)}">${escapeHtml(page.updated)}</time>. Source: ${escapeHtml(page.payload.metadata.source)}. Method: ${escapeHtml(page.payload.analysis.model ?? page.payload.analysis.method)}.</p>${(page.payload.metadata.warnings ?? []).map((warning) => `<p>Source notice: ${escapeHtml(warning)}</p>`).join('')}<details><summary>Model notes</summary><ul>${(page.payload.analysis.modelNotes ?? []).map((note) => `<li>${escapeHtml(note)}</li>`).join('')}</ul></details><p>Interactive team analysis loads when JavaScript is available. <a href="${escapeHtml(page.dataUrl)}">View this data snapshot</a>.</p></main>`;
   let html = template.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`)
     .replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/gi, '')
     .replace(/<meta\b(?=[^>]*(?:\bname="(?:description|twitter:[^"]+)"|\bproperty="og:[^"]+"))[^>]*>/gi, '');
@@ -219,13 +220,13 @@ export function renderLeagueHtml(template: string, page: LeaguePage) {
 <style>#source-snapshot{font:16px/1.5 system-ui,sans-serif;max-width:1200px;margin:24px auto;padding:0 16px;color:#17212b;background:#fff}#source-snapshot a{color:#456500;display:inline-flex;align-items:center;min-height:44px;min-width:44px}#source-snapshot h1{font-size:32px}#source-snapshot dl{display:flex;flex-wrap:wrap;gap:24px}#source-snapshot dd{margin:4px 0;font-weight:600}#source-snapshot .snapshot-scroll{overflow-x:auto}#source-snapshot :focus-visible{outline:2px solid #456500;outline-offset:2px}#source-snapshot table{border-collapse:collapse;min-width:640px;width:100%;font-variant-numeric:tabular-nums}#source-snapshot caption{text-align:left;font-weight:600;padding:16px 0}#source-snapshot th,#source-snapshot td{text-align:left;padding:12px;border-bottom:1px solid #dce2e8}#source-snapshot details{padding:16px 0}#source-snapshot summary{display:list-item;cursor:pointer;min-height:44px;padding:10px 0}</style>`;
   html = html.replace('</head>', `${meta}\n</head>`);
   if (!/<div id="root"><\/div>/.test(html)) throw new Error('Built index is missing its React root.');
-  return html.replace('<div id="root"></div>', `<div id="root"></div><noscript>${content}</noscript>`);
+  return html.replace('<div id="root"></div>', `<div id="root">${content}</div>`);
 }
 
 type RouteBundle = Record<string, { type: string; fileName: string; facadeModuleId?: string | null; imports?: string[] }>;
 
 /** Hint only the selected route to remove the index → route → payload discovery waterfall. */
-function criticalPreloads(bundle: RouteBundle, sport: string, id: string | null, base: string, template: string) {
+export function criticalPreloads(bundle: RouteBundle, sport: string, id: string | null, base: string, template: string) {
   const component = sport === 'landing' ? '/src/landing/LandingPage.tsx' : sport === 'hub' ? '/src/hub/HubPage.tsx' : sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
   const route = Object.values(bundle).find((item) => item.type === 'chunk' && item.facadeModuleId?.endsWith(component));
   const modules = new Set<string>();
@@ -308,11 +309,11 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
         const site = address.endsWith('/') ? address : `${address}/`;
         const entries = (JSON.parse(readFileSync(resolve(publicDir, 'data/leagues.json'), 'utf8')) as { leagues: LeagueEntry[] }).leagues;
         this.emitFile({ type: 'asset', fileName: 'social/og/playoff-pulse.png', source: renderSocialPng(renderHomeOgSvg(entries.length, new Set(entries.map((entry) => entry.sport ?? 'cricket')).size)) });
-        const homeImage = new URL('social/og/playoff-pulse.png', site).href;
+        const homeImage = new URL('social/og/playoff-pulse.png', PRIMARY_SITE_URL).href;
         const fontFiles = Object.keys(bundle).filter((file) => /(?:barlow-semi-condensed-latin-700-normal|ibm-plex-sans-latin-wght-normal)[^/]*\.woff2$/.test(file));
         const fontTag = (file: string) => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${escapeHtml(base + file)}" />`;
         const fontPreloads = fontFiles.map(fontTag).join('\n');
-        const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(site)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(site)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
+        const homeTemplate = String(template.source).replace(/<link\b(?=[^>]*\brel="canonical")[^>]*>/i, `<link rel="canonical" href="${escapeHtml(PRIMARY_SITE_URL)}" />`).replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${escapeHtml(PRIMARY_SITE_URL)}" />`).replace(/<meta name="twitter:card"[^>]*>/i, '<meta name="twitter:card" content="summary_large_image" />').replace('</head>', `<meta property="og:image" content="${escapeHtml(homeImage)}" /><meta name="twitter:image" content="${escapeHtml(homeImage)}" />\n${fontPreloads}\n</head>`);
         const legacyHints = legacyQueryPreloadScript(entries, bundle, base, homeTemplate);
         template.source = homeTemplate.replace('</head>', `<script data-pp-legacy-preloads>${legacyHints}</script>\n</head>`);
         for (const entry of entries) {

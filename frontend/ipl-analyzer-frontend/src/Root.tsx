@@ -1,6 +1,7 @@
 import { Component, lazy, Suspense, useEffect, useMemo, useState, type ReactNode } from 'react';
 import './App.css';
 import { ErrorState, LoadingState } from './components/PageState';
+import SiteFooter from './components/SiteFooter';
 import { DEFAULT_LEAGUE_ID } from './data/iplData';
 import { HUB_ID, hubRequested, leagueIdFromLocation, liveCricketRequested, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
 const App = lazy(() => import('./App'));
@@ -75,5 +76,5 @@ class RouteBoundary extends Component<{ children: ReactNode }, { failed: boolean
       : this.props.children;
   }
 }
-const RoutedRoot = () => <RouteBoundary><Suspense fallback={<LoadingState />}><Root /></Suspense></RouteBoundary>;
+const RoutedRoot = () => <><div className="site-route-content"><RouteBoundary><Suspense fallback={<LoadingState />}><Root /></Suspense></RouteBoundary></div><SiteFooter /></>;
 export default RoutedRoot;

@@ -1,10 +1,13 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Clock3, Pause, Play, RefreshCw, Search, Radio, ChevronRight } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
+import SponsorshipNotice from '../components/SponsorshipNotice';
 import { liveCricketHref as cricketHref, type LeagueIndex } from '../data/leagues';
 import { loadFreeDetail, loadFreeMatches } from '../data/freeCricket';
 import { apiOrigin, parseDetailSnapshot, parseListSnapshot } from './client';
 import { useLiveFeed } from './useLiveFeed';
+import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { CRICKET_DESCRIPTION, CRICKET_TITLE } from '../lib/siteIdentity';
 import type { Bookmaker, Delivery, MatchDetailSnapshot, MatchSummary, Part, ScorecardInnings } from './types';
 import './live.css';
 const FieldGuide = lazy(() => import('./FieldGuide'));
@@ -281,9 +284,27 @@ function Markets({
     {!bookmaker.markets.length && <p>Markets unavailable.</p>}
   </section>)}</>;
 }
+/** Event clocks take precedence; SportScore publication clocks order its snapshots, not balls. */
+function latestScore(summary: MatchSummary | undefined, detail: MatchDetailSnapshot | null, listPublishedAt: string | null) {
+  const fallback = { match: detail?.match ?? summary, publishedAt: detail ? detail.generatedAt : listPublishedAt };
+  if (!summary || !detail || summary.id !== detail.match.id || summary.source.id !== detail.match.source.id) return fallback;
+  const eventClocks = !!summary.observedAt && !!detail.match.observedAt;
+  const publicationClocks = summary.source.id === 'sportscore' && summary.observedAt === null && detail.match.observedAt === null;
+  if (!eventClocks && !publicationClocks) return fallback;
+  const listClock = eventClocks ? summary.observedAt : listPublishedAt;
+  const detailClock = eventClocks ? detail.match.observedAt : detail.generatedAt;
+  // Unknown/tied cross-resource clocks retain the detail view's authority.
+  // A later same-resource correction may legitimately lower a supplied score.
+  return listClock && detailClock && Date.parse(listClock) > Date.parse(detailClock)
+    ? { match: summary, publishedAt: listPublishedAt }
+    : fallback;
+}
+
 function MatchCenter({
   match,
   detail,
+  scorePublishedAt,
+  scoreFromList,
   loading,
   error,
   now,
@@ -291,6 +312,8 @@ function MatchCenter({
 }: {
   match: MatchSummary;
   detail: MatchDetailSnapshot | null;
+  scorePublishedAt: string | null;
+  scoreFromList: boolean;
   loading: boolean;
   error: string | null;
   now: number;
@@ -299,7 +322,7 @@ function MatchCenter({
   const [tab, setTab] = useState<Tab>('Summary');
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const label = match.teams.map(team => team.name).join(' v ') || 'Match';
-  const scoreOverdue = detail && old(match.observedAt ?? detail.generatedAt, detail.staleAfterSeconds, now) && activeStates.has(match.state);
+  const scoreOverdue = detail && old(match.observedAt ?? scorePublishedAt, detail.staleAfterSeconds, now) && activeStates.has(match.state);
   return <article className="lc-center" aria-label="Match center">
   <header className="lc-match-header">
     <div className="lc-match-meta">
@@ -313,7 +336,8 @@ function MatchCenter({
     {scoreOverdue && <p className="lc-notice">Score source overdue · displaying the last known score.</p>}
     <p className="lc-match-status" role="status">{match.statusText || 'Match status not supplied'}</p>
     <p className="lc-muted">{match.venue ?? 'Venue not supplied'} · {time(match.startTime)}</p>
-    <Clocks source={match.source.name} observedAt={match.observedAt} fetchedAt={match.fetchedAt} publishedAt={detail?.generatedAt} />
+    <Clocks source={match.source.name} observedAt={match.observedAt} fetchedAt={match.fetchedAt} publishedAt={scorePublishedAt} />
+    {scoreFromList && <p className="lc-notice">The fixture feed has a newer score. Detailed sections keep their own update times.</p>}
   </header>
   {error && <p className="lc-notice" role="status">{error}</p>}
   <div className="lc-tabs" role="tablist" aria-label="Match views">
@@ -383,7 +407,10 @@ export default function LiveCricketPage({
   const detailPath = selected && !badConfiguration && (origin || selectedSummary) ? origin ? `${origin}/v1/matches/${encodeURIComponent(selected)}` : `free:match:${selected}` : null;
   const freeDetail = useCallback((signal: AbortSignal) => loadFreeDetail(selected!, selectedSummary!, signal), [selected, selectedSummary]);
   const detail = useLiveFeed(detailPath, detailParser, paused, free ? freeDetail : undefined);
-  const match = detail.data?.match ?? selectedSummary;
+  const scoreSnapshot = latestScore(selectedSummary, detail.data, list.data?.generatedAt ?? null);
+  const match = scoreSnapshot.match;
+  const scoreFromList = !!match && !!detail.data && match.revision !== detail.data.match.revision;
+  const displayedDetail = detail.data && match && match !== detail.data.match ? { ...detail.data, match } : detail.data;
   const focusedSelection = useRef<string | null>(null);
   const currentMatchId = match?.id;
   // Explicit navigation moves readers to the score; automatic refresh never moves focus.
@@ -412,7 +439,10 @@ export default function LiveCricketPage({
     return () => clearInterval(timer);
   }, [paused]);
   useEffect(() => {
-    document.title = selected && match ? `${match.teams.map(team => team.shortName || team.name).join(' v ')} · Live Cricket · Playoff Pulse` : 'Live Cricket · Playoff Pulse';
+    const title = selected && match ? `${match.teams.map(team => team.shortName || team.name).join(' v ')} · Live Cricket · Playoff Pulse` : CRICKET_TITLE;
+    const href = new URL('cricket/', appBaseHref()).href;
+    setPageMeta(title, CRICKET_DESCRIPTION, href);
+    setJsonLd({ '@context': 'https://schema.org', '@type': 'CollectionPage', '@id': `${href}#webpage`, name: CRICKET_TITLE, description: CRICKET_DESCRIPTION, url: href, isPartOf: { '@type': 'WebSite', '@id': `${appBaseHref()}#website`, name: 'Playoff Pulse', url: appBaseHref() } });
   }, [selected, match]);
   const navigate = (id?: string) => {
     window.history.pushState({}, '', cricketHref(id));
@@ -504,7 +534,7 @@ export default function LiveCricketPage({
             event.preventDefault();
             navigate();
           }}><ArrowLeft size={18} aria-hidden="true" />All matches</a>}
-        {match ? <MatchCenter key={match.id} match={match} detail={detail.data} loading={detail.loading} error={detail.error} now={now} paused={paused} /> : selected ? <div className="lc-selection-empty">
+        {match ? <MatchCenter key={match.id} match={match} detail={displayedDetail} scorePublishedAt={scoreSnapshot.publishedAt} scoreFromList={scoreFromList} loading={detail.loading} error={detail.error} now={now} paused={paused} /> : selected ? <div className="lc-selection-empty">
           <span className="lc-eyebrow">Match center</span>
           <h2>{list.loading || detail.loading ? 'Loading selected match…' : 'Match not in current coverage'}</h2>
           <p>{detail.error ?? 'The public match list is bounded. A match may leave this feed or no longer be supplied by the source.'}</p>
@@ -537,6 +567,13 @@ export default function LiveCricketPage({
       </details>}
       <a className="lc-attribution" href="https://sportscore.com/" target="_blank" rel="dofollow noopener" title="SportScore — live sports scores">Powered by SportScore</a>
     </section>
+    {!selected && !paused && !stale && !list.error && !badConfiguration
+      && list.data?.status === 'ok' && filtered.length > 0 && <SponsorshipNotice context={{
+        url: window.location.href,
+        sourceIds: [list.data.source.id, ...matches.map(item => item.source.id)],
+        contentReady: true,
+        attributionVisible: true,
+      }} />}
   </main>
   </div>;
 }

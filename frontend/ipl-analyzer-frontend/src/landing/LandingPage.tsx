@@ -8,10 +8,11 @@ import { loadSportData, type SportPayload } from '../data/sportData';
 import { formatChance } from '../sport/format';
 import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
+import { HOME_DESCRIPTION, HOME_TITLE } from '../lib/siteIdentity';
 import { samePageHref } from '../lib/ui';
 
-const TITLE = 'Playoff Pulse: Season Title, Playoff & Relegation Odds Across Sports';
-const DESCRIPTION = 'Title races, playoff chases and relegation fights across football, cricket, basketball, American sports and Formula 1. Explore model season odds, standings and the games that matter, refreshed twice a day.';
+const TITLE = HOME_TITLE;
+const DESCRIPTION = HOME_DESCRIPTION;
 
 interface RacePreview {
   id: string;
