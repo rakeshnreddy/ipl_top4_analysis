@@ -10,7 +10,7 @@ import { formatGeneratedAt } from '../lib/standings';
 import { appBaseHref, setJsonLd, setPageMeta } from '../lib/seo';
 import { heatStyle, samePageHref } from '../lib/ui';
 import { formatChance } from '../sport/format';
-import { loadF1Data, type F1Event, type F1Payload, type F1Team, type F1Tier } from './f1Data';
+import { loadF1Data, validPositionChances, type F1Event, type F1Payload, type F1Team, type F1Tier } from './f1Data';
 
 const NEXT_EVENTS = 4;
 const RESULTS_LIMIT = 8;
@@ -41,8 +41,8 @@ function seo(payload: F1Payload) {
     };
   }
   return {
-    title: `${shortName} ${seasonLabel} Title Odds: Drivers' & Constructors' Championship Chances | Playoff Pulse`,
-    description: `Daily ${name} ${seasonLabel} drivers' and constructors' title odds from ${payload.analysis.simulations.toLocaleString()} simulated seasons, with the standings, win and podium favourites for every remaining race and the latest results.`,
+    title: `${shortName} ${seasonLabel} Championship Odds: All Finishing Positions | Playoff Pulse`,
+    description: `Daily ${name} ${seasonLabel} drivers' and constructors' finishing-position odds from ${payload.analysis.simulations.toLocaleString()} simulated seasons, with current standings, remaining-race favourites and recent results.`,
   };
 }
 
@@ -74,6 +74,59 @@ const Named = ({ team, code, name }: { team: F1Team | undefined; code: string; n
   </span>
 );
 
+interface PositionRow {
+  key: string;
+  code: string;
+  name: string;
+  detail: string;
+  points: number;
+  team: F1Team | undefined;
+}
+
+const PositionTable = ({ rows, positions, label }: {
+  rows: PositionRow[];
+  positions: Record<string, number[]> | undefined;
+  label: 'Drivers' | 'Constructors';
+}) => (
+  <>
+    <p className="probability-note f1-position-key" id={`${label.toLowerCase()}-position-key`}>
+      Each column is one exact finishing position, not a cumulative top-N chance. – means no simulated finishes;
+      {' '}small chances can round to zero in the data. Unavailable means this update has no valid full distribution.
+    </p>
+    <div className="table-scroll f1-position-scroll" tabIndex={0} role="region" aria-label={`${label} position odds, scroll for all positions`} aria-describedby={`${label.toLowerCase()}-position-key`}>
+      <table className="data-table f1-table f1-position-table">
+        <caption className="visually-hidden">{label}' exact championship position odds, percentages</caption>
+        <thead>
+          <tr>
+            <th scope="col" className="col-team f1-position-identity">{label === 'Drivers' ? 'Driver' : 'Team'}</th>
+            <th scope="col" className="f1-position-points"><abbr title="Current points">Pts</abbr></th>
+            {rows.map((_, index) => <th scope="col" key={index} title={`Finish championship in position ${index + 1}`}>P{index + 1}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => {
+            const values = positions?.[row.key];
+            return (
+              <tr key={row.key}>
+                <th scope="row" className="col-team f1-position-identity">
+                  <Named code={row.code} name={row.name} team={row.team} />
+                  <span className="f1-position-detail">{row.detail}</span>
+                </th>
+                <td className="is-strong f1-position-points">{row.points}</td>
+                {validPositionChances(values, rows.length) ? values.map((value, index) => (
+                  <td key={index} style={heatStyle(value, 'good')} aria-label={`${row.code} P${index + 1}: ${value === 0 ? '0%' : formatChance(value)}`}>
+                    {formatChance(value)}
+                  </td>
+                )) : <td className="f1-position-unavailable" colSpan={rows.length}>Unavailable</td>}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </>
+);
+
 /** Points gaps use a zero baseline, with exact text beside every mark. */
 const GapPlot = ({ rows, label }: { rows: { shortName: string; fullName: string; points: number }[]; label: string }) => {
   const leaders = [...rows].sort((a, b) => b.points - a.points).slice(0, 5);
@@ -85,6 +138,7 @@ const GapPlot = ({ rows, label }: { rows: { shortName: string; fullName: string;
 const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueIndex | null }) => {
   const [payload, setPayload] = useState<F1Payload | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [championshipView, setChampionshipView] = useState<'positions' | 'standings'>('positions');
 
   useEffect(() => {
     let active = true;
@@ -177,9 +231,13 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
   const chance = (key: string, tier: F1Tier | undefined) => (tier ? payload.analysis.probabilities[key]?.[tier.key] ?? 0 : 0);
   const teamChance = (key: string) => (teamTitle ? payload.analysis.constructorProbabilities[key]?.[teamTitle.key] ?? 0 : 0);
 
-  const favourite = [...payload.standings].sort((a, b) => chance(b.teamKey, driverTitle) - chance(a.teamKey, driverTitle))[0];
-  const teamFavourite = [...payload.constructorStandings].sort((a, b) => teamChance(b.teamKey) - teamChance(a.teamKey))[0];
-  const nextEvent = payload.events[0];
+  const favourite = complete
+    ? payload.standings.find((row) => row.rank === 1)
+    : [...payload.standings].sort((a, b) => chance(b.teamKey, driverTitle) - chance(a.teamKey, driverTitle))[0];
+  const teamFavourite = complete
+    ? payload.constructorStandings.find((row) => row.rank === 1)
+    : [...payload.constructorStandings].sort((a, b) => teamChance(b.teamKey) - teamChance(a.teamKey))[0];
+  const nextEvent = complete ? undefined : payload.events[0];
   const facts = [
     complete
       ? { label: "Drivers' champion", value: favourite ? `${favourite.fullName} (${favourite.shortName})` : '–' }
@@ -226,16 +284,24 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
                 ? `${races} races and ${payload.events.length - races} sprints remaining. Odds from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
                 : `Pre-season projections from ${payload.analysis.simulations.toLocaleString()} simulated seasons.`
           }
-          title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Standings` : `${payload.league.shortName} ${payload.league.seasonLabel} Title Odds`}
+          title={complete ? `${payload.league.name} ${payload.league.seasonLabel} Final Standings` : `${payload.league.shortName} ${payload.league.seasonLabel} Championship Odds`}
         />
 
         {payload.metadata.warnings.length > 0 && <p className="data-note" role="status">Data note: {payload.metadata.warnings.join(' ')}</p>}
+        {!complete && <div className="f1-view-controls" role="group" aria-label="Championship view">
+          <button type="button" aria-pressed={championshipView === 'positions'} onClick={() => setChampionshipView('positions')}>All positions</button>
+          <button type="button" aria-pressed={championshipView === 'standings'} onClick={() => setChampionshipView('standings')}>Standings</button>
+        </div>}
         <div className="f1-championships">
         <section className="panel" id="drivers" aria-labelledby="drivers-title">
           <div className="section-heading">
             <h2 id="drivers-title">Drivers' Championship</h2>
-            <p>{complete ? 'Final standings' : 'Points so far, and the chance of each finish'}</p>
+            <p>{complete ? 'Final standings' : championshipView === 'positions' ? 'Every driver, every championship position' : 'Current points, wins and title / top-three odds'}</p>
           </div>
+          {!complete && championshipView === 'positions' ? <PositionTable label="Drivers" positions={payload.analysis.positions} rows={payload.standings.map((row) => ({
+            key: row.teamKey, code: row.shortName, name: row.fullName, points: row.points, team: teams.get(row.team ?? ''),
+            detail: `${teams.get(row.team ?? '')?.fullName ?? 'Team unavailable'}${row.racing ? '' : ' · No current race seat'}`,
+          }))} /> :
           <div className="table-scroll" tabIndex={0} role="region" aria-label="Drivers standings, scroll for all columns">
             <table className="data-table f1-table">
               <caption className="visually-hidden">Drivers' standings{complete ? '' : ' with title and top-three odds'}</caption>
@@ -286,7 +352,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
                         const value = chance(row.teamKey, tier);
                         return complete ? (
                           <td className="col-tier" key={tier.key}>
-                            <ChampionMark achieved={value >= 50} label={tier.label} />
+                            <ChampionMark achieved={tier.kind === 'champion' ? row.rank === 1 : row.rank <= (tier.size ?? 0)} label={tier.label} />
                           </td>
                         ) : (
                           <td className="col-tier" key={tier.key} style={heatStyle(value, 'good')}>
@@ -299,7 +365,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
                 })}
               </tbody>
             </table>
-          </div>
+          </div>}
           <p className="probability-note">
             Drivers level on points are ranked by race wins, then second places, and so on; sprints do not count.
             {payload.standings.some((row) => !row.racing) && ' Drivers no longer in a race seat keep their points.'}
@@ -309,8 +375,11 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
         <section className="panel" id="constructors" aria-labelledby="constructors-title">
           <div className="section-heading">
             <h2 id="constructors-title">Constructors' Championship</h2>
-            <p>Both cars score for their team</p>
+            <p>{complete ? 'Final standings · both cars score for their team' : championshipView === 'positions' ? 'Every team, every championship position' : 'Both cars score for their team'}</p>
           </div>
+          {!complete && championshipView === 'positions' ? <PositionTable label="Constructors" positions={payload.analysis.constructorPositions} rows={payload.constructorStandings.map((row) => ({
+            key: row.teamKey, code: row.shortName, name: row.fullName, points: row.points, team: teams.get(row.teamKey), detail: row.drivers.map(code).join(' · '),
+          }))} /> :
           <div className="table-scroll" tabIndex={0} role="region" aria-label="Constructors standings, scroll for all columns">
             <table className="data-table f1-table">
               <caption className="visually-hidden">Constructors' standings{complete ? '' : ' with title odds'}</caption>
@@ -351,7 +420,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
                       {teamTitle &&
                         (complete ? (
                           <td className="col-tier">
-                            <ChampionMark achieved={value >= 50} label={teamTitle.label} />
+                            <ChampionMark achieved={row.rank === 1} label={teamTitle.label} />
                           </td>
                         ) : (
                           <td className="col-tier" style={heatStyle(value, 'good')}>
@@ -363,7 +432,7 @@ const F1Page = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Leag
                 })}
               </tbody>
             </table>
-          </div>
+          </div>}
         </section>
 
         </div>
