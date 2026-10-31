@@ -68,6 +68,26 @@ describe('static league source documents', () => {
     expect(tables[1].querySelector('tbody tr')?.textContent).toContain(String(payload.constructorStandings![0].points));
   });
 
+  it('publishes every F1 championship position in the initial source on both hosting bases', () => {
+    const { entry, payload } = load('f1-2026');
+    const positions = (rows: LeaguePayload['standings']) => Object.fromEntries(rows.map((row, rank) => [row.teamKey, rows.map((_, place) => place === rank ? 100 : 0)]));
+    const enriched = { ...payload, analysis: { ...payload.analysis, positions: positions(payload.standings), constructorPositions: positions(payload.constructorStandings!) } };
+    for (const base of ['https://ipl-playoff-pulse.pages.dev/', 'https://rakeshnreddy.github.io/ipl_top4_analysis/']) {
+      const page = describeLeague(entry, enriched, base);
+      const document = new DOMParser().parseFromString(renderLeagueHtml(template, page), 'text/html');
+      const tables = document.querySelectorAll('table');
+      for (const [index, rows] of [payload.standings, payload.constructorStandings!].entries()) {
+        const table = tables[index];
+        expect(table.caption?.textContent).toContain('championship position');
+        expect(table.querySelector('thead')?.textContent).toContain(`P${rows.length}`);
+        const last = table.querySelectorAll('tbody tr')[rows.length - 1];
+        expect(last.querySelector('th[scope=row]')?.textContent).toBe(rows.at(-1)!.fullName);
+        expect(last.querySelector('td:last-child')?.textContent).toBe('>99.9%');
+        expect(table.textContent).not.toContain('100%');
+      }
+    }
+  });
+
   it('does not call a tied zero-game table a standings leader before the season', () => {
     const { entry, payload } = load('epl-2026-27');
     payload.standings.forEach((row) => { row.played = 0; });

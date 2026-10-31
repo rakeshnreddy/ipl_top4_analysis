@@ -119,9 +119,16 @@ export const f1Payload: F1Payload = {
       max_verstappen: { title: 54, top3: 99 },
       antonelli: { title: 44.5, top3: 98 },
       russell: { title: 1.5, top3: 98 },
-      tsunoda: { title: 0, top3: 0 },
+      tsunoda: { title: 0, top3: 5 },
     },
     constructorProbabilities: { mercedes: { title: 80 }, red_bull: { title: 20 }, rb: { title: 0 } },
+    positions: {
+      max_verstappen: [54, 31, 14, 1],
+      antonelli: [44.5, 35.5, 18, 2],
+      russell: [1.5, 33.5, 63, 2],
+      tsunoda: [0, 0, 5, 95],
+    },
+    constructorPositions: { mercedes: [80, 20, 0], red_bull: [20, 80, 0], rb: [0, 0, 100] },
   },
 };
 

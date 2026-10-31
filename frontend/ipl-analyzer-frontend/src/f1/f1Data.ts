@@ -1,4 +1,4 @@
-/** Formula 1 payloads (formula1.py): drivers' and constructors' championships, title odds and race favourites. */
+/** Formula 1 payloads (formula1.py): full championship position odds and race favourites. */
 
 export interface F1Tier {
   key: string;
@@ -102,9 +102,14 @@ export interface F1Payload {
     modelNotes: string[];
     probabilities: Record<string, Record<string, number>>;
     constructorProbabilities: Record<string, Record<string, number>>;
+    /** Exact championship places: array index 0 is P1, expressed as percentages. */
+    positions?: Record<string, number[]>;
+    constructorPositions?: Record<string, number[]>;
     expected?: Record<string, { points: number }>;
   };
 }
+
+export { validPositionChances } from './positionOdds';
 
 export const f1DataUrl = (leagueId: string) => `${import.meta.env.BASE_URL}data/${leagueId}.json`;
 

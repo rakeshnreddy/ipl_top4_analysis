@@ -1,4 +1,4 @@
-"""Formula 1: the drivers' and constructors' championships, with title odds.
+"""Formula 1: the drivers' and constructors' championships, with finishing-position odds.
 
 Data comes from the Jolpica F1 API (https://api.jolpi.ca/ergast/f1/, the Ergast
 successor): no key, and every download is cached so a failed refresh falls back to
@@ -639,8 +639,6 @@ def win_probabilities(model: PaceModel, lineup: dict[str, str], kind: str = "rac
 
 SIMULATIONS = 20_000
 SEED = 20261004
-# Tie order inside a simulated season: points, then wins, second and third places, then by lot.
-TIE_SCALES = (1e-3, 1e-5, 1e-7)
 
 
 @dataclass
@@ -651,16 +649,22 @@ class SeasonOdds:
     driver_points: dict[str, float]
     constructor_title: dict[str, float]
     constructor_points: dict[str, float]
+    # Entrant -> championship finishing-position chances, P1 first (fractions, not percentages).
+    driver_positions: dict[str, list[float]]
+    constructor_positions: dict[str, list[float]]
     # Event key -> driver -> (win, podium) chances.
     events: dict[str, dict[str, tuple[float, float]]]
 
 
 def _ranked_positions(points: np.ndarray, places: list[np.ndarray], rng: np.random.Generator) -> np.ndarray:
-    keys = points.astype(np.float64).copy()
-    for scale, counts in zip(TIE_SCALES, places):
-        keys += scale * counts
-    keys += 1e-9 * rng.random(keys.shape)
-    return team_sports.positions_from_keys(keys)
+    """Exact points/countback order; only an otherwise identical record is settled by lot."""
+    # lexsort's last key is primary. Integer keys keep even the lowest race place significant,
+    # without letting many lower-place finishes outweigh points or a better race finish.
+    keys = (rng.random(points.shape), *(np.iinfo(np.uint16).max - counts for counts in reversed(places)), -points)
+    order = np.lexsort(keys, axis=1)
+    ranks = np.empty_like(order)
+    ranks[np.arange(len(points))[:, None], order] = np.arange(points.shape[1])[None, :]
+    return ranks
 
 
 def simulate_season(
@@ -682,7 +686,7 @@ def simulate_season(
     team-mates) and every driver's take a random-walk step before each event, so that over a
     whole season of ``season_events`` events they drift by ``drift`` and ``driver_drift``. Then for
     each event: who retires, and the order of the rest by Plackett-Luce sampling (strength plus
-    Gumbel noise). Countback inside a simulation uses wins, second and third places, then lots.
+    Gumbel noise). Countback uses every race finishing position, then lots for identical records.
     """
     rng = np.random.default_rng(seed)
     everyone = sorted(set(drivers) | set(lineup))
@@ -692,16 +696,21 @@ def simulate_season(
     racing = [driver for driver in everyone if driver in lineup]
     columns = np.array([index[driver] for driver in racing], dtype=int)
     count, racers = simulations, len(racing)
+    countback_width = max(racers, max((place for row in (*drivers.values(), *constructors.values()) for place in row.places), default=0))
 
-    def base(rows: dict[str, Row], keys: list[str]) -> list[np.ndarray]:
-        fields = [[rows[key].points if key in rows else 0.0 for key in keys]]
-        fields += [[rows[key].places.get(place, 0) if key in rows else 0 for key in keys] for place in (1, 2, 3)]
-        return [np.tile(np.array(values, dtype=np.float64), (count, 1)) for values in fields]
+    def base(rows: dict[str, Row], keys: list[str]) -> tuple[np.ndarray, np.ndarray]:
+        points = np.tile(np.array([rows[key].points if key in rows else 0.0 for key in keys], dtype=np.float64), (count, 1))
+        # A season has only dozens of races: compact counts avoid a float tensor for every place.
+        places = np.empty((countback_width, count, len(keys)), dtype=np.uint16)
+        for position in range(countback_width):
+            places[position] = [rows[key].places.get(position + 1, 0) if key in rows else 0 for key in keys]
+        return points, places
 
-    driver_points, driver_wins, driver_seconds, driver_thirds = base(drivers, everyone)
-    team_points, team_wins, team_seconds, team_thirds = base(constructors, teams)
+    driver_points, driver_places = base(drivers, everyone)
+    team_points, team_places = base(constructors, teams)
+    racing_teams = np.array([team_index[lineup[driver]] for driver in racing], dtype=int)
     membership = np.zeros((racers, len(teams)))
-    membership[np.arange(racers), [team_index[lineup[driver]] for driver in racing]] = 1.0
+    membership[np.arange(racers), racing_teams] = 1.0
 
     car_step = drift / math.sqrt(max(season_events, 1))
     driver_step = driver_drift / math.sqrt(max(season_events, 1))
@@ -733,26 +742,31 @@ def simulate_season(
         winners = finished & (place == 0)
         podium = finished & (place < 3)
         if event.kind == "race":
-            for target, team_target, position in ((driver_wins, team_wins, 0), (driver_seconds, team_seconds, 1), (driver_thirds, team_thirds, 2)):
-                hits = (finished & (place == position)).astype(np.float64)
-                target[:, columns] += hits
-                team_target += hits @ membership
+            # Each car has a different place within a trial, so constructor entries do not
+            # collide here: both cars' finishes contribute to their team's countback.
+            driver_places[place, rows, columns] += finished
+            team_places[place, rows, racing_teams] += finished
         win_rate, podium_rate = winners.mean(axis=0), podium.mean(axis=0)
         events[event.key] = {driver: (float(win_rate[i]), float(podium_rate[i])) for i, driver in enumerate(racing)}
 
-    driver_rank = _ranked_positions(driver_points, [driver_wins, driver_seconds, driver_thirds], rng)
-    team_rank = _ranked_positions(team_points, [team_wins, team_seconds, team_thirds], rng)
+    driver_rank = _ranked_positions(driver_points, list(driver_places), rng)
+    team_rank = _ranked_positions(team_points, list(team_places), rng)
 
-    def share(flags: np.ndarray, keys: list[str]) -> dict[str, float]:
-        return {key: float(flags[:, i].mean()) for i, key in enumerate(keys)}
+    def distribution(ranks: np.ndarray, keys: list[str]) -> dict[str, list[float]]:
+        return {key: (np.bincount(ranks[:, i], minlength=len(keys)) / count).tolist() for i, key in enumerate(keys)}
+
+    driver_positions = distribution(driver_rank, everyone)
+    constructor_positions = distribution(team_rank, teams)
 
     return SeasonOdds(
         simulations=count,
-        driver_title=share(driver_rank == 0, everyone),
-        driver_top3=share(driver_rank < 3, everyone),
+        driver_title={driver: chances[0] for driver, chances in driver_positions.items()},
+        driver_top3={driver: sum(chances[:3]) for driver, chances in driver_positions.items()},
         driver_points={driver: float(driver_points[:, i].mean()) for i, driver in enumerate(everyone)},
-        constructor_title=share(team_rank == 0, teams),
+        constructor_title={team: chances[0] for team, chances in constructor_positions.items()},
         constructor_points={team: float(team_points[:, i].mean()) for i, team in enumerate(teams)},
+        driver_positions=driver_positions,
+        constructor_positions=constructor_positions,
         events=events,
     )
 
@@ -839,9 +853,8 @@ def _event_block(event: Event, weekend: dict[str, str]) -> dict[str, Any]:
 def check_published(kind: str, rows: dict[str, Row], order: list[str], data: dict[str, Any], last_round: int, warnings: list[str]) -> list[str] | None:
     """The table order to publish when Jolpica's standings for the same round agree with the results.
 
-    When every points and wins total agrees but the order of drivers level on points differs (the
-    last tiebreak, qualifying, is not modelled), the published order is used. Any other difference
-    is a warning, and the computed table stands.
+    When every points and wins total agrees but the order of entrants level on points differs,
+    the published order is used. Any other difference is a warning, and the computed table stands.
     """
     published_round, published = published_standings(data, kind)
     if not published or published_round != last_round:
@@ -983,13 +996,15 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path, settin
         }
 
     if complete:
-        title = {driver: 100.0 if driver == driver_order[0] else 0.0 for driver in everyone}
-        top3 = {driver: 100.0 if driver in driver_order[:3] else 0.0 for driver in everyone}
-        team_title = {team: 100.0 if team == team_order[0] else 0.0 for team in team_keys}
+        # Use the checked published order, when available, for final ties the model cannot resolve.
+        positions = {driver: [100.0 if place == rank else 0.0 for place in range(len(everyone))] for rank, driver in enumerate(everyone)}
+        constructor_positions = {team: [100.0 if place == rank else 0.0 for place in range(len(team_keys))] for rank, team in enumerate(team_keys)}
     else:
-        title = {driver: _percent(odds.driver_title.get(driver, 0.0)) for driver in everyone}
-        top3 = {driver: _percent(odds.driver_top3.get(driver, 0.0)) for driver in everyone}
-        team_title = {team: _percent(odds.constructor_title.get(team, 0.0)) for team in team_keys}
+        positions = {driver: [_percent(chance) for chance in odds.driver_positions[driver]] for driver in everyone}
+        constructor_positions = {team: [_percent(chance) for chance in odds.constructor_positions[team]] for team in team_keys}
+    title = {driver: positions[driver][0] for driver in everyone}
+    top3 = {driver: 100.0 if driver in driver_order[:3] else 0.0 for driver in everyone} if complete else {driver: _percent(odds.driver_top3[driver]) for driver in everyone}
+    team_title = {team: constructor_positions[team][0] for team in team_keys}
 
     upcoming = []
     for event in remaining:
@@ -1034,8 +1049,10 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path, settin
         "Points: 25-18-15-12-10-8-6-4-2-1 in a Grand Prix and 8-7-6-5-4-3-2-1 in a sprint"
         + ("; no fastest-lap point since 2025." if not rules.fastest_lap else f", plus {rules.fastest_lap:g} for the fastest lap in the top ten.")
         + " Ties are split by race places: most wins, then most second places, and so on (sprints do not count). "
-        "Simulated ties use wins, second and third places.",
-        BACKTEST_NOTE.format(**BACKTEST),
+        "Simulated ties use every race finishing position; identical records are split randomly. "
+        "Qualifying results used for further official tie decisions are not modelled.",
+        "Historical evaluation before the full-field position output and expanded countback: " + BACKTEST_NOTE.format(**BACKTEST),
+        "Individual championship-position probabilities have not been independently backtested or calibrated.",
     ]
     if checked:
         model_notes.append(
@@ -1084,6 +1101,8 @@ def build_payload(config: dict[str, Any], now: datetime, cache_dir: Path, settin
             "modelNotes": model_notes,
             "probabilities": {driver: {"title": title[driver], "top3": top3[driver]} for driver in everyone},
             "constructorProbabilities": {team: {"title": team_title[team]} for team in team_keys},
+            "positions": positions,
+            "constructorPositions": constructor_positions,
             "expected": {driver: {"points": round(odds.driver_points.get(driver, 0.0), 1)} for driver in everyone},
             "constructorExpected": {team: {"points": round(odds.constructor_points.get(team, 0.0), 1)} for team in team_keys},
             "ratings": {

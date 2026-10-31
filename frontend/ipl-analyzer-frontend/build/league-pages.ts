@@ -6,6 +6,7 @@ import { inflateSync } from 'node:zlib';
 import type { Plugin } from 'vite';
 import { Resvg } from '@resvg/resvg-js';
 import { formatChance } from '../src/sport/format';
+import { validPositionChances } from '../src/f1/positionOdds';
 import { PRIMARY_SITE_URL, primaryPageUrl } from '../src/lib/siteIdentity';
 
 interface LeagueEntry {
@@ -51,6 +52,8 @@ export interface LeaguePayload {
     probabilities?: Record<string, Record<string, number>>;
     overallProbabilities?: Record<string, Record<string, number>>;
     constructorProbabilities?: Record<string, Record<string, number>>;
+    positions?: Record<string, number[]>;
+    constructorPositions?: Record<string, number[]>;
   };
 }
 
@@ -129,7 +132,9 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
   const started = payload.standings.some((row) => Number(row.played ?? row.matches ?? 0) > 0);
   const status = complete ? 'Final' : /playoff|postseason/.test(payload.metadata.season_status) ? 'Playoffs' : started ? 'In season' : 'Pre-season';
   const heading = `${payload.league.name} ${payload.league.seasonLabel}`;
-  const title = `${heading} ${complete ? 'Final Standings' : 'Standings & Odds'} | Playoff Pulse`;
+  const title = payload.league.sport === 'motorsport' && !complete
+    ? `${payload.league.shortName} ${payload.league.seasonLabel} Championship Odds: All Finishing Positions | Playoff Pulse`
+    : `${heading} ${complete ? 'Final Standings' : 'Standings & Odds'} | Playoff Pulse`;
   const rows = [...payload.standings].sort((a, b) => a.rank - b.rank);
   const cricket = (payload.league.sport ?? entry.sport ?? 'cricket') === 'cricket';
   const columns: Column[] = [...(payload.league.columns ?? (cricket
@@ -153,8 +158,8 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
   const leader = rows[0];
   if (leader && (started || complete)) facts.push({ label: 'Standings leader', value: `${leader.fullName}${typeof leader.points === 'number' ? ` · ${leader.points} points` : typeof leader.wins === 'number' ? ` · ${leader.wins} wins` : ''}` });
   if (!started && !complete) facts.push({ label: 'Teams', value: String(rows.length) });
-  if (typeof payload.league.eventsLeft === 'number') facts.push({ label: 'Grands Prix remaining', value: String(payload.league.eventsLeft) });
-  const description = `${heading}: ${status.toLowerCase()} standings${complete ? '' : ' and model probabilities'}. ${facts.map((fact) => `${fact.label}: ${fact.value}.`).join(' ')} Updated ${payload.metadata.generated_at.slice(0, 10)}.`;
+  if (typeof payload.league.eventsLeft === 'number') facts.push({ label: 'Races and sprints remaining', value: String(payload.league.eventsLeft) });
+  const description = `${heading}: ${status.toLowerCase()} standings${complete ? '' : payload.league.sport === 'motorsport' ? ' and probabilities for every final championship position' : ' and model probabilities'}. ${facts.map((fact) => `${fact.label}: ${fact.value}.`).join(' ')} Updated ${payload.metadata.generated_at.slice(0, 10)}.`;
   return {
     id: entry.id, title, heading, description, status, rows, columns, facts, payload, base,
     updated: payload.metadata.generated_at,
@@ -184,12 +189,22 @@ function cell(page: LeaguePage, row: Standing, column: Column, constructors = fa
 }
 
 function standingsTable(page: LeaguePage, constructors = false) {
-  const columns: Column[] = constructors ? [{ key: 'points', label: 'Points' }, { key: 'wins', label: 'Wins' }, ...(page.status === 'Final' ? [] : [{ key: 'title', label: 'Title', probability: true }])] : page.columns;
+  let columns: Column[] = constructors ? [{ key: 'points', label: 'Points' }, { key: 'wins', label: 'Wins' }, ...(page.status === 'Final' ? [] : [{ key: 'title', label: 'Title', probability: true }])] : page.columns;
   const records = constructors ? page.payload.constructorStandings ?? [] : page.rows;
   const label = constructors ? 'Constructors' : page.payload.league.sport === 'motorsport' ? 'Drivers' : '';
-  const caption = `${page.heading} ${label} ${page.status === 'Final' ? 'final' : 'current'} standings`;
-  const headers = columns.map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`).join('');
-  const rows = records.map((row) => `<tr><td>${row.rank}</td><th scope="row">${escapeHtml(row.fullName)}</th>${columns.map((column) => `<td>${escapeHtml(cell(page, row, column, constructors))}</td>`).join('')}</tr>`).join('\n');
+  const positions = constructors ? page.payload.analysis.constructorPositions : page.payload.analysis.positions;
+  const fullField = page.payload.league.sport === 'motorsport' && page.status !== 'Final' && positions !== undefined;
+  if (fullField) columns = columns.filter((column) => !column.probability);
+  const caption = `${page.heading} ${label} ${page.status === 'Final' ? 'final' : 'current'} standings${fullField ? ' and final championship position probabilities' : ''}`;
+  const headers = columns.map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`).join('')
+    + (fullField ? records.map((_, index) => `<th scope="col"><abbr title="Final championship position ${index + 1}">P${index + 1}</abbr></th>`).join('') : '');
+  const rows = records.map((row) => {
+    const values = positions?.[row.teamKey];
+    const positionCells = !fullField ? '' : validPositionChances(values, records.length)
+      ? values.map((value) => `<td>${escapeHtml(formatProbability(page.payload, value))}</td>`).join('')
+      : `<td colspan="${records.length}">Unavailable</td>`;
+    return `<tr><td>${row.rank}</td><th scope="row">${escapeHtml(row.fullName)}</th>${columns.map((column) => `<td>${escapeHtml(cell(page, row, column, constructors))}</td>`).join('')}${positionCells}</tr>`;
+  }).join('\n');
   return `<div class="snapshot-scroll" tabindex="0" role="region" aria-label="${escapeHtml(label || 'League')} standings table"><table><caption>${escapeHtml(caption)}</caption><thead><tr><th scope="col">Rank</th><th scope="col">${label === 'Drivers' ? 'Driver' : 'Team'}</th>${headers}</tr></thead><tbody>${rows || `<tr><td colspan="${columns.length + 2}">Standings are not available yet.</td></tr>`}</tbody></table></div>`;
 }
 

@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
 
+import numpy as np
 import requests
 
 import extract_table
@@ -350,6 +351,76 @@ class ModelTests(unittest.TestCase):
         self.assertLess(changed.car_rating("fast"), stable.car_rating("fast"))
 
 
+class FinishingPositionTests(unittest.TestCase):
+    @staticmethod
+    def model(skills: dict[str, float] | None = None) -> formula1.PaceModel:
+        return formula1.PaceModel(2026, skills or {}, {}, {}, 0.0, 1.0, 0.4)
+
+    def assert_distribution(self, positions: dict[str, list[float]], scale: float = 1.0) -> None:
+        width = len(positions)
+        for key, chances in positions.items():
+            with self.subTest(entrant=key):
+                self.assertEqual(len(chances), width)
+                self.assertTrue(all(0 <= value <= scale for value in chances))
+                self.assertAlmostEqual(sum(chances), scale, delta=width * 0.0051 if scale == 100 else 1e-12)
+        for position in range(width):
+            self.assertAlmostEqual(sum(chances[position] for chances in positions.values()), scale, delta=width * 0.0051 if scale == 100 else 1e-12)
+
+    def test_every_driver_and_constructor_has_a_normalized_full_distribution(self) -> None:
+        lineup = {"a": "red", "b": "red", "c": "blue", "d": "blue"}
+        # A replaced driver and a departed constructor keep their earned points and a place in the field.
+        drivers = {"retired": formula1.Row("retired", points=40, places={4: 2})}
+        constructors = {"departed": formula1.Row("departed", points=50, places={3: 1})}
+        remaining = [event("race", []), event("sprint", [], round_number=2)]
+        odds = formula1.simulate_season(self.model(), lineup, remaining, formula1.PointsRules(), drivers, constructors, 0.0, 2, simulations=2000)
+        self.assertTrue(hasattr(odds, "driver_positions"), "SeasonOdds must expose every driver's finishing positions")
+        self.assertEqual(set(odds.driver_positions), set(lineup) | {"retired"})
+        self.assertEqual(set(odds.constructor_positions), {"red", "blue", "departed"})
+        self.assert_distribution(odds.driver_positions)
+        self.assert_distribution(odds.constructor_positions)
+        for driver, chances in odds.driver_positions.items():
+            self.assertEqual(odds.driver_title[driver], chances[0])
+            self.assertAlmostEqual(odds.driver_top3[driver], sum(chances[:3]), places=12)
+        for team, chances in odds.constructor_positions.items():
+            self.assertEqual(odds.constructor_title[team], chances[0])
+        self.assertEqual(odds.driver_points["retired"], 40)
+        self.assertEqual(odds.constructor_points["departed"], 50)
+
+    def test_countback_compares_all_places_without_overriding_points_or_better_places(self) -> None:
+        points = np.array([[0.0, 0.0], [10.0, 9.999], [0.0, 0.0]])
+        places = [np.zeros_like(points, dtype=np.uint16) for _ in range(22)]
+        places[21][0, 1] = 1  # A twenty-second place still breaks an otherwise exact tie.
+        places[0][1, 1] = 100  # Wins never override even a small points advantage.
+        places[3][2, 0] = 1
+        places[4][2, 1] = 100  # One fourth place beats any number of fifths.
+        ranks = formula1._ranked_positions(points, places, np.random.default_rng(3))
+        np.testing.assert_array_equal(ranks, [[1, 0], [0, 1], [0, 1]])
+
+    def test_no_remaining_events_preserves_below_podium_countback(self) -> None:
+        drivers = {"a": formula1.Row("a", places={5: 1}), "b": formula1.Row("b", places={4: 1})}
+        constructors = {"red": formula1.Row("red", places={5: 1}), "blue": formula1.Row("blue", places={4: 1})}
+        odds = formula1.simulate_season(self.model(), {"a": "red", "b": "blue"}, [], formula1.PointsRules(), drivers, constructors, 0, 0, simulations=200)
+        self.assertEqual(odds.driver_title, {"a": 0.0, "b": 1.0})
+        self.assertEqual(odds.constructor_title, {"blue": 1.0, "red": 0.0})
+        self.assertEqual(odds.driver_positions, {"a": [0.0, 1.0], "b": [1.0, 0.0]})
+
+    def test_race_countback_counts_both_constructor_cars_but_not_sprint_places(self) -> None:
+        # Red's deterministic P4/P5 must beat Blue's existing P4/P6 on equal zero points.
+        lineup = {"a": "front", "b": "front", "c": "other", "d": "red", "e": "red", "f": "blue"}
+        model = self.model({driver: -100.0 * i for i, driver in enumerate(lineup)})
+        drivers = {"d": formula1.Row("d", places={6: 1}), "e": formula1.Row("e", places={7: 1})}
+        teams = {"blue": formula1.Row("blue", places={4: 1, 6: 1})}
+        rules = formula1.PointsRules(race=(0.0,), sprint=(0.0,))
+        race = formula1.simulate_season(model, lineup, [event("race", [])], rules, drivers, teams, 0, 1, simulations=100)
+        self.assertTrue(hasattr(race, "constructor_positions"), "SeasonOdds must expose every constructor's finishing positions")
+        self.assertEqual(race.constructor_positions["red"][2], 1.0)
+        self.assertEqual(race.constructor_positions["blue"][3], 1.0)
+        # Sprint finishes add no countback: Blue keeps its P4 advantage over Red.
+        sprint = formula1.simulate_season(model, lineup, [event("sprint", [])], rules, drivers, teams, 0, 1, simulations=100)
+        self.assertEqual(sprint.constructor_title["blue"], 1.0)
+        self.assertEqual(sprint.driver_title["d"], 1.0)
+
+
 class PayloadTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -388,6 +459,20 @@ class PayloadTests(unittest.TestCase):
         # Drivers out of a seat cannot win, and the leader is the favourite.
         self.assertEqual(drivers["tsunoda"]["title"], 0)
         self.assertEqual(max(drivers, key=lambda key: drivers[key]["title"]), "antonelli")
+
+    def test_payload_exposes_full_finishing_positions_including_a_replaced_driver(self) -> None:
+        analysis = self.payload["analysis"]
+        self.assertIn("positions", analysis)
+        self.assertEqual(set(analysis["positions"]), {row["teamKey"] for row in self.payload["standings"]})
+        self.assertEqual(set(analysis["constructorPositions"]), {row["teamKey"] for row in self.payload["constructorStandings"]})
+        self.assertIn("tsunoda", analysis["positions"])
+        FinishingPositionTests.assert_distribution(self, analysis["positions"], 100)
+        FinishingPositionTests.assert_distribution(self, analysis["constructorPositions"], 100)
+        for key, chances in analysis["positions"].items():
+            self.assertEqual(analysis["probabilities"][key]["title"], chances[0])
+            self.assertAlmostEqual(analysis["probabilities"][key]["top3"], sum(chances[:3]), delta=0.02)
+        for key, chances in analysis["constructorPositions"].items():
+            self.assertEqual(analysis["constructorProbabilities"][key]["title"], chances[0])
 
     def test_each_remaining_events_win_odds_sum_to_one_hundred(self) -> None:
         events = self.payload["events"]
@@ -431,6 +516,12 @@ class PayloadTests(unittest.TestCase):
         self.assertEqual(payload["analysis"]["probabilities"]["norris"]["title"], 100.0)
         self.assertEqual(payload["analysis"]["constructorProbabilities"]["mclaren"]["title"], 100.0)
         self.assertEqual(payload["events"], [])
+        self.assertEqual([row["shortName"] for row in payload["standings"]], [code for code, _, _ in OFFICIAL_2025_DRIVERS])
+        self.assertEqual([row["teamKey"] for row in payload["constructorStandings"]], [team for team, _, _ in OFFICIAL_2025_CONSTRUCTORS])
+        for field, table in (("positions", "standings"), ("constructorPositions", "constructorStandings")):
+            self.assertIn(field, payload["analysis"])
+            for rank, row in enumerate(payload[table]):
+                self.assertEqual(payload["analysis"][field][row["teamKey"]], [100.0 if position == rank else 0.0 for position in range(len(payload[table]))])
         # 2024 is not in the cache and the source is offline: a warning, not a failure.
         self.assertTrue(any("Last season's results are unavailable" in warning for warning in payload["metadata"]["warnings"]))
         entry = extract_table.index_entry(payload)
@@ -450,6 +541,9 @@ class PayloadTests(unittest.TestCase):
         titles = [payload["analysis"]["probabilities"][row["teamKey"]]["title"] for row in payload["standings"]]
         self.assertEqual(titles, sorted(titles, reverse=True))
         self.assertAlmostEqual(sum(titles), 100, delta=0.1)
+        self.assertIn("positions", payload["analysis"])
+        FinishingPositionTests.assert_distribution(self, payload["analysis"]["positions"], 100)
+        FinishingPositionTests.assert_distribution(self, payload["analysis"]["constructorPositions"], 100)
 
     def test_an_overdue_event_is_left_out_with_a_warning(self) -> None:
         with tempfile.TemporaryDirectory() as folder, mock.patch.object(formula1, "_download", side_effect=offline_download):
