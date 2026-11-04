@@ -1,12 +1,13 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-04T00:02:44Z",
+    "generated_at": "2026-11-04T15:18:25Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
     "season_status": "league_stage",
     "warnings": [
+      "CricketData points table record did not match match results for HUR, REN; standings were derived from match results.",
       "CricketData did not provide usable NRR for HUR, SIX, SCO, STA, REN, STR, THU, HEA; probabilities were generated without NRR."
     ]
   },
@@ -149,6 +150,19 @@
       "remainingMatches": 9
     },
     {
+      "teamKey": "REN",
+      "shortName": "REN",
+      "fullName": "Melbourne Renegades",
+      "matches": 3,
+      "wins": 1,
+      "losses": 2,
+      "noResult": 0,
+      "points": 2,
+      "nrr": null,
+      "rank": 5,
+      "remainingMatches": 7
+    },
+    {
       "teamKey": "STA",
       "shortName": "STA",
       "fullName": "Melbourne Stars",
@@ -158,7 +172,7 @@
       "noResult": 0,
       "points": 2,
       "nrr": null,
-      "rank": 5,
+      "rank": 6,
       "remainingMatches": 7
     },
     {
@@ -171,48 +185,24 @@
       "noResult": 0,
       "points": 0,
       "nrr": null,
-      "rank": 6,
+      "rank": 7,
       "remainingMatches": 8
     },
     {
       "teamKey": "HUR",
       "shortName": "HUR",
       "fullName": "Hobart Hurricanes",
-      "matches": 2,
+      "matches": 3,
       "wins": 0,
-      "losses": 2,
-      "noResult": 0,
-      "points": 0,
-      "nrr": null,
-      "rank": 7,
-      "remainingMatches": 8
-    },
-    {
-      "teamKey": "REN",
-      "shortName": "REN",
-      "fullName": "Melbourne Renegades",
-      "matches": 2,
-      "wins": 0,
-      "losses": 2,
+      "losses": 3,
       "noResult": 0,
       "points": 0,
       "nrr": null,
       "rank": 8,
-      "remainingMatches": 8
+      "remainingMatches": 7
     }
   ],
   "fixtures": [
-    {
-      "id": "786781a5-0548-479e-b268-a87521ea2e36",
-      "matchNo": 9,
-      "teamA": "HUR",
-      "teamB": "REN",
-      "dateTimeGMT": "2026-11-04T08:10:00Z",
-      "dateTimeLocal": null,
-      "venue": "Bellerive Oval, Hobart",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "de774f34-7940-44c4-acce-8918a8069613",
       "matchNo": 10,
@@ -558,49 +548,46 @@
   "analysis": {
     "method": "Monte Carlo",
     "simulationCount": 40000,
-    "generatedAt": "2026-11-04T00:02:44Z",
+    "generatedAt": "2026-11-04T15:18:25Z",
     "overallProbabilities": {
       "SCO": {
-        "top4": 69.83,
-        "top1": 24.59
+        "top4": 70.19,
+        "top1": 24.67
       },
       "SIX": {
-        "top4": 67.33,
-        "top1": 20.35
+        "top4": 67.69,
+        "top1": 20.24
       },
       "THU": {
-        "top4": 64.83,
-        "top1": 17.88
+        "top4": 64.82,
+        "top1": 17.72
       },
       "STR": {
-        "top4": 73.12,
-        "top1": 23.28
+        "top4": 72.93,
+        "top1": 23.31
+      },
+      "REN": {
+        "top4": 39.17,
+        "top1": 5.12
       },
       "STA": {
-        "top4": 34.65,
+        "top4": 34.52,
         "top1": 4.21
       },
       "HEA": {
-        "top4": 32.57,
-        "top1": 3.37
+        "top4": 32.13,
+        "top1": 3.39
       },
       "HUR": {
-        "top4": 29.93,
-        "top1": 3.36
-      },
-      "REN": {
-        "top4": 27.73,
-        "top1": 2.95
+        "top4": 18.55,
+        "top1": 1.33
       }
     },
     "teamAnalysis": {
       "4": {
         "SCO": {
-          "percentage": 69.83,
+          "percentage": 70.19,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "STR wins"
             },
@@ -614,7 +601,7 @@
               "Outcome": "STR wins"
             },
             "HEA vs HUR": {
-              "Outcome": "HUR wins"
+              "Outcome": "HEA wins"
             },
             "SIX vs THU": {
               "Outcome": "SIX wins"
@@ -629,19 +616,19 @@
               "Outcome": "SCO wins"
             },
             "STA vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "STA wins"
             },
             "REN vs SIX": {
-              "Outcome": "REN wins"
+              "Outcome": "SIX wins"
             },
             "HUR vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "HUR wins"
             },
             "SCO vs STR": {
               "Outcome": "SCO wins"
             },
             "SIX vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "SIX wins"
             },
             "THU vs STA": {
               "Outcome": "THU wins"
@@ -653,13 +640,13 @@
               "Outcome": "SCO wins"
             },
             "HEA vs THU": {
-              "Outcome": "HEA wins"
+              "Outcome": "THU wins"
             },
             "STR vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "STR wins"
             },
             "HUR vs THU": {
-              "Outcome": "THU wins"
+              "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
               "Outcome": "SCO wins"
@@ -697,16 +684,13 @@
           }
         },
         "SIX": {
-          "percentage": 67.33,
+          "percentage": 67.69,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "STR wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "SIX wins"
@@ -724,7 +708,7 @@
               "Outcome": "SCO wins"
             },
             "HUR vs STR": {
-              "Outcome": "HUR wins"
+              "Outcome": "STR wins"
             },
             "SCO vs THU": {
               "Outcome": "SCO wins"
@@ -751,16 +735,16 @@
               "Outcome": "SIX wins"
             },
             "HUR vs SCO": {
-              "Outcome": "HUR wins"
+              "Outcome": "SCO wins"
             },
             "HEA vs THU": {
               "Outcome": "HEA wins"
             },
             "STR vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "STR wins"
             },
             "HUR vs THU": {
-              "Outcome": "THU wins"
+              "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
               "Outcome": "SIX wins"
@@ -784,7 +768,7 @@
               "Outcome": "SCO wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "SIX wins"
@@ -793,16 +777,13 @@
               "Outcome": "SCO wins"
             },
             "STR vs HUR": {
-              "Outcome": "STR wins"
+              "Outcome": "HUR wins"
             }
           }
         },
         "THU": {
-          "percentage": 64.83,
+          "percentage": 64.82,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
@@ -840,7 +821,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "SCO wins"
             },
             "SIX vs REN": {
               "Outcome": "SIX wins"
@@ -849,7 +830,7 @@
               "Outcome": "THU wins"
             },
             "STR vs SIX": {
-              "Outcome": "SIX wins"
+              "Outcome": "STR wins"
             },
             "HUR vs SCO": {
               "Outcome": "SCO wins"
@@ -882,10 +863,10 @@
               "Outcome": "SIX wins"
             },
             "SCO vs HUR": {
-              "Outcome": "SCO wins"
+              "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "Result does not matter"
             },
             "THU vs SIX": {
               "Outcome": "THU wins"
@@ -894,21 +875,18 @@
               "Outcome": "SCO wins"
             },
             "STR vs HUR": {
-              "Outcome": "STR wins"
+              "Outcome": "HUR wins"
             }
           }
         },
         "STR": {
-          "percentage": 73.12,
+          "percentage": 72.93,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "STR wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "SIX wins"
@@ -923,7 +901,7 @@
               "Outcome": "SIX wins"
             },
             "SCO vs STA": {
-              "Outcome": "SCO wins"
+              "Outcome": "STA wins"
             },
             "HUR vs STR": {
               "Outcome": "STR wins"
@@ -932,7 +910,105 @@
               "Outcome": "THU wins"
             },
             "STA vs HEA": {
+              "Outcome": "STA wins"
+            },
+            "REN vs SIX": {
+              "Outcome": "SIX wins"
+            },
+            "HUR vs HEA": {
+              "Outcome": "HUR wins"
+            },
+            "SCO vs STR": {
+              "Outcome": "STR wins"
+            },
+            "SIX vs REN": {
+              "Outcome": "SIX wins"
+            },
+            "THU vs STA": {
+              "Outcome": "THU wins"
+            },
+            "STR vs SIX": {
+              "Outcome": "STR wins"
+            },
+            "HUR vs SCO": {
+              "Outcome": "SCO wins"
+            },
+            "HEA vs THU": {
               "Outcome": "HEA wins"
+            },
+            "STR vs REN": {
+              "Outcome": "STR wins"
+            },
+            "HUR vs THU": {
+              "Outcome": "HUR wins"
+            },
+            "SIX vs SCO": {
+              "Outcome": "SCO wins"
+            },
+            "HEA vs STR": {
+              "Outcome": "STR wins"
+            },
+            "STA vs REN": {
+              "Outcome": "REN wins"
+            },
+            "REN vs HEA": {
+              "Outcome": "HEA wins"
+            },
+            "THU vs STR": {
+              "Outcome": "STR wins"
+            },
+            "SIX vs STA": {
+              "Outcome": "SIX wins"
+            },
+            "SCO vs HUR": {
+              "Outcome": "HUR wins"
+            },
+            "REN vs STA": {
+              "Outcome": "STA wins"
+            },
+            "THU vs SIX": {
+              "Outcome": "SIX wins"
+            },
+            "HEA vs SCO": {
+              "Outcome": "SCO wins"
+            },
+            "STR vs HUR": {
+              "Outcome": "STR wins"
+            }
+          }
+        },
+        "REN": {
+          "percentage": 39.17,
+          "results_df": {
+            "STR vs HEA": {
+              "Outcome": "STR wins"
+            },
+            "THU vs SCO": {
+              "Outcome": "THU wins"
+            },
+            "STA vs SIX": {
+              "Outcome": "STA wins"
+            },
+            "REN vs STR": {
+              "Outcome": "REN wins"
+            },
+            "HEA vs HUR": {
+              "Outcome": "HUR wins"
+            },
+            "SIX vs THU": {
+              "Outcome": "THU wins"
+            },
+            "SCO vs STA": {
+              "Outcome": "STA wins"
+            },
+            "HUR vs STR": {
+              "Outcome": "HUR wins"
+            },
+            "SCO vs THU": {
+              "Outcome": "SCO wins"
+            },
+            "STA vs HEA": {
+              "Outcome": "STA wins"
             },
             "REN vs SIX": {
               "Outcome": "REN wins"
@@ -941,7 +1017,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "SCO wins"
             },
             "SIX vs REN": {
               "Outcome": "REN wins"
@@ -959,7 +1035,7 @@
               "Outcome": "HEA wins"
             },
             "STR vs REN": {
-              "Outcome": "STR wins"
+              "Outcome": "REN wins"
             },
             "HUR vs THU": {
               "Outcome": "THU wins"
@@ -983,33 +1059,30 @@
               "Outcome": "STA wins"
             },
             "SCO vs HUR": {
-              "Outcome": "SCO wins"
+              "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "STA wins"
+              "Outcome": "REN wins"
             },
             "THU vs SIX": {
-              "Outcome": "SIX wins"
+              "Outcome": "THU wins"
             },
             "HEA vs SCO": {
               "Outcome": "SCO wins"
             },
             "STR vs HUR": {
-              "Outcome": "STR wins"
+              "Outcome": "HUR wins"
             }
           }
         },
         "STA": {
-          "percentage": 34.65,
+          "percentage": 34.52,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "STR wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "STA wins"
@@ -1021,7 +1094,7 @@
               "Outcome": "HEA wins"
             },
             "SIX vs THU": {
-              "Outcome": "SIX wins"
+              "Outcome": "THU wins"
             },
             "SCO vs STA": {
               "Outcome": "STA wins"
@@ -1036,16 +1109,16 @@
               "Outcome": "STA wins"
             },
             "REN vs SIX": {
-              "Outcome": "REN wins"
+              "Outcome": "SIX wins"
             },
             "HUR vs HEA": {
               "Outcome": "HUR wins"
             },
             "SCO vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "SCO wins"
             },
             "SIX vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "SIX wins"
             },
             "THU vs STA": {
               "Outcome": "STA wins"
@@ -1054,7 +1127,7 @@
               "Outcome": "STR wins"
             },
             "HUR vs SCO": {
-              "Outcome": "SCO wins"
+              "Outcome": "HUR wins"
             },
             "HEA vs THU": {
               "Outcome": "HEA wins"
@@ -1066,7 +1139,7 @@
               "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
-              "Outcome": "SCO wins"
+              "Outcome": "SIX wins"
             },
             "HEA vs STR": {
               "Outcome": "STR wins"
@@ -1084,33 +1157,30 @@
               "Outcome": "STA wins"
             },
             "SCO vs HUR": {
-              "Outcome": "SCO wins"
+              "Outcome": "HUR wins"
             },
             "REN vs STA": {
               "Outcome": "STA wins"
             },
             "THU vs SIX": {
-              "Outcome": "SIX wins"
+              "Outcome": "THU wins"
             },
             "HEA vs SCO": {
               "Outcome": "HEA wins"
             },
             "STR vs HUR": {
-              "Outcome": "STR wins"
+              "Outcome": "HUR wins"
             }
           }
         },
         "HEA": {
-          "percentage": 32.57,
+          "percentage": 32.13,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "STA wins"
@@ -1131,7 +1201,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs THU": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs HEA": {
               "Outcome": "HEA wins"
@@ -1143,7 +1213,7 @@
               "Outcome": "HEA wins"
             },
             "SCO vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "SCO wins"
             },
             "SIX vs REN": {
               "Outcome": "REN wins"
@@ -1161,13 +1231,13 @@
               "Outcome": "HEA wins"
             },
             "STR vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "STR wins"
             },
             "HUR vs THU": {
               "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
-              "Outcome": "SCO wins"
+              "Outcome": "SIX wins"
             },
             "HEA vs STR": {
               "Outcome": "HEA wins"
@@ -1182,13 +1252,13 @@
               "Outcome": "STR wins"
             },
             "SIX vs STA": {
-              "Outcome": "SIX wins"
+              "Outcome": "STA wins"
             },
             "SCO vs HUR": {
               "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "SIX wins"
@@ -1202,22 +1272,19 @@
           }
         },
         "HUR": {
-          "percentage": 29.93,
+          "percentage": 18.55,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "STR wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "STA wins"
             },
             "REN vs STR": {
-              "Outcome": "REN wins"
+              "Outcome": "STR wins"
             },
             "HEA vs HUR": {
               "Outcome": "HUR wins"
@@ -1235,10 +1302,10 @@
               "Outcome": "THU wins"
             },
             "STA vs HEA": {
-              "Outcome": "STA wins"
+              "Outcome": "HEA wins"
             },
             "REN vs SIX": {
-              "Outcome": "REN wins"
+              "Outcome": "SIX wins"
             },
             "HUR vs HEA": {
               "Outcome": "HUR wins"
@@ -1253,13 +1320,13 @@
               "Outcome": "STA wins"
             },
             "STR vs SIX": {
-              "Outcome": "STR wins"
+              "Outcome": "SIX wins"
             },
             "HUR vs SCO": {
               "Outcome": "HUR wins"
             },
             "HEA vs THU": {
-              "Outcome": "HEA wins"
+              "Outcome": "THU wins"
             },
             "STR vs REN": {
               "Outcome": "REN wins"
@@ -1268,7 +1335,7 @@
               "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
-              "Outcome": "SIX wins"
+              "Outcome": "SCO wins"
             },
             "HEA vs STR": {
               "Outcome": "STR wins"
@@ -1277,13 +1344,13 @@
               "Outcome": "REN wins"
             },
             "REN vs HEA": {
-              "Outcome": "REN wins"
+              "Outcome": "HEA wins"
             },
             "THU vs STR": {
               "Outcome": "STR wins"
             },
             "SIX vs STA": {
-              "Outcome": "STA wins"
+              "Outcome": "SIX wins"
             },
             "SCO vs HUR": {
               "Outcome": "HUR wins"
@@ -1299,118 +1366,14 @@
             },
             "STR vs HUR": {
               "Outcome": "HUR wins"
-            }
-          }
-        },
-        "REN": {
-          "percentage": 27.73,
-          "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "STR vs HEA": {
-              "Outcome": "STR wins"
-            },
-            "THU vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs SIX": {
-              "Outcome": "STA wins"
-            },
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "REN wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "STR wins"
             }
           }
         }
       },
       "1": {
         "SCO": {
-          "percentage": 24.59,
+          "percentage": 24.67,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
@@ -1427,7 +1390,7 @@
               "Outcome": "HUR wins"
             },
             "SIX vs THU": {
-              "Outcome": "SIX wins"
+              "Outcome": "THU wins"
             },
             "SCO vs STA": {
               "Outcome": "SCO wins"
@@ -1445,7 +1408,7 @@
               "Outcome": "REN wins"
             },
             "HUR vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "HUR wins"
             },
             "SCO vs STR": {
               "Outcome": "SCO wins"
@@ -1478,7 +1441,7 @@
               "Outcome": "HEA wins"
             },
             "STA vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "REN vs HEA": {
               "Outcome": "HEA wins"
@@ -1493,7 +1456,7 @@
               "Outcome": "SCO wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "THU wins"
@@ -1507,11 +1470,8 @@
           }
         },
         "SIX": {
-          "percentage": 20.35,
+          "percentage": 20.24,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
@@ -1540,13 +1500,13 @@
               "Outcome": "THU wins"
             },
             "STA vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "Result does not matter"
             },
             "REN vs SIX": {
               "Outcome": "SIX wins"
             },
             "HUR vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "HUR wins"
             },
             "SCO vs STR": {
               "Outcome": "STR wins"
@@ -1582,7 +1542,7 @@
               "Outcome": "REN wins"
             },
             "REN vs HEA": {
-              "Outcome": "REN wins"
+              "Outcome": "HEA wins"
             },
             "THU vs STR": {
               "Outcome": "THU wins"
@@ -1594,7 +1554,7 @@
               "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "SIX wins"
@@ -1608,11 +1568,8 @@
           }
         },
         "THU": {
-          "percentage": 17.88,
+          "percentage": 17.72,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
@@ -1650,7 +1607,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "SCO wins"
             },
             "SIX vs REN": {
               "Outcome": "REN wins"
@@ -1680,7 +1637,7 @@
               "Outcome": "HEA wins"
             },
             "STA vs REN": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "REN vs HEA": {
               "Outcome": "HEA wins"
@@ -1695,7 +1652,7 @@
               "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "THU wins"
@@ -1709,11 +1666,8 @@
           }
         },
         "STR": {
-          "percentage": 23.28,
+          "percentage": 23.31,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "STR wins"
             },
@@ -1730,7 +1684,7 @@
               "Outcome": "HEA wins"
             },
             "SIX vs THU": {
-              "Outcome": "SIX wins"
+              "Outcome": "THU wins"
             },
             "SCO vs STA": {
               "Outcome": "STA wins"
@@ -1739,7 +1693,7 @@
               "Outcome": "STR wins"
             },
             "SCO vs THU": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs HEA": {
               "Outcome": "HEA wins"
@@ -1779,6 +1733,104 @@
             },
             "HEA vs STR": {
               "Outcome": "STR wins"
+            },
+            "STA vs REN": {
+              "Outcome": "REN wins"
+            },
+            "REN vs HEA": {
+              "Outcome": "HEA wins"
+            },
+            "THU vs STR": {
+              "Outcome": "STR wins"
+            },
+            "SIX vs STA": {
+              "Outcome": "STA wins"
+            },
+            "SCO vs HUR": {
+              "Outcome": "HUR wins"
+            },
+            "REN vs STA": {
+              "Outcome": "STA wins"
+            },
+            "THU vs SIX": {
+              "Outcome": "SIX wins"
+            },
+            "HEA vs SCO": {
+              "Outcome": "HEA wins"
+            },
+            "STR vs HUR": {
+              "Outcome": "STR wins"
+            }
+          }
+        },
+        "REN": {
+          "percentage": 5.12,
+          "results_df": {
+            "STR vs HEA": {
+              "Outcome": "HEA wins"
+            },
+            "THU vs SCO": {
+              "Outcome": "SCO wins"
+            },
+            "STA vs SIX": {
+              "Outcome": "STA wins"
+            },
+            "REN vs STR": {
+              "Outcome": "REN wins"
+            },
+            "HEA vs HUR": {
+              "Outcome": "HUR wins"
+            },
+            "SIX vs THU": {
+              "Outcome": "SIX wins"
+            },
+            "SCO vs STA": {
+              "Outcome": "STA wins"
+            },
+            "HUR vs STR": {
+              "Outcome": "HUR wins"
+            },
+            "SCO vs THU": {
+              "Outcome": "THU wins"
+            },
+            "STA vs HEA": {
+              "Outcome": "HEA wins"
+            },
+            "REN vs SIX": {
+              "Outcome": "REN wins"
+            },
+            "HUR vs HEA": {
+              "Outcome": "HUR wins"
+            },
+            "SCO vs STR": {
+              "Outcome": "SCO wins"
+            },
+            "SIX vs REN": {
+              "Outcome": "REN wins"
+            },
+            "THU vs STA": {
+              "Outcome": "STA wins"
+            },
+            "STR vs SIX": {
+              "Outcome": "SIX wins"
+            },
+            "HUR vs SCO": {
+              "Outcome": "HUR wins"
+            },
+            "HEA vs THU": {
+              "Outcome": "HEA wins"
+            },
+            "STR vs REN": {
+              "Outcome": "REN wins"
+            },
+            "HUR vs THU": {
+              "Outcome": "HUR wins"
+            },
+            "SIX vs SCO": {
+              "Outcome": "SIX wins"
+            },
+            "HEA vs STR": {
+              "Outcome": "HEA wins"
             },
             "STA vs REN": {
               "Outcome": "REN wins"
@@ -1805,21 +1857,18 @@
               "Outcome": "HEA wins"
             },
             "STR vs HUR": {
-              "Outcome": "STR wins"
+              "Outcome": "HUR wins"
             }
           }
         },
         "STA": {
           "percentage": 4.21,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
             "THU vs SCO": {
-              "Outcome": "Result does not matter"
+              "Outcome": "THU wins"
             },
             "STA vs SIX": {
               "Outcome": "STA wins"
@@ -1828,7 +1877,7 @@
               "Outcome": "REN wins"
             },
             "HEA vs HUR": {
-              "Outcome": "HUR wins"
+              "Outcome": "HEA wins"
             },
             "SIX vs THU": {
               "Outcome": "SIX wins"
@@ -1876,7 +1925,7 @@
               "Outcome": "HUR wins"
             },
             "SIX vs SCO": {
-              "Outcome": "SIX wins"
+              "Outcome": "SCO wins"
             },
             "HEA vs STR": {
               "Outcome": "HEA wins"
@@ -1885,7 +1934,7 @@
               "Outcome": "STA wins"
             },
             "REN vs HEA": {
-              "Outcome": "HEA wins"
+              "Outcome": "REN wins"
             },
             "THU vs STR": {
               "Outcome": "THU wins"
@@ -1894,7 +1943,7 @@
               "Outcome": "STA wins"
             },
             "SCO vs HUR": {
-              "Outcome": "SCO wins"
+              "Outcome": "HUR wins"
             },
             "REN vs STA": {
               "Outcome": "STA wins"
@@ -1911,16 +1960,13 @@
           }
         },
         "HEA": {
-          "percentage": 3.37,
+          "percentage": 3.39,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
             "THU vs SCO": {
-              "Outcome": "THU wins"
+              "Outcome": "SCO wins"
             },
             "STA vs SIX": {
               "Outcome": "STA wins"
@@ -1932,7 +1978,7 @@
               "Outcome": "HEA wins"
             },
             "SIX vs THU": {
-              "Outcome": "THU wins"
+              "Outcome": "SIX wins"
             },
             "SCO vs STA": {
               "Outcome": "STA wins"
@@ -1941,7 +1987,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs THU": {
-              "Outcome": "SCO wins"
+              "Outcome": "THU wins"
             },
             "STA vs HEA": {
               "Outcome": "HEA wins"
@@ -1953,7 +1999,7 @@
               "Outcome": "HEA wins"
             },
             "SCO vs STR": {
-              "Outcome": "SCO wins"
+              "Outcome": "STR wins"
             },
             "SIX vs REN": {
               "Outcome": "REN wins"
@@ -1989,7 +2035,7 @@
               "Outcome": "HEA wins"
             },
             "THU vs STR": {
-              "Outcome": "THU wins"
+              "Outcome": "STR wins"
             },
             "SIX vs STA": {
               "Outcome": "STA wins"
@@ -1998,7 +2044,7 @@
               "Outcome": "HUR wins"
             },
             "REN vs STA": {
-              "Outcome": "REN wins"
+              "Outcome": "STA wins"
             },
             "THU vs SIX": {
               "Outcome": "THU wins"
@@ -2012,11 +2058,8 @@
           }
         },
         "HUR": {
-          "percentage": 3.36,
+          "percentage": 1.33,
           "results_df": {
-            "HUR vs REN": {
-              "Outcome": "HUR wins"
-            },
             "STR vs HEA": {
               "Outcome": "HEA wins"
             },
@@ -2054,7 +2097,7 @@
               "Outcome": "HUR wins"
             },
             "SCO vs STR": {
-              "Outcome": "SCO wins"
+              "Outcome": "STR wins"
             },
             "SIX vs REN": {
               "Outcome": "REN wins"
@@ -2087,10 +2130,10 @@
               "Outcome": "REN wins"
             },
             "REN vs HEA": {
-              "Outcome": "REN wins"
+              "Outcome": "HEA wins"
             },
             "THU vs STR": {
-              "Outcome": "STR wins"
+              "Outcome": "THU wins"
             },
             "SIX vs STA": {
               "Outcome": "STA wins"
@@ -2103,107 +2146,6 @@
             },
             "THU vs SIX": {
               "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
-            }
-          }
-        },
-        "REN": {
-          "percentage": 2.95,
-          "results_df": {
-            "HUR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "STR vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs SIX": {
-              "Outcome": "STA wins"
-            },
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HEA wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "REN wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
             },
             "HEA vs SCO": {
               "Outcome": "HEA wins"
@@ -2241,6 +2183,12 @@
           "target_matches": 9,
           "method": "Monte Carlo"
         },
+        "REN": {
+          "possible": 3,
+          "guaranteed": 6,
+          "target_matches": 7,
+          "method": "Monte Carlo"
+        },
         "STA": {
           "possible": 3,
           "guaranteed": 6,
@@ -2254,15 +2202,9 @@
           "method": "Monte Carlo"
         },
         "HUR": {
-          "possible": 3,
-          "guaranteed": 7,
-          "target_matches": 8,
-          "method": "Monte Carlo"
-        },
-        "REN": {
           "possible": 4,
-          "guaranteed": 7,
-          "target_matches": 8,
+          "guaranteed": 6,
+          "target_matches": 7,
           "method": "Monte Carlo"
         }
       },
@@ -2291,6 +2233,12 @@
           "target_matches": 9,
           "method": "Monte Carlo"
         },
+        "REN": {
+          "possible": 5,
+          "guaranteed": null,
+          "target_matches": 7,
+          "method": "Monte Carlo"
+        },
         "STA": {
           "possible": 5,
           "guaranteed": null,
@@ -2306,30 +2254,24 @@
         "HUR": {
           "possible": 6,
           "guaranteed": null,
-          "target_matches": 8,
-          "method": "Monte Carlo"
-        },
-        "REN": {
-          "possible": 6,
-          "guaranteed": null,
-          "target_matches": 8,
+          "target_matches": 7,
           "method": "Monte Carlo"
         }
       }
     }
   },
   "movement": {
-    "since": "2026-11-01T14:12:03Z",
+    "since": "2026-11-04T00:02:44Z",
     "tier": "top4",
     "changes": {
-      "SCO": 12.98,
-      "SIX": 0.11,
-      "THU": 0.25,
-      "STR": 0.06,
-      "STA": -13.78,
-      "HEA": -0.05,
-      "HUR": -0.08,
-      "REN": 0.51
+      "SCO": 0.36,
+      "SIX": 0.36,
+      "THU": -0.01,
+      "STR": -0.19,
+      "REN": 11.44,
+      "STA": -0.13,
+      "HEA": -0.44,
+      "HUR": -11.38
     }
   }
 }
