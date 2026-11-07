@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-06T14:55:33Z",
+    "generated_at": "2026-11-07T13:51:27Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -124,6 +124,32 @@
       "remainingMatches": 7
     },
     {
+      "teamKey": "HEA",
+      "shortName": "HEA",
+      "fullName": "Brisbane Heat",
+      "matches": 4,
+      "wins": 2,
+      "losses": 2,
+      "noResult": 0,
+      "points": 4,
+      "nrr": null,
+      "rank": 3,
+      "remainingMatches": 6
+    },
+    {
+      "teamKey": "REN",
+      "shortName": "REN",
+      "fullName": "Melbourne Renegades",
+      "matches": 4,
+      "wins": 2,
+      "losses": 2,
+      "noResult": 0,
+      "points": 4,
+      "nrr": null,
+      "rank": 4,
+      "remainingMatches": 6
+    },
+    {
       "teamKey": "THU",
       "shortName": "THU",
       "fullName": "Sydney Thunder",
@@ -133,39 +159,13 @@
       "noResult": 0,
       "points": 4,
       "nrr": null,
-      "rank": 3,
+      "rank": 5,
       "remainingMatches": 7
     },
     {
       "teamKey": "STR",
       "shortName": "STR",
       "fullName": "Adelaide Strikers",
-      "matches": 2,
-      "wins": 1,
-      "losses": 1,
-      "noResult": 0,
-      "points": 2,
-      "nrr": null,
-      "rank": 4,
-      "remainingMatches": 8
-    },
-    {
-      "teamKey": "HEA",
-      "shortName": "HEA",
-      "fullName": "Brisbane Heat",
-      "matches": 3,
-      "wins": 1,
-      "losses": 2,
-      "noResult": 0,
-      "points": 2,
-      "nrr": null,
-      "rank": 5,
-      "remainingMatches": 7
-    },
-    {
-      "teamKey": "REN",
-      "shortName": "REN",
-      "fullName": "Melbourne Renegades",
       "matches": 3,
       "wins": 1,
       "losses": 2,
@@ -192,39 +192,17 @@
       "teamKey": "HUR",
       "shortName": "HUR",
       "fullName": "Hobart Hurricanes",
-      "matches": 3,
+      "matches": 4,
       "wins": 0,
-      "losses": 3,
+      "losses": 4,
       "noResult": 0,
       "points": 0,
       "nrr": null,
       "rank": 8,
-      "remainingMatches": 7
+      "remainingMatches": 6
     }
   ],
   "fixtures": [
-    {
-      "id": "300f2828-e1c8-44ad-8a74-be0a54ec4e02",
-      "matchNo": 13,
-      "teamA": "REN",
-      "teamB": "STR",
-      "dateTimeGMT": "2026-11-07T04:40:00Z",
-      "dateTimeLocal": null,
-      "venue": "Junction Oval, Melbourne",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
-    {
-      "id": "1f4f3716-c5f2-44e7-9a35-056e63a2b1cf",
-      "matchNo": 14,
-      "teamA": "HEA",
-      "teamB": "HUR",
-      "dateTimeGMT": "2026-11-07T08:10:00Z",
-      "dateTimeLocal": null,
-      "venue": "Allan Border Field, Brisbane",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "f9366950-2ae6-4b00-968c-4c6c8462e489",
       "matchNo": 15,
@@ -513,1468 +491,228 @@
     }
   ],
   "analysis": {
-    "method": "Monte Carlo",
-    "simulationCount": 40000,
-    "generatedAt": "2026-11-06T14:55:33Z",
+    "method": "Exact all-combinations",
+    "simulationCount": 67108864,
+    "generatedAt": "2026-11-07T13:51:27Z",
+    "stateCount": 282250,
+    "modelNotes": [
+      "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
+      "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
+      "Teams with identical records can have different probabilities because remaining fixtures and direct rival games change the exact scenario tree.",
+      "Current NRR is displayed when the source provides it; probability math does not require NRR.",
+      "Fixture-impact guidance is computed for the next 1 fixture(s)."
+    ],
     "overallProbabilities": {
       "SCO": {
-        "top4": 81.85,
-        "top1": 36.35
+        "top4": 85.44,
+        "top1": 34.14,
+        "top4Clear": 77.65,
+        "top1Clear": 25.02,
+        "top4Possible": 92.37,
+        "top1Possible": 46.24
       },
       "SIX": {
-        "top4": 80.38,
-        "top1": 28.62
-      },
-      "THU": {
-        "top4": 52.85,
-        "top1": 8.45
-      },
-      "STR": {
-        "top4": 62.72,
-        "top1": 13.47
+        "top4": 84.79,
+        "top1": 35.16,
+        "top4Clear": 77.18,
+        "top1Clear": 26.28,
+        "top4Possible": 91.79,
+        "top1Possible": 46.98
       },
       "HEA": {
-        "top4": 44.9,
-        "top1": 5.25
+        "top4": 49.89,
+        "top1": 5.63,
+        "top4Clear": 36.82,
+        "top1Clear": 2.67,
+        "top4Possible": 62.92,
+        "top1Possible": 10.22
       },
       "REN": {
-        "top4": 38.11,
-        "top1": 4.92
+        "top4": 50.01,
+        "top1": 5.95,
+        "top4Clear": 36.96,
+        "top1Clear": 2.88,
+        "top4Possible": 63.09,
+        "top1Possible": 10.73
+      },
+      "THU": {
+        "top4": 63.94,
+        "top1": 13.84,
+        "top4Clear": 52.03,
+        "top1Clear": 8.6,
+        "top4Possible": 75.44,
+        "top1Possible": 21.38
+      },
+      "STR": {
+        "top4": 36.05,
+        "top1": 3.79,
+        "top4Clear": 24.59,
+        "top1Clear": 1.79,
+        "top4Possible": 47.94,
+        "top1Possible": 7.02
       },
       "STA": {
-        "top4": 20.79,
-        "top1": 1.6
+        "top4": 22.98,
+        "top1": 1.37,
+        "top4Clear": 13.28,
+        "top1Clear": 0.46,
+        "top4Possible": 33.54,
+        "top1Possible": 3.04
       },
       "HUR": {
-        "top4": 18.39,
-        "top1": 1.33
+        "top4": 6.88,
+        "top1": 0.13,
+        "top4Clear": 2.65,
+        "top1Clear": 0.0,
+        "top4Possible": 11.7,
+        "top1Possible": 0.38
       }
     },
     "teamAnalysis": {
       "4": {
         "SCO": {
-          "percentage": 81.85,
+          "percentage": 85.44,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "STR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 0.98
             }
           }
         },
         "SIX": {
-          "percentage": 80.38,
+          "percentage": 84.79,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
-            }
-          }
-        },
-        "THU": {
-          "percentage": 52.85,
-          "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "THU wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
-            }
-          }
-        },
-        "STR": {
-          "percentage": 62.72,
-          "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "STR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 16.72
             }
           }
         },
         "HEA": {
-          "percentage": 44.9,
+          "percentage": 49.89,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HEA wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 1.97
             }
           }
         },
         "REN": {
-          "percentage": 38.11,
+          "percentage": 50.01,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "REN wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 2.18
+            }
+          }
+        },
+        "THU": {
+          "percentage": 63.94,
+          "results_df": {
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 25.87
+            }
+          }
+        },
+        "STR": {
+          "percentage": 36.05,
+          "results_df": {
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 1.75
             }
           }
         },
         "STA": {
-          "percentage": 20.79,
+          "percentage": 22.98,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 1.44
             }
           }
         },
         "HUR": {
-          "percentage": 18.39,
+          "percentage": 6.88,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 0.82
             }
           }
         }
       },
       "1": {
         "SCO": {
-          "percentage": 36.35,
+          "percentage": 34.14,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "SCO wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "SCO wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "SCO wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "SCO wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 5.3
             }
           }
         },
         "SIX": {
-          "percentage": 28.62,
+          "percentage": 35.16,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "SIX wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "SIX wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
-            }
-          }
-        },
-        "THU": {
-          "percentage": 8.45,
-          "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "THU wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
-            }
-          }
-        },
-        "STR": {
-          "percentage": 13.47,
-          "results_df": {
-            "REN vs STR": {
-              "Outcome": "STR wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "STR wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "STR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "SIX beat THU",
+              "Impact": 25.43
             }
           }
         },
         "HEA": {
-          "percentage": 5.25,
+          "percentage": 5.63,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HEA wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 1.71
             }
           }
         },
         "REN": {
-          "percentage": 4.92,
+          "percentage": 5.95,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "REN wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 0.5
+            }
+          }
+        },
+        "THU": {
+          "percentage": 13.84,
+          "results_df": {
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 16.63
+            }
+          }
+        },
+        "STR": {
+          "percentage": 3.79,
+          "results_df": {
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 0.86
             }
           }
         },
         "STA": {
-          "percentage": 1.6,
+          "percentage": 1.37,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HEA wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SIX wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "HEA wins"
-            },
-            "THU vs STR": {
-              "Outcome": "THU wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "STA wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 0.37
             }
           }
         },
         "HUR": {
-          "percentage": 1.33,
+          "percentage": 0.13,
           "results_df": {
-            "REN vs STR": {
-              "Outcome": "REN wins"
-            },
-            "HEA vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs THU": {
-              "Outcome": "THU wins"
-            },
-            "SCO vs STA": {
-              "Outcome": "STA wins"
-            },
-            "HUR vs STR": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs THU": {
-              "Outcome": "THU wins"
-            },
-            "STA vs HEA": {
-              "Outcome": "STA wins"
-            },
-            "REN vs SIX": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs HEA": {
-              "Outcome": "HUR wins"
-            },
-            "SCO vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs REN": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STA": {
-              "Outcome": "STA wins"
-            },
-            "STR vs SIX": {
-              "Outcome": "STR wins"
-            },
-            "HUR vs SCO": {
-              "Outcome": "HUR wins"
-            },
-            "HEA vs THU": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs REN": {
-              "Outcome": "REN wins"
-            },
-            "HUR vs THU": {
-              "Outcome": "HUR wins"
-            },
-            "SIX vs SCO": {
-              "Outcome": "SCO wins"
-            },
-            "HEA vs STR": {
-              "Outcome": "HEA wins"
-            },
-            "STA vs REN": {
-              "Outcome": "STA wins"
-            },
-            "REN vs HEA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs STR": {
-              "Outcome": "STR wins"
-            },
-            "SIX vs STA": {
-              "Outcome": "STA wins"
-            },
-            "SCO vs HUR": {
-              "Outcome": "HUR wins"
-            },
-            "REN vs STA": {
-              "Outcome": "REN wins"
-            },
-            "THU vs SIX": {
-              "Outcome": "THU wins"
-            },
-            "HEA vs SCO": {
-              "Outcome": "HEA wins"
-            },
-            "STR vs HUR": {
-              "Outcome": "HUR wins"
+            "M15: SIX vs THU": {
+              "Outcome": "THU beat SIX",
+              "Impact": 0.06
             }
           }
         }
@@ -1983,118 +721,2652 @@
     "qualificationPath": {
       "4": {
         "SCO": {
-          "possible": 2,
-          "guaranteed": 4,
-          "target_matches": 7,
-          "method": "Monte Carlo"
-        },
-        "SIX": {
           "possible": 1,
-          "guaranteed": 4,
-          "target_matches": 7,
-          "method": "Monte Carlo"
-        },
-        "THU": {
-          "possible": 2,
+          "likely": 2,
           "guaranteed": 5,
           "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 1.81,
+              "possibleRate": 7.09,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 51.74,
+              "possibleRate": 89.26,
+              "guaranteedRate": 12.96
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 98.21,
+              "possibleRate": 99.99,
+              "guaranteedRate": 93.35
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 85.94,
+              "teamBWinProbability": 84.95,
+              "impact": 0.98
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 85.94,
+              "teamBWinProbability": 84.95,
+              "impact": 0.98
+            }
+          ],
+          "impactFixtureWindow": 1
         },
-        "STR": {
-          "possible": 3,
-          "guaranteed": 6,
-          "target_matches": 8,
-          "method": "Monte Carlo"
+        "SIX": {
+          "possible": 0,
+          "likely": 3,
+          "guaranteed": 5,
+          "target_matches": 7,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 1.71,
+              "possibleRate": 6.09,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 48.18,
+              "possibleRate": 86.04,
+              "guaranteedRate": 11.19
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 97.98,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.69
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 93.15,
+              "teamBWinProbability": 76.43,
+              "impact": 16.72
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 93.15,
+              "teamBWinProbability": 76.43,
+              "impact": 16.72
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "HEA": {
-          "possible": 2,
-          "guaranteed": 6,
-          "target_matches": 7,
-          "method": "Monte Carlo"
-        },
-        "REN": {
-          "possible": 3,
-          "guaranteed": 6,
-          "target_matches": 7,
-          "method": "Monte Carlo"
-        },
-        "STA": {
-          "possible": 3,
+          "possible": 1,
+          "likely": 4,
           "guaranteed": 6,
           "target_matches": 6,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 2.28,
+              "possibleRate": 8.06,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 49.86,
+              "possibleRate": 85.33,
+              "guaranteedRate": 14.41
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 97.45,
+              "possibleRate": 99.97,
+              "guaranteedRate": 91.22
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 50.88,
+              "teamBWinProbability": 48.91,
+              "impact": 1.97
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 50.88,
+              "teamBWinProbability": 48.91,
+              "impact": 1.97
+            }
+          ],
+          "impactFixtureWindow": 1
         },
-        "HUR": {
-          "possible": 4,
+        "REN": {
+          "possible": 1,
+          "likely": 3,
+          "guaranteed": 6,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 2.42,
+              "possibleRate": 8.45,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 50.06,
+              "possibleRate": 85.58,
+              "guaranteedRate": 14.57
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 97.56,
+              "possibleRate": 99.97,
+              "guaranteedRate": 91.59
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 51.1,
+              "teamBWinProbability": 48.93,
+              "impact": 2.18
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 51.1,
+              "teamBWinProbability": 48.93,
+              "impact": 2.18
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "THU": {
+          "possible": 1,
+          "likely": 3,
           "guaranteed": 6,
           "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 2.84,
+              "possibleRate": 9.89,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 51.48,
+              "possibleRate": 87.14,
+              "guaranteedRate": 15.18
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 97.81,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.23
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 51.01,
+              "teamBWinProbability": 76.88,
+              "impact": 25.87
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 51.01,
+              "teamBWinProbability": 76.88,
+              "impact": 25.87
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "STR": {
+          "possible": 2,
+          "likely": 5,
+          "guaranteed": 7,
+          "target_matches": 7,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 2.16,
+              "possibleRate": 7.7,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 48.42,
+              "possibleRate": 84.79,
+              "guaranteedRate": 12.66
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 97.36,
+              "possibleRate": 99.98,
+              "guaranteedRate": 90.63
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 36.93,
+              "teamBWinProbability": 35.18,
+              "impact": 1.75
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 36.93,
+              "teamBWinProbability": 35.18,
+              "impact": 1.75
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "STA": {
+          "possible": 2,
+          "likely": 5,
+          "guaranteed": null,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 1.92,
+              "possibleRate": 6.92,
+              "guaranteedRate": 0.01
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 49.49,
+              "possibleRate": 87.23,
+              "guaranteedRate": 12.48
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 98.37,
+              "possibleRate": 100.0,
+              "guaranteedRate": 93.78
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 23.71,
+              "teamBWinProbability": 22.26,
+              "impact": 1.44
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 23.71,
+              "teamBWinProbability": 22.26,
+              "impact": 1.44
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "HUR": {
+          "possible": 3,
+          "likely": 5,
+          "guaranteed": null,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 1.85,
+              "possibleRate": 7.02,
+              "guaranteedRate": 0.01
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 52.27,
+              "possibleRate": 90.56,
+              "guaranteedRate": 12.44
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 98.76,
+              "possibleRate": 100.0,
+              "guaranteedRate": 95.18
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 7.29,
+              "teamBWinProbability": 6.47,
+              "impact": 0.82
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 7.29,
+              "teamBWinProbability": 6.47,
+              "impact": 0.82
+            }
+          ],
+          "impactFixtureWindow": 1
         }
       },
       "1": {
         "SCO": {
-          "possible": 3,
+          "possible": 2,
+          "likely": 5,
           "guaranteed": 7,
           "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 5.8,
+              "possibleRate": 18.49,
+              "guaranteedRate": 0.13
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 45.28,
+              "possibleRate": 70.62,
+              "guaranteedRate": 23.77
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 85.41,
+              "possibleRate": 95.31,
+              "guaranteedRate": 75.62
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 98.33,
+              "possibleRate": 99.78,
+              "guaranteedRate": 96.88
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 31.49,
+              "teamBWinProbability": 36.79,
+              "impact": 5.3
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 31.49,
+              "teamBWinProbability": 36.79,
+              "impact": 5.3
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "SIX": {
-          "possible": 3,
+          "possible": 2,
+          "likely": 5,
           "guaranteed": 7,
           "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 6.2,
+              "possibleRate": 19.4,
+              "guaranteedRate": 0.17
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 47.77,
+              "possibleRate": 72.22,
+              "guaranteedRate": 26.86
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 86.76,
+              "possibleRate": 95.61,
+              "guaranteedRate": 78.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 98.44,
+              "possibleRate": 99.78,
+              "guaranteedRate": 97.1
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 47.87,
+              "teamBWinProbability": 22.44,
+              "impact": 25.43
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 47.87,
+              "teamBWinProbability": 22.44,
+              "impact": 25.43
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "HEA": {
+          "possible": 3,
+          "likely": 6,
+          "guaranteed": null,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 3.94,
+              "possibleRate": 12.9,
+              "guaranteedRate": 0.08
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 36.99,
+              "possibleRate": 61.36,
+              "guaranteedRate": 17.22
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 79.16,
+              "possibleRate": 92.21,
+              "guaranteedRate": 66.5
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 4.78,
+              "teamBWinProbability": 6.48,
+              "impact": 1.71
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 4.78,
+              "teamBWinProbability": 6.48,
+              "impact": 1.71
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "REN": {
+          "possible": 3,
+          "likely": 6,
+          "guaranteed": null,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 4.29,
+              "possibleRate": 13.88,
+              "guaranteedRate": 0.09
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 39.25,
+              "possibleRate": 64.18,
+              "guaranteedRate": 18.91
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 80.93,
+              "possibleRate": 92.98,
+              "guaranteedRate": 69.18
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.7,
+              "teamBWinProbability": 6.2,
+              "impact": 0.5
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.7,
+              "teamBWinProbability": 6.2,
+              "impact": 0.5
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "THU": {
-          "possible": 4,
+          "possible": 3,
+          "likely": 6,
           "guaranteed": null,
           "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 4.7,
+              "possibleRate": 15.12,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 43.02,
+              "possibleRate": 68.28,
+              "guaranteedRate": 22.04
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 86.3,
+              "possibleRate": 96.21,
+              "guaranteedRate": 76.6
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 99.22,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.44
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.52,
+              "teamBWinProbability": 22.15,
+              "impact": 16.63
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.52,
+              "teamBWinProbability": 22.15,
+              "impact": 16.63
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "STR": {
           "possible": 4,
-          "guaranteed": 8,
-          "target_matches": 8,
-          "method": "Monte Carlo"
-        },
-        "HEA": {
-          "possible": 5,
+          "likely": 7,
           "guaranteed": null,
           "target_matches": 7,
-          "method": "Monte Carlo"
-        },
-        "REN": {
-          "possible": 5,
-          "guaranteed": null,
-          "target_matches": 7,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 4.6,
+              "possibleRate": 15.12,
+              "guaranteedRate": 0.09
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 43.01,
+              "possibleRate": 69.1,
+              "guaranteedRate": 21.4
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 86.95,
+              "possibleRate": 96.88,
+              "guaranteedRate": 77.2
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 3.36,
+              "teamBWinProbability": 4.22,
+              "impact": 0.86
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 3.36,
+              "teamBWinProbability": 4.22,
+              "impact": 0.86
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "STA": {
-          "possible": 5,
+          "possible": 4,
+          "likely": 6,
           "guaranteed": null,
           "target_matches": 6,
-          "method": "Monte Carlo"
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 6.19,
+              "possibleRate": 19.61,
+              "guaranteedRate": 0.15
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 50.82,
+              "possibleRate": 76.46,
+              "guaranteedRate": 28.7
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 1.19,
+              "teamBWinProbability": 1.56,
+              "impact": 0.37
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 1.19,
+              "teamBWinProbability": 1.56,
+              "impact": 0.37
+            }
+          ],
+          "impactFixtureWindow": 1
         },
         "HUR": {
-          "possible": 6,
+          "possible": 5,
+          "likely": null,
           "guaranteed": null,
-          "target_matches": 7,
-          "method": "Monte Carlo"
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 7.98,
+              "possibleRate": 24.25,
+              "guaranteedRate": 0.26
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 0.09,
+              "teamBWinProbability": 0.16,
+              "impact": 0.06
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 0.09,
+              "teamBWinProbability": 0.16,
+              "impact": 0.06
+            }
+          ],
+          "impactFixtureWindow": 1
+        }
+      }
+    },
+    "scenarioBreakdown": {
+      "4": {
+        "SCO": {
+          "clearRate": 77.65,
+          "possibleRate": 92.37,
+          "sharedTieAdjustedRate": 85.44,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 1.81,
+              "possibleRate": 7.09,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 51.74,
+              "possibleRate": 89.26,
+              "guaranteedRate": 12.96
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 98.21,
+              "possibleRate": 99.99,
+              "guaranteedRate": 93.35
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 85.94,
+              "teamBWinProbability": 84.95,
+              "impact": 0.98
+            }
+          ]
+        },
+        "SIX": {
+          "clearRate": 77.18,
+          "possibleRate": 91.79,
+          "sharedTieAdjustedRate": 84.79,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 1.71,
+              "possibleRate": 6.09,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 48.18,
+              "possibleRate": 86.04,
+              "guaranteedRate": 11.19
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 97.98,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.69
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 93.15,
+              "teamBWinProbability": 76.43,
+              "impact": 16.72
+            }
+          ]
+        },
+        "HEA": {
+          "clearRate": 36.82,
+          "possibleRate": 62.92,
+          "sharedTieAdjustedRate": 49.89,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 2.28,
+              "possibleRate": 8.06,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 49.86,
+              "possibleRate": 85.33,
+              "guaranteedRate": 14.41
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 97.45,
+              "possibleRate": 99.97,
+              "guaranteedRate": 91.22
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 50.88,
+              "teamBWinProbability": 48.91,
+              "impact": 1.97
+            }
+          ]
+        },
+        "REN": {
+          "clearRate": 36.96,
+          "possibleRate": 63.09,
+          "sharedTieAdjustedRate": 50.01,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 2.42,
+              "possibleRate": 8.45,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 50.06,
+              "possibleRate": 85.58,
+              "guaranteedRate": 14.57
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 97.56,
+              "possibleRate": 99.97,
+              "guaranteedRate": 91.59
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 51.1,
+              "teamBWinProbability": 48.93,
+              "impact": 2.18
+            }
+          ]
+        },
+        "THU": {
+          "clearRate": 52.03,
+          "possibleRate": 75.44,
+          "sharedTieAdjustedRate": 63.94,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 2.84,
+              "possibleRate": 9.89,
+              "guaranteedRate": 0.03
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 51.48,
+              "possibleRate": 87.14,
+              "guaranteedRate": 15.18
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 97.81,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.23
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 51.01,
+              "teamBWinProbability": 76.88,
+              "impact": 25.87
+            }
+          ]
+        },
+        "STR": {
+          "clearRate": 24.59,
+          "possibleRate": 47.94,
+          "sharedTieAdjustedRate": 36.05,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 2.16,
+              "possibleRate": 7.7,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 48.42,
+              "possibleRate": 84.79,
+              "guaranteedRate": 12.66
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 97.36,
+              "possibleRate": 99.98,
+              "guaranteedRate": 90.63
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 36.93,
+              "teamBWinProbability": 35.18,
+              "impact": 1.75
+            }
+          ]
+        },
+        "STA": {
+          "clearRate": 13.28,
+          "possibleRate": 33.54,
+          "sharedTieAdjustedRate": 22.98,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 1.92,
+              "possibleRate": 6.92,
+              "guaranteedRate": 0.01
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 49.49,
+              "possibleRate": 87.23,
+              "guaranteedRate": 12.48
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 98.37,
+              "possibleRate": 100.0,
+              "guaranteedRate": 93.78
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 23.71,
+              "teamBWinProbability": 22.26,
+              "impact": 1.44
+            }
+          ]
+        },
+        "HUR": {
+          "clearRate": 2.65,
+          "possibleRate": 11.7,
+          "sharedTieAdjustedRate": 6.88,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 1.85,
+              "possibleRate": 7.02,
+              "guaranteedRate": 0.01
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 52.27,
+              "possibleRate": 90.56,
+              "guaranteedRate": 12.44
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 98.76,
+              "possibleRate": 100.0,
+              "guaranteedRate": 95.18
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 7.29,
+              "teamBWinProbability": 6.47,
+              "impact": 0.82
+            }
+          ]
+        }
+      },
+      "1": {
+        "SCO": {
+          "clearRate": 25.02,
+          "possibleRate": 46.24,
+          "sharedTieAdjustedRate": 34.14,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 5.8,
+              "possibleRate": 18.49,
+              "guaranteedRate": 0.13
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 45.28,
+              "possibleRate": 70.62,
+              "guaranteedRate": 23.77
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 85.41,
+              "possibleRate": 95.31,
+              "guaranteedRate": 75.62
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 98.33,
+              "possibleRate": 99.78,
+              "guaranteedRate": 96.88
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 31.49,
+              "teamBWinProbability": 36.79,
+              "impact": 5.3
+            }
+          ]
+        },
+        "SIX": {
+          "clearRate": 26.28,
+          "possibleRate": 46.98,
+          "sharedTieAdjustedRate": 35.16,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 6.2,
+              "possibleRate": 19.4,
+              "guaranteedRate": 0.17
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 47.77,
+              "possibleRate": 72.22,
+              "guaranteedRate": 26.86
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 86.76,
+              "possibleRate": 95.61,
+              "guaranteedRate": 78.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 98.44,
+              "possibleRate": 99.78,
+              "guaranteedRate": 97.1
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "SIX",
+              "preferredLabel": "SIX beat THU",
+              "teamAWinProbability": 47.87,
+              "teamBWinProbability": 22.44,
+              "impact": 25.43
+            }
+          ]
+        },
+        "HEA": {
+          "clearRate": 2.67,
+          "possibleRate": 10.22,
+          "sharedTieAdjustedRate": 5.63,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 3.94,
+              "possibleRate": 12.9,
+              "guaranteedRate": 0.08
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 36.99,
+              "possibleRate": 61.36,
+              "guaranteedRate": 17.22
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 79.16,
+              "possibleRate": 92.21,
+              "guaranteedRate": 66.5
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 4.78,
+              "teamBWinProbability": 6.48,
+              "impact": 1.71
+            }
+          ]
+        },
+        "REN": {
+          "clearRate": 2.88,
+          "possibleRate": 10.73,
+          "sharedTieAdjustedRate": 5.95,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 4.29,
+              "possibleRate": 13.88,
+              "guaranteedRate": 0.09
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 39.25,
+              "possibleRate": 64.18,
+              "guaranteedRate": 18.91
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 80.93,
+              "possibleRate": 92.98,
+              "guaranteedRate": 69.18
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.7,
+              "teamBWinProbability": 6.2,
+              "impact": 0.5
+            }
+          ]
+        },
+        "THU": {
+          "clearRate": 8.6,
+          "possibleRate": 21.38,
+          "sharedTieAdjustedRate": 13.84,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 4.7,
+              "possibleRate": 15.12,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 43.02,
+              "possibleRate": 68.28,
+              "guaranteedRate": 22.04
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 86.3,
+              "possibleRate": 96.21,
+              "guaranteedRate": 76.6
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 99.22,
+              "possibleRate": 100.0,
+              "guaranteedRate": 98.44
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 5.52,
+              "teamBWinProbability": 22.15,
+              "impact": 16.63
+            }
+          ]
+        },
+        "STR": {
+          "clearRate": 1.79,
+          "possibleRate": 7.02,
+          "sharedTieAdjustedRate": 3.79,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 524288,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 11010048,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 18350080,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 11010048,
+              "probability": 4.6,
+              "possibleRate": 15.12,
+              "guaranteedRate": 0.09
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 43.01,
+              "possibleRate": 69.1,
+              "guaranteedRate": 21.4
+            },
+            {
+              "wins": 7,
+              "scenarios": 524288,
+              "probability": 86.95,
+              "possibleRate": 96.88,
+              "guaranteedRate": 77.2
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 3.36,
+              "teamBWinProbability": 4.22,
+              "impact": 0.86
+            }
+          ]
+        },
+        "STA": {
+          "clearRate": 0.46,
+          "possibleRate": 3.04,
+          "sharedTieAdjustedRate": 1.37,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.02,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 6.19,
+              "possibleRate": 19.61,
+              "guaranteedRate": 0.15
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 50.82,
+              "possibleRate": 76.46,
+              "guaranteedRate": 28.7
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 1.19,
+              "teamBWinProbability": 1.56,
+              "impact": 0.37
+            }
+          ]
+        },
+        "HUR": {
+          "clearRate": 0.0,
+          "possibleRate": 0.38,
+          "sharedTieAdjustedRate": 0.13,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 6291456,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 20971520,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 15728640,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 6291456,
+              "probability": 0.01,
+              "possibleRate": 0.04,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 1048576,
+              "probability": 7.98,
+              "possibleRate": 24.25,
+              "guaranteedRate": 0.26
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "f9366950-2ae6-4b00-968c-4c6c8462e489",
+              "matchNo": 15,
+              "label": "M15: SIX vs THU",
+              "teamA": "SIX",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat SIX",
+              "teamAWinProbability": 0.09,
+              "teamBWinProbability": 0.16,
+              "impact": 0.06
+            }
+          ]
         }
       }
     }
   },
   "movement": {
-    "since": "2026-11-05T15:19:24Z",
+    "since": "2026-11-06T14:55:33Z",
     "tier": "top4",
     "changes": {
-      "SCO": 0.16,
-      "SIX": 12.57,
-      "THU": 0.47,
-      "STR": 0.57,
-      "HEA": -0.08,
-      "REN": -0.17,
-      "STA": -13.58,
-      "HUR": 0.04
+      "SCO": 3.59,
+      "SIX": 4.41,
+      "HEA": 4.99,
+      "REN": 11.9,
+      "THU": 11.09,
+      "STR": -26.67,
+      "STA": 2.19,
+      "HUR": -11.51
     }
   }
 }
