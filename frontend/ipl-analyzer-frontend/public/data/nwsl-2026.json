@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-07T22:53:08Z",
+    "generated_at": "2026-11-08T22:59:54Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
     "data_freshness_status": "fresh",
@@ -584,39 +584,30 @@
       "remaining": 0
     }
   ],
-  "fixtures": [
+  "fixtures": [],
+  "results": [
     {
-      "id": "playoff-0",
-      "round": null,
-      "date": "2026-11-08T17:30:00Z",
-      "home": "Gotham FC",
-      "away": "Seattle Reign FC",
-      "venue": null,
-      "stage": "Quarterfinals",
-      "probabilities": {
-        "home": 0.459,
-        "draw": 0.313,
-        "away": 0.228
-      }
-    },
-    {
-      "id": "playoff-1",
+      "id": "playoff-result-0",
       "round": null,
       "date": "2026-11-08T20:00:00Z",
       "home": "Washington Spirit",
       "away": "Portland Thorns FC",
-      "venue": null,
-      "stage": "Quarterfinals",
-      "probabilities": {
-        "home": 0.467,
-        "draw": 0.258,
-        "away": 0.276
-      }
-    }
-  ],
-  "results": [
+      "homeScore": 4,
+      "awayScore": 1,
+      "note": "Quarterfinals"
+    },
     {
-      "id": "playoff-result-0",
+      "id": "playoff-result-1",
+      "round": null,
+      "date": "2026-11-08T17:30:00Z",
+      "home": "Gotham FC",
+      "away": "Seattle Reign FC",
+      "homeScore": 1,
+      "awayScore": 0,
+      "note": "Quarterfinals"
+    },
+    {
+      "id": "playoff-result-2",
       "round": null,
       "date": "2026-11-07T17:00:00Z",
       "home": "Kansas City Current",
@@ -626,7 +617,7 @@
       "note": "Quarterfinals, aet"
     },
     {
-      "id": "playoff-result-1",
+      "id": "playoff-result-3",
       "round": null,
       "date": "2026-11-07T03:00:00Z",
       "home": "San Diego Wave FC",
@@ -2844,7 +2835,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 100.0,
-        "title": 18.66
+        "title": 28.43
       },
       "Houston Dash": {
         "playoffs": 0.0,
@@ -2856,7 +2847,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 31.96
+        "title": 26.62
       },
       "North Carolina Courage": {
         "playoffs": 0.0,
@@ -2874,7 +2865,7 @@
         "playoffs": 100.0,
         "top4": 0.0,
         "shield": 0.0,
-        "title": 10.17
+        "title": 0.0
       },
       "Racing Louisville FC": {
         "playoffs": 0.0,
@@ -2892,19 +2883,19 @@
         "playoffs": 100.0,
         "top4": 0.0,
         "shield": 0.0,
-        "title": 5.67
+        "title": 0.0
       },
       "Utah Royals FC": {
         "playoffs": 100.0,
         "top4": 0.0,
         "shield": 0.0,
-        "title": 12.93
+        "title": 12.23
       },
       "Washington Spirit": {
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 20.61
+        "title": 32.71
       }
     },
     "positions": {
@@ -3344,11 +3335,14 @@
             "bottom": "Seattle Reign FC",
             "topSeed": 1,
             "bottomSeed": 8,
-            "topWins": 0,
+            "topWins": 1,
             "bottomWins": 0,
             "bestOf": 1,
-            "winner": null,
-            "aggregate": null
+            "winner": "Gotham FC",
+            "aggregate": {
+              "top": 1,
+              "bottom": 0
+            }
           },
           {
             "stage": "Quarterfinals",
@@ -3390,11 +3384,14 @@
             "bottom": "Portland Thorns FC",
             "topSeed": 3,
             "bottomSeed": 6,
-            "topWins": 0,
+            "topWins": 1,
             "bottomWins": 0,
             "bestOf": 1,
-            "winner": null,
-            "aggregate": null
+            "winner": "Washington Spirit",
+            "aggregate": {
+              "top": 4,
+              "bottom": 1
+            }
           }
         ]
       },
@@ -3405,9 +3402,9 @@
           {
             "stage": "Semifinals",
             "conference": null,
-            "top": null,
+            "top": "Gotham FC",
             "bottom": "Kansas City Current",
-            "topSeed": null,
+            "topSeed": 1,
             "bottomSeed": 4,
             "topWins": 0,
             "bottomWins": 0,
@@ -3418,10 +3415,10 @@
           {
             "stage": "Semifinals",
             "conference": null,
-            "top": "Utah Royals FC",
-            "bottom": null,
-            "topSeed": 7,
-            "bottomSeed": null,
+            "top": "Washington Spirit",
+            "bottom": "Utah Royals FC",
+            "topSeed": 3,
+            "bottomSeed": 7,
             "topWins": 0,
             "bottomWins": 0,
             "bestOf": 1,
