@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-11T15:01:20Z",
+    "generated_at": "2026-11-12T15:54:07Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -114,32 +114,32 @@
       "teamKey": "SIX",
       "shortName": "SIX",
       "fullName": "Sydney Sixers",
-      "matches": 4,
-      "wins": 4,
+      "matches": 5,
+      "wins": 5,
       "losses": 0,
       "noResult": 0,
-      "points": 8,
+      "points": 10,
       "nrr": null,
       "rank": 2,
-      "remainingMatches": 6
-    },
-    {
-      "teamKey": "STR",
-      "shortName": "STR",
-      "fullName": "Adelaide Strikers",
-      "matches": 4,
-      "wins": 2,
-      "losses": 2,
-      "noResult": 0,
-      "points": 4,
-      "nrr": null,
-      "rank": 3,
-      "remainingMatches": 6
+      "remainingMatches": 5
     },
     {
       "teamKey": "HEA",
       "shortName": "HEA",
       "fullName": "Brisbane Heat",
+      "matches": 5,
+      "wins": 3,
+      "losses": 2,
+      "noResult": 0,
+      "points": 6,
+      "nrr": null,
+      "rank": 3,
+      "remainingMatches": 5
+    },
+    {
+      "teamKey": "STR",
+      "shortName": "STR",
+      "fullName": "Adelaide Strikers",
       "matches": 4,
       "wins": 2,
       "losses": 2,
@@ -153,14 +153,14 @@
       "teamKey": "REN",
       "shortName": "REN",
       "fullName": "Melbourne Renegades",
-      "matches": 4,
+      "matches": 5,
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "noResult": 0,
       "points": 4,
       "nrr": null,
       "rank": 5,
-      "remainingMatches": 6
+      "remainingMatches": 5
     },
     {
       "teamKey": "THU",
@@ -179,14 +179,14 @@
       "teamKey": "STA",
       "shortName": "STA",
       "fullName": "Melbourne Stars",
-      "matches": 5,
+      "matches": 6,
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "noResult": 0,
       "points": 2,
       "nrr": null,
       "rank": 7,
-      "remainingMatches": 5
+      "remainingMatches": 4
     },
     {
       "teamKey": "HUR",
@@ -203,28 +203,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-      "matchNo": 19,
-      "teamA": "STA",
-      "teamB": "HEA",
-      "dateTimeGMT": "2026-11-12T04:40:00Z",
-      "dateTimeLocal": null,
-      "venue": "Junction Oval, Melbourne",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
-    {
-      "id": "2643e1b7-5921-4c4f-8805-32a3defbae85",
-      "matchNo": 20,
-      "teamA": "REN",
-      "teamB": "SIX",
-      "dateTimeGMT": "2026-11-12T08:10:00Z",
-      "dateTimeLocal": null,
-      "venue": "Junction Oval, Melbourne",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "94adaed4-2917-43c6-9990-eee50849a7dc",
       "matchNo": 21,
@@ -448,9 +426,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 4194304,
-    "generatedAt": "2026-11-11T15:01:20Z",
-    "stateCount": 95394,
+    "simulationCount": 1048576,
+    "generatedAt": "2026-11-12T15:54:07Z",
+    "stateCount": 52064,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -460,213 +438,213 @@
     ],
     "overallProbabilities": {
       "SCO": {
-        "top4": 98.44,
-        "top1": 54.04,
-        "top4Clear": 96.57,
-        "top1Clear": 43.11,
-        "top4Possible": 99.72,
-        "top1Possible": 66.9
+        "top4": 98.58,
+        "top1": 46.43,
+        "top4Clear": 96.85,
+        "top1Clear": 35.56,
+        "top4Possible": 99.75,
+        "top1Possible": 58.92
       },
       "SIX": {
-        "top4": 93.59,
-        "top1": 35.56,
-        "top4Clear": 88.9,
-        "top1Clear": 25.81,
-        "top4Possible": 97.44,
-        "top1Possible": 47.11
-      },
-      "STR": {
-        "top4": 52.33,
-        "top1": 3.52,
-        "top4Clear": 39.66,
-        "top1Clear": 1.48,
-        "top4Possible": 64.99,
-        "top1Possible": 6.49
+        "top4": 98.26,
+        "top1": 46.24,
+        "top4Clear": 96.28,
+        "top1Clear": 35.23,
+        "top4Possible": 99.65,
+        "top1Possible": 58.88
       },
       "HEA": {
-        "top4": 52.17,
-        "top1": 2.93,
-        "top4Clear": 39.6,
-        "top1Clear": 1.12,
-        "top4Possible": 64.74,
-        "top1Possible": 5.61
+        "top4": 69.21,
+        "top1": 3.66,
+        "top4Clear": 57.35,
+        "top1Clear": 1.31,
+        "top4Possible": 80.52,
+        "top1Possible": 6.99
+      },
+      "STR": {
+        "top4": 53.56,
+        "top1": 2.65,
+        "top4Clear": 41.32,
+        "top1Clear": 1.0,
+        "top4Possible": 66.05,
+        "top1Possible": 5.04
       },
       "REN": {
-        "top4": 52.35,
-        "top1": 3.17,
-        "top4Clear": 39.67,
-        "top1Clear": 1.27,
-        "top4Possible": 65.02,
-        "top1Possible": 5.92
+        "top4": 36.69,
+        "top1": 0.51,
+        "top4Clear": 24.4,
+        "top1Clear": 0.08,
+        "top4Possible": 49.76,
+        "top1Possible": 1.23
       },
       "THU": {
-        "top4": 35.8,
-        "top1": 0.73,
-        "top4Clear": 23.36,
-        "top1Clear": 0.15,
-        "top4Possible": 48.92,
-        "top1Possible": 1.71
+        "top4": 36.48,
+        "top1": 0.51,
+        "top4Clear": 24.12,
+        "top1Clear": 0.08,
+        "top4Possible": 49.66,
+        "top1Possible": 1.23
       },
       "STA": {
-        "top4": 13.01,
-        "top1": 0.05,
-        "top4Clear": 6.33,
+        "top4": 4.71,
+        "top1": 0.0,
+        "top4Clear": 1.59,
         "top1Clear": 0.0,
-        "top4Possible": 20.82,
-        "top1Possible": 0.16
+        "top4Possible": 9.12,
+        "top1Possible": 0.0
       },
       "HUR": {
-        "top4": 2.32,
+        "top4": 2.52,
         "top1": 0.0,
-        "top4Clear": 0.58,
+        "top4Clear": 0.68,
         "top1Clear": 0.0,
-        "top4Possible": 4.82,
+        "top4Possible": 5.23,
         "top1Possible": 0.0
       }
     },
     "teamAnalysis": {
       "4": {
         "SCO": {
-          "percentage": 98.44,
+          "percentage": 98.58,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.41
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 0.39
             }
           }
         },
         "SIX": {
-          "percentage": 93.59,
+          "percentage": 98.26,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.86
-            }
-          }
-        },
-        "STR": {
-          "percentage": 52.33,
-          "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 3.0
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 0.71
             }
           }
         },
         "HEA": {
-          "percentage": 52.17,
+          "percentage": 69.21,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "HEA beat STA",
-              "Impact": 29.21
+            "M21: HUR vs HEA": {
+              "Outcome": "HEA beat HUR",
+              "Impact": 24.34
+            }
+          }
+        },
+        "STR": {
+          "percentage": 53.56,
+          "results_df": {
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 5.01
             }
           }
         },
         "REN": {
-          "percentage": 52.35,
+          "percentage": 36.69,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 3.31
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 6.08
             }
           }
         },
         "THU": {
-          "percentage": 35.8,
+          "percentage": 36.48,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 3.6
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 6.2
             }
           }
         },
         "STA": {
-          "percentage": 13.01,
+          "percentage": 4.71,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 17.67
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 1.38
             }
           }
         },
         "HUR": {
-          "percentage": 2.32,
+          "percentage": 2.52,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.36
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 4.57
             }
           }
         }
       },
       "1": {
         "SCO": {
-          "percentage": 54.04,
+          "percentage": 46.43,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 1.87
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 2.21
             }
           }
         },
         "SIX": {
-          "percentage": 35.56,
+          "percentage": 46.24,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 1.58
-            }
-          }
-        },
-        "STR": {
-          "percentage": 3.52,
-          "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.24
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 2.58
             }
           }
         },
         "HEA": {
-          "percentage": 2.93,
+          "percentage": 3.66,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "HEA beat STA",
-              "Impact": 4.09
+            "M21: HUR vs HEA": {
+              "Outcome": "HEA beat HUR",
+              "Impact": 5.19
+            }
+          }
+        },
+        "STR": {
+          "percentage": 2.65,
+          "results_df": {
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 0.25
             }
           }
         },
         "REN": {
-          "percentage": 3.17,
+          "percentage": 0.51,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.23
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
+              "Impact": 0.07
             }
           }
         },
         "THU": {
-          "percentage": 0.73,
+          "percentage": 0.51,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
+            "M21: HUR vs HEA": {
+              "Outcome": "HUR beat HEA",
               "Impact": 0.07
             }
           }
         },
         "STA": {
-          "percentage": 0.05,
+          "percentage": 0.0,
           "results_df": {
-            "M19: STA vs HEA": {
-              "Outcome": "STA beat HEA",
-              "Impact": 0.09
+            "M21: HUR vs HEA": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "HUR": {
           "percentage": 0.0,
           "results_df": {
-            "M19: STA vs HEA": {
+            "M21: HUR vs HEA": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -679,48 +657,48 @@
         "SCO": {
           "possible": 0,
           "likely": 0,
-          "guaranteed": 3,
+          "guaranteed": 2,
           "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
-              "probability": 58.13,
-              "possibleRate": 91.2,
-              "guaranteedRate": 20.26
+              "scenarios": 32768,
+              "probability": 62.29,
+              "possibleRate": 92.1,
+              "guaranteedRate": 27.23
             },
             {
               "wins": 1,
-              "scenarios": 655360,
-              "probability": 98.36,
+              "scenarios": 163840,
+              "probability": 98.43,
               "possibleRate": 100.0,
-              "guaranteedRate": 94.01
+              "guaranteedRate": 94.42
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -728,86 +706,79 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 98.64,
-              "teamBWinProbability": 98.23,
-              "impact": 0.41
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.77,
+              "teamBWinProbability": 98.38,
+              "impact": 0.39
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 98.64,
-              "teamBWinProbability": 98.23,
-              "impact": 0.41
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.77,
+              "teamBWinProbability": 98.38,
+              "impact": 0.39
             }
           ],
           "impactFixtureWindow": 1
         },
         "SIX": {
           "possible": 0,
-          "likely": 1,
-          "guaranteed": 4,
-          "target_matches": 6,
+          "likely": 0,
+          "guaranteed": 2,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
-              "probability": 2.18,
-              "possibleRate": 7.83,
-              "guaranteedRate": 0.01
+              "scenarios": 32768,
+              "probability": 54.21,
+              "possibleRate": 88.89,
+              "guaranteedRate": 15.54
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 52.7,
-              "possibleRate": 88.03,
-              "guaranteedRate": 14.96
+              "scenarios": 163840,
+              "probability": 98.04,
+              "possibleRate": 100.0,
+              "guaranteedRate": 93.09
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 98.07,
-              "possibleRate": 99.99,
-              "guaranteedRate": 93.3
+              "scenarios": 327680,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 4,
-              "scenarios": 983040,
+              "scenarios": 163840,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -815,30 +786,110 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 94.02,
-              "teamBWinProbability": 93.16,
-              "impact": 0.86
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.62,
+              "teamBWinProbability": 97.91,
+              "impact": 0.71
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 94.02,
-              "teamBWinProbability": 93.16,
-              "impact": 0.86
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.62,
+              "teamBWinProbability": 97.91,
+              "impact": 0.71
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "HEA": {
+          "possible": 1,
+          "likely": 2,
+          "guaranteed": 4,
+          "target_matches": 5,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 32768,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 163840,
+              "probability": 6.34,
+              "possibleRate": 19.56,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 2,
+              "scenarios": 327680,
+              "probability": 60.44,
+              "possibleRate": 87.9,
+              "guaranteedRate": 30.15
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
+              "probability": 97.87,
+              "possibleRate": 99.97,
+              "guaranteedRate": 93.31
+            },
+            {
+              "wins": 4,
+              "scenarios": 163840,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HEA",
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 57.04,
+              "teamBWinProbability": 81.38,
+              "impact": 24.34
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HEA",
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 57.04,
+              "teamBWinProbability": 81.38,
+              "impact": 24.34
             }
           ],
           "impactFixtureWindow": 1
@@ -846,55 +897,55 @@
         "STR": {
           "possible": 1,
           "likely": 3,
-          "guaranteed": 6,
+          "guaranteed": 5,
           "target_matches": 6,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 16384,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.02,
+              "scenarios": 98304,
+              "probability": 0.01,
+              "possibleRate": 0.05,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.83,
-              "possibleRate": 15.4,
-              "guaranteedRate": 0.09
+              "scenarios": 245760,
+              "probability": 6.6,
+              "possibleRate": 19.64,
+              "guaranteedRate": 0.21
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.66,
-              "possibleRate": 86.45,
-              "guaranteedRate": 22.87
+              "scenarios": 327680,
+              "probability": 58.3,
+              "possibleRate": 86.64,
+              "guaranteedRate": 27.98
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.55,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.98
+              "scenarios": 245760,
+              "probability": 97.5,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.1
             },
             {
               "wins": 5,
-              "scenarios": 393216,
+              "scenarios": 98304,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 16384,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -902,117 +953,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 53.83,
-              "teamBWinProbability": 50.83,
-              "impact": 3.0
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 56.06,
+              "teamBWinProbability": 51.05,
+              "impact": 5.01
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 53.83,
-              "teamBWinProbability": 50.83,
-              "impact": 3.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "HEA": {
-          "possible": 1,
-          "likely": 3,
-          "guaranteed": 6,
-          "target_matches": 6,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.41,
-              "possibleRate": 14.35,
-              "guaranteedRate": 0.05
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.58,
-              "possibleRate": 86.42,
-              "guaranteedRate": 22.93
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.42,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.67
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 37.57,
-              "teamBWinProbability": 66.78,
-              "impact": 29.21
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 37.57,
-              "teamBWinProbability": 66.78,
-              "impact": 29.21
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 56.06,
+              "teamBWinProbability": 51.05,
+              "impact": 5.01
             }
           ],
           "impactFixtureWindow": 1
@@ -1020,55 +984,48 @@
         "REN": {
           "possible": 1,
           "likely": 3,
-          "guaranteed": 6,
-          "target_matches": 6,
+          "guaranteed": 5,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.01,
+              "scenarios": 163840,
+              "probability": 0.01,
+              "possibleRate": 0.03,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.81,
-              "possibleRate": 15.32,
-              "guaranteedRate": 0.09
+              "scenarios": 327680,
+              "probability": 5.52,
+              "possibleRate": 16.56,
+              "guaranteedRate": 0.19
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.86,
-              "possibleRate": 86.6,
-              "guaranteedRate": 23.22
+              "scenarios": 327680,
+              "probability": 53.78,
+              "possibleRate": 82.69,
+              "guaranteedRate": 23.73
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.38,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.54
+              "scenarios": 163840,
+              "probability": 96.2,
+              "possibleRate": 99.94,
+              "guaranteedRate": 88.31
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1076,30 +1033,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.0,
-              "teamBWinProbability": 50.69,
-              "impact": 3.31
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.73,
+              "teamBWinProbability": 33.65,
+              "impact": 6.08
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.0,
-              "teamBWinProbability": 50.69,
-              "impact": 3.31
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.73,
+              "teamBWinProbability": 33.65,
+              "impact": 6.08
             }
           ],
           "impactFixtureWindow": 1
@@ -1107,79 +1064,79 @@
         "THU": {
           "possible": 1,
           "likely": 3,
-          "guaranteed": null,
+          "guaranteed": 5,
           "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
-              "probability": 0.0,
-              "possibleRate": 0.01,
+              "scenarios": 163840,
+              "probability": 0.01,
+              "possibleRate": 0.03,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
-              "probability": 4.01,
-              "possibleRate": 12.91,
-              "guaranteedRate": 0.06
+              "scenarios": 327680,
+              "probability": 5.35,
+              "possibleRate": 16.24,
+              "guaranteedRate": 0.13
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 52.21,
-              "possibleRate": 83.64,
-              "guaranteedRate": 19.97
+              "scenarios": 327680,
+              "probability": 53.28,
+              "possibleRate": 82.69,
+              "guaranteedRate": 22.9
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 96.68,
-              "possibleRate": 99.95,
-              "guaranteedRate": 89.44
+              "scenarios": 163840,
+              "probability": 96.2,
+              "possibleRate": 99.94,
+              "guaranteedRate": 88.31
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "guaranteedRate": 100.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 37.6,
-              "teamBWinProbability": 34.0,
-              "impact": 3.6
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.58,
+              "teamBWinProbability": 33.38,
+              "impact": 6.2
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 37.6,
-              "teamBWinProbability": 34.0,
-              "impact": 3.6
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.58,
+              "teamBWinProbability": 33.38,
+              "impact": 6.2
             }
           ],
           "impactFixtureWindow": 1
@@ -1188,78 +1145,71 @@
           "possible": 2,
           "likely": 4,
           "guaranteed": null,
-          "target_matches": 5,
+          "target_matches": 4,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 65536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 393216,
               "probability": 0.0,
-              "possibleRate": 0.0,
+              "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 3.54,
-              "possibleRate": 11.77,
-              "guaranteedRate": 0.04
+              "scenarios": 262144,
+              "probability": 4.71,
+              "possibleRate": 14.99,
+              "guaranteedRate": 0.11
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 56.47,
-              "possibleRate": 89.71,
-              "guaranteedRate": 21.32
-            },
-            {
-              "wins": 5,
-              "scenarios": 131072,
-              "probability": 98.7,
-              "possibleRate": 99.99,
-              "guaranteedRate": 95.5
+              "scenarios": 65536,
+              "probability": 56.5,
+              "possibleRate": 85.8,
+              "guaranteedRate": 24.91
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 21.85,
-              "teamBWinProbability": 4.18,
-              "impact": 17.67
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 5.4,
+              "teamBWinProbability": 4.02,
+              "impact": 1.38
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 21.85,
-              "teamBWinProbability": 4.18,
-              "impact": 17.67
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 5.4,
+              "teamBWinProbability": 4.02,
+              "impact": 1.38
             }
           ],
           "impactFixtureWindow": 1
@@ -1273,73 +1223,73 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
-              "possibleRate": 0.0,
+              "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 3.45,
-              "possibleRate": 12.45,
-              "guaranteedRate": 0.01
+              "scenarios": 163840,
+              "probability": 4.33,
+              "possibleRate": 14.95,
+              "guaranteedRate": 0.02
             },
             {
               "wins": 5,
-              "scenarios": 131072,
-              "probability": 56.87,
-              "possibleRate": 91.99,
-              "guaranteedRate": 18.63
+              "scenarios": 32768,
+              "probability": 58.81,
+              "possibleRate": 92.57,
+              "guaranteedRate": 21.53
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 2.5,
-              "teamBWinProbability": 2.14,
-              "impact": 0.36
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 4.8,
+              "teamBWinProbability": 0.23,
+              "impact": 4.57
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 2.5,
-              "teamBWinProbability": 2.14,
-              "impact": 0.36
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 4.8,
+              "teamBWinProbability": 0.23,
+              "impact": 4.57
             }
           ],
           "impactFixtureWindow": 1
@@ -1347,7 +1297,7 @@
       },
       "1": {
         "SCO": {
-          "possible": 0,
+          "possible": 1,
           "likely": 3,
           "guaranteed": 5,
           "target_matches": 5,
@@ -1355,42 +1305,42 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
-              "probability": 3.33,
-              "possibleRate": 10.92,
-              "guaranteedRate": 0.05
+              "scenarios": 163840,
+              "probability": 1.36,
+              "possibleRate": 4.69,
+              "guaranteedRate": 0.01
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
-              "probability": 35.12,
-              "possibleRate": 58.3,
-              "guaranteedRate": 15.81
+              "scenarios": 327680,
+              "probability": 23.65,
+              "possibleRate": 43.09,
+              "guaranteedRate": 8.11
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 77.86,
-              "possibleRate": 90.62,
-              "guaranteedRate": 65.25
+              "scenarios": 327680,
+              "probability": 67.36,
+              "possibleRate": 83.75,
+              "guaranteedRate": 51.29
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 96.56,
-              "possibleRate": 99.38,
-              "guaranteedRate": 93.75
+              "scenarios": 163840,
+              "probability": 93.75,
+              "possibleRate": 98.75,
+              "guaranteedRate": 88.75
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1398,86 +1348,79 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.98,
-              "teamBWinProbability": 53.11,
-              "impact": 1.87
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 45.32,
+              "impact": 2.21
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.98,
-              "teamBWinProbability": 53.11,
-              "impact": 1.87
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 45.32,
+              "impact": 2.21
             }
           ],
           "impactFixtureWindow": 1
         },
         "SIX": {
           "possible": 1,
-          "likely": 4,
-          "guaranteed": 6,
-          "target_matches": 6,
+          "likely": 3,
+          "guaranteed": 5,
+          "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
+              "scenarios": 163840,
+              "probability": 1.36,
+              "possibleRate": 4.69,
+              "guaranteedRate": 0.01
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 1.97,
-              "possibleRate": 6.58,
-              "guaranteedRate": 0.02
+              "scenarios": 327680,
+              "probability": 23.44,
+              "possibleRate": 42.93,
+              "guaranteedRate": 7.86
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 26.84,
-              "possibleRate": 47.05,
-              "guaranteedRate": 10.24
+              "scenarios": 327680,
+              "probability": 66.97,
+              "possibleRate": 83.75,
+              "guaranteedRate": 50.51
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 69.59,
-              "possibleRate": 85.42,
-              "guaranteedRate": 53.96
+              "scenarios": 163840,
+              "probability": 93.75,
+              "possibleRate": 98.75,
+              "guaranteedRate": 88.75
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 94.27,
-              "possibleRate": 98.96,
-              "guaranteedRate": 89.58
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1485,376 +1428,202 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 36.35,
-              "teamBWinProbability": 34.77,
-              "impact": 1.58
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 44.95,
+              "impact": 2.58
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 36.35,
-              "teamBWinProbability": 34.77,
-              "impact": 1.58
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "STR": {
-          "possible": 3,
-          "likely": 6,
-          "guaranteed": null,
-          "target_matches": 6,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 1.15,
-              "possibleRate": 4.06,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 22.77,
-              "possibleRate": 43.94,
-              "guaranteedRate": 6.81
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 71.61,
-              "possibleRate": 90.62,
-              "guaranteedRate": 53.52
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.64,
-              "teamBWinProbability": 3.4,
-              "impact": 0.24
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.64,
-              "teamBWinProbability": 3.4,
-              "impact": 0.24
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 44.95,
+              "impact": 2.58
             }
           ],
           "impactFixtureWindow": 1
         },
         "HEA": {
           "possible": 3,
-          "likely": 6,
-          "guaranteed": null,
-          "target_matches": 6,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 0.95,
-              "possibleRate": 3.43,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 18.58,
-              "possibleRate": 37.39,
-              "guaranteedRate": 4.86
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 61.78,
-              "possibleRate": 83.01,
-              "guaranteedRate": 42.19
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 0.89,
-              "teamBWinProbability": 4.97,
-              "impact": 4.09
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 0.89,
-              "teamBWinProbability": 4.97,
-              "impact": 4.09
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "REN": {
-          "possible": 3,
-          "likely": 6,
-          "guaranteed": null,
-          "target_matches": 6,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 1.08,
-              "possibleRate": 3.81,
-              "guaranteedRate": 0.01
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 20.58,
-              "possibleRate": 40.07,
-              "guaranteedRate": 5.94
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 63.22,
-              "possibleRate": 81.25,
-              "guaranteedRate": 45.7
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.28,
-              "teamBWinProbability": 3.06,
-              "impact": 0.23
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.28,
-              "teamBWinProbability": 3.06,
-              "impact": 0.23
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "THU": {
-          "possible": 3,
-          "likely": null,
+          "likely": 5,
           "guaranteed": null,
           "target_matches": 5,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
+              "probability": 0.39,
+              "possibleRate": 1.46,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 163840,
+              "probability": 12.27,
+              "possibleRate": 26.75,
+              "guaranteedRate": 2.23
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 51.95,
+              "possibleRate": 75.39,
+              "guaranteedRate": 30.86
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HEA",
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 1.07,
+              "teamBWinProbability": 6.26,
+              "impact": 5.19
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HEA",
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 1.07,
+              "teamBWinProbability": 6.26,
+              "impact": 5.19
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "STR": {
+          "possible": 4,
+          "likely": 6,
+          "guaranteed": null,
+          "target_matches": 6,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 16384,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 98304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 245760,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 0.94,
-              "possibleRate": 3.47,
+              "scenarios": 245760,
+              "probability": 0.5,
+              "possibleRate": 1.85,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
-              "probability": 18.57,
-              "possibleRate": 37.5,
-              "guaranteedRate": 4.79
+              "scenarios": 98304,
+              "probability": 16.24,
+              "possibleRate": 34.55,
+              "guaranteedRate": 3.35
+            },
+            {
+              "wins": 6,
+              "scenarios": 16384,
+              "probability": 64.84,
+              "possibleRate": 87.5,
+              "guaranteedRate": 43.75
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.76,
-              "teamBWinProbability": 0.69,
-              "impact": 0.07
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 2.78,
+              "teamBWinProbability": 2.52,
+              "impact": 0.25
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.76,
-              "teamBWinProbability": 0.69,
-              "impact": 0.07
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 2.78,
+              "teamBWinProbability": 2.52,
+              "impact": 0.25
             }
           ],
           "impactFixtureWindow": 1
         },
-        "STA": {
+        "REN": {
           "possible": 4,
           "likely": null,
           "guaranteed": null,
@@ -1863,79 +1632,79 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 0.0,
-              "possibleRate": 0.0,
+              "scenarios": 163840,
+              "probability": 0.44,
+              "possibleRate": 1.7,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
-              "probability": 1.51,
-              "possibleRate": 5.13,
-              "guaranteedRate": 0.01
+              "scenarios": 32768,
+              "probability": 14.1,
+              "possibleRate": 30.86,
+              "guaranteedRate": 2.59
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.09,
-              "teamBWinProbability": 0.0,
-              "impact": 0.09
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
+              "impact": 0.07
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.09,
-              "teamBWinProbability": 0.0,
-              "impact": 0.09
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
+              "impact": 0.07
             }
           ],
           "impactFixtureWindow": 1
         },
-        "HUR": {
-          "possible": 5,
+        "THU": {
+          "possible": 4,
           "likely": null,
           "guaranteed": null,
           "target_matches": 5,
@@ -1943,53 +1712,126 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
+              "scenarios": 163840,
+              "probability": 0.44,
+              "possibleRate": 1.7,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 14.1,
+              "possibleRate": 30.86,
+              "guaranteedRate": 2.59
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
+              "impact": 0.07
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
+              "impact": 0.07
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "STA": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 4,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 65536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
-              "wins": 5,
-              "scenarios": 131072,
+              "wins": 1,
+              "scenarios": 262144,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 393216,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 65536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
@@ -2000,10 +1842,90 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "HUR": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 5,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 32768,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 163840,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 327680,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 163840,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
@@ -2019,48 +1941,48 @@
     "scenarioBreakdown": {
       "4": {
         "SCO": {
-          "clearRate": 96.57,
-          "possibleRate": 99.72,
-          "sharedTieAdjustedRate": 98.44,
+          "clearRate": 96.85,
+          "possibleRate": 99.75,
+          "sharedTieAdjustedRate": 98.58,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
-              "probability": 58.13,
-              "possibleRate": 91.2,
-              "guaranteedRate": 20.26
+              "scenarios": 32768,
+              "probability": 62.29,
+              "possibleRate": 92.1,
+              "guaranteedRate": 27.23
             },
             {
               "wins": 1,
-              "scenarios": 655360,
-              "probability": 98.36,
+              "scenarios": 163840,
+              "probability": 98.43,
               "possibleRate": 100.0,
-              "guaranteedRate": 94.01
+              "guaranteedRate": 94.42
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2068,69 +1990,62 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 98.64,
-              "teamBWinProbability": 98.23,
-              "impact": 0.41
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.77,
+              "teamBWinProbability": 98.38,
+              "impact": 0.39
             }
           ]
         },
         "SIX": {
-          "clearRate": 88.9,
-          "possibleRate": 97.44,
-          "sharedTieAdjustedRate": 93.59,
+          "clearRate": 96.28,
+          "possibleRate": 99.65,
+          "sharedTieAdjustedRate": 98.26,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
-              "probability": 2.18,
-              "possibleRate": 7.83,
-              "guaranteedRate": 0.01
+              "scenarios": 32768,
+              "probability": 54.21,
+              "possibleRate": 88.89,
+              "guaranteedRate": 15.54
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 52.7,
-              "possibleRate": 88.03,
-              "guaranteedRate": 14.96
+              "scenarios": 163840,
+              "probability": 98.04,
+              "possibleRate": 100.0,
+              "guaranteedRate": 93.09
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 98.07,
-              "possibleRate": 99.99,
-              "guaranteedRate": 93.3
+              "scenarios": 327680,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 4,
-              "scenarios": 983040,
+              "scenarios": 163840,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2138,139 +2053,62 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 94.02,
-              "teamBWinProbability": 93.16,
-              "impact": 0.86
-            }
-          ]
-        },
-        "STR": {
-          "clearRate": 39.66,
-          "possibleRate": 64.99,
-          "sharedTieAdjustedRate": 52.33,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.02,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.83,
-              "possibleRate": 15.4,
-              "guaranteedRate": 0.09
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.66,
-              "possibleRate": 86.45,
-              "guaranteedRate": 22.87
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.55,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.98
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 53.83,
-              "teamBWinProbability": 50.83,
-              "impact": 3.0
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 98.62,
+              "teamBWinProbability": 97.91,
+              "impact": 0.71
             }
           ]
         },
         "HEA": {
-          "clearRate": 39.6,
-          "possibleRate": 64.74,
-          "sharedTieAdjustedRate": 52.17,
+          "clearRate": 57.35,
+          "possibleRate": 80.52,
+          "sharedTieAdjustedRate": 69.21,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
+              "scenarios": 163840,
+              "probability": 6.34,
+              "possibleRate": 19.56,
+              "guaranteedRate": 0.1
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.41,
-              "possibleRate": 14.35,
-              "guaranteedRate": 0.05
+              "scenarios": 327680,
+              "probability": 60.44,
+              "possibleRate": 87.9,
+              "guaranteedRate": 30.15
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.58,
-              "possibleRate": 86.42,
-              "guaranteedRate": 22.93
+              "scenarios": 327680,
+              "probability": 97.87,
+              "possibleRate": 99.97,
+              "guaranteedRate": 93.31
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.42,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.67
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
+              "scenarios": 163840,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
-              "wins": 6,
-              "scenarios": 65536,
+              "wins": 5,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2278,69 +2116,132 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
               "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 37.57,
-              "teamBWinProbability": 66.78,
-              "impact": 29.21
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 57.04,
+              "teamBWinProbability": 81.38,
+              "impact": 24.34
+            }
+          ]
+        },
+        "STR": {
+          "clearRate": 41.32,
+          "possibleRate": 66.05,
+          "sharedTieAdjustedRate": 53.56,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 16384,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 98304,
+              "probability": 0.01,
+              "possibleRate": 0.05,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 245760,
+              "probability": 6.6,
+              "possibleRate": 19.64,
+              "guaranteedRate": 0.21
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
+              "probability": 58.3,
+              "possibleRate": 86.64,
+              "guaranteedRate": 27.98
+            },
+            {
+              "wins": 4,
+              "scenarios": 245760,
+              "probability": 97.5,
+              "possibleRate": 99.98,
+              "guaranteedRate": 92.1
+            },
+            {
+              "wins": 5,
+              "scenarios": 98304,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 16384,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 56.06,
+              "teamBWinProbability": 51.05,
+              "impact": 5.01
             }
           ]
         },
         "REN": {
-          "clearRate": 39.67,
-          "possibleRate": 65.02,
-          "sharedTieAdjustedRate": 52.35,
+          "clearRate": 24.4,
+          "possibleRate": 49.76,
+          "sharedTieAdjustedRate": 36.69,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.01,
+              "scenarios": 163840,
+              "probability": 0.01,
+              "possibleRate": 0.03,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 4.81,
-              "possibleRate": 15.32,
-              "guaranteedRate": 0.09
+              "scenarios": 327680,
+              "probability": 5.52,
+              "possibleRate": 16.56,
+              "guaranteedRate": 0.19
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 55.86,
-              "possibleRate": 86.6,
-              "guaranteedRate": 23.22
+              "scenarios": 327680,
+              "probability": 53.78,
+              "possibleRate": 82.69,
+              "guaranteedRate": 23.73
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 97.38,
-              "possibleRate": 99.97,
-              "guaranteedRate": 91.54
+              "scenarios": 163840,
+              "probability": 96.2,
+              "possibleRate": 99.94,
+              "guaranteedRate": 88.31
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2348,253 +2249,246 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.0,
-              "teamBWinProbability": 50.69,
-              "impact": 3.31
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.73,
+              "teamBWinProbability": 33.65,
+              "impact": 6.08
             }
           ]
         },
         "THU": {
-          "clearRate": 23.36,
-          "possibleRate": 48.92,
-          "sharedTieAdjustedRate": 35.8,
+          "clearRate": 24.12,
+          "possibleRate": 49.66,
+          "sharedTieAdjustedRate": 36.48,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
+              "probability": 0.01,
+              "possibleRate": 0.03,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 327680,
+              "probability": 5.35,
+              "possibleRate": 16.24,
+              "guaranteedRate": 0.13
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
+              "probability": 53.28,
+              "possibleRate": 82.69,
+              "guaranteedRate": 22.9
+            },
+            {
+              "wins": 4,
+              "scenarios": 163840,
+              "probability": 96.2,
+              "possibleRate": 99.94,
+              "guaranteedRate": 88.31
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 39.58,
+              "teamBWinProbability": 33.38,
+              "impact": 6.2
+            }
+          ]
+        },
+        "STA": {
+          "clearRate": 1.59,
+          "possibleRate": 9.12,
+          "sharedTieAdjustedRate": 4.71,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 65536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 262144,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 393216,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
-              "wins": 2,
-              "scenarios": 1310720,
-              "probability": 4.01,
-              "possibleRate": 12.91,
-              "guaranteedRate": 0.06
-            },
-            {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 52.21,
-              "possibleRate": 83.64,
-              "guaranteedRate": 19.97
+              "scenarios": 262144,
+              "probability": 4.71,
+              "possibleRate": 14.99,
+              "guaranteedRate": 0.11
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 96.68,
-              "possibleRate": 99.95,
-              "guaranteedRate": 89.44
-            },
-            {
-              "wins": 5,
-              "scenarios": 131072,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "scenarios": 65536,
+              "probability": 56.5,
+              "possibleRate": 85.8,
+              "guaranteedRate": 24.91
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 37.6,
-              "teamBWinProbability": 34.0,
-              "impact": 3.6
-            }
-          ]
-        },
-        "STA": {
-          "clearRate": 6.33,
-          "possibleRate": 20.82,
-          "sharedTieAdjustedRate": 13.01,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 131072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 655360,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 1310720,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 3.54,
-              "possibleRate": 11.77,
-              "guaranteedRate": 0.04
-            },
-            {
-              "wins": 4,
-              "scenarios": 655360,
-              "probability": 56.47,
-              "possibleRate": 89.71,
-              "guaranteedRate": 21.32
-            },
-            {
-              "wins": 5,
-              "scenarios": 131072,
-              "probability": 98.7,
-              "possibleRate": 99.99,
-              "guaranteedRate": 95.5
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 21.85,
-              "teamBWinProbability": 4.18,
-              "impact": 17.67
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 5.4,
+              "teamBWinProbability": 4.02,
+              "impact": 1.38
             }
           ]
         },
         "HUR": {
-          "clearRate": 0.58,
-          "possibleRate": 4.82,
-          "sharedTieAdjustedRate": 2.32,
+          "clearRate": 0.68,
+          "possibleRate": 5.23,
+          "sharedTieAdjustedRate": 2.52,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
-              "possibleRate": 0.0,
+              "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 3.45,
-              "possibleRate": 12.45,
-              "guaranteedRate": 0.01
+              "scenarios": 163840,
+              "probability": 4.33,
+              "possibleRate": 14.95,
+              "guaranteedRate": 0.02
             },
             {
               "wins": 5,
-              "scenarios": 131072,
-              "probability": 56.87,
-              "possibleRate": 91.99,
-              "guaranteedRate": 18.63
+              "scenarios": 32768,
+              "probability": 58.81,
+              "possibleRate": 92.57,
+              "guaranteedRate": 21.53
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 2.5,
-              "teamBWinProbability": 2.14,
-              "impact": 0.36
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 4.8,
+              "teamBWinProbability": 0.23,
+              "impact": 4.57
             }
           ]
         }
       },
       "1": {
         "SCO": {
-          "clearRate": 43.11,
-          "possibleRate": 66.9,
-          "sharedTieAdjustedRate": 54.04,
+          "clearRate": 35.56,
+          "possibleRate": 58.92,
+          "sharedTieAdjustedRate": 46.43,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
-              "probability": 3.33,
-              "possibleRate": 10.92,
-              "guaranteedRate": 0.05
+              "scenarios": 163840,
+              "probability": 1.36,
+              "possibleRate": 4.69,
+              "guaranteedRate": 0.01
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
-              "probability": 35.12,
-              "possibleRate": 58.3,
-              "guaranteedRate": 15.81
+              "scenarios": 327680,
+              "probability": 23.65,
+              "possibleRate": 43.09,
+              "guaranteedRate": 8.11
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 77.86,
-              "possibleRate": 90.62,
-              "guaranteedRate": 65.25
+              "scenarios": 327680,
+              "probability": 67.36,
+              "possibleRate": 83.75,
+              "guaranteedRate": 51.29
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 96.56,
-              "possibleRate": 99.38,
-              "guaranteedRate": 93.75
+              "scenarios": 163840,
+              "probability": 93.75,
+              "possibleRate": 98.75,
+              "guaranteedRate": 88.75
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2602,69 +2496,62 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 54.98,
-              "teamBWinProbability": 53.11,
-              "impact": 1.87
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 45.32,
+              "impact": 2.21
             }
           ]
         },
         "SIX": {
-          "clearRate": 25.81,
-          "possibleRate": 47.11,
-          "sharedTieAdjustedRate": 35.56,
+          "clearRate": 35.23,
+          "possibleRate": 58.88,
+          "sharedTieAdjustedRate": 46.24,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
+              "scenarios": 163840,
+              "probability": 1.36,
+              "possibleRate": 4.69,
+              "guaranteedRate": 0.01
             },
             {
               "wins": 2,
-              "scenarios": 983040,
-              "probability": 1.97,
-              "possibleRate": 6.58,
-              "guaranteedRate": 0.02
+              "scenarios": 327680,
+              "probability": 23.44,
+              "possibleRate": 42.93,
+              "guaranteedRate": 7.86
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
-              "probability": 26.84,
-              "possibleRate": 47.05,
-              "guaranteedRate": 10.24
+              "scenarios": 327680,
+              "probability": 66.97,
+              "possibleRate": 83.75,
+              "guaranteedRate": 50.51
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 69.59,
-              "possibleRate": 85.42,
-              "guaranteedRate": 53.96
+              "scenarios": 163840,
+              "probability": 93.75,
+              "possibleRate": 98.75,
+              "guaranteedRate": 88.75
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 94.27,
-              "possibleRate": 98.96,
-              "guaranteedRate": 89.58
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2672,352 +2559,331 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 36.35,
-              "teamBWinProbability": 34.77,
-              "impact": 1.58
-            }
-          ]
-        },
-        "STR": {
-          "clearRate": 1.48,
-          "possibleRate": 6.49,
-          "sharedTieAdjustedRate": 3.52,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 65536,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 393216,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 983040,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 1310720,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 983040,
-              "probability": 1.15,
-              "possibleRate": 4.06,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 5,
-              "scenarios": 393216,
-              "probability": 22.77,
-              "possibleRate": 43.94,
-              "guaranteedRate": 6.81
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 71.61,
-              "possibleRate": 90.62,
-              "guaranteedRate": 53.52
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
-              "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.64,
-              "teamBWinProbability": 3.4,
-              "impact": 0.24
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 47.53,
+              "teamBWinProbability": 44.95,
+              "impact": 2.58
             }
           ]
         },
         "HEA": {
-          "clearRate": 1.12,
-          "possibleRate": 5.61,
-          "sharedTieAdjustedRate": 2.93,
+          "clearRate": 1.31,
+          "possibleRate": 6.99,
+          "sharedTieAdjustedRate": 3.66,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 983040,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
+              "probability": 0.39,
+              "possibleRate": 1.46,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 4,
+              "scenarios": 163840,
+              "probability": 12.27,
+              "possibleRate": 26.75,
+              "guaranteedRate": 2.23
+            },
+            {
+              "wins": 5,
+              "scenarios": 32768,
+              "probability": 51.95,
+              "possibleRate": 75.39,
+              "guaranteedRate": 30.86
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
+              "teamB": "HEA",
+              "preferredWinner": "HEA",
+              "preferredLabel": "HEA beat HUR",
+              "teamAWinProbability": 1.07,
+              "teamBWinProbability": 6.26,
+              "impact": 5.19
+            }
+          ]
+        },
+        "STR": {
+          "clearRate": 1.0,
+          "possibleRate": 5.04,
+          "sharedTieAdjustedRate": 2.65,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 16384,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 98304,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 245760,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 0.95,
-              "possibleRate": 3.43,
+              "scenarios": 245760,
+              "probability": 0.5,
+              "possibleRate": 1.85,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 18.58,
-              "possibleRate": 37.39,
-              "guaranteedRate": 4.86
+              "scenarios": 98304,
+              "probability": 16.24,
+              "possibleRate": 34.55,
+              "guaranteedRate": 3.35
             },
             {
               "wins": 6,
-              "scenarios": 65536,
-              "probability": 61.78,
-              "possibleRate": 83.01,
-              "guaranteedRate": 42.19
+              "scenarios": 16384,
+              "probability": 64.84,
+              "possibleRate": 87.5,
+              "guaranteedRate": 43.75
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "HEA",
-              "preferredLabel": "HEA beat STA",
-              "teamAWinProbability": 0.89,
-              "teamBWinProbability": 4.97,
-              "impact": 4.09
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 2.78,
+              "teamBWinProbability": 2.52,
+              "impact": 0.25
             }
           ]
         },
         "REN": {
-          "clearRate": 1.27,
-          "possibleRate": 5.92,
-          "sharedTieAdjustedRate": 3.17,
+          "clearRate": 0.08,
+          "possibleRate": 1.23,
+          "sharedTieAdjustedRate": 0.51,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 393216,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 983040,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 983040,
-              "probability": 1.08,
-              "possibleRate": 3.81,
-              "guaranteedRate": 0.01
+              "scenarios": 163840,
+              "probability": 0.44,
+              "possibleRate": 1.7,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 393216,
-              "probability": 20.58,
-              "possibleRate": 40.07,
-              "guaranteedRate": 5.94
-            },
-            {
-              "wins": 6,
-              "scenarios": 65536,
-              "probability": 63.22,
-              "possibleRate": 81.25,
-              "guaranteedRate": 45.7
+              "scenarios": 32768,
+              "probability": 14.1,
+              "possibleRate": 30.86,
+              "guaranteedRate": 2.59
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 3.28,
-              "teamBWinProbability": 3.06,
-              "impact": 0.23
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
+              "impact": 0.07
             }
           ]
         },
         "THU": {
-          "clearRate": 0.15,
-          "possibleRate": 1.71,
-          "sharedTieAdjustedRate": 0.73,
+          "clearRate": 0.08,
+          "possibleRate": 1.23,
+          "sharedTieAdjustedRate": 0.51,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
-              "probability": 0.94,
-              "possibleRate": 3.47,
+              "scenarios": 163840,
+              "probability": 0.44,
+              "possibleRate": 1.7,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
-              "probability": 18.57,
-              "possibleRate": 37.5,
-              "guaranteedRate": 4.79
+              "scenarios": 32768,
+              "probability": 14.1,
+              "possibleRate": 30.86,
+              "guaranteedRate": 2.59
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.76,
-              "teamBWinProbability": 0.69,
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat HEA",
+              "teamAWinProbability": 0.54,
+              "teamBWinProbability": 0.47,
               "impact": 0.07
             }
           ]
         },
         "STA": {
           "clearRate": 0.0,
-          "possibleRate": 0.16,
-          "sharedTieAdjustedRate": 0.05,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 65536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 393216,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 262144,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
+              "scenarios": 65536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 5,
-              "scenarios": 131072,
-              "probability": 1.51,
-              "possibleRate": 5.13,
-              "guaranteedRate": 0.01
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
-              "preferredWinner": "STA",
-              "preferredLabel": "STA beat HEA",
-              "teamAWinProbability": 0.09,
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
-              "impact": 0.09
+              "impact": 0.0
             }
           ]
         },
@@ -3028,53 +2894,53 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 1310720,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 655360,
+              "scenarios": 163840,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 131072,
+              "scenarios": 32768,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0e094a86-1a1e-4a3e-9f41-4cf61c748b7e",
-              "matchNo": 19,
-              "label": "M19: STA vs HEA",
-              "teamA": "STA",
+              "fixtureId": "94adaed4-2917-43c6-9990-eee50849a7dc",
+              "matchNo": 21,
+              "label": "M21: HUR vs HEA",
+              "teamA": "HUR",
               "teamB": "HEA",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
@@ -3088,17 +2954,17 @@
     }
   },
   "movement": {
-    "since": "2026-11-10T15:30:21Z",
+    "since": "2026-11-11T15:01:20Z",
     "tier": "top4",
     "changes": {
-      "SCO": 4.99,
-      "SIX": 0.78,
-      "STR": 2.34,
-      "HEA": 2.3,
-      "REN": 2.34,
-      "THU": -14.13,
-      "STA": 1.17,
-      "HUR": 0.22
+      "SCO": 0.14,
+      "SIX": 4.67,
+      "HEA": 17.04,
+      "STR": 1.23,
+      "REN": -15.66,
+      "THU": 0.68,
+      "STA": -8.3,
+      "HUR": 0.2
     }
   }
 }
