@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-09T17:22:23Z",
+    "generated_at": "2026-11-14T23:14:06Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
     "data_freshness_status": "fresh",
@@ -588,20 +588,6 @@
     {
       "id": "playoff-0",
       "round": null,
-      "date": "2026-11-14T17:00:00Z",
-      "home": "Washington Spirit",
-      "away": "Utah Royals FC",
-      "venue": null,
-      "stage": "Semifinals",
-      "probabilities": {
-        "home": 0.511,
-        "draw": 0.257,
-        "away": 0.232
-      }
-    },
-    {
-      "id": "playoff-1",
-      "round": null,
       "date": "2026-11-15T20:00:00Z",
       "home": "Gotham FC",
       "away": "Kansas City Current",
@@ -618,6 +604,16 @@
     {
       "id": "playoff-result-0",
       "round": null,
+      "date": "2026-11-14T17:00:00Z",
+      "home": "Washington Spirit",
+      "away": "Utah Royals FC",
+      "homeScore": 2,
+      "awayScore": 1,
+      "note": "Semifinals"
+    },
+    {
+      "id": "playoff-result-1",
+      "round": null,
       "date": "2026-11-08T20:00:00Z",
       "home": "Washington Spirit",
       "away": "Portland Thorns FC",
@@ -626,7 +622,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-1",
+      "id": "playoff-result-2",
       "round": null,
       "date": "2026-11-08T17:30:00Z",
       "home": "Gotham FC",
@@ -636,7 +632,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-2",
+      "id": "playoff-result-3",
       "round": null,
       "date": "2026-11-07T17:00:00Z",
       "home": "Kansas City Current",
@@ -646,7 +642,7 @@
       "note": "Quarterfinals, aet"
     },
     {
-      "id": "playoff-result-3",
+      "id": "playoff-result-4",
       "round": null,
       "date": "2026-11-07T03:00:00Z",
       "home": "San Diego Wave FC",
@@ -2864,7 +2860,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 100.0,
-        "title": 28.43
+        "title": 25.91
       },
       "Houston Dash": {
         "playoffs": 0.0,
@@ -2876,7 +2872,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 26.62
+        "title": 23.71
       },
       "North Carolina Courage": {
         "playoffs": 0.0,
@@ -2918,13 +2914,13 @@
         "playoffs": 100.0,
         "top4": 0.0,
         "shield": 0.0,
-        "title": 12.23
+        "title": 0.0
       },
       "Washington Spirit": {
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 32.71
+        "title": 50.39
       }
     },
     "positions": {
@@ -3448,11 +3444,14 @@
             "bottom": "Utah Royals FC",
             "topSeed": 3,
             "bottomSeed": 7,
-            "topWins": 0,
+            "topWins": 1,
             "bottomWins": 0,
             "bestOf": 1,
-            "winner": null,
-            "aggregate": null
+            "winner": "Washington Spirit",
+            "aggregate": {
+              "top": 2,
+              "bottom": 1
+            }
           }
         ]
       },
@@ -3464,9 +3463,9 @@
             "stage": "NWSL Championship",
             "conference": null,
             "top": null,
-            "bottom": null,
+            "bottom": "Washington Spirit",
             "topSeed": null,
-            "bottomSeed": null,
+            "bottomSeed": 3,
             "topWins": 0,
             "bottomWins": 0,
             "bestOf": 1,
