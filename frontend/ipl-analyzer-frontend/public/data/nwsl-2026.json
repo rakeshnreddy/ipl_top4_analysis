@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-14T23:14:06Z",
+    "generated_at": "2026-11-15T23:27:17Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
     "data_freshness_status": "fresh",
@@ -588,21 +588,31 @@
     {
       "id": "playoff-0",
       "round": null,
-      "date": "2026-11-15T20:00:00Z",
-      "home": "Gotham FC",
+      "date": "2026-11-22T01:00:00Z",
+      "home": "Washington Spirit",
       "away": "Kansas City Current",
       "venue": null,
-      "stage": "Semifinals",
+      "stage": "NWSL Championship",
       "probabilities": {
-        "home": 0.377,
-        "draw": 0.294,
-        "away": 0.329
+        "home": 0.358,
+        "draw": 0.272,
+        "away": 0.37
       }
     }
   ],
   "results": [
     {
       "id": "playoff-result-0",
+      "round": null,
+      "date": "2026-11-15T20:00:00Z",
+      "home": "Gotham FC",
+      "away": "Kansas City Current",
+      "homeScore": 1,
+      "awayScore": 2,
+      "note": "Semifinals"
+    },
+    {
+      "id": "playoff-result-1",
       "round": null,
       "date": "2026-11-14T17:00:00Z",
       "home": "Washington Spirit",
@@ -612,7 +622,7 @@
       "note": "Semifinals"
     },
     {
-      "id": "playoff-result-1",
+      "id": "playoff-result-2",
       "round": null,
       "date": "2026-11-08T20:00:00Z",
       "home": "Washington Spirit",
@@ -622,7 +632,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-2",
+      "id": "playoff-result-3",
       "round": null,
       "date": "2026-11-08T17:30:00Z",
       "home": "Gotham FC",
@@ -632,7 +642,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-3",
+      "id": "playoff-result-4",
       "round": null,
       "date": "2026-11-07T17:00:00Z",
       "home": "Kansas City Current",
@@ -642,7 +652,7 @@
       "note": "Quarterfinals, aet"
     },
     {
-      "id": "playoff-result-4",
+      "id": "playoff-result-5",
       "round": null,
       "date": "2026-11-07T03:00:00Z",
       "home": "San Diego Wave FC",
@@ -2860,7 +2870,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 100.0,
-        "title": 25.91
+        "title": 0.0
       },
       "Houston Dash": {
         "playoffs": 0.0,
@@ -2872,7 +2882,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 23.71
+        "title": 50.78
       },
       "North Carolina Courage": {
         "playoffs": 0.0,
@@ -2920,7 +2930,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 50.39
+        "title": 49.23
       }
     },
     "positions": {
@@ -3432,10 +3442,13 @@
             "topSeed": 1,
             "bottomSeed": 4,
             "topWins": 0,
-            "bottomWins": 0,
+            "bottomWins": 1,
             "bestOf": 1,
-            "winner": null,
-            "aggregate": null
+            "winner": "Kansas City Current",
+            "aggregate": {
+              "top": 1,
+              "bottom": 2
+            }
           },
           {
             "stage": "Semifinals",
@@ -3462,10 +3475,10 @@
           {
             "stage": "NWSL Championship",
             "conference": null,
-            "top": null,
-            "bottom": "Washington Spirit",
-            "topSeed": null,
-            "bottomSeed": 3,
+            "top": "Washington Spirit",
+            "bottom": "Kansas City Current",
+            "topSeed": 3,
+            "bottomSeed": 4,
             "topWins": 0,
             "bottomWins": 0,
             "bestOf": 1,
