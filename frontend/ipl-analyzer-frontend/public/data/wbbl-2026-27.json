@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-17T16:49:24Z",
+    "generated_at": "2026-11-20T16:00:04Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -98,9 +98,9 @@
   },
   "standings": [
     {
-      "teamKey": "SIX",
-      "shortName": "SIX",
-      "fullName": "Sydney Sixers",
+      "teamKey": "SCO",
+      "shortName": "SCO",
+      "fullName": "Perth Scorchers",
       "matches": 7,
       "wins": 6,
       "losses": 1,
@@ -111,56 +111,69 @@
       "remainingMatches": 3
     },
     {
-      "teamKey": "SCO",
-      "shortName": "SCO",
-      "fullName": "Perth Scorchers",
-      "matches": 6,
-      "wins": 5,
+      "teamKey": "SIX",
+      "shortName": "SIX",
+      "fullName": "Sydney Sixers",
+      "matches": 7,
+      "wins": 6,
       "losses": 1,
       "noResult": 0,
-      "points": 10,
+      "points": 12,
       "nrr": null,
       "rank": 2,
-      "remainingMatches": 4
-    },
-    {
-      "teamKey": "HEA",
-      "shortName": "HEA",
-      "fullName": "Brisbane Heat",
-      "matches": 6,
-      "wins": 4,
-      "losses": 2,
-      "noResult": 0,
-      "points": 8,
-      "nrr": null,
-      "rank": 3,
-      "remainingMatches": 4
+      "remainingMatches": 3
     },
     {
       "teamKey": "STR",
       "shortName": "STR",
       "fullName": "Adelaide Strikers",
-      "matches": 6,
-      "wins": 3,
+      "matches": 7,
+      "wins": 4,
       "losses": 3,
       "noResult": 0,
-      "points": 6,
+      "points": 8,
+      "nrr": null,
+      "rank": 3,
+      "remainingMatches": 3
+    },
+    {
+      "teamKey": "HEA",
+      "shortName": "HEA",
+      "fullName": "Brisbane Heat",
+      "matches": 7,
+      "wins": 4,
+      "losses": 3,
+      "noResult": 0,
+      "points": 8,
       "nrr": null,
       "rank": 4,
-      "remainingMatches": 4
+      "remainingMatches": 3
     },
     {
       "teamKey": "REN",
       "shortName": "REN",
       "fullName": "Melbourne Renegades",
-      "matches": 6,
+      "matches": 7,
       "wins": 3,
-      "losses": 3,
+      "losses": 4,
       "noResult": 0,
       "points": 6,
       "nrr": null,
       "rank": 5,
-      "remainingMatches": 4
+      "remainingMatches": 3
+    },
+    {
+      "teamKey": "THU",
+      "shortName": "THU",
+      "fullName": "Sydney Thunder",
+      "matches": 7,
+      "wins": 3,
+      "losses": 4,
+      "noResult": 0,
+      "points": 6,
+      "nrr": null,
+      "rank": 6,
+      "remainingMatches": 3
     },
     {
       "teamKey": "STA",
@@ -172,70 +185,24 @@
       "noResult": 0,
       "points": 4,
       "nrr": null,
-      "rank": 6,
-      "remainingMatches": 3
-    },
-    {
-      "teamKey": "THU",
-      "shortName": "THU",
-      "fullName": "Sydney Thunder",
-      "matches": 6,
-      "wins": 2,
-      "losses": 4,
-      "noResult": 0,
-      "points": 4,
-      "nrr": null,
       "rank": 7,
-      "remainingMatches": 4
+      "remainingMatches": 3
     },
     {
       "teamKey": "HUR",
       "shortName": "HUR",
       "fullName": "Hobart Hurricanes",
-      "matches": 6,
+      "matches": 7,
       "wins": 0,
-      "losses": 6,
+      "losses": 7,
       "noResult": 0,
       "points": 0,
       "nrr": null,
       "rank": 8,
-      "remainingMatches": 4
+      "remainingMatches": 3
     }
   ],
   "fixtures": [
-    {
-      "id": "0f63b918-a76b-422c-9019-04219f5aec34",
-      "matchNo": 26,
-      "teamA": "HUR",
-      "teamB": "SCO",
-      "dateTimeGMT": "2026-11-19T04:40:00Z",
-      "dateTimeLocal": null,
-      "venue": "Allan Border Field, Brisbane",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
-    {
-      "id": "b5d34f36-f5e6-4203-b19d-9ddef4631f57",
-      "matchNo": 27,
-      "teamA": "HEA",
-      "teamB": "THU",
-      "dateTimeGMT": "2026-11-19T08:10:00Z",
-      "dateTimeLocal": null,
-      "venue": "Allan Border Field, Brisbane",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
-    {
-      "id": "994c9cae-f89b-44b8-9e0f-c6f9455b1b67",
-      "matchNo": 28,
-      "teamA": "STR",
-      "teamB": "REN",
-      "dateTimeGMT": "2026-11-20T08:10:00Z",
-      "dateTimeLocal": null,
-      "venue": "Adelaide Oval, Adelaide",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
       "matchNo": 29,
@@ -371,9 +338,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 32768,
-    "generatedAt": "2026-11-17T16:49:24Z",
-    "stateCount": 7902,
+    "simulationCount": 4096,
+    "generatedAt": "2026-11-20T16:00:04Z",
+    "stateCount": 2148,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -382,214 +349,214 @@
       "Fixture-impact guidance is computed for the next 1 fixture(s)."
     ],
     "overallProbabilities": {
-      "SIX": {
-        "top4": 99.86,
-        "top1": 55.59,
-        "top4Clear": 99.46,
-        "top1Clear": 42.82,
-        "top4Possible": 100.0,
-        "top1Possible": 70.56
-      },
       "SCO": {
-        "top4": 97.58,
-        "top1": 34.64,
-        "top4Clear": 94.63,
-        "top1Clear": 23.73,
-        "top4Possible": 99.65,
-        "top1Possible": 47.71
+        "top4": 99.87,
+        "top1": 48.76,
+        "top4Clear": 99.46,
+        "top1Clear": 36.33,
+        "top4Possible": 100.0,
+        "top1Possible": 62.5
       },
-      "HEA": {
-        "top4": 80.78,
-        "top1": 8.07,
-        "top4Clear": 70.23,
-        "top1Clear": 3.08,
-        "top4Possible": 90.41,
-        "top1Possible": 14.75
+      "SIX": {
+        "top4": 99.88,
+        "top1": 48.76,
+        "top4Clear": 99.51,
+        "top1Clear": 36.33,
+        "top4Possible": 100.0,
+        "top1Possible": 62.5
       },
       "STR": {
-        "top4": 49.38,
-        "top1": 0.84,
-        "top4Clear": 35.26,
-        "top1Clear": 0.07,
-        "top4Possible": 63.87,
-        "top1Possible": 2.09
+        "top4": 69.24,
+        "top1": 0.91,
+        "top4Clear": 54.88,
+        "top1Clear": 0.0,
+        "top4Possible": 83.59,
+        "top1Possible": 2.34
+      },
+      "HEA": {
+        "top4": 68.95,
+        "top1": 1.56,
+        "top4Clear": 54.49,
+        "top1Clear": 0.0,
+        "top4Possible": 83.2,
+        "top1Possible": 3.91
       },
       "REN": {
-        "top4": 49.68,
-        "top1": 0.84,
-        "top4Clear": 35.57,
-        "top1Clear": 0.07,
-        "top4Possible": 63.9,
-        "top1Possible": 2.09
-      },
-      "STA": {
-        "top4": 6.19,
+        "top4": 28.86,
         "top1": 0.0,
-        "top4Clear": 1.54,
+        "top4Clear": 15.23,
         "top1Clear": 0.0,
-        "top4Possible": 12.02,
+        "top4Possible": 43.55,
         "top1Possible": 0.0
       },
       "THU": {
-        "top4": 16.43,
-        "top1": 0.03,
-        "top4Clear": 7.23,
+        "top4": 27.81,
+        "top1": 0.0,
+        "top4Clear": 13.87,
         "top1Clear": 0.0,
-        "top4Possible": 27.15,
-        "top1Possible": 0.13
+        "top4Possible": 43.55,
+        "top1Possible": 0.0
+      },
+      "STA": {
+        "top4": 5.39,
+        "top1": 0.0,
+        "top4Clear": 1.17,
+        "top1Clear": 0.0,
+        "top4Possible": 10.74,
+        "top1Possible": 0.0
       },
       "HUR": {
-        "top4": 0.1,
+        "top4": 0.0,
         "top1": 0.0,
         "top4Clear": 0.0,
         "top1Clear": 0.0,
-        "top4Possible": 0.4,
+        "top4Possible": 0.0,
         "top1Possible": 0.0
       }
     },
     "teamAnalysis": {
       "4": {
-        "SIX": {
-          "percentage": 99.86,
-          "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.01
-            }
-          }
-        },
         "SCO": {
-          "percentage": 97.58,
+          "percentage": 99.87,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "SCO beat HUR",
-              "Impact": 4.46
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 0.17
             }
           }
         },
-        "HEA": {
-          "percentage": 80.78,
+        "SIX": {
+          "percentage": 99.88,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.59
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 0.2
             }
           }
         },
         "STR": {
-          "percentage": 49.38,
+          "percentage": 69.24,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 1.23
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 10.39
+            }
+          }
+        },
+        "HEA": {
+          "percentage": 68.95,
+          "results_df": {
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 7.91
             }
           }
         },
         "REN": {
-          "percentage": 49.68,
+          "percentage": 28.86,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 1.28
-            }
-          }
-        },
-        "STA": {
-          "percentage": 6.19,
-          "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.31
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 8.28
             }
           }
         },
         "THU": {
-          "percentage": 16.43,
+          "percentage": 27.81,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.84
+            "M29: HUR vs THU": {
+              "Outcome": "THU beat HUR",
+              "Impact": 29.84
+            }
+          }
+        },
+        "STA": {
+          "percentage": 5.39,
+          "results_df": {
+            "M29: HUR vs THU": {
+              "Outcome": "HUR beat THU",
+              "Impact": 2.9
             }
           }
         },
         "HUR": {
-          "percentage": 0.1,
+          "percentage": 0.0,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.2
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         }
       },
       "1": {
-        "SIX": {
-          "percentage": 55.59,
-          "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 18.48
-            }
-          }
-        },
         "SCO": {
-          "percentage": 34.64,
+          "percentage": 48.76,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "SCO beat HUR",
-              "Impact": 24.2
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
-        "HEA": {
-          "percentage": 8.07,
+        "SIX": {
+          "percentage": 48.76,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 4.01
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "STR": {
-          "percentage": 0.84,
+          "percentage": 0.91,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.82
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "HEA": {
+          "percentage": 1.56,
+          "results_df": {
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "REN": {
-          "percentage": 0.84,
-          "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.82
-            }
-          }
-        },
-        "STA": {
           "percentage": 0.0,
           "results_df": {
-            "M26: HUR vs SCO": {
+            "M29: HUR vs THU": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
           }
         },
         "THU": {
-          "percentage": 0.03,
+          "percentage": 0.0,
           "results_df": {
-            "M26: HUR vs SCO": {
-              "Outcome": "HUR beat SCO",
-              "Impact": 0.07
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
+            }
+          }
+        },
+        "STA": {
+          "percentage": 0.0,
+          "results_df": {
+            "M29: HUR vs THU": {
+              "Outcome": "Either result",
+              "Impact": 0.0
             }
           }
         },
         "HUR": {
           "percentage": 0.0,
           "results_df": {
-            "M26: HUR vs SCO": {
+            "M29: HUR vs THU": {
               "Outcome": "Either result",
               "Impact": 0.0
             }
@@ -599,6 +566,72 @@
     },
     "qualificationPath": {
       "4": {
+        "SCO": {
+          "possible": 0,
+          "likely": 0,
+          "guaranteed": 1,
+          "target_matches": 3,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 98.93,
+              "possibleRate": 100.0,
+              "guaranteedRate": 95.7
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.95,
+              "teamBWinProbability": 99.78,
+              "impact": 0.17
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.95,
+              "teamBWinProbability": 99.78,
+              "impact": 0.17
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
         "SIX": {
           "possible": 0,
           "likely": 0,
@@ -608,28 +641,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
-              "probability": 98.88,
+              "scenarios": 512,
+              "probability": 99.02,
               "possibleRate": 100.0,
-              "guaranteedRate": 95.7
+              "guaranteedRate": 96.09
             },
             {
               "wins": 1,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -637,72 +670,65 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 99.87,
-              "teamBWinProbability": 99.85,
-              "impact": 0.01
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.98,
+              "teamBWinProbability": 99.78,
+              "impact": 0.2
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 99.87,
-              "teamBWinProbability": 99.85,
-              "impact": 0.01
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.98,
+              "teamBWinProbability": 99.78,
+              "impact": 0.2
             }
           ],
           "impactFixtureWindow": 1
         },
-        "SCO": {
+        "STR": {
           "possible": 0,
-          "likely": 0,
-          "guaranteed": 2,
-          "target_matches": 4,
+          "likely": 1,
+          "guaranteed": 3,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 66.06,
-              "possibleRate": 94.43,
-              "guaranteedRate": 31.79
+              "scenarios": 512,
+              "probability": 2.73,
+              "possibleRate": 9.38,
+              "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 98.79,
-              "possibleRate": 100.0,
-              "guaranteedRate": 95.56
+              "scenarios": 1536,
+              "probability": 51.95,
+              "possibleRate": 86.46,
+              "guaranteedRate": 18.23
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 100.0,
+              "scenarios": 1536,
+              "probability": 98.45,
               "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "guaranteedRate": 94.79
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -710,30 +736,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 95.35,
-              "teamBWinProbability": 99.81,
-              "impact": 4.46
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 74.44,
+              "teamBWinProbability": 64.05,
+              "impact": 10.39
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 95.35,
-              "teamBWinProbability": 99.81,
-              "impact": 4.46
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 74.44,
+              "teamBWinProbability": 64.05,
+              "impact": 10.39
             }
           ],
           "impactFixtureWindow": 1
@@ -742,40 +768,33 @@
           "possible": 0,
           "likely": 1,
           "guaranteed": 3,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 1.6,
-              "possibleRate": 5.86,
+              "scenarios": 512,
+              "probability": 1.69,
+              "possibleRate": 6.25,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 50.75,
-              "possibleRate": 85.18,
-              "guaranteedRate": 15.72
+              "scenarios": 1536,
+              "probability": 51.52,
+              "possibleRate": 86.46,
+              "guaranteedRate": 17.19
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 97.97,
+              "scenarios": 1536,
+              "probability": 98.46,
               "possibleRate": 100.0,
-              "guaranteedRate": 93.46
+              "guaranteedRate": 94.79
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -783,103 +802,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 81.07,
-              "teamBWinProbability": 80.48,
-              "impact": 0.59
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 72.91,
+              "teamBWinProbability": 65.0,
+              "impact": 7.91
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 81.07,
-              "teamBWinProbability": 80.48,
-              "impact": 0.59
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "STR": {
-          "possible": 1,
-          "likely": 3,
-          "guaranteed": 4,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 2.44,
-              "possibleRate": 8.3,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 48.59,
-              "possibleRate": 81.45,
-              "guaranteedRate": 16.54
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 97.2,
-              "possibleRate": 100.0,
-              "guaranteedRate": 91.24
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 49.99,
-              "teamBWinProbability": 48.77,
-              "impact": 1.23
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 49.99,
-              "teamBWinProbability": 48.77,
-              "impact": 1.23
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 72.91,
+              "teamBWinProbability": 65.0,
+              "impact": 7.91
             }
           ],
           "impactFixtureWindow": 1
@@ -887,72 +833,131 @@
         "REN": {
           "possible": 1,
           "likely": 3,
-          "guaranteed": 4,
-          "target_matches": 4,
+          "guaranteed": null,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 2.45,
-              "possibleRate": 8.4,
+              "scenarios": 1536,
+              "probability": 1.3,
+              "possibleRate": 4.69,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 49.68,
-              "possibleRate": 81.48,
-              "guaranteedRate": 18.29
+              "scenarios": 1536,
+              "probability": 43.58,
+              "possibleRate": 78.12,
+              "guaranteedRate": 11.46
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 96.76,
+              "scenarios": 512,
+              "probability": 96.26,
               "possibleRate": 100.0,
-              "guaranteedRate": 89.82
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "guaranteedRate": 87.5
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 50.32,
-              "teamBWinProbability": 49.04,
-              "impact": 1.28
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 33.0,
+              "teamBWinProbability": 24.72,
+              "impact": 8.28
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 50.32,
-              "teamBWinProbability": 49.04,
-              "impact": 1.28
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 33.0,
+              "teamBWinProbability": 24.72,
+              "impact": 8.28
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "THU": {
+          "possible": 1,
+          "likely": 3,
+          "guaranteed": null,
+          "target_matches": 3,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 1.3,
+              "possibleRate": 4.69,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 40.76,
+              "possibleRate": 78.12,
+              "guaranteedRate": 7.81
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 96.32,
+              "possibleRate": 100.0,
+              "guaranteedRate": 87.5
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat HUR",
+              "teamAWinProbability": 12.89,
+              "teamBWinProbability": 42.73,
+              "impact": 29.84
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat HUR",
+              "teamAWinProbability": 12.89,
+              "teamBWinProbability": 42.73,
+              "impact": 29.84
             }
           ],
           "impactFixtureWindow": 1
@@ -966,213 +971,133 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 1.5,
-              "possibleRate": 5.27,
+              "scenarios": 1536,
+              "probability": 1.13,
+              "possibleRate": 4.17,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 4096,
-              "probability": 45.05,
-              "possibleRate": 80.35,
-              "guaranteedRate": 12.3
+              "scenarios": 512,
+              "probability": 39.71,
+              "possibleRate": 73.44,
+              "guaranteedRate": 9.38
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 6.35,
-              "teamBWinProbability": 6.04,
-              "impact": 0.31
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 6.84,
+              "teamBWinProbability": 3.94,
+              "impact": 2.9
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 6.35,
-              "teamBWinProbability": 6.04,
-              "impact": 0.31
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "THU": {
-          "possible": 2,
-          "likely": 4,
-          "guaranteed": null,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 1.29,
-              "possibleRate": 4.75,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 39.84,
-              "possibleRate": 76.49,
-              "guaranteedRate": 7.42
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 95.78,
-              "possibleRate": 100.0,
-              "guaranteedRate": 86.04
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 16.85,
-              "teamBWinProbability": 16.01,
-              "impact": 0.84
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 16.85,
-              "teamBWinProbability": 16.01,
-              "impact": 0.84
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 6.84,
+              "teamBWinProbability": 3.94,
+              "impact": 2.9
             }
           ],
           "impactFixtureWindow": 1
         },
         "HUR": {
-          "possible": 4,
+          "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 1.56,
-              "possibleRate": 6.45,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.2,
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
-              "impact": 0.2
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.2,
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
-              "impact": 0.2
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
         }
       },
       "1": {
-        "SIX": {
-          "possible": 0,
+        "SCO": {
+          "possible": 1,
           "likely": 2,
           "guaranteed": 3,
           "target_matches": 3,
@@ -1180,28 +1105,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
-              "probability": 1.43,
-              "possibleRate": 5.08,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 12288,
-              "probability": 31.96,
-              "possibleRate": 57.29,
-              "guaranteedRate": 11.59
+              "scenarios": 1536,
+              "probability": 21.7,
+              "possibleRate": 41.67,
+              "guaranteedRate": 5.21
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 82.47,
-              "possibleRate": 95.83,
-              "guaranteedRate": 69.27
+              "scenarios": 1536,
+              "probability": 75.0,
+              "possibleRate": 91.67,
+              "guaranteedRate": 58.33
             },
             {
               "wins": 3,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1209,72 +1134,65 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 64.83,
-              "teamBWinProbability": 46.35,
-              "impact": 18.48
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 64.83,
-              "teamBWinProbability": 46.35,
-              "impact": 18.48
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
         },
-        "SCO": {
+        "SIX": {
           "possible": 1,
-          "likely": 3,
-          "guaranteed": 4,
-          "target_matches": 4,
+          "likely": 2,
+          "guaranteed": 3,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.71,
-              "possibleRate": 2.54,
-              "guaranteedRate": 0.0
+              "scenarios": 1536,
+              "probability": 21.7,
+              "possibleRate": 41.67,
+              "guaranteedRate": 5.21
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 24.01,
-              "possibleRate": 46.35,
-              "guaranteedRate": 6.51
+              "scenarios": 1536,
+              "probability": 75.0,
+              "possibleRate": 91.67,
+              "guaranteedRate": 58.33
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 76.82,
-              "possibleRate": 93.75,
-              "guaranteedRate": 60.16
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1282,103 +1200,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 22.54,
-              "teamBWinProbability": 46.74,
-              "impact": 24.2
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 22.54,
-              "teamBWinProbability": 46.74,
-              "impact": 24.2
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "HEA": {
-          "possible": 2,
-          "likely": 4,
-          "guaranteed": null,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.35,
-              "possibleRate": 1.3,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 15.87,
-              "possibleRate": 35.16,
-              "guaranteedRate": 2.15
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 63.54,
-              "possibleRate": 87.5,
-              "guaranteedRate": 40.62
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 10.07,
-              "teamBWinProbability": 6.06,
-              "impact": 4.01
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 10.07,
-              "teamBWinProbability": 6.06,
-              "impact": 4.01
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1387,144 +1232,262 @@
           "possible": 3,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.23,
-              "possibleRate": 0.93,
+              "scenarios": 512,
+              "probability": 7.29,
+              "possibleRate": 18.75,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 12.47,
-              "possibleRate": 29.69,
-              "guaranteedRate": 1.17
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.91,
+              "teamBWinProbability": 0.91,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.91,
+              "teamBWinProbability": 0.91,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "HEA": {
+          "possible": 3,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 3,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 12.5,
+              "possibleRate": 31.25,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 1.56,
+              "teamBWinProbability": 1.56,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 1.56,
+              "teamBWinProbability": 1.56,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
         },
         "REN": {
-          "possible": 3,
+          "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.23,
-              "possibleRate": 0.93,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
               "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 12.47,
-              "possibleRate": 29.69,
-              "guaranteedRate": 1.17
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
+        "THU": {
+          "possible": null,
+          "likely": null,
+          "guaranteed": null,
+          "target_matches": 3,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ],
           "impactFixtureWindow": 1
@@ -1538,28 +1501,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1567,11 +1530,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1581,89 +1544,16 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
               "impact": 0.0
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "THU": {
-          "possible": 4,
-          "likely": null,
-          "guaranteed": null,
-          "target_matches": 4,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 0.53,
-              "possibleRate": 2.15,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.07,
-              "teamBWinProbability": 0.0,
-              "impact": 0.07
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.07,
-              "teamBWinProbability": 0.0,
-              "impact": 0.07
             }
           ],
           "impactFixtureWindow": 1
@@ -1672,40 +1562,33 @@
           "possible": null,
           "likely": null,
           "guaranteed": null,
-          "target_matches": 4,
+          "target_matches": 3,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -1713,11 +1596,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1727,11 +1610,11 @@
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -1745,35 +1628,35 @@
     },
     "scenarioBreakdown": {
       "4": {
-        "SIX": {
+        "SCO": {
           "clearRate": 99.46,
           "possibleRate": 100.0,
-          "sharedTieAdjustedRate": 99.86,
+          "sharedTieAdjustedRate": 99.87,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
-              "probability": 98.88,
+              "scenarios": 512,
+              "probability": 98.93,
               "possibleRate": 100.0,
               "guaranteedRate": 95.7
             },
             {
               "wins": 1,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1781,55 +1664,48 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 99.87,
-              "teamBWinProbability": 99.85,
-              "impact": 0.01
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.95,
+              "teamBWinProbability": 99.78,
+              "impact": 0.17
             }
           ]
         },
-        "SCO": {
-          "clearRate": 94.63,
-          "possibleRate": 99.65,
-          "sharedTieAdjustedRate": 97.58,
+        "SIX": {
+          "clearRate": 99.51,
+          "possibleRate": 100.0,
+          "sharedTieAdjustedRate": 99.88,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 66.06,
-              "possibleRate": 94.43,
-              "guaranteedRate": 31.79
+              "scenarios": 512,
+              "probability": 99.02,
+              "possibleRate": 100.0,
+              "guaranteedRate": 96.09
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 98.79,
+              "scenarios": 1536,
+              "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 95.56
+              "guaranteedRate": 100.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1837,111 +1713,48 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 95.35,
-              "teamBWinProbability": 99.81,
-              "impact": 4.46
-            }
-          ]
-        },
-        "HEA": {
-          "clearRate": 70.23,
-          "possibleRate": 90.41,
-          "sharedTieAdjustedRate": 80.78,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 1.6,
-              "possibleRate": 5.86,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 50.75,
-              "possibleRate": 85.18,
-              "guaranteedRate": 15.72
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 97.97,
-              "possibleRate": 100.0,
-              "guaranteedRate": 93.46
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 81.07,
-              "teamBWinProbability": 80.48,
-              "impact": 0.59
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 99.98,
+              "teamBWinProbability": 99.78,
+              "impact": 0.2
             }
           ]
         },
         "STR": {
-          "clearRate": 35.26,
-          "possibleRate": 63.87,
-          "sharedTieAdjustedRate": 49.38,
+          "clearRate": 54.88,
+          "possibleRate": 83.59,
+          "sharedTieAdjustedRate": 69.24,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
+              "scenarios": 512,
+              "probability": 2.73,
+              "possibleRate": 9.38,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 2.44,
-              "possibleRate": 8.3,
-              "guaranteedRate": 0.0
+              "scenarios": 1536,
+              "probability": 51.95,
+              "possibleRate": 86.46,
+              "guaranteedRate": 18.23
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 48.59,
-              "possibleRate": 81.45,
-              "guaranteedRate": 16.54
+              "scenarios": 1536,
+              "probability": 98.45,
+              "possibleRate": 100.0,
+              "guaranteedRate": 94.79
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 97.2,
-              "possibleRate": 100.0,
-              "guaranteedRate": 91.24
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1949,540 +1762,244 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 49.99,
-              "teamBWinProbability": 48.77,
-              "impact": 1.23
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 74.44,
+              "teamBWinProbability": 64.05,
+              "impact": 10.39
+            }
+          ]
+        },
+        "HEA": {
+          "clearRate": 54.49,
+          "possibleRate": 83.2,
+          "sharedTieAdjustedRate": 68.95,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 1.69,
+              "possibleRate": 6.25,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 51.52,
+              "possibleRate": 86.46,
+              "guaranteedRate": 17.19
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 98.46,
+              "possibleRate": 100.0,
+              "guaranteedRate": 94.79
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 72.91,
+              "teamBWinProbability": 65.0,
+              "impact": 7.91
             }
           ]
         },
         "REN": {
-          "clearRate": 35.57,
-          "possibleRate": 63.9,
-          "sharedTieAdjustedRate": 49.68,
+          "clearRate": 15.23,
+          "possibleRate": 43.55,
+          "sharedTieAdjustedRate": 28.86,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 2.45,
-              "possibleRate": 8.4,
+              "scenarios": 1536,
+              "probability": 1.3,
+              "possibleRate": 4.69,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 49.68,
-              "possibleRate": 81.48,
-              "guaranteedRate": 18.29
+              "scenarios": 1536,
+              "probability": 43.58,
+              "possibleRate": 78.12,
+              "guaranteedRate": 11.46
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 96.76,
+              "scenarios": 512,
+              "probability": 96.26,
               "possibleRate": 100.0,
-              "guaranteedRate": 89.82
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
+              "guaranteedRate": 87.5
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 50.32,
-              "teamBWinProbability": 49.04,
-              "impact": 1.28
-            }
-          ]
-        },
-        "STA": {
-          "clearRate": 1.54,
-          "possibleRate": 12.02,
-          "sharedTieAdjustedRate": 6.19,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4096,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 12288,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 1.5,
-              "possibleRate": 5.27,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 4096,
-              "probability": 45.05,
-              "possibleRate": 80.35,
-              "guaranteedRate": 12.3
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 6.35,
-              "teamBWinProbability": 6.04,
-              "impact": 0.31
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 33.0,
+              "teamBWinProbability": 24.72,
+              "impact": 8.28
             }
           ]
         },
         "THU": {
-          "clearRate": 7.23,
-          "possibleRate": 27.15,
-          "sharedTieAdjustedRate": 16.43,
+          "clearRate": 13.87,
+          "possibleRate": 43.55,
+          "sharedTieAdjustedRate": 27.81,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
+              "scenarios": 1536,
+              "probability": 1.3,
+              "possibleRate": 4.69,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
-              "probability": 1.29,
-              "possibleRate": 4.75,
-              "guaranteedRate": 0.0
+              "scenarios": 1536,
+              "probability": 40.76,
+              "possibleRate": 78.12,
+              "guaranteedRate": 7.81
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 39.84,
-              "possibleRate": 76.49,
-              "guaranteedRate": 7.42
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 95.78,
+              "scenarios": 512,
+              "probability": 96.32,
               "possibleRate": 100.0,
-              "guaranteedRate": 86.04
+              "guaranteedRate": 87.5
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 16.85,
-              "teamBWinProbability": 16.01,
-              "impact": 0.84
-            }
-          ]
-        },
-        "HUR": {
-          "clearRate": 0.0,
-          "possibleRate": 0.4,
-          "sharedTieAdjustedRate": 0.1,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 1.56,
-              "possibleRate": 6.45,
-              "guaranteedRate": 0.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.2,
-              "teamBWinProbability": 0.0,
-              "impact": 0.2
-            }
-          ]
-        }
-      },
-      "1": {
-        "SIX": {
-          "clearRate": 42.82,
-          "possibleRate": 70.56,
-          "sharedTieAdjustedRate": 55.59,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 4096,
-              "probability": 1.43,
-              "possibleRate": 5.08,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 12288,
-              "probability": 31.96,
-              "possibleRate": 57.29,
-              "guaranteedRate": 11.59
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 82.47,
-              "possibleRate": 95.83,
-              "guaranteedRate": 69.27
-            },
-            {
-              "wins": 3,
-              "scenarios": 4096,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 64.83,
-              "teamBWinProbability": 46.35,
-              "impact": 18.48
-            }
-          ]
-        },
-        "SCO": {
-          "clearRate": 23.73,
-          "possibleRate": 47.71,
-          "sharedTieAdjustedRate": 34.64,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.71,
-              "possibleRate": 2.54,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 24.01,
-              "possibleRate": 46.35,
-              "guaranteedRate": 6.51
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 76.82,
-              "possibleRate": 93.75,
-              "guaranteedRate": 60.16
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "SCO",
-              "preferredLabel": "SCO beat HUR",
-              "teamAWinProbability": 22.54,
-              "teamBWinProbability": 46.74,
-              "impact": 24.2
-            }
-          ]
-        },
-        "HEA": {
-          "clearRate": 3.08,
-          "possibleRate": 14.75,
-          "sharedTieAdjustedRate": 8.07,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.35,
-              "possibleRate": 1.3,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 15.87,
-              "possibleRate": 35.16,
-              "guaranteedRate": 2.15
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 63.54,
-              "possibleRate": 87.5,
-              "guaranteedRate": 40.62
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 10.07,
-              "teamBWinProbability": 6.06,
-              "impact": 4.01
-            }
-          ]
-        },
-        "STR": {
-          "clearRate": 0.07,
-          "possibleRate": 2.09,
-          "sharedTieAdjustedRate": 0.84,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.23,
-              "possibleRate": 0.93,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 12.47,
-              "possibleRate": 29.69,
-              "guaranteedRate": 1.17
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
-            }
-          ]
-        },
-        "REN": {
-          "clearRate": 0.07,
-          "possibleRate": 2.09,
-          "sharedTieAdjustedRate": 0.84,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 2048,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 12288,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.23,
-              "possibleRate": 0.93,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 12.47,
-              "possibleRate": 29.69,
-              "guaranteedRate": 1.17
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
-              "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 1.25,
-              "teamBWinProbability": 0.43,
-              "impact": 0.82
+              "teamB": "THU",
+              "preferredWinner": "THU",
+              "preferredLabel": "THU beat HUR",
+              "teamAWinProbability": 12.89,
+              "teamBWinProbability": 42.73,
+              "impact": 29.84
             }
           ]
         },
         "STA": {
+          "clearRate": 1.17,
+          "possibleRate": 10.74,
+          "sharedTieAdjustedRate": 5.39,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 1.13,
+              "possibleRate": 4.17,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 39.71,
+              "possibleRate": 73.44,
+              "guaranteedRate": 9.38
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "HUR",
+              "preferredLabel": "HUR beat THU",
+              "teamAWinProbability": 6.84,
+              "teamBWinProbability": 3.94,
+              "impact": 2.9
+            }
+          ]
+        },
+        "HUR": {
           "clearRate": 0.0,
           "possibleRate": 0.0,
           "sharedTieAdjustedRate": 0.0,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 4096,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2490,11 +2007,258 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
+            }
+          ]
+        }
+      },
+      "1": {
+        "SCO": {
+          "clearRate": 36.33,
+          "possibleRate": 62.5,
+          "sharedTieAdjustedRate": 48.76,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 21.7,
+              "possibleRate": 41.67,
+              "guaranteedRate": 5.21
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 75.0,
+              "possibleRate": 91.67,
+              "guaranteedRate": 58.33
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
+            }
+          ]
+        },
+        "SIX": {
+          "clearRate": 36.33,
+          "possibleRate": 62.5,
+          "sharedTieAdjustedRate": 48.76,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 21.7,
+              "possibleRate": 41.67,
+              "guaranteedRate": 5.21
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 75.0,
+              "possibleRate": 91.67,
+              "guaranteedRate": 58.33
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 48.76,
+              "teamBWinProbability": 48.76,
+              "impact": 0.0
+            }
+          ]
+        },
+        "STR": {
+          "clearRate": 0.0,
+          "possibleRate": 2.34,
+          "sharedTieAdjustedRate": 0.91,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 7.29,
+              "possibleRate": 18.75,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.91,
+              "teamBWinProbability": 0.91,
+              "impact": 0.0
+            }
+          ]
+        },
+        "HEA": {
+          "clearRate": 0.0,
+          "possibleRate": 3.91,
+          "sharedTieAdjustedRate": 1.56,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 12.5,
+              "possibleRate": 31.25,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 1.56,
+              "teamBWinProbability": 1.56,
+              "impact": 0.0
+            }
+          ]
+        },
+        "REN": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2505,57 +2269,99 @@
         },
         "THU": {
           "clearRate": 0.0,
-          "possibleRate": 0.13,
-          "sharedTieAdjustedRate": 0.03,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
-              "probability": 0.53,
-              "possibleRate": 2.15,
               "guaranteedRate": 0.0
             }
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
-              "preferredWinner": "HUR",
-              "preferredLabel": "HUR beat SCO",
-              "teamAWinProbability": 0.07,
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
               "teamBWinProbability": 0.0,
-              "impact": 0.07
+              "impact": 0.0
+            }
+          ]
+        },
+        "STA": {
+          "clearRate": 0.0,
+          "possibleRate": 0.0,
+          "sharedTieAdjustedRate": 0.0,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 1536,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 512,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
+              "teamA": "HUR",
+              "teamB": "THU",
+              "preferredWinner": "neutral",
+              "preferredLabel": "Either result",
+              "teamAWinProbability": 0.0,
+              "teamBWinProbability": 0.0,
+              "impact": 0.0
             }
           ]
         },
@@ -2566,35 +2372,28 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 8192,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 12288,
+              "scenarios": 1536,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 8192,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 2048,
+              "scenarios": 512,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
@@ -2602,11 +2401,11 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "0f63b918-a76b-422c-9019-04219f5aec34",
-              "matchNo": 26,
-              "label": "M26: HUR vs SCO",
+              "fixtureId": "b1da5f1d-5a90-4a7f-abbb-a7b283bbf4a1",
+              "matchNo": 29,
+              "label": "M29: HUR vs THU",
               "teamA": "HUR",
-              "teamB": "SCO",
+              "teamB": "THU",
               "preferredWinner": "neutral",
               "preferredLabel": "Either result",
               "teamAWinProbability": 0.0,
@@ -2619,17 +2418,17 @@
     }
   },
   "movement": {
-    "since": "2026-11-16T16:54:37Z",
+    "since": "2026-11-17T16:49:24Z",
     "tier": "top4",
     "changes": {
-      "SIX": 3.81,
-      "SCO": 0.77,
-      "HEA": 2.11,
-      "STR": -13.69,
-      "REN": 4.17,
-      "STA": 0.98,
-      "THU": 1.8,
-      "HUR": 0.05
+      "SCO": 2.29,
+      "SIX": 0.02,
+      "STR": 19.86,
+      "HEA": -11.83,
+      "REN": -20.82,
+      "THU": 11.38,
+      "STA": -0.8,
+      "HUR": -0.1
     }
   }
 }
