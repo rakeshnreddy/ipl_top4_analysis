@@ -1,11 +1,11 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-15T23:27:17Z",
+    "generated_at": "2026-11-22T15:12:27Z",
     "source": "FixtureDownload",
     "source_url": "https://fixturedownload.com/",
     "data_freshness_status": "fresh",
-    "season_status": "postseason",
+    "season_status": "complete",
     "warnings": [],
     "credits": [
       {
@@ -50,7 +50,8 @@
         "key": "title",
         "label": "Championship",
         "kind": "champion",
-        "shortLabel": "Title"
+        "shortLabel": "Title",
+        "settled": true
       }
     ],
     "columns": [
@@ -584,25 +585,20 @@
       "remaining": 0
     }
   ],
-  "fixtures": [
+  "fixtures": [],
+  "results": [
     {
-      "id": "playoff-0",
+      "id": "playoff-result-0",
       "round": null,
       "date": "2026-11-22T01:00:00Z",
       "home": "Washington Spirit",
       "away": "Kansas City Current",
-      "venue": null,
-      "stage": "NWSL Championship",
-      "probabilities": {
-        "home": 0.358,
-        "draw": 0.272,
-        "away": 0.37
-      }
-    }
-  ],
-  "results": [
+      "homeScore": 1,
+      "awayScore": 2,
+      "note": "NWSL Championship"
+    },
     {
-      "id": "playoff-result-0",
+      "id": "playoff-result-1",
       "round": null,
       "date": "2026-11-15T20:00:00Z",
       "home": "Gotham FC",
@@ -612,7 +608,7 @@
       "note": "Semifinals"
     },
     {
-      "id": "playoff-result-1",
+      "id": "playoff-result-2",
       "round": null,
       "date": "2026-11-14T17:00:00Z",
       "home": "Washington Spirit",
@@ -622,7 +618,7 @@
       "note": "Semifinals"
     },
     {
-      "id": "playoff-result-2",
+      "id": "playoff-result-3",
       "round": null,
       "date": "2026-11-08T20:00:00Z",
       "home": "Washington Spirit",
@@ -632,7 +628,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-3",
+      "id": "playoff-result-4",
       "round": null,
       "date": "2026-11-08T17:30:00Z",
       "home": "Gotham FC",
@@ -642,7 +638,7 @@
       "note": "Quarterfinals"
     },
     {
-      "id": "playoff-result-4",
+      "id": "playoff-result-5",
       "round": null,
       "date": "2026-11-07T17:00:00Z",
       "home": "Kansas City Current",
@@ -652,7 +648,7 @@
       "note": "Quarterfinals, aet"
     },
     {
-      "id": "playoff-result-5",
+      "id": "playoff-result-6",
       "round": null,
       "date": "2026-11-07T03:00:00Z",
       "home": "San Diego Wave FC",
@@ -2882,7 +2878,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 50.78
+        "title": 100.0
       },
       "North Carolina Courage": {
         "playoffs": 0.0,
@@ -2930,7 +2926,7 @@
         "playoffs": 100.0,
         "top4": 100.0,
         "shield": 0.0,
-        "title": 49.23
+        "title": 0.0
       }
     },
     "positions": {
@@ -3480,115 +3476,20 @@
             "topSeed": 3,
             "bottomSeed": 4,
             "topWins": 0,
-            "bottomWins": 0,
+            "bottomWins": 1,
             "bestOf": 1,
-            "winner": null,
-            "aggregate": null
+            "winner": "Kansas City Current",
+            "aggregate": {
+              "top": 1,
+              "bottom": 2
+            }
           }
         ]
       }
     ],
-    "champion": null
+    "champion": "Kansas City Current"
   },
-  "movement": {
-    "since": "2026-10-26T14:06:02Z",
-    "changes": {
-      "Angel City FC": {
-        "playoffs": 0.0,
-        "top4": -28.62,
-        "shield": 0.0,
-        "title": -0.42
-      },
-      "Bay FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "Boston Legacy FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "Chicago Stars FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "Denver Summit FC": {
-        "playoffs": -9.04,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": -0.48
-      },
-      "Gotham FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 11.63,
-        "title": 0.57
-      },
-      "Houston Dash": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "Kansas City Current": {
-        "playoffs": 0.0,
-        "top4": 25.78,
-        "shield": 0.0,
-        "title": 0.28
-      },
-      "North Carolina Courage": {
-        "playoffs": -24.02,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": -1.37
-      },
-      "Orlando Pride": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "Portland Thorns FC": {
-        "playoffs": 0.0,
-        "top4": -0.03,
-        "shield": 0.0,
-        "title": 0.77
-      },
-      "Racing Louisville FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 0.0
-      },
-      "San Diego Wave FC": {
-        "playoffs": 0.0,
-        "top4": 0.0,
-        "shield": -11.63,
-        "title": 0.73
-      },
-      "Seattle Reign FC": {
-        "playoffs": 33.06,
-        "top4": 0.0,
-        "shield": 0.0,
-        "title": 1.54
-      },
-      "Utah Royals FC": {
-        "playoffs": 0.0,
-        "top4": -0.01,
-        "shield": 0.0,
-        "title": -0.71
-      },
-      "Washington Spirit": {
-        "playoffs": 0.0,
-        "top4": 2.88,
-        "shield": 0.0,
-        "title": -0.89
-      }
-    }
+  "playoffs": {
+    "champion": "Kansas City Current"
   }
 }
