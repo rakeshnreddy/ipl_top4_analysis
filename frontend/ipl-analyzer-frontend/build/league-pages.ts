@@ -15,6 +15,7 @@ interface LeagueEntry {
   shortName: string;
   seasonLabel: string;
   sport?: string;
+  engine?: string;
   champion?: string | null;
   path: string;
 }
@@ -37,8 +38,8 @@ interface Standing {
 export interface LeaguePayload {
   metadata: { generated_at: string; source: string; source_url?: string; season_status: string; warnings?: string[] };
   league: {
-    id: string; name: string; shortName: string; seasonLabel: string; sport?: string;
-    columns?: { key: string; label: string; signed?: boolean }[];
+    id: string; name: string; shortName: string; seasonLabel: string; sport?: string; engine?: string;
+    columns?: { key: string; label: string; signed?: boolean; decimals?: number }[];
     tiers?: { key: string; label: string }[];
     qualification?: { size: number; label: string }[];
     eventsLeft?: number;
@@ -58,7 +59,7 @@ export interface LeaguePayload {
 }
 
 interface Fact { label: string; value: string }
-interface Column { key: string; label: string; signed?: boolean; probability?: boolean }
+interface Column { key: string; label: string; signed?: boolean; probability?: boolean; decimals?: number }
 export interface LeaguePage {
   id: string; title: string; heading: string; description: string; status: string;
   updated: string; canonical: string; image: string; base: string; dataUrl: string;
@@ -132,9 +133,12 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
   const started = payload.standings.some((row) => Number(row.played ?? row.matches ?? 0) > 0);
   const status = complete ? 'Final' : /playoff|postseason/.test(payload.metadata.season_status) ? 'Playoffs' : started ? 'In season' : 'Pre-season';
   const heading = `${payload.league.name} ${payload.league.seasonLabel}`;
+  const wtc = payload.league.engine === 'wtc';
   const title = payload.league.sport === 'motorsport' && !complete
     ? `${payload.league.shortName} ${payload.league.seasonLabel} Championship Odds: All Finishing Positions | Playoff Pulse`
-    : `${heading} ${complete ? 'Final Standings' : 'Standings & Odds'} | Playoff Pulse`;
+    : wtc && !complete
+      ? `${payload.league.shortName} ${payload.league.seasonLabel} Final & Title Odds: Points Table and What Each Team Needs | Playoff Pulse`
+      : `${heading} ${complete ? 'Final Standings' : 'Standings & Odds'} | Playoff Pulse`;
   const rows = [...payload.standings].sort((a, b) => a.rank - b.rank);
   const cricket = (payload.league.sport ?? entry.sport ?? 'cricket') === 'cricket';
   const columns: Column[] = [...(payload.league.columns ?? (cricket
@@ -153,13 +157,13 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
     const tier = tiers[0];
     const favourite = [...rows].sort((a, b) => (probabilities[b.teamKey]?.[tier.key] ?? -1) - (probabilities[a.teamKey]?.[tier.key] ?? -1))[0];
     const chance = favourite && probabilities[favourite.teamKey]?.[tier.key];
-    if (chance !== undefined) facts.push({ label: `${tier.label} favourite`, value: `${favourite.shortName} ${formatProbability(payload, chance)}` });
+    if (chance !== undefined) facts.push({ label: wtc ? 'Likeliest finalist' : `${tier.label} favourite`, value: `${favourite.shortName} ${formatProbability(payload, chance)}` });
   }
   const leader = rows[0];
-  if (leader && (started || complete)) facts.push({ label: 'Standings leader', value: `${leader.fullName}${typeof leader.points === 'number' ? ` · ${leader.points} points` : typeof leader.wins === 'number' ? ` · ${leader.wins} wins` : ''}` });
+  if (leader && (started || complete)) facts.push({ label: 'Standings leader', value: `${leader.fullName}${wtc && typeof leader.pct === 'number' ? ` · ${leader.pct.toFixed(2)}% of points` : typeof leader.points === 'number' ? ` · ${leader.points} points` : typeof leader.wins === 'number' ? ` · ${leader.wins} wins` : ''}` });
   if (!started && !complete) facts.push({ label: 'Teams', value: String(rows.length) });
   if (typeof payload.league.eventsLeft === 'number') facts.push({ label: 'Races and sprints remaining', value: String(payload.league.eventsLeft) });
-  const description = `${heading}: ${status.toLowerCase()} standings${complete ? '' : payload.league.sport === 'motorsport' ? ' and probabilities for every final championship position' : ' and model probabilities'}. ${facts.map((fact) => `${fact.label}: ${fact.value}.`).join(' ')} Updated ${payload.metadata.generated_at.slice(0, 10)}.`;
+  const description = `${heading}: ${status.toLowerCase()} standings${complete ? '' : payload.league.sport === 'motorsport' ? ' and probabilities for every final championship position' : wtc ? ' by percentage of points, exact clinch and elimination checks, and final and title probabilities' : ' and model probabilities'}. ${facts.map((fact) => `${fact.label}: ${fact.value}.`).join(' ')} Updated ${payload.metadata.generated_at.slice(0, 10)}.`;
   return {
     id: entry.id, title, heading, description, status, rows, columns, facts, payload, base,
     updated: payload.metadata.generated_at,
@@ -182,6 +186,7 @@ function cell(page: LeaguePage, row: Standing, column: Column, constructors = fa
   const value = row[column.key];
   if (typeof value === 'number') {
     if (column.key === 'nrr') return `${value > 0 ? '+' : ''}${value.toFixed(3)}`;
+    if (typeof column.decimals === 'number') return value.toFixed(column.decimals);
     if (column.key === 'pct') return value.toFixed(3);
     return `${column.signed && value > 0 ? '+' : ''}${value}`;
   }
@@ -242,7 +247,7 @@ type RouteBundle = Record<string, { type: string; fileName: string; facadeModule
 
 /** Hint only the selected route to remove the index → route → payload discovery waterfall. */
 export function criticalPreloads(bundle: RouteBundle, sport: string, id: string | null, base: string, template: string) {
-  const component = sport === 'landing' ? '/src/landing/LandingPage.tsx' : sport === 'hub' ? '/src/hub/HubPage.tsx' : sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
+  const component = sport === 'landing' ? '/src/landing/LandingPage.tsx' : sport === 'hub' ? '/src/hub/HubPage.tsx' : sport === 'wtc' ? '/src/wtc/WtcPage.tsx' : sport === 'motorsport' ? '/src/f1/F1Page.tsx' : sport === 'cricket' ? '/src/App.tsx' : '/src/sport/SportPage.tsx';
   const route = Object.values(bundle).find((item) => item.type === 'chunk' && item.facadeModuleId?.endsWith(component));
   const modules = new Set<string>();
   const styles = new Set<string>();
@@ -262,10 +267,14 @@ export function criticalPreloads(bundle: RouteBundle, sport: string, id: string 
   return tags.join('\n');
 }
 
+/** The page family a league opens: its engine's own page (the World Test Championship), or its sport's. */
+export const routeFamily = (entry: Pick<LeagueEntry, 'sport' | 'engine'>) =>
+  entry.engine === 'wtc' ? 'wtc' : entry.sport === 'motorsport' ? 'motorsport' : !entry.sport || entry.sport === 'cricket' ? 'cricket' : 'sport';
+
 /** Root entries get only the selected route's hints; query metadata stays generic. */
-export function legacyQueryPreloadScript(entries: Pick<LeagueEntry, 'id' | 'sport'>[], bundle: RouteBundle, base: string, template: string) {
-  const family = (sport: string | undefined) => sport === 'motorsport' ? 'motorsport' : !sport || sport === 'cricket' ? 'cricket' : 'sport';
-  const leagues = Object.fromEntries(entries.filter((entry) => validId.test(entry.id)).map((entry) => [entry.id, family(entry.sport)]));
+export function legacyQueryPreloadScript(entries: Pick<LeagueEntry, 'id' | 'sport' | 'engine'>[], bundle: RouteBundle, base: string, template: string) {
+  const family = (entry: Pick<LeagueEntry, 'sport' | 'engine'>) => routeFamily(entry);
+  const leagues = Object.fromEntries(entries.filter((entry) => validId.test(entry.id)).map((entry) => [entry.id, family(entry)]));
   const placeholder = '__pp_league_id__';
   const hints = Object.fromEntries([...new Set([...Object.values(leagues), 'landing', 'hub'])].map((sport) => [sport, criticalPreloads(bundle, sport, ['landing', 'hub'].includes(sport) ? null : placeholder, base, template)]));
   return `(() => {
@@ -335,7 +344,7 @@ export function leaguePagesPlugin(siteUrl: string | undefined): Plugin {
           if (!validId.test(entry.id) || entry.path !== `data/${entry.id}.json`) throw new Error(`Unsafe league path: ${entry.id}`);
           const payload = JSON.parse(readFileSync(resolve(publicDir, entry.path), 'utf8')) as LeaguePayload;
           const page = describeLeague(entry, payload, site);
-          const preloads = criticalPreloads(bundle, entry.sport ?? 'cricket', entry.id, base, homeTemplate);
+          const preloads = criticalPreloads(bundle, routeFamily(entry) === 'wtc' ? 'wtc' : entry.sport ?? 'cricket', entry.id, base, homeTemplate);
           const html = renderLeagueHtml(homeTemplate, page).replace('</head>', `${preloads}\n</head>`);
           this.emitFile({ type: 'asset', fileName: `league/${entry.id}/index.html`, source: html });
           const png = renderSocialPng(renderLeagueOgSvg(page));

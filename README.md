@@ -1,6 +1,6 @@
 # Playoff Pulse
 
-League tables and season odds: T20 cricket leagues (IPL first), European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-League Men and Women, NBL and WNBL, and Formula 1. The React/Vite frontend serves checked-in season JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`. A separate `/cricket/` section discovers covered cricket matches through a free source.
+League tables and season odds: T20 cricket leagues (IPL first), the ICC World Test Championship, European football leagues from the Premier League to the Süper Lig, the Champions League, Europa League and Conference League, MLS and the NWSL, the NFL, NBA, WNBA, NHL and MLB, Australia's A-League Men and Women, NBL and WNBL, and Formula 1. The React/Vite frontend serves checked-in season JSON and social PNG assets from `frontend/ipl-analyzer-frontend/public`. A separate `/cricket/` section discovers covered cricket matches through a free source.
 
 Season data generation happens ahead of the frontend build. Live Cricket uses the keyless SportScore API by default; an optional coordinated Worker service supports additional authorized feeds. See the [implementation and verification notes](docs/live-cricket-implementation.md), [service setup](services/live-cricket/README.md), and [future sports roadmap](docs/designs/live-sports-roadmap.md). The notes distinguish dated local verification from release and deployment evidence. See [revenue readiness](docs/revenue-readiness.md) for the integrated trust pages and default-off advertising prerequisites.
 
@@ -27,7 +27,7 @@ Social posting tools live on a separate page, `/share.html` (Share kit): the lat
 
 ## Data Rules
 
-- Cricket qualification odds use exact enumeration when eligible and Monte Carlo for larger schedules, groups and bonus points. Cricket playoff fixtures are excluded from league-stage qualification math. Other sports use the rating models and simulations documented below.
+- T20 cricket qualification odds use exact enumeration when eligible and Monte Carlo for larger schedules, groups and bonus points. Cricket playoff fixtures are excluded from league-stage qualification math. The World Test Championship has its own Test rating model and exact clinch checks ([below](#world-test-championship)). Other sports use the rating models and simulations documented below.
 - The default `--source auto` selects CricketData for configured in-season cricket leagues and Cricsheet otherwise. NRR is display-only when CricketData provides it and is not used in probability math.
 - Completed seasons are rebuilt from Cricsheet (`--source cricsheet`): results, playoffs, and NRR computed from ball-by-ball data.
 - Cricsheet data is licensed ODC-By 1.0. Keep the source and licence credit visible on the site.
@@ -97,6 +97,50 @@ To add a league season:
 3. Build it and compare the table with the official one, then add the official points and NRR to `OFFICIAL_TABLES` in `tests/test_cricsheet.py`.
 
 Live odds work for any league whose config has a CricketData source; the others show completed seasons. Bonus points are simulated at the rate seen in the previous season (`bonusSimulationRate` for winners, `bonusLoserSimulationRate` for losers). A tie that stands, as in the Super Smash, is read from CricketData's match status.
+
+## World Test Championship
+
+The ICC World Test Championship 2025-27 (`leagues/wtc-2025-27.json`, `"engine": "wtc"`) is cricket with its own engine, `wtc.py`, its rating model, `wtc_model.py`, and its own page (`src/wtc/WtcPage.tsx`) at `/league/wtc-2025-27/`. It is listed under Cricket and found by "Test" or "WTC" in the league picker. Rules, the official table check and the backtest are recorded in [docs/audits/wtc-2025-27.md](docs/audits/wtc-2025-27.md).
+
+**Rules** ([Playing Conditions 2025-2027](https://images.icc-cricket.com/image/upload/prd/xgmt8r5r41onkqbb5nxv.pdf), clauses 6.4, 12.9 and 16.9-16.13; [Competition Regulations](https://images.icc-cricket.com/image/upload/prd/doztximb3sxhwcc4oo3f.pdf) 8-10):
+
+- Nine teams, six series each (three home, three away) of two to five Tests: 27 series and 71 Tests.
+- A win is 12 points, a tie 6, a draw 4. An abandoned Test is a draw, unless the pitch or outfield is rated unfit, when the visitors get a win's points (still a draw in the records and for series wins). A match conceded, awarded or forfeited (unacceptable non-compliance) is a win for the other side. A Test not played for an accepted reason is left out of the percentage.
+- One point off per over short of the over rate, kept in the config's `deductions` with the Test and the ICC's media release.
+- Teams are ranked by percentage of points (PCT), compared exactly; ties go to series wins, away PCT, then the ICC Test ranking at the end of the window (`rankings` in the config holds the latest one until then). The Playing Conditions close the window on 30 April 2027; the Regulations say March, with the ranking taken on 1 April 2027. The page names both.
+- The top two meet at The Oval on 9-13 June 2027 with a reserve day; a drawn, tied or abandoned final makes them joint champions.
+
+**Data**, in order of precedence:
+
+1. The config's `results`: Tests Cricsheet cannot describe (abandoned without a ball, an unfit pitch, awarded, forfeited) or has not added yet, each with its source. On 21 November 2026 it held four Tests Cricsheet had not added.
+2. Cricsheet's men's Test archive (`tests_male_json.zip`), matched to the schedule by teams and a start within three days. A Cricsheet Test between two championship teams that matches nothing is reported, unless it is listed under `otherTests` (the MCG's 150th anniversary Test).
+3. CricketData, with `CRICDATA_API_KEY`: each series with a Test under way or finished in the last three weeks without a Cricsheet result is read from its `series_info` (series found by "<visitor> tour of <host>" and the year, cached in `.cache/fixtures/cricketdata-wtc-series.json`, or fixed with `cricketdata.seriesId` on the series). A Test under way is shown and never counted. The final is read the same way while Cricsheet lacks it, or set by hand with `final.result`.
+
+The schedule lives in the config, with the country each Test is played in, so a postponed, cancelled (`"status": "cancelled"`), moved or added Test, a series cut or lengthened, or a "home" series at a neutral ground (`"country": "UAE"`) is a config edit. A Test known only by its month (`"start": "2027-02"`) is tentative and never assumed to be under way. A finished Test with no result yet is simulated as still to play, with a warning. The next cycle is not rolled forward: 2027-29 needs its own config once its format is known.
+
+**Model** (`wtc_model.py`): a Davidson model of each Test's result. A side's strength is its rating plus home advantage when the Test is in its own country (by the ground, not the series, so a neutral ground gives none), with a home advantage fitted for each country but shrunk, as the backtest preferred, almost entirely to the overall one. Draws are likelier between close sides; their rate depends on the country of the ground and on the era (a draw trend, fitted). Ratings are fitted on every men's Test in Cricsheet since 2001 by penalised maximum likelihood, older results losing weight. The remaining Tests are simulated 20,000 times with the ratings held (drift did not help in the backtest), teams level on PCT split by the tie-breakers, then the final at The Oval (England would be at home), where a draw means joint champions.
+
+**Backtest** (`scripts/backtest_wtc.py`; `--tune` reruns the settings search):
+
+- Before each of the 242 championship Tests of 2019-21, 2021-23, 2023-25 and 2025-27 so far (Tests between the nine teams in each window, less series arranged outside it: England and New Zealand's four Tests in 2019-21 and two in February 2023), the model was fitted on the Tests finished before it started and its win, draw and loss chances were scored against home-win, draw and away-win base rates (the shares of the previous four years' Tests):
+
+  | Cycle | Tests | RPS (base rates) | Log loss (base rates) | Draws predicted / seen |
+  | --- | ---: | --- | --- | --- |
+  | 2019-21 | 60 | 0.1940 (0.2281) | 0.8695 (0.9567) | 13.9% / 13.3% |
+  | 2021-23 | 69 | 0.1755 (0.2264) | 0.8505 (1.0037) | 14.7% / 17.4% |
+  | 2023-25 | 69 | 0.2299 (0.2554) | 0.8783 (0.9292) | 12.3% / 5.8% |
+  | 2025-27 so far | 44 | 0.2258 (0.2417) | 0.9356 (0.9599) | 9.6% / 11.4% |
+  | All | 242 | 0.2048 (0.2379) | 0.8786 (0.9628) | 12.9% / 12.0% |
+
+- The same script rebuilds the final tables of 2021-23 and 2023-25 from Cricsheet and the ICC's over-rate deductions; both match the ICC's to two decimals.
+- Settings, by a two-pass coordinate search on that log loss; on the final 242 Tests, changing any one setting from the chosen ones scores worse: a half-life of 12 years (8 years 0.8795, 20 years 0.8788; in the search 2 years scored 0.9008 and 4 years 0.8863), rating ridge 2 (1: 0.8791, 4: 0.8808), home-advantage ridge 256 (64: 0.8786, the same; 4 and 16 were worse in the search) and draw ridge 2 (0.5: 0.8792, 8: 0.8789), with the draw trend (without it 0.8999 in the search). The long half-life works with the draw trend: strengths change slowly, while draws have become much rarer (17-37% of Tests a year in 2003-2013, 4-9% in 2024-2026).
+- Season odds: at 25%, 50% and 75% of 2021-23 and 2023-25 (the cycles with today's 12-6-4 points; 2019-21 gave each series 120 points and switched to percentages mid-cycle), the rest of the cycle was simulated from the table at the time, deductions made by then included, and the chances of reaching the final scored a Brier score of 0.0627, against 0.2222 for the table at the time and 0.1728 for a no-skill guess. Rating drift: none 0.0627, 0.1 0.0627, 0.2 0.0632, 0.3 0.0634, 0.5 0.0653, so none is used. Predicted v observed by bin: 0-20% 0.042 v 0.000 (35 team-checkpoints), 20-40% 0.310 v 0.250 (4), 40-60% 0.500 v 0.400 (5), 60-80% 0.663 v 0.889 (9), 80-100% 0.818 v 1.000 (1); six checkpoints make small bins.
+
+**Exact claims:** "Through", "Out", "In control", "Needs help" and "Level at best", each team's best and worst possible PCT, the fewest wins that keep a chance and the wins that would guarantee a final place come from a search over every remaining result, ties included, never from the simulation. When two teams could finish level on PCT for a final place, the page says so instead of guessing the tie-breakers. They take the deductions already made into account; deductions still to come could change them, which the page says.
+
+**Page:** the PCT table (M, W, L, D, deductions, points, PCT to two decimals, final and title odds; on phones W, L and D move to the team panel), what each team needs, a team panel (`#team=IND`), the final (venue, dates, joint-champion rule, odds of reaching it, winning it outright and sharing it), the Tests that swing the race most, every series Test by Test, final-place chances and the method. Designed states: pre-cycle, in season, final ahead (the table settled, finalists' odds), final under way, champions and joint champions.
+
+**Limitations:** no player availability, toss, pitch or weather; the reserve day is not modelled (the draw rate is a five-day Test's); future over-rate deductions are not simulated; the last tie-breaker uses the latest ranking in the config until the window's ranking date.
 
 ## Football
 
@@ -493,7 +537,7 @@ Cloudflare Pages should serve these files directly from the static build:
 
 The app uses hash links, so no Cloudflare redirects are needed for `#team=RCB`, `#standings`, `#top4`, `#playoffs`, or `#deep-dive`.
 
-The build reads the league index and real payloads to generate every league's HTML and PNG (currently 44 of each), canonical metadata, JSON-LD and sitemap entries. Source HTML includes a visible snapshot with standings, facts, source notices and model notes inside the application root; Formula 1 includes both championship tables. Home, directory and cricket entries also contain readable source HTML. React replaces each source snapshot when it mounts; there is no React SSR or hydration. Legacy root queries redirect to canonical paths in the browser while preserving hashes; use canonical paths when sharing.
+The build reads the league index and real payloads to generate every league's HTML and PNG (currently 46 of each), canonical metadata, JSON-LD and sitemap entries. Source HTML includes a visible snapshot with standings, facts, source notices and model notes inside the application root; Formula 1 includes both championship tables. Home, directory and cricket entries also contain readable source HTML. React replaces each source snapshot when it mounts; there is no React SSR or hydration. Legacy root queries redirect to canonical paths in the browser while preserving hashes; use canonical paths when sharing.
 
 Build-only `@resvg/resvg-js` renders previews with the existing Fontsource fonts. The build preloads critical Latin fonts and the canonical page's route, styles and data to shorten request discovery. On root entries, a small helper selects Landing, Hub or an allowlisted league family's route and data hints; it never redirects or fetches other sport families. Canonical and social page URLs use `src/lib/siteIdentity.ts` and the primary Cloudflare origin; GitHub mirror assets and navigation retain their deployment base. Root and league pages link the web manifest for standalone installation with icons; no service worker or offline odds cache is installed. Both the root deployment and GitHub Pages subpath use the same build commands above.
 

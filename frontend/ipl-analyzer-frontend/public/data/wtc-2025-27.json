@@ -1,0 +1,3749 @@
+{
+  "metadata": {
+    "season": "2025-27",
+    "generated_at": "2026-11-22T06:23:32Z",
+    "source": "Cricsheet",
+    "source_url": "https://cricsheet.org/",
+    "license": "ODC-By 1.0",
+    "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+    "data_freshness_status": "fresh",
+    "season_status": "league_stage",
+    "warnings": [],
+    "notes": [
+      "ban-wi-2026-2: Drawn at Sylhet. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre. (source: https://www.icc-cricket.com/tournaments/world-test-championship/standings).",
+      "pak-sl-2026-1: Drawn at Rawalpindi. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre. (source: https://www.icc-cricket.com/tournaments/world-test-championship/standings).",
+      "pak-sl-2026-2: Pakistan won by 8 wickets at Rawalpindi. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre. (source: https://www.icc-cricket.com/tournaments/world-test-championship/standings).",
+      "sa-ban-2026-1: South Africa won by 9 wickets at Johannesburg. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre. (source: https://www.icc-cricket.com/tournaments/world-test-championship/standings)."
+    ]
+  },
+  "league": {
+    "id": "wtc-2025-27",
+    "configId": "wtc-2025-27",
+    "sport": "cricket",
+    "engine": "wtc",
+    "name": "ICC World Test Championship",
+    "shortName": "WTC",
+    "headline": "World Test Championship 2025-27: Final and Title Odds",
+    "season": "2025-27",
+    "seasonLabel": "2025-27",
+    "priority": 5,
+    "points": {
+      "win": 12,
+      "tie": 6,
+      "draw": 4,
+      "loss": 0
+    },
+    "finalists": 2,
+    "tiers": [
+      {
+        "key": "final",
+        "label": "Reach the final",
+        "shortLabel": "Final",
+        "kind": "top",
+        "size": 2
+      },
+      {
+        "key": "title",
+        "label": "Win the title",
+        "shortLabel": "Title",
+        "kind": "champion"
+      }
+    ],
+    "columns": [
+      {
+        "key": "played",
+        "label": "M"
+      },
+      {
+        "key": "won",
+        "label": "W"
+      },
+      {
+        "key": "lost",
+        "label": "L"
+      },
+      {
+        "key": "drawn",
+        "label": "D"
+      },
+      {
+        "key": "deducted",
+        "label": "Ded"
+      },
+      {
+        "key": "points",
+        "label": "Pts"
+      },
+      {
+        "key": "pct",
+        "label": "PCT",
+        "decimals": 2
+      }
+    ],
+    "teams": [
+      {
+        "key": "AUS",
+        "shortName": "AUS",
+        "fullName": "Australia",
+        "color": "#FFCD00",
+        "textColor": "#000000"
+      },
+      {
+        "key": "BAN",
+        "shortName": "BAN",
+        "fullName": "Bangladesh",
+        "color": "#E4002B",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "ENG",
+        "shortName": "ENG",
+        "fullName": "England",
+        "color": "#1C2C5B",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "IND",
+        "shortName": "IND",
+        "fullName": "India",
+        "color": "#2D7FF9",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "NZ",
+        "shortName": "NZ",
+        "fullName": "New Zealand",
+        "color": "#111111",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "PAK",
+        "shortName": "PAK",
+        "fullName": "Pakistan",
+        "color": "#8DC63F",
+        "textColor": "#000000"
+      },
+      {
+        "key": "SA",
+        "shortName": "SA",
+        "fullName": "South Africa",
+        "color": "#007749",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "SL",
+        "shortName": "SL",
+        "fullName": "Sri Lanka",
+        "color": "#0A3D91",
+        "textColor": "#FFFFFF"
+      },
+      {
+        "key": "WI",
+        "shortName": "WI",
+        "fullName": "West Indies",
+        "color": "#7B1E3A",
+        "textColor": "#FFFFFF"
+      }
+    ],
+    "tiebreakers": [
+      "Percentage of points (PCT)",
+      "Series wins",
+      "Away PCT",
+      "ICC Test ranking at the end of the competition window"
+    ],
+    "rankings": {
+      "order": [
+        "SA",
+        "AUS",
+        "NZ",
+        "IND",
+        "ENG",
+        "WI",
+        "SL",
+        "BAN",
+        "PAK"
+      ],
+      "asOf": "17 November 2026",
+      "source": "https://www.icc-cricket.com/rankings/team-rankings/mens/test"
+    },
+    "testsTotal": 71,
+    "testsLeft": 23,
+    "seasonStart": "2025-06-17",
+    "seasonEnd": "2027-06-14",
+    "rules": {
+      "summary": "Nine teams each play six series of two to five Tests, three at home and three away, from June 2025. A win is worth 12 points, a tie 6, a draw 4 and a loss 0. An abandoned Test is a draw, unless the pitch or outfield is rated unfit, when the visitors take the win's points. Each over short of the minimum rate costs a point. Teams are ranked by the percentage of available points they won (PCT), then series wins, away PCT and the ICC Test ranking at the end of the window. A Test not played for an accepted reason (a security or force-majeure ruling) is left out; one forfeited goes to the other side. The top two meet in the final at The Oval on 9-13 June 2027, with a reserve day; a drawn, tied or abandoned final makes them joint champions.",
+      "sources": [
+        {
+          "label": "ICC World Test Championship 2025-2027 Playing Conditions, clauses 16.9-16.13 (effective June 2025)",
+          "url": "https://images.icc-cricket.com/image/upload/prd/xgmt8r5r41onkqbb5nxv.pdf"
+        },
+        {
+          "label": "ICC World Test Championship 2025-27 Competition Regulations, 8-10 (effective 11 April 2025)",
+          "url": "https://images.icc-cricket.com/image/upload/prd/doztximb3sxhwcc4oo3f.pdf"
+        },
+        {
+          "label": "ICC: WTC 2027 final at The Oval, 9-13 June 2027",
+          "url": "https://www.icc-cricket.com/news/venue-and-dates-for-world-test-championship-2027-final-revealed"
+        },
+        {
+          "label": "ICC World Test Championship standings",
+          "url": "https://www.icc-cricket.com/tournaments/world-test-championship/standings"
+        }
+      ]
+    },
+    "deductions": [
+      {
+        "team": "ENG",
+        "points": 2,
+        "test": "eng-ind-2025-3",
+        "note": "2 overs short at Lord's, 10-14 July 2025",
+        "source": "https://www.icc-cricket.com/media-releases/england-penalised-for-slow-over-rate-in-lord-s-test"
+      },
+      {
+        "team": "PAK",
+        "points": 8,
+        "test": "ban-pak-2026-1",
+        "note": "8 overs short at Mirpur, 8-12 May 2026",
+        "source": "https://www.icc-cricket.com/news/pakistan-docked-wtc-points-for-slow-over-rate-in-mirpur-test"
+      },
+      {
+        "team": "ENG",
+        "points": 12,
+        "test": "eng-nz-2026-2",
+        "note": "12 overs short at The Oval, 17-21 June 2026",
+        "source": "https://www.icc-cricket.com/media-releases/england-penalised-for-slow-over-rate-in-the-oval-test"
+      },
+      {
+        "team": "WI",
+        "points": 2,
+        "test": "wi-sl-2026-2",
+        "note": "2 overs short at North Sound, 3-7 July 2026",
+        "source": "https://www.icc-cricket.com/media-releases/west-indies-penalised-for-slow-over-rate-in-second-test-against-sri-lanka"
+      },
+      {
+        "team": "PAK",
+        "points": 11,
+        "test": "eng-pak-2026-3",
+        "note": "11 overs short at Edgbaston, 9-12 September 2026",
+        "source": "https://www.icc-cricket.com/media-releases/pakistan-penalised-for-slow-over-rate-in-edgbaston-test"
+      },
+      {
+        "team": "PAK",
+        "points": 5,
+        "test": "pak-sl-2026-1",
+        "note": "5 overs short at Rawalpindi, 9-13 November 2026",
+        "source": "https://www.icc-cricket.com/media-releases/pakistan-sri-lanka-fined-for-slow-over-rate-in-first-test-match"
+      },
+      {
+        "team": "SL",
+        "points": 15,
+        "test": "pak-sl-2026-1",
+        "note": "15 overs short at Rawalpindi, 9-13 November 2026",
+        "source": "https://www.icc-cricket.com/media-releases/pakistan-sri-lanka-fined-for-slow-over-rate-in-first-test-match"
+      }
+    ]
+  },
+  "standings": [
+    {
+      "teamKey": "SA",
+      "shortName": "SA",
+      "fullName": "South Africa",
+      "color": "#007749",
+      "textColor": "#FFFFFF",
+      "rank": 1,
+      "played": 8,
+      "matches": 8,
+      "won": 6,
+      "wins": 6,
+      "lost": 2,
+      "drawn": 0,
+      "tied": 0,
+      "pointsWon": 72,
+      "deducted": 0,
+      "points": 72,
+      "pct": 75.0,
+      "pctExact": [
+        72,
+        96
+      ],
+      "seriesWon": 2,
+      "seriesPlayed": 3,
+      "awayPlayed": 4,
+      "awayPct": 75.0,
+      "testsLeft": 6,
+      "bestPct": 85.71,
+      "worstPct": 42.86,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W"
+      ]
+    },
+    {
+      "teamKey": "NZ",
+      "shortName": "NZ",
+      "fullName": "New Zealand",
+      "color": "#111111",
+      "textColor": "#FFFFFF",
+      "rank": 2,
+      "played": 6,
+      "matches": 6,
+      "won": 4,
+      "wins": 4,
+      "lost": 1,
+      "drawn": 1,
+      "tied": 0,
+      "pointsWon": 52,
+      "deducted": 0,
+      "points": 52,
+      "pct": 72.22,
+      "pctExact": [
+        52,
+        72
+      ],
+      "seriesWon": 2,
+      "seriesPlayed": 2,
+      "awayPlayed": 3,
+      "awayPct": 66.67,
+      "testsLeft": 10,
+      "bestPct": 89.58,
+      "worstPct": 27.08,
+      "form": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ]
+    },
+    {
+      "teamKey": "AUS",
+      "shortName": "AUS",
+      "fullName": "Australia",
+      "color": "#FFCD00",
+      "textColor": "#000000",
+      "rank": 3,
+      "played": 13,
+      "matches": 13,
+      "won": 9,
+      "wins": 9,
+      "lost": 4,
+      "drawn": 0,
+      "tied": 0,
+      "pointsWon": 108,
+      "deducted": 0,
+      "points": 108,
+      "pct": 69.23,
+      "pctExact": [
+        108,
+        156
+      ],
+      "seriesWon": 2,
+      "seriesPlayed": 4,
+      "awayPlayed": 6,
+      "awayPct": 66.67,
+      "testsLeft": 9,
+      "bestPct": 81.82,
+      "worstPct": 40.91,
+      "form": [
+        "L",
+        "L",
+        "W",
+        "W",
+        "L"
+      ]
+    },
+    {
+      "teamKey": "IND",
+      "shortName": "IND",
+      "fullName": "India",
+      "color": "#2D7FF9",
+      "textColor": "#FFFFFF",
+      "rank": 4,
+      "played": 11,
+      "matches": 11,
+      "won": 5,
+      "wins": 5,
+      "lost": 4,
+      "drawn": 2,
+      "tied": 0,
+      "pointsWon": 68,
+      "deducted": 0,
+      "points": 68,
+      "pct": 51.52,
+      "pctExact": [
+        68,
+        132
+      ],
+      "seriesWon": 2,
+      "seriesPlayed": 4,
+      "awayPlayed": 7,
+      "awayPct": 52.38,
+      "testsLeft": 7,
+      "bestPct": 70.37,
+      "worstPct": 31.48,
+      "form": [
+        "D",
+        "W",
+        "L",
+        "L",
+        "W"
+      ]
+    },
+    {
+      "teamKey": "BAN",
+      "shortName": "BAN",
+      "fullName": "Bangladesh",
+      "color": "#E4002B",
+      "textColor": "#FFFFFF",
+      "rank": 5,
+      "played": 9,
+      "matches": 9,
+      "won": 3,
+      "wins": 3,
+      "lost": 4,
+      "drawn": 2,
+      "tied": 0,
+      "pointsWon": 44,
+      "deducted": 0,
+      "points": 44,
+      "pct": 40.74,
+      "pctExact": [
+        44,
+        108
+      ],
+      "seriesWon": 1,
+      "seriesPlayed": 4,
+      "awayPlayed": 5,
+      "awayPct": 26.67,
+      "testsLeft": 3,
+      "bestPct": 55.56,
+      "worstPct": 30.56,
+      "form": [
+        "L",
+        "D",
+        "L",
+        "L",
+        "W"
+      ]
+    },
+    {
+      "teamKey": "ENG",
+      "shortName": "ENG",
+      "fullName": "England",
+      "color": "#1C2C5B",
+      "textColor": "#FFFFFF",
+      "rank": 6,
+      "played": 16,
+      "matches": 16,
+      "won": 7,
+      "wins": 7,
+      "lost": 8,
+      "drawn": 1,
+      "tied": 0,
+      "pointsWon": 88,
+      "deducted": 14,
+      "points": 74,
+      "pct": 38.54,
+      "pctExact": [
+        74,
+        192
+      ],
+      "seriesWon": 1,
+      "seriesPlayed": 4,
+      "awayPlayed": 5,
+      "awayPct": 20.0,
+      "testsLeft": 5,
+      "bestPct": 53.17,
+      "worstPct": 29.37,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "L"
+      ]
+    },
+    {
+      "teamKey": "WI",
+      "shortName": "WI",
+      "fullName": "West Indies",
+      "color": "#7B1E3A",
+      "textColor": "#FFFFFF",
+      "rank": 7,
+      "played": 14,
+      "matches": 14,
+      "won": 3,
+      "wins": 3,
+      "lost": 8,
+      "drawn": 3,
+      "tied": 0,
+      "pointsWon": 48,
+      "deducted": 2,
+      "points": 46,
+      "pct": 27.38,
+      "pctExact": [
+        46,
+        168
+      ],
+      "seriesWon": 2,
+      "seriesPlayed": 6,
+      "awayPlayed": 7,
+      "awayPct": 23.81,
+      "testsLeft": 0,
+      "bestPct": 27.38,
+      "worstPct": 27.38,
+      "form": [
+        "D",
+        "W",
+        "L",
+        "W",
+        "D"
+      ]
+    },
+    {
+      "teamKey": "SL",
+      "shortName": "SL",
+      "fullName": "Sri Lanka",
+      "color": "#0A3D91",
+      "textColor": "#FFFFFF",
+      "rank": 8,
+      "played": 8,
+      "matches": 8,
+      "won": 1,
+      "wins": 1,
+      "lost": 3,
+      "drawn": 4,
+      "tied": 0,
+      "pointsWon": 28,
+      "deducted": 15,
+      "points": 13,
+      "pct": 13.54,
+      "pctExact": [
+        13,
+        96
+      ],
+      "seriesWon": 1,
+      "seriesPlayed": 4,
+      "awayPlayed": 4,
+      "awayPct": -14.58,
+      "testsLeft": 4,
+      "bestPct": 42.36,
+      "worstPct": 9.03,
+      "form": [
+        "L",
+        "D",
+        "D",
+        "L",
+        "D"
+      ]
+    },
+    {
+      "teamKey": "PAK",
+      "shortName": "PAK",
+      "fullName": "Pakistan",
+      "color": "#8DC63F",
+      "textColor": "#000000",
+      "rank": 9,
+      "played": 11,
+      "matches": 11,
+      "won": 3,
+      "wins": 3,
+      "lost": 7,
+      "drawn": 1,
+      "tied": 0,
+      "pointsWon": 40,
+      "deducted": 24,
+      "points": 16,
+      "pct": 12.12,
+      "pctExact": [
+        16,
+        132
+      ],
+      "seriesWon": 1,
+      "seriesPlayed": 5,
+      "awayPlayed": 7,
+      "awayPct": -8.33,
+      "testsLeft": 2,
+      "bestPct": 25.64,
+      "worstPct": 10.26,
+      "form": [
+        "W",
+        "D",
+        "L",
+        "L",
+        "L"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "id": "sl-ban-2025",
+      "name": "Bangladesh tour of Sri Lanka",
+      "host": "SL",
+      "visitor": "BAN",
+      "status": "complete",
+      "start": "2025-06-17",
+      "end": "2025-06-29",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "SL": 1,
+        "BAN": 0,
+        "draws": 1
+      },
+      "winner": "SL",
+      "tests": [
+        {
+          "key": "sl-ban-2025-1",
+          "number": 1,
+          "start": "2025-06-17",
+          "end": "2025-06-21",
+          "venue": "Galle International Stadium",
+          "country": "SL",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "SL": 4,
+              "BAN": 4
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "sl-ban-2025-2",
+          "number": 2,
+          "start": "2025-06-25",
+          "end": "2025-06-29",
+          "venue": "Sinhalese Sports Club Cricket Ground, Colombo",
+          "country": "SL",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "SL",
+            "margin": "an innings and 78 runs",
+            "points": {
+              "SL": 12,
+              "BAN": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eng-ind-2025",
+      "name": "Anderson\u2013Tendulkar Trophy",
+      "host": "ENG",
+      "visitor": "IND",
+      "status": "complete",
+      "start": "2025-06-20",
+      "end": "2025-08-04",
+      "scheduled": 5,
+      "counted": 5,
+      "score": {
+        "ENG": 2,
+        "IND": 2,
+        "draws": 1
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "eng-ind-2025-1",
+          "number": 1,
+          "start": "2025-06-20",
+          "end": "2025-06-24",
+          "venue": "Headingley, Leeds",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "5 wickets",
+            "points": {
+              "ENG": 12,
+              "IND": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-ind-2025-2",
+          "number": 2,
+          "start": "2025-07-02",
+          "end": "2025-07-06",
+          "venue": "Edgbaston, Birmingham",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "IND",
+            "margin": "336 runs",
+            "points": {
+              "ENG": 0,
+              "IND": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-ind-2025-3",
+          "number": 3,
+          "start": "2025-07-10",
+          "end": "2025-07-14",
+          "venue": "Lord's, London",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "22 runs",
+            "points": {
+              "ENG": 12,
+              "IND": 0
+            },
+            "source": "Cricsheet"
+          },
+          "deductions": [
+            {
+              "team": "ENG",
+              "points": 2,
+              "note": "2 overs short at Lord's, 10-14 July 2025",
+              "source": "https://www.icc-cricket.com/media-releases/england-penalised-for-slow-over-rate-in-lord-s-test"
+            }
+          ]
+        },
+        {
+          "key": "eng-ind-2025-4",
+          "number": 4,
+          "start": "2025-07-23",
+          "end": "2025-07-27",
+          "venue": "Old Trafford, Manchester",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "ENG": 4,
+              "IND": 4
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-ind-2025-5",
+          "number": 5,
+          "start": "2025-07-31",
+          "end": "2025-08-04",
+          "venue": "The Oval, London",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "IND",
+            "margin": "6 runs",
+            "points": {
+              "ENG": 0,
+              "IND": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wi-aus-2025",
+      "name": "Frank Worrell Trophy",
+      "host": "WI",
+      "visitor": "AUS",
+      "status": "complete",
+      "start": "2025-06-25",
+      "end": "2025-07-16",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "WI": 0,
+        "AUS": 3,
+        "draws": 0
+      },
+      "winner": "AUS",
+      "tests": [
+        {
+          "key": "wi-aus-2025-1",
+          "number": 1,
+          "start": "2025-06-25",
+          "end": "2025-06-29",
+          "venue": "Kensington Oval, Bridgetown",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "AUS",
+            "margin": "159 runs",
+            "points": {
+              "WI": 0,
+              "AUS": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "wi-aus-2025-2",
+          "number": 2,
+          "start": "2025-07-03",
+          "end": "2025-07-07",
+          "venue": "National Cricket Stadium, St George's",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "AUS",
+            "margin": "133 runs",
+            "points": {
+              "WI": 0,
+              "AUS": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "wi-aus-2025-3",
+          "number": 3,
+          "start": "2025-07-12",
+          "end": "2025-07-16",
+          "venue": "Sabina Park, Kingston",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "AUS",
+            "margin": "176 runs",
+            "points": {
+              "WI": 0,
+              "AUS": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ind-wi-2025",
+      "name": "West Indies tour of India",
+      "host": "IND",
+      "visitor": "WI",
+      "status": "complete",
+      "start": "2025-10-02",
+      "end": "2025-10-14",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "IND": 2,
+        "WI": 0,
+        "draws": 0
+      },
+      "winner": "IND",
+      "tests": [
+        {
+          "key": "ind-wi-2025-1",
+          "number": 1,
+          "start": "2025-10-02",
+          "end": "2025-10-06",
+          "venue": "Narendra Modi Stadium, Ahmedabad",
+          "country": "IND",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "IND",
+            "margin": "an innings and 140 runs",
+            "points": {
+              "IND": 12,
+              "WI": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "ind-wi-2025-2",
+          "number": 2,
+          "start": "2025-10-10",
+          "end": "2025-10-14",
+          "venue": "Arun Jaitley Stadium, Delhi",
+          "country": "IND",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "IND",
+            "margin": "7 wickets",
+            "points": {
+              "IND": 12,
+              "WI": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pak-sa-2025",
+      "name": "South Africa tour of Pakistan",
+      "host": "PAK",
+      "visitor": "SA",
+      "status": "complete",
+      "start": "2025-10-12",
+      "end": "2025-10-24",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "PAK": 1,
+        "SA": 1,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "pak-sa-2025-1",
+          "number": 1,
+          "start": "2025-10-12",
+          "end": "2025-10-16",
+          "venue": "Gaddafi Stadium, Lahore",
+          "country": "PAK",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "PAK",
+            "margin": "93 runs",
+            "points": {
+              "PAK": 12,
+              "SA": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "pak-sa-2025-2",
+          "number": 2,
+          "start": "2025-10-20",
+          "end": "2025-10-24",
+          "venue": "Rawalpindi Cricket Stadium",
+          "country": "PAK",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "SA",
+            "margin": "8 wickets",
+            "points": {
+              "PAK": 0,
+              "SA": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ind-sa-2025",
+      "name": "Freedom Trophy",
+      "host": "IND",
+      "visitor": "SA",
+      "status": "complete",
+      "start": "2025-11-14",
+      "end": "2025-11-26",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "IND": 0,
+        "SA": 2,
+        "draws": 0
+      },
+      "winner": "SA",
+      "tests": [
+        {
+          "key": "ind-sa-2025-1",
+          "number": 1,
+          "start": "2025-11-14",
+          "end": "2025-11-18",
+          "venue": "Eden Gardens, Kolkata",
+          "country": "IND",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "SA",
+            "margin": "30 runs",
+            "points": {
+              "IND": 0,
+              "SA": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "ind-sa-2025-2",
+          "number": 2,
+          "start": "2025-11-22",
+          "end": "2025-11-26",
+          "venue": "Barsapara Cricket Stadium (ACA Stadium), Guwahati",
+          "country": "IND",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "SA",
+            "margin": "408 runs",
+            "points": {
+              "IND": 0,
+              "SA": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aus-eng-2025",
+      "name": "The Ashes",
+      "host": "AUS",
+      "visitor": "ENG",
+      "status": "complete",
+      "start": "2025-11-21",
+      "end": "2026-01-08",
+      "scheduled": 5,
+      "counted": 5,
+      "score": {
+        "AUS": 4,
+        "ENG": 1,
+        "draws": 0
+      },
+      "winner": "AUS",
+      "tests": [
+        {
+          "key": "aus-eng-2025-1",
+          "number": 1,
+          "start": "2025-11-21",
+          "end": "2025-11-25",
+          "venue": "Perth Stadium",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "AUS",
+            "margin": "8 wickets",
+            "points": {
+              "AUS": 12,
+              "ENG": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "aus-eng-2025-2",
+          "number": 2,
+          "start": "2025-12-04",
+          "end": "2025-12-08",
+          "venue": "The Gabba, Brisbane",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "AUS",
+            "margin": "8 wickets",
+            "points": {
+              "AUS": 12,
+              "ENG": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "aus-eng-2025-3",
+          "number": 3,
+          "start": "2025-12-17",
+          "end": "2025-12-21",
+          "venue": "Adelaide Oval",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "AUS",
+            "margin": "82 runs",
+            "points": {
+              "AUS": 12,
+              "ENG": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "aus-eng-2025-4",
+          "number": 4,
+          "start": "2025-12-26",
+          "end": "2025-12-30",
+          "venue": "Melbourne Cricket Ground",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "ENG",
+            "margin": "4 wickets",
+            "points": {
+              "AUS": 0,
+              "ENG": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "aus-eng-2025-5",
+          "number": 5,
+          "start": "2026-01-04",
+          "end": "2026-01-08",
+          "venue": "Sydney Cricket Ground",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "AUS",
+            "margin": "5 wickets",
+            "points": {
+              "AUS": 12,
+              "ENG": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nz-wi-2025",
+      "name": "West Indies tour of New Zealand",
+      "host": "NZ",
+      "visitor": "WI",
+      "status": "complete",
+      "start": "2025-12-02",
+      "end": "2025-12-22",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "NZ": 2,
+        "WI": 0,
+        "draws": 1
+      },
+      "winner": "NZ",
+      "tests": [
+        {
+          "key": "nz-wi-2025-1",
+          "number": 1,
+          "start": "2025-12-02",
+          "end": "2025-12-06",
+          "venue": "Hagley Oval, Christchurch",
+          "country": "NZ",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "NZ": 4,
+              "WI": 4
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "nz-wi-2025-2",
+          "number": 2,
+          "start": "2025-12-10",
+          "end": "2025-12-14",
+          "venue": "Basin Reserve, Wellington",
+          "country": "NZ",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "NZ",
+            "margin": "9 wickets",
+            "points": {
+              "NZ": 12,
+              "WI": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "nz-wi-2025-3",
+          "number": 3,
+          "start": "2025-12-18",
+          "end": "2025-12-22",
+          "venue": "Bay Oval, Mount Maunganui",
+          "country": "NZ",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "NZ",
+            "margin": "323 runs",
+            "points": {
+              "NZ": 12,
+              "WI": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ban-pak-2026",
+      "name": "Pakistan tour of Bangladesh",
+      "host": "BAN",
+      "visitor": "PAK",
+      "status": "complete",
+      "start": "2026-05-08",
+      "end": "2026-05-20",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "BAN": 2,
+        "PAK": 0,
+        "draws": 0
+      },
+      "winner": "BAN",
+      "tests": [
+        {
+          "key": "ban-pak-2026-1",
+          "number": 1,
+          "start": "2026-05-08",
+          "end": "2026-05-12",
+          "venue": "Sher-e-Bangla National Cricket Stadium, Mirpur, Dhaka",
+          "country": "BAN",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "BAN",
+            "margin": "104 runs",
+            "points": {
+              "BAN": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          },
+          "deductions": [
+            {
+              "team": "PAK",
+              "points": 8,
+              "note": "8 overs short at Mirpur, 8-12 May 2026",
+              "source": "https://www.icc-cricket.com/news/pakistan-docked-wtc-points-for-slow-over-rate-in-mirpur-test"
+            }
+          ]
+        },
+        {
+          "key": "ban-pak-2026-2",
+          "number": 2,
+          "start": "2026-05-16",
+          "end": "2026-05-20",
+          "venue": "Sylhet International Cricket Stadium",
+          "country": "BAN",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "BAN",
+            "margin": "78 runs",
+            "points": {
+              "BAN": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eng-nz-2026",
+      "name": "Crowe\u2013Thorpe Trophy",
+      "host": "ENG",
+      "visitor": "NZ",
+      "status": "complete",
+      "start": "2026-06-04",
+      "end": "2026-06-29",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "ENG": 1,
+        "NZ": 2,
+        "draws": 0
+      },
+      "winner": "NZ",
+      "tests": [
+        {
+          "key": "eng-nz-2026-1",
+          "number": 1,
+          "start": "2026-06-04",
+          "end": "2026-06-08",
+          "venue": "Lord's, London",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "115 runs",
+            "points": {
+              "ENG": 12,
+              "NZ": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-nz-2026-2",
+          "number": 2,
+          "start": "2026-06-17",
+          "end": "2026-06-21",
+          "venue": "The Oval, London",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "NZ",
+            "margin": "253 runs",
+            "points": {
+              "ENG": 0,
+              "NZ": 12
+            },
+            "source": "Cricsheet"
+          },
+          "deductions": [
+            {
+              "team": "ENG",
+              "points": 12,
+              "note": "12 overs short at The Oval, 17-21 June 2026",
+              "source": "https://www.icc-cricket.com/media-releases/england-penalised-for-slow-over-rate-in-the-oval-test"
+            }
+          ]
+        },
+        {
+          "key": "eng-nz-2026-3",
+          "number": 3,
+          "start": "2026-06-25",
+          "end": "2026-06-29",
+          "venue": "Trent Bridge, Nottingham",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "NZ",
+            "margin": "160 runs",
+            "points": {
+              "ENG": 0,
+              "NZ": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wi-sl-2026",
+      "name": "Sobers\u2013Tissera Trophy",
+      "host": "WI",
+      "visitor": "SL",
+      "status": "complete",
+      "start": "2026-06-25",
+      "end": "2026-07-07",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "WI": 1,
+        "SL": 0,
+        "draws": 1
+      },
+      "winner": "WI",
+      "tests": [
+        {
+          "key": "wi-sl-2026-1",
+          "number": 1,
+          "start": "2026-06-25",
+          "end": "2026-06-29",
+          "venue": "Sir Vivian Richards Stadium, North Sound",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "WI",
+            "margin": "an innings and 217 runs",
+            "points": {
+              "WI": 12,
+              "SL": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "wi-sl-2026-2",
+          "number": 2,
+          "start": "2026-07-03",
+          "end": "2026-07-07",
+          "venue": "Sir Vivian Richards Stadium, North Sound",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "WI": 4,
+              "SL": 4
+            },
+            "source": "Cricsheet"
+          },
+          "deductions": [
+            {
+              "team": "WI",
+              "points": 2,
+              "note": "2 overs short at North Sound, 3-7 July 2026",
+              "source": "https://www.icc-cricket.com/media-releases/west-indies-penalised-for-slow-over-rate-in-second-test-against-sri-lanka"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wi-pak-2026",
+      "name": "Pakistan tour of West Indies",
+      "host": "WI",
+      "visitor": "PAK",
+      "status": "complete",
+      "start": "2026-07-25",
+      "end": "2026-08-06",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "WI": 1,
+        "PAK": 1,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "wi-pak-2026-1",
+          "number": 1,
+          "start": "2026-07-25",
+          "end": "2026-07-29",
+          "venue": "Brian Lara Cricket Academy, Tarouba, San Fernando",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "WI",
+            "margin": "90 runs",
+            "points": {
+              "WI": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "wi-pak-2026-2",
+          "number": 2,
+          "start": "2026-08-02",
+          "end": "2026-08-06",
+          "venue": "Queen's Park Oval, Port of Spain",
+          "country": "WI",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "PAK",
+            "margin": "8 wickets",
+            "points": {
+              "WI": 0,
+              "PAK": 12
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aus-ban-2026",
+      "name": "Bangladesh tour of Australia",
+      "host": "AUS",
+      "visitor": "BAN",
+      "status": "complete",
+      "start": "2026-08-13",
+      "end": "2026-08-26",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "AUS": 1,
+        "BAN": 1,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "aus-ban-2026-1",
+          "number": 1,
+          "start": "2026-08-13",
+          "end": "2026-08-17",
+          "venue": "Marrara Oval (Marrara Stadium), Darwin",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "BAN",
+            "margin": "9 wickets",
+            "points": {
+              "AUS": 0,
+              "BAN": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "aus-ban-2026-2",
+          "number": 2,
+          "start": "2026-08-22",
+          "end": "2026-08-26",
+          "venue": "Great Barrier Reef Arena (Harrup Park), Mackay",
+          "country": "AUS",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "AUS",
+            "margin": "an innings and 51 runs",
+            "points": {
+              "AUS": 12,
+              "BAN": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sl-ind-2026",
+      "name": "India tour of Sri Lanka",
+      "host": "SL",
+      "visitor": "IND",
+      "status": "complete",
+      "start": "2026-08-15",
+      "end": "2026-08-27",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "SL": 0,
+        "IND": 1,
+        "draws": 1
+      },
+      "winner": "IND",
+      "tests": [
+        {
+          "key": "sl-ind-2026-1",
+          "number": 1,
+          "start": "2026-08-15",
+          "end": "2026-08-19",
+          "venue": "Galle International Stadium",
+          "country": "SL",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "IND",
+            "margin": "165 runs",
+            "points": {
+              "SL": 0,
+              "IND": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "sl-ind-2026-2",
+          "number": 2,
+          "start": "2026-08-23",
+          "end": "2026-08-27",
+          "venue": "Sinhalese Sports Club Cricket Ground, Colombo",
+          "country": "SL",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "SL": 4,
+              "IND": 4
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eng-pak-2026",
+      "name": "Pakistan tour of England",
+      "host": "ENG",
+      "visitor": "PAK",
+      "status": "complete",
+      "start": "2026-08-19",
+      "end": "2026-09-13",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "ENG": 3,
+        "PAK": 0,
+        "draws": 0
+      },
+      "winner": "ENG",
+      "tests": [
+        {
+          "key": "eng-pak-2026-1",
+          "number": 1,
+          "start": "2026-08-19",
+          "end": "2026-08-23",
+          "venue": "Headingley, Leeds",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "an innings and 103 runs",
+            "points": {
+              "ENG": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-pak-2026-2",
+          "number": 2,
+          "start": "2026-08-27",
+          "end": "2026-08-31",
+          "venue": "Lord's, London",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "194 runs",
+            "points": {
+              "ENG": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "eng-pak-2026-3",
+          "number": 3,
+          "start": "2026-09-09",
+          "end": "2026-09-13",
+          "venue": "Edgbaston, Birmingham",
+          "country": "ENG",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "ENG",
+            "margin": "8 wickets",
+            "points": {
+              "ENG": 12,
+              "PAK": 0
+            },
+            "source": "Cricsheet"
+          },
+          "deductions": [
+            {
+              "team": "PAK",
+              "points": 11,
+              "note": "11 overs short at Edgbaston, 9-12 September 2026",
+              "source": "https://www.icc-cricket.com/media-releases/pakistan-penalised-for-slow-over-rate-in-edgbaston-test"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sa-aus-2026",
+      "name": "Australia tour of South Africa",
+      "host": "SA",
+      "visitor": "AUS",
+      "status": "complete",
+      "start": "2026-10-09",
+      "end": "2026-10-31",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "SA": 2,
+        "AUS": 1,
+        "draws": 0
+      },
+      "winner": "SA",
+      "tests": [
+        {
+          "key": "sa-aus-2026-1",
+          "number": 1,
+          "start": "2026-10-09",
+          "end": "2026-10-13",
+          "venue": "Kingsmead, Durban",
+          "country": "SA",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "AUS",
+            "margin": "214 runs",
+            "points": {
+              "SA": 0,
+              "AUS": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "sa-aus-2026-2",
+          "number": 2,
+          "start": "2026-10-18",
+          "end": "2026-10-22",
+          "venue": "St George's Park, Gqeberha",
+          "country": "SA",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "SA",
+            "margin": "an innings and 31 runs",
+            "points": {
+              "SA": 12,
+              "AUS": 0
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "sa-aus-2026-3",
+          "number": 3,
+          "start": "2026-10-27",
+          "end": "2026-10-31",
+          "venue": "Newlands, Cape Town",
+          "country": "SA",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "SA",
+            "margin": "176 runs",
+            "points": {
+              "SA": 12,
+              "AUS": 0
+            },
+            "source": "Cricsheet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ban-wi-2026",
+      "name": "West Indies tour of Bangladesh",
+      "host": "BAN",
+      "visitor": "WI",
+      "status": "complete",
+      "start": "2026-10-28",
+      "end": "2026-11-09",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "BAN": 0,
+        "WI": 1,
+        "draws": 1
+      },
+      "winner": "WI",
+      "tests": [
+        {
+          "key": "ban-wi-2026-1",
+          "number": 1,
+          "start": "2026-10-28",
+          "end": "2026-11-01",
+          "venue": "Sher-e-Bangla National Cricket Stadium, Mirpur, Dhaka",
+          "country": "BAN",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "visitor",
+            "winner": "WI",
+            "margin": "8 wickets",
+            "points": {
+              "BAN": 0,
+              "WI": 12
+            },
+            "source": "Cricsheet"
+          }
+        },
+        {
+          "key": "ban-wi-2026-2",
+          "number": 2,
+          "start": "2026-11-05",
+          "end": "2026-11-09",
+          "venue": "Sylhet International Cricket Stadium",
+          "country": "BAN",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "BAN": 4,
+              "WI": 4
+            },
+            "source": "https://www.icc-cricket.com/tournaments/world-test-championship/standings",
+            "note": "Drawn at Sylhet. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pak-sl-2026",
+      "name": "Sri Lanka tour of Pakistan",
+      "host": "PAK",
+      "visitor": "SL",
+      "status": "complete",
+      "start": "2026-11-09",
+      "end": "2026-11-21",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "PAK": 1,
+        "SL": 0,
+        "draws": 1
+      },
+      "winner": "PAK",
+      "tests": [
+        {
+          "key": "pak-sl-2026-1",
+          "number": 1,
+          "start": "2026-11-09",
+          "end": "2026-11-13",
+          "venue": "Rawalpindi Cricket Stadium",
+          "country": "PAK",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "draw",
+            "winner": null,
+            "margin": "",
+            "points": {
+              "PAK": 4,
+              "SL": 4
+            },
+            "source": "https://www.icc-cricket.com/tournaments/world-test-championship/standings",
+            "note": "Drawn at Rawalpindi. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre."
+          },
+          "deductions": [
+            {
+              "team": "PAK",
+              "points": 5,
+              "note": "5 overs short at Rawalpindi, 9-13 November 2026",
+              "source": "https://www.icc-cricket.com/media-releases/pakistan-sri-lanka-fined-for-slow-over-rate-in-first-test-match"
+            },
+            {
+              "team": "SL",
+              "points": 15,
+              "note": "15 overs short at Rawalpindi, 9-13 November 2026",
+              "source": "https://www.icc-cricket.com/media-releases/pakistan-sri-lanka-fined-for-slow-over-rate-in-first-test-match"
+            }
+          ]
+        },
+        {
+          "key": "pak-sl-2026-2",
+          "number": 2,
+          "start": "2026-11-17",
+          "end": "2026-11-21",
+          "venue": "Rawalpindi Cricket Stadium",
+          "country": "PAK",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "PAK",
+            "margin": "8 wickets",
+            "points": {
+              "PAK": 12,
+              "SL": 0
+            },
+            "source": "https://www.icc-cricket.com/tournaments/world-test-championship/standings",
+            "note": "Pakistan won by 8 wickets at Rawalpindi. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sa-ban-2026",
+      "name": "Bangladesh tour of South Africa",
+      "host": "SA",
+      "visitor": "BAN",
+      "status": "in_progress",
+      "start": "2026-11-15",
+      "end": "2026-11-27",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "SA": 1,
+        "BAN": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "sa-ban-2026-1",
+          "number": 1,
+          "start": "2026-11-15",
+          "end": "2026-11-19",
+          "venue": "Wanderers Stadium, Johannesburg",
+          "country": "SA",
+          "neutral": false,
+          "state": "result",
+          "tentative": false,
+          "precision": "day",
+          "result": {
+            "kind": "host",
+            "winner": "SA",
+            "margin": "9 wickets",
+            "points": {
+              "SA": 12,
+              "BAN": 0
+            },
+            "source": "https://www.icc-cricket.com/tournaments/world-test-championship/standings",
+            "note": "South Africa won by 9 wickets at Johannesburg. Cricsheet had not added this Test by 21 November 2026; the result is from the ICC's WTC standings and match centre."
+          }
+        },
+        {
+          "key": "sa-ban-2026-2",
+          "number": 2,
+          "start": "2026-11-23",
+          "end": "2026-11-27",
+          "venue": "Centurion Park (SuperSport Park)",
+          "country": "SA",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 89.05,
+            "draw": 2.9,
+            "visitor": 8.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "nz-ind-2026",
+      "name": "India tour of New Zealand",
+      "host": "NZ",
+      "visitor": "IND",
+      "status": "in_progress",
+      "start": "2026-11-19",
+      "end": "2026-12-01",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "NZ": 0,
+        "IND": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "nz-ind-2026-1",
+          "number": 1,
+          "start": "2026-11-19",
+          "end": "2026-11-23",
+          "venue": "Basin Reserve, Wellington",
+          "country": "NZ",
+          "neutral": false,
+          "state": "in_progress",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 45.59,
+            "draw": 11.06,
+            "visitor": 43.35
+          }
+        },
+        {
+          "key": "nz-ind-2026-2",
+          "number": 2,
+          "start": "2026-11-27",
+          "end": "2026-12-01",
+          "venue": "Hagley Oval, Christchurch",
+          "country": "NZ",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 45.59,
+            "draw": 11.06,
+            "visitor": 43.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "aus-nz-2026",
+      "name": "Trans-Tasman Trophy",
+      "host": "AUS",
+      "visitor": "NZ",
+      "status": "scheduled",
+      "start": "2026-12-09",
+      "end": "2027-01-08",
+      "scheduled": 4,
+      "counted": 4,
+      "score": {
+        "AUS": 0,
+        "NZ": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "aus-nz-2026-1",
+          "number": 1,
+          "start": "2026-12-09",
+          "end": "2026-12-13",
+          "venue": "Perth Stadium",
+          "country": "AUS",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 71.91,
+            "draw": 7.21,
+            "visitor": 20.88
+          }
+        },
+        {
+          "key": "aus-nz-2026-2",
+          "number": 2,
+          "start": "2026-12-17",
+          "end": "2026-12-21",
+          "venue": "Adelaide Oval",
+          "country": "AUS",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 71.91,
+            "draw": 7.21,
+            "visitor": 20.88
+          }
+        },
+        {
+          "key": "aus-nz-2026-3",
+          "number": 3,
+          "start": "2026-12-26",
+          "end": "2026-12-30",
+          "venue": "Melbourne Cricket Ground",
+          "country": "AUS",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 71.91,
+            "draw": 7.21,
+            "visitor": 20.88
+          }
+        },
+        {
+          "key": "aus-nz-2026-4",
+          "number": 4,
+          "start": "2027-01-04",
+          "end": "2027-01-08",
+          "venue": "Sydney Cricket Ground",
+          "country": "AUS",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 71.91,
+            "draw": 7.21,
+            "visitor": 20.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "sa-eng-2026",
+      "name": "Basil D'Oliveira Trophy",
+      "host": "SA",
+      "visitor": "ENG",
+      "status": "scheduled",
+      "start": "2026-12-17",
+      "end": "2027-01-07",
+      "scheduled": 3,
+      "counted": 3,
+      "score": {
+        "SA": 0,
+        "ENG": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "sa-eng-2026-1",
+          "number": 1,
+          "start": "2026-12-17",
+          "end": "2026-12-21",
+          "venue": "Wanderers Stadium, Johannesburg",
+          "country": "SA",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 65.71,
+            "draw": 4.76,
+            "visitor": 29.53
+          }
+        },
+        {
+          "key": "sa-eng-2026-2",
+          "number": 2,
+          "start": "2026-12-26",
+          "end": "2026-12-30",
+          "venue": "Centurion Park (SuperSport Park)",
+          "country": "SA",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 65.71,
+            "draw": 4.76,
+            "visitor": 29.53
+          }
+        },
+        {
+          "key": "sa-eng-2026-3",
+          "number": 3,
+          "start": "2027-01-03",
+          "end": "2027-01-07",
+          "venue": "Newlands, Cape Town",
+          "country": "SA",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 65.71,
+            "draw": 4.76,
+            "visitor": 29.53
+          }
+        }
+      ]
+    },
+    {
+      "id": "ind-aus-2027",
+      "name": "Border\u2013Gavaskar Trophy",
+      "host": "IND",
+      "visitor": "AUS",
+      "status": "scheduled",
+      "start": "2027-01-21",
+      "end": "2027-03-03",
+      "scheduled": 5,
+      "counted": 5,
+      "score": {
+        "IND": 0,
+        "AUS": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "ind-aus-2027-1",
+          "number": 1,
+          "start": "2027-01-21",
+          "end": "2027-01-25",
+          "venue": "Vidarbha Cricket Association Stadium, Nagpur",
+          "country": "IND",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 55.34,
+            "draw": 10.43,
+            "visitor": 34.23
+          }
+        },
+        {
+          "key": "ind-aus-2027-2",
+          "number": 2,
+          "start": "2027-01-29",
+          "end": "2027-02-02",
+          "venue": "M. A. Chidambaram Stadium, Chennai",
+          "country": "IND",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 55.34,
+            "draw": 10.43,
+            "visitor": 34.23
+          }
+        },
+        {
+          "key": "ind-aus-2027-3",
+          "number": 3,
+          "start": "2027-02-11",
+          "end": "2027-02-15",
+          "venue": "Barsapara Cricket Stadium (ACA Stadium), Guwahati",
+          "country": "IND",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 55.34,
+            "draw": 10.43,
+            "visitor": 34.23
+          }
+        },
+        {
+          "key": "ind-aus-2027-4",
+          "number": 4,
+          "start": "2027-02-19",
+          "end": "2027-02-23",
+          "venue": "JSCA International Stadium Complex, Ranchi",
+          "country": "IND",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 55.34,
+            "draw": 10.43,
+            "visitor": 34.23
+          }
+        },
+        {
+          "key": "ind-aus-2027-5",
+          "number": 5,
+          "start": "2027-02-27",
+          "end": "2027-03-03",
+          "venue": "Narendra Modi Stadium, Ahmedabad",
+          "country": "IND",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 55.34,
+            "draw": 10.43,
+            "visitor": 34.23
+          }
+        }
+      ]
+    },
+    {
+      "id": "ban-eng-2027",
+      "name": "England tour of Bangladesh",
+      "host": "BAN",
+      "visitor": "ENG",
+      "status": "scheduled",
+      "start": "2027-02-01",
+      "end": "2027-02-28",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "BAN": 0,
+        "ENG": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "ban-eng-2027-1",
+          "number": 1,
+          "start": "2027-02-01",
+          "end": "2027-02-28",
+          "venue": "Sher-e-Bangla National Cricket Stadium, Mirpur, Dhaka",
+          "country": "BAN",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 24.14,
+            "draw": 8.17,
+            "visitor": 67.69
+          }
+        },
+        {
+          "key": "ban-eng-2027-2",
+          "number": 2,
+          "start": "2027-02-01",
+          "end": "2027-02-28",
+          "venue": "Zahur Ahmed Chowdhury Stadium, Chattogram",
+          "country": "BAN",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 24.14,
+            "draw": 8.17,
+            "visitor": 67.69
+          }
+        }
+      ]
+    },
+    {
+      "id": "sl-sa-2027",
+      "name": "South Africa tour of Sri Lanka",
+      "host": "SL",
+      "visitor": "SA",
+      "status": "scheduled",
+      "start": "2027-02-01",
+      "end": "2027-03-31",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "SL": 0,
+        "SA": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "sl-sa-2027-1",
+          "number": 1,
+          "start": "2027-02-01",
+          "end": "2027-02-28",
+          "venue": null,
+          "country": "SL",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 40.53,
+            "draw": 9.0,
+            "visitor": 50.46
+          }
+        },
+        {
+          "key": "sl-sa-2027-2",
+          "number": 2,
+          "start": "2027-03-01",
+          "end": "2027-03-31",
+          "venue": null,
+          "country": "SL",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 40.53,
+            "draw": 9.0,
+            "visitor": 50.46
+          }
+        }
+      ]
+    },
+    {
+      "id": "nz-sl-2027",
+      "name": "Sri Lanka tour of New Zealand",
+      "host": "NZ",
+      "visitor": "SL",
+      "status": "scheduled",
+      "start": "2027-02-04",
+      "end": "2027-02-16",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "NZ": 0,
+        "SL": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "nz-sl-2027-1",
+          "number": 1,
+          "start": "2027-02-04",
+          "end": "2027-02-08",
+          "venue": "Bay Oval, Mount Maunganui",
+          "country": "NZ",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 65.76,
+            "draw": 9.95,
+            "visitor": 24.3
+          }
+        },
+        {
+          "key": "nz-sl-2027-2",
+          "number": 2,
+          "start": "2027-02-12",
+          "end": "2027-02-16",
+          "venue": "Seddon Park, Hamilton",
+          "country": "NZ",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": false,
+          "precision": "day",
+          "odds": {
+            "host": 65.76,
+            "draw": 9.95,
+            "visitor": 24.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "pak-nz-2027",
+      "name": "New Zealand tour of Pakistan",
+      "host": "PAK",
+      "visitor": "NZ",
+      "status": "scheduled",
+      "start": "2027-03-01",
+      "end": "2027-03-31",
+      "scheduled": 2,
+      "counted": 2,
+      "score": {
+        "PAK": 0,
+        "NZ": 0,
+        "draws": 0
+      },
+      "winner": null,
+      "tests": [
+        {
+          "key": "pak-nz-2027-1",
+          "number": 1,
+          "start": "2027-03-01",
+          "end": "2027-03-31",
+          "venue": null,
+          "country": "PAK",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 46.98,
+            "draw": 14.92,
+            "visitor": 38.11
+          }
+        },
+        {
+          "key": "pak-nz-2027-2",
+          "number": 2,
+          "start": "2027-03-01",
+          "end": "2027-03-31",
+          "venue": null,
+          "country": "PAK",
+          "neutral": false,
+          "state": "scheduled",
+          "tentative": true,
+          "precision": "month",
+          "odds": {
+            "host": 46.98,
+            "draw": 14.92,
+            "visitor": 38.11
+          }
+        }
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "nz-ind-2026-1",
+      "series": "nz-ind-2026",
+      "number": 1,
+      "teamA": "NZ",
+      "teamB": "IND",
+      "host": "NZ",
+      "visitor": "IND",
+      "dateTimeGMT": "2026-11-19T00:00:00Z",
+      "start": "2026-11-19",
+      "end": "2026-11-23",
+      "venue": "Basin Reserve, Wellington",
+      "country": "NZ",
+      "neutral": false,
+      "state": "in_progress",
+      "status": "in_progress",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 45.59,
+        "draw": 11.06,
+        "visitor": 43.35
+      }
+    },
+    {
+      "id": "sa-ban-2026-2",
+      "series": "sa-ban-2026",
+      "number": 2,
+      "teamA": "SA",
+      "teamB": "BAN",
+      "host": "SA",
+      "visitor": "BAN",
+      "dateTimeGMT": "2026-11-23T00:00:00Z",
+      "start": "2026-11-23",
+      "end": "2026-11-27",
+      "venue": "Centurion Park (SuperSport Park)",
+      "country": "SA",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 89.05,
+        "draw": 2.9,
+        "visitor": 8.05
+      }
+    },
+    {
+      "id": "nz-ind-2026-2",
+      "series": "nz-ind-2026",
+      "number": 2,
+      "teamA": "NZ",
+      "teamB": "IND",
+      "host": "NZ",
+      "visitor": "IND",
+      "dateTimeGMT": "2026-11-27T00:00:00Z",
+      "start": "2026-11-27",
+      "end": "2026-12-01",
+      "venue": "Hagley Oval, Christchurch",
+      "country": "NZ",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 45.59,
+        "draw": 11.06,
+        "visitor": 43.35
+      }
+    },
+    {
+      "id": "aus-nz-2026-1",
+      "series": "aus-nz-2026",
+      "number": 1,
+      "teamA": "AUS",
+      "teamB": "NZ",
+      "host": "AUS",
+      "visitor": "NZ",
+      "dateTimeGMT": "2026-12-09T00:00:00Z",
+      "start": "2026-12-09",
+      "end": "2026-12-13",
+      "venue": "Perth Stadium",
+      "country": "AUS",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 71.91,
+        "draw": 7.21,
+        "visitor": 20.88
+      }
+    },
+    {
+      "id": "aus-nz-2026-2",
+      "series": "aus-nz-2026",
+      "number": 2,
+      "teamA": "AUS",
+      "teamB": "NZ",
+      "host": "AUS",
+      "visitor": "NZ",
+      "dateTimeGMT": "2026-12-17T00:00:00Z",
+      "start": "2026-12-17",
+      "end": "2026-12-21",
+      "venue": "Adelaide Oval",
+      "country": "AUS",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 71.91,
+        "draw": 7.21,
+        "visitor": 20.88
+      }
+    },
+    {
+      "id": "sa-eng-2026-1",
+      "series": "sa-eng-2026",
+      "number": 1,
+      "teamA": "SA",
+      "teamB": "ENG",
+      "host": "SA",
+      "visitor": "ENG",
+      "dateTimeGMT": "2026-12-17T00:00:00Z",
+      "start": "2026-12-17",
+      "end": "2026-12-21",
+      "venue": "Wanderers Stadium, Johannesburg",
+      "country": "SA",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 65.71,
+        "draw": 4.76,
+        "visitor": 29.53
+      }
+    },
+    {
+      "id": "aus-nz-2026-3",
+      "series": "aus-nz-2026",
+      "number": 3,
+      "teamA": "AUS",
+      "teamB": "NZ",
+      "host": "AUS",
+      "visitor": "NZ",
+      "dateTimeGMT": "2026-12-26T00:00:00Z",
+      "start": "2026-12-26",
+      "end": "2026-12-30",
+      "venue": "Melbourne Cricket Ground",
+      "country": "AUS",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 71.91,
+        "draw": 7.21,
+        "visitor": 20.88
+      }
+    },
+    {
+      "id": "sa-eng-2026-2",
+      "series": "sa-eng-2026",
+      "number": 2,
+      "teamA": "SA",
+      "teamB": "ENG",
+      "host": "SA",
+      "visitor": "ENG",
+      "dateTimeGMT": "2026-12-26T00:00:00Z",
+      "start": "2026-12-26",
+      "end": "2026-12-30",
+      "venue": "Centurion Park (SuperSport Park)",
+      "country": "SA",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 65.71,
+        "draw": 4.76,
+        "visitor": 29.53
+      }
+    },
+    {
+      "id": "sa-eng-2026-3",
+      "series": "sa-eng-2026",
+      "number": 3,
+      "teamA": "SA",
+      "teamB": "ENG",
+      "host": "SA",
+      "visitor": "ENG",
+      "dateTimeGMT": "2027-01-03T00:00:00Z",
+      "start": "2027-01-03",
+      "end": "2027-01-07",
+      "venue": "Newlands, Cape Town",
+      "country": "SA",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 65.71,
+        "draw": 4.76,
+        "visitor": 29.53
+      }
+    },
+    {
+      "id": "aus-nz-2026-4",
+      "series": "aus-nz-2026",
+      "number": 4,
+      "teamA": "AUS",
+      "teamB": "NZ",
+      "host": "AUS",
+      "visitor": "NZ",
+      "dateTimeGMT": "2027-01-04T00:00:00Z",
+      "start": "2027-01-04",
+      "end": "2027-01-08",
+      "venue": "Sydney Cricket Ground",
+      "country": "AUS",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 71.91,
+        "draw": 7.21,
+        "visitor": 20.88
+      }
+    },
+    {
+      "id": "ind-aus-2027-1",
+      "series": "ind-aus-2027",
+      "number": 1,
+      "teamA": "IND",
+      "teamB": "AUS",
+      "host": "IND",
+      "visitor": "AUS",
+      "dateTimeGMT": "2027-01-21T00:00:00Z",
+      "start": "2027-01-21",
+      "end": "2027-01-25",
+      "venue": "Vidarbha Cricket Association Stadium, Nagpur",
+      "country": "IND",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 55.34,
+        "draw": 10.43,
+        "visitor": 34.23
+      }
+    },
+    {
+      "id": "ind-aus-2027-2",
+      "series": "ind-aus-2027",
+      "number": 2,
+      "teamA": "IND",
+      "teamB": "AUS",
+      "host": "IND",
+      "visitor": "AUS",
+      "dateTimeGMT": "2027-01-29T00:00:00Z",
+      "start": "2027-01-29",
+      "end": "2027-02-02",
+      "venue": "M. A. Chidambaram Stadium, Chennai",
+      "country": "IND",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 55.34,
+        "draw": 10.43,
+        "visitor": 34.23
+      }
+    },
+    {
+      "id": "ban-eng-2027-1",
+      "series": "ban-eng-2027",
+      "number": 1,
+      "teamA": "BAN",
+      "teamB": "ENG",
+      "host": "BAN",
+      "visitor": "ENG",
+      "dateTimeGMT": "2027-02-01T00:00:00Z",
+      "start": "2027-02-01",
+      "end": "2027-02-28",
+      "venue": "Sher-e-Bangla National Cricket Stadium, Mirpur, Dhaka",
+      "country": "BAN",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 24.14,
+        "draw": 8.17,
+        "visitor": 67.69
+      }
+    },
+    {
+      "id": "ban-eng-2027-2",
+      "series": "ban-eng-2027",
+      "number": 2,
+      "teamA": "BAN",
+      "teamB": "ENG",
+      "host": "BAN",
+      "visitor": "ENG",
+      "dateTimeGMT": "2027-02-01T00:00:00Z",
+      "start": "2027-02-01",
+      "end": "2027-02-28",
+      "venue": "Zahur Ahmed Chowdhury Stadium, Chattogram",
+      "country": "BAN",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 24.14,
+        "draw": 8.17,
+        "visitor": 67.69
+      }
+    },
+    {
+      "id": "sl-sa-2027-1",
+      "series": "sl-sa-2027",
+      "number": 1,
+      "teamA": "SL",
+      "teamB": "SA",
+      "host": "SL",
+      "visitor": "SA",
+      "dateTimeGMT": "2027-02-01T00:00:00Z",
+      "start": "2027-02-01",
+      "end": "2027-02-28",
+      "venue": null,
+      "country": "SL",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 40.53,
+        "draw": 9.0,
+        "visitor": 50.46
+      }
+    },
+    {
+      "id": "nz-sl-2027-1",
+      "series": "nz-sl-2027",
+      "number": 1,
+      "teamA": "NZ",
+      "teamB": "SL",
+      "host": "NZ",
+      "visitor": "SL",
+      "dateTimeGMT": "2027-02-04T00:00:00Z",
+      "start": "2027-02-04",
+      "end": "2027-02-08",
+      "venue": "Bay Oval, Mount Maunganui",
+      "country": "NZ",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 65.76,
+        "draw": 9.95,
+        "visitor": 24.3
+      }
+    },
+    {
+      "id": "ind-aus-2027-3",
+      "series": "ind-aus-2027",
+      "number": 3,
+      "teamA": "IND",
+      "teamB": "AUS",
+      "host": "IND",
+      "visitor": "AUS",
+      "dateTimeGMT": "2027-02-11T00:00:00Z",
+      "start": "2027-02-11",
+      "end": "2027-02-15",
+      "venue": "Barsapara Cricket Stadium (ACA Stadium), Guwahati",
+      "country": "IND",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 55.34,
+        "draw": 10.43,
+        "visitor": 34.23
+      }
+    },
+    {
+      "id": "nz-sl-2027-2",
+      "series": "nz-sl-2027",
+      "number": 2,
+      "teamA": "NZ",
+      "teamB": "SL",
+      "host": "NZ",
+      "visitor": "SL",
+      "dateTimeGMT": "2027-02-12T00:00:00Z",
+      "start": "2027-02-12",
+      "end": "2027-02-16",
+      "venue": "Seddon Park, Hamilton",
+      "country": "NZ",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 65.76,
+        "draw": 9.95,
+        "visitor": 24.3
+      }
+    },
+    {
+      "id": "ind-aus-2027-4",
+      "series": "ind-aus-2027",
+      "number": 4,
+      "teamA": "IND",
+      "teamB": "AUS",
+      "host": "IND",
+      "visitor": "AUS",
+      "dateTimeGMT": "2027-02-19T00:00:00Z",
+      "start": "2027-02-19",
+      "end": "2027-02-23",
+      "venue": "JSCA International Stadium Complex, Ranchi",
+      "country": "IND",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 55.34,
+        "draw": 10.43,
+        "visitor": 34.23
+      }
+    },
+    {
+      "id": "ind-aus-2027-5",
+      "series": "ind-aus-2027",
+      "number": 5,
+      "teamA": "IND",
+      "teamB": "AUS",
+      "host": "IND",
+      "visitor": "AUS",
+      "dateTimeGMT": "2027-02-27T00:00:00Z",
+      "start": "2027-02-27",
+      "end": "2027-03-03",
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "country": "IND",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "day",
+      "tentative": false,
+      "odds": {
+        "host": 55.34,
+        "draw": 10.43,
+        "visitor": 34.23
+      }
+    },
+    {
+      "id": "pak-nz-2027-1",
+      "series": "pak-nz-2027",
+      "number": 1,
+      "teamA": "PAK",
+      "teamB": "NZ",
+      "host": "PAK",
+      "visitor": "NZ",
+      "dateTimeGMT": "2027-03-01T00:00:00Z",
+      "start": "2027-03-01",
+      "end": "2027-03-31",
+      "venue": null,
+      "country": "PAK",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 46.98,
+        "draw": 14.92,
+        "visitor": 38.11
+      }
+    },
+    {
+      "id": "pak-nz-2027-2",
+      "series": "pak-nz-2027",
+      "number": 2,
+      "teamA": "PAK",
+      "teamB": "NZ",
+      "host": "PAK",
+      "visitor": "NZ",
+      "dateTimeGMT": "2027-03-01T00:00:00Z",
+      "start": "2027-03-01",
+      "end": "2027-03-31",
+      "venue": null,
+      "country": "PAK",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 46.98,
+        "draw": 14.92,
+        "visitor": 38.11
+      }
+    },
+    {
+      "id": "sl-sa-2027-2",
+      "series": "sl-sa-2027",
+      "number": 2,
+      "teamA": "SL",
+      "teamB": "SA",
+      "host": "SL",
+      "visitor": "SA",
+      "dateTimeGMT": "2027-03-01T00:00:00Z",
+      "start": "2027-03-01",
+      "end": "2027-03-31",
+      "venue": null,
+      "country": "SL",
+      "neutral": false,
+      "state": "scheduled",
+      "status": "scheduled",
+      "precision": "month",
+      "tentative": true,
+      "odds": {
+        "host": 40.53,
+        "draw": 9.0,
+        "visitor": 50.46
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "pak-sl-2026-2",
+      "series": "pak-sl-2026",
+      "number": 2,
+      "host": "PAK",
+      "visitor": "SL",
+      "start": "2026-11-17",
+      "venue": "Rawalpindi Cricket Stadium",
+      "kind": "host",
+      "winner": "PAK",
+      "margin": "8 wickets"
+    },
+    {
+      "id": "sa-ban-2026-1",
+      "series": "sa-ban-2026",
+      "number": 1,
+      "host": "SA",
+      "visitor": "BAN",
+      "start": "2026-11-15",
+      "venue": "Wanderers Stadium, Johannesburg",
+      "kind": "host",
+      "winner": "SA",
+      "margin": "9 wickets"
+    },
+    {
+      "id": "pak-sl-2026-1",
+      "series": "pak-sl-2026",
+      "number": 1,
+      "host": "PAK",
+      "visitor": "SL",
+      "start": "2026-11-09",
+      "venue": "Rawalpindi Cricket Stadium",
+      "kind": "draw",
+      "winner": null,
+      "margin": ""
+    },
+    {
+      "id": "ban-wi-2026-2",
+      "series": "ban-wi-2026",
+      "number": 2,
+      "host": "BAN",
+      "visitor": "WI",
+      "start": "2026-11-05",
+      "venue": "Sylhet International Cricket Stadium",
+      "kind": "draw",
+      "winner": null,
+      "margin": ""
+    },
+    {
+      "id": "ban-wi-2026-1",
+      "series": "ban-wi-2026",
+      "number": 1,
+      "host": "BAN",
+      "visitor": "WI",
+      "start": "2026-10-28",
+      "venue": "Sher-e-Bangla National Cricket Stadium, Mirpur, Dhaka",
+      "kind": "visitor",
+      "winner": "WI",
+      "margin": "8 wickets"
+    },
+    {
+      "id": "sa-aus-2026-3",
+      "series": "sa-aus-2026",
+      "number": 3,
+      "host": "SA",
+      "visitor": "AUS",
+      "start": "2026-10-27",
+      "venue": "Newlands, Cape Town",
+      "kind": "host",
+      "winner": "SA",
+      "margin": "176 runs"
+    },
+    {
+      "id": "sa-aus-2026-2",
+      "series": "sa-aus-2026",
+      "number": 2,
+      "host": "SA",
+      "visitor": "AUS",
+      "start": "2026-10-18",
+      "venue": "St George's Park, Gqeberha",
+      "kind": "host",
+      "winner": "SA",
+      "margin": "an innings and 31 runs"
+    },
+    {
+      "id": "sa-aus-2026-1",
+      "series": "sa-aus-2026",
+      "number": 1,
+      "host": "SA",
+      "visitor": "AUS",
+      "start": "2026-10-09",
+      "venue": "Kingsmead, Durban",
+      "kind": "visitor",
+      "winner": "AUS",
+      "margin": "214 runs"
+    },
+    {
+      "id": "eng-pak-2026-3",
+      "series": "eng-pak-2026",
+      "number": 3,
+      "host": "ENG",
+      "visitor": "PAK",
+      "start": "2026-09-09",
+      "venue": "Edgbaston, Birmingham",
+      "kind": "host",
+      "winner": "ENG",
+      "margin": "8 wickets"
+    },
+    {
+      "id": "eng-pak-2026-2",
+      "series": "eng-pak-2026",
+      "number": 2,
+      "host": "ENG",
+      "visitor": "PAK",
+      "start": "2026-08-27",
+      "venue": "Lord's, London",
+      "kind": "host",
+      "winner": "ENG",
+      "margin": "194 runs"
+    }
+  ],
+  "final": {
+    "venue": "The Oval",
+    "city": "London",
+    "country": "ENG",
+    "start": "2027-06-09",
+    "end": "2027-06-13",
+    "reserveDay": null,
+    "drawResult": "joint",
+    "tentative": false,
+    "note": "The ICC announced The Oval and 9-13 June 2027 on 23 July 2026. A reserve day will be scheduled (Playing Conditions 16.13.2), but its date and the final's full playing conditions are due in early 2027. A drawn, tied or abandoned final makes both teams joint champions (Competition Regulations 10.4).",
+    "sources": [
+      {
+        "label": "ICC: venue and dates for the World Test Championship 2027 final revealed (23 July 2026)",
+        "url": "https://www.icc-cricket.com/news/venue-and-dates-for-world-test-championship-2027-final-revealed"
+      },
+      {
+        "label": "ICC World Test Championship 2025-27 Competition Regulations, 10.4",
+        "url": "https://images.icc-cricket.com/image/upload/prd/doztximb3sxhwcc4oo3f.pdf"
+      }
+    ],
+    "finalists": null,
+    "standingsClose": "2027-04-30",
+    "matchups": [
+      {
+        "teams": [
+          "AUS",
+          "SA"
+        ],
+        "chance": 63.1
+      },
+      {
+        "teams": [
+          "IND",
+          "SA"
+        ],
+        "chance": 16.13
+      },
+      {
+        "teams": [
+          "NZ",
+          "SA"
+        ],
+        "chance": 15.9
+      },
+      {
+        "teams": [
+          "AUS",
+          "NZ"
+        ],
+        "chance": 2.46
+      },
+      {
+        "teams": [
+          "AUS",
+          "IND"
+        ],
+        "chance": 1.8
+      },
+      {
+        "teams": [
+          "IND",
+          "NZ"
+        ],
+        "chance": 0.51
+      }
+    ]
+  },
+  "analysis": {
+    "method": "Monte Carlo",
+    "simulations": 20000,
+    "model": "Davidson Test rating model",
+    "modelNotes": [
+      "Each Test's win, draw and loss chances come from a Davidson rating model fitted on every men's Test in Cricsheet's archive since 2001, results losing half their weight every 12 years. Home advantage goes to the side playing in its own country, whatever the series calls home, so a neutral ground gives none.",
+      "Draws are likelier between evenly matched sides, and their rate depends on the country the Test is played in and on the era: the rate is fitted on recent Tests, which are drawn far less often than in the 2000s.",
+      "Backtest: before each of the 242 championship Tests of 2019-21, 2021-23, 2023-25 and 2025-27 so far, the model, fitted on the Tests before it, scored 0.2048 (ranked probability score) and 0.879 (log loss), against 0.2379 and 0.963 for home-win, draw and away-win base rates. Final-place odds at 25%, 50% and 75% of 2021-23 and 2023-25 scored a Brier score of 0.063, against 0.222 for the table at the time and 0.173 for a no-skill guess.",
+      "The remaining 23 Tests are simulated 20,000 times. Ratings are held for the rest of the cycle: in the backtest, letting them drift did not improve the season odds. Teams level on PCT are split by series wins, away PCT, then the latest ICC Test ranking in the config.",
+      "The final is played in England at The Oval: England would be at home, any other pair on neutral ground. A drawn or tied final makes both finalists joint champions; the reserve day is not modelled.",
+      "Exact claims (clinched, eliminated, can finish level) consider every remaining result, ties included, and the over-rate deductions already made; later deductions could still change them. The simulation does not invent future deductions.",
+      "The standings close at the end of the competition window: Friday 30 April 2027 in the Playing Conditions (16.12.4, 16.13.1), the end of March in the Competition Regulations, which take the ICC ranking for the last tie-breaker on 1 April 2027. The last Tests end in March, so only the ranking date differs.",
+      "Bangladesh v England (February 2027), Sri Lanka v South Africa (February-March 2027) and Pakistan v New Zealand (March 2027) have no published dates yet; their Tests are placed in the months reported and marked tentative."
+    ],
+    "probabilities": {
+      "SA": {
+        "final": 95.14,
+        "title": 40.79,
+        "joint": 7.92,
+        "champion": 48.71
+      },
+      "NZ": {
+        "final": 18.88,
+        "title": 6.93,
+        "joint": 1.54,
+        "champion": 8.47
+      },
+      "AUS": {
+        "final": 67.45,
+        "title": 34.71,
+        "joint": 5.67,
+        "champion": 40.38
+      },
+      "IND": {
+        "final": 18.44,
+        "title": 9.16,
+        "joint": 1.57,
+        "champion": 10.73
+      },
+      "BAN": {
+        "final": 0.01,
+        "title": 0.0,
+        "joint": 0.0,
+        "champion": 0.0
+      },
+      "ENG": {
+        "final": 0.07,
+        "title": 0.05,
+        "joint": 0.01,
+        "champion": 0.06
+      },
+      "WI": {
+        "final": 0.0,
+        "title": 0.0,
+        "joint": 0.0,
+        "champion": 0.0
+      },
+      "SL": {
+        "final": 0.0,
+        "title": 0.0,
+        "joint": 0.0,
+        "champion": 0.0
+      },
+      "PAK": {
+        "final": 0.0,
+        "title": 0.0,
+        "joint": 0.0,
+        "champion": 0.0
+      }
+    },
+    "positions": {
+      "SA": [
+        74.25,
+        20.89,
+        4.06,
+        0.66,
+        0.13,
+        0.01,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "NZ": [
+        4.74,
+        14.14,
+        34.01,
+        35.34,
+        9.72,
+        1.73,
+        0.24,
+        0.08,
+        0.0
+      ],
+      "AUS": [
+        17.93,
+        49.53,
+        24.64,
+        7.71,
+        0.18,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "IND": [
+        3.08,
+        15.35,
+        35.73,
+        37.29,
+        7.87,
+        0.64,
+        0.03,
+        0.0,
+        0.0
+      ],
+      "BAN": [
+        0.0,
+        0.01,
+        0.34,
+        4.46,
+        20.19,
+        69.77,
+        5.21,
+        0.0,
+        0.0
+      ],
+      "ENG": [
+        0.0,
+        0.07,
+        1.21,
+        14.28,
+        61.06,
+        22.64,
+        0.73,
+        0.0,
+        0.0
+      ],
+      "WI": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.03,
+        82.99,
+        16.98,
+        0.0
+      ],
+      "SL": [
+        0.0,
+        0.0,
+        0.01,
+        0.24,
+        0.85,
+        5.18,
+        10.79,
+        41.09,
+        41.84
+      ],
+      "PAK": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        41.84,
+        58.16
+      ]
+    },
+    "expectedPct": {
+      "SA": 71.25,
+      "NZ": 53.11,
+      "AUS": 63.05,
+      "IND": 53.0,
+      "BAN": 35.75,
+      "ENG": 40.56,
+      "WI": 27.38,
+      "SL": 20.9,
+      "PAK": 18.25
+    },
+    "needs": {
+      "AUS": {
+        "status": "in-control",
+        "testsLeft": 9,
+        "bestPct": 81.82,
+        "worstPct": 40.91,
+        "ownDestiny": "yes",
+        "fewestWins": 0,
+        "winsToClinch": 8,
+        "statements": [
+          "In control: winning all 9 remaining Tests would take them to the final, whatever else happens.",
+          "Their PCT can finish anywhere from 40.91% to 81.82%.",
+          "Any 8 wins from 9 remaining Tests would be enough, whichever they are."
+        ]
+      },
+      "BAN": {
+        "status": "needs-help",
+        "testsLeft": 3,
+        "bestPct": 55.56,
+        "worstPct": 30.56,
+        "ownDestiny": "no",
+        "fewestWins": 2,
+        "statements": [
+          "Needs help: even winning all 3 remaining Tests could leave two teams above them.",
+          "Their PCT can finish anywhere from 30.56% to 55.56%.",
+          "Need at least 2 wins from 3 remaining Tests (drawing the rest) to keep a chance of finishing in the top two outright."
+        ]
+      },
+      "ENG": {
+        "status": "needs-help",
+        "testsLeft": 5,
+        "bestPct": 53.17,
+        "worstPct": 29.37,
+        "ownDestiny": "no",
+        "fewestWins": 3,
+        "statements": [
+          "Needs help: even winning all 5 remaining Tests could leave two teams above them.",
+          "Their PCT can finish anywhere from 29.37% to 53.17%.",
+          "Need at least 3 wins from 5 remaining Tests (drawing the rest) to keep a chance of finishing in the top two outright."
+        ]
+      },
+      "IND": {
+        "status": "needs-help",
+        "testsLeft": 7,
+        "bestPct": 70.37,
+        "worstPct": 31.48,
+        "ownDestiny": "no",
+        "fewestWins": 1,
+        "statements": [
+          "Needs help: even winning all 7 remaining Tests could leave two teams above them.",
+          "Their PCT can finish anywhere from 31.48% to 70.37%.",
+          "Need at least 1 win from 7 remaining Tests (drawing the rest) to keep a chance of finishing in the top two outright."
+        ]
+      },
+      "NZ": {
+        "status": "in-control",
+        "testsLeft": 10,
+        "bestPct": 89.58,
+        "worstPct": 27.08,
+        "ownDestiny": "yes",
+        "fewestWins": 0,
+        "winsToClinch": 8,
+        "statements": [
+          "In control: winning all 10 remaining Tests would take them to the final, whatever else happens.",
+          "Their PCT can finish anywhere from 27.08% to 89.58%.",
+          "Any 8 wins from 10 remaining Tests would be enough, whichever they are."
+        ]
+      },
+      "PAK": {
+        "status": "eliminated",
+        "testsLeft": 2,
+        "bestPct": 25.64,
+        "worstPct": 10.26,
+        "ownDestiny": "no",
+        "statements": [
+          "Cannot reach the final on results: at least two teams will finish above them whatever happens.",
+          "Their PCT can finish anywhere from 10.26% to 25.64%."
+        ]
+      },
+      "SA": {
+        "status": "in-control",
+        "testsLeft": 6,
+        "bestPct": 85.71,
+        "worstPct": 42.86,
+        "ownDestiny": "yes",
+        "fewestWins": 0,
+        "winsToClinch": 5,
+        "statements": [
+          "In control: winning all 6 remaining Tests would take them to the final, whatever else happens.",
+          "Their PCT can finish anywhere from 42.86% to 85.71%.",
+          "Any 5 wins from 6 remaining Tests would be enough, whichever they are."
+        ]
+      },
+      "SL": {
+        "status": "eliminated",
+        "testsLeft": 4,
+        "bestPct": 42.36,
+        "worstPct": 9.03,
+        "ownDestiny": "no",
+        "statements": [
+          "Cannot reach the final on results: at least two teams will finish above them whatever happens.",
+          "Their PCT can finish anywhere from 9.03% to 42.36%."
+        ]
+      },
+      "WI": {
+        "status": "eliminated",
+        "testsLeft": 0,
+        "bestPct": 27.38,
+        "worstPct": 27.38,
+        "ownDestiny": "no",
+        "statements": [
+          "Cannot reach the final on results: at least two teams will finish above them whatever happens.",
+          "No Tests left: they finish on 27.38%."
+        ]
+      }
+    },
+    "swing": [
+      {
+        "fixtureId": "aus-nz-2026-3",
+        "series": "aus-nz-2026",
+        "number": 3,
+        "date": "2026-12-26",
+        "host": "AUS",
+        "visitor": "NZ",
+        "team": "AUS",
+        "ifHost": 74.06,
+        "ifDraw": 61.68,
+        "ifVisitor": 46.54,
+        "swing": 27.52
+      },
+      {
+        "fixtureId": "aus-nz-2026-2",
+        "series": "aus-nz-2026",
+        "number": 2,
+        "date": "2026-12-17",
+        "host": "AUS",
+        "visitor": "NZ",
+        "team": "AUS",
+        "ifHost": 73.85,
+        "ifDraw": 63.4,
+        "ifVisitor": 46.53,
+        "swing": 27.33
+      },
+      {
+        "fixtureId": "aus-nz-2026-1",
+        "series": "aus-nz-2026",
+        "number": 1,
+        "date": "2026-12-09",
+        "host": "AUS",
+        "visitor": "NZ",
+        "team": "AUS",
+        "ifHost": 73.91,
+        "ifDraw": 62.27,
+        "ifVisitor": 46.88,
+        "swing": 27.02
+      },
+      {
+        "fixtureId": "aus-nz-2026-4",
+        "series": "aus-nz-2026",
+        "number": 4,
+        "date": "2027-01-04",
+        "host": "AUS",
+        "visitor": "NZ",
+        "team": "AUS",
+        "ifHost": 73.78,
+        "ifDraw": 63.26,
+        "ifVisitor": 47.36,
+        "swing": 26.42
+      },
+      {
+        "fixtureId": "ind-aus-2027-1",
+        "series": "ind-aus-2027",
+        "number": 1,
+        "date": "2027-01-21",
+        "host": "IND",
+        "visitor": "AUS",
+        "team": "AUS",
+        "ifHost": 57.96,
+        "ifDraw": 71.0,
+        "ifVisitor": 81.69,
+        "swing": 23.73
+      },
+      {
+        "fixtureId": "ind-aus-2027-2",
+        "series": "ind-aus-2027",
+        "number": 2,
+        "date": "2027-01-29",
+        "host": "IND",
+        "visitor": "AUS",
+        "team": "AUS",
+        "ifHost": 57.99,
+        "ifDraw": 71.13,
+        "ifVisitor": 81.54,
+        "swing": 23.55
+      }
+    ],
+    "ratings": {
+      "SA": 0.816,
+      "NZ": 0.428,
+      "AUS": 1.072,
+      "IND": 0.962,
+      "BAN": -1.004,
+      "ENG": 0.599,
+      "WI": -0.497,
+      "SL": 0.017,
+      "PAK": 0.061
+    },
+    "homeAdvantage": {
+      "AUS": 0.592,
+      "BAN": 0.572,
+      "ENG": 0.59,
+      "IND": 0.591,
+      "IRE": 0.58,
+      "NZ": 0.585,
+      "PAK": 0.576,
+      "SA": 0.582,
+      "SL": 0.58,
+      "UAE": 0.582,
+      "WI": 0.579,
+      "ZIM": 0.572
+    }
+  },
+  "movement": null
+}

@@ -2,6 +2,8 @@ export interface LeagueSummary {
   id: string;
   /** Older league lists predate other sports; a missing sport means cricket. */
   sport?: string;
+  /** A sport's own page family, e.g. "wtc" for the World Test Championship (cricket, but Tests). */
+  engine?: string;
   name: string;
   shortName: string;
   seasonLabel: string;

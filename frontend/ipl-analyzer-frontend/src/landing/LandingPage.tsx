@@ -231,7 +231,7 @@ const LandingPage = ({ index }: { index: LeagueIndex }) => {
           </div>
           <dl className="landing-method-steps">
             <div><dt><span aria-hidden="true">01</span>Start with the results</dt><dd>Public results and fixtures set the table. Sources and update times are shown on every league page.</dd></div>
-            <div><dt><span aria-hidden="true">02</span>Play the season forward</dt><dd>Most sports use backtested ratings and thousands of simulated seasons. Cricket uses equal-strength result scenarios; net run rate is shown but not simulated.</dd></div>
+            <div><dt><span aria-hidden="true">02</span>Play the season forward</dt><dd>Most sports use backtested ratings and thousands of simulated seasons. T20 cricket uses equal-strength result scenarios; net run rate is shown but not simulated. Test cricket's World Test Championship rates every side on its Test results, draws included.</dd></div>
             <div><dt><span aria-hidden="true">03</span>Count the possible endings</dt><dd>A team&apos;s chance is the share of model seasons in which it reaches that outcome. Read each league&apos;s method and limitations for the full picture.</dd></div>
           </dl>
         </section>

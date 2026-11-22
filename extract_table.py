@@ -1551,6 +1551,9 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
     if status == "complete":
         return [{"label": "Champions", "value": champion}] if champion else []
 
+    if league.get("engine") == "wtc":
+        return _wtc_facts(payload, short)
+
     if league.get("sport", "cricket") == "cricket":
         tier = (league.get("qualification") or [{"size": 4, "label": "Top 4"}])[0]
         odds = {team: values.get(f"top{tier['size']}", 0.0) for team, values in payload["analysis"]["overallProbabilities"].items()}
@@ -1594,6 +1597,21 @@ def _league_facts(payload: dict[str, Any], champion: str | None) -> list[dict[st
     return facts[:2]
 
 
+def _wtc_facts(payload: dict[str, Any], short: dict[str, str]) -> list[dict[str, str]]:
+    """The likeliest final and the title favourite, e.g. "Likely final: AUS v SA"."""
+    probabilities = payload["analysis"]["probabilities"]
+    final = payload.get("final") or {}
+    if final.get("finalists"):
+        first, second = final["finalists"]
+        facts = [{"label": "Final", "value": f"{short.get(first, first)} v {short.get(second, second)}"}]
+    else:
+        likely = sorted(probabilities, key=lambda team: -probabilities[team].get("final", 0.0))[:2]
+        facts = [{"label": "Likely final", "value": " v ".join(short.get(team, team) for team in likely)}]
+    favourite = max(probabilities, key=lambda team: probabilities[team].get("title", 0.0))
+    facts.append({"label": "Title favourite", "value": f"{short.get(favourite, favourite)} {chance_text(probabilities[favourite]['title'])}"})
+    return facts
+
+
 def _motorsport_facts(payload: dict[str, Any], short: dict[str, str]) -> list[dict[str, str]]:
     """The drivers' and constructors' title favourites, e.g. "Drivers' title favourite: VER 54%"."""
     facts = []
@@ -1619,9 +1637,15 @@ def index_entry(payload: dict[str, Any]) -> dict[str, Any]:
         # A football league's champion tops the table; other sports name theirs in "playoffs".
         champion_key = payload["standings"][0]["teamKey"]
     champion = next((row["shortName"] for row in payload["standings"] if row["teamKey"] == champion_key), None)
+    joint = (payload.get("playoffs") or {}).get("jointChampions")
+    if joint:
+        # A drawn World Test Championship final: both finalists are champions.
+        names = {row["teamKey"]: row["shortName"] for row in payload["standings"]}
+        champion = " & ".join(names.get(team, team) for team in joint)
     return {
         "id": league["id"],
         "sport": league.get("sport", "cricket"),
+        **({"engine": league["engine"]} if league.get("engine") else {}),
         "name": league.get("name", league["id"]),
         "shortName": league.get("shortName", league["id"].upper()),
         "seasonLabel": league.get("seasonLabel", str(metadata.get("season", ""))),
@@ -1723,7 +1747,10 @@ def league_plan(now: datetime) -> list[tuple[str, str]]:
     for league_id in available_league_ids() + rolled_league_ids(now, FINALIZE_DAYS):
         config = read_config(league_id)
         if not is_cricket(config):
-            if team_sports.resolve_season(config, now).contains(now):
+            # An engine with fixed dates (the World Test Championship) says when it is on.
+            module = importlib.import_module(config.get("engine") or SPORT_MODULES[config["sport"]])
+            on = module.in_season(config, now) if hasattr(module, "in_season") else team_sports.resolve_season(config, now).contains(now)
+            if on:
                 plan.append((league_id, "feed"))
             continue
         league = parse_league(config)
@@ -1790,6 +1817,9 @@ def build_league(league_id: str, source: str, archive: Path | None = None) -> di
     if not is_cricket(config):
         # A config can name its own engine (European cups are football with a knockout bracket).
         module = importlib.import_module(config.get("engine") or SPORT_MODULES[config["sport"]])
+        if archive is not None and config.get("engine") == "wtc":
+            # The World Test Championship reads Cricsheet's Test archive, which can be a local copy.
+            return module.build_payload(config, utc_now(), FIXTURES_CACHE_DIR, archive=archive)
         return module.build_payload(config, utc_now(), FIXTURES_CACHE_DIR)
     league = parse_league(config)
     use_league(league)
@@ -1846,7 +1876,7 @@ def main(argv: list[str] | None = None) -> None:
             # Nothing published yet: the league table and playoff results so far beat no page.
             print(f"{league_id}: publishing the season so far; Cricsheet does not have the final yet")
         if payload["metadata"].get("season_status") != "complete":
-            if payload["league"].get("sport", "cricket") == "cricket":
+            if payload["league"].get("sport", "cricket") == "cricket" and not payload["league"].get("engine"):
                 payload["movement"] = probability_movement(previous, payload)
             else:
                 payload["movement"] = team_sports.probability_movement(previous, payload)
