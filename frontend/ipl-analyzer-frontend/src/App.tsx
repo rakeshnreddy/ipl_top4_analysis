@@ -19,7 +19,7 @@ import PageHeader from './components/PageHeader';
 import { ErrorState, LoadingState } from './components/PageState';
 import SiteHeader from './components/SiteHeader';
 import { appBaseHref, setJsonLd, setPageMeta } from './lib/seo';
-import { heatStyle, readableOn, samePageHref, scrollToSection } from './lib/ui';
+import { readableOn, samePageHref, scrollToSection } from './lib/ui';
 import { formatChance } from './sport/format';
 import {
   formatGeneratedAt,
@@ -452,6 +452,7 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
 
   const { playoffTier, topTier } = leagueInfo(payload);
   const tiers = topTier.size === playoffTier.size ? [playoffTier] : [playoffTier, topTier];
+  const secondTier = tiers[1];
   const goal = targetGoal || String(playoffTier.size);
   const seasonStarted = payload.standings.some((team) => team.matches > 0);
   const snapshot = raceSnapshot(payload, playoffTier.size);
@@ -487,7 +488,64 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
           <HeroSummary payload={payload} seasonStarted={seasonStarted} snapshot={snapshot} sourceIsStale={sourceIsStale} />
         )}
 
-        <section className="race-grid" aria-label={isFinal ? `${shortName} final standings and playoffs` : `${shortName} playoff race board`}>
+        <section className={`race-grid${isFinal ? '' : ' odds-first'}`} aria-label={isFinal ? `${shortName} final standings and playoffs` : `${shortName} playoff race board`}>
+          {!isFinal && (
+            <div className="probability-panel" id="top4" data-testid="probability-panel">
+              <div className="section-heading">
+                <h2>{playoffTier.label} Odds</h2>
+                <p>Probabilities exclude NRR simulation</p>
+              </div>
+
+              <div className={`race-board${secondTier ? ' has-second-tier' : ''}`}>
+                <div className="race-head" aria-hidden="true">
+                  <span />
+                  <span className="cricket-race-scale"><span>0%</span><span>100%</span></span>
+                  <span>{playoffTier.shortLabel ?? playoffTier.label}</span>
+                  {secondTier && <span>{secondTier.shortLabel ?? secondTier.label}</span>}
+                </div>
+                <div className="race-bars">
+                  {sortedStandings.map((team) => {
+                    const probability = tierProbability(payload, team.teamKey, playoffTier.size);
+                    return (
+                      <button
+                        aria-pressed={selectedTeam.teamKey === team.teamKey}
+                        aria-controls="deep-dive"
+                        className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
+                        key={team.teamKey}
+                        type="button"
+                        onClick={() => handleTeamSelect(team)}
+                      >
+                        <span className="race-team">{team.shortName}</span>
+                        <span aria-hidden="true" className="race-track">
+                          <span
+                            className="race-fill"
+                            style={{ width: `${probability}%` }}
+                          />
+                        </span>
+                        <strong>
+                          {qualificationChance(payload, probability)}
+                          <span className="visually-hidden"> {playoffTier.label}</span>
+                        </strong>
+                        {secondTier && (
+                          <span className="race-second">
+                            {qualificationChance(payload, tierProbability(payload, team.teamKey, secondTier.size))}
+                            <span className="visually-hidden"> {secondTier.label}</span>
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <p className="probability-note">
+                {seasonStarted
+                  ? 'Equal points do not imply equal odds; the exact model also evaluates remaining fixtures and direct rival games.'
+                  : 'Every team starts level; the odds move as results come in.'}
+              </p>
+            </div>
+          )}
+
           <div className="ladder-panel" id="standings" data-testid="standings-ladder">
             <div className="section-heading">
               <h2>{isFinal ? 'Final Standings' : 'Standings'}</h2>
@@ -536,53 +594,11 @@ function App({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: LeagueI
             <details className="cricket-table-help">
               <summary>How to read the table</summary>
               <p>Pts are league points. Net run rate (NRR) compares a team&apos;s scoring rate with its opponents&apos;; it separates teams level on points.</p>
-              <p>{isFinal ? 'Ticks show the places each team reached.' : 'The odds estimate each qualification outcome. Select a team for its remaining games and paths.'}</p>
+              <p>{isFinal ? 'Ticks show the places each team reached.' : 'Select a team for its remaining games and qualification paths.'}</p>
             </details>
           </div>
 
-          {isFinal ? (
-            <PlayoffsPanel payload={payload} />
-          ) : (
-            <div className="probability-panel" id="top4" data-testid="probability-panel">
-              <div className="section-heading">
-                <h2>{playoffTier.label} Odds</h2>
-                <p>Probabilities exclude NRR simulation</p>
-              </div>
-
-              <div className="cricket-race-scale" aria-hidden="true"><span>0%</span><span>Qualification chance</span><span>100%</span></div>
-
-              <div className="race-bars">
-                {sortedStandings.map((team) => {
-                  const probability = tierProbability(payload, team.teamKey, playoffTier.size);
-                  return (
-                    <button
-                      aria-pressed={selectedTeam.teamKey === team.teamKey}
-                      aria-controls="deep-dive"
-                      className={`race-bar-row ${selectedTeam.teamKey === team.teamKey ? 'is-selected' : ''}`}
-                      key={team.teamKey}
-                      type="button"
-                      onClick={() => handleTeamSelect(team)}
-                    >
-                      <span className="race-team">{team.shortName}</span>
-                      <span aria-hidden="true" className="race-track">
-                        <span
-                          className="race-fill"
-                          style={{ width: `${probability}%` }}
-                        />
-                      </span>
-                      <strong>{qualificationChance(payload, probability)}</strong>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <p className="probability-note">
-                {seasonStarted
-                  ? 'Equal points do not imply equal odds; the exact model also evaluates remaining fixtures and direct rival games.'
-                  : 'Every team starts level; the odds move as results come in.'}
-              </p>
-            </div>
-          )}
+          {isFinal && <PlayoffsPanel payload={payload} />}
         </section>
 
         {isFinal && <SeasonSummary payload={payload} />}
@@ -732,8 +748,8 @@ const HeroSummary = ({
         ]}
         factsLabel="Race snapshot"
         sections={[
-          { href: '#standings', label: 'Standings' },
           { href: '#top4', label: `${playoffTier.label} odds` },
+          { href: '#standings', label: 'Standings' },
           { href: '#deep-dive', label: 'Team path' },
           { href: '#method', label: 'How it works' },
           ...(isIplLeague(payload) ? [{ href: SHARE_KIT_HREF, label: 'Share kit' }] : []),
@@ -847,7 +863,7 @@ const StandingsTable = ({
             <th className="col-optional" scope="col">
               {isFinal ? 'Played' : 'Left'}
             </th>
-            {[playoffTier, topTier].map((tier, index) => (
+            {isFinal && [playoffTier, topTier].map((tier, index) => (
               <th className="col-tier" key={index} scope="col">
                 {tier.shortLabel ? (
                   <>
@@ -866,8 +882,6 @@ const StandingsTable = ({
         <tbody>
           {teams.map((team) => {
             const inPlayoffZone = team.rank <= playoffTier.size;
-            const playoffOdds = tierProbability(payload, team.teamKey, playoffTier.size);
-            const topOdds = tierProbability(payload, team.teamKey, topTier.size);
             const selected = selectedKey === team.teamKey;
             return (
               <tr
@@ -907,22 +921,13 @@ const StandingsTable = ({
                   {formatNrr(team.nrr)}
                 </td>
                 <td className="col-optional">{isFinal ? team.matches : team.remainingMatches}</td>
-                {isFinal ? (
+                {isFinal && (
                   <>
                     <td className="col-tier">
                       <FinishMark achieved={inPlayoffZone} label={playoffTier.label} />
                     </td>
                     <td className="col-tier">
                       <FinishMark achieved={team.rank <= topTier.size} label={topTier.label} />
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className="col-tier" style={heatStyle(playoffOdds, 'good')}>
-                      {qualificationChance(payload, playoffOdds)}
-                    </td>
-                    <td className="col-tier" style={heatStyle(topOdds, 'good')}>
-                      {qualificationChance(payload, topOdds)}
                     </td>
                   </>
                 )}

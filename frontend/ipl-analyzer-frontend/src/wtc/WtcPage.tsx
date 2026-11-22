@@ -273,7 +273,19 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
         { label: 'Tests left', value: `${payload.league.testsLeft} of ${payload.league.testsTotal}` },
         { label: 'Latest update', value: formatGeneratedAt(payload.metadata.generated_at), testId: 'latest-update' },
       ];
+  const rowClass = (row: WtcStanding) =>
+    `${row.rank <= payload.league.finalists ? 'zone-top' : ''}${row.rank === payload.league.finalists ? ' wtc-cut' : ''}${row.teamKey === selected.teamKey ? ' is-selected' : ''}`;
+  const teamCell = (row: WtcStanding) => (
+    <th scope="row" className="col-team">
+      <button className="team-button" type="button" aria-pressed={row.teamKey === selected.teamKey} onClick={(event) => { event.stopPropagation(); selectTeam(row.teamKey); }}>
+        <span aria-hidden="true" className="team-chip" style={{ backgroundColor: row.color }} />
+        <strong>{row.shortName}</strong>
+        <small>{row.fullName}</small>
+      </button>
+    </th>
+  );
   const sections = [
+    ...(!complete ? [{ href: '#odds', label: 'Odds' }] : []),
     { href: '#table', label: 'Table' },
     ...(!complete ? [{ href: '#needs', label: 'What they need' }] : []),
     { href: '#final', label: 'The final' },
@@ -319,6 +331,47 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
 
         {payload.metadata.warnings.length > 0 && <p className="data-note" role="status">Data note: {payload.metadata.warnings.join(' ')}</p>}
 
+        {!complete && (
+          <section className="panel" id="odds" aria-labelledby="odds-title">
+            <div className="section-heading">
+              <h2 id="odds-title">Final &amp; Title Odds</h2>
+              <p>Chance to reach the final, and to win it</p>
+            </div>
+            <div className="table-scroll">
+              <table className="data-table wtc-table wtc-odds-table">
+                <caption className="visually-hidden">
+                  {payload.league.name} {payload.league.seasonLabel} final and title odds
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col" className="col-rank"><abbr title="Position">#</abbr></th>
+                    <th scope="col" className="col-team">Team</th>
+                    <th scope="col" className="col-tier"><abbr title="Reach the final (top two)">Final</abbr></th>
+                    <th scope="col" className="col-tier"><abbr title="Win the final outright">Title</abbr></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {payload.standings.map((row) => {
+                    const need = needs[row.teamKey];
+                    const odds = chances[row.teamKey];
+                    return (
+                      <tr className={rowClass(row)} key={row.teamKey} onClick={() => selectTeam(row.teamKey)}>
+                        <td className="col-rank">{row.rank}</td>
+                        {teamCell(row)}
+                        <td className="col-tier" style={heatStyle(odds?.final ?? 0, 'good')}>{finalChance(odds?.final ?? 0, need, false)}</td>
+                        <td className="col-tier" style={heatStyle(odds?.title ?? 0, 'good')}>{titleChance(odds?.title ?? 0, need, false)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p className="probability-note">
+              Final and Title odds are simulated; "Out" and "Through" are exact. Teams are listed in points-table order; select one for its path.
+            </p>
+          </section>
+        )}
+
         <section className="panel" id="table" aria-labelledby="table-title">
           <div className="section-heading">
             <h2 id="table-title">Points Table</h2>
@@ -327,7 +380,7 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
           <div className="table-scroll" tabIndex={0} role="region" aria-label="Points table, scroll for all columns">
             <table className="data-table wtc-table">
               <caption className="visually-hidden">
-                {payload.league.name} {payload.league.seasonLabel} points table{complete ? '' : ' with final and title odds'}
+                {payload.league.name} {payload.league.seasonLabel} points table
               </caption>
               <thead>
                 <tr>
@@ -341,29 +394,17 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
                   <th scope="col"><abbr title="Points deducted for slow over rates">Ded</abbr></th>
                   <th scope="col"><abbr title="Points, after deductions">Pts</abbr></th>
                   <th scope="col"><abbr title="Percentage of points">PCT</abbr></th>
-                  <th scope="col" className="col-tier">{complete ? 'Final' : <abbr title="Reach the final (top two)">Final</abbr>}</th>
-                  <th scope="col" className="col-tier">{complete ? 'Title' : <abbr title="Win the final outright">Title</abbr>}</th>
+                  {complete && <th scope="col" className="col-tier">Final</th>}
+                  {complete && <th scope="col" className="col-tier">Title</th>}
                 </tr>
               </thead>
               <tbody>
                 {payload.standings.map((row) => {
-                  const need = needs[row.teamKey];
-                  const odds = chances[row.teamKey];
                   const won = champion === row.teamKey || Boolean(joint?.includes(row.teamKey));
                   return (
-                    <tr
-                      className={`${row.rank <= payload.league.finalists ? 'zone-top' : ''}${row.rank === payload.league.finalists ? ' wtc-cut' : ''}${row.teamKey === selected.teamKey ? ' is-selected' : ''}`}
-                      key={row.teamKey}
-                      onClick={() => selectTeam(row.teamKey)}
-                    >
+                    <tr className={rowClass(row)} key={row.teamKey} onClick={() => selectTeam(row.teamKey)}>
                       <td className="col-rank">{row.rank}</td>
-                      <th scope="row" className="col-team">
-                        <button className="team-button" type="button" aria-pressed={row.teamKey === selected.teamKey} onClick={(event) => { event.stopPropagation(); selectTeam(row.teamKey); }}>
-                          <span aria-hidden="true" className="team-chip" style={{ backgroundColor: row.color }} />
-                          <strong>{row.shortName}</strong>
-                          <small>{row.fullName}</small>
-                        </button>
-                      </th>
+                      {teamCell(row)}
                       <td>{row.played}</td>
                       <td className="col-optional">{row.won}</td>
                       <td className="col-optional">{row.lost}</td>
@@ -372,12 +413,16 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
                       <td className={row.deducted ? 'wtc-deducted' : ''}>{row.deducted ? `−${row.deducted}` : 0}</td>
                       <td>{row.points}</td>
                       <td className="is-strong">{formatPct(row.pct)}</td>
-                      <td className="col-tier" style={complete ? undefined : heatStyle(odds?.final ?? 0, 'good')}>
-                        {complete ? (finalists?.includes(row.teamKey) ? <span className="mark-yes">✓<span className="visually-hidden"> Reached the final</span></span> : '–') : finalChance(odds?.final ?? 0, need, false)}
-                      </td>
-                      <td className="col-tier" style={complete ? undefined : heatStyle(odds?.title ?? 0, 'good')}>
-                        {complete ? (won ? <span className="mark-yes">{joint ? 'Joint' : '✓'}<span className="visually-hidden"> Champions</span></span> : '–') : titleChance(odds?.title ?? 0, need, false)}
-                      </td>
+                      {complete && (
+                        <td className="col-tier">
+                          {finalists?.includes(row.teamKey) ? <span className="mark-yes">✓<span className="visually-hidden"> Reached the final</span></span> : '–'}
+                        </td>
+                      )}
+                      {complete && (
+                        <td className="col-tier">
+                          {won ? <span className="mark-yes">{joint ? 'Joint' : '✓'}<span className="visually-hidden"> Champions</span></span> : '–'}
+                        </td>
+                      )}
                     </tr>
                   );
                 })}
@@ -386,7 +431,7 @@ const WtcPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: Lea
           </div>
           <p className="probability-note">
             PCT is points after over-rate deductions divided by 12 points for every Test played: a win is worth {payload.league.points.win}, a tie {payload.league.points.tie}, a draw {payload.league.points.draw}. The line after {ordinalLabel(payload.league.finalists)} marks the final places. Teams level on PCT are split by {payload.league.tiebreakers.slice(1).map(lowerFirst).join(', then ')}.
-            {!complete && ' Final and Title odds are simulated; "Out" and "Through" are exact.'} Narrow screens leave out the won, lost and drawn columns; each team's record is in its panel below.
+ Narrow screens leave out the won, lost and drawn columns; each team's record is in its panel below.
           </p>
           {payload.metadata.notes.filter((note) => note.includes('level on')).map((note) => <p className="probability-note" key={note}>{note}</p>)}
           {payload.league.deductions.length > 0 && (

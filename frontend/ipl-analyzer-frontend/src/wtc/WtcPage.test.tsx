@@ -16,7 +16,10 @@ function openWtc(path = '/league/wtc-2025-27/', payload: WtcPayload = wtcPayload
 }
 
 const table = () => screen.getByRole('table', { name: /points table/ });
-const rowFor = (team: string) => within(table()).getAllByRole('row').find((row) => within(row).queryByRole('rowheader')?.textContent?.startsWith(team))!;
+const oddsTable = () => screen.getByRole('table', { name: /final and title odds/ });
+const rowIn = (scope: HTMLElement, team: string) => within(scope).getAllByRole('row').find((row) => within(row).queryByRole('rowheader')?.textContent?.startsWith(team))!;
+const rowFor = (team: string) => rowIn(table(), team);
+const oddsRow = (team: string) => rowIn(oddsTable(), team);
 
 describe('WtcPage', () => {
   beforeEach(() => {
@@ -33,11 +36,24 @@ describe('WtcPage', () => {
     expect(screen.getByText('In season', { selector: '.status-pill' })).toBeInTheDocument();
   });
 
+  it('leads with the final and title odds, then the points table', async () => {
+    openWtc();
+    await screen.findByTestId('wtc-page');
+    expect(within(oddsTable()).getAllByRole('columnheader').map((cell) => cell.textContent)).toEqual(['#', 'Team', 'Final', 'Title']);
+    expect(oddsTable().compareDocumentPosition(table()) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const sections = within(screen.getByRole('navigation', { name: 'Page sections' })).getAllByRole('link').map((link) => link.textContent);
+    expect(sections.slice(0, 2)).toEqual(['Odds', 'Table']);
+    // An eliminated team is "Out", not a simulated 0%; an estimate never shows as 100%.
+    expect(within(oddsRow('ENG')).getAllByText('Out')).toHaveLength(2);
+    expect(oddsRow('SA')).toHaveClass('zone-top');
+    expect(oddsTable()).not.toHaveTextContent('100%');
+  });
+
   it('shows the PCT table with deductions, two decimals and the final line', async () => {
     openWtc();
     await screen.findByTestId('wtc-page');
     const headers = within(table()).getAllByRole('columnheader').map((cell) => cell.textContent);
-    expect(headers).toEqual(['#', 'Team', 'M', 'W', 'L', 'D', 'Ded', 'Pts', 'PCT', 'Final', 'Title']);
+    expect(headers).toEqual(['#', 'Team', 'M', 'W', 'L', 'D', 'Ded', 'Pts', 'PCT']);
     const sa = rowFor('SA');
     expect(sa).toHaveTextContent('66.67');
     expect(sa).toHaveClass('zone-top');
@@ -46,12 +62,9 @@ describe('WtcPage', () => {
     expect(within(aus).getByText('−3')).toBeInTheDocument();
     expect(aus).toHaveTextContent('4.17');
     expect(aus).toHaveClass('wtc-cut');
-    // 0.00 is a real PCT; an eliminated team is "Out", not a simulated 0%.
-    const eng = rowFor('ENG');
-    expect(eng).toHaveTextContent('0.00');
-    expect(within(eng).getAllByText('Out')).toHaveLength(2);
-    // Never 100% for an estimate, and a chance still alive is never shown as nothing.
-    expect(table()).not.toHaveTextContent('100%');
+    // 0.00 is a real PCT.
+    expect(rowFor('ENG')).toHaveTextContent('0.00');
+    expect(table()).not.toHaveTextContent('%');
     expect(screen.getByText('Over-rate deductions: 3 points')).toBeInTheDocument();
     expect(screen.getByText(/IND, ENG are level on 50.00%/)).toBeInTheDocument();
   });
@@ -119,7 +132,7 @@ describe('WtcPage', () => {
     expect(within(final).getByText('Draw: joint champions')).toBeInTheDocument();
     expect(within(final).getByText('Draw: joint champions').closest('div')).toHaveTextContent('9%');
     expect(within(final).getByText(/A drawn, tied or abandoned final makes both teams joint champions/)).toBeInTheDocument();
-    expect(within(rowFor('SA')).getByText('Through')).toBeInTheDocument();
+    expect(within(oddsRow('SA')).getByText('Through')).toBeInTheDocument();
   });
 
   it('says when the final is under way', async () => {
@@ -132,6 +145,9 @@ describe('WtcPage', () => {
     expect(await screen.findByRole('heading', { name: 'WTC 2025-27: South Africa Are Champions' })).toBeInTheDocument();
     expect(screen.getByText('South Africa won the final by 5 wickets.')).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'What Each Team Needs' })).not.toBeInTheDocument();
+    // Nothing left to forecast: the points table carries the final and title ticks itself.
+    expect(screen.queryByRole('table', { name: /final and title odds/ })).not.toBeInTheDocument();
+    expect(within(table()).getAllByRole('columnheader').map((cell) => cell.textContent).slice(-2)).toEqual(['Final', 'Title']);
     unmount();
     openWtc('/league/wtc-2025-27/', wtcJoint);
     expect(await screen.findByRole('heading', { name: 'WTC 2025-27: SA and IND Share the Title' })).toBeInTheDocument();
