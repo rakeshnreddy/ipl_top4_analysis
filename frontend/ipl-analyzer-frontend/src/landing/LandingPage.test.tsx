@@ -61,7 +61,7 @@ describe('LandingPage', () => {
     expect(within(sports).getByRole('link', { name: /IPL 2026/ })).toHaveAttribute('href', '/league/ipl-2026/');
     expect(screen.getByRole('link', { name: 'How the odds are made' })).toHaveAttribute('href', '/#method');
     expect(screen.getByRole('heading', { name: /The odds have a method/ })).toBeInTheDocument();
-    expect(screen.getByText(/Cricket uses equal-strength result scenarios/)).toBeInTheDocument();
+    expect(screen.getByText(/T20 cricket uses equal-strength result scenarios/)).toBeInTheDocument();
   });
 
   it('keeps tiny tracks exact and near-certainty formatted safely', async () => {

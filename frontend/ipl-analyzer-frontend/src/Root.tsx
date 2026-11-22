@@ -6,6 +6,7 @@ import { DEFAULT_LEAGUE_ID } from './data/iplData';
 import { HUB_ID, hubRequested, leagueIdFromLocation, liveCricketRequested, loadLeagueIndex, sportOf, type LeagueIndex } from './data/leagues';
 const App = lazy(() => import('./App'));
 const F1Page = lazy(() => import('./f1/F1Page'));
+const WtcPage = lazy(() => import('./wtc/WtcPage'));
 const HubPage = lazy(() => import('./hub/HubPage'));
 const LandingPage = lazy(() => import('./landing/LandingPage'));
 const SportPage = lazy(() => import('./sport/SportPage'));
@@ -57,6 +58,10 @@ function Root() {
   const fallback = index?.default && index.default !== HUB_ID ? index.default : DEFAULT_LEAGUE_ID;
   const leagueId = requestedLeague ?? fallback;
   const entry = index?.leagues.find((league) => league.id === leagueId);
+  // The World Test Championship is cricket with its own engine (Tests, PCT, a final), not a T20 league.
+  if (entry?.engine === 'wtc' || (!entry && /^wtc-/.test(leagueId))) {
+    return <WtcPage leagueId={leagueId} leagueIndex={index} />;
+  }
   if (entry && sportOf(entry) === 'motorsport') {
     return <F1Page leagueId={leagueId} leagueIndex={index} />;
   }

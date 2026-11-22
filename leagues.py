@@ -370,14 +370,16 @@ def rolled_league_ids(now: datetime, finalize_days: int, directory: Path = LEAGU
 
 
 def is_cricket(config: dict[str, Any]) -> bool:
-    return config.get("sport", "cricket") == "cricket"
+    """A T20 cricket season. Cricket built by its own engine (the World Test Championship) is not one."""
+    return config.get("sport", "cricket") == "cricket" and not config.get("engine")
 
 
 def load_league(league_id: str, directory: Path = LEAGUES_DIR) -> League:
     """A cricket season config; other sports use rolling configs read with read_config."""
     config = read_config(league_id, directory)
     if not is_cricket(config):
-        raise ValueError(f"{league_id} is a {config['sport']} config, not a cricket season")
+        kind = config.get("engine") or config["sport"]
+        raise ValueError(f"{league_id} is a {kind} config, not a T20 cricket season")
     return parse_league(config)
 
 

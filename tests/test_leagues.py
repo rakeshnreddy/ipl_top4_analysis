@@ -13,6 +13,7 @@ from unittest import mock
 import extract_table
 import leagues
 import team_sports
+import wtc
 from test_cricsheet import round_robin_season, write_archive
 
 
@@ -27,6 +28,10 @@ class LeagueConfigTests(unittest.TestCase):
         for league_id in ids:
             config = leagues.read_config(league_id)
             self.assertEqual(config["id"], league_id)
+            if config.get("engine") == "wtc":
+                # The World Test Championship has fixed dates and a schedule, not a rolling season rule.
+                wtc.validate_config(config)
+                continue
             if not leagues.is_cricket(config):
                 self.assertIn(config["sport"], extract_table.SPORT_MODULES)
                 team_sports.validate_config(config)

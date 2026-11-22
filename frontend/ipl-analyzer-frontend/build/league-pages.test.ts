@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PRIMARY_SITE_URL } from '../src/lib/siteIdentity';
-import { describeLeague, leagueJsonLd, legacyQueryPreloadScript, renderLeagueHtml, renderLeagueOgSvg, renderSocialPng, type LeaguePayload } from './league-pages';
+import { describeLeague, leagueJsonLd, legacyQueryPreloadScript, renderLeagueHtml, renderLeagueOgSvg, renderSocialPng, routeFamily, type LeaguePayload } from './league-pages';
 
 const publicDir = resolve(import.meta.dirname, '../public');
 const entries = (JSON.parse(readFileSync(resolve(publicDir, 'data/leagues.json'), 'utf8')) as { leagues: { id: string; name: string; shortName: string; seasonLabel: string; path: string }[] }).leagues;
@@ -88,6 +88,30 @@ describe('static league source documents', () => {
     }
   });
 
+  it('publishes the World Test Championship table by PCT to two decimals, with deductions', () => {
+    const { entry, payload } = load('wtc-2025-27');
+    const page = describeLeague(entry, payload, 'https://example.org/');
+    expect(page.columns.map((column) => column.label)).toEqual(['M', 'W', 'L', 'D', 'Ded', 'Pts', 'PCT', ...(page.status === 'Final' ? [] : (payload.league.tiers ?? []).map((tier) => tier.label))]);
+    if (page.status !== 'Final') expect(page.facts[0].label).toBe('Likeliest finalist');
+    const document = new DOMParser().parseFromString(renderLeagueHtml(template, page), 'text/html');
+    const rows = Array.from(document.querySelectorAll('table')[0].querySelectorAll('tbody tr'));
+    const pctIndex = page.columns.findIndex((column) => column.key === 'pct') + 2;
+    payload.standings.forEach((row, index) => {
+      const pct = row.pct as number | null;
+      expect(rows[index].children[pctIndex].textContent).toBe(pct === null ? '—' : pct.toFixed(2));
+    });
+    expect(page.title).toContain('WTC');
+    expect(page.description).toContain('percentage of points');
+    // A drawn final: the static page, its description and social card name both champions.
+    const shared = { ...payload, metadata: { ...payload.metadata, season_status: 'complete' }, playoffs: { champion: null, jointChampions: [payload.standings[0].teamKey, payload.standings[1].teamKey] } };
+    const finished = describeLeague({ ...entry, champion: `${payload.standings[0].shortName} & ${payload.standings[1].shortName}` }, shared, 'https://example.org/');
+    expect(finished.facts[0]).toEqual({ label: 'Joint champions', value: `${payload.standings[0].fullName} & ${payload.standings[1].fullName}` });
+    expect(finished.description).toContain('Joint champions');
+    expect(routeFamily({ sport: 'cricket', engine: 'wtc' })).toBe('wtc');
+    expect(routeFamily({ sport: 'cricket' })).toBe('cricket');
+    expect(routeFamily({ sport: 'motorsport' })).toBe('motorsport');
+  });
+
   it('does not call a tied zero-game table a standings leader before the season', () => {
     const { entry, payload } = load('epl-2026-27');
     payload.standings.forEach((row) => { row.played = 0; });
@@ -135,9 +159,9 @@ describe('static league source documents', () => {
 describe('legacy query critical hints', () => {
   const bundle = { ...Object.fromEntries([
     ['cricket.js', '/src/App.tsx'], ['f1.js', '/src/f1/F1Page.tsx'], ['sport.js', '/src/sport/SportPage.tsx'],
-    ['landing.js', '/src/landing/LandingPage.tsx'], ['hub.js', '/src/hub/HubPage.tsx'],
+    ['landing.js', '/src/landing/LandingPage.tsx'], ['hub.js', '/src/hub/HubPage.tsx'], ['wtc.js', '/src/wtc/WtcPage.tsx'],
   ].map(([fileName, facadeModuleId]) => [fileName, { type: 'chunk', fileName, facadeModuleId, imports: ['shared.js'], viteMetadata: { importedCss: new Set([fileName.replace('.js', '.css')]) } }])), 'shared.js': { type: 'chunk', fileName: 'shared.js', imports: [] } };
-  const leagues = [{ id: 'ipl-2026', sport: 'cricket' }, { id: 'f1-2026', sport: 'motorsport' }, { id: 'epl-2026-27', sport: 'football' }];
+  const leagues = [{ id: 'ipl-2026', sport: 'cricket' }, { id: 'f1-2026', sport: 'motorsport' }, { id: 'epl-2026-27', sport: 'football' }, { id: 'wtc-2025-27', sport: 'cricket', engine: 'wtc' }];
   function run(search: string, base: string, pathname = base) {
     const document = new DOMParser().parseFromString('<html><head></head><body></body></html>', 'text/html');
     const source = legacyQueryPreloadScript(leagues, bundle, base, '');
@@ -154,6 +178,15 @@ describe('legacy query critical hints', () => {
         `${base}sport.js`, `${base}shared.js`, `${base}sport.css`, `${base}data/leagues.json`, `${base}data/epl-2026-27.json`,
       ]);
       expect(document.querySelectorAll('body *')).toHaveLength(0);
+    }
+  });
+
+  it('hints the World Test Championship page, not the T20 cricket page, for its query link', () => {
+    for (const base of ['/', '/ipl_top4_analysis/']) {
+      const { document } = run('?league=wtc-2025-27', base);
+      expect(Array.from(document.querySelectorAll('link')).map((link) => link.getAttribute('href'))).toEqual([
+        `${base}wtc.js`, `${base}shared.js`, `${base}wtc.css`, `${base}data/leagues.json`, `${base}data/wtc-2025-27.json`,
+      ]);
     }
   });
 
