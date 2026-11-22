@@ -23,6 +23,13 @@
   }
 }
 
+/* Season odds first, then the table itself, stacked in the main column beside the team panel. */
+.sport-tables {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
 .sport-group-tabs {
   margin-bottom: var(--space-3);
 }

@@ -320,7 +320,6 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
   const rows = group
     ? group.teams.map((key) => byKey.get(key)).filter((row): row is SportStanding => Boolean(row))
     : payload.standings;
-  const columnCount = 3 + payload.league.columns.length + payload.league.tiers.length;
 
   const selectTeam = (key: string) => {
     setSelectedKey(key);
@@ -331,6 +330,131 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
       if (panel) panel.scrollTop = 0;
       document.getElementById('team-title')?.focus({ preventScroll: true });
     }, 0);
+  };
+
+  const groupTabs = (label: string) =>
+    groups.length > 0 && (
+      <div className="goal-tabs sport-group-tabs" role="group" aria-label={label}>
+        <button aria-pressed={!group} onClick={() => setGroupKey('')} type="button">
+          {payload.league.rankLabel ?? 'All'}
+        </button>
+        {groups.map((item) => (
+          <button aria-pressed={group?.key === item.key} key={item.key} onClick={() => setGroupKey(item.key)} type="button">
+            {item.label}
+          </button>
+        ))}
+      </div>
+    );
+
+  /** The odds table (team and race chances), the standings table (results and form), or a finished season's single table. */
+  const renderTable = (kind: 'odds' | 'standings' | 'final') => {
+    const showStats = kind !== 'odds';
+    const showTiers = kind !== 'standings';
+    const columnCount = 2 + (showStats ? payload.league.columns.length + 1 : 0) + (showTiers ? payload.league.tiers.length : 0);
+    const name = group ? group.label : payload.league.name;
+    return (
+      <div className="table-scroll">
+        <table className={`data-table sport-table sport-table-${kind}`}>
+          <caption className="visually-hidden">{kind === 'odds' ? `${name} season odds` : `${name} table`}</caption>
+          <thead>
+            <tr>
+              <th scope="col" className="col-rank">
+                <abbr title="Position">#</abbr>
+              </th>
+              <th scope="col" className="col-team">
+                Team
+              </th>
+              {showStats &&
+                payload.league.columns.map((column) => (
+                  <th scope="col" key={column.key} title={column.title} className={isOptional(column) ? 'col-optional' : undefined}>
+                    {column.title && column.title !== column.label ? <abbr title={column.title}>{column.label}</abbr> : column.label}
+                  </th>
+                ))}
+              {showStats && (
+                <th scope="col" className="col-form" title="Last five results, latest on the right">
+                  Form
+                </th>
+              )}
+              {showTiers &&
+                payload.league.tiers.map((tier) => (
+                  <th scope="col" className="col-tier" key={tier.key} title={tier.label}>
+                    {tier.shortLabel ? (
+                      <>
+                        <span className="label-full">{tier.label}</span>
+                        <span className="label-short" aria-hidden="true">
+                          {tier.shortLabel}
+                        </span>
+                      </>
+                    ) : (
+                      tier.label
+                    )}
+                  </th>
+                ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.length === 0 && (
+              <tr><td colSpan={columnCount} className="sport-empty">No teams have been published for this season yet.</td></tr>
+            )}
+            {rows.map((row, position) => (
+              <Fragment key={row.teamKey}>
+                {cutoffs?.some((cutoff) => cutoff.after === position) && (
+                  <tr className="cutline">
+                    <td colSpan={columnCount}>{cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
+                  </tr>
+                )}
+                <tr
+                  className={`${zonesFromLines ? groupZone(cutoffs, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
+                  onClick={() => selectTeam(row.teamKey)}
+                >
+                  <td className="col-rank">{group ? position + 1 : row.rank}</td>
+                  <th scope="row" className="col-team">
+                    <button
+                      aria-pressed={row.teamKey === selected.teamKey}
+                      aria-controls="team"
+                      className="team-button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        selectTeam(row.teamKey);
+                      }}
+                      type="button"
+                    >
+                      <span className="team-chip" style={{ backgroundColor: team(row.teamKey).color }} aria-hidden="true" />
+                      <strong>{row.shortName}</strong>
+                      <small>{row.fullName}</small>
+                    </button>
+                  </th>
+                  {showStats &&
+                    payload.league.columns.map((column) => (
+                      <td key={column.key} className={`${column.strong ? 'is-strong' : ''} ${isOptional(column) ? 'col-optional' : ''}`}>
+                        {formatCell(row, column)}
+                      </td>
+                    ))}
+                  {showStats && (
+                    <td className="col-form">
+                      <FormStrip form={row.form} />
+                    </td>
+                  )}
+                  {showTiers &&
+                    payload.league.tiers.map((tier) => {
+                      const value = chance(payload, row.teamKey, tier.key);
+                      return isSettled(payload, tier) ? (
+                        <td className="col-tier" key={tier.key}>
+                          <SettledMark achieved={value >= 50} label={tier.label} />
+                        </td>
+                      ) : (
+                        <td className="col-tier" key={tier.key} style={heatStyle(value, tierTone(tier))}>
+                          {formatChance(value)}
+                        </td>
+                      );
+                    })}
+                </tr>
+              </Fragment>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
   };
 
   const status = seasonStatus(payload, started);
@@ -347,6 +471,7 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
   ];
   const sections = [
     ...(payload.bracket ? [{ href: '#bracket', label: 'Bracket' }] : []),
+    ...(!complete && payload.standings.length > 0 ? [{ href: '#odds', label: 'Odds' }] : []),
     { href: '#table', label: 'Table' },
     ...(!complete && payload.fixtures.length > 0 ? [{ href: '#fixtures', label: 'Fixtures' }] : []),
     ...(payload.matchesThatMatter.length > 0 ? [{ href: '#matters', label: 'Matches that matter' }] : []),
@@ -391,127 +516,33 @@ const SportPage = ({ leagueId, leagueIndex }: { leagueId: string; leagueIndex: L
         {payload.bracket && <BracketPanel bracket={payload.bracket} short={short} />}
 
         <div className="sport-grid">
-          <section className="panel sport-table-panel" id="table" aria-labelledby="table-title">
-            <div className="section-heading">
-              <h2 id="table-title">{complete ? 'Final Table' : 'Table & Season Odds'}</h2>
-              <p>{complete ? 'Ticks mark the races each team finished in.' : 'Chance of each finish, from every remaining fixture.'}</p>
-            </div>
-
-            {groups.length > 0 && (
-              <div className="goal-tabs sport-group-tabs" role="group" aria-label="Table view">
-                <button aria-pressed={!group} onClick={() => setGroupKey('')} type="button">
-                  {payload.league.rankLabel ?? 'All'}
-                </button>
-                {groups.map((item) => (
-                  <button aria-pressed={group?.key === item.key} key={item.key} onClick={() => setGroupKey(item.key)} type="button">
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+          <div className="sport-tables">
+            {!complete && payload.standings.length > 0 && (
+              <section className="panel sport-table-panel" id="odds" aria-labelledby="odds-title">
+                <div className="section-heading">
+                  <h2 id="odds-title">Season Odds</h2>
+                  <p>Chance of each finish, from every remaining fixture.</p>
+                </div>
+                {groupTabs('Odds view')}
+                {renderTable('odds')}
+                <p className="probability-note">Tap a team for its finishing-position chances and next games.</p>
+              </section>
             )}
 
-            <div className="table-scroll">
-              <table className="data-table sport-table">
-                <caption className="visually-hidden">
-                  {group ? `${group.label} table` : `${payload.league.name} table`}
-                  {complete ? '' : ' with season odds'}
-                </caption>
-                <thead>
-                  <tr>
-                    <th scope="col" className="col-rank">
-                      <abbr title="Position">#</abbr>
-                    </th>
-                    <th scope="col" className="col-team">
-                      Team
-                    </th>
-                    {payload.league.columns.map((column) => (
-                      <th scope="col" key={column.key} title={column.title} className={isOptional(column) ? 'col-optional' : undefined}>
-                        {column.title && column.title !== column.label ? <abbr title={column.title}>{column.label}</abbr> : column.label}
-                      </th>
-                    ))}
-                    <th scope="col" className="col-form" title="Last five results, latest on the right">
-                      Form
-                    </th>
-                    {payload.league.tiers.map((tier) => (
-                      <th scope="col" className="col-tier" key={tier.key} title={tier.label}>
-                        {tier.shortLabel ? (
-                          <>
-                            <span className="label-full">{tier.label}</span>
-                            <span className="label-short" aria-hidden="true">
-                              {tier.shortLabel}
-                            </span>
-                          </>
-                        ) : (
-                          tier.label
-                        )}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.length === 0 && (
-                    <tr><td colSpan={columnCount} className="sport-empty">No teams have been published for this season yet.</td></tr>
-                  )}
-                  {rows.map((row, position) => (
-                    <Fragment key={row.teamKey}>
-                      {cutoffs?.some((cutoff) => cutoff.after === position) && (
-                        <tr className="cutline">
-                          <td colSpan={columnCount}>{cutoffs.find((cutoff) => cutoff.after === position)?.label}</td>
-                        </tr>
-                      )}
-                      <tr
-                        className={`${zonesFromLines ? groupZone(cutoffs, position) : zoneFor(payload, row.rank)} ${row.teamKey === selected.teamKey ? 'is-selected' : ''}`}
-                        onClick={() => selectTeam(row.teamKey)}
-                      >
-                        <td className="col-rank">{group ? position + 1 : row.rank}</td>
-                        <th scope="row" className="col-team">
-                          <button
-                            aria-pressed={row.teamKey === selected.teamKey}
-                            aria-controls="team"
-                            className="team-button"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              selectTeam(row.teamKey);
-                            }}
-                            type="button"
-                          >
-                            <span className="team-chip" style={{ backgroundColor: team(row.teamKey).color }} aria-hidden="true" />
-                            <strong>{row.shortName}</strong>
-                            <small>{row.fullName}</small>
-                          </button>
-                        </th>
-                        {payload.league.columns.map((column) => (
-                          <td key={column.key} className={`${column.strong ? 'is-strong' : ''} ${isOptional(column) ? 'col-optional' : ''}`}>
-                            {formatCell(row, column)}
-                          </td>
-                        ))}
-                        <td className="col-form">
-                          <FormStrip form={row.form} />
-                        </td>
-                        {payload.league.tiers.map((tier) => {
-                          const value = chance(payload, row.teamKey, tier.key);
-                          return isSettled(payload, tier) ? (
-                            <td className="col-tier" key={tier.key}>
-                              <SettledMark achieved={value >= 50} label={tier.label} />
-                            </td>
-                          ) : (
-                            <td className="col-tier" key={tier.key} style={heatStyle(value, tierTone(tier))}>
-                              {formatChance(value)}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    </Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="probability-note">
-              {complete
-                ? 'Final positions; ties are broken by the league rules shown in How it works.'
-                : 'Tap a team for its finishing-position chances and next games.'}
-            </p>
-          </section>
+            <section className="panel sport-table-panel" id="table" aria-labelledby="table-title">
+              <div className="section-heading">
+                <h2 id="table-title">{complete ? 'Final Table' : 'Table'}</h2>
+                <p>{complete ? 'Ticks mark the races each team finished in.' : 'Where every team stands now.'}</p>
+              </div>
+              {groupTabs('Table view')}
+              {renderTable(complete ? 'final' : 'standings')}
+              <p className="probability-note">
+                {complete
+                  ? 'Final positions; ties are broken by the league rules shown in How it works.'
+                  : 'Ties are broken by the league rules shown in How it works.'}
+              </p>
+            </section>
+          </div>
 
           {selected && <TeamPanel payload={payload} row={selected} short={short} team={team} />}
         </div>

@@ -75,6 +75,20 @@ describe('Cricket race interactions', () => {
     expect(window.location.search).toBe('?league=ipl-2026');
   });
 
+  it('leads with the odds, then a standings table of real results', async () => {
+    render(<Root />);
+    const panel = await screen.findByTestId('probability-panel');
+    const ladder = screen.getByTestId('standings-ladder');
+    expect(panel.compareDocumentPosition(ladder) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const sections = within(screen.getByRole('navigation', { name: 'Page sections' })).getAllByRole('link').map((link) => link.textContent);
+    expect(sections.slice(0, 2)).toEqual(['Top 4 odds', 'Standings']);
+    // Each bar row names both qualification tiers for screen readers.
+    expect(within(panel).getByRole('button', { name: /^PBKS .*Top 4 .*Top 2$/ })).toBeInTheDocument();
+    const table = screen.getByRole('table', { name: 'IPL 2026 standings' });
+    expect(within(table).getAllByRole('columnheader').map((cell) => cell.textContent)).toEqual(['#', 'Team', 'Record', 'Pts', 'NRR', 'Left']);
+    expect(table).not.toHaveTextContent('%');
+  });
+
   it('draws a zero chance with no filled track and preserves the probability scale', async () => {
     const { container } = render(<Root />);
     await screen.findByTestId('probability-panel');
@@ -264,7 +278,10 @@ describe('App during another league\'s season', () => {
     expect(screen.getByRole('button', { name: 'Top 1' })).toBeInTheDocument();
     expect(screen.getByText('GG +12.5')).toBeInTheDocument();
     expect(screen.getByText('UPW -8.0')).toBeInTheDocument();
-    expect(container.querySelector('.standing-row td.col-tier')).toHaveTextContent('98.5%');
+    const panel = screen.getByTestId('probability-panel');
+    expect(panel.querySelector('.race-head')).toHaveTextContent('Top 3Top 1');
+    expect(panel.querySelector('.race-bar-row')).toHaveTextContent('98.5%');
+    expect(container.querySelector('.standing-row td.col-tier')).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Share kit' })).not.toBeInTheDocument();
     await waitFor(() => expect(document.title).toBe('WPL Top 3 Qualification Chances Today | WPL Playoff Pulse'));
   });
@@ -377,7 +394,7 @@ describe('App for a league played in groups', () => {
     expect(card).toHaveTextContent('League stage · 2 points deducted');
   });
 
-  it('shows live odds inside each group table', async () => {
+  it('shows live odds beside the group tables', async () => {
     installFetch(finalPayload, mockManifest, { '/data/t20-blast-2026.json': blastPayload(false) });
     window.history.replaceState(null, '', '/?league=t20-blast-2026');
 
@@ -386,10 +403,11 @@ describe('App for a league played in groups', () => {
     expect(await screen.findByRole('heading', { name: 'T20 Blast Quarter-finals Qualification Probabilities' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Quarter-finals Odds' })).toBeInTheDocument();
     const north = groupTable('North');
-    // Phones show the short tier label; screen readers keep the full one.
-    expect(within(north).getByText('Home quarter-final')).toHaveClass('label-full');
-    expect(within(north).getByText('Home QF')).toHaveAttribute('aria-hidden', 'true');
-    expect(rowsOf(north)[0].text).toContain('76%');
+    expect(rowsOf(north)[0].text).not.toContain('%');
+    // The odds board uses the short tier labels; screen readers hear the full ones.
+    const panel = screen.getByTestId('probability-panel');
+    expect(panel.querySelector('.race-head')).toHaveTextContent('QFHome QF');
+    expect(within(panel).getAllByRole('button')[0]).toHaveAccessibleName(/^NOR\s*92% Quarter-finals\s*54% Home quarter-final$/);
     const heroFacts = screen.getByLabelText('Race snapshot');
     expect(within(heroFacts).getByText('NOR, HAM, NOT, YOR, SOM, SUR, ESS, GLO')).toBeInTheDocument();
   });

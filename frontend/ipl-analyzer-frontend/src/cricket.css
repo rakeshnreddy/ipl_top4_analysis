@@ -38,12 +38,20 @@
 }
 .cricket-table-help p { color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2); max-width: 65ch; }
 .cricket-race-scale {
-  color: var(--text-subtle);
   display: flex;
-  font-size: var(--text-xs);
   justify-content: space-between;
+}
+/* Column heads share the rows' grid: the bar's 0–100% scale, then each tier's figure. */
+.cricket-page .race-head {
+  align-items: end;
+  color: var(--text-subtle);
+  display: grid;
+  font-size: var(--text-xs);
+  gap: var(--space-3);
+  grid-template-columns: 46px minmax(0, 1fr) 60px;
   margin-bottom: var(--space-2);
 }
+.cricket-page .race-head > span:nth-child(n + 3) { text-align: right; }
 .cricket-page .race-bars { gap: 0; }
 .cricket-page .race-bar-row {
   border-bottom: 1px solid var(--border);
@@ -54,6 +62,9 @@
   padding: var(--space-2) 0;
 }
 .cricket-page .race-bar-row:last-child { border-bottom: 0; }
+.cricket-page .has-second-tier .race-head,
+.cricket-page .has-second-tier .race-bar-row { gap: var(--space-2); grid-template-columns: 46px minmax(0, 1fr) 56px 56px; }
+.cricket-page .race-second { color: var(--text-muted); font-size: var(--text-sm); font-variant-numeric: tabular-nums; text-align: right; }
 .cricket-page .race-bar-row.is-selected .race-team::after { content: ' ✓'; }
 .cricket-page .race-track { background: var(--surface-3); border-radius: 2px; height: 12px; }
 .cricket-page .race-fill { background: var(--cricket-accent); border-radius: 0 2px 2px 0; }
@@ -121,6 +132,8 @@
 
 @media (min-width: 1000px) {
   .cricket-page .race-grid { gap: var(--space-5); grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.9fr); }
+  /* Live seasons lead with the odds; the standings follow on the right. */
+  .cricket-page .race-grid.odds-first { grid-template-columns: minmax(360px, 1fr) minmax(0, 1.25fr); }
 }
 @media (max-width: 520px) {
   .cricket-page .race-summary-grid article,

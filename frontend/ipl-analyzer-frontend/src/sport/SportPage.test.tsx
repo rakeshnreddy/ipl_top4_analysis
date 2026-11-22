@@ -6,6 +6,9 @@ import { finalPayload, installFetch, mockManifest } from '../test/fixtures';
 import { conferencePayload, footballPayload, multiSportIndex } from '../test/sportFixtures';
 import { formatChance } from './format';
 
+const oddsTable = () => screen.getByRole('table', { name: /season odds$/ });
+const standingsTable = () => screen.getByRole('table', { name: / table$/ });
+
 function openLeague(path: string, payload = footballPayload) {
   window.history.replaceState(null, '', path);
   installFetch(finalPayload, mockManifest, {
@@ -21,16 +24,26 @@ describe('SportPage', () => {
     window.HTMLElement.prototype.scrollIntoView = vi.fn();
   });
 
-  it('routes a football league to the table and season odds', async () => {
+  it('routes a football league to the season odds, then the table', async () => {
     openLeague('/?league=epl-2026-27');
 
     expect(await screen.findByRole('heading', { name: 'Premier League Title, Top 2 & Relegation Odds' })).toBeInTheDocument();
-    const table = screen.getByRole('table');
-    const rows = within(table).getAllByRole('row');
+    const odds = oddsTable();
+    const rows = within(odds).getAllByRole('row');
+    expect(within(rows[0]).getAllByRole('columnheader').map((cell) => cell.textContent)).toEqual(['#', 'Team', 'Title', 'Top 2', 'RelegationDrop']);
     expect(rows[1]).toHaveTextContent('ARS');
     expect(rows[1]).toHaveTextContent('81%');
     expect(rows[1]).toHaveTextContent('>99.9%');
     expect(rows[4]).toHaveTextContent('87%');
+
+    // The odds come first; the table that follows holds the real results only.
+    const table = standingsTable();
+    expect(odds.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(within(table).queryAllByRole('columnheader', { name: /Title|Relegation/ })).toHaveLength(0);
+    expect(within(table).getAllByRole('columnheader').map((cell) => cell.textContent)).toContain('Form');
+    expect(table).not.toHaveTextContent('%');
+    const sections = within(screen.getByRole('navigation', { name: 'Page sections' })).getAllByRole('link').map((link) => link.textContent);
+    expect(sections.slice(0, 2)).toEqual(['Odds', 'Table']);
     expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('ARS 81%');
     await waitFor(() => expect(document.title).toBe('Premier League 2026-27 Odds: Title, Top 2 & Relegation Chances | Playoff Pulse'));
     expect(globalThis.fetch).toHaveBeenCalledWith('/data/epl-2026-27.json', { cache: 'no-cache' });
@@ -59,8 +72,7 @@ describe('SportPage', () => {
     expect(within(sections).getByRole('link', { name: 'Fixtures' })).toHaveAttribute('href', '/?league=epl-2026-27#fixtures');
     expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '/?league=epl-2026-27#main');
 
-    const table = screen.getByRole('table');
-    fireEvent.click(within(table).getAllByRole('button')[1]);
+    fireEvent.click(within(oddsTable()).getAllByRole('button')[1]);
     expect(window.location.search).toBe('?league=epl-2026-27');
     expect(window.location.hash).toMatch(/^#team=/);
   });
@@ -121,10 +133,12 @@ describe('SportPage', () => {
     await waitFor(() => expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled());
     const inspector = document.getElementById('team')!;
     inspector.scrollTop = 400;
-    fireEvent.click(within(screen.getByRole('table')).getAllByRole('button')[0]);
+    fireEvent.click(within(standingsTable()).getAllByRole('button')[0]);
     await waitFor(() => expect(screen.getByRole('heading', { name: 'Arsenal' })).toHaveFocus());
     expect(inspector.scrollTop).toBe(0);
-    expect(within(screen.getByRole('table')).getAllByRole('button')[0]).toHaveAttribute('aria-controls', 'team');
+    for (const table of [oddsTable(), standingsTable()]) {
+      expect(within(table).getAllByRole('button')[0]).toHaveAttribute('aria-controls', 'team');
+    }
   });
 
   it('keeps an empty published table readable without inventing a selected team', async () => {
@@ -134,6 +148,7 @@ describe('SportPage', () => {
       analysis: { ...footballPayload.analysis, probabilities: {}, positions: {}, expected: {} },
     });
     expect(await screen.findByText('No teams have been published for this season yet.')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Season Odds' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Arsenal' })).not.toBeInTheDocument();
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
@@ -157,6 +172,8 @@ describe('SportPage', () => {
 
     expect(await screen.findByRole('heading', { name: 'Premier League 2026-27 Final Table' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Fixture Predictions' })).not.toBeInTheDocument();
+    // No odds are left to show: one final table, with ticks for each finished race.
+    expect(screen.getAllByRole('table')).toHaveLength(1);
     expect(within(screen.getAllByRole('row')[1]).getAllByText('✓')).toHaveLength(2);
   });
 
@@ -175,8 +192,10 @@ describe('SportPage', () => {
     });
 
     expect(await screen.findByRole('heading', { name: 'Premier League Title, Top 2, Play-off & Relegation Odds' })).toBeInTheDocument();
-    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr'));
-    expect(rows.map((row) => row.textContent)[2]).toBe('Split');
+    for (const table of [oddsTable(), standingsTable()]) {
+      expect(Array.from(table.querySelectorAll('tbody tr')).map((row) => row.textContent)[2]).toBe('Split');
+    }
+    const rows = Array.from(standingsTable().querySelectorAll('tbody tr'));
     expect(rows[0]).toHaveClass('zone-first');
     expect(rows[1]).toHaveClass('zone-top');
     expect(rows[3]).toHaveClass('zone-mid');
@@ -210,13 +229,16 @@ describe('SportPage for leagues with conferences', () => {
 
     expect(await screen.findByRole('heading', { name: 'NFL Playoff & Super Bowl Odds' })).toBeInTheDocument();
     await waitFor(() => expect(document.title).toBe('NFL Playoff & Super Bowl Odds 2026 | Playoff Pulse'));
-    fireEvent.click(screen.getByRole('button', { name: 'AFC' }));
+    fireEvent.click(within(screen.getByRole('group', { name: 'Odds view' })).getByRole('button', { name: 'AFC' }));
 
-    // The cut line is decorative (aria-hidden), so read the rows from the DOM.
-    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr')).map((row) => row.textContent);
-    expect(rows[0]).toContain('CHE');
-    expect(rows[1]).toBe('Playoff line');
-    expect(rows[2]).toContain('ARS');
+    // One conference choice drives both tables. The cut line is decorative (aria-hidden), so read the rows from the DOM.
+    expect(within(screen.getByRole('group', { name: 'Table view' })).getByRole('button', { name: 'AFC' })).toHaveAttribute('aria-pressed', 'true');
+    for (const table of [oddsTable(), standingsTable()]) {
+      const rows = Array.from(table.querySelectorAll('tbody tr')).map((row) => row.textContent);
+      expect(rows[0]).toContain('CHE');
+      expect(rows[1]).toBe('Playoff line');
+      expect(rows[2]).toContain('ARS');
+    }
     expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
   });
 
@@ -228,7 +250,7 @@ describe('SportPage for leagues with conferences', () => {
 
     expect(await screen.findByRole('heading', { name: 'NFL Playoff & Super Bowl Odds' })).toBeInTheDocument();
     expect(screen.queryByRole('group', { name: 'Table view' })).not.toBeInTheDocument();
-    const rows = Array.from(screen.getByRole('table').querySelectorAll('tbody tr'));
+    const rows = Array.from(standingsTable().querySelectorAll('tbody tr'));
     expect(rows.map((row) => row.textContent)[2]).toBe('Playoff line');
     expect(rows[1]).toHaveClass('zone-top');
     expect(rows[3]).not.toHaveClass('zone-top');
@@ -294,7 +316,7 @@ describe('SportPage during the playoffs', () => {
     expect(within(bracket).getByText('1 CHE')).toHaveClass('is-winner');
     expect(within(bracket).getAllByText('To be decided')).toHaveLength(2);
 
-    const chelsea = within(screen.getByRole('table')).getAllByRole('row').find((row) => row.textContent?.includes('CHE'))!;
+    const chelsea = within(oddsTable()).getAllByRole('row').find((row) => row.textContent?.includes('CHE'))!;
     expect(within(chelsea).getByText('✓')).toBeInTheDocument();
     expect(within(chelsea).getByText('42%')).toBeInTheDocument();
     expect(screen.getByLabelText('Season snapshot')).toHaveTextContent('Super Bowl favourite');
