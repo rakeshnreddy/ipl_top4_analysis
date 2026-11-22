@@ -102,6 +102,11 @@ describe('static league source documents', () => {
     });
     expect(page.title).toContain('WTC');
     expect(page.description).toContain('percentage of points');
+    // A drawn final: the static page, its description and social card name both champions.
+    const shared = { ...payload, metadata: { ...payload.metadata, season_status: 'complete' }, playoffs: { champion: null, jointChampions: [payload.standings[0].teamKey, payload.standings[1].teamKey] } };
+    const finished = describeLeague({ ...entry, champion: `${payload.standings[0].shortName} & ${payload.standings[1].shortName}` }, shared, 'https://example.org/');
+    expect(finished.facts[0]).toEqual({ label: 'Joint champions', value: `${payload.standings[0].fullName} & ${payload.standings[1].fullName}` });
+    expect(finished.description).toContain('Joint champions');
     expect(routeFamily({ sport: 'cricket', engine: 'wtc' })).toBe('wtc');
     expect(routeFamily({ sport: 'cricket' })).toBe('cricket');
     expect(routeFamily({ sport: 'motorsport' })).toBe('motorsport');

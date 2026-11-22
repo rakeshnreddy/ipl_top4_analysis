@@ -312,6 +312,17 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(len(warnings), 1)
         self.assertIn("not in the championship schedule", warnings[0])
 
+    def test_tests_known_only_by_month_match_anywhere_in_it(self) -> None:
+        # Bangladesh v England is scheduled for "February 2027" only.
+        tests = [
+            TestMatch("1", date(2027, 2, 10), date(2027, 2, 14), ("BAN", "ENG"), "Mirpur", "Dhaka", "BAN", "ENG", margin="7 wickets"),
+            TestMatch("2", date(2027, 2, 18), date(2027, 2, 22), ("BAN", "ENG"), "Chattogram", "Chattogram", "BAN", None),
+        ]
+        warnings: list[str] = []
+        found = wtc.match_cricsheet(self.cycle, tests, warnings)
+        self.assertEqual(warnings, [])
+        self.assertEqual((found["ban-eng-2027-1"].kind, found["ban-eng-2027-2"].kind), ("visitor", "draw"))
+
     def test_tests_outside_the_championship_are_ignored(self) -> None:
         # The MCG's 150th anniversary Test (March 2027) is not a championship Test.
         tests = [TestMatch("1", date(2027, 3, 11), date(2027, 3, 15), ("AUS", "ENG"), "Melbourne Cricket Ground", "Melbourne", "AUS", "AUS")]
@@ -334,6 +345,12 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(read("Match abandoned without a ball bowled").kind, "abandoned")
         self.assertIsNone(read("Stumps - Day 4"))
         self.assertIsNone(read(""))
+        # A win is read first, whatever else the text mentions.
+        self.assertEqual(read("India won by 3 wkts after a tied first innings").kind, "visitor")
+        self.assertEqual(read("New Zealand won by 5 wkts (draw avoided on day 5)").kind, "host")
+        # An unfit pitch, an award or a forfeit changes the points: left to the config.
+        self.assertIsNone(read("Match abandoned due to an unfit pitch"))
+        self.assertIsNone(read("Match awarded to India"))
 
     def test_cricketdata_fills_lagging_results_and_live_tests(self) -> None:
         pending = [f for f in self.cycle.fixtures if f.key in ("nz-ind-2026-1", "sa-ban-2026-1")]
@@ -374,6 +391,21 @@ class SourceTests(unittest.TestCase):
         self.assertNotIn("nz-ind-2026-1", results)
         self.assertEqual(live["nz-ind-2026-1"].status, "Day 3: Stumps")
         self.assertEqual(cached, {"nz-ind-2026": "s-nz", "sa-ban-2026": "s-sa"})
+
+    def test_cricketdata_finds_a_series_named_by_its_season(self) -> None:
+        series = next(item for item in self.cycle.series if item.id == "nz-sl-2027")
+
+        class Session:
+            def get(self, url, params, timeout):
+                class Response:
+                    ok, status_code = True, 200
+
+                    def json(self):
+                        return {"status": "success", "data": [{"id": "s1", "name": "Sri Lanka tour of New Zealand, 2026-27"}]}
+
+                return Response()
+
+        self.assertEqual(wtc.find_cricdata_series(self.cycle, series, Session(), "key", {}), "s1")
 
     def test_no_cricketdata_key_means_no_calls(self) -> None:
         with mock.patch.dict("os.environ", {}, clear=True):
@@ -510,6 +542,22 @@ class ExactClaimTests(unittest.TestCase):
         rows["CCC"] = wtc.Row("CCC", played=2, points_won=24)
         claims = wtc.needs(cycle, rows, remaining)
         self.assertEqual(claims["CCC"]["status"], "clinched")
+
+    def test_a_finished_table_is_settled_by_its_tie_breakers(self) -> None:
+        cycle = wtc.parse_config(mini_config([], teams=("AAA", "BBB", "CCC"), rankings={"order": ["CCC", "BBB", "AAA"]}))
+        rows = {
+            "AAA": wtc.Row("AAA", played=2, points_won=24),
+            "BBB": wtc.Row("BBB", played=2, points_won=12, series_won=2),
+            "CCC": wtc.Row("CCC", played=2, points_won=12, series_won=1),
+        }
+        claims = wtc.needs(cycle, rows, [])
+        # BBB and CCC are level on PCT, but series wins decide it: no "level" left.
+        self.assertEqual({team: claims[team]["status"] for team in rows}, {"AAA": "clinched", "BBB": "clinched", "CCC": "eliminated"})
+        # Level on PCT, series wins and away PCT: the ICC ranking decides, and it can still change.
+        rows["BBB"].series_won = 1
+        claims = wtc.needs(cycle, rows, [])
+        self.assertEqual((claims["CCC"]["status"], claims["BBB"]["status"]), ("clinched-unless-level", "level-only"))
+        self.assertIn("ICC Test ranking", wtc.need_statements(cycle, claims["BBB"], "BBB")[0])
 
     def test_live_table_claims_on_20_november_2026(self) -> None:
         cycle = wtc.parse_config(CONFIG)
@@ -654,6 +702,8 @@ class SimulationTests(unittest.TestCase):
                         return Response({"status": "success", "data": [{"id": "f", "name": "ICC World Test Championship Final, 2027"}]})
                     status = f"{names[b]} won by 5 wkts" if ended else "Day 2: Stumps"
                     return Response({"status": "success", "data": {"matchList": [
+                        # The finalists' round-stage meeting in the same list is not the final.
+                        {"matchType": "test", "teams": [names[a], names[b]], "date": "2027-02-11", "status": f"{names[a]} won by 9 wkts", "matchStarted": True, "matchEnded": True},
                         {"matchType": "test", "teams": [names[a], names[b]], "date": "2027-06-09", "status": status, "matchStarted": True, "matchEnded": ended},
                     ]}})
 

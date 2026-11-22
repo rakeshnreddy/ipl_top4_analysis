@@ -46,7 +46,7 @@ export interface LeaguePayload {
   };
   standings: Standing[];
   constructorStandings?: Standing[];
-  playoffs?: { champion?: string | null };
+  playoffs?: { champion?: string | null; jointChampions?: string[] | null };
   fixtures?: unknown[];
   analysis: {
     method: string; model?: string; modelNotes?: string[];
@@ -149,9 +149,12 @@ export function describeLeague(entry: LeagueEntry, payload: LeaguePayload, siteU
   if (!complete) columns.push(...tiers.map((tier) => ({ ...tier, probability: true })));
 
   const facts: Fact[] = [];
-  const championKey = payload.playoffs?.champion ?? entry.champion;
+  const joint = (payload.playoffs?.jointChampions ?? []).map((key) => rows.find((row) => row.teamKey === key)?.fullName ?? key);
+  const championKey = payload.playoffs?.champion ?? (joint.length ? null : entry.champion);
   const champion = rows.find((row) => row.teamKey === championKey || row.shortName === championKey);
-  if (complete && champion) facts.push({ label: 'Champions', value: champion.fullName });
+  // A drawn World Test Championship final: both finalists are champions.
+  if (complete && joint.length) facts.push({ label: 'Joint champions', value: joint.join(' & ') });
+  else if (complete && champion) facts.push({ label: 'Champions', value: champion.fullName });
   const probabilities = payload.analysis.probabilities ?? payload.analysis.overallProbabilities ?? {};
   if (!complete && tiers[0]) {
     const tier = tiers[0];

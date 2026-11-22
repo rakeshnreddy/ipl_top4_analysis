@@ -127,6 +127,15 @@ class Fixture:
         """Cancelled and postponed-out-of-window Tests are not in the points percentage (16.12.1)."""
         return self.status not in ("cancelled", "postponed")
 
+    def matches_start(self, day: date, slack: int = 3) -> bool:
+        """A real Test starting on ``day`` is this one: within three days of the date, or in the month when only that is known."""
+        if self.precision == "month":
+            return self.start - timedelta(days=slack) <= day <= self.end + timedelta(days=slack)
+        return abs((day - self.start).days) <= slack
+
+    def distance(self, day: date) -> int:
+        return 0 if self.precision == "month" and self.matches_start(day, 0) else abs((day - self.start).days)
+
 
 @dataclass(frozen=True)
 class Series:
@@ -444,16 +453,16 @@ def match_cricsheet(cycle: Cycle, tests: Iterable[TestMatch], warnings: list[str
         candidates = [
             fixture
             for fixture in by_pair.get(frozenset(test.teams), [])
-            if abs((test.start - fixture.start).days) <= 3 and fixture.key not in found
+            if fixture.matches_start(test.start) and fixture.key not in found
         ]
         if not candidates:
-            if not any(abs((test.start - fixture.start).days) <= 3 for fixture in by_pair.get(frozenset(test.teams), [])):
+            if not any(fixture.matches_start(test.start) for fixture in by_pair.get(frozenset(test.teams), [])):
                 warnings.append(
                     f"Cricsheet has a {test.teams[0]} v {test.teams[1]} Test from {test.start.isoformat()} that is not in "
                     "the championship schedule; check the config."
                 )
             continue
-        fixture = min(candidates, key=lambda item: abs((test.start - item.start).days))
+        fixture = min(candidates, key=lambda item: item.distance(test.start))
         if test.tie:
             kind = "tie"
         elif test.winner is None:
@@ -498,14 +507,17 @@ def parse_cricdata_status(cycle: Cycle, fixture: Fixture, status: str) -> Result
     text = _normal(status)
     if not text:
         return None
-    if re.search(r"\b(abandoned|called off)\b", text):
-        return Result(fixture.key, "abandoned", source="CricketData", note=status)
-    if re.search(r"\b(drawn|draw)\b", text):
-        return Result(fixture.key, "draw", source="CricketData")
-    if re.search(r"\btied?\b", text):
-        return Result(fixture.key, "tie", source="CricketData")
+    # An unfit pitch or outfield changes the points (16.10.2) and needs the ICC's ruling: config only.
+    if re.search(r"\b(unfit|pitch|outfield|awarded|forfeit\w*|conceded)\b", text):
+        return None
     match = re.search(r"^(.*?)\bwon\b(.*)$", text)
     if not match:
+        if re.search(r"\b(abandoned|called off)\b", text):
+            return Result(fixture.key, "abandoned", source="CricketData", note=status)
+        if re.search(r"\b(drawn|draw)\b", text):
+            return Result(fixture.key, "draw", source="CricketData")
+        if re.search(r"\btied?\b", text):
+            return Result(fixture.key, "tie", source="CricketData")
         return None
     winners = []
     for team in fixture.teams:
@@ -545,7 +557,11 @@ def find_cricdata_series(cycle: Cycle, series: Series, session: requests.Session
         return str(series.cricketdata["seriesId"])
     if series.id in cache:
         return cache[series.id]
-    years = {str(fixture.start.year) for fixture in series.fixtures}
+    years = set()
+    for fixture in series.fixtures:
+        year = fixture.start.year
+        # "2027", or the season it falls in, written "2026-27" or "2027-28" (normalised to "2026 27").
+        years |= {str(year), f"{year - 1} {year % 100:02d}", f"{year} {(year + 1) % 100:02d}"}
     wanted = [_normal(name) for name in _series_names(cycle, series)]
     for offset in range(0, 100, 25):
         payload = _cricdata_get(session, "series", key, {"offset": offset})
@@ -610,7 +626,7 @@ def fetch_cricdata(
             except ValueError:
                 continue
             fixture = next(
-                (f for f in fixtures if teams == set(f.teams) and abs((day - f.start).days) <= 3),
+                (f for f in fixtures if teams == set(f.teams) and f.matches_start(day)),
                 None,
             )
             if fixture is None:
@@ -679,6 +695,13 @@ def fetch_cricdata_final(
         if not isinstance(item, dict) or str(item.get("matchType", "test")).lower() != "test":
             continue
         if {team_from_name(cycle, str(name)) for name in item.get("teams") or []} != set(finalists):
+            continue
+        # The finalists may have met in the round stage: only a match on the final's dates is the final.
+        try:
+            day = date.fromisoformat(str(item.get("dateTimeGMT") or item.get("date") or "")[:10])
+        except ValueError:
+            continue
+        if abs((day - cycle.final.start).days) > 7:
             continue
         status = str(item.get("status") or "")
         if item.get("matchEnded"):
@@ -987,6 +1010,7 @@ class Exact:
             return False
         order = sorted(games, key=lambda game: (caps[game.host] + caps[game.visitor]))
         memo: dict[tuple, bool] = {}
+        self.nodes = 0
 
         def search(index: int, budget: tuple[int, ...]) -> bool:
             self.nodes += 1
@@ -1031,6 +1055,7 @@ def needs(cycle: Cycle, rows: dict[str, Row], remaining: list[Remaining]) -> dic
     exact = Exact(cycle, rows, remaining)
     out = {}
     finalists = cycle.rules.finalists
+    settled = settled_places(cycle, rows) if not remaining and any(row.played for row in rows.values()) else None
     for team in cycle.teams:
         own = exact.own_games(team)
         left = len(own)
@@ -1055,8 +1080,12 @@ def needs(cycle: Cycle, rows: dict[str, Row], remaining: list[Remaining]) -> dic
             status = "undetermined"
         else:
             status = "needs-help"
+        if settled is not None:
+            # No Tests left: series wins and away PCT are known, so only an ICC-ranking tie stays open.
+            status = settled[team]
         entry: dict[str, Any] = {
             "status": status,
+            "settled": settled is not None,
             "testsLeft": left,
             "bestPct": round(float(best) * 100, 2) if best is not None else None,
             "worstPct": round(float(worst) * 100, 2) if worst is not None else None,
@@ -1094,6 +1123,25 @@ def needs(cycle: Cycle, rows: dict[str, Row], remaining: list[Remaining]) -> dic
     return out
 
 
+def settled_places(cycle: Cycle, rows: dict[str, Row]) -> dict[str, str]:
+    """Final-place claims once every Test is in: by the table's order, unless only the ICC ranking splits the last place."""
+    order = rank(cycle, rows)
+    places = cycle.rules.finalists
+
+    def record(team: str) -> tuple:
+        row = rows[team]
+        return (row.pct(cycle.rules), row.series_won, row.away_pct(cycle.rules))
+
+    status = {team: ("clinched" if index < places else "eliminated") for index, team in enumerate(order)}
+    if len(order) > places:
+        boundary = record(order[places - 1])
+        tied = [team for team in order if record(team) == boundary]
+        if any(order.index(team) < places for team in tied) and any(order.index(team) >= places for team in tied):
+            for team in tied:
+                status[team] = "clinched-unless-level" if order.index(team) < places else "level-only"
+    return status
+
+
 def need_statements(cycle: Cycle, entry: dict[str, Any], team: str) -> list[str]:
     """Plain sentences for one team's exact situation."""
     left = entry["testsLeft"]
@@ -1102,6 +1150,10 @@ def need_statements(cycle: Cycle, entry: dict[str, Any], team: str) -> list[str]
     status = entry["status"]
     if status == "clinched":
         statements.append("Through to the final, whatever the remaining results.")
+    elif status == "clinched-unless-level" and entry.get("settled"):
+        statements.append("Level with a team outside the top two on PCT, series wins and away PCT: the ICC Test ranking at the end of the window decides, and on the latest ranking they are in.")
+    elif status == "level-only" and entry.get("settled"):
+        statements.append("Level with a team in the top two on PCT, series wins and away PCT: the ICC Test ranking at the end of the window decides, and on the latest ranking they are out.")
     elif status == "clinched-unless-level":
         statements.append("Can only miss the final on a tie-breaker: at worst they finish level on PCT with the team in the last place, and series wins, away PCT and the ICC ranking would decide.")
     elif status == "eliminated":
@@ -1121,7 +1173,7 @@ def need_statements(cycle: Cycle, entry: dict[str, Any], team: str) -> list[str]
         statements.append(f"No Tests left: they finish on {entry['bestPct']:.2f}%.")
     if "fewestWins" in entry and entry["fewestWins"] > 0 and status not in ("clinched",):
         count = entry["fewestWins"]
-        statements.append(f"Need at least {count} win{'s' if count != 1 else ''} from {tests} (drawing the rest) to keep a chance of finishing in the top two outright.")
+        statements.append(f"If they draw every Test they do not win, they need at least {count} win{'s' if count != 1 else ''} from {tests} to keep a chance of finishing in the top two outright.")
     if "winsToClinch" in entry and 0 < entry["winsToClinch"] <= left and status != "in-control":
         count = entry["winsToClinch"]
         statements.append(f"Any {count} win{'s' if count != 1 else ''} from {tests} would guarantee a final place.")

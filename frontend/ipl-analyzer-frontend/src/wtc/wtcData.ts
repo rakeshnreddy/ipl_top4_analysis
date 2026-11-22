@@ -113,6 +113,8 @@ export interface WtcNeed {
   bestPct: number | null;
   worstPct: number | null;
   ownDestiny: 'yes' | 'level' | 'no';
+  /** Every Test is in: the claims follow the table's tie-breakers. */
+  settled?: boolean;
   fewestWins?: number;
   winsToClinch?: number;
   statements: string[];
