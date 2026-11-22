@@ -1,13 +1,43 @@
 /// <reference types="vitest/globals" />
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { finalPayload, installFetch, mockManifest } from '../test/fixtures';
 import SharePage from './SharePage';
+
+// jsdom has no IntersectionObserver, so a test that needs one installs this fake.
+function installIntersectionObserver() {
+  const observers: FakeIntersectionObserver[] = [];
+  class FakeIntersectionObserver {
+    targets: Element[] = [];
+    callback: IntersectionObserverCallback;
+    constructor(callback: IntersectionObserverCallback) {
+      this.callback = callback;
+      observers.push(this);
+    }
+    observe(target: Element) { this.targets.push(target); }
+    disconnect() { this.targets = []; }
+  }
+  vi.stubGlobal('IntersectionObserver', FakeIntersectionObserver);
+  const watching = (target: Element) => observers.filter((observer) => observer.targets.includes(target));
+  return {
+    observes: (target: Element) => watching(target).length > 0,
+    intersect: (target: Element) => watching(target).forEach((observer) => {
+      observer.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], observer as unknown as IntersectionObserver);
+    }),
+  };
+}
 
 describe('SharePage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     installFetch();
+  });
+
+  afterEach(() => {
+    // Unmount before removing stubs: React may still have a slide's observer
+    // effect queued, and it must not run once IntersectionObserver is gone.
+    cleanup();
+    vi.unstubAllGlobals();
   });
 
   it('renders the Reels gallery from the latest manifest', async () => {
@@ -70,23 +100,26 @@ describe('SharePage', () => {
   });
 
   it('keeps later slides off the network until they approach the viewport', async () => {
-    let intersect!: IntersectionObserverCallback;
-    vi.stubGlobal('IntersectionObserver', class {
-      constructor(callback: IntersectionObserverCallback) { intersect = callback; }
-      observe() {}
-      disconnect() {}
-    });
-    try {
-      render(<SharePage />);
-      const images = (await screen.findByTestId('reels-gallery')).querySelectorAll('img');
-      expect(images[0]).toHaveAttribute('src', `/${mockManifest.slides[0].path}`);
-      expect(images[1]).not.toHaveAttribute('src');
+    const viewport = installIntersectionObserver();
+    render(<SharePage />);
+    const images = (await screen.findByTestId('reels-gallery')).querySelectorAll('img');
+    expect(images[0]).toHaveAttribute('src', `/${mockManifest.slides[0].path}`);
+    expect(images[1]).not.toHaveAttribute('src');
 
-      act(() => intersect([{ isIntersecting: true } as IntersectionObserverEntry], {} as IntersectionObserver));
-      expect(images[1]).toHaveAttribute('src', `/${mockManifest.slides[1].path}`);
-    } finally {
-      vi.unstubAllGlobals();
-    }
+    // React runs effects in a later scheduler task than the commit, so the
+    // gallery can be on screen before the slide has started observing.
+    await waitFor(() => expect(viewport.observes(images[1])).toBe(true));
+    act(() => viewport.intersect(images[1]));
+    expect(images[1]).toHaveAttribute('src', `/${mockManifest.slides[1].path}`);
+  });
+
+  it('loads every slide straight away where IntersectionObserver is unavailable', async () => {
+    vi.stubGlobal('IntersectionObserver', undefined);
+    render(<SharePage />);
+    const images = (await screen.findByTestId('reels-gallery')).querySelectorAll('img');
+
+    expect(images[0]).toHaveAttribute('src', `/${mockManifest.slides[0].path}`);
+    expect(images[1]).toHaveAttribute('src', `/${mockManifest.slides[1].path}`);
   });
 
   it('falls back to the original PNG when an optional preview cannot load', async () => {
