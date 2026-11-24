@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026-27",
-    "generated_at": "2026-11-24T04:22:25Z",
+    "generated_at": "2026-11-24T18:48:02Z",
     "source": "NHL",
     "source_url": "https://www.nhl.com/",
     "data_freshness_status": "fresh",
@@ -359,9 +359,9 @@
           "St. Louis Blues",
           "Winnipeg Jets",
           "Utah Mammoth",
+          "Seattle Kraken",
           "Anaheim Ducks",
           "Calgary Flames",
-          "Seattle Kraken",
           "Los Angeles Kings",
           "Chicago Blackhawks",
           "Vancouver Canucks"
@@ -422,9 +422,9 @@
           "Edmonton Oilers",
           "Vegas Golden Knights",
           "San Jose Sharks",
+          "Seattle Kraken",
           "Anaheim Ducks",
           "Calgary Flames",
-          "Seattle Kraken",
           "Los Angeles Kings",
           "Vancouver Canucks"
         ]
@@ -441,10 +441,41 @@
   },
   "standings": [
     {
+      "teamKey": "Minnesota Wild",
+      "shortName": "MIN",
+      "fullName": "Minnesota Wild",
+      "rank": 1,
+      "played": 26,
+      "wins": 18,
+      "losses": 3,
+      "record": "18-3-5",
+      "pct": 0.692,
+      "pointDifferential": 37,
+      "conference": "West",
+      "conferenceLabel": "Western",
+      "division": "Central",
+      "seed": 1,
+      "divisionRank": 1,
+      "form": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "W"
+      ],
+      "lastTen": "8-2",
+      "streak": "W1",
+      "divisionRecord": "4-1",
+      "remaining": 58,
+      "otLosses": 5,
+      "points": 41,
+      "regulationWins": 17
+    },
+    {
       "teamKey": "Carolina Hurricanes",
       "shortName": "CAR",
       "fullName": "Carolina Hurricanes",
-      "rank": 1,
+      "rank": 2,
       "played": 24,
       "wins": 18,
       "losses": 3,
@@ -470,37 +501,6 @@
       "otLosses": 3,
       "points": 39,
       "regulationWins": 17
-    },
-    {
-      "teamKey": "Minnesota Wild",
-      "shortName": "MIN",
-      "fullName": "Minnesota Wild",
-      "rank": 2,
-      "played": 25,
-      "wins": 17,
-      "losses": 3,
-      "record": "17-3-5",
-      "pct": 0.68,
-      "pointDifferential": 34,
-      "conference": "West",
-      "conferenceLabel": "Western",
-      "division": "Central",
-      "seed": 1,
-      "divisionRank": 1,
-      "form": [
-        "L",
-        "W",
-        "W",
-        "W",
-        "W"
-      ],
-      "lastTen": "8-2",
-      "streak": "L1",
-      "divisionRecord": "4-1",
-      "remaining": 59,
-      "otLosses": 5,
-      "points": 39,
-      "regulationWins": 16
     },
     {
       "teamKey": "Edmonton Oilers",
@@ -1030,41 +1030,10 @@
       "regulationWins": 8
     },
     {
-      "teamKey": "San Jose Sharks",
-      "shortName": "SJS",
-      "fullName": "San Jose Sharks",
-      "rank": 20,
-      "played": 25,
-      "wins": 11,
-      "losses": 12,
-      "record": "11-12-2",
-      "pct": 0.44,
-      "pointDifferential": -20,
-      "conference": "West",
-      "conferenceLabel": "Western",
-      "division": "Pacific",
-      "seed": 6,
-      "divisionRank": 3,
-      "form": [
-        "W",
-        "L",
-        "W",
-        "W",
-        "L"
-      ],
-      "lastTen": "4-6",
-      "streak": "W1",
-      "divisionRecord": "3-4",
-      "remaining": 59,
-      "otLosses": 2,
-      "points": 24,
-      "regulationWins": 4
-    },
-    {
       "teamKey": "Philadelphia Flyers",
       "shortName": "PHI",
       "fullName": "Philadelphia Flyers",
-      "rank": 21,
+      "rank": 20,
       "played": 26,
       "wins": 9,
       "losses": 11,
@@ -1092,32 +1061,94 @@
       "regulationWins": 8
     },
     {
-      "teamKey": "Anaheim Ducks",
-      "shortName": "ANA",
-      "fullName": "Anaheim Ducks",
-      "rank": 22,
-      "played": 24,
+      "teamKey": "San Jose Sharks",
+      "shortName": "SJS",
+      "fullName": "San Jose Sharks",
+      "rank": 21,
+      "played": 26,
       "wins": 11,
-      "losses": 12,
-      "record": "11-12-1",
-      "pct": 0.458,
-      "pointDifferential": -5,
+      "losses": 13,
+      "record": "11-13-2",
+      "pct": 0.423,
+      "pointDifferential": -23,
+      "conference": "West",
+      "conferenceLabel": "Western",
+      "division": "Pacific",
+      "seed": 6,
+      "divisionRank": 3,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "lastTen": "4-6",
+      "streak": "L1",
+      "divisionRecord": "3-4",
+      "remaining": 58,
+      "otLosses": 2,
+      "points": 24,
+      "regulationWins": 4
+    },
+    {
+      "teamKey": "Seattle Kraken",
+      "shortName": "SEA",
+      "fullName": "Seattle Kraken",
+      "rank": 22,
+      "played": 21,
+      "wins": 11,
+      "losses": 9,
+      "record": "11-9-1",
+      "pct": 0.524,
+      "pointDifferential": -3,
       "conference": "West",
       "conferenceLabel": "Western",
       "division": "Pacific",
       "seed": 11,
       "divisionRank": 4,
       "form": [
-        "L",
-        "L",
+        "W",
         "L",
         "W",
+        "L",
         "L"
       ],
-      "lastTen": "5-5",
-      "streak": "L3",
-      "divisionRecord": "6-3",
-      "remaining": 60,
+      "lastTen": "4-6",
+      "streak": "W1",
+      "divisionRecord": "5-4",
+      "remaining": 63,
+      "otLosses": 1,
+      "points": 23,
+      "regulationWins": 8
+    },
+    {
+      "teamKey": "Anaheim Ducks",
+      "shortName": "ANA",
+      "fullName": "Anaheim Ducks",
+      "rank": 23,
+      "played": 25,
+      "wins": 11,
+      "losses": 13,
+      "record": "11-13-1",
+      "pct": 0.44,
+      "pointDifferential": -6,
+      "conference": "West",
+      "conferenceLabel": "Western",
+      "division": "Pacific",
+      "seed": 12,
+      "divisionRank": 5,
+      "form": [
+        "L",
+        "L",
+        "L",
+        "L",
+        "W"
+      ],
+      "lastTen": "4-6",
+      "streak": "L4",
+      "divisionRecord": "6-4",
+      "remaining": 59,
       "otLosses": 1,
       "points": 23,
       "regulationWins": 10
@@ -1126,7 +1157,7 @@
       "teamKey": "Calgary Flames",
       "shortName": "CGY",
       "fullName": "Calgary Flames",
-      "rank": 23,
+      "rank": 24,
       "played": 25,
       "wins": 10,
       "losses": 13,
@@ -1136,8 +1167,8 @@
       "conference": "West",
       "conferenceLabel": "Western",
       "division": "Pacific",
-      "seed": 12,
-      "divisionRank": 5,
+      "seed": 13,
+      "divisionRank": 6,
       "form": [
         "L",
         "L",
@@ -1152,37 +1183,6 @@
       "otLosses": 2,
       "points": 22,
       "regulationWins": 9
-    },
-    {
-      "teamKey": "Seattle Kraken",
-      "shortName": "SEA",
-      "fullName": "Seattle Kraken",
-      "rank": 24,
-      "played": 20,
-      "wins": 10,
-      "losses": 9,
-      "record": "10-9-1",
-      "pct": 0.5,
-      "pointDifferential": -4,
-      "conference": "West",
-      "conferenceLabel": "Western",
-      "division": "Pacific",
-      "seed": 13,
-      "divisionRank": 6,
-      "form": [
-        "L",
-        "W",
-        "L",
-        "L",
-        "L"
-      ],
-      "lastTen": "4-6",
-      "streak": "L1",
-      "divisionRecord": "4-4",
-      "remaining": 64,
-      "otLosses": 1,
-      "points": 21,
-      "regulationWins": 7
     },
     {
       "teamKey": "Toronto Maple Leafs",
@@ -1435,30 +1435,6 @@
   ],
   "fixtures": [
     {
-      "id": "2026020383",
-      "round": null,
-      "date": "2026-11-24T02:40:00Z",
-      "home": "Seattle Kraken",
-      "away": "Anaheim Ducks",
-      "venue": null,
-      "probabilities": {
-        "home": 0.509,
-        "away": 0.491
-      }
-    },
-    {
-      "id": "2026020384",
-      "round": null,
-      "date": "2026-11-24T03:00:00Z",
-      "home": "San Jose Sharks",
-      "away": "Minnesota Wild",
-      "venue": null,
-      "probabilities": {
-        "home": 0.369,
-        "away": 0.631
-      }
-    },
-    {
       "id": "2026020385",
       "round": null,
       "date": "2026-11-25T01:00:00Z",
@@ -1466,8 +1442,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.557,
-        "away": 0.443
+        "home": 0.556,
+        "away": 0.444
       }
     },
     {
@@ -1490,8 +1466,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.549,
-        "away": 0.451
+        "home": 0.548,
+        "away": 0.452
       }
     },
     {
@@ -1514,8 +1490,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.462,
-        "away": 0.538
+        "home": 0.461,
+        "away": 0.539
       }
     },
     {
@@ -1538,8 +1514,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.579,
-        "away": 0.421
+        "home": 0.578,
+        "away": 0.422
       }
     },
     {
@@ -1562,8 +1538,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.479,
-        "away": 0.521
+        "home": 0.478,
+        "away": 0.522
       }
     },
     {
@@ -1574,8 +1550,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.644,
-        "away": 0.356
+        "home": 0.643,
+        "away": 0.357
       }
     },
     {
@@ -1586,8 +1562,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.58,
-        "away": 0.42
+        "home": 0.579,
+        "away": 0.421
       }
     },
     {
@@ -1598,8 +1574,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.606,
-        "away": 0.394
+        "home": 0.611,
+        "away": 0.389
       }
     },
     {
@@ -1610,8 +1586,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.593,
-        "away": 0.407
+        "home": 0.592,
+        "away": 0.408
       }
     },
     {
@@ -1622,8 +1598,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.581,
-        "away": 0.419
+        "home": 0.583,
+        "away": 0.417
       }
     },
     {
@@ -1634,8 +1610,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.563,
-        "away": 0.437
+        "home": 0.566,
+        "away": 0.434
       }
     },
     {
@@ -1694,8 +1670,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.556,
-        "away": 0.444
+        "home": 0.555,
+        "away": 0.445
       }
     },
     {
@@ -1706,8 +1682,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.655,
-        "away": 0.345
+        "home": 0.654,
+        "away": 0.346
       }
     },
     {
@@ -1742,8 +1718,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.505,
-        "away": 0.495
+        "home": 0.51,
+        "away": 0.49
       }
     },
     {
@@ -1754,8 +1730,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.547,
-        "away": 0.453
+        "home": 0.544,
+        "away": 0.456
       }
     },
     {
@@ -1766,8 +1742,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.434,
-        "away": 0.566
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -1778,8 +1754,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.428,
-        "away": 0.572
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -1790,8 +1766,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.536,
-        "away": 0.464
+        "home": 0.535,
+        "away": 0.465
       }
     },
     {
@@ -1814,8 +1790,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.622,
-        "away": 0.378
+        "home": 0.619,
+        "away": 0.381
       }
     },
     {
@@ -1826,8 +1802,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.508,
-        "away": 0.492
+        "home": 0.507,
+        "away": 0.493
       }
     },
     {
@@ -1850,8 +1826,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -1874,8 +1850,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.594,
-        "away": 0.406
+        "home": 0.593,
+        "away": 0.407
       }
     },
     {
@@ -1886,8 +1862,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.575,
-        "away": 0.425
+        "home": 0.574,
+        "away": 0.426
       }
     },
     {
@@ -1910,8 +1886,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.525,
-        "away": 0.475
+        "home": 0.524,
+        "away": 0.476
       }
     },
     {
@@ -1922,8 +1898,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.513,
-        "away": 0.487
+        "home": 0.512,
+        "away": 0.488
       }
     },
     {
@@ -1946,8 +1922,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.693,
-        "away": 0.307
+        "home": 0.698,
+        "away": 0.302
       }
     },
     {
@@ -1958,8 +1934,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -1970,8 +1946,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.425,
-        "away": 0.575
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -1982,8 +1958,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.337,
-        "away": 0.663
+        "home": 0.332,
+        "away": 0.668
       }
     },
     {
@@ -2006,8 +1982,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.472,
-        "away": 0.528
+        "home": 0.471,
+        "away": 0.529
       }
     },
     {
@@ -2018,8 +1994,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.405,
-        "away": 0.595
+        "home": 0.404,
+        "away": 0.596
       }
     },
     {
@@ -2054,8 +2030,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.603,
-        "away": 0.397
+        "home": 0.602,
+        "away": 0.398
       }
     },
     {
@@ -2066,8 +2042,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.492,
-        "away": 0.508
+        "home": 0.491,
+        "away": 0.509
       }
     },
     {
@@ -2102,8 +2078,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.672,
-        "away": 0.328
+        "home": 0.671,
+        "away": 0.329
       }
     },
     {
@@ -2114,8 +2090,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.608,
-        "away": 0.392
+        "home": 0.613,
+        "away": 0.387
       }
     },
     {
@@ -2150,8 +2126,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.428,
-        "away": 0.572
+        "home": 0.43,
+        "away": 0.57
       }
     },
     {
@@ -2162,8 +2138,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.406,
-        "away": 0.594
+        "home": 0.398,
+        "away": 0.602
       }
     },
     {
@@ -2174,8 +2150,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.45,
-        "away": 0.55
+        "home": 0.449,
+        "away": 0.551
       }
     },
     {
@@ -2198,8 +2174,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.542,
-        "away": 0.458
+        "home": 0.541,
+        "away": 0.459
       }
     },
     {
@@ -2234,8 +2210,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.556,
-        "away": 0.444
+        "home": 0.555,
+        "away": 0.445
       }
     },
     {
@@ -2246,8 +2222,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.383,
-        "away": 0.617
+        "home": 0.382,
+        "away": 0.618
       }
     },
     {
@@ -2258,8 +2234,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.586,
-        "away": 0.414
+        "home": 0.592,
+        "away": 0.408
       }
     },
     {
@@ -2282,8 +2258,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.513,
-        "away": 0.487
+        "home": 0.512,
+        "away": 0.488
       }
     },
     {
@@ -2306,8 +2282,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.43,
-        "away": 0.57
+        "home": 0.429,
+        "away": 0.571
       }
     },
     {
@@ -2318,8 +2294,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.583,
-        "away": 0.417
+        "home": 0.582,
+        "away": 0.418
       }
     },
     {
@@ -2330,8 +2306,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.428,
-        "away": 0.572
+        "home": 0.43,
+        "away": 0.57
       }
     },
     {
@@ -2354,8 +2330,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.384,
-        "away": 0.616
+        "home": 0.378,
+        "away": 0.622
       }
     },
     {
@@ -2366,8 +2342,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.581,
-        "away": 0.419
+        "home": 0.586,
+        "away": 0.414
       }
     },
     {
@@ -2402,8 +2378,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.539,
-        "away": 0.461
+        "home": 0.534,
+        "away": 0.466
       }
     },
     {
@@ -2414,8 +2390,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.612,
-        "away": 0.388
+        "home": 0.611,
+        "away": 0.389
       }
     },
     {
@@ -2438,8 +2414,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.549,
-        "away": 0.451
+        "home": 0.548,
+        "away": 0.452
       }
     },
     {
@@ -2450,8 +2426,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.487,
-        "away": 0.513
+        "home": 0.486,
+        "away": 0.514
       }
     },
     {
@@ -2474,8 +2450,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.493,
-        "away": 0.507
+        "home": 0.492,
+        "away": 0.508
       }
     },
     {
@@ -2486,8 +2462,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.411,
-        "away": 0.589
+        "home": 0.41,
+        "away": 0.59
       }
     },
     {
@@ -2522,8 +2498,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.634,
-        "away": 0.366
+        "home": 0.639,
+        "away": 0.361
       }
     },
     {
@@ -2534,8 +2510,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.466,
-        "away": 0.534
+        "home": 0.465,
+        "away": 0.535
       }
     },
     {
@@ -2558,8 +2534,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.571,
-        "away": 0.429
+        "home": 0.577,
+        "away": 0.423
       }
     },
     {
@@ -2606,8 +2582,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -2618,8 +2594,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.461,
-        "away": 0.539
+        "home": 0.463,
+        "away": 0.537
       }
     },
     {
@@ -2642,8 +2618,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.631,
-        "away": 0.369
+        "home": 0.63,
+        "away": 0.37
       }
     },
     {
@@ -2678,8 +2654,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.541,
-        "away": 0.459
+        "home": 0.54,
+        "away": 0.46
       }
     },
     {
@@ -2690,8 +2666,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.601,
-        "away": 0.399
+        "home": 0.603,
+        "away": 0.397
       }
     },
     {
@@ -2702,8 +2678,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.456,
-        "away": 0.544
+        "home": 0.455,
+        "away": 0.545
       }
     },
     {
@@ -2714,8 +2690,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.642,
-        "away": 0.358
+        "home": 0.641,
+        "away": 0.359
       }
     },
     {
@@ -2750,8 +2726,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.413,
-        "away": 0.587
+        "home": 0.412,
+        "away": 0.588
       }
     },
     {
@@ -2762,8 +2738,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.453,
-        "away": 0.547
+        "home": 0.452,
+        "away": 0.548
       }
     },
     {
@@ -2774,8 +2750,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.558,
-        "away": 0.442
+        "home": 0.564,
+        "away": 0.436
       }
     },
     {
@@ -2786,8 +2762,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.501,
-        "away": 0.499
+        "home": 0.492,
+        "away": 0.508
       }
     },
     {
@@ -2810,8 +2786,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.645,
-        "away": 0.355
+        "home": 0.644,
+        "away": 0.356
       }
     },
     {
@@ -2822,8 +2798,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.54,
-        "away": 0.46
+        "home": 0.546,
+        "away": 0.454
       }
     },
     {
@@ -2846,8 +2822,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.592,
-        "away": 0.408
+        "home": 0.594,
+        "away": 0.406
       }
     },
     {
@@ -2858,8 +2834,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.549,
+        "away": 0.451
       }
     },
     {
@@ -2870,8 +2846,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.549,
+        "away": 0.451
       }
     },
     {
@@ -2906,8 +2882,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.407,
-        "away": 0.593
+        "home": 0.401,
+        "away": 0.599
       }
     },
     {
@@ -2918,8 +2894,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.603,
-        "away": 0.397
+        "home": 0.602,
+        "away": 0.398
       }
     },
     {
@@ -2954,8 +2930,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.484,
-        "away": 0.516
+        "home": 0.486,
+        "away": 0.514
       }
     },
     {
@@ -2978,8 +2954,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.577,
-        "away": 0.423
+        "home": 0.576,
+        "away": 0.424
       }
     },
     {
@@ -3002,8 +2978,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.508,
-        "away": 0.492
+        "home": 0.502,
+        "away": 0.498
       }
     },
     {
@@ -3050,8 +3026,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.634,
-        "away": 0.366
+        "home": 0.639,
+        "away": 0.361
       }
     },
     {
@@ -3062,8 +3038,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.573,
-        "away": 0.427
+        "home": 0.574,
+        "away": 0.426
       }
     },
     {
@@ -3086,8 +3062,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.518,
-        "away": 0.482
+        "home": 0.517,
+        "away": 0.483
       }
     },
     {
@@ -3098,8 +3074,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.504,
-        "away": 0.496
+        "home": 0.503,
+        "away": 0.497
       }
     },
     {
@@ -3158,8 +3134,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.484,
-        "away": 0.516
+        "home": 0.486,
+        "away": 0.514
       }
     },
     {
@@ -3182,8 +3158,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.547,
+        "away": 0.453
       }
     },
     {
@@ -3194,8 +3170,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.482,
-        "away": 0.518
+        "home": 0.484,
+        "away": 0.516
       }
     },
     {
@@ -3206,8 +3182,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.441,
-        "away": 0.559
+        "home": 0.44,
+        "away": 0.56
       }
     },
     {
@@ -3266,8 +3242,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.612,
-        "away": 0.388
+        "home": 0.606,
+        "away": 0.394
       }
     },
     {
@@ -3290,8 +3266,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.618,
-        "away": 0.382
+        "home": 0.617,
+        "away": 0.383
       }
     },
     {
@@ -3314,8 +3290,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.424,
-        "away": 0.576
+        "home": 0.423,
+        "away": 0.577
       }
     },
     {
@@ -3338,8 +3314,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.542,
-        "away": 0.458
+        "home": 0.541,
+        "away": 0.459
       }
     },
     {
@@ -3362,8 +3338,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.564,
-        "away": 0.436
+        "home": 0.562,
+        "away": 0.438
       }
     },
     {
@@ -3374,8 +3350,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.679,
-        "away": 0.321
+        "home": 0.684,
+        "away": 0.316
       }
     },
     {
@@ -3398,8 +3374,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.58,
-        "away": 0.42
+        "home": 0.579,
+        "away": 0.421
       }
     },
     {
@@ -3410,8 +3386,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.507,
-        "away": 0.493
+        "home": 0.506,
+        "away": 0.494
       }
     },
     {
@@ -3434,8 +3410,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.648,
-        "away": 0.352
+        "home": 0.646,
+        "away": 0.354
       }
     },
     {
@@ -3446,8 +3422,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.614,
-        "away": 0.386
+        "home": 0.619,
+        "away": 0.381
       }
     },
     {
@@ -3458,8 +3434,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.582,
-        "away": 0.418
+        "home": 0.581,
+        "away": 0.419
       }
     },
     {
@@ -3494,8 +3470,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.555,
-        "away": 0.445
+        "home": 0.554,
+        "away": 0.446
       }
     },
     {
@@ -3506,8 +3482,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.54,
-        "away": 0.46
+        "home": 0.537,
+        "away": 0.463
       }
     },
     {
@@ -3530,8 +3506,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.528,
-        "away": 0.472
+        "home": 0.527,
+        "away": 0.473
       }
     },
     {
@@ -3554,8 +3530,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.67,
-        "away": 0.33
+        "home": 0.669,
+        "away": 0.331
       }
     },
     {
@@ -3590,8 +3566,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.545,
+        "away": 0.455
       }
     },
     {
@@ -3614,8 +3590,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.64,
-        "away": 0.36
+        "home": 0.648,
+        "away": 0.352
       }
     },
     {
@@ -3626,8 +3602,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.518,
-        "away": 0.482
+        "home": 0.517,
+        "away": 0.483
       }
     },
     {
@@ -3698,8 +3674,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.524,
-        "away": 0.476
+        "home": 0.523,
+        "away": 0.477
       }
     },
     {
@@ -3722,8 +3698,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.574,
-        "away": 0.426
+        "home": 0.579,
+        "away": 0.421
       }
     },
     {
@@ -3734,8 +3710,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.45,
-        "away": 0.55
+        "home": 0.449,
+        "away": 0.551
       }
     },
     {
@@ -3746,8 +3722,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.436,
-        "away": 0.564
+        "home": 0.441,
+        "away": 0.559
       }
     },
     {
@@ -3758,8 +3734,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.376,
-        "away": 0.624
+        "home": 0.375,
+        "away": 0.625
       }
     },
     {
@@ -3770,8 +3746,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.601,
-        "away": 0.399
+        "home": 0.6,
+        "away": 0.4
       }
     },
     {
@@ -3794,8 +3770,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.45,
-        "away": 0.55
+        "home": 0.449,
+        "away": 0.551
       }
     },
     {
@@ -3806,8 +3782,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.595,
-        "away": 0.405
+        "home": 0.594,
+        "away": 0.406
       }
     },
     {
@@ -3842,8 +3818,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.608,
-        "away": 0.392
+        "home": 0.61,
+        "away": 0.39
       }
     },
     {
@@ -3854,8 +3830,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.672,
-        "away": 0.328
+        "home": 0.669,
+        "away": 0.331
       }
     },
     {
@@ -3878,8 +3854,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.514,
-        "away": 0.486
+        "home": 0.513,
+        "away": 0.487
       }
     },
     {
@@ -3998,8 +3974,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.543,
-        "away": 0.457
+        "home": 0.542,
+        "away": 0.458
       }
     },
     {
@@ -4010,8 +3986,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.649,
-        "away": 0.351
+        "home": 0.648,
+        "away": 0.352
       }
     },
     {
@@ -4022,8 +3998,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.661,
-        "away": 0.339
+        "home": 0.666,
+        "away": 0.334
       }
     },
     {
@@ -4034,8 +4010,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.472,
-        "away": 0.528
+        "home": 0.469,
+        "away": 0.531
       }
     },
     {
@@ -4046,8 +4022,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.556,
+        "away": 0.444
       }
     },
     {
@@ -4082,8 +4058,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.527,
-        "away": 0.473
+        "home": 0.526,
+        "away": 0.474
       }
     },
     {
@@ -4094,8 +4070,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.633,
-        "away": 0.367
+        "home": 0.632,
+        "away": 0.368
       }
     },
     {
@@ -4130,8 +4106,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.634,
-        "away": 0.366
+        "home": 0.639,
+        "away": 0.361
       }
     },
     {
@@ -4142,8 +4118,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.549,
-        "away": 0.451
+        "home": 0.548,
+        "away": 0.452
       }
     },
     {
@@ -4166,8 +4142,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.466,
-        "away": 0.534
+        "home": 0.465,
+        "away": 0.535
       }
     },
     {
@@ -4178,8 +4154,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.434,
-        "away": 0.566
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -4226,8 +4202,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.512,
-        "away": 0.488
+        "home": 0.511,
+        "away": 0.489
       }
     },
     {
@@ -4250,8 +4226,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.465,
-        "away": 0.535
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -4262,8 +4238,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.387,
-        "away": 0.613
+        "home": 0.385,
+        "away": 0.615
       }
     },
     {
@@ -4274,8 +4250,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.59,
-        "away": 0.41
+        "home": 0.595,
+        "away": 0.405
       }
     },
     {
@@ -4334,8 +4310,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.569,
-        "away": 0.431
+        "home": 0.575,
+        "away": 0.425
       }
     },
     {
@@ -4346,8 +4322,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.42,
-        "away": 0.58
+        "home": 0.419,
+        "away": 0.581
       }
     },
     {
@@ -4370,8 +4346,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.521,
-        "away": 0.479
+        "home": 0.52,
+        "away": 0.48
       }
     },
     {
@@ -4406,8 +4382,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.39,
-        "away": 0.61
+        "home": 0.389,
+        "away": 0.611
       }
     },
     {
@@ -4430,8 +4406,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.522,
+        "away": 0.478
       }
     },
     {
@@ -4442,8 +4418,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.634,
-        "away": 0.366
+        "home": 0.633,
+        "away": 0.367
       }
     },
     {
@@ -4466,8 +4442,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -4478,8 +4454,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.566,
-        "away": 0.434
+        "home": 0.563,
+        "away": 0.437
       }
     },
     {
@@ -4490,8 +4466,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.516,
+        "away": 0.484
       }
     },
     {
@@ -4514,8 +4490,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.524,
-        "away": 0.476
+        "home": 0.523,
+        "away": 0.477
       }
     },
     {
@@ -4526,8 +4502,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.412,
-        "away": 0.588
+        "home": 0.41,
+        "away": 0.59
       }
     },
     {
@@ -4538,8 +4514,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.544,
-        "away": 0.456
+        "home": 0.543,
+        "away": 0.457
       }
     },
     {
@@ -4550,8 +4526,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.593,
-        "away": 0.407
+        "home": 0.592,
+        "away": 0.408
       }
     },
     {
@@ -4574,8 +4550,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.565,
-        "away": 0.435
+        "home": 0.564,
+        "away": 0.436
       }
     },
     {
@@ -4610,8 +4586,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.423,
-        "away": 0.577
+        "home": 0.422,
+        "away": 0.578
       }
     },
     {
@@ -4658,8 +4634,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.37,
-        "away": 0.63
+        "home": 0.369,
+        "away": 0.631
       }
     },
     {
@@ -4670,8 +4646,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.478,
-        "away": 0.522
+        "home": 0.475,
+        "away": 0.525
       }
     },
     {
@@ -4682,8 +4658,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.479,
-        "away": 0.521
+        "home": 0.472,
+        "away": 0.528
       }
     },
     {
@@ -4694,8 +4670,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.415,
-        "away": 0.585
+        "home": 0.408,
+        "away": 0.592
       }
     },
     {
@@ -4706,8 +4682,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.471,
-        "away": 0.529
+        "home": 0.47,
+        "away": 0.53
       }
     },
     {
@@ -4718,8 +4694,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.435,
-        "away": 0.565
+        "home": 0.434,
+        "away": 0.566
       }
     },
     {
@@ -4754,8 +4730,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.641,
-        "away": 0.359
+        "home": 0.64,
+        "away": 0.36
       }
     },
     {
@@ -4778,8 +4754,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.615,
-        "away": 0.385
+        "home": 0.621,
+        "away": 0.379
       }
     },
     {
@@ -4802,8 +4778,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.528,
-        "away": 0.472
+        "home": 0.522,
+        "away": 0.478
       }
     },
     {
@@ -4814,8 +4790,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.673,
-        "away": 0.327
+        "home": 0.672,
+        "away": 0.328
       }
     },
     {
@@ -4826,8 +4802,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.456,
-        "away": 0.544
+        "home": 0.455,
+        "away": 0.545
       }
     },
     {
@@ -4862,8 +4838,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.491,
-        "away": 0.509
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -4886,8 +4862,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.547,
+        "away": 0.453
       }
     },
     {
@@ -4898,8 +4874,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.596,
-        "away": 0.404
+        "home": 0.595,
+        "away": 0.405
       }
     },
     {
@@ -4910,8 +4886,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.515,
+        "away": 0.485
       }
     },
     {
@@ -4922,8 +4898,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.634,
-        "away": 0.366
+        "home": 0.636,
+        "away": 0.364
       }
     },
     {
@@ -4934,8 +4910,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.566,
-        "away": 0.434
+        "home": 0.565,
+        "away": 0.435
       }
     },
     {
@@ -4994,8 +4970,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.495,
-        "away": 0.505
+        "home": 0.494,
+        "away": 0.506
       }
     },
     {
@@ -5006,8 +4982,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.44,
-        "away": 0.56
+        "home": 0.433,
+        "away": 0.567
       }
     },
     {
@@ -5030,8 +5006,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.501,
-        "away": 0.499
+        "home": 0.5,
+        "away": 0.5
       }
     },
     {
@@ -5054,8 +5030,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.465,
-        "away": 0.535
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -5102,8 +5078,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.401,
-        "away": 0.599
+        "home": 0.402,
+        "away": 0.598
       }
     },
     {
@@ -5114,8 +5090,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.406,
-        "away": 0.594
+        "home": 0.398,
+        "away": 0.602
       }
     },
     {
@@ -5162,8 +5138,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.405,
-        "away": 0.595
+        "home": 0.399,
+        "away": 0.601
       }
     },
     {
@@ -5210,8 +5186,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.573,
-        "away": 0.427
+        "home": 0.572,
+        "away": 0.428
       }
     },
     {
@@ -5234,8 +5210,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.506,
-        "away": 0.494
+        "home": 0.505,
+        "away": 0.495
       }
     },
     {
@@ -5246,8 +5222,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.46,
-        "away": 0.54
+        "home": 0.459,
+        "away": 0.541
       }
     },
     {
@@ -5258,8 +5234,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.593,
-        "away": 0.407
+        "home": 0.592,
+        "away": 0.408
       }
     },
     {
@@ -5270,8 +5246,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.297,
-        "away": 0.703
+        "home": 0.296,
+        "away": 0.704
       }
     },
     {
@@ -5282,8 +5258,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.458,
-        "away": 0.542
+        "home": 0.451,
+        "away": 0.549
       }
     },
     {
@@ -5318,8 +5294,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.672,
-        "away": 0.328
+        "home": 0.669,
+        "away": 0.331
       }
     },
     {
@@ -5330,8 +5306,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.443,
-        "away": 0.557
+        "home": 0.44,
+        "away": 0.56
       }
     },
     {
@@ -5342,8 +5318,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.46,
-        "away": 0.54
+        "home": 0.454,
+        "away": 0.546
       }
     },
     {
@@ -5366,8 +5342,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.371,
-        "away": 0.629
+        "home": 0.37,
+        "away": 0.63
       }
     },
     {
@@ -5390,8 +5366,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.429,
-        "away": 0.571
+        "home": 0.428,
+        "away": 0.572
       }
     },
     {
@@ -5414,8 +5390,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.584,
-        "away": 0.416
+        "home": 0.583,
+        "away": 0.417
       }
     },
     {
@@ -5450,8 +5426,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.616,
-        "away": 0.384
+        "home": 0.621,
+        "away": 0.379
       }
     },
     {
@@ -5462,8 +5438,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.421,
-        "away": 0.579
+        "home": 0.42,
+        "away": 0.58
       }
     },
     {
@@ -5474,8 +5450,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.383,
-        "away": 0.617
+        "home": 0.382,
+        "away": 0.618
       }
     },
     {
@@ -5486,8 +5462,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.591,
-        "away": 0.409
+        "home": 0.588,
+        "away": 0.412
       }
     },
     {
@@ -5498,8 +5474,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.461,
-        "away": 0.539
+        "home": 0.455,
+        "away": 0.545
       }
     },
     {
@@ -5510,8 +5486,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.499,
-        "away": 0.501
+        "home": 0.496,
+        "away": 0.504
       }
     },
     {
@@ -5534,8 +5510,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.635,
-        "away": 0.365
+        "home": 0.634,
+        "away": 0.366
       }
     },
     {
@@ -5570,8 +5546,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.478,
-        "away": 0.522
+        "home": 0.477,
+        "away": 0.523
       }
     },
     {
@@ -5582,8 +5558,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.464,
-        "away": 0.536
+        "home": 0.463,
+        "away": 0.537
       }
     },
     {
@@ -5594,8 +5570,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.527,
-        "away": 0.473
+        "home": 0.526,
+        "away": 0.474
       }
     },
     {
@@ -5606,8 +5582,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.396,
-        "away": 0.604
+        "home": 0.395,
+        "away": 0.605
       }
     },
     {
@@ -5618,8 +5594,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.498,
-        "away": 0.502
+        "home": 0.497,
+        "away": 0.503
       }
     },
     {
@@ -5642,8 +5618,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.543,
-        "away": 0.457
+        "home": 0.542,
+        "away": 0.458
       }
     },
     {
@@ -5654,8 +5630,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.528,
-        "away": 0.472
+        "home": 0.527,
+        "away": 0.473
       }
     },
     {
@@ -5678,8 +5654,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.496,
+        "away": 0.504
       }
     },
     {
@@ -5690,8 +5666,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.5,
-        "away": 0.5
+        "home": 0.497,
+        "away": 0.503
       }
     },
     {
@@ -5702,8 +5678,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.547,
-        "away": 0.453
+        "home": 0.546,
+        "away": 0.454
       }
     },
     {
@@ -5714,8 +5690,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.534,
-        "away": 0.466
+        "home": 0.533,
+        "away": 0.467
       }
     },
     {
@@ -5738,8 +5714,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.644,
-        "away": 0.356
+        "home": 0.649,
+        "away": 0.351
       }
     },
     {
@@ -5750,8 +5726,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.476,
-        "away": 0.524
+        "home": 0.475,
+        "away": 0.525
       }
     },
     {
@@ -5762,8 +5738,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.527,
-        "away": 0.473
+        "home": 0.526,
+        "away": 0.474
       }
     },
     {
@@ -5786,8 +5762,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.595,
-        "away": 0.405
+        "home": 0.594,
+        "away": 0.406
       }
     },
     {
@@ -5810,8 +5786,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.406,
-        "away": 0.594
+        "home": 0.405,
+        "away": 0.595
       }
     },
     {
@@ -5822,8 +5798,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.435,
-        "away": 0.565
+        "home": 0.434,
+        "away": 0.566
       }
     },
     {
@@ -5834,8 +5810,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.481,
-        "away": 0.519
+        "home": 0.48,
+        "away": 0.52
       }
     },
     {
@@ -5846,8 +5822,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.522,
+        "away": 0.478
       }
     },
     {
@@ -5858,8 +5834,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.412,
-        "away": 0.588
+        "home": 0.41,
+        "away": 0.59
       }
     },
     {
@@ -5870,8 +5846,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.626,
-        "away": 0.374
+        "home": 0.631,
+        "away": 0.369
       }
     },
     {
@@ -5882,8 +5858,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.498,
-        "away": 0.502
+        "home": 0.495,
+        "away": 0.505
       }
     },
     {
@@ -5918,8 +5894,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.607,
-        "away": 0.393
+        "home": 0.606,
+        "away": 0.394
       }
     },
     {
@@ -5954,8 +5930,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.556,
-        "away": 0.444
+        "home": 0.555,
+        "away": 0.445
       }
     },
     {
@@ -5978,8 +5954,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.547,
+        "away": 0.453
       }
     },
     {
@@ -6038,8 +6014,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.457,
-        "away": 0.543
+        "home": 0.456,
+        "away": 0.544
       }
     },
     {
@@ -6050,8 +6026,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.432,
-        "away": 0.568
+        "home": 0.426,
+        "away": 0.574
       }
     },
     {
@@ -6062,8 +6038,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.531,
-        "away": 0.469
+        "home": 0.533,
+        "away": 0.467
       }
     },
     {
@@ -6098,8 +6074,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.556,
+        "away": 0.444
       }
     },
     {
@@ -6110,8 +6086,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.401,
-        "away": 0.599
+        "home": 0.395,
+        "away": 0.605
       }
     },
     {
@@ -6158,8 +6134,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.499,
-        "away": 0.501
+        "home": 0.498,
+        "away": 0.502
       }
     },
     {
@@ -6194,8 +6170,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.767,
-        "away": 0.233
+        "home": 0.766,
+        "away": 0.234
       }
     },
     {
@@ -6218,8 +6194,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.449,
-        "away": 0.551
+        "home": 0.443,
+        "away": 0.557
       }
     },
     {
@@ -6230,8 +6206,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.508,
-        "away": 0.492
+        "home": 0.51,
+        "away": 0.49
       }
     },
     {
@@ -6242,8 +6218,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.456,
-        "away": 0.544
+        "home": 0.455,
+        "away": 0.545
       }
     },
     {
@@ -6254,8 +6230,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.462,
-        "away": 0.538
+        "home": 0.461,
+        "away": 0.539
       }
     },
     {
@@ -6278,8 +6254,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.519,
-        "away": 0.481
+        "home": 0.521,
+        "away": 0.479
       }
     },
     {
@@ -6302,8 +6278,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.542,
-        "away": 0.458
+        "home": 0.541,
+        "away": 0.459
       }
     },
     {
@@ -6326,8 +6302,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.413,
-        "away": 0.587
+        "home": 0.407,
+        "away": 0.593
       }
     },
     {
@@ -6338,8 +6314,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -6350,8 +6326,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.672,
-        "away": 0.328
+        "home": 0.671,
+        "away": 0.329
       }
     },
     {
@@ -6362,8 +6338,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -6374,8 +6350,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.642,
-        "away": 0.358
+        "home": 0.641,
+        "away": 0.359
       }
     },
     {
@@ -6410,8 +6386,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.492,
-        "away": 0.508
+        "home": 0.491,
+        "away": 0.509
       }
     },
     {
@@ -6422,8 +6398,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.587,
-        "away": 0.413
+        "home": 0.585,
+        "away": 0.415
       }
     },
     {
@@ -6434,8 +6410,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.567,
-        "away": 0.433
+        "home": 0.566,
+        "away": 0.434
       }
     },
     {
@@ -6458,8 +6434,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.461,
-        "away": 0.539
+        "home": 0.46,
+        "away": 0.54
       }
     },
     {
@@ -6470,8 +6446,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.506,
-        "away": 0.494
+        "home": 0.505,
+        "away": 0.495
       }
     },
     {
@@ -6482,8 +6458,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.533,
-        "away": 0.467
+        "home": 0.535,
+        "away": 0.465
       }
     },
     {
@@ -6518,8 +6494,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.645,
-        "away": 0.355
+        "home": 0.65,
+        "away": 0.35
       }
     },
     {
@@ -6530,8 +6506,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.418,
-        "away": 0.582
+        "home": 0.417,
+        "away": 0.583
       }
     },
     {
@@ -6554,8 +6530,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.579,
-        "away": 0.421
+        "home": 0.578,
+        "away": 0.422
       }
     },
     {
@@ -6614,8 +6590,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.572,
-        "away": 0.428
+        "home": 0.571,
+        "away": 0.429
       }
     },
     {
@@ -6626,8 +6602,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.637,
-        "away": 0.363
+        "home": 0.636,
+        "away": 0.364
       }
     },
     {
@@ -6650,8 +6626,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.664,
-        "away": 0.336
+        "home": 0.666,
+        "away": 0.334
       }
     },
     {
@@ -6662,8 +6638,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.592,
-        "away": 0.408
+        "home": 0.591,
+        "away": 0.409
       }
     },
     {
@@ -6674,8 +6650,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.557,
-        "away": 0.443
+        "home": 0.555,
+        "away": 0.445
       }
     },
     {
@@ -6686,8 +6662,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.485,
-        "away": 0.515
+        "home": 0.484,
+        "away": 0.516
       }
     },
     {
@@ -6698,8 +6674,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.617,
-        "away": 0.383
+        "home": 0.623,
+        "away": 0.377
       }
     },
     {
@@ -6722,8 +6698,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.402,
-        "away": 0.598
+        "home": 0.396,
+        "away": 0.604
       }
     },
     {
@@ -6746,8 +6722,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.525,
-        "away": 0.475
+        "home": 0.527,
+        "away": 0.473
       }
     },
     {
@@ -6758,8 +6734,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.581,
-        "away": 0.419
+        "home": 0.58,
+        "away": 0.42
       }
     },
     {
@@ -6782,8 +6758,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.545,
-        "away": 0.455
+        "home": 0.544,
+        "away": 0.456
       }
     },
     {
@@ -6818,8 +6794,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.563,
-        "away": 0.437
+        "home": 0.56,
+        "away": 0.44
       }
     },
     {
@@ -6830,8 +6806,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.458,
-        "away": 0.542
+        "home": 0.457,
+        "away": 0.543
       }
     },
     {
@@ -6842,8 +6818,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.442,
-        "away": 0.558
+        "home": 0.435,
+        "away": 0.565
       }
     },
     {
@@ -6902,8 +6878,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.585,
-        "away": 0.415
+        "home": 0.582,
+        "away": 0.418
       }
     },
     {
@@ -6926,8 +6902,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.515,
-        "away": 0.485
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -6962,8 +6938,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.605,
-        "away": 0.395
+        "home": 0.606,
+        "away": 0.394
       }
     },
     {
@@ -6974,8 +6950,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.751,
-        "away": 0.249
+        "home": 0.756,
+        "away": 0.244
       }
     },
     {
@@ -7010,8 +6986,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.533,
-        "away": 0.467
+        "home": 0.532,
+        "away": 0.468
       }
     },
     {
@@ -7022,8 +6998,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.512,
-        "away": 0.488
+        "home": 0.511,
+        "away": 0.489
       }
     },
     {
@@ -7082,8 +7058,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.413,
-        "away": 0.587
+        "home": 0.412,
+        "away": 0.588
       }
     },
     {
@@ -7094,8 +7070,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.721,
-        "away": 0.279
+        "home": 0.72,
+        "away": 0.28
       }
     },
     {
@@ -7106,8 +7082,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.41,
-        "away": 0.59
+        "home": 0.409,
+        "away": 0.591
       }
     },
     {
@@ -7118,8 +7094,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.563,
-        "away": 0.437
+        "home": 0.562,
+        "away": 0.438
       }
     },
     {
@@ -7130,8 +7106,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.654,
-        "away": 0.346
+        "home": 0.657,
+        "away": 0.343
       }
     },
     {
@@ -7142,8 +7118,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.528,
-        "away": 0.472
+        "home": 0.527,
+        "away": 0.473
       }
     },
     {
@@ -7154,8 +7130,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.596,
-        "away": 0.404
+        "home": 0.593,
+        "away": 0.407
       }
     },
     {
@@ -7166,8 +7142,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.46,
-        "away": 0.54
+        "home": 0.454,
+        "away": 0.546
       }
     },
     {
@@ -7178,8 +7154,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.504,
-        "away": 0.496
+        "home": 0.503,
+        "away": 0.497
       }
     },
     {
@@ -7190,8 +7166,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.509,
-        "away": 0.491
+        "home": 0.508,
+        "away": 0.492
       }
     },
     {
@@ -7202,8 +7178,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.535,
-        "away": 0.465
+        "home": 0.534,
+        "away": 0.466
       }
     },
     {
@@ -7250,8 +7226,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.558,
-        "away": 0.442
+        "home": 0.552,
+        "away": 0.448
       }
     },
     {
@@ -7286,8 +7262,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.578,
-        "away": 0.422
+        "home": 0.577,
+        "away": 0.423
       }
     },
     {
@@ -7346,8 +7322,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.561,
-        "away": 0.439
+        "home": 0.567,
+        "away": 0.433
       }
     },
     {
@@ -7358,8 +7334,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.551,
-        "away": 0.449
+        "home": 0.55,
+        "away": 0.45
       }
     },
     {
@@ -7370,8 +7346,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.499,
-        "away": 0.501
+        "home": 0.496,
+        "away": 0.504
       }
     },
     {
@@ -7394,8 +7370,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.463,
-        "away": 0.537
+        "home": 0.465,
+        "away": 0.535
       }
     },
     {
@@ -7454,8 +7430,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.543,
-        "away": 0.457
+        "home": 0.542,
+        "away": 0.458
       }
     },
     {
@@ -7466,8 +7442,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.424,
-        "away": 0.576
+        "home": 0.423,
+        "away": 0.577
       }
     },
     {
@@ -7526,8 +7502,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.422,
-        "away": 0.578
+        "home": 0.421,
+        "away": 0.579
       }
     },
     {
@@ -7538,8 +7514,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.442,
-        "away": 0.558
+        "home": 0.441,
+        "away": 0.559
       }
     },
     {
@@ -7550,8 +7526,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.557,
-        "away": 0.443
+        "home": 0.556,
+        "away": 0.444
       }
     },
     {
@@ -7562,8 +7538,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.354,
-        "away": 0.646
+        "home": 0.353,
+        "away": 0.647
       }
     },
     {
@@ -7574,8 +7550,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.441,
-        "away": 0.559
+        "home": 0.442,
+        "away": 0.558
       }
     },
     {
@@ -7622,8 +7598,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.531,
-        "away": 0.469
+        "home": 0.53,
+        "away": 0.47
       }
     },
     {
@@ -7634,8 +7610,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.573,
-        "away": 0.427
+        "home": 0.572,
+        "away": 0.428
       }
     },
     {
@@ -7646,8 +7622,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.529,
-        "away": 0.471
+        "home": 0.526,
+        "away": 0.474
       }
     },
     {
@@ -7658,8 +7634,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.399,
-        "away": 0.601
+        "home": 0.398,
+        "away": 0.602
       }
     },
     {
@@ -7670,8 +7646,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.558,
-        "away": 0.442
+        "home": 0.552,
+        "away": 0.448
       }
     },
     {
@@ -7694,8 +7670,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.544,
+        "away": 0.456
       }
     },
     {
@@ -7706,8 +7682,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.596,
-        "away": 0.404
+        "home": 0.593,
+        "away": 0.407
       }
     },
     {
@@ -7718,8 +7694,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.507,
-        "away": 0.493
+        "home": 0.506,
+        "away": 0.494
       }
     },
     {
@@ -7778,8 +7754,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.606,
-        "away": 0.394
+        "home": 0.605,
+        "away": 0.395
       }
     },
     {
@@ -7802,8 +7778,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.551,
+        "away": 0.449
       }
     },
     {
@@ -7814,8 +7790,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.491,
-        "away": 0.509
+        "home": 0.484,
+        "away": 0.516
       }
     },
     {
@@ -7838,8 +7814,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.574,
-        "away": 0.426
+        "home": 0.573,
+        "away": 0.427
       }
     },
     {
@@ -7862,8 +7838,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.642,
-        "away": 0.358
+        "home": 0.641,
+        "away": 0.359
       }
     },
     {
@@ -7874,8 +7850,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.496,
-        "away": 0.504
+        "home": 0.495,
+        "away": 0.505
       }
     },
     {
@@ -7886,8 +7862,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.424,
-        "away": 0.576
+        "home": 0.418,
+        "away": 0.582
       }
     },
     {
@@ -7898,8 +7874,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.619,
-        "away": 0.381
+        "home": 0.618,
+        "away": 0.382
       }
     },
     {
@@ -7922,8 +7898,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.485,
-        "away": 0.515
+        "home": 0.484,
+        "away": 0.516
       }
     },
     {
@@ -7958,8 +7934,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.483,
-        "away": 0.517
+        "home": 0.485,
+        "away": 0.515
       }
     },
     {
@@ -7970,8 +7946,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.569,
-        "away": 0.431
+        "home": 0.568,
+        "away": 0.432
       }
     },
     {
@@ -7982,8 +7958,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.514,
-        "away": 0.486
+        "home": 0.513,
+        "away": 0.487
       }
     },
     {
@@ -7994,8 +7970,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.607,
-        "away": 0.393
+        "home": 0.609,
+        "away": 0.391
       }
     },
     {
@@ -8030,8 +8006,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.5,
-        "away": 0.5
+        "home": 0.502,
+        "away": 0.498
       }
     },
     {
@@ -8042,8 +8018,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.5,
-        "away": 0.5
+        "home": 0.499,
+        "away": 0.501
       }
     },
     {
@@ -8054,8 +8030,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.565,
-        "away": 0.435
+        "home": 0.57,
+        "away": 0.43
       }
     },
     {
@@ -8066,8 +8042,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.479,
-        "away": 0.521
+        "home": 0.472,
+        "away": 0.528
       }
     },
     {
@@ -8078,8 +8054,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.544,
-        "away": 0.456
+        "home": 0.543,
+        "away": 0.457
       }
     },
     {
@@ -8102,8 +8078,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.548,
-        "away": 0.452
+        "home": 0.547,
+        "away": 0.453
       }
     },
     {
@@ -8126,8 +8102,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.552,
+        "away": 0.448
       }
     },
     {
@@ -8138,8 +8114,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.617,
-        "away": 0.383
+        "home": 0.616,
+        "away": 0.384
       }
     },
     {
@@ -8162,8 +8138,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.487,
-        "away": 0.513
+        "home": 0.48,
+        "away": 0.52
       }
     },
     {
@@ -8186,8 +8162,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.426,
-        "away": 0.574
+        "home": 0.425,
+        "away": 0.575
       }
     },
     {
@@ -8234,8 +8210,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.471,
-        "away": 0.529
+        "home": 0.47,
+        "away": 0.53
       }
     },
     {
@@ -8246,8 +8222,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.431,
-        "away": 0.569
+        "home": 0.434,
+        "away": 0.566
       }
     },
     {
@@ -8258,8 +8234,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.429,
-        "away": 0.571
+        "home": 0.428,
+        "away": 0.572
       }
     },
     {
@@ -8270,8 +8246,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.451,
-        "away": 0.549
+        "home": 0.45,
+        "away": 0.55
       }
     },
     {
@@ -8282,8 +8258,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.631,
-        "away": 0.369
+        "home": 0.633,
+        "away": 0.367
       }
     },
     {
@@ -8294,8 +8270,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -8330,8 +8306,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.661,
-        "away": 0.339
+        "home": 0.666,
+        "away": 0.334
       }
     },
     {
@@ -8354,8 +8330,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.325,
-        "away": 0.675
+        "home": 0.324,
+        "away": 0.676
       }
     },
     {
@@ -8378,8 +8354,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.588,
-        "away": 0.412
+        "home": 0.593,
+        "away": 0.407
       }
     },
     {
@@ -8390,8 +8366,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.669,
-        "away": 0.331
+        "home": 0.668,
+        "away": 0.332
       }
     },
     {
@@ -8426,8 +8402,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.525,
-        "away": 0.475
+        "home": 0.524,
+        "away": 0.476
       }
     },
     {
@@ -8438,8 +8414,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.575,
-        "away": 0.425
+        "home": 0.572,
+        "away": 0.428
       }
     },
     {
@@ -8450,8 +8426,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.507,
-        "away": 0.493
+        "home": 0.506,
+        "away": 0.494
       }
     },
     {
@@ -8462,8 +8438,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.522,
-        "away": 0.478
+        "home": 0.521,
+        "away": 0.479
       }
     },
     {
@@ -8474,8 +8450,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.337,
-        "away": 0.663
+        "home": 0.332,
+        "away": 0.668
       }
     },
     {
@@ -8486,8 +8462,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.54,
-        "away": 0.46
+        "home": 0.542,
+        "away": 0.458
       }
     },
     {
@@ -8498,8 +8474,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.5,
-        "away": 0.5
+        "home": 0.499,
+        "away": 0.501
       }
     },
     {
@@ -8522,8 +8498,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.671,
-        "away": 0.329
+        "home": 0.67,
+        "away": 0.33
       }
     },
     {
@@ -8558,8 +8534,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -8570,8 +8546,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.642,
-        "away": 0.358
+        "home": 0.641,
+        "away": 0.359
       }
     },
     {
@@ -8582,8 +8558,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.471,
-        "away": 0.529
+        "home": 0.47,
+        "away": 0.53
       }
     },
     {
@@ -8618,8 +8594,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.578,
-        "away": 0.422
+        "home": 0.583,
+        "away": 0.417
       }
     },
     {
@@ -8690,8 +8666,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.507,
-        "away": 0.493
+        "home": 0.506,
+        "away": 0.494
       }
     },
     {
@@ -8726,8 +8702,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.425,
-        "away": 0.575
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -8750,8 +8726,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.667,
-        "away": 0.333
+        "home": 0.672,
+        "away": 0.328
       }
     },
     {
@@ -8762,8 +8738,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.526,
-        "away": 0.474
+        "home": 0.525,
+        "away": 0.475
       }
     },
     {
@@ -8786,8 +8762,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.434,
-        "away": 0.566
+        "home": 0.433,
+        "away": 0.567
       }
     },
     {
@@ -8798,8 +8774,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.543,
-        "away": 0.457
+        "home": 0.542,
+        "away": 0.458
       }
     },
     {
@@ -8810,8 +8786,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.721,
-        "away": 0.279
+        "home": 0.72,
+        "away": 0.28
       }
     },
     {
@@ -8822,8 +8798,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.632,
-        "away": 0.368
+        "home": 0.637,
+        "away": 0.363
       }
     },
     {
@@ -8846,8 +8822,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.606,
-        "away": 0.394
+        "home": 0.605,
+        "away": 0.395
       }
     },
     {
@@ -8858,8 +8834,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.561,
-        "away": 0.439
+        "home": 0.56,
+        "away": 0.44
       }
     },
     {
@@ -8870,8 +8846,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.539,
-        "away": 0.461
+        "home": 0.534,
+        "away": 0.466
       }
     },
     {
@@ -8906,8 +8882,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.575,
-        "away": 0.425
+        "home": 0.574,
+        "away": 0.426
       }
     },
     {
@@ -8918,8 +8894,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.699,
-        "away": 0.301
+        "home": 0.704,
+        "away": 0.296
       }
     },
     {
@@ -8954,8 +8930,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.465,
-        "away": 0.535
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -8978,8 +8954,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.652,
-        "away": 0.348
+        "home": 0.651,
+        "away": 0.349
       }
     },
     {
@@ -8990,8 +8966,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.536,
-        "away": 0.464
+        "home": 0.535,
+        "away": 0.465
       }
     },
     {
@@ -9002,8 +8978,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.523,
-        "away": 0.477
+        "home": 0.522,
+        "away": 0.478
       }
     },
     {
@@ -9014,8 +8990,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.479,
-        "away": 0.521
+        "home": 0.478,
+        "away": 0.522
       }
     },
     {
@@ -9050,8 +9026,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.545,
-        "away": 0.455
+        "home": 0.544,
+        "away": 0.456
       }
     },
     {
@@ -9062,8 +9038,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.576,
-        "away": 0.424
+        "home": 0.578,
+        "away": 0.422
       }
     },
     {
@@ -9074,8 +9050,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.612,
-        "away": 0.388
+        "home": 0.611,
+        "away": 0.389
       }
     },
     {
@@ -9098,8 +9074,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.432,
-        "away": 0.568
+        "home": 0.426,
+        "away": 0.574
       }
     },
     {
@@ -9110,8 +9086,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.614,
-        "away": 0.386
+        "home": 0.613,
+        "away": 0.387
       }
     },
     {
@@ -9122,8 +9098,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.569,
-        "away": 0.431
+        "home": 0.575,
+        "away": 0.425
       }
     },
     {
@@ -9146,8 +9122,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.507,
-        "away": 0.493
+        "home": 0.506,
+        "away": 0.494
       }
     },
     {
@@ -9158,8 +9134,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.644,
-        "away": 0.356
+        "home": 0.643,
+        "away": 0.357
       }
     },
     {
@@ -9170,8 +9146,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.455,
-        "away": 0.545
+        "home": 0.453,
+        "away": 0.547
       }
     },
     {
@@ -9182,8 +9158,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -9194,8 +9170,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.572,
-        "away": 0.428
+        "home": 0.571,
+        "away": 0.429
       }
     },
     {
@@ -9218,8 +9194,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.509,
-        "away": 0.491
+        "home": 0.508,
+        "away": 0.492
       }
     },
     {
@@ -9230,8 +9206,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.596,
-        "away": 0.404
+        "home": 0.601,
+        "away": 0.399
       }
     },
     {
@@ -9242,8 +9218,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.32,
-        "away": 0.68
+        "home": 0.319,
+        "away": 0.681
       }
     },
     {
@@ -9254,8 +9230,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.597,
-        "away": 0.403
+        "home": 0.596,
+        "away": 0.404
       }
     },
     {
@@ -9290,8 +9266,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.517,
-        "away": 0.483
+        "home": 0.516,
+        "away": 0.484
       }
     },
     {
@@ -9314,8 +9290,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.546,
-        "away": 0.454
+        "home": 0.543,
+        "away": 0.457
       }
     },
     {
@@ -9338,8 +9314,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -9350,8 +9326,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.417,
-        "away": 0.583
+        "home": 0.411,
+        "away": 0.589
       }
     },
     {
@@ -9374,8 +9350,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.504,
-        "away": 0.496
+        "home": 0.503,
+        "away": 0.497
       }
     },
     {
@@ -9398,8 +9374,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.479,
-        "away": 0.521
+        "home": 0.478,
+        "away": 0.522
       }
     },
     {
@@ -9422,8 +9398,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.497,
-        "away": 0.503
+        "home": 0.494,
+        "away": 0.506
       }
     },
     {
@@ -9446,8 +9422,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.406,
-        "away": 0.594
+        "home": 0.405,
+        "away": 0.595
       }
     },
     {
@@ -9458,8 +9434,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.487,
-        "away": 0.513
+        "home": 0.48,
+        "away": 0.52
       }
     },
     {
@@ -9506,8 +9482,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.485,
-        "away": 0.515
+        "home": 0.478,
+        "away": 0.522
       }
     },
     {
@@ -9530,8 +9506,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.547,
-        "away": 0.453
+        "home": 0.546,
+        "away": 0.454
       }
     },
     {
@@ -9542,8 +9518,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.607,
-        "away": 0.393
+        "home": 0.604,
+        "away": 0.396
       }
     },
     {
@@ -9614,8 +9590,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.45,
-        "away": 0.55
+        "home": 0.449,
+        "away": 0.551
       }
     },
     {
@@ -9638,8 +9614,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.506,
-        "away": 0.494
+        "home": 0.505,
+        "away": 0.495
       }
     },
     {
@@ -9662,8 +9638,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.415,
-        "away": 0.585
+        "home": 0.412,
+        "away": 0.588
       }
     },
     {
@@ -9674,8 +9650,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.501,
-        "away": 0.499
+        "home": 0.5,
+        "away": 0.5
       }
     },
     {
@@ -9686,8 +9662,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.351,
-        "away": 0.649
+        "home": 0.345,
+        "away": 0.655
       }
     },
     {
@@ -9698,8 +9674,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.599,
-        "away": 0.401
+        "home": 0.598,
+        "away": 0.402
       }
     },
     {
@@ -9710,8 +9686,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.549,
-        "away": 0.451
+        "home": 0.548,
+        "away": 0.452
       }
     },
     {
@@ -9722,8 +9698,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.616,
-        "away": 0.384
+        "home": 0.613,
+        "away": 0.387
       }
     },
     {
@@ -9770,8 +9746,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.431,
-        "away": 0.569
+        "home": 0.425,
+        "away": 0.575
       }
     },
     {
@@ -9782,8 +9758,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.676,
-        "away": 0.324
+        "home": 0.675,
+        "away": 0.325
       }
     },
     {
@@ -9794,8 +9770,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.378,
-        "away": 0.622
+        "home": 0.372,
+        "away": 0.628
       }
     },
     {
@@ -9806,8 +9782,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.534,
-        "away": 0.466
+        "home": 0.533,
+        "away": 0.467
       }
     },
     {
@@ -9854,8 +9830,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.505,
-        "away": 0.495
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -9890,8 +9866,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.523,
-        "away": 0.477
+        "home": 0.521,
+        "away": 0.479
       }
     },
     {
@@ -9902,8 +9878,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.616,
-        "away": 0.384
+        "home": 0.621,
+        "away": 0.379
       }
     },
     {
@@ -9914,8 +9890,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.622,
-        "away": 0.378
+        "home": 0.619,
+        "away": 0.381
       }
     },
     {
@@ -9962,8 +9938,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -9974,8 +9950,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.474,
-        "away": 0.526
+        "home": 0.473,
+        "away": 0.527
       }
     },
     {
@@ -10034,8 +10010,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.498,
-        "away": 0.502
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -10082,8 +10058,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.614,
-        "away": 0.386
+        "home": 0.619,
+        "away": 0.381
       }
     },
     {
@@ -10118,8 +10094,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.605,
-        "away": 0.395
+        "home": 0.606,
+        "away": 0.394
       }
     },
     {
@@ -10130,8 +10106,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.483,
-        "away": 0.517
+        "home": 0.477,
+        "away": 0.523
       }
     },
     {
@@ -10190,8 +10166,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.588,
-        "away": 0.412
+        "home": 0.594,
+        "away": 0.406
       }
     },
     {
@@ -10214,8 +10190,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.636,
-        "away": 0.364
+        "home": 0.635,
+        "away": 0.365
       }
     },
     {
@@ -10226,8 +10202,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.532,
-        "away": 0.468
+        "home": 0.534,
+        "away": 0.466
       }
     },
     {
@@ -10250,8 +10226,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.471,
-        "away": 0.529
+        "home": 0.47,
+        "away": 0.53
       }
     },
     {
@@ -10298,8 +10274,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.506,
-        "away": 0.494
+        "home": 0.505,
+        "away": 0.495
       }
     },
     {
@@ -10310,8 +10286,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.554,
-        "away": 0.446
+        "home": 0.553,
+        "away": 0.447
       }
     },
     {
@@ -10334,8 +10310,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.552,
+        "away": 0.448
       }
     },
     {
@@ -10406,8 +10382,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.563,
-        "away": 0.437
+        "home": 0.569,
+        "away": 0.431
       }
     },
     {
@@ -10418,8 +10394,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.421,
-        "away": 0.579
+        "home": 0.42,
+        "away": 0.58
       }
     },
     {
@@ -10442,8 +10418,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.425,
-        "away": 0.575
+        "home": 0.427,
+        "away": 0.573
       }
     },
     {
@@ -10454,8 +10430,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.538,
-        "away": 0.462
+        "home": 0.537,
+        "away": 0.463
       }
     },
     {
@@ -10466,8 +10442,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.452,
-        "away": 0.548
+        "home": 0.454,
+        "away": 0.546
       }
     },
     {
@@ -10478,8 +10454,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.718,
-        "away": 0.282
+        "home": 0.717,
+        "away": 0.283
       }
     },
     {
@@ -10490,8 +10466,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.594,
-        "away": 0.406
+        "home": 0.599,
+        "away": 0.401
       }
     },
     {
@@ -10526,8 +10502,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.61,
-        "away": 0.39
+        "home": 0.615,
+        "away": 0.385
       }
     },
     {
@@ -10574,8 +10550,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.453,
-        "away": 0.547
+        "home": 0.452,
+        "away": 0.548
       }
     },
     {
@@ -10586,8 +10562,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.483,
-        "away": 0.517
+        "home": 0.485,
+        "away": 0.515
       }
     },
     {
@@ -10658,8 +10634,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.49,
-        "away": 0.51
+        "home": 0.496,
+        "away": 0.504
       }
     },
     {
@@ -10670,8 +10646,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.495,
-        "away": 0.505
+        "home": 0.494,
+        "away": 0.506
       }
     },
     {
@@ -10682,8 +10658,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.381,
-        "away": 0.619
+        "home": 0.378,
+        "away": 0.622
       }
     },
     {
@@ -10718,8 +10694,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.544,
-        "away": 0.456
+        "home": 0.537,
+        "away": 0.463
       }
     },
     {
@@ -10730,8 +10706,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.398,
-        "away": 0.602
+        "home": 0.397,
+        "away": 0.603
       }
     },
     {
@@ -10754,8 +10730,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.591,
-        "away": 0.409
+        "home": 0.588,
+        "away": 0.412
       }
     },
     {
@@ -10850,8 +10826,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.569,
-        "away": 0.431
+        "home": 0.575,
+        "away": 0.425
       }
     },
     {
@@ -10874,8 +10850,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.488,
-        "away": 0.512
+        "home": 0.485,
+        "away": 0.515
       }
     },
     {
@@ -10886,8 +10862,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.36,
-        "away": 0.64
+        "home": 0.359,
+        "away": 0.641
       }
     },
     {
@@ -10898,8 +10874,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.683,
-        "away": 0.317
+        "home": 0.688,
+        "away": 0.312
       }
     },
     {
@@ -10910,8 +10886,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.631,
-        "away": 0.369
+        "home": 0.63,
+        "away": 0.37
       }
     },
     {
@@ -10922,8 +10898,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.373,
-        "away": 0.627
+        "home": 0.375,
+        "away": 0.625
       }
     },
     {
@@ -10934,8 +10910,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.451,
-        "away": 0.549
+        "home": 0.45,
+        "away": 0.55
       }
     },
     {
@@ -10958,8 +10934,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.536,
-        "away": 0.464
+        "home": 0.535,
+        "away": 0.465
       }
     },
     {
@@ -10970,8 +10946,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.528,
-        "away": 0.472
+        "home": 0.527,
+        "away": 0.473
       }
     },
     {
@@ -10994,8 +10970,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.493,
-        "away": 0.507
+        "home": 0.492,
+        "away": 0.508
       }
     },
     {
@@ -11030,8 +11006,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.54,
-        "away": 0.46
+        "home": 0.539,
+        "away": 0.461
       }
     },
     {
@@ -11042,8 +11018,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.373,
-        "away": 0.627
+        "home": 0.372,
+        "away": 0.628
       }
     },
     {
@@ -11054,8 +11030,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.472,
-        "away": 0.528
+        "home": 0.469,
+        "away": 0.531
       }
     },
     {
@@ -11066,8 +11042,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.345,
-        "away": 0.655
+        "home": 0.339,
+        "away": 0.661
       }
     },
     {
@@ -11078,8 +11054,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.606,
-        "away": 0.394
+        "home": 0.611,
+        "away": 0.389
       }
     },
     {
@@ -11090,8 +11066,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -11114,8 +11090,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.523,
-        "away": 0.477
+        "home": 0.522,
+        "away": 0.478
       }
     },
     {
@@ -11126,8 +11102,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.452,
-        "away": 0.548
+        "home": 0.451,
+        "away": 0.549
       }
     },
     {
@@ -11138,8 +11114,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.532,
-        "away": 0.468
+        "home": 0.534,
+        "away": 0.466
       }
     },
     {
@@ -11150,8 +11126,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.319,
-        "away": 0.681
+        "home": 0.318,
+        "away": 0.682
       }
     },
     {
@@ -11174,8 +11150,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.633,
-        "away": 0.367
+        "home": 0.632,
+        "away": 0.368
       }
     },
     {
@@ -11186,8 +11162,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.563,
-        "away": 0.437
+        "home": 0.566,
+        "away": 0.434
       }
     },
     {
@@ -11210,8 +11186,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.617,
-        "away": 0.383
+        "home": 0.616,
+        "away": 0.384
       }
     },
     {
@@ -11234,8 +11210,8 @@
       "away": "Detroit Red Wings",
       "venue": null,
       "probabilities": {
-        "home": 0.555,
-        "away": 0.445
+        "home": 0.554,
+        "away": 0.446
       }
     },
     {
@@ -11258,8 +11234,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.461,
-        "away": 0.539
+        "home": 0.46,
+        "away": 0.54
       }
     },
     {
@@ -11270,8 +11246,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.706,
-        "away": 0.294
+        "home": 0.71,
+        "away": 0.29
       }
     },
     {
@@ -11318,8 +11294,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.457,
-        "away": 0.543
+        "home": 0.459,
+        "away": 0.541
       }
     },
     {
@@ -11330,8 +11306,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.42,
-        "away": 0.58
+        "home": 0.419,
+        "away": 0.581
       }
     },
     {
@@ -11354,8 +11330,8 @@
       "away": "Washington Capitals",
       "venue": null,
       "probabilities": {
-        "home": 0.494,
-        "away": 0.506
+        "home": 0.493,
+        "away": 0.507
       }
     },
     {
@@ -11366,8 +11342,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.486,
-        "away": 0.514
+        "home": 0.482,
+        "away": 0.518
       }
     },
     {
@@ -11402,8 +11378,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.614,
-        "away": 0.386
+        "home": 0.613,
+        "away": 0.387
       }
     },
     {
@@ -11414,8 +11390,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.516,
-        "away": 0.484
+        "home": 0.515,
+        "away": 0.485
       }
     },
     {
@@ -11426,8 +11402,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.487,
-        "away": 0.513
+        "home": 0.486,
+        "away": 0.514
       }
     },
     {
@@ -11450,8 +11426,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.597,
-        "away": 0.403
+        "home": 0.596,
+        "away": 0.404
       }
     },
     {
@@ -11486,8 +11462,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.558,
-        "away": 0.442
+        "home": 0.564,
+        "away": 0.436
       }
     },
     {
@@ -11510,8 +11486,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.509,
-        "away": 0.491
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -11534,8 +11510,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.466,
-        "away": 0.534
+        "home": 0.465,
+        "away": 0.535
       }
     },
     {
@@ -11546,8 +11522,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.427,
-        "away": 0.573
+        "home": 0.426,
+        "away": 0.574
       }
     },
     {
@@ -11558,8 +11534,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.598,
-        "away": 0.402
+        "home": 0.603,
+        "away": 0.397
       }
     },
     {
@@ -11570,8 +11546,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.654,
-        "away": 0.346
+        "home": 0.657,
+        "away": 0.343
       }
     },
     {
@@ -11594,8 +11570,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.398,
-        "away": 0.602
+        "home": 0.4,
+        "away": 0.6
       }
     },
     {
@@ -11606,8 +11582,8 @@
       "away": "Philadelphia Flyers",
       "venue": null,
       "probabilities": {
-        "home": 0.533,
-        "away": 0.467
+        "home": 0.532,
+        "away": 0.468
       }
     },
     {
@@ -11618,8 +11594,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.405,
-        "away": 0.595
+        "home": 0.404,
+        "away": 0.596
       }
     },
     {
@@ -11630,8 +11606,8 @@
       "away": "New Jersey Devils",
       "venue": null,
       "probabilities": {
-        "home": 0.547,
-        "away": 0.453
+        "home": 0.546,
+        "away": 0.454
       }
     },
     {
@@ -11654,8 +11630,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.39,
-        "away": 0.61
+        "home": 0.389,
+        "away": 0.611
       }
     },
     {
@@ -11678,8 +11654,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.652,
-        "away": 0.348
+        "home": 0.651,
+        "away": 0.349
       }
     },
     {
@@ -11702,8 +11678,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.58,
-        "away": 0.42
+        "home": 0.579,
+        "away": 0.421
       }
     },
     {
@@ -11726,8 +11702,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.467,
-        "away": 0.533
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -11762,8 +11738,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.501,
+        "away": 0.499
       }
     },
     {
@@ -11786,8 +11762,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.43,
-        "away": 0.57
+        "home": 0.424,
+        "away": 0.576
       }
     },
     {
@@ -11810,8 +11786,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.351,
-        "away": 0.649
+        "home": 0.345,
+        "away": 0.655
       }
     },
     {
@@ -11846,8 +11822,8 @@
       "away": "Toronto Maple Leafs",
       "venue": null,
       "probabilities": {
-        "home": 0.671,
-        "away": 0.329
+        "home": 0.67,
+        "away": 0.33
       }
     },
     {
@@ -11858,8 +11834,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.539,
-        "away": 0.461
+        "home": 0.538,
+        "away": 0.462
       }
     },
     {
@@ -11882,8 +11858,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.621,
-        "away": 0.379
+        "home": 0.62,
+        "away": 0.38
       }
     },
     {
@@ -11894,8 +11870,8 @@
       "away": "Carolina Hurricanes",
       "venue": null,
       "probabilities": {
-        "home": 0.399,
-        "away": 0.601
+        "home": 0.398,
+        "away": 0.602
       }
     },
     {
@@ -11906,8 +11882,8 @@
       "away": "Buffalo Sabres",
       "venue": null,
       "probabilities": {
-        "home": 0.501,
-        "away": 0.499
+        "home": 0.5,
+        "away": 0.5
       }
     },
     {
@@ -11918,8 +11894,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.649,
-        "away": 0.351
+        "home": 0.648,
+        "away": 0.352
       }
     },
     {
@@ -11930,8 +11906,8 @@
       "away": "Utah Mammoth",
       "venue": null,
       "probabilities": {
-        "home": 0.473,
-        "away": 0.527
+        "home": 0.475,
+        "away": 0.525
       }
     },
     {
@@ -11942,8 +11918,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.387,
-        "away": 0.613
+        "home": 0.385,
+        "away": 0.615
       }
     },
     {
@@ -11954,8 +11930,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.452,
-        "away": 0.548
+        "home": 0.445,
+        "away": 0.555
       }
     },
     {
@@ -11966,8 +11942,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.644,
-        "away": 0.356
+        "home": 0.649,
+        "away": 0.351
       }
     },
     {
@@ -11978,8 +11954,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.495,
-        "away": 0.505
+        "home": 0.494,
+        "away": 0.506
       }
     },
     {
@@ -11990,8 +11966,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.696,
-        "away": 0.304
+        "home": 0.695,
+        "away": 0.305
       }
     },
     {
@@ -12002,8 +11978,8 @@
       "away": "New York Rangers",
       "venue": null,
       "probabilities": {
-        "home": 0.569,
-        "away": 0.431
+        "home": 0.568,
+        "away": 0.432
       }
     },
     {
@@ -12014,8 +11990,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.631,
-        "away": 0.369
+        "home": 0.63,
+        "away": 0.37
       }
     },
     {
@@ -12038,8 +12014,8 @@
       "away": "New York Islanders",
       "venue": null,
       "probabilities": {
-        "home": 0.515,
-        "away": 0.485
+        "home": 0.514,
+        "away": 0.486
       }
     },
     {
@@ -12050,8 +12026,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.489,
-        "away": 0.511
+        "home": 0.488,
+        "away": 0.512
       }
     },
     {
@@ -12074,8 +12050,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.596,
-        "away": 0.404
+        "home": 0.595,
+        "away": 0.405
       }
     },
     {
@@ -12098,8 +12074,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.56,
-        "away": 0.44
+        "home": 0.562,
+        "away": 0.438
       }
     },
     {
@@ -12122,8 +12098,8 @@
       "away": "Ottawa Senators",
       "venue": null,
       "probabilities": {
-        "home": 0.465,
-        "away": 0.535
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -12134,8 +12110,8 @@
       "away": "Dallas Stars",
       "venue": null,
       "probabilities": {
-        "home": 0.561,
-        "away": 0.439
+        "home": 0.567,
+        "away": 0.433
       }
     },
     {
@@ -12146,8 +12122,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.679,
-        "away": 0.321
+        "home": 0.678,
+        "away": 0.322
       }
     },
     {
@@ -12158,8 +12134,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.492,
-        "away": 0.508
+        "home": 0.491,
+        "away": 0.509
       }
     },
     {
@@ -12170,8 +12146,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.533,
-        "away": 0.467
+        "home": 0.532,
+        "away": 0.468
       }
     },
     {
@@ -12182,8 +12158,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.499,
-        "away": 0.501
+        "home": 0.498,
+        "away": 0.502
       }
     },
     {
@@ -12206,8 +12182,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.549,
-        "away": 0.451
+        "home": 0.548,
+        "away": 0.452
       }
     },
     {
@@ -12230,8 +12206,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.673,
-        "away": 0.327
+        "home": 0.672,
+        "away": 0.328
       }
     },
     {
@@ -12254,8 +12230,8 @@
       "away": "Winnipeg Jets",
       "venue": null,
       "probabilities": {
-        "home": 0.502,
-        "away": 0.498
+        "home": 0.504,
+        "away": 0.496
       }
     },
     {
@@ -12290,8 +12266,8 @@
       "away": "San Jose Sharks",
       "venue": null,
       "probabilities": {
-        "home": 0.436,
-        "away": 0.564
+        "home": 0.441,
+        "away": 0.559
       }
     },
     {
@@ -12302,8 +12278,8 @@
       "away": "Edmonton Oilers",
       "venue": null,
       "probabilities": {
-        "home": 0.44,
-        "away": 0.56
+        "home": 0.437,
+        "away": 0.563
       }
     },
     {
@@ -12314,8 +12290,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.476,
-        "away": 0.524
+        "home": 0.475,
+        "away": 0.525
       }
     },
     {
@@ -12326,8 +12302,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.505,
-        "away": 0.495
+        "home": 0.51,
+        "away": 0.49
       }
     },
     {
@@ -12350,8 +12326,8 @@
       "away": "Florida Panthers",
       "venue": null,
       "probabilities": {
-        "home": 0.555,
-        "away": 0.445
+        "home": 0.554,
+        "away": 0.446
       }
     },
     {
@@ -12374,8 +12350,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.474,
-        "away": 0.526
+        "home": 0.473,
+        "away": 0.527
       }
     },
     {
@@ -12386,8 +12362,8 @@
       "away": "St. Louis Blues",
       "venue": null,
       "probabilities": {
-        "home": 0.459,
-        "away": 0.541
+        "home": 0.453,
+        "away": 0.547
       }
     },
     {
@@ -12422,8 +12398,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.399,
-        "away": 0.601
+        "home": 0.398,
+        "away": 0.602
       }
     },
     {
@@ -12434,8 +12410,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.619,
-        "away": 0.381
+        "home": 0.616,
+        "away": 0.384
       }
     },
     {
@@ -12458,8 +12434,8 @@
       "away": "Calgary Flames",
       "venue": null,
       "probabilities": {
-        "home": 0.652,
-        "away": 0.348
+        "home": 0.651,
+        "away": 0.349
       }
     },
     {
@@ -12470,8 +12446,8 @@
       "away": "Pittsburgh Penguins",
       "venue": null,
       "probabilities": {
-        "home": 0.54,
-        "away": 0.46
+        "home": 0.539,
+        "away": 0.461
       }
     },
     {
@@ -12482,8 +12458,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.471,
-        "away": 0.529
+        "home": 0.47,
+        "away": 0.53
       }
     },
     {
@@ -12494,8 +12470,8 @@
       "away": "Tampa Bay Lightning",
       "venue": null,
       "probabilities": {
-        "home": 0.461,
-        "away": 0.539
+        "home": 0.46,
+        "away": 0.54
       }
     },
     {
@@ -12530,8 +12506,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.564,
-        "away": 0.436
+        "home": 0.562,
+        "away": 0.438
       }
     },
     {
@@ -12542,8 +12518,8 @@
       "away": "Chicago Blackhawks",
       "venue": null,
       "probabilities": {
-        "home": 0.706,
-        "away": 0.294
+        "home": 0.71,
+        "away": 0.29
       }
     },
     {
@@ -12566,8 +12542,8 @@
       "away": "Los Angeles Kings",
       "venue": null,
       "probabilities": {
-        "home": 0.547,
-        "away": 0.453
+        "home": 0.544,
+        "away": 0.456
       }
     },
     {
@@ -12602,8 +12578,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.489,
-        "away": 0.511
+        "home": 0.488,
+        "away": 0.512
       }
     },
     {
@@ -12650,8 +12626,8 @@
       "away": "Montr\u00e9al Canadiens",
       "venue": null,
       "probabilities": {
-        "home": 0.565,
-        "away": 0.435
+        "home": 0.564,
+        "away": 0.436
       }
     },
     {
@@ -12686,8 +12662,8 @@
       "away": "Nashville Predators",
       "venue": null,
       "probabilities": {
-        "home": 0.427,
-        "away": 0.573
+        "home": 0.426,
+        "away": 0.574
       }
     },
     {
@@ -12698,8 +12674,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.565,
-        "away": 0.435
+        "home": 0.562,
+        "away": 0.438
       }
     },
     {
@@ -12710,8 +12686,8 @@
       "away": "Colorado Avalanche",
       "venue": null,
       "probabilities": {
-        "home": 0.344,
-        "away": 0.656
+        "home": 0.343,
+        "away": 0.657
       }
     },
     {
@@ -12722,8 +12698,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.369,
-        "away": 0.631
+        "home": 0.358,
+        "away": 0.642
       }
     },
     {
@@ -12734,8 +12710,8 @@
       "away": "Vegas Golden Knights",
       "venue": null,
       "probabilities": {
-        "home": 0.45,
-        "away": 0.55
+        "home": 0.449,
+        "away": 0.551
       }
     },
     {
@@ -12758,8 +12734,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.456,
-        "away": 0.544
+        "home": 0.455,
+        "away": 0.545
       }
     },
     {
@@ -12770,8 +12746,8 @@
       "away": "Vancouver Canucks",
       "venue": null,
       "probabilities": {
-        "home": 0.655,
-        "away": 0.345
+        "home": 0.654,
+        "away": 0.346
       }
     },
     {
@@ -12806,8 +12782,8 @@
       "away": "Minnesota Wild",
       "venue": null,
       "probabilities": {
-        "home": 0.544,
-        "away": 0.456
+        "home": 0.537,
+        "away": 0.463
       }
     },
     {
@@ -12818,8 +12794,8 @@
       "away": "Anaheim Ducks",
       "venue": null,
       "probabilities": {
-        "home": 0.486,
-        "away": 0.514
+        "home": 0.482,
+        "away": 0.518
       }
     },
     {
@@ -12830,8 +12806,8 @@
       "away": "Columbus Blue Jackets",
       "venue": null,
       "probabilities": {
-        "home": 0.542,
-        "away": 0.458
+        "home": 0.541,
+        "away": 0.459
       }
     },
     {
@@ -12878,8 +12854,8 @@
       "away": "Seattle Kraken",
       "venue": null,
       "probabilities": {
-        "home": 0.467,
-        "away": 0.533
+        "home": 0.464,
+        "away": 0.536
       }
     },
     {
@@ -12938,8 +12914,8 @@
       "away": "Boston Bruins",
       "venue": null,
       "probabilities": {
-        "home": 0.55,
-        "away": 0.45
+        "home": 0.549,
+        "away": 0.451
       }
     },
     {
@@ -12980,6 +12956,24 @@
     }
   ],
   "results": [
+    {
+      "id": "2026020384",
+      "round": null,
+      "date": "2026-11-24T03:00:00Z",
+      "home": "San Jose Sharks",
+      "away": "Minnesota Wild",
+      "homeScore": 2,
+      "awayScore": 5
+    },
+    {
+      "id": "2026020383",
+      "round": null,
+      "date": "2026-11-24T02:40:00Z",
+      "home": "Seattle Kraken",
+      "away": "Anaheim Ducks",
+      "homeScore": 3,
+      "awayScore": 2
+    },
     {
       "id": "2026020382",
       "round": null,
@@ -16514,702 +16508,702 @@
     ],
     "probabilities": {
       "Anaheim Ducks": {
-        "playoffs": 37.63,
-        "division": 2.17,
+        "playoffs": 32.58,
+        "division": 1.73,
         "presidents": 0.01,
-        "title": 0.84
+        "title": 0.79
       },
       "Boston Bruins": {
-        "playoffs": 85.21,
-        "division": 21.81,
-        "presidents": 3.65,
-        "title": 5.7
+        "playoffs": 85.45,
+        "division": 21.63,
+        "presidents": 3.21,
+        "title": 5.15
       },
       "Buffalo Sabres": {
-        "playoffs": 41.14,
+        "playoffs": 41.48,
         "division": 2.25,
-        "presidents": 0.15,
-        "title": 2.0
+        "presidents": 0.14,
+        "title": 1.7
       },
       "Calgary Flames": {
-        "playoffs": 12.78,
-        "division": 0.44,
+        "playoffs": 13.98,
+        "division": 0.34,
         "presidents": 0.0,
-        "title": 0.18
+        "title": 0.21
       },
       "Carolina Hurricanes": {
-        "playoffs": 99.06,
-        "division": 83.44,
-        "presidents": 34.27,
-        "title": 16.55
+        "playoffs": 99.1,
+        "division": 83.51,
+        "presidents": 33.54,
+        "title": 16.25
       },
       "Chicago Blackhawks": {
-        "playoffs": 1.68,
+        "playoffs": 1.84,
         "division": 0.01,
-        "presidents": 0.0,
-        "title": 0.01
+        "presidents": 0.01,
+        "title": 0.02
       },
       "Colorado Avalanche": {
-        "playoffs": 93.67,
-        "division": 25.3,
-        "presidents": 8.72,
-        "title": 12.93
+        "playoffs": 93.88,
+        "division": 22.78,
+        "presidents": 8.13,
+        "title": 13.46
       },
       "Columbus Blue Jackets": {
-        "playoffs": 15.27,
-        "division": 0.24,
-        "presidents": 0.01,
-        "title": 0.47
+        "playoffs": 15.3,
+        "division": 0.28,
+        "presidents": 0.0,
+        "title": 0.5
       },
       "Dallas Stars": {
-        "playoffs": 88.11,
-        "division": 14.82,
-        "presidents": 4.63,
-        "title": 5.41
+        "playoffs": 88.17,
+        "division": 13.59,
+        "presidents": 4.35,
+        "title": 5.27
       },
       "Detroit Red Wings": {
-        "playoffs": 10.32,
-        "division": 0.19,
+        "playoffs": 10.55,
+        "division": 0.22,
         "presidents": 0.0,
-        "title": 0.26
+        "title": 0.34
       },
       "Edmonton Oilers": {
-        "playoffs": 97.39,
-        "division": 65.85,
-        "presidents": 7.62,
-        "title": 7.38
+        "playoffs": 97.21,
+        "division": 65.59,
+        "presidents": 7.27,
+        "title": 7.01
       },
       "Florida Panthers": {
-        "playoffs": 46.08,
-        "division": 3.15,
-        "presidents": 0.27,
-        "title": 1.19
+        "playoffs": 46.1,
+        "division": 3.19,
+        "presidents": 0.18,
+        "title": 1.0
       },
       "Los Angeles Kings": {
-        "playoffs": 19.96,
-        "division": 0.9,
+        "playoffs": 20.34,
+        "division": 0.92,
         "presidents": 0.01,
-        "title": 0.38
+        "title": 0.42
       },
       "Minnesota Wild": {
-        "playoffs": 98.19,
-        "division": 52.14,
-        "presidents": 22.19,
-        "title": 10.57
+        "playoffs": 98.72,
+        "division": 56.76,
+        "presidents": 25.52,
+        "title": 11.38
       },
       "Montr\u00e9al Canadiens": {
-        "playoffs": 77.23,
-        "division": 12.87,
-        "presidents": 1.59,
-        "title": 3.72
+        "playoffs": 76.36,
+        "division": 12.8,
+        "presidents": 1.58,
+        "title": 3.79
       },
       "Nashville Predators": {
-        "playoffs": 62.52,
-        "division": 3.25,
-        "presidents": 0.55,
-        "title": 1.6
+        "playoffs": 62.28,
+        "division": 2.96,
+        "presidents": 0.6,
+        "title": 1.71
       },
       "New Jersey Devils": {
-        "playoffs": 75.61,
-        "division": 9.03,
-        "presidents": 1.52,
-        "title": 2.81
+        "playoffs": 76.1,
+        "division": 9.18,
+        "presidents": 1.35,
+        "title": 2.71
       },
       "New York Islanders": {
-        "playoffs": 45.82,
-        "division": 2.34,
-        "presidents": 0.19,
-        "title": 1.23
+        "playoffs": 46.52,
+        "division": 2.22,
+        "presidents": 0.15,
+        "title": 1.34
       },
       "New York Rangers": {
-        "playoffs": 51.62,
-        "division": 2.96,
-        "presidents": 0.25,
+        "playoffs": 51.65,
+        "division": 2.97,
+        "presidents": 0.3,
         "title": 1.52
       },
       "Ottawa Senators": {
-        "playoffs": 86.45,
-        "division": 21.87,
-        "presidents": 3.71,
-        "title": 5.17
+        "playoffs": 86.33,
+        "division": 22.66,
+        "presidents": 3.88,
+        "title": 5.03
       },
       "Philadelphia Flyers": {
-        "playoffs": 22.68,
-        "division": 0.48,
+        "playoffs": 22.69,
+        "division": 0.41,
         "presidents": 0.01,
-        "title": 0.63
+        "title": 0.66
       },
       "Pittsburgh Penguins": {
-        "playoffs": 10.64,
-        "division": 0.15,
-        "presidents": 0.01,
-        "title": 0.41
+        "playoffs": 9.84,
+        "division": 0.12,
+        "presidents": 0.0,
+        "title": 0.36
       },
       "San Jose Sharks": {
-        "playoffs": 19.42,
-        "division": 0.67,
-        "presidents": 0.01,
+        "playoffs": 15.9,
+        "division": 0.51,
+        "presidents": 0.0,
         "title": 0.23
       },
       "Seattle Kraken": {
-        "playoffs": 39.27,
-        "division": 3.06,
+        "playoffs": 45.01,
+        "division": 3.83,
         "presidents": 0.06,
-        "title": 0.69
+        "title": 0.9
       },
       "St. Louis Blues": {
-        "playoffs": 54.06,
-        "division": 1.99,
-        "presidents": 0.27,
+        "playoffs": 53.46,
+        "division": 1.67,
+        "presidents": 0.22,
         "title": 1.54
       },
       "Tampa Bay Lightning": {
-        "playoffs": 92.75,
-        "division": 37.84,
-        "presidents": 8.26,
-        "title": 8.63
+        "playoffs": 92.94,
+        "division": 37.2,
+        "presidents": 7.5,
+        "title": 8.72
       },
       "Toronto Maple Leafs": {
-        "playoffs": 3.38,
-        "division": 0.01,
+        "playoffs": 3.33,
+        "division": 0.04,
         "presidents": 0.0,
-        "title": 0.08
+        "title": 0.1
       },
       "Utah Mammoth": {
-        "playoffs": 47.23,
-        "division": 1.5,
-        "presidents": 0.26,
-        "title": 1.71
+        "playoffs": 47.16,
+        "division": 1.34,
+        "presidents": 0.15,
+        "title": 1.65
       },
       "Vancouver Canucks": {
-        "playoffs": 0.21,
-        "division": 0.0,
+        "playoffs": 0.18,
+        "division": 0.01,
         "presidents": 0.0,
         "title": 0.0
       },
       "Vegas Golden Knights": {
-        "playoffs": 88.42,
-        "division": 26.91,
-        "presidents": 1.59,
-        "title": 4.04
+        "playoffs": 89.25,
+        "division": 27.06,
+        "presidents": 1.64,
+        "title": 4.06
       },
       "Washington Capitals": {
-        "playoffs": 36.73,
-        "division": 1.34,
-        "presidents": 0.06,
+        "playoffs": 36.26,
+        "division": 1.31,
+        "presidents": 0.08,
         "title": 1.24
       },
       "Winnipeg Jets": {
-        "playoffs": 39.45,
-        "division": 0.98,
-        "presidents": 0.14,
-        "title": 0.87
+        "playoffs": 40.04,
+        "division": 0.9,
+        "presidents": 0.1,
+        "title": 0.93
       }
     },
     "positions": {
       "Anaheim Ducks": [
-        0.14,
-        2.02,
-        0.66,
-        1.52,
-        9.09,
-        20.88,
-        0.82,
-        2.5,
-        5.08,
-        9.34,
-        11.82,
-        11.62,
-        10.22,
-        8.28,
-        4.93,
-        1.08
+        0.1,
+        1.62,
+        0.45,
+        1.18,
+        7.44,
+        18.67,
+        0.85,
+        2.26,
+        5.18,
+        8.94,
+        12.5,
+        12.96,
+        11.32,
+        9.1,
+        6.02,
+        1.38
       ],
       "Boston Bruins": [
-        8.56,
-        13.26,
-        15.44,
-        14.16,
-        8.35,
-        4.75,
-        12.28,
-        8.43,
-        5.14,
-        3.28,
-        2.56,
-        1.57,
-        1.18,
-        0.65,
-        0.32,
+        8.09,
+        13.54,
+        15.9,
+        14.25,
+        8.32,
+        4.68,
+        12.59,
+        8.09,
+        5.12,
+        3.68,
+        2.27,
+        1.55,
+        0.9,
+        0.64,
+        0.29,
         0.1
       ],
       "Buffalo Sabres": [
-        0.58,
-        1.67,
-        3.13,
-        5.34,
-        3.88,
-        2.75,
-        11.03,
-        12.76,
-        11.73,
-        10.56,
-        9.18,
-        8.13,
-        6.86,
-        5.85,
-        4.22,
-        2.34
+        0.52,
+        1.74,
+        3.19,
+        4.74,
+        3.69,
+        2.85,
+        11.19,
+        13.58,
+        12.22,
+        9.62,
+        9.48,
+        8.0,
+        6.95,
+        5.8,
+        4.08,
+        2.36
       ],
       "Calgary Flames": [
-        0.02,
-        0.43,
-        0.11,
-        0.3,
-        2.36,
-        7.6,
-        0.54,
-        1.42,
-        3.42,
-        6.54,
-        10.72,
-        13.5,
-        16.14,
-        17.54,
-        14.32,
-        5.05
+        0.0,
+        0.34,
+        0.03,
+        0.44,
+        2.75,
+        8.53,
+        0.52,
+        1.35,
+        3.38,
+        6.67,
+        10.58,
+        13.41,
+        15.94,
+        17.34,
+        13.92,
+        4.78
       ],
       "Carolina Hurricanes": [
-        54.66,
-        28.77,
-        5.56,
-        3.52,
-        3.88,
-        1.82,
+        55.47,
+        28.04,
+        5.4,
+        3.56,
+        4.01,
+        1.85,
         0.43,
-        0.43,
-        0.4,
-        0.26,
-        0.12,
+        0.34,
+        0.36,
+        0.22,
+        0.18,
         0.08,
-        0.03,
-        0.03,
+        0.04,
+        0.01,
         0.0,
         0.0
       ],
       "Chicago Blackhawks": [
+        0.01,
         0.0,
-        0.02,
-        0.02,
+        0.01,
+        0.1,
         0.06,
         0.04,
-        0.02,
         0.4,
-        1.12,
-        2.37,
-        4.04,
-        5.74,
-        8.51,
-        12.24,
-        19.18,
-        31.35,
-        14.9
+        1.2,
+        2.32,
+        4.17,
+        6.46,
+        8.46,
+        12.65,
+        19.05,
+        30.21,
+        14.83
       ],
       "Colorado Avalanche": [
-        19.31,
-        5.98,
-        26.5,
-        17.94,
+        17.84,
         4.94,
-        0.97,
-        11.3,
-        6.74,
-        3.38,
-        1.57,
-        0.73,
-        0.36,
-        0.17,
-        0.09,
+        27.82,
+        18.5,
+        4.86,
+        0.88,
+        12.38,
+        6.67,
+        3.28,
+        1.63,
+        0.64,
+        0.34,
+        0.1,
+        0.1,
         0.02,
         0.0
       ],
       "Columbus Blue Jackets": [
-        0.04,
-        0.2,
-        0.59,
-        1.08,
-        2.68,
-        5.34,
-        1.86,
-        3.48,
-        5.34,
-        6.93,
-        9.18,
-        10.75,
-        12.26,
-        13.38,
-        14.42,
-        12.47
+        0.02,
+        0.26,
+        0.52,
+        1.04,
+        2.85,
+        5.16,
+        2.01,
+        3.44,
+        5.62,
+        7.02,
+        8.68,
+        10.36,
+        12.41,
+        13.54,
+        14.38,
+        12.67
       ],
       "Dallas Stars": [
-        11.06,
-        3.77,
-        20.54,
-        19.31,
-        5.9,
-        1.04,
-        16.21,
-        10.27,
-        5.92,
-        3.02,
-        1.43,
+        10.14,
+        3.45,
+        20.74,
+        20.29,
+        5.97,
+        1.16,
+        16.2,
+        10.22,
+        5.95,
+        2.99,
+        1.42,
         0.78,
-        0.48,
-        0.2,
-        0.05,
+        0.47,
+        0.16,
+        0.04,
         0.0
       ],
       "Detroit Red Wings": [
-        0.04,
-        0.15,
-        0.34,
+        0.02,
+        0.19,
+        0.4,
+        0.84,
         0.74,
         0.7,
-        0.7,
-        2.86,
-        4.78,
-        6.16,
-        7.0,
-        8.58,
-        10.28,
-        12.16,
-        14.0,
-        15.14,
-        16.35
+        3.04,
+        4.61,
+        5.92,
+        7.04,
+        8.51,
+        10.01,
+        12.2,
+        13.96,
+        15.51,
+        16.3
       ],
       "Edmonton Oilers": [
-        17.5,
-        48.36,
-        4.04,
-        5.26,
-        15.54,
-        6.06,
-        0.22,
-        0.4,
-        0.62,
-        0.82,
-        0.57,
+        16.3,
+        49.29,
+        3.74,
+        5.52,
+        15.9,
+        5.86,
+        0.26,
         0.32,
-        0.22,
-        0.05,
-        0.01,
+        0.76,
+        0.92,
+        0.59,
+        0.34,
+        0.12,
+        0.06,
+        0.0,
         0.0
       ],
       "Florida Panthers": [
-        0.9,
-        2.25,
-        3.94,
-        5.94,
-        4.2,
-        3.11,
-        12.44,
-        13.3,
-        11.69,
-        9.56,
-        8.77,
-        7.48,
-        6.25,
-        5.05,
-        3.49,
-        1.62
+        0.71,
+        2.48,
+        3.81,
+        6.16,
+        4.22,
+        3.12,
+        11.88,
+        13.72,
+        11.66,
+        9.78,
+        8.8,
+        7.86,
+        6.24,
+        4.54,
+        3.38,
+        1.65
       ],
       "Los Angeles Kings": [
         0.02,
-        0.88,
-        0.25,
-        0.64,
-        3.97,
-        11.96,
-        0.56,
-        1.68,
-        3.75,
-        7.58,
-        10.99,
-        13.1,
-        14.63,
-        14.86,
-        11.18,
-        3.94
+        0.9,
+        0.16,
+        0.62,
+        4.31,
+        12.04,
+        0.6,
+        1.69,
+        4.1,
+        7.28,
+        11.12,
+        13.18,
+        14.49,
+        14.26,
+        11.46,
+        3.77
       ],
       "Minnesota Wild": [
-        42.2,
-        9.94,
-        22.07,
-        12.11,
-        2.9,
-        0.4,
-        6.09,
-        2.48,
-        1.14,
-        0.37,
-        0.18,
-        0.08,
-        0.03,
-        0.01,
+        46.66,
+        10.1,
+        21.61,
+        10.64,
+        2.14,
+        0.27,
+        5.02,
+        2.28,
+        0.81,
+        0.32,
+        0.09,
+        0.04,
+        0.02,
+        0.0,
         0.0,
         0.0
       ],
       "Montr\u00e9al Canadiens": [
-        4.04,
-        8.83,
-        11.84,
-        12.99,
-        7.81,
-        4.88,
-        15.78,
-        11.07,
-        7.31,
-        5.18,
-        3.74,
-        2.73,
-        1.81,
-        1.2,
-        0.58,
-        0.21
+        4.28,
+        8.53,
+        11.42,
+        13.41,
+        8.27,
+        4.5,
+        15.38,
+        10.58,
+        7.58,
+        5.24,
+        3.87,
+        2.99,
+        2.0,
+        1.17,
+        0.53,
+        0.24
       ],
       "Nashville Predators": [
-        2.13,
-        1.12,
-        6.9,
-        11.54,
+        1.92,
+        1.03,
+        7.28,
+        10.8,
+        3.98,
+        0.78,
+        18.92,
+        17.57,
+        14.1,
+        9.56,
+        5.44,
         4.03,
-        0.9,
-        18.68,
-        17.21,
-        13.87,
-        9.29,
-        5.64,
-        4.14,
-        2.54,
-        1.34,
-        0.58,
-        0.1
+        2.59,
+        1.29,
+        0.63,
+        0.08
       ],
       "New Jersey Devils": [
-        3.95,
-        5.08,
-        12.93,
-        11.14,
-        17.89,
-        15.7,
-        4.12,
-        4.8,
-        5.74,
-        5.68,
-        4.4,
-        3.34,
-        2.53,
-        1.52,
-        0.84,
-        0.34
+        3.84,
+        5.34,
+        13.58,
+        10.89,
+        17.82,
+        15.74,
+        3.88,
+        5.0,
+        5.46,
+        5.66,
+        4.44,
+        3.42,
+        2.42,
+        1.4,
+        0.79,
+        0.31
       ],
       "New York Islanders": [
-        0.68,
-        1.67,
-        4.44,
-        4.98,
-        9.64,
-        14.04,
-        4.14,
-        6.24,
-        8.57,
-        9.36,
-        9.02,
-        8.16,
-        7.17,
-        5.62,
-        4.15,
-        2.11
+        0.64,
+        1.58,
+        4.18,
+        5.41,
+        9.8,
+        14.24,
+        4.59,
+        6.08,
+        8.02,
+        9.07,
+        8.81,
+        8.33,
+        7.04,
+        6.0,
+        4.0,
+        2.22
       ],
       "New York Rangers": [
-        0.91,
-        2.05,
-        5.05,
-        6.4,
-        11.39,
-        15.12,
-        4.37,
-        6.34,
-        8.05,
-        9.01,
-        8.4,
-        7.17,
-        6.1,
-        4.9,
-        3.09,
-        1.65
+        0.86,
+        2.11,
+        5.03,
+        6.0,
+        11.26,
+        15.5,
+        4.46,
+        6.44,
+        8.28,
+        8.93,
+        8.38,
+        7.18,
+        5.9,
+        4.75,
+        3.26,
+        1.68
       ],
       "Ottawa Senators": [
-        8.5,
-        13.37,
-        15.94,
-        14.54,
-        8.66,
-        4.5,
-        12.91,
-        8.02,
-        4.91,
-        3.04,
-        2.34,
-        1.58,
-        0.92,
-        0.44,
-        0.24,
+        8.97,
+        13.69,
+        15.36,
+        14.47,
+        8.51,
+        4.7,
+        12.58,
+        8.05,
+        4.84,
+        3.38,
+        2.14,
+        1.5,
+        0.86,
+        0.56,
+        0.31,
         0.08
       ],
       "Philadelphia Flyers": [
-        0.06,
-        0.43,
+        0.07,
+        0.34,
         0.97,
-        1.68,
-        4.2,
-        7.9,
-        2.53,
-        4.93,
-        6.86,
-        9.0,
-        10.19,
-        11.56,
-        11.9,
-        11.18,
-        9.59,
-        7.06
+        1.63,
+        4.24,
+        7.89,
+        2.78,
+        4.78,
+        6.99,
+        9.23,
+        10.64,
+        11.35,
+        11.38,
+        11.04,
+        9.9,
+        6.78
       ],
       "Pittsburgh Penguins": [
-        0.03,
-        0.12,
-        0.27,
-        0.76,
-        1.81,
-        3.9,
-        1.24,
-        2.5,
-        4.38,
-        5.9,
-        7.87,
-        9.32,
-        11.42,
-        14.22,
-        16.76,
-        19.49
+        0.02,
+        0.1,
+        0.32,
+        0.57,
+        1.56,
+        3.8,
+        1.1,
+        2.38,
+        4.33,
+        6.08,
+        7.65,
+        9.67,
+        11.83,
+        14.7,
+        16.64,
+        19.25
       ],
       "San Jose Sharks": [
-        0.03,
-        0.64,
-        0.18,
-        0.56,
-        4.12,
-        11.62,
-        0.53,
-        1.72,
-        4.3,
-        8.24,
-        11.94,
-        13.98,
-        15.06,
-        13.83,
-        10.35,
-        2.88
+        0.01,
+        0.5,
+        0.08,
+        0.31,
+        2.94,
+        10.38,
+        0.44,
+        1.24,
+        3.79,
+        7.13,
+        11.24,
+        13.66,
+        15.9,
+        15.95,
+        12.55,
+        3.88
       ],
       "Seattle Kraken": [
-        0.29,
-        2.77,
-        0.86,
-        2.01,
-        9.27,
-        21.02,
+        0.24,
+        3.6,
+        1.05,
+        2.34,
+        11.2,
+        23.48,
         0.9,
-        2.15,
-        5.25,
-        8.48,
-        11.29,
-        10.93,
-        10.41,
-        8.1,
-        5.0,
-        1.27
+        2.2,
+        5.04,
+        8.46,
+        11.14,
+        10.38,
+        8.81,
+        6.77,
+        3.52,
+        0.86
       ],
       "St. Louis Blues": [
-        1.23,
-        0.76,
-        4.93,
-        8.42,
-        3.05,
+        1.0,
+        0.67,
+        4.9,
+        8.3,
+        3.18,
         0.82,
-        16.3,
-        18.54,
-        15.46,
-        10.98,
-        7.26,
-        5.38,
-        3.54,
-        2.14,
-        1.05,
+        16.48,
+        18.13,
+        16.12,
+        11.8,
+        6.82,
+        5.22,
+        3.42,
+        2.08,
+        0.93,
         0.14
       ],
       "Tampa Bay Lightning": [
-        16.79,
+        16.16,
         21.05,
-        16.94,
-        12.86,
-        7.31,
-        3.52,
-        8.96,
-        5.32,
-        2.94,
-        1.84,
-        1.14,
-        0.66,
-        0.33,
+        17.47,
+        13.06,
+        6.92,
+        3.58,
+        9.3,
+        5.4,
+        2.89,
+        1.58,
+        1.13,
+        0.76,
+        0.4,
         0.2,
-        0.1,
-        0.03
+        0.06,
+        0.04
       ],
       "Toronto Maple Leafs": [
         0.0,
-        0.02,
+        0.04,
         0.08,
-        0.16,
-        0.23,
-        0.27,
-        1.02,
-        1.6,
-        2.66,
-        3.88,
-        4.92,
-        7.64,
-        10.36,
-        14.31,
-        20.91,
-        31.95
+        0.18,
+        0.24,
+        0.24,
+        0.8,
+        1.76,
+        2.72,
+        3.75,
+        5.22,
+        7.41,
+        10.56,
+        14.18,
+        20.62,
+        32.21
       ],
       "Utah Mammoth": [
-        0.88,
-        0.62,
-        4.06,
-        6.46,
-        2.91,
-        0.76,
-        14.3,
-        17.24,
-        16.49,
-        12.51,
-        8.35,
-        6.01,
-        4.61,
-        3.1,
-        1.44,
-        0.26
+        0.78,
+        0.56,
+        3.74,
+        7.02,
+        2.97,
+        0.78,
+        13.96,
+        17.33,
+        16.28,
+        13.06,
+        8.72,
+        6.27,
+        4.34,
+        2.71,
+        1.24,
+        0.22
       ],
       "Vancouver Canucks": [
         0.0,
@@ -17217,78 +17211,78 @@
         0.0,
         0.0,
         0.02,
-        0.18,
+        0.14,
         0.0,
         0.02,
-        0.12,
-        0.29,
-        0.62,
-        1.29,
-        2.79,
-        6.84,
-        17.76,
-        70.08
+        0.07,
+        0.17,
+        0.64,
+        1.48,
+        3.14,
+        6.9,
+        17.64,
+        69.78
       ],
       "Vegas Golden Knights": [
-        4.54,
-        22.36,
-        6.1,
-        8.99,
-        29.59,
-        15.22,
-        0.55,
-        1.08,
-        2.3,
+        4.39,
+        22.67,
+        5.78,
+        8.69,
+        30.34,
+        15.57,
+        0.61,
+        1.2,
+        1.9,
         2.9,
-        2.68,
-        1.86,
-        1.12,
-        0.52,
+        2.64,
+        1.64,
+        1.01,
+        0.46,
         0.18,
-        0.02
+        0.01
       ],
       "Washington Capitals": [
-        0.26,
-        1.08,
-        2.54,
-        3.69,
-        7.4,
-        11.71,
-        4.04,
-        6.01,
-        8.12,
+        0.34,
+        0.97,
+        2.38,
+        3.79,
+        7.56,
+        11.46,
+        4.01,
+        5.75,
+        7.98,
+        9.69,
+        9.83,
         9.52,
-        9.58,
-        9.56,
-        8.71,
-        7.46,
-        6.14,
-        4.18
+        8.88,
+        7.5,
+        6.24,
+        4.12
       ],
       "Winnipeg Jets": [
-        0.65,
-        0.34,
-        2.77,
-        4.87,
-        2.26,
-        0.53,
-        12.6,
-        15.44,
-        16.55,
-        14.03,
-        10.02,
-        8.17,
-        5.81,
-        3.91,
-        1.78,
-        0.27
+        0.59,
+        0.3,
+        2.62,
+        5.24,
+        1.92,
+        0.58,
+        12.46,
+        16.32,
+        16.93,
+        14.01,
+        9.92,
+        7.78,
+        5.68,
+        3.76,
+        1.62,
+        0.25
       ]
     },
     "expected": {
       "Anaheim Ducks": {
-        "wins": 39.6,
-        "seed": 9.6,
-        "points": 87.3
+        "wins": 38.9,
+        "seed": 10.0,
+        "points": 86.0
       },
       "Boston Bruins": {
         "wins": 48.7,
@@ -17296,29 +17290,29 @@
         "points": 104.7
       },
       "Buffalo Sabres": {
-        "wins": 41.1,
+        "wins": 41.0,
         "seed": 9.3,
-        "points": 92.8
+        "points": 92.7
       },
       "Calgary Flames": {
-        "wins": 35.3,
-        "seed": 12.0,
-        "points": 80.4
+        "wins": 35.4,
+        "seed": 11.9,
+        "points": 80.5
       },
       "Carolina Hurricanes": {
-        "wins": 54.4,
+        "wins": 54.5,
         "seed": 1.9,
-        "points": 117.3
+        "points": 117.4
       },
       "Chicago Blackhawks": {
         "wins": 32.0,
-        "seed": 13.8,
+        "seed": 13.7,
         "points": 74.3
       },
       "Colorado Avalanche": {
         "wins": 50.2,
         "seed": 4.1,
-        "points": 108.9
+        "points": 108.8
       },
       "Columbus Blue Jackets": {
         "wins": 38.3,
@@ -17326,7 +17320,7 @@
         "points": 84.2
       },
       "Dallas Stars": {
-        "wins": 48.9,
+        "wins": 48.8,
         "seed": 5.1,
         "points": 105.9
       },
@@ -17337,8 +17331,8 @@
       },
       "Edmonton Oilers": {
         "wins": 49.4,
-        "seed": 2.9,
-        "points": 108.8
+        "seed": 3.0,
+        "points": 108.7
       },
       "Florida Panthers": {
         "wins": 41.8,
@@ -17351,23 +17345,23 @@
         "points": 82.6
       },
       "Minnesota Wild": {
-        "wins": 52.0,
-        "seed": 2.7,
-        "points": 114.5
+        "wins": 52.7,
+        "seed": 2.5,
+        "points": 115.8
       },
       "Montr\u00e9al Canadiens": {
-        "wins": 45.8,
+        "wins": 45.7,
         "seed": 6.2,
-        "points": 101.8
+        "points": 101.7
       },
       "Nashville Predators": {
-        "wins": 42.9,
+        "wins": 42.8,
         "seed": 7.6,
-        "points": 97.7
+        "points": 97.6
       },
       "New Jersey Devils": {
         "wins": 46.9,
-        "seed": 6.2,
+        "seed": 6.1,
         "points": 100.5
       },
       "New York Islanders": {
@@ -17387,38 +17381,38 @@
       },
       "Philadelphia Flyers": {
         "wins": 37.1,
-        "seed": 11.1,
-        "points": 87.0
+        "seed": 11.0,
+        "points": 87.1
       },
       "Pittsburgh Penguins": {
-        "wins": 36.3,
-        "seed": 12.7,
-        "points": 81.9
+        "wins": 36.2,
+        "seed": 12.8,
+        "points": 81.7
       },
       "San Jose Sharks": {
-        "wins": 36.8,
-        "seed": 11.2,
-        "points": 83.3
+        "wins": 36.1,
+        "seed": 11.7,
+        "points": 81.9
       },
       "Seattle Kraken": {
-        "wins": 39.5,
-        "seed": 9.4,
-        "points": 88.0
+        "wins": 40.2,
+        "seed": 8.9,
+        "points": 89.1
       },
       "St. Louis Blues": {
         "wins": 43.2,
         "seed": 8.2,
-        "points": 95.2
+        "points": 95.3
       },
       "Tampa Bay Lightning": {
         "wins": 50.3,
         "seed": 4.0,
-        "points": 108.6
+        "points": 108.5
       },
       "Toronto Maple Leafs": {
         "wins": 33.5,
         "seed": 13.9,
-        "points": 77.7
+        "points": 77.6
       },
       "Utah Mammoth": {
         "wins": 42.1,
@@ -17428,26 +17422,26 @@
       "Vancouver Canucks": {
         "wins": 26.7,
         "seed": 15.5,
-        "points": 63.0
+        "points": 62.9
       },
       "Vegas Golden Knights": {
         "wins": 45.1,
         "seed": 4.8,
-        "points": 101.6
+        "points": 101.7
       },
       "Washington Capitals": {
         "wins": 41.6,
-        "seed": 9.7,
+        "seed": 9.8,
         "points": 90.5
       },
       "Winnipeg Jets": {
         "wins": 40.7,
         "seed": 9.1,
-        "points": 92.3
+        "points": 92.4
       }
     },
     "ratings": {
-      "Anaheim Ducks": -0.1,
+      "Anaheim Ducks": -0.11,
       "Boston Bruins": 0.2,
       "Buffalo Sabres": 0.08,
       "Calgary Flames": -0.26,
@@ -17460,7 +17454,7 @@
       "Edmonton Oilers": 0.21,
       "Florida Panthers": -0.04,
       "Los Angeles Kings": -0.18,
-      "Minnesota Wild": 0.33,
+      "Minnesota Wild": 0.35,
       "Montr\u00e9al Canadiens": 0.15,
       "Nashville Predators": -0.01,
       "New Jersey Devils": 0.07,
@@ -17469,8 +17463,8 @@
       "Ottawa Senators": 0.18,
       "Philadelphia Flyers": -0.07,
       "Pittsburgh Penguins": -0.07,
-      "San Jose Sharks": -0.24,
-      "Seattle Kraken": -0.15,
+      "San Jose Sharks": -0.26,
+      "Seattle Kraken": -0.14,
       "St. Louis Blues": -0.0,
       "Tampa Bay Lightning": 0.29,
       "Toronto Maple Leafs": -0.25,
@@ -17486,18 +17480,6 @@
   },
   "matchesThatMatter": [
     {
-      "fixtureId": "2026020408",
-      "date": "2026-11-27T21:00:00Z",
-      "home": "Minnesota Wild",
-      "away": "Colorado Avalanche",
-      "tier": "division",
-      "tierLabel": "Division",
-      "team": "Minnesota Wild",
-      "swing": 16.5,
-      "ifHome": 60.3,
-      "ifAway": 43.8
-    },
-    {
       "fixtureId": "2026020385",
       "date": "2026-11-25T01:00:00Z",
       "home": "Edmonton Oilers",
@@ -17505,81 +17487,21 @@
       "tier": "division",
       "tierLabel": "Division",
       "team": "Edmonton Oilers",
-      "swing": 16.4,
-      "ifHome": 73.2,
+      "swing": 15.9,
+      "ifHome": 72.7,
       "ifAway": 56.8
     },
     {
-      "fixtureId": "2026020402",
-      "date": "2026-11-27T18:00:00Z",
-      "home": "Nashville Predators",
-      "away": "Utah Mammoth",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "Nashville Predators",
-      "swing": 15.4,
-      "ifHome": 70.1,
-      "ifAway": 54.7
-    },
-    {
-      "fixtureId": "2026020383",
-      "date": "2026-11-24T02:40:00Z",
-      "home": "Seattle Kraken",
-      "away": "Anaheim Ducks",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "Seattle Kraken",
-      "swing": 14.4,
-      "ifHome": 46.3,
-      "ifAway": 31.9
-    },
-    {
-      "fixtureId": "2026020387",
-      "date": "2026-11-26T00:00:00Z",
-      "home": "Buffalo Sabres",
-      "away": "New York Rangers",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "New York Rangers",
-      "swing": 14.4,
-      "ifHome": 45.1,
-      "ifAway": 59.6
-    },
-    {
-      "fixtureId": "2026020406",
-      "date": "2026-11-27T20:00:00Z",
-      "home": "Washington Capitals",
-      "away": "Florida Panthers",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "Washington Capitals",
-      "swing": 13.5,
-      "ifHome": 43.0,
-      "ifAway": 29.4
-    },
-    {
-      "fixtureId": "2026020409",
+      "fixtureId": "2026020408",
       "date": "2026-11-27T21:00:00Z",
-      "home": "Anaheim Ducks",
-      "away": "Los Angeles Kings",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "Anaheim Ducks",
-      "swing": 13.4,
-      "ifHome": 43.6,
-      "ifAway": 30.3
-    },
-    {
-      "fixtureId": "2026020398",
-      "date": "2026-11-26T03:00:00Z",
-      "home": "Anaheim Ducks",
-      "away": "San Jose Sharks",
-      "tier": "playoffs",
-      "tierLabel": "Playoffs",
-      "team": "Anaheim Ducks",
-      "swing": 13.2,
-      "ifHome": 43.3,
-      "ifAway": 30.1
+      "home": "Minnesota Wild",
+      "away": "Colorado Avalanche",
+      "tier": "division",
+      "tierLabel": "Division",
+      "team": "Minnesota Wild",
+      "swing": 15.8,
+      "ifHome": 64.5,
+      "ifAway": 48.7
     },
     {
       "fixtureId": "2026020404",
@@ -17589,9 +17511,57 @@
       "tier": "division",
       "tierLabel": "Division",
       "team": "Tampa Bay Lightning",
-      "swing": 13.2,
-      "ifHome": 43.7,
-      "ifAway": 30.5
+      "swing": 15.6,
+      "ifHome": 44.2,
+      "ifAway": 28.6
+    },
+    {
+      "fixtureId": "2026020402",
+      "date": "2026-11-27T18:00:00Z",
+      "home": "Nashville Predators",
+      "away": "Utah Mammoth",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Utah Mammoth",
+      "swing": 15.3,
+      "ifHome": 39.7,
+      "ifAway": 55.0
+    },
+    {
+      "fixtureId": "2026020424",
+      "date": "2026-11-29T01:00:00Z",
+      "home": "Dallas Stars",
+      "away": "Utah Mammoth",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Utah Mammoth",
+      "swing": 14.2,
+      "ifHome": 41.1,
+      "ifAway": 55.3
+    },
+    {
+      "fixtureId": "2026020403",
+      "date": "2026-11-27T19:00:00Z",
+      "home": "St. Louis Blues",
+      "away": "Dallas Stars",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "St. Louis Blues",
+      "swing": 14.1,
+      "ifHome": 61.0,
+      "ifAway": 46.9
+    },
+    {
+      "fixtureId": "2026020423",
+      "date": "2026-11-29T00:30:00Z",
+      "home": "Philadelphia Flyers",
+      "away": "New York Islanders",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "New York Islanders",
+      "swing": 14.0,
+      "ifHome": 39.7,
+      "ifAway": 53.8
     },
     {
       "fixtureId": "2026020389",
@@ -17601,205 +17571,229 @@
       "tier": "playoffs",
       "tierLabel": "Playoffs",
       "team": "Florida Panthers",
-      "swing": 13.1,
-      "ifHome": 53.1,
-      "ifAway": 40.0
+      "swing": 13.8,
+      "ifHome": 53.6,
+      "ifAway": 39.8
+    },
+    {
+      "fixtureId": "2026020387",
+      "date": "2026-11-26T00:00:00Z",
+      "home": "Buffalo Sabres",
+      "away": "New York Rangers",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "New York Rangers",
+      "swing": 13.6,
+      "ifHome": 45.6,
+      "ifAway": 59.1
+    },
+    {
+      "fixtureId": "2026020406",
+      "date": "2026-11-27T20:00:00Z",
+      "home": "Washington Capitals",
+      "away": "Florida Panthers",
+      "tier": "playoffs",
+      "tierLabel": "Playoffs",
+      "team": "Florida Panthers",
+      "swing": 13.6,
+      "ifHome": 39.8,
+      "ifAway": 53.4
     }
   ],
   "movement": {
-    "since": "2026-11-23T19:09:52Z",
+    "since": "2026-11-24T04:22:25Z",
     "changes": {
       "Anaheim Ducks": {
-        "playoffs": -0.02,
-        "division": 0.0,
-        "presidents": -0.02,
-        "title": -0.17
+        "playoffs": -5.05,
+        "division": -0.44,
+        "presidents": 0.0,
+        "title": -0.05
       },
       "Boston Bruins": {
-        "playoffs": 0.39,
-        "division": 0.19,
-        "presidents": 0.0,
-        "title": 0.26
+        "playoffs": 0.24,
+        "division": -0.18,
+        "presidents": -0.44,
+        "title": -0.55
       },
       "Buffalo Sabres": {
-        "playoffs": 1.11,
-        "division": 0.04,
-        "presidents": 0.05,
-        "title": 0.06
+        "playoffs": 0.34,
+        "division": 0.0,
+        "presidents": -0.01,
+        "title": -0.3
       },
       "Calgary Flames": {
-        "playoffs": -2.55,
+        "playoffs": 1.2,
         "division": -0.1,
         "presidents": 0.0,
-        "title": 0.0
-      },
-      "Carolina Hurricanes": {
-        "playoffs": -0.16,
-        "division": -0.18,
-        "presidents": -0.41,
-        "title": 0.6
-      },
-      "Chicago Blackhawks": {
-        "playoffs": -0.07,
-        "division": 0.01,
-        "presidents": 0.0,
-        "title": -0.02
-      },
-      "Colorado Avalanche": {
-        "playoffs": -0.01,
-        "division": 0.08,
-        "presidents": 0.2,
-        "title": -0.05
-      },
-      "Columbus Blue Jackets": {
-        "playoffs": -2.47,
-        "division": -0.17,
-        "presidents": -0.01,
-        "title": -0.09
-      },
-      "Dallas Stars": {
-        "playoffs": -0.02,
-        "division": 0.14,
-        "presidents": 0.21,
-        "title": 0.11
-      },
-      "Detroit Red Wings": {
-        "playoffs": 0.55,
-        "division": 0.01,
-        "presidents": -0.01,
-        "title": -0.09
-      },
-      "Edmonton Oilers": {
-        "playoffs": -0.03,
-        "division": -0.22,
-        "presidents": 0.33,
-        "title": 0.43
-      },
-      "Florida Panthers": {
-        "playoffs": 0.38,
-        "division": 0.19,
-        "presidents": 0.0,
-        "title": 0.11
-      },
-      "Los Angeles Kings": {
-        "playoffs": 3.8,
-        "division": 0.28,
-        "presidents": 0.01,
-        "title": -0.05
-      },
-      "Minnesota Wild": {
-        "playoffs": 0.08,
-        "division": 0.36,
-        "presidents": -0.08,
-        "title": 0.09
-      },
-      "Montr\u00e9al Canadiens": {
-        "playoffs": -4.07,
-        "division": -3.86,
-        "presidents": -0.66,
-        "title": -0.45
-      },
-      "Nashville Predators": {
-        "playoffs": 0.16,
-        "division": 0.15,
-        "presidents": -0.05,
-        "title": -0.17
-      },
-      "New Jersey Devils": {
-        "playoffs": 4.3,
-        "division": 0.91,
-        "presidents": 0.31,
-        "title": 0.04
-      },
-      "New York Islanders": {
-        "playoffs": -6.98,
-        "division": -0.82,
-        "presidents": -0.17,
-        "title": -0.21
-      },
-      "New York Rangers": {
-        "playoffs": 0.07,
-        "division": 0.11,
-        "presidents": -0.1,
-        "title": -0.03
-      },
-      "Ottawa Senators": {
-        "playoffs": 2.22,
-        "division": 2.19,
-        "presidents": 0.31,
-        "title": 0.36
-      },
-      "Philadelphia Flyers": {
-        "playoffs": 0.88,
-        "division": 0.05,
-        "presidents": 0.0,
-        "title": -0.02
-      },
-      "Pittsburgh Penguins": {
-        "playoffs": 0.9,
-        "division": 0.0,
-        "presidents": 0.01,
         "title": 0.03
       },
-      "San Jose Sharks": {
-        "playoffs": -1.26,
-        "division": -0.17,
-        "presidents": 0.01,
-        "title": -0.06
+      "Carolina Hurricanes": {
+        "playoffs": 0.04,
+        "division": 0.07,
+        "presidents": -0.73,
+        "title": -0.3
       },
-      "Seattle Kraken": {
-        "playoffs": 0.36,
-        "division": -0.11,
+      "Chicago Blackhawks": {
+        "playoffs": 0.16,
+        "division": 0.0,
+        "presidents": 0.01,
+        "title": 0.01
+      },
+      "Colorado Avalanche": {
+        "playoffs": 0.21,
+        "division": -2.52,
+        "presidents": -0.59,
+        "title": 0.53
+      },
+      "Columbus Blue Jackets": {
+        "playoffs": 0.03,
+        "division": 0.04,
+        "presidents": -0.01,
+        "title": 0.03
+      },
+      "Dallas Stars": {
+        "playoffs": 0.06,
+        "division": -1.23,
+        "presidents": -0.28,
+        "title": -0.14
+      },
+      "Detroit Red Wings": {
+        "playoffs": 0.23,
+        "division": 0.03,
+        "presidents": 0.0,
+        "title": 0.08
+      },
+      "Edmonton Oilers": {
+        "playoffs": -0.18,
+        "division": -0.26,
+        "presidents": -0.35,
+        "title": -0.37
+      },
+      "Florida Panthers": {
+        "playoffs": 0.02,
+        "division": 0.04,
+        "presidents": -0.09,
+        "title": -0.19
+      },
+      "Los Angeles Kings": {
+        "playoffs": 0.38,
+        "division": 0.02,
+        "presidents": 0.0,
+        "title": 0.04
+      },
+      "Minnesota Wild": {
+        "playoffs": 0.53,
+        "division": 4.62,
+        "presidents": 3.33,
+        "title": 0.81
+      },
+      "Montr\u00e9al Canadiens": {
+        "playoffs": -0.87,
+        "division": -0.07,
+        "presidents": -0.01,
+        "title": 0.07
+      },
+      "Nashville Predators": {
+        "playoffs": -0.24,
+        "division": -0.29,
+        "presidents": 0.05,
+        "title": 0.11
+      },
+      "New Jersey Devils": {
+        "playoffs": 0.49,
+        "division": 0.15,
+        "presidents": -0.17,
+        "title": -0.1
+      },
+      "New York Islanders": {
+        "playoffs": 0.7,
+        "division": -0.12,
+        "presidents": -0.04,
+        "title": 0.11
+      },
+      "New York Rangers": {
+        "playoffs": 0.03,
+        "division": 0.01,
+        "presidents": 0.05,
+        "title": 0.0
+      },
+      "Ottawa Senators": {
+        "playoffs": -0.12,
+        "division": 0.79,
+        "presidents": 0.17,
+        "title": -0.14
+      },
+      "Philadelphia Flyers": {
+        "playoffs": 0.01,
+        "division": -0.07,
+        "presidents": 0.0,
+        "title": 0.03
+      },
+      "Pittsburgh Penguins": {
+        "playoffs": -0.8,
+        "division": -0.03,
+        "presidents": -0.01,
+        "title": -0.05
+      },
+      "San Jose Sharks": {
+        "playoffs": -3.52,
+        "division": -0.16,
         "presidents": -0.01,
         "title": 0.0
       },
+      "Seattle Kraken": {
+        "playoffs": 5.74,
+        "division": 0.77,
+        "presidents": 0.0,
+        "title": 0.21
+      },
       "St. Louis Blues": {
-        "playoffs": 0.61,
-        "division": -0.26,
-        "presidents": -0.13,
-        "title": 0.02
+        "playoffs": -0.6,
+        "division": -0.32,
+        "presidents": -0.05,
+        "title": 0.0
       },
       "Tampa Bay Lightning": {
         "playoffs": 0.19,
-        "division": 1.23,
-        "presidents": 0.3,
-        "title": -0.35
+        "division": -0.64,
+        "presidents": -0.76,
+        "title": 0.09
       },
       "Toronto Maple Leafs": {
-        "playoffs": 1.07,
-        "division": -0.02,
+        "playoffs": -0.05,
+        "division": 0.03,
         "presidents": 0.0,
-        "title": 0.03
+        "title": 0.02
       },
       "Utah Mammoth": {
-        "playoffs": -6.84,
-        "division": -0.81,
-        "presidents": -0.15,
-        "title": -0.4
+        "playoffs": -0.07,
+        "division": -0.16,
+        "presidents": -0.11,
+        "title": -0.06
       },
       "Vancouver Canucks": {
-        "playoffs": 0.04,
-        "division": 0.0,
+        "playoffs": -0.03,
+        "division": 0.01,
         "presidents": 0.0,
         "title": 0.0
       },
       "Vegas Golden Knights": {
-        "playoffs": 0.14,
-        "division": 0.33,
-        "presidents": -0.05,
-        "title": 0.0
+        "playoffs": 0.83,
+        "division": 0.15,
+        "presidents": 0.05,
+        "title": 0.02
       },
       "Washington Capitals": {
-        "playoffs": 1.62,
-        "division": 0.08,
+        "playoffs": -0.47,
+        "division": -0.03,
         "presidents": 0.02,
-        "title": -0.01
+        "title": 0.0
       },
       "Winnipeg Jets": {
-        "playoffs": 5.59,
-        "division": 0.32,
-        "presidents": 0.07,
-        "title": 0.03
+        "playoffs": 0.59,
+        "division": -0.08,
+        "presidents": -0.04,
+        "title": 0.06
       }
     }
   }

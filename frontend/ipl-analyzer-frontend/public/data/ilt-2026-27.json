@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2026",
-    "generated_at": "2026-11-23T19:09:14Z",
+    "generated_at": "2026-11-24T18:47:26Z",
     "source": "CricketData",
     "source_url": "https://cricketdata.org/",
     "data_freshness_status": "warning",
@@ -86,6 +86,19 @@
   },
   "standings": [
     {
+      "teamKey": "GG",
+      "shortName": "GG",
+      "fullName": "Gulf Giants",
+      "matches": 2,
+      "wins": 2,
+      "losses": 0,
+      "noResult": 0,
+      "points": 4,
+      "nrr": null,
+      "rank": 1,
+      "remainingMatches": 8
+    },
+    {
       "teamKey": "ADKR",
       "shortName": "ADKR",
       "fullName": "Abu Dhabi Knight Riders",
@@ -95,7 +108,7 @@
       "noResult": 0,
       "points": 2,
       "nrr": null,
-      "rank": 1,
+      "rank": 2,
       "remainingMatches": 9
     },
     {
@@ -108,34 +121,21 @@
       "noResult": 0,
       "points": 2,
       "nrr": null,
-      "rank": 2,
-      "remainingMatches": 8
-    },
-    {
-      "teamKey": "GG",
-      "shortName": "GG",
-      "fullName": "Gulf Giants",
-      "matches": 1,
-      "wins": 1,
-      "losses": 0,
-      "noResult": 0,
-      "points": 2,
-      "nrr": null,
       "rank": 3,
-      "remainingMatches": 9
+      "remainingMatches": 8
     },
     {
       "teamKey": "MIE",
       "shortName": "MIE",
       "fullName": "MI Emirates",
-      "matches": 1,
+      "matches": 2,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "noResult": 0,
       "points": 2,
       "nrr": null,
       "rank": 4,
-      "remainingMatches": 9
+      "remainingMatches": 8
     },
     {
       "teamKey": "DUC",
@@ -165,17 +165,6 @@
     }
   ],
   "fixtures": [
-    {
-      "id": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-      "matchNo": 5,
-      "teamA": "GG",
-      "teamB": "MIE",
-      "dateTimeGMT": "2026-11-24T14:30:00Z",
-      "dateTimeLocal": null,
-      "venue": "Dubai International Cricket Stadium, Dubai",
-      "status": "scheduled",
-      "sourceUrl": "https://api.cricapi.com/v1/series_info"
-    },
     {
       "id": "a1899243-cdaf-4ad5-98db-72477456b3fb",
       "matchNo": 6,
@@ -454,9 +443,9 @@
   ],
   "analysis": {
     "method": "Exact all-combinations",
-    "simulationCount": 67108864,
-    "generatedAt": "2026-11-23T19:09:14Z",
-    "stateCount": 30986,
+    "simulationCount": 33554432,
+    "generatedAt": "2026-11-24T18:47:26Z",
+    "stateCount": 25763,
     "modelNotes": [
       "Every remaining fixture winner combination is evaluated exactly through a compressed final-state dynamic program.",
       "Future NRR movement is excluded; teams tied on points and wins share open top-N slots fractionally.",
@@ -465,164 +454,164 @@
       "Fixture-impact guidance is computed for the next 1 fixture(s)."
     ],
     "overallProbabilities": {
+      "GG": {
+        "top4": 86.61,
+        "top2": 57.53,
+        "top4Clear": 79.8,
+        "top2Clear": 47.63,
+        "top4Possible": 91.63,
+        "top2Possible": 68.11
+      },
       "ADKR": {
-        "top4": 68.21,
-        "top2": 31.72,
-        "top4Clear": 58.06,
-        "top2Clear": 23.09,
-        "top4Possible": 76.81,
-        "top2Possible": 41.93
+        "top4": 68.07,
+        "top2": 31.79,
+        "top4Clear": 57.96,
+        "top2Clear": 23.14,
+        "top4Possible": 76.66,
+        "top2Possible": 42.03
       },
       "DV": {
-        "top4": 68.22,
-        "top2": 31.85,
-        "top4Clear": 58.01,
+        "top4": 68.27,
+        "top2": 31.87,
+        "top4Clear": 58.02,
         "top2Clear": 23.26,
-        "top4Possible": 76.84,
+        "top4Possible": 76.94,
         "top2Possible": 41.99
       },
-      "GG": {
-        "top4": 77.39,
-        "top2": 44.68,
-        "top4Clear": 68.89,
-        "top2Clear": 35.43,
-        "top4Possible": 84.2,
-        "top2Possible": 55.06
-      },
       "MIE": {
-        "top4": 77.34,
-        "top2": 44.63,
-        "top4Clear": 68.89,
-        "top2Clear": 35.33,
-        "top4Possible": 84.14,
-        "top2Possible": 55.1
+        "top4": 68.13,
+        "top2": 31.73,
+        "top4Clear": 58.01,
+        "top2Clear": 23.06,
+        "top4Possible": 76.73,
+        "top2Possible": 41.99
       },
       "DUC": {
-        "top4": 66.37,
+        "top4": 66.4,
         "top2": 33.66,
-        "top4Clear": 56.87,
-        "top2Clear": 25.63,
-        "top4Possible": 74.43,
-        "top2Possible": 43.09
+        "top4Clear": 56.86,
+        "top2Clear": 25.61,
+        "top4Possible": 74.51,
+        "top2Possible": 43.06
       },
       "SJW": {
-        "top4": 42.49,
-        "top2": 13.45,
-        "top4Clear": 31.86,
-        "top2Clear": 8.44,
+        "top4": 42.51,
+        "top2": 13.43,
+        "top4Clear": 31.95,
+        "top2Clear": 8.42,
         "top4Possible": 52.4,
         "top2Possible": 20.22
       }
     },
     "teamAnalysis": {
       "4": {
-        "ADKR": {
-          "percentage": 68.21,
+        "GG": {
+          "percentage": 86.61,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "MIE beat GG",
-              "Impact": 0.27
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.31
+            }
+          }
+        },
+        "ADKR": {
+          "percentage": 68.07,
+          "results_df": {
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.19
             }
           }
         },
         "DV": {
-          "percentage": 68.22,
+          "percentage": 68.27,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 0.11
-            }
-          }
-        },
-        "GG": {
-          "percentage": 77.39,
-          "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 18.44
+            "M6: DUC vs DV": {
+              "Outcome": "DV beat DUC",
+              "Impact": 24.0
             }
           }
         },
         "MIE": {
-          "percentage": 77.34,
+          "percentage": 68.13,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "MIE beat GG",
-              "Impact": 18.41
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.51
             }
           }
         },
         "DUC": {
-          "percentage": 66.37,
+          "percentage": 66.4,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 0.07
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 22.64
             }
           }
         },
         "SJW": {
-          "percentage": 42.49,
+          "percentage": 42.51,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 0.05
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.35
             }
           }
         }
       },
       "2": {
-        "ADKR": {
-          "percentage": 31.72,
+        "GG": {
+          "percentage": 57.53,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 0.13
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.31
+            }
+          }
+        },
+        "ADKR": {
+          "percentage": 31.79,
+          "results_df": {
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.19
             }
           }
         },
         "DV": {
-          "percentage": 31.85,
+          "percentage": 31.87,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 0.03
-            }
-          }
-        },
-        "GG": {
-          "percentage": 44.68,
-          "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "GG beat MIE",
-              "Impact": 25.69
+            "M6: DUC vs DV": {
+              "Outcome": "DV beat DUC",
+              "Impact": 23.54
             }
           }
         },
         "MIE": {
-          "percentage": 44.63,
+          "percentage": 31.73,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "MIE beat GG",
-              "Impact": 25.81
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.51
             }
           }
         },
         "DUC": {
           "percentage": 33.66,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "MIE beat GG",
-              "Impact": 0.01
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 22.17
             }
           }
         },
         "SJW": {
-          "percentage": 13.45,
+          "percentage": 13.43,
           "results_df": {
-            "M5: GG vs MIE": {
-              "Outcome": "MIE beat GG",
-              "Impact": 0.03
+            "M6: DUC vs DV": {
+              "Outcome": "DUC beat DV",
+              "Impact": 0.35
             }
           }
         }
@@ -630,6 +619,107 @@
     },
     "qualificationPath": {
       "4": {
+        "GG": {
+          "possible": 1,
+          "likely": 3,
+          "guaranteed": 5,
+          "target_matches": 8,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 131072,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1048576,
+              "probability": 1.08,
+              "possibleRate": 2.86,
+              "guaranteedRate": 0.02
+            },
+            {
+              "wins": 2,
+              "scenarios": 3670016,
+              "probability": 27.77,
+              "possibleRate": 55.12,
+              "guaranteedRate": 5.85
+            },
+            {
+              "wins": 3,
+              "scenarios": 7340032,
+              "probability": 90.81,
+              "possibleRate": 99.85,
+              "guaranteedRate": 70.84
+            },
+            {
+              "wins": 4,
+              "scenarios": 9175040,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.98
+            },
+            {
+              "wins": 5,
+              "scenarios": 7340032,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 8,
+              "scenarios": 131072,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 86.76,
+              "teamBWinProbability": 86.45,
+              "impact": 0.31
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 86.76,
+              "teamBWinProbability": 86.45,
+              "impact": 0.31
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
         "ADKR": {
           "possible": 1,
           "likely": 4,
@@ -639,63 +729,63 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
-              "probability": 1.5,
-              "possibleRate": 3.83,
-              "guaranteedRate": 0.07
+              "scenarios": 3670016,
+              "probability": 1.31,
+              "possibleRate": 3.4,
+              "guaranteedRate": 0.05
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 30.58,
-              "possibleRate": 58.33,
-              "guaranteedRate": 7.63
+              "scenarios": 7340032,
+              "probability": 30.09,
+              "possibleRate": 57.88,
+              "guaranteedRate": 7.2
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 91.52,
-              "possibleRate": 99.85,
-              "guaranteedRate": 73.37
+              "scenarios": 9175040,
+              "probability": 91.49,
+              "possibleRate": 99.84,
+              "guaranteedRate": 73.34
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -703,30 +793,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.07,
-              "teamBWinProbability": 68.34,
-              "impact": 0.27
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.17,
+              "teamBWinProbability": 67.98,
+              "impact": 0.19
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.07,
-              "teamBWinProbability": 68.34,
-              "impact": 0.27
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.17,
+              "teamBWinProbability": 67.98,
+              "impact": 0.19
             }
           ],
           "impactFixtureWindow": 1
@@ -740,170 +830,62 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.01,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
-              "probability": 1.62,
-              "possibleRate": 4.11,
+              "scenarios": 3670016,
+              "probability": 1.69,
+              "possibleRate": 4.29,
               "guaranteedRate": 0.08
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 30.74,
-              "possibleRate": 58.34,
-              "guaranteedRate": 7.79
+              "scenarios": 7340032,
+              "probability": 31.02,
+              "possibleRate": 58.72,
+              "guaranteedRate": 7.88
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 91.39,
-              "possibleRate": 99.83,
-              "guaranteedRate": 73.06
+              "scenarios": 9175040,
+              "probability": 91.34,
+              "possibleRate": 99.82,
+              "guaranteedRate": 73.0
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.98
-            },
-            {
-              "wins": 6,
               "scenarios": 7340032,
               "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 7,
-              "scenarios": 2097152,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 8,
-              "scenarios": 262144,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 68.27,
-              "teamBWinProbability": 68.16,
-              "impact": 0.11
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 68.27,
-              "teamBWinProbability": 68.16,
-              "impact": 0.11
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "GG": {
-          "possible": 1,
-          "likely": 4,
-          "guaranteed": 6,
-          "target_matches": 9,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 131072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1179648,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 4718592,
-              "probability": 1.47,
-              "possibleRate": 3.75,
-              "guaranteedRate": 0.06
-            },
-            {
-              "wins": 3,
-              "scenarios": 11010048,
-              "probability": 29.56,
-              "possibleRate": 57.07,
-              "guaranteedRate": 7.03
-            },
-            {
-              "wins": 4,
-              "scenarios": 16515072,
-              "probability": 91.16,
-              "possibleRate": 99.85,
-              "guaranteedRate": 72.09
-            },
-            {
-              "wins": 5,
-              "scenarios": 16515072,
-              "probability": 100.0,
-              "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -912,30 +894,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 86.61,
-              "teamBWinProbability": 68.16,
-              "impact": 18.44
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 56.27,
+              "teamBWinProbability": 80.27,
+              "impact": 24.0
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 86.61,
-              "teamBWinProbability": 68.16,
-              "impact": 18.44
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 56.27,
+              "teamBWinProbability": 80.27,
+              "impact": 24.0
             }
           ],
           "impactFixtureWindow": 1
@@ -944,7 +926,7 @@
           "possible": 1,
           "likely": 4,
           "guaranteed": 6,
-          "target_matches": 9,
+          "target_matches": 8,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -956,62 +938,55 @@
             },
             {
               "wins": 1,
-              "scenarios": 1179648,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 4718592,
-              "probability": 1.25,
-              "possibleRate": 3.25,
-              "guaranteedRate": 0.05
+              "scenarios": 3670016,
+              "probability": 1.36,
+              "possibleRate": 3.52,
+              "guaranteedRate": 0.06
             },
             {
               "wins": 3,
-              "scenarios": 11010048,
-              "probability": 29.19,
-              "possibleRate": 56.9,
-              "guaranteedRate": 6.67
+              "scenarios": 7340032,
+              "probability": 30.3,
+              "possibleRate": 58.15,
+              "guaranteedRate": 7.33
             },
             {
               "wins": 4,
-              "scenarios": 16515072,
-              "probability": 91.27,
-              "possibleRate": 99.86,
-              "guaranteedRate": 72.33
+              "scenarios": 9175040,
+              "probability": 91.53,
+              "possibleRate": 99.84,
+              "guaranteedRate": 73.43
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
+              "scenarios": 7340032,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -1020,30 +995,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.13,
-              "teamBWinProbability": 86.54,
-              "impact": 18.41
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.39,
+              "teamBWinProbability": 67.88,
+              "impact": 0.51
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.13,
-              "teamBWinProbability": 86.54,
-              "impact": 18.41
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.39,
+              "teamBWinProbability": 67.88,
+              "impact": 0.51
             }
           ],
           "impactFixtureWindow": 1
@@ -1057,77 +1032,77 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 7864320,
-              "probability": 1.42,
-              "possibleRate": 3.65,
+              "scenarios": 3932160,
+              "probability": 1.46,
+              "possibleRate": 3.76,
               "guaranteedRate": 0.06
             },
             {
               "wins": 4,
-              "scenarios": 13762560,
-              "probability": 29.57,
-              "possibleRate": 57.23,
-              "guaranteedRate": 6.94
+              "scenarios": 6881280,
+              "probability": 29.8,
+              "possibleRate": 57.55,
+              "guaranteedRate": 7.01
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 91.19,
-              "possibleRate": 99.85,
-              "guaranteedRate": 72.14
+              "scenarios": 8257536,
+              "probability": 91.12,
+              "possibleRate": 99.84,
+              "guaranteedRate": 72.04
             },
             {
               "wins": 6,
-              "scenarios": 13762560,
+              "scenarios": 6881280,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 7,
-              "scenarios": 7864320,
+              "scenarios": 3932160,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 9,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 10,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1135,30 +1110,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 66.4,
-              "teamBWinProbability": 66.33,
-              "impact": 0.07
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 77.72,
+              "teamBWinProbability": 55.08,
+              "impact": 22.64
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 66.4,
-              "teamBWinProbability": 66.33,
-              "impact": 0.07
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 77.72,
+              "teamBWinProbability": 55.08,
+              "impact": 22.64
             }
           ],
           "impactFixtureWindow": 1
@@ -1172,63 +1147,63 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 1.21,
-              "possibleRate": 3.16,
+              "scenarios": 7340032,
+              "probability": 1.17,
+              "possibleRate": 3.05,
               "guaranteedRate": 0.04
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 28.55,
-              "possibleRate": 56.32,
+              "scenarios": 9175040,
+              "probability": 28.59,
+              "possibleRate": 56.4,
               "guaranteedRate": 6.22
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 91.26,
+              "scenarios": 7340032,
+              "probability": 91.38,
               "possibleRate": 99.91,
-              "guaranteedRate": 71.77
+              "guaranteedRate": 72.16
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1236,36 +1211,137 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 42.51,
-              "teamBWinProbability": 42.46,
-              "impact": 0.05
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 42.69,
+              "teamBWinProbability": 42.34,
+              "impact": 0.35
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 42.51,
-              "teamBWinProbability": 42.46,
-              "impact": 0.05
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 42.69,
+              "teamBWinProbability": 42.34,
+              "impact": 0.35
             }
           ],
           "impactFixtureWindow": 1
         }
       },
       "2": {
+        "GG": {
+          "possible": 2,
+          "likely": 4,
+          "guaranteed": 7,
+          "target_matches": 8,
+          "method": "Exact all-combinations",
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 131072,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
+              "scenarios": 7340032,
+              "probability": 8.68,
+              "possibleRate": 27.99,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 4,
+              "scenarios": 9175040,
+              "probability": 71.52,
+              "possibleRate": 93.88,
+              "guaranteedRate": 43.67
+            },
+            {
+              "wins": 5,
+              "scenarios": 7340032,
+              "probability": 98.84,
+              "possibleRate": 99.96,
+              "guaranteedRate": 96.97
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 7,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 8,
+              "scenarios": 131072,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 57.69,
+              "teamBWinProbability": 57.37,
+              "impact": 0.31
+            }
+          ],
+          "nextFixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 57.69,
+              "teamBWinProbability": 57.37,
+              "impact": 0.31
+            }
+          ],
+          "impactFixtureWindow": 1
+        },
         "ADKR": {
           "possible": 3,
           "likely": 5,
@@ -1275,63 +1351,63 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 8.57,
-              "possibleRate": 26.85,
-              "guaranteedRate": 0.16
+              "scenarios": 9175040,
+              "probability": 8.7,
+              "possibleRate": 27.09,
+              "guaranteedRate": 0.18
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 69.06,
-              "possibleRate": 92.09,
-              "guaranteedRate": 41.39
+              "scenarios": 7340032,
+              "probability": 69.18,
+              "possibleRate": 92.24,
+              "guaranteedRate": 41.56
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
-              "probability": 98.34,
-              "possibleRate": 99.92,
-              "guaranteedRate": 95.78
+              "scenarios": 3670016,
+              "probability": 98.36,
+              "possibleRate": 99.93,
+              "guaranteedRate": 95.82
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 99.99,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1339,30 +1415,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.79,
-              "teamBWinProbability": 31.66,
-              "impact": 0.13
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.88,
+              "teamBWinProbability": 31.69,
+              "impact": 0.19
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.79,
-              "teamBWinProbability": 31.66,
-              "impact": 0.13
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.88,
+              "teamBWinProbability": 31.69,
+              "impact": 0.19
             }
           ],
           "impactFixtureWindow": 1
@@ -1376,170 +1452,62 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 8.52,
-              "possibleRate": 26.72,
-              "guaranteedRate": 0.16
+              "scenarios": 9175040,
+              "probability": 8.47,
+              "possibleRate": 26.57,
+              "guaranteedRate": 0.15
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 69.62,
-              "possibleRate": 92.49,
-              "guaranteedRate": 41.94
-            },
-            {
-              "wins": 6,
               "scenarios": 7340032,
-              "probability": 98.54,
-              "possibleRate": 99.93,
-              "guaranteedRate": 96.27
-            },
-            {
-              "wins": 7,
-              "scenarios": 2097152,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.99
-            },
-            {
-              "wins": 8,
-              "scenarios": 262144,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.87,
-              "teamBWinProbability": 31.84,
-              "impact": 0.03
-            }
-          ],
-          "nextFixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.87,
-              "teamBWinProbability": 31.84,
-              "impact": 0.03
-            }
-          ],
-          "impactFixtureWindow": 1
-        },
-        "GG": {
-          "possible": 3,
-          "likely": 5,
-          "guaranteed": 8,
-          "target_matches": 9,
-          "method": "Exact all-combinations",
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 131072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1179648,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 4718592,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 11010048,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 16515072,
-              "probability": 8.62,
-              "possibleRate": 27.39,
-              "guaranteedRate": 0.13
-            },
-            {
-              "wins": 5,
-              "scenarios": 16515072,
-              "probability": 70.64,
-              "possibleRate": 93.21,
-              "guaranteedRate": 42.91
+              "probability": 69.7,
+              "possibleRate": 92.68,
+              "guaranteedRate": 41.84
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
-              "probability": 98.7,
-              "possibleRate": 99.95,
-              "guaranteedRate": 96.64
+              "scenarios": 3670016,
+              "probability": 98.64,
+              "possibleRate": 99.94,
+              "guaranteedRate": 96.49
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.99
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -1548,30 +1516,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 57.53,
-              "teamBWinProbability": 31.84,
-              "impact": 25.69
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 20.1,
+              "teamBWinProbability": 43.64,
+              "impact": 23.54
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 57.53,
-              "teamBWinProbability": 31.84,
-              "impact": 25.69
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 20.1,
+              "teamBWinProbability": 43.64,
+              "impact": 23.54
             }
           ],
           "impactFixtureWindow": 1
@@ -1580,7 +1548,7 @@
           "possible": 3,
           "likely": 5,
           "guaranteed": 8,
-          "target_matches": 9,
+          "target_matches": 8,
           "method": "Exact all-combinations",
           "ownWinBuckets": [
             {
@@ -1592,62 +1560,55 @@
             },
             {
               "wins": 1,
-              "scenarios": 1179648,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 4718592,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 11010048,
+              "scenarios": 7340032,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 16515072,
-              "probability": 8.75,
-              "possibleRate": 27.72,
-              "guaranteedRate": 0.14
+              "scenarios": 9175040,
+              "probability": 8.66,
+              "possibleRate": 27.0,
+              "guaranteedRate": 0.17
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 70.37,
-              "possibleRate": 93.05,
-              "guaranteedRate": 42.66
+              "scenarios": 7340032,
+              "probability": 68.98,
+              "possibleRate": 92.13,
+              "guaranteedRate": 41.28
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
-              "probability": 98.6,
-              "possibleRate": 99.94,
-              "guaranteedRate": 96.39
+              "scenarios": 3670016,
+              "probability": 98.32,
+              "possibleRate": 99.92,
+              "guaranteedRate": 95.73
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
-              "probability": 100.0,
+              "scenarios": 1048576,
+              "probability": 99.99,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "guaranteedRate": 99.98
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -1656,30 +1617,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 31.73,
-              "teamBWinProbability": 57.54,
-              "impact": 25.81
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.98,
+              "teamBWinProbability": 31.47,
+              "impact": 0.51
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 31.73,
-              "teamBWinProbability": 57.54,
-              "impact": 25.81
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.98,
+              "teamBWinProbability": 31.47,
+              "impact": 0.51
             }
           ],
           "impactFixtureWindow": 1
@@ -1693,77 +1654,77 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 7864320,
+              "scenarios": 3932160,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 13762560,
+              "scenarios": 6881280,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 8.67,
-              "possibleRate": 27.53,
+              "scenarios": 8257536,
+              "probability": 8.6,
+              "possibleRate": 27.31,
               "guaranteedRate": 0.13
             },
             {
               "wins": 6,
-              "scenarios": 13762560,
-              "probability": 70.67,
-              "possibleRate": 93.26,
-              "guaranteedRate": 42.91
+              "scenarios": 6881280,
+              "probability": 70.68,
+              "possibleRate": 93.39,
+              "guaranteedRate": 42.73
             },
             {
               "wins": 7,
-              "scenarios": 7864320,
-              "probability": 98.71,
-              "possibleRate": 99.95,
-              "guaranteedRate": 96.65
+              "scenarios": 3932160,
+              "probability": 98.79,
+              "possibleRate": 99.96,
+              "guaranteedRate": 96.84
             },
             {
               "wins": 8,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.99
             },
             {
               "wins": 9,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 10,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1771,30 +1732,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 33.66,
-              "teamBWinProbability": 33.67,
-              "impact": 0.01
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 44.74,
+              "teamBWinProbability": 22.57,
+              "impact": 22.17
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 33.66,
-              "teamBWinProbability": 33.67,
-              "impact": 0.01
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 44.74,
+              "teamBWinProbability": 22.57,
+              "impact": 22.17
             }
           ],
           "impactFixtureWindow": 1
@@ -1808,63 +1769,63 @@
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
+              "scenarios": 9175040,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 9.14,
-              "possibleRate": 29.13,
-              "guaranteedRate": 0.14
+              "scenarios": 7340032,
+              "probability": 9.21,
+              "possibleRate": 29.21,
+              "guaranteedRate": 0.15
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
-              "probability": 72.78,
-              "possibleRate": 94.45,
-              "guaranteedRate": 45.46
+              "scenarios": 3670016,
+              "probability": 72.52,
+              "possibleRate": 94.26,
+              "guaranteedRate": 45.3
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
-              "probability": 99.07,
+              "scenarios": 1048576,
+              "probability": 99.01,
               "possibleRate": 99.98,
-              "guaranteedRate": 97.53
+              "guaranteedRate": 97.37
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1872,30 +1833,30 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 13.43,
-              "teamBWinProbability": 13.46,
-              "impact": 0.03
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 13.61,
+              "teamBWinProbability": 13.26,
+              "impact": 0.35
             }
           ],
           "nextFixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 13.43,
-              "teamBWinProbability": 13.46,
-              "impact": 0.03
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 13.61,
+              "teamBWinProbability": 13.26,
+              "impact": 0.35
             }
           ],
           "impactFixtureWindow": 1
@@ -1904,70 +1865,70 @@
     },
     "scenarioBreakdown": {
       "4": {
-        "ADKR": {
-          "clearRate": 58.06,
-          "possibleRate": 76.81,
-          "sharedTieAdjustedRate": 68.21,
+        "GG": {
+          "clearRate": 79.8,
+          "possibleRate": 91.63,
+          "sharedTieAdjustedRate": 86.61,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
+              "scenarios": 1048576,
+              "probability": 1.08,
+              "possibleRate": 2.86,
+              "guaranteedRate": 0.02
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
-              "probability": 1.5,
-              "possibleRate": 3.83,
-              "guaranteedRate": 0.07
+              "scenarios": 3670016,
+              "probability": 27.77,
+              "possibleRate": 55.12,
+              "guaranteedRate": 5.85
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 30.58,
-              "possibleRate": 58.33,
-              "guaranteedRate": 7.63
+              "scenarios": 7340032,
+              "probability": 90.81,
+              "possibleRate": 99.85,
+              "guaranteedRate": 70.84
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 91.52,
-              "possibleRate": 99.85,
-              "guaranteedRate": 73.37
-            },
-            {
-              "wins": 5,
-              "scenarios": 14680064,
+              "scenarios": 9175040,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
-              "wins": 6,
+              "wins": 5,
               "scenarios": 7340032,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -1975,173 +1936,166 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.07,
-              "teamBWinProbability": 68.34,
-              "impact": 0.27
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 86.76,
+              "teamBWinProbability": 86.45,
+              "impact": 0.31
             }
           ]
         },
-        "DV": {
-          "clearRate": 58.01,
-          "possibleRate": 76.84,
-          "sharedTieAdjustedRate": 68.22,
+        "ADKR": {
+          "clearRate": 57.96,
+          "possibleRate": 76.66,
+          "sharedTieAdjustedRate": 68.07,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3670016,
+              "probability": 1.31,
+              "possibleRate": 3.4,
+              "guaranteedRate": 0.05
+            },
+            {
+              "wins": 3,
+              "scenarios": 7340032,
+              "probability": 30.09,
+              "possibleRate": 57.88,
+              "guaranteedRate": 7.2
+            },
+            {
+              "wins": 4,
+              "scenarios": 9175040,
+              "probability": 91.49,
+              "possibleRate": 99.84,
+              "guaranteedRate": 73.34
+            },
+            {
+              "wins": 5,
+              "scenarios": 7340032,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.98
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 7,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 8,
+              "scenarios": 131072,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.17,
+              "teamBWinProbability": 67.98,
+              "impact": 0.19
+            }
+          ]
+        },
+        "DV": {
+          "clearRate": 58.02,
+          "possibleRate": 76.94,
+          "sharedTieAdjustedRate": 68.27,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 131072,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1048576,
               "probability": 0.01,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
-              "probability": 1.62,
-              "possibleRate": 4.11,
+              "scenarios": 3670016,
+              "probability": 1.69,
+              "possibleRate": 4.29,
               "guaranteedRate": 0.08
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 30.74,
-              "possibleRate": 58.34,
-              "guaranteedRate": 7.79
+              "scenarios": 7340032,
+              "probability": 31.02,
+              "possibleRate": 58.72,
+              "guaranteedRate": 7.88
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 91.39,
-              "possibleRate": 99.83,
-              "guaranteedRate": 73.06
+              "scenarios": 9175040,
+              "probability": 91.34,
+              "possibleRate": 99.82,
+              "guaranteedRate": 73.0
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.98
-            },
-            {
-              "wins": 6,
               "scenarios": 7340032,
               "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 7,
-              "scenarios": 2097152,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 8,
-              "scenarios": 262144,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 68.27,
-              "teamBWinProbability": 68.16,
-              "impact": 0.11
-            }
-          ]
-        },
-        "GG": {
-          "clearRate": 68.89,
-          "possibleRate": 84.2,
-          "sharedTieAdjustedRate": 77.39,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 131072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1179648,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 4718592,
-              "probability": 1.47,
-              "possibleRate": 3.75,
-              "guaranteedRate": 0.06
-            },
-            {
-              "wins": 3,
-              "scenarios": 11010048,
-              "probability": 29.56,
-              "possibleRate": 57.07,
-              "guaranteedRate": 7.03
-            },
-            {
-              "wins": 4,
-              "scenarios": 16515072,
-              "probability": 91.16,
-              "possibleRate": 99.85,
-              "guaranteedRate": 72.09
-            },
-            {
-              "wins": 5,
-              "scenarios": 16515072,
-              "probability": 100.0,
-              "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2150,23 +2104,23 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 86.61,
-              "teamBWinProbability": 68.16,
-              "impact": 18.44
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 56.27,
+              "teamBWinProbability": 80.27,
+              "impact": 24.0
             }
           ]
         },
         "MIE": {
-          "clearRate": 68.89,
-          "possibleRate": 84.14,
-          "sharedTieAdjustedRate": 77.34,
+          "clearRate": 58.01,
+          "possibleRate": 76.73,
+          "sharedTieAdjustedRate": 68.13,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2177,62 +2131,55 @@
             },
             {
               "wins": 1,
-              "scenarios": 1179648,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 4718592,
-              "probability": 1.25,
-              "possibleRate": 3.25,
-              "guaranteedRate": 0.05
+              "scenarios": 3670016,
+              "probability": 1.36,
+              "possibleRate": 3.52,
+              "guaranteedRate": 0.06
             },
             {
               "wins": 3,
-              "scenarios": 11010048,
-              "probability": 29.19,
-              "possibleRate": 56.9,
-              "guaranteedRate": 6.67
+              "scenarios": 7340032,
+              "probability": 30.3,
+              "possibleRate": 58.15,
+              "guaranteedRate": 7.33
             },
             {
               "wins": 4,
-              "scenarios": 16515072,
-              "probability": 91.27,
-              "possibleRate": 99.86,
-              "guaranteedRate": 72.33
+              "scenarios": 9175040,
+              "probability": 91.53,
+              "possibleRate": 99.84,
+              "guaranteedRate": 73.43
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
+              "scenarios": 7340032,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2241,97 +2188,97 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 68.13,
-              "teamBWinProbability": 86.54,
-              "impact": 18.41
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 68.39,
+              "teamBWinProbability": 67.88,
+              "impact": 0.51
             }
           ]
         },
         "DUC": {
-          "clearRate": 56.87,
-          "possibleRate": 74.43,
-          "sharedTieAdjustedRate": 66.37,
+          "clearRate": 56.86,
+          "possibleRate": 74.51,
+          "sharedTieAdjustedRate": 66.4,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 7864320,
-              "probability": 1.42,
-              "possibleRate": 3.65,
+              "scenarios": 3932160,
+              "probability": 1.46,
+              "possibleRate": 3.76,
               "guaranteedRate": 0.06
             },
             {
               "wins": 4,
-              "scenarios": 13762560,
-              "probability": 29.57,
-              "possibleRate": 57.23,
-              "guaranteedRate": 6.94
+              "scenarios": 6881280,
+              "probability": 29.8,
+              "possibleRate": 57.55,
+              "guaranteedRate": 7.01
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 91.19,
-              "possibleRate": 99.85,
-              "guaranteedRate": 72.14
+              "scenarios": 8257536,
+              "probability": 91.12,
+              "possibleRate": 99.84,
+              "guaranteedRate": 72.04
             },
             {
               "wins": 6,
-              "scenarios": 13762560,
+              "scenarios": 6881280,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 7,
-              "scenarios": 7864320,
+              "scenarios": 3932160,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 9,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 10,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2339,83 +2286,83 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 66.4,
-              "teamBWinProbability": 66.33,
-              "impact": 0.07
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 77.72,
+              "teamBWinProbability": 55.08,
+              "impact": 22.64
             }
           ]
         },
         "SJW": {
-          "clearRate": 31.86,
+          "clearRate": 31.95,
           "possibleRate": 52.4,
-          "sharedTieAdjustedRate": 42.49,
+          "sharedTieAdjustedRate": 42.51,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.01,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
-              "probability": 1.21,
-              "possibleRate": 3.16,
+              "scenarios": 7340032,
+              "probability": 1.17,
+              "possibleRate": 3.05,
               "guaranteedRate": 0.04
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 28.55,
-              "possibleRate": 56.32,
+              "scenarios": 9175040,
+              "probability": 28.59,
+              "possibleRate": 56.4,
               "guaranteedRate": 6.22
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 91.26,
+              "scenarios": 7340032,
+              "probability": 91.38,
               "possibleRate": 99.91,
-              "guaranteedRate": 71.77
+              "guaranteedRate": 72.16
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 100.0,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "guaranteedRate": 100.0
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2423,85 +2370,169 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 42.51,
-              "teamBWinProbability": 42.46,
-              "impact": 0.05
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 42.69,
+              "teamBWinProbability": 42.34,
+              "impact": 0.35
             }
           ]
         }
       },
       "2": {
-        "ADKR": {
-          "clearRate": 23.09,
-          "possibleRate": 41.93,
-          "sharedTieAdjustedRate": 31.72,
+        "GG": {
+          "clearRate": 47.63,
+          "possibleRate": 68.11,
+          "sharedTieAdjustedRate": 57.53,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
+              "scenarios": 3670016,
+              "probability": 0.0,
+              "possibleRate": 0.01,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 3,
               "scenarios": 7340032,
+              "probability": 8.68,
+              "possibleRate": 27.99,
+              "guaranteedRate": 0.1
+            },
+            {
+              "wins": 4,
+              "scenarios": 9175040,
+              "probability": 71.52,
+              "possibleRate": 93.88,
+              "guaranteedRate": 43.67
+            },
+            {
+              "wins": 5,
+              "scenarios": 7340032,
+              "probability": 98.84,
+              "possibleRate": 99.96,
+              "guaranteedRate": 96.97
+            },
+            {
+              "wins": 6,
+              "scenarios": 3670016,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 99.99
+            },
+            {
+              "wins": 7,
+              "scenarios": 1048576,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            },
+            {
+              "wins": 8,
+              "scenarios": 131072,
+              "probability": 100.0,
+              "possibleRate": 100.0,
+              "guaranteedRate": 100.0
+            }
+          ],
+          "fixtureImpacts": [
+            {
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 57.69,
+              "teamBWinProbability": 57.37,
+              "impact": 0.31
+            }
+          ]
+        },
+        "ADKR": {
+          "clearRate": 23.14,
+          "possibleRate": 42.03,
+          "sharedTieAdjustedRate": 31.79,
+          "ownWinBuckets": [
+            {
+              "wins": 0,
+              "scenarios": 131072,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 1,
+              "scenarios": 1048576,
+              "probability": 0.0,
+              "possibleRate": 0.0,
+              "guaranteedRate": 0.0
+            },
+            {
+              "wins": 2,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 8.57,
-              "possibleRate": 26.85,
-              "guaranteedRate": 0.16
+              "scenarios": 9175040,
+              "probability": 8.7,
+              "possibleRate": 27.09,
+              "guaranteedRate": 0.18
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 69.06,
-              "possibleRate": 92.09,
-              "guaranteedRate": 41.39
+              "scenarios": 7340032,
+              "probability": 69.18,
+              "possibleRate": 92.24,
+              "guaranteedRate": 41.56
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
-              "probability": 98.34,
-              "possibleRate": 99.92,
-              "guaranteedRate": 95.78
+              "scenarios": 3670016,
+              "probability": 98.36,
+              "possibleRate": 99.93,
+              "guaranteedRate": 95.82
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 99.99,
               "possibleRate": 100.0,
               "guaranteedRate": 99.98
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2509,173 +2540,82 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.79,
-              "teamBWinProbability": 31.66,
-              "impact": 0.13
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.88,
+              "teamBWinProbability": 31.69,
+              "impact": 0.19
             }
           ]
         },
         "DV": {
           "clearRate": 23.26,
           "possibleRate": 41.99,
-          "sharedTieAdjustedRate": 31.85,
+          "sharedTieAdjustedRate": 31.87,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
-              "probability": 8.52,
-              "possibleRate": 26.72,
-              "guaranteedRate": 0.16
+              "scenarios": 9175040,
+              "probability": 8.47,
+              "possibleRate": 26.57,
+              "guaranteedRate": 0.15
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 69.62,
-              "possibleRate": 92.49,
-              "guaranteedRate": 41.94
-            },
-            {
-              "wins": 6,
               "scenarios": 7340032,
-              "probability": 98.54,
-              "possibleRate": 99.93,
-              "guaranteedRate": 96.27
-            },
-            {
-              "wins": 7,
-              "scenarios": 2097152,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 99.99
-            },
-            {
-              "wins": 8,
-              "scenarios": 262144,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            }
-          ],
-          "fixtureImpacts": [
-            {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 31.87,
-              "teamBWinProbability": 31.84,
-              "impact": 0.03
-            }
-          ]
-        },
-        "GG": {
-          "clearRate": 35.43,
-          "possibleRate": 55.06,
-          "sharedTieAdjustedRate": 44.68,
-          "ownWinBuckets": [
-            {
-              "wins": 0,
-              "scenarios": 131072,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 1,
-              "scenarios": 1179648,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 2,
-              "scenarios": 4718592,
-              "probability": 0.0,
-              "possibleRate": 0.0,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 3,
-              "scenarios": 11010048,
-              "probability": 0.0,
-              "possibleRate": 0.01,
-              "guaranteedRate": 0.0
-            },
-            {
-              "wins": 4,
-              "scenarios": 16515072,
-              "probability": 8.62,
-              "possibleRate": 27.39,
-              "guaranteedRate": 0.13
-            },
-            {
-              "wins": 5,
-              "scenarios": 16515072,
-              "probability": 70.64,
-              "possibleRate": 93.21,
-              "guaranteedRate": 42.91
+              "probability": 69.7,
+              "possibleRate": 92.68,
+              "guaranteedRate": 41.84
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
-              "probability": 98.7,
-              "possibleRate": 99.95,
-              "guaranteedRate": 96.64
+              "scenarios": 3670016,
+              "probability": 98.64,
+              "possibleRate": 99.94,
+              "guaranteedRate": 96.49
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
+              "scenarios": 1048576,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.99
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2684,23 +2624,23 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "GG",
-              "preferredLabel": "GG beat MIE",
-              "teamAWinProbability": 57.53,
-              "teamBWinProbability": 31.84,
-              "impact": 25.69
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DV",
+              "preferredLabel": "DV beat DUC",
+              "teamAWinProbability": 20.1,
+              "teamBWinProbability": 43.64,
+              "impact": 23.54
             }
           ]
         },
         "MIE": {
-          "clearRate": 35.33,
-          "possibleRate": 55.1,
-          "sharedTieAdjustedRate": 44.63,
+          "clearRate": 23.06,
+          "possibleRate": 41.99,
+          "sharedTieAdjustedRate": 31.73,
           "ownWinBuckets": [
             {
               "wins": 0,
@@ -2711,62 +2651,55 @@
             },
             {
               "wins": 1,
-              "scenarios": 1179648,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 4718592,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 11010048,
+              "scenarios": 7340032,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 16515072,
-              "probability": 8.75,
-              "possibleRate": 27.72,
-              "guaranteedRate": 0.14
+              "scenarios": 9175040,
+              "probability": 8.66,
+              "possibleRate": 27.0,
+              "guaranteedRate": 0.17
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 70.37,
-              "possibleRate": 93.05,
-              "guaranteedRate": 42.66
+              "scenarios": 7340032,
+              "probability": 68.98,
+              "possibleRate": 92.13,
+              "guaranteedRate": 41.28
             },
             {
               "wins": 6,
-              "scenarios": 11010048,
-              "probability": 98.6,
-              "possibleRate": 99.94,
-              "guaranteedRate": 96.39
+              "scenarios": 3670016,
+              "probability": 98.32,
+              "possibleRate": 99.92,
+              "guaranteedRate": 95.73
             },
             {
               "wins": 7,
-              "scenarios": 4718592,
-              "probability": 100.0,
+              "scenarios": 1048576,
+              "probability": 99.99,
               "possibleRate": 100.0,
-              "guaranteedRate": 99.99
+              "guaranteedRate": 99.98
             },
             {
               "wins": 8,
-              "scenarios": 1179648,
-              "probability": 100.0,
-              "possibleRate": 100.0,
-              "guaranteedRate": 100.0
-            },
-            {
-              "wins": 9,
               "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
@@ -2775,97 +2708,97 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 31.73,
-              "teamBWinProbability": 57.54,
-              "impact": 25.81
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 31.98,
+              "teamBWinProbability": 31.47,
+              "impact": 0.51
             }
           ]
         },
         "DUC": {
-          "clearRate": 25.63,
-          "possibleRate": 43.09,
+          "clearRate": 25.61,
+          "possibleRate": 43.06,
           "sharedTieAdjustedRate": 33.66,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 7864320,
+              "scenarios": 3932160,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 13762560,
+              "scenarios": 6881280,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 16515072,
-              "probability": 8.67,
-              "possibleRate": 27.53,
+              "scenarios": 8257536,
+              "probability": 8.6,
+              "possibleRate": 27.31,
               "guaranteedRate": 0.13
             },
             {
               "wins": 6,
-              "scenarios": 13762560,
-              "probability": 70.67,
-              "possibleRate": 93.26,
-              "guaranteedRate": 42.91
+              "scenarios": 6881280,
+              "probability": 70.68,
+              "possibleRate": 93.39,
+              "guaranteedRate": 42.73
             },
             {
               "wins": 7,
-              "scenarios": 7864320,
-              "probability": 98.71,
-              "possibleRate": 99.95,
-              "guaranteedRate": 96.65
+              "scenarios": 3932160,
+              "probability": 98.79,
+              "possibleRate": 99.96,
+              "guaranteedRate": 96.84
             },
             {
               "wins": 8,
-              "scenarios": 2949120,
+              "scenarios": 1474560,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 99.99
             },
             {
               "wins": 9,
-              "scenarios": 655360,
+              "scenarios": 327680,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
             },
             {
               "wins": 10,
-              "scenarios": 65536,
+              "scenarios": 32768,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2873,83 +2806,83 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 33.66,
-              "teamBWinProbability": 33.67,
-              "impact": 0.01
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 44.74,
+              "teamBWinProbability": 22.57,
+              "impact": 22.17
             }
           ]
         },
         "SJW": {
-          "clearRate": 8.44,
+          "clearRate": 8.42,
           "possibleRate": 20.22,
-          "sharedTieAdjustedRate": 13.45,
+          "sharedTieAdjustedRate": 13.43,
           "ownWinBuckets": [
             {
               "wins": 0,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 1,
-              "scenarios": 2097152,
+              "scenarios": 1048576,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 2,
-              "scenarios": 7340032,
+              "scenarios": 3670016,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 3,
-              "scenarios": 14680064,
+              "scenarios": 7340032,
               "probability": 0.0,
               "possibleRate": 0.0,
               "guaranteedRate": 0.0
             },
             {
               "wins": 4,
-              "scenarios": 18350080,
+              "scenarios": 9175040,
               "probability": 0.0,
-              "possibleRate": 0.01,
+              "possibleRate": 0.02,
               "guaranteedRate": 0.0
             },
             {
               "wins": 5,
-              "scenarios": 14680064,
-              "probability": 9.14,
-              "possibleRate": 29.13,
-              "guaranteedRate": 0.14
+              "scenarios": 7340032,
+              "probability": 9.21,
+              "possibleRate": 29.21,
+              "guaranteedRate": 0.15
             },
             {
               "wins": 6,
-              "scenarios": 7340032,
-              "probability": 72.78,
-              "possibleRate": 94.45,
-              "guaranteedRate": 45.46
+              "scenarios": 3670016,
+              "probability": 72.52,
+              "possibleRate": 94.26,
+              "guaranteedRate": 45.3
             },
             {
               "wins": 7,
-              "scenarios": 2097152,
-              "probability": 99.07,
+              "scenarios": 1048576,
+              "probability": 99.01,
               "possibleRate": 99.98,
-              "guaranteedRate": 97.53
+              "guaranteedRate": 97.37
             },
             {
               "wins": 8,
-              "scenarios": 262144,
+              "scenarios": 131072,
               "probability": 100.0,
               "possibleRate": 100.0,
               "guaranteedRate": 100.0
@@ -2957,16 +2890,16 @@
           ],
           "fixtureImpacts": [
             {
-              "fixtureId": "9736d8fa-050e-4657-b0a3-3529bc2bb9ec",
-              "matchNo": 5,
-              "label": "M5: GG vs MIE",
-              "teamA": "GG",
-              "teamB": "MIE",
-              "preferredWinner": "MIE",
-              "preferredLabel": "MIE beat GG",
-              "teamAWinProbability": 13.43,
-              "teamBWinProbability": 13.46,
-              "impact": 0.03
+              "fixtureId": "a1899243-cdaf-4ad5-98db-72477456b3fb",
+              "matchNo": 6,
+              "label": "M6: DUC vs DV",
+              "teamA": "DUC",
+              "teamB": "DV",
+              "preferredWinner": "DUC",
+              "preferredLabel": "DUC beat DV",
+              "teamAWinProbability": 13.61,
+              "teamBWinProbability": 13.26,
+              "impact": 0.35
             }
           ]
         }
@@ -2974,15 +2907,15 @@
     }
   },
   "movement": {
-    "since": "2026-11-23T00:23:47Z",
+    "since": "2026-11-23T19:09:14Z",
     "tier": "top4",
     "changes": {
-      "ADKR": 0.01,
-      "DV": 12.87,
-      "GG": 0.02,
-      "MIE": -0.01,
-      "DUC": -0.01,
-      "SJW": -12.86
+      "GG": 9.22,
+      "ADKR": -0.14,
+      "DV": 0.05,
+      "MIE": -9.21,
+      "DUC": 0.03,
+      "SJW": 0.02
     }
   }
 }
