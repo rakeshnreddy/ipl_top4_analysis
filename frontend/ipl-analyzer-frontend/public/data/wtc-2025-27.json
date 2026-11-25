@@ -1,7 +1,7 @@
 {
   "metadata": {
     "season": "2025-27",
-    "generated_at": "2026-11-24T18:47:20Z",
+    "generated_at": "2026-11-25T17:54:16Z",
     "source": "CricketData and Cricsheet",
     "source_url": "https://cricsheet.org/",
     "license": "ODC-By 1.0",
@@ -167,7 +167,7 @@
       "source": "https://www.icc-cricket.com/rankings/team-rankings/mens/test"
     },
     "testsTotal": 71,
-    "testsLeft": 22,
+    "testsLeft": 21,
     "seasonStart": "2025-06-17",
     "seasonEnd": "2027-06-14",
     "rules": {
@@ -251,34 +251,34 @@
       "color": "#007749",
       "textColor": "#FFFFFF",
       "rank": 1,
-      "played": 8,
-      "matches": 8,
-      "won": 6,
-      "wins": 6,
+      "played": 9,
+      "matches": 9,
+      "won": 7,
+      "wins": 7,
       "lost": 2,
       "drawn": 0,
       "tied": 0,
-      "pointsWon": 72,
+      "pointsWon": 84,
       "deducted": 0,
-      "points": 72,
-      "pct": 75.0,
+      "points": 84,
+      "pct": 77.78,
       "pctExact": [
-        72,
-        96
+        84,
+        108
       ],
-      "seriesWon": 2,
-      "seriesPlayed": 3,
+      "seriesWon": 3,
+      "seriesPlayed": 4,
       "awayPlayed": 4,
       "awayPct": 75.0,
-      "testsLeft": 6,
+      "testsLeft": 5,
       "bestPct": 85.71,
-      "worstPct": 42.86,
+      "worstPct": 50.0,
       "form": [
         "W",
         "W",
         "W",
-        "L",
-        "W"
+        "W",
+        "L"
       ]
     },
     {
@@ -393,49 +393,12 @@
       ]
     },
     {
-      "teamKey": "BAN",
-      "shortName": "BAN",
-      "fullName": "Bangladesh",
-      "color": "#E4002B",
-      "textColor": "#FFFFFF",
-      "rank": 5,
-      "played": 9,
-      "matches": 9,
-      "won": 3,
-      "wins": 3,
-      "lost": 4,
-      "drawn": 2,
-      "tied": 0,
-      "pointsWon": 44,
-      "deducted": 0,
-      "points": 44,
-      "pct": 40.74,
-      "pctExact": [
-        44,
-        108
-      ],
-      "seriesWon": 1,
-      "seriesPlayed": 4,
-      "awayPlayed": 5,
-      "awayPct": 26.67,
-      "testsLeft": 3,
-      "bestPct": 55.56,
-      "worstPct": 30.56,
-      "form": [
-        "L",
-        "D",
-        "L",
-        "L",
-        "W"
-      ]
-    },
-    {
       "teamKey": "ENG",
       "shortName": "ENG",
       "fullName": "England",
       "color": "#1C2C5B",
       "textColor": "#FFFFFF",
-      "rank": 6,
+      "rank": 5,
       "played": 16,
       "matches": 16,
       "won": 7,
@@ -462,6 +425,43 @@
         "W",
         "W",
         "W",
+        "L",
+        "L"
+      ]
+    },
+    {
+      "teamKey": "BAN",
+      "shortName": "BAN",
+      "fullName": "Bangladesh",
+      "color": "#E4002B",
+      "textColor": "#FFFFFF",
+      "rank": 6,
+      "played": 10,
+      "matches": 10,
+      "won": 3,
+      "wins": 3,
+      "lost": 5,
+      "drawn": 2,
+      "tied": 0,
+      "pointsWon": 44,
+      "deducted": 0,
+      "points": 44,
+      "pct": 36.67,
+      "pctExact": [
+        44,
+        120
+      ],
+      "seriesWon": 1,
+      "seriesPlayed": 5,
+      "awayPlayed": 6,
+      "awayPct": 22.22,
+      "testsLeft": 2,
+      "bestPct": 47.22,
+      "worstPct": 30.56,
+      "form": [
+        "L",
+        "L",
+        "D",
         "L",
         "L"
       ]
@@ -2017,17 +2017,17 @@
       "name": "Bangladesh tour of South Africa",
       "host": "SA",
       "visitor": "BAN",
-      "status": "in_progress",
+      "status": "complete",
       "start": "2026-11-15",
       "end": "2026-11-27",
       "scheduled": 2,
       "counted": 2,
       "score": {
-        "SA": 1,
+        "SA": 2,
         "BAN": 0,
         "draws": 0
       },
-      "winner": null,
+      "winner": "SA",
       "tests": [
         {
           "key": "sa-ban-2026-1",
@@ -2060,14 +2060,18 @@
           "venue": "Centurion Park (SuperSport Park)",
           "country": "SA",
           "neutral": false,
-          "state": "in_progress",
+          "state": "result",
           "tentative": false,
           "precision": "day",
-          "live": "Day 2: Stumps - South Africa lead by 403 runs",
-          "odds": {
-            "host": 89.05,
-            "draw": 2.89,
-            "visitor": 8.05
+          "result": {
+            "kind": "host",
+            "winner": "SA",
+            "margin": "an innings and 219 runs",
+            "points": {
+              "SA": 12,
+              "BAN": 0
+            },
+            "source": "CricketData"
           }
         }
       ]
@@ -2124,7 +2128,7 @@
           "precision": "day",
           "odds": {
             "host": 45.59,
-            "draw": 11.06,
+            "draw": 11.05,
             "visitor": 43.35
           }
         }
@@ -2160,8 +2164,8 @@
           "precision": "day",
           "odds": {
             "host": 71.91,
-            "draw": 7.21,
-            "visitor": 20.88
+            "draw": 7.2,
+            "visitor": 20.89
           }
         },
         {
@@ -2177,8 +2181,8 @@
           "precision": "day",
           "odds": {
             "host": 71.91,
-            "draw": 7.21,
-            "visitor": 20.88
+            "draw": 7.2,
+            "visitor": 20.89
           }
         },
         {
@@ -2194,8 +2198,8 @@
           "precision": "day",
           "odds": {
             "host": 71.91,
-            "draw": 7.21,
-            "visitor": 20.88
+            "draw": 7.2,
+            "visitor": 20.89
           }
         },
         {
@@ -2211,8 +2215,8 @@
           "precision": "day",
           "odds": {
             "host": 71.91,
-            "draw": 7.21,
-            "visitor": 20.88
+            "draw": 7.2,
+            "visitor": 20.89
           }
         }
       ]
@@ -2420,7 +2424,7 @@
           "tentative": true,
           "precision": "month",
           "odds": {
-            "host": 24.14,
+            "host": 24.15,
             "draw": 8.17,
             "visitor": 67.69
           }
@@ -2437,7 +2441,7 @@
           "tentative": true,
           "precision": "month",
           "odds": {
-            "host": 24.14,
+            "host": 24.15,
             "draw": 8.17,
             "visitor": 67.69
           }
@@ -2606,30 +2610,6 @@
   ],
   "fixtures": [
     {
-      "id": "sa-ban-2026-2",
-      "series": "sa-ban-2026",
-      "number": 2,
-      "teamA": "SA",
-      "teamB": "BAN",
-      "host": "SA",
-      "visitor": "BAN",
-      "dateTimeGMT": "2026-11-23T00:00:00Z",
-      "start": "2026-11-23",
-      "end": "2026-11-27",
-      "venue": "Centurion Park (SuperSport Park)",
-      "country": "SA",
-      "neutral": false,
-      "state": "in_progress",
-      "status": "in_progress",
-      "precision": "day",
-      "tentative": false,
-      "odds": {
-        "host": 89.05,
-        "draw": 2.89,
-        "visitor": 8.05
-      }
-    },
-    {
       "id": "nz-ind-2026-2",
       "series": "nz-ind-2026",
       "number": 2,
@@ -2649,7 +2629,7 @@
       "tentative": false,
       "odds": {
         "host": 45.59,
-        "draw": 11.06,
+        "draw": 11.05,
         "visitor": 43.35
       }
     },
@@ -2673,8 +2653,8 @@
       "tentative": false,
       "odds": {
         "host": 71.91,
-        "draw": 7.21,
-        "visitor": 20.88
+        "draw": 7.2,
+        "visitor": 20.89
       }
     },
     {
@@ -2697,8 +2677,8 @@
       "tentative": false,
       "odds": {
         "host": 71.91,
-        "draw": 7.21,
-        "visitor": 20.88
+        "draw": 7.2,
+        "visitor": 20.89
       }
     },
     {
@@ -2745,8 +2725,8 @@
       "tentative": false,
       "odds": {
         "host": 71.91,
-        "draw": 7.21,
-        "visitor": 20.88
+        "draw": 7.2,
+        "visitor": 20.89
       }
     },
     {
@@ -2817,8 +2797,8 @@
       "tentative": false,
       "odds": {
         "host": 71.91,
-        "draw": 7.21,
-        "visitor": 20.88
+        "draw": 7.2,
+        "visitor": 20.89
       }
     },
     {
@@ -2888,7 +2868,7 @@
       "precision": "month",
       "tentative": true,
       "odds": {
-        "host": 24.14,
+        "host": 24.15,
         "draw": 8.17,
         "visitor": 67.69
       }
@@ -2912,7 +2892,7 @@
       "precision": "month",
       "tentative": true,
       "odds": {
-        "host": 24.14,
+        "host": 24.15,
         "draw": 8.17,
         "visitor": 67.69
       }
@@ -3136,6 +3116,18 @@
   ],
   "results": [
     {
+      "id": "sa-ban-2026-2",
+      "series": "sa-ban-2026",
+      "number": 2,
+      "host": "SA",
+      "visitor": "BAN",
+      "start": "2026-11-23",
+      "venue": "Centurion Park (SuperSport Park)",
+      "kind": "host",
+      "winner": "SA",
+      "margin": "an innings and 219 runs"
+    },
+    {
       "id": "nz-ind-2026-1",
       "series": "nz-ind-2026",
       "number": 1,
@@ -3242,18 +3234,6 @@
       "kind": "visitor",
       "winner": "AUS",
       "margin": "214 runs"
-    },
-    {
-      "id": "eng-pak-2026-3",
-      "series": "eng-pak-2026",
-      "number": 3,
-      "host": "ENG",
-      "visitor": "PAK",
-      "start": "2026-09-09",
-      "venue": "Edgbaston, Birmingham",
-      "kind": "host",
-      "winner": "ENG",
-      "margin": "8 wickets"
     }
   ],
   "final": {
@@ -3284,42 +3264,42 @@
           "AUS",
           "SA"
         ],
-        "chance": 69.46
+        "chance": 69.91
       },
       {
         "teams": [
           "NZ",
           "SA"
         ],
-        "chance": 13.55
+        "chance": 13.73
       },
       {
         "teams": [
           "IND",
           "SA"
         ],
-        "chance": 13.29
+        "chance": 13.64
       },
       {
         "teams": [
           "AUS",
           "NZ"
         ],
-        "chance": 1.8
+        "chance": 1.5
       },
       {
         "teams": [
           "AUS",
           "IND"
         ],
-        "chance": 1.35
+        "chance": 0.89
       },
       {
         "teams": [
           "IND",
           "NZ"
         ],
-        "chance": 0.39
+        "chance": 0.25
       }
     ]
   },
@@ -3331,7 +3311,7 @@
       "Each Test's win, draw and loss chances come from a Davidson rating model fitted on every men's Test in Cricsheet's archive since 2001, results losing half their weight every 12 years. Home advantage goes to the side playing in its own country, whatever the series calls home, so a neutral ground gives none.",
       "Draws are likelier between evenly matched sides, and their rate depends on the country the Test is played in and on the era: the rate is fitted on recent Tests, which are drawn far less often than in the 2000s.",
       "Backtest: before each of the 242 championship Tests of 2019-21, 2021-23, 2023-25 and 2025-27 so far, the model, fitted on the Tests before it, scored 0.2048 (ranked probability score) and 0.879 (log loss), against 0.2379 and 0.963 for home-win, draw and away-win base rates. Final-place odds at 25%, 50% and 75% of 2021-23 and 2023-25 scored a Brier score of 0.063, against 0.222 for the table at the time and 0.173 for a no-skill guess.",
-      "The remaining 22 Tests are simulated 20,000 times. Ratings are held for the rest of the cycle: in the backtest, letting them drift did not improve the season odds. Teams level on PCT are split by series wins, away PCT, then the latest ICC Test ranking in the config.",
+      "The remaining 21 Tests are simulated 20,000 times. Ratings are held for the rest of the cycle: in the backtest, letting them drift did not improve the season odds. Teams level on PCT are split by series wins, away PCT, then the latest ICC Test ranking in the config.",
       "The final is played in England at The Oval: England would be at home, any other pair on neutral ground. A drawn or tied final makes both finalists joint champions; the reserve day is not modelled.",
       "Exact claims (clinched, eliminated, can finish level) consider every remaining result, ties included, and the over-rate deductions already made; later deductions could still change them. The simulation does not invent future deductions.",
       "The standings close at the end of the competition window: Friday 30 April 2027 in the Playing Conditions (16.12.4, 16.13.1), the end of March in the Competition Regulations, which take the ICC ranking for the last tie-breaker on 1 April 2027. The last Tests end in March, so only the ranking date differs.",
@@ -3339,40 +3319,40 @@
     ],
     "probabilities": {
       "SA": {
-        "final": 96.3,
-        "title": 40.73,
-        "joint": 8.33,
-        "champion": 49.06
+        "final": 97.28,
+        "title": 40.94,
+        "joint": 8.84,
+        "champion": 49.78
       },
       "AUS": {
-        "final": 72.77,
-        "title": 37.7,
-        "joint": 6.28,
-        "champion": 43.98
+        "final": 72.38,
+        "title": 36.73,
+        "joint": 6.58,
+        "champion": 43.31
       },
       "NZ": {
-        "final": 15.75,
-        "title": 5.79,
-        "joint": 1.34,
-        "champion": 7.12
+        "final": 15.48,
+        "title": 5.76,
+        "joint": 1.4,
+        "champion": 7.16
       },
       "IND": {
-        "final": 15.03,
-        "title": 7.07,
+        "final": 14.78,
+        "title": 7.46,
         "joint": 1.34,
-        "champion": 8.42
-      },
-      "BAN": {
-        "final": 0.03,
-        "title": 0.01,
-        "joint": 0.01,
-        "champion": 0.01
+        "champion": 8.8
       },
       "ENG": {
-        "final": 0.14,
-        "title": 0.04,
+        "final": 0.08,
+        "title": 0.03,
         "joint": 0.01,
-        "champion": 0.05
+        "champion": 0.04
+      },
+      "BAN": {
+        "final": 0.0,
+        "title": 0.0,
+        "joint": 0.0,
+        "champion": 0.0
       },
       "WI": {
         "final": 0.0,
@@ -3395,68 +3375,68 @@
     },
     "positions": {
       "SA": [
-        76.77,
-        19.54,
-        2.97,
-        0.52,
-        0.2,
-        0.01,
+        79.42,
+        17.86,
+        2.3,
+        0.34,
+        0.09,
+        0.0,
         0.0,
         0.0,
         0.0
       ],
       "AUS": [
-        18.14,
-        54.62,
-        18.92,
-        8.16,
-        0.15,
+        16.29,
+        56.09,
+        19.46,
+        7.99,
+        0.17,
         0.0,
         0.0,
         0.0,
         0.0
       ],
       "NZ": [
-        3.36,
-        12.38,
-        35.79,
-        35.62,
-        10.66,
-        1.86,
-        0.31,
+        2.84,
+        12.65,
+        36.31,
+        36.47,
+        9.87,
+        1.62,
+        0.24,
         0.0,
         0.0
       ],
       "IND": [
-        1.73,
-        13.3,
-        40.11,
-        36.96,
-        7.46,
-        0.42,
-        0.02,
-        0.0,
-        0.0
-      ],
-      "BAN": [
-        0.0,
-        0.03,
-        0.74,
-        4.84,
-        19.86,
-        69.09,
-        5.45,
+        1.46,
+        13.32,
+        40.05,
+        37.98,
+        6.85,
+        0.33,
+        0.01,
         0.0,
         0.0
       ],
       "ENG": [
         0.0,
-        0.14,
-        1.47,
-        13.62,
-        60.98,
-        23.12,
-        0.67,
+        0.08,
+        1.57,
+        13.3,
+        63.59,
+        20.67,
+        0.78,
+        0.0,
+        0.0
+      ],
+      "BAN": [
+        0.0,
+        0.0,
+        0.3,
+        3.57,
+        18.7,
+        71.43,
+        6.0,
         0.0,
         0.0
       ],
@@ -3467,20 +3447,20 @@
         0.0,
         0.0,
         0.0,
-        82.6,
-        17.4,
+        82.53,
+        17.46,
         0.0
       ],
       "SL": [
         0.0,
         0.0,
         0.01,
-        0.27,
-        0.68,
-        5.5,
-        10.96,
-        39.57,
-        43.03
+        0.34,
+        0.74,
+        5.95,
+        10.43,
+        40.11,
+        42.43
       ],
       "PAK": [
         0.0,
@@ -3490,20 +3470,20 @@
         0.0,
         0.0,
         0.0,
-        43.03,
-        56.97
+        42.43,
+        57.57
       ]
     },
     "expectedPct": {
-      "SA": 71.39,
-      "AUS": 62.99,
-      "NZ": 52.1,
-      "IND": 52.26,
-      "BAN": 35.79,
-      "ENG": 40.51,
+      "SA": 72.06,
+      "AUS": 63.01,
+      "NZ": 52.13,
+      "IND": 52.28,
+      "ENG": 40.47,
+      "BAN": 35.08,
       "WI": 27.38,
-      "SL": 20.82,
-      "PAK": 18.26
+      "SL": 20.85,
+      "PAK": 18.22
     },
     "needs": {
       "AUS": {
@@ -3522,17 +3502,15 @@
         ]
       },
       "BAN": {
-        "status": "needs-help",
+        "status": "eliminated",
         "settled": false,
-        "testsLeft": 3,
-        "bestPct": 55.56,
+        "testsLeft": 2,
+        "bestPct": 47.22,
         "worstPct": 30.56,
         "ownDestiny": "no",
-        "fewestWins": 2,
         "statements": [
-          "Needs help: even winning all 3 remaining Tests could leave two teams above them.",
-          "Their PCT can finish anywhere from 30.56% to 55.56%.",
-          "If they draw every Test they do not win, they need at least 2 wins from 3 remaining Tests to keep a chance of finishing in the top two outright."
+          "Cannot reach the final on results: at least two teams will finish above them whatever happens.",
+          "Their PCT can finish anywhere from 30.56% to 47.22%."
         ]
       },
       "ENG": {
@@ -3542,11 +3520,11 @@
         "bestPct": 53.17,
         "worstPct": 29.37,
         "ownDestiny": "no",
-        "fewestWins": 3,
+        "fewestWins": 5,
         "statements": [
           "Needs help: even winning all 5 remaining Tests could leave two teams above them.",
           "Their PCT can finish anywhere from 29.37% to 53.17%.",
-          "If they draw every Test they do not win, they need at least 3 wins from 5 remaining Tests to keep a chance of finishing in the top two outright."
+          "If they draw every Test they do not win, they need at least 5 wins from 5 remaining Tests to keep a chance of finishing in the top two outright."
         ]
       },
       "IND": {
@@ -3556,11 +3534,11 @@
         "bestPct": 66.67,
         "worstPct": 33.33,
         "ownDestiny": "no",
-        "fewestWins": 1,
+        "fewestWins": 2,
         "statements": [
           "Needs help: even winning all 6 remaining Tests could leave two teams above them.",
           "Their PCT can finish anywhere from 33.33% to 66.67%.",
-          "If they draw every Test they do not win, they need at least 1 win from 6 remaining Tests to keep a chance of finishing in the top two outright."
+          "If they draw every Test they do not win, they need at least 2 wins from 6 remaining Tests to keep a chance of finishing in the top two outright."
         ]
       },
       "NZ": {
@@ -3570,11 +3548,12 @@
         "bestPct": 85.42,
         "worstPct": 29.17,
         "ownDestiny": "yes",
-        "fewestWins": 0,
+        "fewestWins": 1,
         "winsToClinch": 7,
         "statements": [
           "In control: winning all 9 remaining Tests would take them to the final, whatever else happens.",
           "Their PCT can finish anywhere from 29.17% to 85.42%.",
+          "If they draw every Test they do not win, they need at least 1 win from 9 remaining Tests to keep a chance of finishing in the top two outright.",
           "Any 7 wins from 9 remaining Tests would be enough, whichever they are."
         ]
       },
@@ -3593,16 +3572,16 @@
       "SA": {
         "status": "in-control",
         "settled": false,
-        "testsLeft": 6,
+        "testsLeft": 5,
         "bestPct": 85.71,
-        "worstPct": 42.86,
+        "worstPct": 50.0,
         "ownDestiny": "yes",
         "fewestWins": 0,
-        "winsToClinch": 5,
+        "winsToClinch": 4,
         "statements": [
-          "In control: winning all 6 remaining Tests would take them to the final, whatever else happens.",
-          "Their PCT can finish anywhere from 42.86% to 85.71%.",
-          "Any 5 wins from 6 remaining Tests would be enough, whichever they are."
+          "In control: winning all 5 remaining Tests would take them to the final, whatever else happens.",
+          "Their PCT can finish anywhere from 50.00% to 85.71%.",
+          "Any 4 wins from 5 remaining Tests would be enough, whichever they are."
         ]
       },
       "SL": {
@@ -3632,6 +3611,19 @@
     },
     "swing": [
       {
+        "fixtureId": "aus-nz-2026-1",
+        "series": "aus-nz-2026",
+        "number": 1,
+        "date": "2026-12-09",
+        "host": "AUS",
+        "visitor": "NZ",
+        "team": "AUS",
+        "ifHost": 78.69,
+        "ifDraw": 66.08,
+        "ifVisitor": 52.49,
+        "swing": 26.2
+      },
+      {
         "fixtureId": "aus-nz-2026-3",
         "series": "aus-nz-2026",
         "number": 3,
@@ -3639,23 +3631,10 @@
         "host": "AUS",
         "visitor": "NZ",
         "team": "AUS",
-        "ifHost": 79.54,
-        "ifDraw": 65.88,
-        "ifVisitor": 51.65,
-        "swing": 27.89
-      },
-      {
-        "fixtureId": "aus-nz-2026-2",
-        "series": "aus-nz-2026",
-        "number": 2,
-        "date": "2026-12-17",
-        "host": "AUS",
-        "visitor": "NZ",
-        "team": "AUS",
-        "ifHost": 79.13,
-        "ifDraw": 68.12,
-        "ifVisitor": 52.33,
-        "swing": 26.8
+        "ifHost": 78.6,
+        "ifDraw": 66.76,
+        "ifVisitor": 52.58,
+        "swing": 26.02
       },
       {
         "fixtureId": "aus-nz-2026-4",
@@ -3665,23 +3644,23 @@
         "host": "AUS",
         "visitor": "NZ",
         "team": "AUS",
-        "ifHost": 79.23,
-        "ifDraw": 66.64,
+        "ifHost": 78.78,
+        "ifDraw": 65.93,
         "ifVisitor": 52.9,
-        "swing": 26.33
+        "swing": 25.88
       },
       {
-        "fixtureId": "aus-nz-2026-1",
+        "fixtureId": "aus-nz-2026-2",
         "series": "aus-nz-2026",
-        "number": 1,
-        "date": "2026-12-09",
+        "number": 2,
+        "date": "2026-12-17",
         "host": "AUS",
         "visitor": "NZ",
         "team": "AUS",
-        "ifHost": 78.88,
-        "ifDraw": 67.36,
-        "ifVisitor": 53.63,
-        "swing": 25.25
+        "ifHost": 78.42,
+        "ifDraw": 66.53,
+        "ifVisitor": 53.65,
+        "swing": 24.76
       },
       {
         "fixtureId": "ind-aus-2027-2",
@@ -3691,9 +3670,9 @@
         "host": "IND",
         "visitor": "AUS",
         "team": "AUS",
-        "ifHost": 63.91,
-        "ifDraw": 75.59,
-        "ifVisitor": 86.18,
+        "ifHost": 63.22,
+        "ifDraw": 78.33,
+        "ifVisitor": 85.49,
         "swing": 22.27
       },
       {
@@ -3704,10 +3683,10 @@
         "host": "IND",
         "visitor": "AUS",
         "team": "AUS",
-        "ifHost": 63.96,
-        "ifDraw": 78.39,
-        "ifVisitor": 85.4,
-        "swing": 21.44
+        "ifHost": 63.94,
+        "ifDraw": 74.47,
+        "ifVisitor": 85.2,
+        "swing": 21.26
       }
     ],
     "ratings": {
@@ -3715,8 +3694,8 @@
       "AUS": 1.072,
       "NZ": 0.428,
       "IND": 0.962,
-      "BAN": -1.004,
       "ENG": 0.599,
+      "BAN": -1.004,
       "WI": -0.497,
       "SL": 0.017,
       "PAK": 0.061
@@ -3737,42 +3716,42 @@
     }
   },
   "movement": {
-    "since": "2026-11-23T00:23:40Z",
+    "since": "2026-11-24T18:47:20Z",
     "changes": {
       "SA": {
-        "final": 1.16,
-        "title": -0.06,
-        "joint": 0.41,
-        "champion": 0.35
+        "final": 0.98,
+        "title": 0.21,
+        "joint": 0.51,
+        "champion": 0.72
       },
       "AUS": {
-        "final": 5.32,
-        "title": 2.99,
-        "joint": 0.61,
-        "champion": 3.6
+        "final": -0.39,
+        "title": -0.97,
+        "joint": 0.3,
+        "champion": -0.67
       },
       "NZ": {
-        "final": -3.13,
-        "title": -1.14,
-        "joint": -0.2,
-        "champion": -1.35
+        "final": -0.27,
+        "title": -0.03,
+        "joint": 0.06,
+        "champion": 0.04
       },
       "IND": {
-        "final": -3.41,
-        "title": -2.09,
-        "joint": -0.23,
-        "champion": -2.31
-      },
-      "BAN": {
-        "final": 0.02,
-        "title": 0.01,
-        "joint": 0.01,
-        "champion": 0.01
+        "final": -0.25,
+        "title": 0.39,
+        "joint": 0.0,
+        "champion": 0.38
       },
       "ENG": {
-        "final": 0.07,
+        "final": -0.06,
         "title": -0.01,
         "joint": 0.0,
+        "champion": -0.01
+      },
+      "BAN": {
+        "final": -0.03,
+        "title": -0.01,
+        "joint": -0.01,
         "champion": -0.01
       },
       "WI": {
